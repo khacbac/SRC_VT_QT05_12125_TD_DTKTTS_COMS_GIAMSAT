@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding10">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding5"
+        android:text="@string/str_trong_ngay_to_chuc_thi_cong"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtTitle">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtTitleTT"
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_tai_tram_tuyen" />
+
+            <TextView
+                android:id="@+id/txtDpTramTuyen"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/txtTitleTT"
+                android:text="Tram 1" />
+
+            <TextView
+                android:id="@+id/txtTitleThoiTiet"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDpTramTuyen"
+                android:layout_marginTop="@dimen/margin"
+                android:text="@string/str_thoi_tiet" />
+
+            <TextView
+                android:id="@+id/txtDpThoiTiet"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDpTramTuyen"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_toRightOf="@id/txtTitleThoiTiet"
+                android:text="Binh thuong" />
+
+            <TextView
+                android:id="@+id/txtTitleQuanSoDoiThiCong"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleThoiTiet"
+                android:layout_marginTop="@dimen/margin"
+                android:text="@string/str_quan_so_doi_thi_cong" />
+
+            <RelativeLayout
+                android:id="@+id/layoutForListViewNhatKy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleQuanSoDoiThiCong">
+
+                <LinearLayout
+                    android:id="@+id/linearForTitleOfListViewNhatKy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin20"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_2"
+                    android:paddingTop="@dimen/padding_2">
+
+                    <TextView
+                        android:id="@+id/txtSttNoiDung"
+                        style="@style/Content.Textview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:background="@drawable/border_right"
+                        android:textStyle="bold"
+                        android:text="STT" />
+
+                    <TextView
+                        android:id="@+id/txtTenDoiThiCong"
+                        style="@style/Content.Textview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:background="@drawable/border_right"
+                        android:text="Đội thi công" />
+
+                    <TextView
+                        android:id="@+id/txtSoNguoi"
+                        style="@style/Content.Textview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Số người" />
+                </LinearLayout>
+
+                <com.viettel.utils.NestedListView
+                    android:id="@+id/listViewDpQuanSoDoiThiCong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin20"
+                    android:layout_below="@+id/linearForTitleOfListViewNhatKy"
+                    android:background="@drawable/border_top_right_bottom_left">
+                </com.viettel.utils.NestedListView>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtTitleCongViecThiCongTrongNgay"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutForListViewNhatKy"
+                android:layout_marginTop="@dimen/margin"
+                android:text="@string/str_noidung_congviec_thicong_trongngay" />
+
+            <TextView
+                android:id="@+id/txtDpCongViecThiCongTrongNgay"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleCongViecThiCongTrongNgay"
+                android:layout_marginLeft="@dimen/margin20"
+                android:text="Cong viec 1" />
+
+            <TextView
+                android:id="@+id/txtTitleTienDoThiCongTrongNgay"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDpCongViecThiCongTrongNgay"
+                android:layout_marginTop="@dimen/margin"
+                android:text="@string/str_tiendo_thicong_trongngay" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relayout_expandable_listview"
+                android:layout_below="@+id/txtTitleTienDoThiCongTrongNgay"
+                android:layout_marginLeft="@dimen/margin20">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/margin"
+                    android:id="@+id/linearForExpanableListView"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:paddingTop="@dimen/margin"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#00f9e8"
+                        android:layout_weight="0.5"
+                        style="@style/Header.Textview"
+                        android:id="@+id/txtSttProgress"
+                        android:background="@drawable/border_right"
+                        android:text="STT"/>
+                    <TextView
+                        android:id="@+id/txtTenHangMuc"
+                        style="@style/Header.Textview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:background="@drawable/border_right"
+                        android:textColor="#00f9e8"
+                        android:layout_weight="2"
+                        android:text="Tên hạng mục"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Content.Textview"
+                        android:id="@+id/txtNgayBatDau"
+                        android:background="@drawable/border_right"
+                        android:textColor="#00f9e8"
+                        android:text="Ngày bắt đầu"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Content.Textview"
+                        android:id="@+id/txtNgayHoanThanh"
+                        android:text="Ngày hoàn thành"
+                        android:textColor="#00f9e8"/>
+                </LinearLayout>
+                <com.viettel.utils.NestedExpandableListView
+                    android:id="@+id/expandableListViewDpTienDoThiCongTrongNgay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:layout_below="@+id/linearForExpanableListView">
+                </com.viettel.utils.NestedExpandableListView>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtTitleThayDoiBoSung"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relayout_expandable_listview"
+                android:layout_margin="@dimen/margin"
+                android:text="@string/str_thaydoi_bosung_phatsinh" />
+
+            <TextView
+                android:id="@+id/txtDpThayDoiBoSung"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relayout_expandable_listview"
+                android:layout_margin="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_toRightOf="@id/txtTitleThayDoiBoSung"
+                android:text="Khong co" />
+
+            <TextView
+                android:id="@+id/txtTitleYKienDonViThiCong"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleThayDoiBoSung"
+                android:layout_margin="@dimen/margin"
+                android:text="@string/str_ykien_donvi_thicong" />
+
+            <TextView
+                android:id="@+id/txtDpYKienDonViThiCong"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleThayDoiBoSung"
+                android:layout_margin="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_toRightOf="@id/txtTitleYKienDonViThiCong"
+                android:text="Khong co" />
+
+            <TextView
+                android:id="@+id/txtTitleYKienGiamSat"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleYKienDonViThiCong"
+                android:layout_margin="@dimen/margin"
+                android:text="@string/str_ykien_giamsat" />
+
+            <TextView
+                android:id="@+id/txtDpYKienGiamSat"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitleYKienDonViThiCong"
+                android:layout_margin="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_toRightOf="@id/txtTitleYKienGiamSat"
+                android:text="Khong co" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
