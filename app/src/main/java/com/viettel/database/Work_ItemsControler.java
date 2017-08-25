@@ -11,6 +11,7 @@ import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Work_ItemsField;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hieppq3 on 4/26/17.
@@ -180,6 +181,26 @@ public class Work_ItemsControler {
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
         return ret;
+    }
+
+    public List<String> getAllLogDate(long constructId) {
+        List<String> listLogDate = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db.query(
+                Work_ItemsField.TABLE_NAME, allColumn,
+                Work_ItemsField.CONSTR_ID + "=?",
+                new String[]{String.valueOf(constructId)},
+                null, null, null, null
+        );
+        if (cursor.moveToFirst()) {
+            do {
+                String log_date = this.converCursorToItem(cursor).getUpdate_date();
+                listLogDate.add(log_date);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return listLogDate;
     }
 
 

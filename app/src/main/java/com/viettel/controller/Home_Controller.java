@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.viettel.common.ActionEvent;
 import com.viettel.common.ActionEventConstant;
@@ -49,9 +48,9 @@ import com.viettel.view.base.BaseActivity;
 
 /**
  * Ham dieu khi luong du lieu trang chu
- * 
+ *
  * @author datht1
- * 
+ *
  */
 public class Home_Controller extends AbstractController {
 	static Home_Controller instance;
@@ -66,434 +65,434 @@ public class Home_Controller extends AbstractController {
 		return instance;
 	}
 
-//	private static final String TAG = "Home_Controller";
+	//	private static final String TAG = "Home_Controller";
 	@Override
 	public void handleSwitchActivity(ActionEvent e) {
 		Activity base = (Activity) e.sender;
 		Intent intent;
 		Bundle extras;
 		switch (e.action) {
-		case ActionEventConstant.GOTO_HOME_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, HomeActivity.class);
+			case ActionEventConstant.GOTO_HOME_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, HomeActivity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.HomeActivity"));
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (extras != null) {
-				intent.putExtras(extras);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_PLAN_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, MakePlanActivity.class);
+			case ActionEventConstant.GOTO_PLAN_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, MakePlanActivity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.MakePlanActivity"));
-			// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (extras != null) {
-				intent.putExtras(extras);
+				// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_ABOUT_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, AboutActivity.class);
+			case ActionEventConstant.GOTO_ABOUT_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, AboutActivity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.AboutActivity"));
-			// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (extras != null) {
-				intent.putExtras(extras);
+				// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_SUPERVISION_SUB_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, Supervision_BRCD_Sub_Activity.class);
+			case ActionEventConstant.GOTO_SUPERVISION_SUB_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, Supervision_BRCD_Sub_Activity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.Supervision_BRCD_Sub_Activity"));
-			// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (extras != null) {
-				intent.putExtras(extras);
+				// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_SUPERVISION_BRCD_MT_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, Supervision_BRCD_MTrucActivity.class);
+			case ActionEventConstant.GOTO_SUPERVISION_BRCD_MT_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, Supervision_BRCD_MTrucActivity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (extras != null) {
-				intent.putExtras(extras);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_SUPERVISION_BRCD_TTTK_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, Supervision_BRCD_Thongtintk_Activity.class);
+			case ActionEventConstant.GOTO_SUPERVISION_BRCD_TTTK_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, Supervision_BRCD_Thongtintk_Activity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.Supervision_BRCD_Thongtintk_Activity"));
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (extras != null) {
-				intent.putExtras(extras);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_SET_LINE_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, ConstructionSetLineActivity.class);
+			case ActionEventConstant.GOTO_SET_LINE_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, ConstructionSetLineActivity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.ConstructionSetLineActivity"));
-			if (extras != null) {
-				intent.putExtras(extras);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_SUPERVISION_BTS_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			intent = new Intent(base, SupervisionBtsActivity.class);
+			case ActionEventConstant.GOTO_SUPERVISION_BTS_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				intent = new Intent(base, SupervisionBtsActivity.class);
 //			intent.setComponent(new ComponentName("com.viettel.ktts",
 //					"com.viettel.ktts.SupervisionBtsActivity"));
-			if (extras != null) {
-				intent.putExtras(extras);
+				if (extras != null) {
+					intent.putExtras(extras);
+				}
+				base.startActivity(intent);
+				break;
 			}
-			base.startActivity(intent);
-			break;
-		}
-		case ActionEventConstant.GOTO_SUPERVISION_LINE_BACKGROUND_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
-			switch (iDesignInfo) {
-				case Constants.LINE_BACKGROUND_INFO.NHAT_KY_INFO:
-					intent = new Intent(base, LineBackgroundActivity.class);
-					if (extras != null) {
-						extras.putInt(LineBackgroundActivity.ARG_INFO, iDesignInfo);
-						intent.putExtras(extras);
-					}
-					base.startActivity(intent);
-					break;
-				case Constants.LINE_BACKGROUND_INFO.TIEN_DO_INFO:
-					intent = new Intent(base, LineBackgroundActivity.class);
-					if (extras != null) {
-						extras.putInt(LineBackgroundActivity.ARG_INFO, iDesignInfo);
-						intent.putExtras(extras);
-					}
-					base.startActivity(intent);
-					break;
-			case Constants.LINE_BACKGROUND_INFO.THIE_TKE_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_DesignActivity.class);
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+			case ActionEventConstant.GOTO_SUPERVISION_LINE_BACKGROUND_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
+				switch (iDesignInfo) {
+					case Constants.LINE_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO:
+						intent = new Intent(base, LineBackgroundActivity.class);
+						if (extras != null) {
+							extras.putInt(LineBackgroundActivity.ARG_INFO, iDesignInfo);
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+//				case Constants.LINE_BACKGROUND_INFO.TIEN_DO_INFO:
+//					intent = new Intent(base, LineBackgroundActivity.class);
+//					if (extras != null) {
+//						extras.putInt(LineBackgroundActivity.ARG_INFO, iDesignInfo);
+//						intent.putExtras(extras);
+//					}
+//					base.startActivity(intent);
+//					break;
+					case Constants.LINE_BACKGROUND_INFO.THIE_TKE_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_DesignActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.LINE_BACKGROUND_INFO.VI_TRI_DAC_BIET_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_SpecialActivity.class);
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+					case Constants.LINE_BACKGROUND_INFO.VI_TRI_DAC_BIET_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_SpecialActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.LINE_BACKGROUND_INFO.MEASURE_CONSTR_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_Measure_ConstrActivity.class);
+					case Constants.LINE_BACKGROUND_INFO.MEASURE_CONSTR_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_Measure_ConstrActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_Measure_ConstrActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.LINE_BACKGROUND_INFO.BE_CAP_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_TankActivity.class);
+					case Constants.LINE_BACKGROUND_INFO.BE_CAP_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_TankActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_TankActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.LINE_BACKGROUND_INFO.CONG_RANH_CAP_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_PipeActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.LINE_BACKGROUND_INFO.CONG_RANH_CAP_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_PipeActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_PipeActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.LINE_BACKGROUND_INFO.KEO_CAP_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_PipeActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.LINE_BACKGROUND_INFO.KEO_CAP_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_PipeActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_CableActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.LINE_BACKGROUND_INFO.HAN_NOI_DO_KIEM_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_PipeActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.LINE_BACKGROUND_INFO.HAN_NOI_DO_KIEM_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_PipeActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_MXActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			// ---Hungtn add new 25/08/2016
-			case Constants.LINE_BACKGROUND_INFO.CAP_NHAT_DOI_THI_CONG:
-				intent = new Intent(base, Supervision_CNDTC_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					// ---Hungtn add new 25/08/2016
+					case Constants.LINE_BACKGROUND_INFO.CAP_NHAT_DOI_THI_CONG:
+						intent = new Intent(base, Supervision_CNDTC_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_CNDTC_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.LINE_BACKGROUND_INFO.CAP_NHAT_VUONG:
-				intent = new Intent(base,
-						SupervisionBts_CNV_List_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.LINE_BACKGROUND_INFO.CAP_NHAT_VUONG:
+						intent = new Intent(base,
+								SupervisionBts_CNV_List_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.SupervisionBts_CNV_List_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			// ---
-			case Constants.LINE_BACKGROUND_INFO.KET_LUAN_INFO:
-				intent = new Intent(base,
-						Supervision_Line_BG_PipeActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					// ---
+					case Constants.LINE_BACKGROUND_INFO.KET_LUAN_INFO:
+						intent = new Intent(base,
+								Supervision_Line_BG_PipeActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_KLActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					default:
+						break;
 				}
-				base.startActivity(intent);
-				break;
-			default:
 				break;
 			}
-			break;
-		}
-		case ActionEventConstant.GOTO_BRCD_BACKGROUND_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
-			switch (iDesignInfo) {
-			case Constants.BRCD_BACKGROUND_INFO.MANG_SONG_TRUC:
-				intent = new Intent(base, Supervision_BRCD_MTrucActivity.class);
+			case ActionEventConstant.GOTO_BRCD_BACKGROUND_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
+				switch (iDesignInfo) {
+					case Constants.BRCD_BACKGROUND_INFO.MANG_SONG_TRUC:
+						intent = new Intent(base, Supervision_BRCD_MTrucActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-				case Constants.BRCD_BACKGROUND_INFO.NHAT_KY:
-					intent = new Intent(base, GponActivity.class);
+					case Constants.BRCD_BACKGROUND_INFO.NHAT_KY:
+						intent = new Intent(base, GponActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
-					if (extras != null) {
-						extras.putInt(GponActivity.ARG_INFO, iDesignInfo);
-						intent.putExtras(extras);
-					}
-					base.startActivity(intent);
-					break;
+						if (extras != null) {
+							extras.putInt(GponActivity.ARG_INFO, iDesignInfo);
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-				case Constants.BRCD_BACKGROUND_INFO.TIEN_DO:
-					intent = new Intent(base, GponActivity.class);
+					case Constants.BRCD_BACKGROUND_INFO.TIEN_DO:
+						intent = new Intent(base, GponActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
-					if (extras != null) {
-						extras.putInt(GponActivity.ARG_INFO, iDesignInfo);
-						intent.putExtras(extras);
-					}
-					base.startActivity(intent);
-					break;
+						if (extras != null) {
+							extras.putInt(GponActivity.ARG_INFO, iDesignInfo);
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.BRCD_BACKGROUND_INFO.KEO_CAP_TRUC:
-				intent = new Intent(base, Supervision_BRCD_KeoCTActivity.class);
+					case Constants.BRCD_BACKGROUND_INFO.KEO_CAP_TRUC:
+						intent = new Intent(base, Supervision_BRCD_KeoCTActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_KeoCTActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.BRCD_BACKGROUND_INFO.TU_NHANH:
-				intent = new Intent(base,
-						Supervision_BRCD_TuNhanhActivity.class);
+					case Constants.BRCD_BACKGROUND_INFO.TU_NHANH:
+						intent = new Intent(base,
+								Supervision_BRCD_TuNhanhActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_TuNhanhActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.BRCD_BACKGROUND_INFO.TU_THUE_BAO:
-				intent = new Intent(base,
-						Supervision_BRCD_TuThueBaoActivity.class);
+					case Constants.BRCD_BACKGROUND_INFO.TU_THUE_BAO:
+						intent = new Intent(base,
+								Supervision_BRCD_TuThueBaoActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_TuThueBaoActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			case Constants.BRCD_BACKGROUND_INFO.KET_LUAN_INFO:
-				intent = new Intent(base, Supervision_BRCD_KLActivity.class);
+					case Constants.BRCD_BACKGROUND_INFO.KET_LUAN_INFO:
+						intent = new Intent(base, Supervision_BRCD_KLActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_KLActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.BRCD_BACKGROUND_INFO.THONG_TIN_TK:
-				intent = new Intent(base,
-						Supervision_BRCD_Thongtintk_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.BRCD_BACKGROUND_INFO.THONG_TIN_TK:
+						intent = new Intent(base,
+								Supervision_BRCD_Thongtintk_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_Thongtintk_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.BRCD_BACKGROUND_INFO.KEO_CAP_NHANH:
-				intent = new Intent(base,
-						Supervision_BRCD_KeoCapNhanhActivity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.BRCD_BACKGROUND_INFO.KEO_CAP_NHANH:
+						intent = new Intent(base,
+								Supervision_BRCD_KeoCapNhanhActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_KeoCapNhanhActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.BRCD_BACKGROUND_INFO.DROP_GO:
-				intent = new Intent(base,
-						Supervision_BRCD_DropGo_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.BRCD_BACKGROUND_INFO.DROP_GO:
+						intent = new Intent(base,
+								Supervision_BRCD_DropGo_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_DropGo_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			// ---Hungtn add new 25/08/
-			case Constants.BRCD_BACKGROUND_INFO.CAP_NHAT_DOI_THI_CONG:
-				intent = new Intent(base, Supervision_CNDTC_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					// ---Hungtn add new 25/08/
+					case Constants.BRCD_BACKGROUND_INFO.CAP_NHAT_DOI_THI_CONG:
+						intent = new Intent(base, Supervision_CNDTC_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_CNDTC_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.BRCD_BACKGROUND_INFO.CAP_NHAT_VUONG:
-				intent = new Intent(base,
-						SupervisionBts_CNV_List_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.BRCD_BACKGROUND_INFO.CAP_NHAT_VUONG:
+						intent = new Intent(base,
+								SupervisionBts_CNV_List_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.SupervisionBts_CNV_List_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					// ---
+					default:
+						break;
 				}
-				base.startActivity(intent);
-				break;
-			// ---
-			default:
 				break;
 			}
-			break;
-		}
-		case ActionEventConstant.GOTO_SUB_BACKGROUND_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
-			switch (iDesignInfo) {
-			case Constants.SUBHEADEND_INFO.GIAM_SAT_LAP_DAT_THIET_BI:
-				intent = new Intent(base, Supervision_BRCD_MTrucActivity.class);
+			case ActionEventConstant.GOTO_SUB_BACKGROUND_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
+				switch (iDesignInfo) {
+					case Constants.SUBHEADEND_INFO.GIAM_SAT_LAP_DAT_THIET_BI:
+						intent = new Intent(base, Supervision_BRCD_MTrucActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_Sub_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			// ---Hungtn add new 25/08/2016
-			case Constants.SUBHEADEND_INFO.CAP_NHAT_DOI_THI_CONG:
-				intent = new Intent(base, Supervision_CNDTC_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					// ---Hungtn add new 25/08/2016
+					case Constants.SUBHEADEND_INFO.CAP_NHAT_DOI_THI_CONG:
+						intent = new Intent(base, Supervision_CNDTC_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_CNDTC_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			case Constants.SUBHEADEND_INFO.CAP_NHAT_VUONG:
-				intent = new Intent(base,
-						SupervisionBts_CNV_List_Activity.class);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					case Constants.SUBHEADEND_INFO.CAP_NHAT_VUONG:
+						intent = new Intent(base,
+								SupervisionBts_CNV_List_Activity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.SupervisionBts_CNV_List_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
-			// ---
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					// ---
 
-			case Constants.SUBHEADEND_INFO.KET_LUAN_INFO:
-				intent = new Intent(base, Supervision_BRCD_KeoCTActivity.class);
+					case Constants.SUBHEADEND_INFO.KET_LUAN_INFO:
+						intent = new Intent(base, Supervision_BRCD_KeoCTActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Sub_KL_Activity"));
-				if (extras != null) {
-					intent.putExtras(extras);
-				}
-				base.startActivity(intent);
-				break;
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
 
-			default:
+					default:
+						break;
+				}
 				break;
 			}
-			break;
-		}
-		case ActionEventConstant.GOTO_SUPERVISION_LINE_HANG_ACTIVITY: {
-			extras = (Bundle) e.viewData;
-			int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
-			switch (iDesignInfo) {
-			case Constants.LINE_HANG_INFO.THIE_TKE_INFO:
-				intent = new Intent(base,
-						Supervision_Line_HG_DesignActivity.class);
+			case ActionEventConstant.GOTO_SUPERVISION_LINE_HANG_ACTIVITY: {
+				extras = (Bundle) e.viewData;
+				int iDesignInfo = extras.getInt(IntentConstants.INTENT_DESIGNINFO);
+				switch (iDesignInfo) {
+					case Constants.LINE_HANG_INFO.THIE_TKE_INFO:
+						intent = new Intent(base,
+								Supervision_Line_HG_DesignActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_HG_DesignActivity"));
-				if (extras != null) {
-					intent.putExtras(extras);
+						if (extras != null) {
+							intent.putExtras(extras);
+						}
+						base.startActivity(intent);
+						break;
+					default:
+						break;
 				}
-				base.startActivity(intent);
-				break;
-			default:
 				break;
 			}
-			break;
-		}
 
 		}
 	}
@@ -506,16 +505,16 @@ public class Home_Controller extends AbstractController {
 				BaseActivity baseActivity = (BaseActivity) e.sender;
 				switch (e.action) {
 				/* lay du lieu lich hop */
-				case ActionEventConstant.REQEST_LOGIN:
-					SyncModel.bStop = false;
-					request = SyncModel.getInstance().requestLoginHTTP(e);
-					break;
-				case ActionEventConstant.REQEST_SYNC:
-					SyncQueue.getInstance().resetData();
-					SyncModel.getInstance().syncKttsKey(e);
-					break;
-				default:
-					break;
+					case ActionEventConstant.REQEST_LOGIN:
+						SyncModel.bStop = false;
+						request = SyncModel.getInstance().requestLoginHTTP(e);
+						break;
+					case ActionEventConstant.REQEST_SYNC:
+						SyncQueue.getInstance().resetData();
+						SyncModel.getInstance().syncKttsKey(e);
+						break;
+					default:
+						break;
 				}
 
 				if (request != null && baseActivity != null) {

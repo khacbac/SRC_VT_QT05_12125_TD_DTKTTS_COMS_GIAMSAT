@@ -601,106 +601,106 @@ public class SupervisionBtsActivity extends SupervisionBtsBaseActivity {
 		}
 
 		switch (v.getId()) {
-		// click save
-		case R.id.rl_supervision_bts_body_row6_1_bt_save:
-			String sValid = this.checkValidation();
-			if (!GlobalInfo.getInstance().isCheckIn()) {
-				showAlertDialogCheckInRequire(this,
-						getString(R.string.checkin_require),
-						getString(R.string.text_close));
+			// click save
+			case R.id.rl_supervision_bts_body_row6_1_bt_save:
+				String sValid = this.checkValidation();
+				if (!GlobalInfo.getInstance().isCheckIn()) {
+					showAlertDialogCheckInRequire(this,
+							getString(R.string.checkin_require),
+							getString(R.string.text_close));
+					break;
+				}
+				if (StringUtil.isNullOrEmpty(sValid)) {
+					confirmSave = new ConfirmDialog(this,
+							StringUtil.getString(R.string.text_confirm_save));
+					confirmSave.show();
+				}
+
+				// ConfirmDialog confirmSave = new ConfirmDialog(this,
+				// StringUtil.getString(R.string.text_confirm_save));
+				// confirmSave.show();
+
 				break;
-			}
-			if (StringUtil.isNullOrEmpty(sValid)) {
-				confirmSave = new ConfirmDialog(this,
-						StringUtil.getString(R.string.text_confirm_save));
-				confirmSave.show();
-			}
+			// click combobox thong tin
+			case R.id.rl_supervision_bts_tv_thietke:
+				this.dropdownPopupMenuInfomation = new Menu_DropdownPopup(this,
+						this.listInfomation);
 
-			// ConfirmDialog confirmSave = new ConfirmDialog(this,
-			// StringUtil.getString(R.string.text_confirm_save));
-			// confirmSave.show();
-
-			break;
-		// click combobox thong tin
-		case R.id.rl_supervision_bts_tv_thietke:
-			this.dropdownPopupMenuInfomation = new Menu_DropdownPopup(this,
-					this.listInfomation);
-
-			dropdownPopupMenuInfomation.show(v);
-			break;
-		// click combobox loai thiet ke
-		case R.id.rl_supervision_bts_body_tv_chonthietke:
-			this.dropdownPopupMenuDesignType = new Menu_DropdownPopup(this,
-					this.listDesignType);
-			dropdownPopupMenuDesignType.show(v);
-			break;
-		// click combobox danh gia
-		case R.id.rl_supervision_bts_body_tv_chondanhgia:
-			this.dropdownPopupMenuAssess = new Menu_DropdownPopup(this,
-					this.listAssess);
-			dropdownPopupMenuAssess.show(v);
-			break;
-		// click combobox loai xay dung
-		case R.id.cb_supervision_bts_body_row2_tv_chon_loai_xay_dung:
-			this.dropdownPopupMenuConstructionType = new Menu_DropdownPopup(
-					this, this.listConstructionType);
-			dropdownPopupMenuConstructionType.show(v);
-			break;
-
-		// click combobox cot anten
-		case R.id.ll_supervision_bts_body_row3_1_tv_chonanten:
-			this.dropdownPopupMenuPillarAnten = new Menu_DropdownPopup(this,
-					this.listPillarAnten);
-			dropdownPopupMenuPillarAnten.show(v);
-			break;
-		// click combobox chon loai cot
-		case R.id.ll_supervision_bts_body_row3_1_tv_chonloaicot:
-			this.dropdownPopupMenuPillarType = new Menu_DropdownPopup(this,
-					this.listPillarType);
-			dropdownPopupMenuPillarType.show(v);
-			break;
-		// click combobox chon loai nha
-		case R.id.ll_supervision_bts_body_row4_1_tv_chonloainha:
-			this.dropdownPopupMenuHouseType = new Menu_DropdownPopup(this,
-					this.listHouseType);
-			dropdownPopupMenuHouseType.show(v);
-			break;
-		// click combobox chon nha may no
-		case R.id.rl_supervision_bts_body_row5_1_tv_chonnhamayno:
-			this.dropdownPopupMenuFactoryType = new Menu_DropdownPopup(this,
-					this.listFactoryType);
-			dropdownPopupMenuFactoryType.show(v);
-			break;
-
-		// click combobox chon so mong co
-		case R.id.ll_supervision_bts_body_row4_1_et_somongco:
-			this.dropdownPopupMenuFoundNumType = new Menu_DropdownPopup(this,
-					this.listFoundNum);
-			dropdownPopupMenuFoundNumType.show(v);
-			break;
-		// click chon save tren popup check in
-		case R.id.btn_popup_save_plan:
-			if (edtMakePlan.getText().toString().trim().length() <= 0) {
-				showAlertDialogCheckInRequire(this,
-						getString(R.string.input_plan_require),
-						getString(R.string.text_close));
+				dropdownPopupMenuInfomation.show(v);
 				break;
-			} else if (addnewSupvLocatetoDB()) {
-				isCheckIn = !isCheckIn;
-				GlobalInfo.getInstance().setCheckIn(isCheckIn);
-				changeMenuCheckIn(R.drawable.icon_checkout,
-						getString(R.string.check_out));
-				startService();
+			// click combobox loai thiet ke
+			case R.id.rl_supervision_bts_body_tv_chonthietke:
+				this.dropdownPopupMenuDesignType = new Menu_DropdownPopup(this,
+						this.listDesignType);
+				dropdownPopupMenuDesignType.show(v);
+				break;
+			// click combobox danh gia
+			case R.id.rl_supervision_bts_body_tv_chondanhgia:
+				this.dropdownPopupMenuAssess = new Menu_DropdownPopup(this,
+						this.listAssess);
+				dropdownPopupMenuAssess.show(v);
+				break;
+			// click combobox loai xay dung
+			case R.id.cb_supervision_bts_body_row2_tv_chon_loai_xay_dung:
+				this.dropdownPopupMenuConstructionType = new Menu_DropdownPopup(
+						this, this.listConstructionType);
+				dropdownPopupMenuConstructionType.show(v);
+				break;
+
+			// click combobox cot anten
+			case R.id.ll_supervision_bts_body_row3_1_tv_chonanten:
+				this.dropdownPopupMenuPillarAnten = new Menu_DropdownPopup(this,
+						this.listPillarAnten);
+				dropdownPopupMenuPillarAnten.show(v);
+				break;
+			// click combobox chon loai cot
+			case R.id.ll_supervision_bts_body_row3_1_tv_chonloaicot:
+				this.dropdownPopupMenuPillarType = new Menu_DropdownPopup(this,
+						this.listPillarType);
+				dropdownPopupMenuPillarType.show(v);
+				break;
+			// click combobox chon loai nha
+			case R.id.ll_supervision_bts_body_row4_1_tv_chonloainha:
+				this.dropdownPopupMenuHouseType = new Menu_DropdownPopup(this,
+						this.listHouseType);
+				dropdownPopupMenuHouseType.show(v);
+				break;
+			// click combobox chon nha may no
+			case R.id.rl_supervision_bts_body_row5_1_tv_chonnhamayno:
+				this.dropdownPopupMenuFactoryType = new Menu_DropdownPopup(this,
+						this.listFactoryType);
+				dropdownPopupMenuFactoryType.show(v);
+				break;
+
+			// click combobox chon so mong co
+			case R.id.ll_supervision_bts_body_row4_1_et_somongco:
+				this.dropdownPopupMenuFoundNumType = new Menu_DropdownPopup(this,
+						this.listFoundNum);
+				dropdownPopupMenuFoundNumType.show(v);
+				break;
+			// click chon save tren popup check in
+			case R.id.btn_popup_save_plan:
+				if (edtMakePlan.getText().toString().trim().length() <= 0) {
+					showAlertDialogCheckInRequire(this,
+							getString(R.string.input_plan_require),
+							getString(R.string.text_close));
+					break;
+				} else if (addnewSupvLocatetoDB()) {
+					isCheckIn = !isCheckIn;
+					GlobalInfo.getInstance().setCheckIn(isCheckIn);
+					changeMenuCheckIn(R.drawable.icon_checkout,
+							getString(R.string.check_out));
+					startService();
+					popupWindow.dismiss();
+				}
+				break;
+			// dong popup check in
+			case R.id.btn_popup_cancel:
 				popupWindow.dismiss();
-			}
-			break;
-		// dong popup check in
-		case R.id.btn_popup_cancel:
-			popupWindow.dismiss();
-			break;
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 
@@ -827,7 +827,7 @@ public class SupervisionBtsActivity extends SupervisionBtsBaseActivity {
 							btsEntity.getSupervision_Bts_Id(), bts_Entity);
 
 					Toast toast = Toast.makeText(this, getResources()
-							.getString(R.string.update_database_complete),
+									.getString(R.string.update_database_complete),
 							Toast.LENGTH_LONG);
 
 					toast.setGravity(Gravity.CENTER, 0, 0);
@@ -938,261 +938,261 @@ public class SupervisionBtsActivity extends SupervisionBtsBaseActivity {
 	public void onEvent(int eventType, View control, Object data) {
 		switch (eventType) {
 
-		case OnEventControlListener.EVENT_DROPDOWN_ITEM_CLICK:
-			DropdownItemEntity dropdownItem = (DropdownItemEntity) data;
-			String typeItem = dropdownItem.getType();
-			Drawable ic_combo = getResources().getDrawable(
-					R.drawable.icon_combo);
-			ic_combo.setBounds(0, 0, ic_combo.getIntrinsicWidth(),
-					ic_combo.getIntrinsicHeight());
+			case OnEventControlListener.EVENT_DROPDOWN_ITEM_CLICK:
+				DropdownItemEntity dropdownItem = (DropdownItemEntity) data;
+				String typeItem = dropdownItem.getType();
+				Drawable ic_combo = getResources().getDrawable(
+						R.drawable.icon_combo);
+				ic_combo.setBounds(0, 0, ic_combo.getIntrinsicWidth(),
+						ic_combo.getIntrinsicHeight());
 
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
 
-				isInfomation = dropdownItem.getId();
+					isInfomation = dropdownItem.getId();
 
-				Bundle bundleMonitorData = new Bundle();
-				bundleMonitorData.putSerializable(IntentConstants.INTENT_DATA,
-						constr_ConstructionItem);
-				bundleMonitorData.putInt(IntentConstants.INTENT_DESIGNINFO,
-						isInfomation);
+					Bundle bundleMonitorData = new Bundle();
+					bundleMonitorData.putSerializable(IntentConstants.INTENT_DATA,
+							constr_ConstructionItem);
+					bundleMonitorData.putInt(IntentConstants.INTENT_DESIGNINFO,
+							isInfomation);
 
-				if (btsEntity != null
-						&& this.supervision_ConstrData.getDeployExpectedDay() > 0) {
-					this.supervision_bts_cb_tv_thietke.setText(dropdownItem
-							.getTitle());
-					this.dropdownPopupMenuInfomation.dismiss();
-				}
-				if (isInfomation == Constants.BTS_INFO.THIET_TKE_INFO) {
-
-					gotoSupervisionBtsActivity(bundleMonitorData);
-				} else {
-					if (this.supervision_ConstrData.getDeployExpectedDay() == 0) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_deploy_day_not_fill));
+					if (btsEntity != null
+							&& this.supervision_ConstrData.getDeployExpectedDay() > 0) {
+						this.supervision_bts_cb_tv_thietke.setText(dropdownItem
+								.getTitle());
 						this.dropdownPopupMenuInfomation.dismiss();
-						return;
 					}
-				}
-				if (isInfomation == Constants.BTS_INFO.NHAT_KY_INFO) {
-					gotoNhatkyBtsActivity(bundleMonitorData);
-				}
+					if (isInfomation == Constants.BTS_INFO.THIET_TKE_INFO) {
 
-				if (isInfomation == Constants.BTS_INFO.TIEN_DO_INFO) {
-					gotoTiendoBtsActivity(bundleMonitorData);
-				}
-
-
-				if (isInfomation == Constants.BTS_INFO.THI_CONG_TIEP_DIA_INFO) {
-
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsPillarActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.THI_CONG_PHONG_MAY_NHA_MAY_NO_INFO) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsCatWorkActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.KEO_DIEN_INFO) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsPowerPoleActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.LAP_DAT_THIET_BI_INFO) {
-
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsEquipActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.LAP_DAT_VIBA_INFO) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsVibaActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.THI_CONG_HAN_NOI_INFO) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsMeasureActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.MEASURE_CONSTR_INFO) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionMeasureConstrActivity(bundleMonitorData);
-				}
-
-				// HungTN add new 24/08/2016
-				if (isInfomation == Constants.BTS_INFO.CAP_NHAT_DOI_THI_CONG) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionCNDTCActivity(bundleMonitorData);
-				}
-				if (isInfomation == Constants.BTS_INFO.CAP_NHAT_VUONG) {
-					// hungtn test comment
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionCNVCActivity(bundleMonitorData);
-				}
-				// ---
-
-				if (isInfomation == Constants.BTS_INFO.KET_LUAN_INFO) {
-					if (btsEntity == null) {
-						this.showDialog(StringUtil
-								.getString(R.string.supervision_bts_infomation_design_not_fill));
-						this.dropdownPopupMenuInfomation.dismiss();
-						return;
-					}
-
-					gotoSupervisionBtsKLActivity(bundleMonitorData);
-
-				}
-
-				this.showProgressDialog(StringUtil
-						.getString(R.string.text_loading));
-				finish();
-
-			}
-
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_TYPE)) {
-				isDesignType = dropdownItem.getId();
-				if (this.isDesignType > 0) {
-					supervision_bts_cb_tv_loaithietke.setError(null, ic_combo);
-				}
-				this.supervision_bts_cb_tv_loaithietke.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuDesignType.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_ASSESS)) {
-				isAssess = dropdownItem.getId();
-				if (this.isAssess > 0) {
-					supervision_bts_cb_tv_chondanhgia.setError(null, ic_combo);
-				}
-				this.supervision_bts_cb_tv_chondanhgia.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuAssess.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.CONSTRUCTION_TYPE)) {
-				isConstructionType = dropdownItem.getId();
-				if (this.isConstructionType > 0) {
-					cb_supervision_bts_chon_loai_xay_dung.setError(null,
-							ic_combo);
-				}
-				this.cb_supervision_bts_chon_loai_xay_dung.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuConstructionType.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.POSITION_PILLAR_ANTEN)) {
-				isPillarAnten = dropdownItem.getId();
-				if (this.isPillarAnten > 0) {
-					supervision_bts_cb_tv_chonanten.setError(null, ic_combo);
-				}
-				this.supervision_bts_cb_tv_chonanten.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuPillarAnten.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.PILLAR_ANTEN_TYPE)) {
-				isPillarType = dropdownItem.getId();
-				if (this.isPillarType > 0) {
-					supervision_bts_cb_tv_chonloaicot.setError(null, ic_combo);
-
-					if (isPillarType == Constants.BTS_PILLAR_ANTEN_TYPE.TU_DUNG) {
-						isFoundNum = 0;
-						this.supervision_bts_cb_tv_somongco.setText("0");
-						this.supervision_bts_cb_tv_somongco.setEnabled(false);
+						gotoSupervisionBtsActivity(bundleMonitorData);
 					} else {
-						// this.supervision_bts_cb_tv_somongco.setText(getResources().getString(R.string.text_choice1));
-						this.supervision_bts_cb_tv_somongco.setEnabled(true);
+						if (this.supervision_ConstrData.getDeployExpectedDay() == 0) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_deploy_day_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
 					}
-				}
-				this.supervision_bts_cb_tv_chonloaicot.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuPillarType.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.HOUSE_TYPE)) {
-				isHouseType = dropdownItem.getId();
-				if (this.isHouseType > 0) {
-					supervision_bts_cb_tv_chonloainha.setError(null, ic_combo);
-				}
-				this.supervision_bts_cb_tv_chonloainha.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuHouseType.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.FACTORY_TYPE)) {
-				isFactory = dropdownItem.getId();
-				// if (this.isFactory > 0) {
-				// supervision_bts_cb_tv_chonnhamayno.setError(null,
-				// ic_combo);
-				// }
-				this.supervision_bts_cb_tv_chonnhamayno.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuFactoryType.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.FOUND_NUM)) {
-				isFoundNum = dropdownItem.getId();
-				if (this.isFoundNum > 0) {
-					supervision_bts_cb_tv_somongco.setError(null, ic_combo);
-				}
-				this.supervision_bts_cb_tv_somongco.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuFoundNumType.dismiss();
-			}
-			getWindow().setSoftInputMode(
-					WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-			break;
-		// click confirm yes dialog chac chan them du lieu vao database
-		case OnEventControlListener.EVENT_CONFIRM_OK:
-			// saveData();
-			SaveAsyncTask task = new SaveAsyncTask();
-			task.execute();
+					if (isInfomation == Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO) {
+						gotoNhatkyBtsActivity(bundleMonitorData);
+					}
 
-			break;
-		default:
-			super.onEvent(eventType, control, data);
-			break;
+//				if (isInfomation == Constants.BTS_INFO.TIEN_DO_INFO) {
+//					gotoTiendoBtsActivity(bundleMonitorData);
+//				}
+
+
+					if (isInfomation == Constants.BTS_INFO.THI_CONG_TIEP_DIA_INFO) {
+
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsPillarActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.THI_CONG_PHONG_MAY_NHA_MAY_NO_INFO) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsCatWorkActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.KEO_DIEN_INFO) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsPowerPoleActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.LAP_DAT_THIET_BI_INFO) {
+
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsEquipActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.LAP_DAT_VIBA_INFO) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsVibaActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.THI_CONG_HAN_NOI_INFO) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsMeasureActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.MEASURE_CONSTR_INFO) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionMeasureConstrActivity(bundleMonitorData);
+					}
+
+					// HungTN add new 24/08/2016
+					if (isInfomation == Constants.BTS_INFO.CAP_NHAT_DOI_THI_CONG) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionCNDTCActivity(bundleMonitorData);
+					}
+					if (isInfomation == Constants.BTS_INFO.CAP_NHAT_VUONG) {
+						// hungtn test comment
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionCNVCActivity(bundleMonitorData);
+					}
+					// ---
+
+					if (isInfomation == Constants.BTS_INFO.KET_LUAN_INFO) {
+						if (btsEntity == null) {
+							this.showDialog(StringUtil
+									.getString(R.string.supervision_bts_infomation_design_not_fill));
+							this.dropdownPopupMenuInfomation.dismiss();
+							return;
+						}
+
+						gotoSupervisionBtsKLActivity(bundleMonitorData);
+
+					}
+
+					this.showProgressDialog(StringUtil
+							.getString(R.string.text_loading));
+					finish();
+
+				}
+
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_TYPE)) {
+					isDesignType = dropdownItem.getId();
+					if (this.isDesignType > 0) {
+						supervision_bts_cb_tv_loaithietke.setError(null, ic_combo);
+					}
+					this.supervision_bts_cb_tv_loaithietke.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuDesignType.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_ASSESS)) {
+					isAssess = dropdownItem.getId();
+					if (this.isAssess > 0) {
+						supervision_bts_cb_tv_chondanhgia.setError(null, ic_combo);
+					}
+					this.supervision_bts_cb_tv_chondanhgia.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuAssess.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.CONSTRUCTION_TYPE)) {
+					isConstructionType = dropdownItem.getId();
+					if (this.isConstructionType > 0) {
+						cb_supervision_bts_chon_loai_xay_dung.setError(null,
+								ic_combo);
+					}
+					this.cb_supervision_bts_chon_loai_xay_dung.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuConstructionType.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.POSITION_PILLAR_ANTEN)) {
+					isPillarAnten = dropdownItem.getId();
+					if (this.isPillarAnten > 0) {
+						supervision_bts_cb_tv_chonanten.setError(null, ic_combo);
+					}
+					this.supervision_bts_cb_tv_chonanten.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuPillarAnten.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.PILLAR_ANTEN_TYPE)) {
+					isPillarType = dropdownItem.getId();
+					if (this.isPillarType > 0) {
+						supervision_bts_cb_tv_chonloaicot.setError(null, ic_combo);
+
+						if (isPillarType == Constants.BTS_PILLAR_ANTEN_TYPE.TU_DUNG) {
+							isFoundNum = 0;
+							this.supervision_bts_cb_tv_somongco.setText("0");
+							this.supervision_bts_cb_tv_somongco.setEnabled(false);
+						} else {
+							// this.supervision_bts_cb_tv_somongco.setText(getResources().getString(R.string.text_choice1));
+							this.supervision_bts_cb_tv_somongco.setEnabled(true);
+						}
+					}
+					this.supervision_bts_cb_tv_chonloaicot.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuPillarType.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.HOUSE_TYPE)) {
+					isHouseType = dropdownItem.getId();
+					if (this.isHouseType > 0) {
+						supervision_bts_cb_tv_chonloainha.setError(null, ic_combo);
+					}
+					this.supervision_bts_cb_tv_chonloainha.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuHouseType.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.FACTORY_TYPE)) {
+					isFactory = dropdownItem.getId();
+					// if (this.isFactory > 0) {
+					// supervision_bts_cb_tv_chonnhamayno.setError(null,
+					// ic_combo);
+					// }
+					this.supervision_bts_cb_tv_chonnhamayno.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuFactoryType.dismiss();
+				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.FOUND_NUM)) {
+					isFoundNum = dropdownItem.getId();
+					if (this.isFoundNum > 0) {
+						supervision_bts_cb_tv_somongco.setError(null, ic_combo);
+					}
+					this.supervision_bts_cb_tv_somongco.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuFoundNumType.dismiss();
+				}
+				getWindow().setSoftInputMode(
+						WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+				break;
+			// click confirm yes dialog chac chan them du lieu vao database
+			case OnEventControlListener.EVENT_CONFIRM_OK:
+				// saveData();
+				SaveAsyncTask task = new SaveAsyncTask();
+				task.execute();
+
+				break;
+			default:
+				super.onEvent(eventType, control, data);
+				break;
 		}
 	}
 
@@ -1366,17 +1366,17 @@ public class SupervisionBtsActivity extends SupervisionBtsBaseActivity {
 	public void handleModelViewEvent(ModelEvent modelEvent) {
 		ActionEvent e = modelEvent.getActionEvent();
 		switch (e.action) {
-		case ActionEventConstant.REQEST_SYNC:
-			// closeProgressDialog();
-			SyncTask.closeDialog();
-			Toast.makeText(this,
-					StringUtil.getString(R.string.text_sync_success),
-					Toast.LENGTH_LONG).show();
+			case ActionEventConstant.REQEST_SYNC:
+				// closeProgressDialog();
+				SyncTask.closeDialog();
+				Toast.makeText(this,
+						StringUtil.getString(R.string.text_sync_success),
+						Toast.LENGTH_LONG).show();
 
-			break;
-		default:
-			super.handleModelViewEvent(modelEvent);
-			break;
+				break;
+			default:
+				super.handleModelViewEvent(modelEvent);
+				break;
 		}
 
 	}

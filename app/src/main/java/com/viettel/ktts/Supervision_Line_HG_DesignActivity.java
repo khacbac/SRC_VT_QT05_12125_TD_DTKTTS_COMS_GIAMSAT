@@ -52,9 +52,9 @@ import java.util.List;
 
 /**
  * giam sat thiet ke tuyen treo
- * 
+ *
  * @author datht1
- * 
+ *
  */
 
 public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
@@ -109,7 +109,7 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	private List<Supervision_Line_Hg_FiberEntity> listLineHGFiber;
 
 	// private boolean fiberNumChange = false;
-	
+
 	//hungkm -checkin
 	private Constr_ConstructionController constr_ConstructionController;
 	private Constr_ConstructionEntity constr_ConstructionData;
@@ -133,75 +133,75 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 			return;
 		}
 		switch (v.getId()) {
-		case R.id.tv_constr_line_hang_dropdown:
-			this.dropdownPopupMenuDesignInfo = new Menu_DropdownPopup(this,
-					this.listDesignInfo);
-			dropdownPopupMenuDesignInfo.show(v);
-			break;
-		case R.id.tv_constr_line_hang_design_type_dropdown:
+			case R.id.tv_constr_line_hang_dropdown:
+				this.dropdownPopupMenuDesignInfo = new Menu_DropdownPopup(this,
+						this.listDesignInfo);
+				dropdownPopupMenuDesignInfo.show(v);
+				break;
+			case R.id.tv_constr_line_hang_design_type_dropdown:
 
-			this.dropdownPopupMenuDesignType = new Menu_DropdownPopup(this,
+				this.dropdownPopupMenuDesignType = new Menu_DropdownPopup(this,
 
-			this.listDesignType);
-			dropdownPopupMenuDesignType.show(v);
-			break;
-		case R.id.tv_constr_line_hang_review_dropdown:
-			this.dropdownPopupMenuDesignAssess = new Menu_DropdownPopup(this,
+						this.listDesignType);
+				dropdownPopupMenuDesignType.show(v);
+				break;
+			case R.id.tv_constr_line_hang_review_dropdown:
+				this.dropdownPopupMenuDesignAssess = new Menu_DropdownPopup(this,
 
-			this.listDesignAssess);
-			dropdownPopupMenuDesignAssess.show(v);
-			break;
-		case R.id.tv_constr_line_hang_lc_dropdown:
-			this.dropdownPopupMenuCableType = new Menu_DropdownPopup(this,
+						this.listDesignAssess);
+				dropdownPopupMenuDesignAssess.show(v);
+				break;
+			case R.id.tv_constr_line_hang_lc_dropdown:
+				this.dropdownPopupMenuCableType = new Menu_DropdownPopup(this,
 
-			this.listCableType);
-			dropdownPopupMenuCableType.show(v);
-			break;
-		case R.id.rbt_line_hang_design_pillar_be_tong:
-			rbt_line_hang_design_pillar_be_tong.setChecked(true);
-			rbt_line_hang_design_pillar_go.setChecked(false);
-			break;
-		case R.id.rbt_line_hang_design_pillar_go:
-			rbt_line_hang_design_pillar_be_tong.setChecked(false);
-			rbt_line_hang_design_pillar_go.setChecked(true);
-			break;
-		case R.id.btn_constr_line_hang_save:
+						this.listCableType);
+				dropdownPopupMenuCableType.show(v);
+				break;
+			case R.id.rbt_line_hang_design_pillar_be_tong:
+				rbt_line_hang_design_pillar_be_tong.setChecked(true);
+				rbt_line_hang_design_pillar_go.setChecked(false);
+				break;
+			case R.id.rbt_line_hang_design_pillar_go:
+				rbt_line_hang_design_pillar_be_tong.setChecked(false);
+				rbt_line_hang_design_pillar_go.setChecked(true);
+				break;
+			case R.id.btn_constr_line_hang_save:
 			/* Ghi thong tin */
 			/* hien thi confirm ghi thong tin */
-			boolean bValid = this.checkValid();
-			if (bValid) {
-				ConfirmDialog confirmSave = new ConfirmDialog(this,
-						StringUtil.getString(R.string.text_confirm_save));
-				confirmSave.show();
+				boolean bValid = this.checkValid();
+				if (bValid) {
+					ConfirmDialog confirmSave = new ConfirmDialog(this,
+							StringUtil.getString(R.string.text_confirm_save));
+					confirmSave.show();
 
-			}
-			// else {
-			// Toast.makeText(this, sValid, Toast.LENGTH_SHORT).show();
-			// }
-			break;
-			// click chon save tren popup check in
-		case R.id.btn_popup_save_plan:
-			if(edtMakePlan.getText().toString().trim().length()<=0){
-				showAlertDialogCheckInRequire(this, getString(R.string.input_plan_require), getString(R.string.text_close));
+				}
+				// else {
+				// Toast.makeText(this, sValid, Toast.LENGTH_SHORT).show();
+				// }
 				break;
-			}else if (addnewSupvLocatetoDB()) {
-				isCheckIn = !isCheckIn;
-				GlobalInfo.getInstance().setCheckIn(isCheckIn);
-				changeMenuCheckIn(R.drawable.icon_checkout, getString(R.string.check_out));
-				startService();
-				popupWindow.dismiss();
-			}
-			
-			break;
+			// click chon save tren popup check in
+			case R.id.btn_popup_save_plan:
+				if(edtMakePlan.getText().toString().trim().length()<=0){
+					showAlertDialogCheckInRequire(this, getString(R.string.input_plan_require), getString(R.string.text_close));
+					break;
+				}else if (addnewSupvLocatetoDB()) {
+					isCheckIn = !isCheckIn;
+					GlobalInfo.getInstance().setCheckIn(isCheckIn);
+					changeMenuCheckIn(R.drawable.icon_checkout, getString(R.string.check_out));
+					startService();
+					popupWindow.dismiss();
+				}
+
+				break;
 			// dong popup check in
-		case R.id.btn_popup_cancel:
-			popupWindow.dismiss();
-			break;		
-		default:
-			break;
+			case R.id.btn_popup_cancel:
+				popupWindow.dismiss();
+				break;
+			default:
+				break;
 		}
 	}
-	
+
 	@Override
 	public void actionCheckInButton() {
 		super.actionCheckInButton();
@@ -246,10 +246,10 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 		//}else{
 		//	showPopupPlan((View) findViewById(R.id.action_checkin));
 		//}
-		
+
 		showPopupPlan((View) findViewById(R.id.action_checkin));
 	}
-	
+
 	public boolean addnewSupvLocatetoDB(){
 		long supv_locate_id = Ktts_KeyController.getInstance().getKttsNextKey(Supervision_Locate_Field.TABLE_NAME);
 		if(supv_locate_id==0){
@@ -465,7 +465,7 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 		super.onResume();
 		setData();
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
@@ -477,35 +477,19 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	@Override
 	public void onEvent(int eventType, View control, Object data) {
 		switch (eventType) {
-		case OnEventControlListener.EVENT_DROPDOWN_ITEM_CLICK:
-			DropdownItemEntity dropdownItem = (DropdownItemEntity) data;
-			String typeItem = dropdownItem.getType();
-			Drawable ic_combo = getResources().getDrawable(
-					R.drawable.icon_combo);
-			ic_combo.setBounds(0, 0, ic_combo.getIntrinsicWidth(),
-					ic_combo.getIntrinsicHeight());
+			case OnEventControlListener.EVENT_DROPDOWN_ITEM_CLICK:
+				DropdownItemEntity dropdownItem = (DropdownItemEntity) data;
+				String typeItem = dropdownItem.getType();
+				Drawable ic_combo = getResources().getDrawable(
+						R.drawable.icon_combo);
+				ic_combo.setBounds(0, 0, ic_combo.getIntrinsicWidth(),
+						ic_combo.getIntrinsicHeight());
 
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
-				this.iDesignInfo = dropdownItem.getId();
-				this.dropdownPopupMenuDesignInfo.dismiss();
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
+					this.iDesignInfo = dropdownItem.getId();
+					this.dropdownPopupMenuDesignInfo.dismiss();
 
-				if (this.iDesignInfo == Constants.LINE_HANG_INFO.NHAT_KY_INFO || this.iDesignInfo == Constants.LINE_HANG_INFO.TIEN_DO_INFO) {
-					Bundle bundleData = new Bundle();
-					bundleData.putSerializable(IntentConstants.INTENT_DATA,
-							itemData);
-					bundleData.putSerializable(IntentConstants.INTENT_DATA_EX,
-							supervision_Line_HangData);
-					bundleData.putInt(IntentConstants.INTENT_DESIGNINFO,
-							this.iDesignInfo);
-					this.gotoLineHangActivity(bundleData);
-				} else {
-					if (this.supervision_Line_HangData
-							.getSupervision_Line_Hang_Id() > 0) {
-						if (this.supervision_ConstrData.getDeployExpectedDay() == 0) {
-							this.showDialog(StringUtil
-									.getString(R.string.supervision_deploy_day_not_fill));
-							return;
-						}
+					if (this.iDesignInfo == Constants.LINE_HANG_INFO.NHAT_KY_TIEN_DO_INFO /*|| this.iDesignInfo == Constants.LINE_HANG_INFO.TIEN_DO_INFO*/) {
 						Bundle bundleData = new Bundle();
 						bundleData.putSerializable(IntentConstants.INTENT_DATA,
 								itemData);
@@ -515,56 +499,72 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 								this.iDesignInfo);
 						this.gotoLineHangActivity(bundleData);
 					} else {
-						this.showDialog(StringUtil
-								.getString(R.string.line_hang_design_noinfo_message));
+						if (this.supervision_Line_HangData
+								.getSupervision_Line_Hang_Id() > 0) {
+							if (this.supervision_ConstrData.getDeployExpectedDay() == 0) {
+								this.showDialog(StringUtil
+										.getString(R.string.supervision_deploy_day_not_fill));
+								return;
+							}
+							Bundle bundleData = new Bundle();
+							bundleData.putSerializable(IntentConstants.INTENT_DATA,
+									itemData);
+							bundleData.putSerializable(IntentConstants.INTENT_DATA_EX,
+									supervision_Line_HangData);
+							bundleData.putInt(IntentConstants.INTENT_DESIGNINFO,
+									this.iDesignInfo);
+							this.gotoLineHangActivity(bundleData);
+						} else {
+							this.showDialog(StringUtil
+									.getString(R.string.line_hang_design_noinfo_message));
+						}
 					}
+
+					this.dropdownPopupMenuDesignInfo.dismiss();
 				}
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_TYPE)) {
+					this.iDesignType = dropdownItem.getId();
 
-				this.dropdownPopupMenuDesignInfo.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_TYPE)) {
-				this.iDesignType = dropdownItem.getId();
+					if (this.iDesignType > 0) {
+						tv_constr_line_hang_design_type_dropdown.setError(null,
+								ic_combo);
+					}
 
-				if (this.iDesignType > 0) {
-					tv_constr_line_hang_design_type_dropdown.setError(null,
-							ic_combo);
+					this.tv_constr_line_hang_design_type_dropdown
+							.setText(dropdownItem.getTitle());
+					this.dropdownPopupMenuDesignType.dismiss();
 				}
-
-				this.tv_constr_line_hang_design_type_dropdown
-						.setText(dropdownItem.getTitle());
-				this.dropdownPopupMenuDesignType.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_ASSESS)) {
-				this.iDesignAssess = dropdownItem.getId();
-				if (this.iDesignAssess > 0) {
-					tv_constr_line_hang_review_dropdown
-							.setError(null, ic_combo);
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_ASSESS)) {
+					this.iDesignAssess = dropdownItem.getId();
+					if (this.iDesignAssess > 0) {
+						tv_constr_line_hang_review_dropdown
+								.setError(null, ic_combo);
+					}
+					this.tv_constr_line_hang_review_dropdown.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuDesignAssess.dismiss();
 				}
-				this.tv_constr_line_hang_review_dropdown.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuDesignAssess.dismiss();
-			}
-			if (typeItem.equals(Constants.DROPDOWN_TYPE.CABLE_TYPE)) {
-				this.iCableType = dropdownItem.getId();
-				if (this.iCableType > 0) {
-					edt_constr_line_hang_loai_cap.setError(null, ic_combo);
+				if (typeItem.equals(Constants.DROPDOWN_TYPE.CABLE_TYPE)) {
+					this.iCableType = dropdownItem.getId();
+					if (this.iCableType > 0) {
+						edt_constr_line_hang_loai_cap.setError(null, ic_combo);
+					}
+
+					this.edt_constr_line_hang_loai_cap.setText(dropdownItem
+							.getTitle());
+					this.dropdownPopupMenuCableType.dismiss();
 				}
+				getWindow().setSoftInputMode(
+						WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+				break;
+			case OnEventControlListener.EVENT_CONFIRM_OK:
+				new SaveAsyncTask().execute();
+				// this.saveDataDesign();
 
-				this.edt_constr_line_hang_loai_cap.setText(dropdownItem
-						.getTitle());
-				this.dropdownPopupMenuCableType.dismiss();
-			}
-			getWindow().setSoftInputMode(
-					WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-			break;
-		case OnEventControlListener.EVENT_CONFIRM_OK:
-			new SaveAsyncTask().execute();
-			// this.saveDataDesign();
-
-			break;
-		default:
-			super.onEvent(eventType, control, data);
-			break;
+				break;
+			default:
+				super.onEvent(eventType, control, data);
+				break;
 		}
 	}
 
@@ -776,7 +776,7 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 
 	/**
 	 * Ham check vailid du lieu truoc khi ghi
-	 * 
+	 *
 	 * @return
 	 */
 	private boolean checkValid() {
@@ -1287,19 +1287,19 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	public void handleModelViewEvent(ModelEvent modelEvent) {
 		ActionEvent e = modelEvent.getActionEvent();
 		switch (e.action) {
-		case ActionEventConstant.REQEST_SYNC:
-			this.supervision_Line_HangData = supervision_Line_HangController
-					.getItemBySupervisionConstrId(this.supervision_ConstrData
-							.getSupervision_Constr_Id());
+			case ActionEventConstant.REQEST_SYNC:
+				this.supervision_Line_HangData = supervision_Line_HangController
+						.getItemBySupervisionConstrId(this.supervision_ConstrData
+								.getSupervision_Constr_Id());
 //			closeProgressDialog();
-			SyncTask.closeDialog();
-			Toast.makeText(this,
-					StringUtil.getString(R.string.text_sync_success),
-					Toast.LENGTH_LONG).show();
-			break;
-		default:
-			super.handleModelViewEvent(modelEvent);
-			break;
+				SyncTask.closeDialog();
+				Toast.makeText(this,
+						StringUtil.getString(R.string.text_sync_success),
+						Toast.LENGTH_LONG).show();
+				break;
+			default:
+				super.handleModelViewEvent(modelEvent);
+				break;
 		}
 
 	}

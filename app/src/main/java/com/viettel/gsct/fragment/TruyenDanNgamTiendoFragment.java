@@ -29,6 +29,8 @@ import com.viettel.gsct.View.SubWorkItemTienDoNgamView;
 import com.viettel.gsct.View.WorkItemTienDoNgamView;
 import com.viettel.ktts.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -224,6 +226,7 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     @Override
     public void save() {
+        EventBus.getDefault().post(layoutRoot);
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
             Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
             return;
@@ -355,7 +358,7 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
         //Tuyến cáp treo
         planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "End_Date_Usage", constr_ConstructionItem.getStatus() >= 395 ? GSCTUtils.getDateNow() : "");
 
-        Toast.makeText(getContext(), "Lưu dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -364,4 +367,7 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+
+
 }

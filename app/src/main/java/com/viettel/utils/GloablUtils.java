@@ -432,15 +432,15 @@ public class GloablUtils {
                     .getString(R.string.line_background_design_info),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
             listData.add(new DropdownItemEntity(
-                    Constants.LINE_BACKGROUND_INFO.NHAT_KY_INFO, GlobalInfo
+                    Constants.LINE_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO, GlobalInfo
                     .getInstance().getAppContext().getResources()
-                    .getString(R.string.line_background_nhatky_info),
+                    .getString(R.string.line_background_nhatky_tiendo_info),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
-            listData.add(new DropdownItemEntity(
-                    Constants.LINE_BACKGROUND_INFO.TIEN_DO_INFO, GlobalInfo
-                    .getInstance().getAppContext().getResources()
-                    .getString(R.string.line_background_tiendo_info),
-                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
+//            listData.add(new DropdownItemEntity(
+//                    Constants.LINE_BACKGROUND_INFO.TIEN_DO_INFO, GlobalInfo
+//                    .getInstance().getAppContext().getResources()
+//                    .getString(R.string.line_background_tiendo_info),
+//                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
             listData.add(new DropdownItemEntity(
                     Constants.LINE_BACKGROUND_INFO.VI_TRI_DAC_BIET_INFO,
                     GlobalInfo.getInstance().getAppContext().getResources()
@@ -510,13 +510,13 @@ public class GloablUtils {
                     .getString(R.string.line_hang_design_info),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
             listData.add(new DropdownItemEntity(
-                    Constants.LINE_HANG_INFO.NHAT_KY_INFO, StringUtil
-                    .getString(R.string.line_hang_nhatky_info),
+                    Constants.LINE_HANG_INFO.NHAT_KY_TIEN_DO_INFO, StringUtil
+                    .getString(R.string.line_hang_nhatky_tiendo_info),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
-            listData.add(new DropdownItemEntity(
-                    Constants.LINE_HANG_INFO.TIEN_DO_INFO, StringUtil
-                    .getString(R.string.line_hang_tiendo_info),
-                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
+//            listData.add(new DropdownItemEntity(
+//                    Constants.LINE_HANG_INFO.TIEN_DO_INFO, StringUtil
+//                    .getString(R.string.line_hang_tiendo_info),
+//                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
 
             listData.add(new DropdownItemEntity(
                     Constants.LINE_HANG_INFO.GS_COT_INFO, StringUtil
@@ -581,16 +581,16 @@ public class GloablUtils {
                     .getAppContext()
                     .getResources()
                     .getString(
-                            R.string.line_hang_nhatky_info),
+                            R.string.line_hang_nhatky_tiendo_info),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
-            listData.add(new DropdownItemEntity(
-                    Constants.BRCD_BACKGROUND_INFO.TIEN_DO, GlobalInfo
-                    .getInstance()
-                    .getAppContext()
-                    .getResources()
-                    .getString(
-                            R.string.line_hang_tiendo_info),
-                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
+//            listData.add(new DropdownItemEntity(
+//                    Constants.BRCD_BACKGROUND_INFO.TIEN_DO, GlobalInfo
+//                    .getInstance()
+//                    .getAppContext()
+//                    .getResources()
+//                    .getString(
+//                            R.string.line_hang_tiendo_info),
+//                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
             listData.add(new DropdownItemEntity(
                     Constants.BRCD_BACKGROUND_INFO.KEO_CAP_TRUC,
                     GlobalInfo
@@ -1132,12 +1132,12 @@ public class GloablUtils {
                         Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
             }
             listData.add(new DropdownItemEntity(
-                    Constants.BRCD_BACKGROUND_INFO.THONG_TIN_TK, GlobalInfo
+                    Constants.BRCD_BACKGROUND_INFO.NHAT_KY, GlobalInfo
                     .getInstance().getAppContext().getResources()
                     .getString(R.string.line_cable_type_bon),
                     Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
             listData.add(new DropdownItemEntity(
-                    Constants.BRCD_BACKGROUND_INFO.THONG_TIN_TK, GlobalInfo
+                    Constants.BRCD_BACKGROUND_INFO.TIEN_DO, GlobalInfo
                     .getInstance().getAppContext().getResources()
                     .getString(R.string.line_cable_type_tam),
                     Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
@@ -1956,15 +1956,15 @@ public class GloablUtils {
                     .getString(R.string.bts_info_design),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
             listData.add(new DropdownItemEntity(
-                    Constants.BTS_INFO.NHAT_KY_INFO, GlobalInfo.getInstance()
+                    Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO, GlobalInfo.getInstance()
                     .getAppContext().getResources()
                     .getString(R.string.bts_info_nhatky),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
-            listData.add(new DropdownItemEntity(
-                    Constants.BTS_INFO.TIEN_DO_INFO, GlobalInfo.getInstance()
-                    .getAppContext().getResources()
-                    .getString(R.string.bts_info_tiendo),
-                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
+//            listData.add(new DropdownItemEntity(
+//                    Constants.BTS_INFO.TIEN_DO_INFO, GlobalInfo.getInstance()
+//                    .getAppContext().getResources()
+//                    .getString(R.string.bts_info_tiendo),
+//                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
 
             listData.add(new DropdownItemEntity(
                     Constants.BTS_INFO.THI_CONG_TIEP_DIA_INFO, GlobalInfo
@@ -2075,14 +2075,14 @@ public class GloablUtils {
                 sResult = GlobalInfo.getInstance().getAppContext().getResources()
                         .getString(R.string.bts_info_kl_design);
                 break;
-            case Constants.BTS_INFO.NHAT_KY_INFO:
+            case Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO:
                 sResult = GlobalInfo.getInstance().getAppContext().getResources()
                         .getString(R.string.bts_info_nhat_ky);
                 break;
-            case Constants.BTS_INFO.TIEN_DO_INFO:
-                sResult = GlobalInfo.getInstance().getAppContext().getResources()
-                        .getString(R.string.bts_info_tien_do);
-                break;
+//            case Constants.BTS_INFO.TIEN_DO_INFO:
+//                sResult = GlobalInfo.getInstance().getAppContext().getResources()
+//                        .getString(R.string.bts_info_tien_do);
+//                break;
 
             default:
                 break;

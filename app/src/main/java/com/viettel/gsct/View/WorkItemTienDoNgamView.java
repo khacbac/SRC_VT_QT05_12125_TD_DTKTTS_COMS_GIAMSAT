@@ -35,7 +35,7 @@ public class WorkItemTienDoNgamView extends LinearLayout {
     Work_ItemsEntity entity;
     private ArrayList<SubWorkItemTienDoNgamView> arrSubItems = new ArrayList<>();
     private boolean flagIsWorking = false; // = true neu co mot truong subWorkItem da nhap du lieu
-                                           // btnTiendo chi co hai trang hai hoan thanh / dang lam
+    // btnTiendo chi co hai trang hai hoan thanh / dang lam
 
     public WorkItemTienDoNgamView(Context context) {
         super(context);
@@ -99,6 +99,18 @@ public class WorkItemTienDoNgamView extends LinearLayout {
         }
     }
 
+    public Work_ItemsEntity getWorkItemEntity() {
+        return entity;
+    }
+
+    public String getTitle() {
+        return tvTitle.getText().toString();
+    }
+
+    public String getTrangThaiTienDo() {
+        return btnTienDo.getText().toString();
+    }
+
     public boolean isWorking() {
         for (SubWorkItemTienDoNgamView view : arrSubItems) {
             if (view.getValue() > 0)
@@ -117,4 +129,7 @@ public class WorkItemTienDoNgamView extends LinearLayout {
         view.setEditeTextEnable(entity.getStatus_id() != Work_ItemsEntity.STATUS_COMPLETE || GSCTUtils.getDateNow().equals(entity.getComplete_date()));
     }
 
+    public ArrayList<SubWorkItemTienDoNgamView> getArrSubItems() {
+        return arrSubItems;
+    }
 }

@@ -1217,6 +1217,8 @@ public class SyncModel extends AbstractSyncService {
                         pFileUpload.getEmployeeId());
                 json.put(Supv_Constr_Attach_FileField.COLUMN_PROCESS_ID,
                         pFileUpload.getProcessId());
+                json.put(Supv_Constr_Attach_FileField.COLUMN_SUPERVISION_CONSTR_ID,
+                        pFileUpload.getSupervisionConstrId());
 
                 jsonArrayData.put(json);
             }

@@ -48,7 +48,7 @@ public class Constants {
 	public static final int NUMBER_ITEM_PERPAGE = 20;
 	public static final int NUMBER_MAX_ITEM_SYNC = 20;
 	public static final int NUMBER_MAX_ITEM_SYNC_IMG = 3; // max anh dong bo 1
-															// req
+	// req
 	public static final float MIN_DISTANCE_FROM_STATION = 500.0f;
 	public static final String DOWNLOAD_SUCCESS = "DOWNLOAD_OK";
 	public static final String DOWNLOAD_ERROR = "DOWNLOAD_ERROR";
@@ -63,7 +63,7 @@ public class Constants {
 	public static final String MESSAGE_ERROR_NO_CONNECT_SERVER = "Không kết nối được với máy chủ";
 	public static final String MESSAGE_ERROR_NO_CONNECTION = "Không kết nối mạng được.";
 	public static final String MESSAGE_TIME_OUT = "Connect bị timeout!"; // cuongdk3
-																			// add
+	// add
 	public static final String HTTPCONNECTION_POST = "POST";
 	public static final int IS_ACTIVE = 1;
 	public static final String GSCT_TAG_ERROR = "GSCT ERROR";
@@ -267,7 +267,7 @@ public class Constants {
 		public static final String SUB_TYPE_CAP_QUANG_NGUON_RRU = "CAP_QUANG_NGUON_RRU";
 		public static final String SUB_TYPE_4G_CAP_QUANG_NGUON_RRU = "4G_CAP_QUANG_NGUON_RRU";
 
-		
+
 		public static final String SUB_TYPE_THIET_BI = "THIET_BI";
 		public static final String SUB_TYPE_VIBA = "VIBA";
 
@@ -461,19 +461,20 @@ public class Constants {
 	/* Thong tin giam sat cong trinh */
 	public interface LINE_BACKGROUND_INFO {
 		public static final int THIE_TKE_INFO = 1;
-		public static final int NHAT_KY_INFO = 2;
-		public static final int TIEN_DO_INFO = 3;
-		public static final int VI_TRI_DAC_BIET_INFO = 4;
-		public static final int BE_CAP_INFO = 5;
-		public static final int CONG_RANH_CAP_INFO = 6;
-		public static final int KEO_CAP_INFO = 7;
-		public static final int HAN_NOI_DO_KIEM_INFO = 8;
-		public static final int MEASURE_CONSTR_INFO = 9;
-		public static final int KET_LUAN_INFO = 10;
+		public static final int NHAT_KY_TIEN_DO_INFO = 2;
+		//		public static final int TIEN_DO_INFO = 3;
+		public static final int VI_TRI_DAC_BIET_INFO = 3;
+		public static final int BE_CAP_INFO = 4;
+		public static final int CONG_RANH_CAP_INFO = 5;
+		public static final int KEO_CAP_INFO = 6;
+		public static final int HAN_NOI_DO_KIEM_INFO = 7;
+		public static final int MEASURE_CONSTR_INFO = 8;
+		public static final int KET_LUAN_INFO = 9;
 
 		// ---HungTN add 23/08/2016
-		public static final int CAP_NHAT_DOI_THI_CONG = 11;
-		public static final int CAP_NHAT_VUONG = 12;
+		public static final int CAP_NHAT_DOI_THI_CONG = 10;
+		public static final int CAP_NHAT_VUONG = 11;
+//		public static final int NHAT_KY_TIEN_DO_INFO = 13;
 
 		// ---
 	}
@@ -530,8 +531,8 @@ public class Constants {
 	/* Thong tin giam sat cong trinh tuyen treo */
 	public interface LINE_HANG_INFO {
 		public static final int THIE_TKE_INFO = 1;
-		public static final int NHAT_KY_INFO = 2;
-		public static final int TIEN_DO_INFO = 3;
+		public static final int NHAT_KY_TIEN_DO_INFO = 2;
+		//		public static final int TIEN_DO_INFO = 3;
 		public static final int GS_COT_INFO = 4;
 		public static final int GS_CAP_INFO = 5;
 		public static final int MEASURE_CONSTR_INFO = 7;
@@ -585,19 +586,19 @@ public class Constants {
 	/* Thong tin giam sat BTS */
 	public interface BTS_INFO {
 		public static final int THIET_TKE_INFO = 1;
-		public static final int NHAT_KY_INFO = 2;
-		public static final int TIEN_DO_INFO = 3;
-		public static final int THI_CONG_TIEP_DIA_INFO = 4;
-		public static final int THI_CONG_PHONG_MAY_NHA_MAY_NO_INFO = 5;
-		public static final int KEO_DIEN_INFO = 6;
-		public static final int LAP_DAT_THIET_BI_INFO = 7;
-		public static final int LAP_DAT_VIBA_INFO = 8;
-		public static final int THI_CONG_HAN_NOI_INFO = 9;
-		public static final int MEASURE_CONSTR_INFO = 10;
-		public static final int KET_LUAN_INFO = 11;
+		public static final int NHAT_KY_TIEN_DO_INFO = 2;
+		//		public static final int TIEN_DO_INFO = 3;
+		public static final int THI_CONG_TIEP_DIA_INFO = 3;
+		public static final int THI_CONG_PHONG_MAY_NHA_MAY_NO_INFO = 4;
+		public static final int KEO_DIEN_INFO = 5;
+		public static final int LAP_DAT_THIET_BI_INFO = 6;
+		public static final int LAP_DAT_VIBA_INFO = 7;
+		public static final int THI_CONG_HAN_NOI_INFO = 8;
+		public static final int MEASURE_CONSTR_INFO = 9;
+		public static final int KET_LUAN_INFO = 10;
 		// ---HungTN add 23/08/2016
-		public static final int CAP_NHAT_DOI_THI_CONG = 12;
-		public static final int CAP_NHAT_VUONG = 13;
+		public static final int CAP_NHAT_DOI_THI_CONG = 11;
+		public static final int CAP_NHAT_VUONG = 12;
 
 		// ---
 	}

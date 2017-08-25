@@ -116,7 +116,15 @@ public class TiendoBTSItemView  extends LinearLayout{
         tvTitle.setText(title);
     }
 
+    public String getTitle() {
+        return ""+tvTitle.getText();
+    }
+
     public void addSubView(View view) {
         arrSubViews.add(view);
+    }
+
+    public ArrayList<View> getSubView() {
+        return arrSubViews;
     }
 }

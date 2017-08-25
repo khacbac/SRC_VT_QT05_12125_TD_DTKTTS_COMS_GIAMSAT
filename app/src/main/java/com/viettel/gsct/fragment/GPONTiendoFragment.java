@@ -51,6 +51,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
     LinearLayout layoutRootRight;
     private Unbinder unbinder;
     private boolean dialogDismissFlag = true;
+    public boolean mIsCheckValidate;
 
     private ConcurrentHashMap<Long, SubWorkItemGPONView> hashSubWorkItemViews = new ConcurrentHashMap<>();
 
@@ -197,7 +198,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
 
     @Override
     public void save() {
+        mIsCheckValidate = true;
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
+            mIsCheckValidate = false;
             Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -227,6 +230,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                     }
                 }
                 if (!flagValue) {
+                    mIsCheckValidate = false;
                     showError("Bạn chưa nhập khối lượng cho hạng mục");
                     return;
                 }
@@ -287,7 +291,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
             }
         }
 
-        Toast.makeText(getContext(), "Lưu dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
 
     }
 

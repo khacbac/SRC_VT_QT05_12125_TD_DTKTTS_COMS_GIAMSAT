@@ -8,39 +8,86 @@
     android:orientation="vertical">
 
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/tl_supervision_bts_header"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="@dimen/margin"-->
-        <!--android:background="@drawable/border_layout"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:padding="@dimen/padding"-->
-        <!--android:visibility="visible" >-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layoutForJournalProgressPreview"
+        android:visibility="gone">
+    </FrameLayout>
 
-        <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/margin_left"-->
-            <!--android:layout_marginRight="@dimen/margin"-->
-            <!--android:layout_weight="0.1"-->
-            <!--android:text="@string/supervision_bts_tt"-->
-            <!--android:textStyle="bold" />-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/tl_supervision_bts_header"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/margin"-->
+    <!--android:background="@drawable/border_layout"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:padding="@dimen/padding"-->
+    <!--android:visibility="visible" >-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/margin_left"-->
+    <!--android:layout_marginRight="@dimen/margin"-->
+    <!--android:layout_weight="0.1"-->
+    <!--android:text="@string/supervision_bts_tt"-->
+    <!--android:textStyle="bold" />-->
     <!--</LinearLayout>-->
 
     <include
         layout="@layout/layout_header"
         android:layout_margin="@dimen/margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutHeader"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:id="@+id/layout_root">
+
+        <Button
+            android:id="@+id/btnNhatKyTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="@string/line_background_nhatky_info">
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/btnTienDoTab"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:text="@string/line_background_tiendo_info"/>
+    </LinearLayout>
+
     <FrameLayout
-        android:id="@+id/fr_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
-        android:background="@drawable/border_layout"></FrameLayout>
+        android:id="@+id/frame_layout_nhatky_tiendo">
+        <FrameLayout
+            android:id="@+id/fr_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:background="@drawable/border_layout">
+        </FrameLayout>
+    </FrameLayout>
+
+
 </LinearLayout>
 

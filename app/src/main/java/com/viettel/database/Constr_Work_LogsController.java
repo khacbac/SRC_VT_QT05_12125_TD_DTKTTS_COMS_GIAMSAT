@@ -9,6 +9,10 @@ import android.util.Log;
 import com.viettel.database.entity.Constr_Work_LogsEntity;
 import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Constr_Work_LogsField;
+import com.viettel.gsct.GSCTUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hieppq3 on 4/26/17.
@@ -100,7 +104,7 @@ public class Constr_Work_LogsController {
         Cursor cursor = db
                 .query(Constr_Work_LogsField.TABLE_NAME, allColumn,
                         Constr_Work_LogsField.CONSTRUCT_ID + "=? AND "
-                        + Constr_Work_LogsField.LOG_DATE +  "=?",
+                                + Constr_Work_LogsField.LOG_DATE +  "=?",
                         new String[] { String.valueOf(itemId), date }, null, null,
                         null, null);
         if (cursor != null && cursor.getCount() > 0) {
@@ -112,6 +116,41 @@ public class Constr_Work_LogsController {
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
         return curItem;
+    }
+
+    public List<Constr_Work_LogsEntity> getAllItem(long itemId) {
+        List<Constr_Work_LogsEntity> listItems = new ArrayList<>();
+        Constr_Work_LogsEntity curItem;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db.query(Constr_Work_LogsField.TABLE_NAME,allColumn,
+                Constr_Work_LogsField.CONSTRUCT_ID + "=?",
+                new String[]{String.valueOf(itemId)},null,null,null,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Constr_Work_LogsEntity item = this.converCursorToItem(cursor);
+                listItems.add(item);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return listItems;
+    }
+
+    public List<String> getListLogDate(long itemId) {
+        List<String> listDate = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db.query(Constr_Work_LogsField.TABLE_NAME,allColumn,
+                Constr_Work_LogsField.CONSTRUCT_ID + "=?",
+                new String[]{String.valueOf(itemId)},null,null,null,null);
+        if (cursor.moveToFirst()) {
+            do {
+                String date = this.converCursorToItem(cursor).getLog_date();
+                listDate.add(date);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return listDate;
     }
 
     public boolean addItem(Constr_Work_LogsEntity addItem) {

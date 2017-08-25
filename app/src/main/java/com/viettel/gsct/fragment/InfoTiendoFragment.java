@@ -16,6 +16,7 @@ import com.viettel.gsct.View.WorkItemInfoView;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +52,8 @@ public class InfoTiendoFragment extends BaseFragment {
     public void initData() {
         super.initData();
         ArrayList<Work_ItemsEntity> workItems = work_itemsControler.getItems(constr_ConstructionItem.getConstructId());
+        List<String> updateDates = new ArrayList<>();
+        updateDates = work_itemsControler.getAllLogDate(constr_ConstructionItem.getConstructId());
         int childCount = rootLayout.getChildCount();
         if (workItems.isEmpty()) {
             for (int index = 0; index < childCount; index++) {

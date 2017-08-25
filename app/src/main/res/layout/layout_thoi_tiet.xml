@@ -18,15 +18,15 @@
         style="@style/Header.Textview"
         android:id="@+id/title1"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="8dp"
-        android:text="Những thay đổi, bổ sung, phát sinh *" />
+        android:text="@string/str_edt_noidung_congviec" />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/et_thay_doi"
+        android:id="@+id/et_noi_dung_cong_viec"
         android:layout_marginLeft="10dp"
         style="@style/Content.EditText"
         android:layout_width="match_parent"
@@ -35,7 +35,30 @@
         android:imeOptions="flagNoEnterAction"
         android:inputType="text|textMultiLine"
         android:paddingBottom="10dp"
-        android:lines="2"
+        android:maxLines="2"
+        android:scrollbars="vertical"
+        android:text="" />
+    <TextView
+        android:id="@+id/titleThayDoiBoSung"
+        style="@style/Header.Textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:text="@string/str_edt_thay_doi_bo_sung" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etThayDoiBoSung"
+        android:layout_marginLeft="10dp"
+        style="@style/Content.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|left"
+        android:imeOptions="flagNoEnterAction"
+        android:inputType="text|textMultiLine"
+        android:paddingBottom="10dp"
         android:maxLines="2"
         android:scrollbars="vertical"
         android:text="" />
@@ -43,7 +66,7 @@
         style="@style/Header.Textview"
         android:id="@+id/title2"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -60,7 +83,6 @@
         android:imeOptions="flagNoEnterAction"
         android:inputType="text|textMultiLine"
         android:paddingBottom="10dp"
-        android:lines="2"
         android:maxLines="2"
         android:scrollbars="vertical"
         android:text="" />
@@ -68,7 +90,7 @@
         android:id="@+id/title3"
         style="@style/Header.Textview"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -85,9 +107,9 @@
         android:imeOptions="flagNoEnterAction"
         android:inputType="text|textMultiLine"
         android:paddingBottom="10dp"
-        android:lines="2"
         android:maxLines="2"
         android:scrollbars="vertical"
         android:text="" />
+
 
 </merge>

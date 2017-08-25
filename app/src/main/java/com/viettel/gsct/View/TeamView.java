@@ -68,4 +68,8 @@ public class TeamView extends LinearLayout {
 
     }
 
+    public String getTitle() {
+        return ""+tvTitle.getText();
+    }
+
 }

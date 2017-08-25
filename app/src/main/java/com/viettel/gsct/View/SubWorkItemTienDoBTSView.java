@@ -29,6 +29,7 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
     private Cat_Sub_Work_ItemEntity entity;
     private boolean isFinish = false;
     private FinishListener listener;
+    private String finishDate;
 
     public SubWorkItemTienDoBTSView(Context context) {
         super(context);
@@ -68,6 +69,14 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
         btnTienDo.setText(isFinish ? "Hoàn thành" : "Chưa làm");
     }
 
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
     public void setEnableTiendo(boolean enable) {
         btnTienDo.setEnabled(enable);
     }
@@ -77,11 +86,19 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
         this.entity = entity;
     }
 
+    public String getTitle() {
+        return String.valueOf(tvTitle.getText());
+    }
+
     public void setFinishListener(FinishListener listener) {
         this.listener = listener;
     }
 
     public interface FinishListener {
         void onFinishListener(boolean isFinish, long catSubWorkItemId);
+    }
+
+    public String getButtonTienDoStatus() {
+        return ""+btnTienDo.getText();
     }
 }

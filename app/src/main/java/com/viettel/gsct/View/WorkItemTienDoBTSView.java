@@ -28,6 +28,7 @@ public class WorkItemTienDoBTSView extends LinearLayout {
     @BindView(R.id.rb_check)
     AppCompatRadioButton rbCheck;
     private RadioCheckListener listener;
+    private boolean isTxtActive;
 
     private int parentIndex = 0;
     private Cat_Work_Item_TypesEntity entity;
@@ -69,7 +70,7 @@ public class WorkItemTienDoBTSView extends LinearLayout {
                     rbCheck.setChecked(rbCheck.isEnabled() && true);
                 } else {
                     if (listener != null)
-                        listener.onTextviewClicked(entity);
+                        listener.onTextviewClicked(parentIndex,entity);
                 }
             }
         });
@@ -81,6 +82,10 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         this.entity = code;
     }
 
+    public String getTitle() {
+        return ""+ tvTitle.getText();
+    }
+
     public Cat_Work_Item_TypesEntity getEntity() {
         return entity;
     }
@@ -89,12 +94,28 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         rbCheck.setChecked(checked);
     }
 
+    public boolean isChecked() {
+        return rbCheck.isChecked();
+    }
+
+    public boolean isTxtActive() {
+        return isTxtActive;
+    }
+
+    public void setTxtActive(boolean txtActive) {
+        isTxtActive = txtActive;
+    }
+
     public void setRadioCheckListener(RadioCheckListener listener) {
         this.listener = listener;
     }
 
     public void setEnabledRadioBtn(boolean enable) {
         rbCheck.setEnabled(enable);
+    }
+
+    public boolean getEnabledRadioBtn() {
+        return rbCheck.isEnabled();
     }
 
     private TiendoBTSItemView parentView;
@@ -109,6 +130,6 @@ public class WorkItemTienDoBTSView extends LinearLayout {
 
     public interface RadioCheckListener {
         public void onRadioChecked(int parentIndex, Cat_Work_Item_TypesEntity entity) ;
-        public void onTextviewClicked(Cat_Work_Item_TypesEntity entity) ;
+        public void onTextviewClicked(int parentIndex,Cat_Work_Item_TypesEntity entity) ;
     }
 }

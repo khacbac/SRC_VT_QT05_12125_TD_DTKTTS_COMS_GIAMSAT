@@ -89,4 +89,11 @@ public class SubWorkItemTienDoNgamView extends LinearLayout {
         etValue.addTextChangedListener(listener);
     }
 
+    public String getTvTitle() {
+        return tvTitle.getText().toString();
+    }
+
+    public Sub_Work_ItemEntity getSubWorkItemEntity() {
+        return entity;
+    }
 }

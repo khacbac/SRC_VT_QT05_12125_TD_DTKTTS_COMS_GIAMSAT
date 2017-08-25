@@ -3,11 +3,9 @@ package com.viettel.view.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.viettel.common.ActionEvent;
 import com.viettel.common.ActionEventConstant;
-import com.viettel.common.ModelEvent;
 import com.viettel.constants.Constants;
 import com.viettel.controller.Home_Controller;
 import com.viettel.controller.SupervisionBtsController;
@@ -27,9 +25,7 @@ import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
 import com.viettel.database.entity.Supervision_BtsEntity;
 import com.viettel.database.entity.Supervision_Bts_MeasureEntity;
 import com.viettel.gsct.activity.BtsActivity;
-import com.viettel.ktts.HomeActivity;
 import com.viettel.ktts.R;
-import com.viettel.sync.SyncTask;
 import com.viettel.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -39,7 +35,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form home
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoHomeActivity(Bundle data) {
@@ -72,13 +68,13 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 			gotoSupervisionBtsActivity(bundleMonitorData);
 		}
 
-		if (isInfomation == Constants.BTS_INFO.NHAT_KY_INFO) {
+		if (isInfomation == Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO) {
 			gotoNhatkyBtsActivity(bundleMonitorData);
 		}
 
-		if (isInfomation == Constants.BTS_INFO.TIEN_DO_INFO) {
-			gotoTiendoBtsActivity(bundleMonitorData);
-		}
+//		if (isInfomation == Constants.BTS_INFO.TIEN_DO_INFO) {
+//			gotoTiendoBtsActivity(bundleMonitorData);
+//		}
 
 		if (isInfomation == Constants.BTS_INFO.THI_CONG_TIEP_DIA_INFO) {
 
@@ -125,7 +121,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form thiet ke bts
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsActivity(Bundle data) {
@@ -141,25 +137,25 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		Intent intent = new Intent(this, BtsActivity.class);
 
 		if (extras != null) {
-			extras.putInt(BtsActivity.ARG_INFO, Constants.BTS_INFO.NHAT_KY_INFO);
+			extras.putInt(BtsActivity.ARG_INFO, Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO);
 			intent.putExtras(extras);
 		}
 		startActivity(intent);
 	}
 
-	protected void gotoTiendoBtsActivity(Bundle data) {
-		Bundle extras = data;
-		Intent intent = new Intent(this, BtsActivity.class);
-		if (extras != null) {
-			extras.putInt(BtsActivity.ARG_INFO, Constants.BTS_INFO.TIEN_DO_INFO);
-			intent.putExtras(extras);
-		}
-		startActivity(intent);
-	}
+//	protected void gotoTiendoBtsActivity(Bundle data) {
+//		Bundle extras = data;
+//		Intent intent = new Intent(this, BtsActivity.class);
+//		if (extras != null) {
+//			extras.putInt(BtsActivity.ARG_INFO, Constants.BTS_INFO.TIEN_DO_INFO);
+//			intent.putExtras(extras);
+//		}
+//		startActivity(intent);
+//	}
 
 	/**
 	 * chuyen toi form thi cong tip dia
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsPillarActivity(Bundle data) {
@@ -172,7 +168,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form xac dinh vi tri cot
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsPillarPosition(Bundle data) {
@@ -185,7 +181,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form thi cong phong may va nha may no
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsCatWorkActivity(Bundle data) {
@@ -198,7 +194,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form thi cong keo dien
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsPowerPoleActivity(Bundle data) {
@@ -211,7 +207,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form lap dat thiet bi
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsEquipActivity(Bundle data) {
@@ -224,7 +220,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form lap dat thiet bi
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsVibaActivity(Bundle data) {
@@ -237,7 +233,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form lap dat thiet bi
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsMeasureActivity(Bundle data) {
@@ -250,7 +246,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/**
 	 * chuyen toi form do kich thuoc cong trinh
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionMeasureConstrActivity(Bundle data) {
@@ -260,11 +256,11 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		e.sender = this;
 		SupervisionBtsController.getInstance().handleSwitchActivity(e);
 	}
-	
+
 	//--- HungTN add new 23/08/2016
 	/**
 	 * chuyen toi form cap nhat doi thi cong
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionCNDTCActivity(Bundle data) {
@@ -274,10 +270,10 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		e.sender = this;
 		SupervisionBtsController.getInstance().handleSwitchActivity(e);
 	}
-	
+
 	/**
 	 * chuyen toi form cap nhat doi thi cong
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionCNVCActivity(Bundle data) {
@@ -291,7 +287,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 	//--- end
 	/**
 	 * chuyen toi form ket luan cong trinh tram bts
-	 * 
+	 *
 	 * @param data
 	 */
 	protected void gotoSupervisionBtsKLActivity(Bundle data) {
@@ -304,7 +300,7 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 	/* Check nguyen nhan khong dat */
 	public boolean checkCauseDeny(Constr_Construction_EmployeeEntity constr_ConstructionItem) {
-		
+
 		String sResult = "";
 
 		List<Cat_Supervision_Constr_WorkEntity> listConstrWork;
@@ -455,9 +451,9 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		List<Cause_Bts_Cat_WorkEntity> listCauseCatWorkEquipEntity = new ArrayList<Cause_Bts_Cat_WorkEntity>();
 
 		// getDataFromDatabaseEquip();
-		 causeCatWorkController = new
-		 Cause_Bts_Cat_WorkController(
-		 this);
+		causeCatWorkController = new
+				Cause_Bts_Cat_WorkController(
+				this);
 		for (int i = 0; i < listConstrWork.size(); i++) {
 			Cause_Bts_Cat_WorkEntity item = new Cause_Bts_Cat_WorkEntity();
 
@@ -573,9 +569,9 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		// setListDataLowViba();
 		listConstrWorkLow = new ArrayList<Cat_Supervision_Constr_WorkEntity>();
 
-		 constrWorkController = new
-		 Cat_Supervision_Constr_WorkController(
-		 this);
+		constrWorkController = new
+				Cat_Supervision_Constr_WorkController(
+				this);
 
 		// lay ten constr work tuong ung voi work code thi cong ngoai troi
 		Cat_Supervision_Constr_WorkEntity constrWorkThicong_ngtroi = constrWorkController
@@ -607,9 +603,9 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		List<Cause_Bts_Cat_WorkEntity> listCauseCatWorkLowVibaEntity = new ArrayList<Cause_Bts_Cat_WorkEntity>();
 
 		// getDataFromDatabaseVibaLow();
-		 causeCatWorkController = new
-		 Cause_Bts_Cat_WorkController(
-		 this);
+		causeCatWorkController = new
+				Cause_Bts_Cat_WorkController(
+				this);
 		String worktype = Constants.UNQUALIFY_TYPE.SUB_TYPE_BTS_VIBA_LOW;
 		for (int i = 0; i < listConstrWorkLow.size(); i++) {
 			Cause_Bts_Cat_WorkEntity item = new Cause_Bts_Cat_WorkEntity();
@@ -664,34 +660,34 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		// setListDataHeightViba();
 		List<Cat_Supervision_Constr_WorkEntity> listConstrWorkHeigh = new ArrayList<Cat_Supervision_Constr_WorkEntity>();
 
-		 constrWorkController = new
-		 Cat_Supervision_Constr_WorkController(
-		 this);
+		constrWorkController = new
+				Cat_Supervision_Constr_WorkController(
+				this);
 
-		 // lay ten constr work tuong ung voi work code thi cong ngoai troi
-		 constrWorkThicong_ngtroi =
-		 constrWorkController
-		 .getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_ANTENNA);
-		
-		 // lay ten constr work tuong ung voi work code cap trung tan
-		 constrWorkCap_trungtan =
-		 constrWorkController
-		 .getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_TRUNG_TAN);
-		
-		 // lay ten constr work tuong ung voi work code tinh trang phan cung
-		 constrWorkTinhtrang_phancung =
-		 constrWorkController
-		 .getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TINH_TRANG_PHAN_CUNG);
-		
-		 // lay ten constr work tuong ung voi work code cap nguon DC
-		 constrWorkCapnguon_Dc =
-		 constrWorkController
-		 .getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_DC);
-		
-		 // lay ten constr work tuong ung voi work code cap bang tan goc
-		 constrWorkCapbangtan =
-		 constrWorkController
-		 .getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_BANG_TAN_GOC);
+		// lay ten constr work tuong ung voi work code thi cong ngoai troi
+		constrWorkThicong_ngtroi =
+				constrWorkController
+						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_ANTENNA);
+
+		// lay ten constr work tuong ung voi work code cap trung tan
+		constrWorkCap_trungtan =
+				constrWorkController
+						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_TRUNG_TAN);
+
+		// lay ten constr work tuong ung voi work code tinh trang phan cung
+		constrWorkTinhtrang_phancung =
+				constrWorkController
+						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TINH_TRANG_PHAN_CUNG);
+
+		// lay ten constr work tuong ung voi work code cap nguon DC
+		constrWorkCapnguon_Dc =
+				constrWorkController
+						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_DC);
+
+		// lay ten constr work tuong ung voi work code cap bang tan goc
+		constrWorkCapbangtan =
+				constrWorkController
+						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_BANG_TAN_GOC);
 
 		listConstrWorkHeigh.add(constrWorkThicong_ngtroi);
 		listConstrWorkHeigh.add(constrWorkCap_trungtan);
@@ -703,9 +699,9 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		List<Cause_Bts_Cat_WorkEntity> listCauseCatWorkHeighVibaEntity = new ArrayList<Cause_Bts_Cat_WorkEntity>();
 
 		// getDataFromDatabaseVibaHeigh();
-		 causeCatWorkController = new
-		 Cause_Bts_Cat_WorkController(
-		 this);
+		causeCatWorkController = new
+				Cause_Bts_Cat_WorkController(
+				this);
 		worktype = Constants.UNQUALIFY_TYPE.SUB_TYPE_BTS_VIBA_HIGH;
 
 		for (int i = 0; i < listConstrWorkHeigh.size(); i++) {
@@ -852,87 +848,87 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 			for (Cause_Bts_Pillar_AntenEntity i : listPillar) {
 				if (i.getSupervision_Bts_Pillar_AntenEntity().getStatus() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_pillar_khongdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_pillar_khongdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
-			
+
 			if (btsEntity.getPillar_STATUS_QUALITY() != -1) {
 				if (btsEntity.getPillar_STATUS_QUALITY() == Constants.BTS_ASSESS_PILLAR.DAT) {
-					
+
 					if (catWorkEntityLdc.getBts_Cat_WorkEntity().getStatus() == 0) {
-						 sResult = StringUtil
-						 .getString(R.string.supervision_bts_kl_lapdungcot_khongdat);
-						 Log.i("Cause_Deny", sResult);
+						sResult = StringUtil
+								.getString(R.string.supervision_bts_kl_lapdungcot_khongdat);
+						Log.i("Cause_Deny", sResult);
 					}
 				}
 				else {
 					if (btsEntity.getPillar_STATUS_QUALITY() == Constants.BTS_ASSESS_PILLAR.KHONG_DAT) {
 						sResult = StringUtil
-								 .getString(R.string.supervision_bts_kl_danhgia_chatluong_cot_khongdat);
-								 Log.i("Cause_Deny", sResult);
+								.getString(R.string.supervision_bts_kl_danhgia_chatluong_cot_khongdat);
+						Log.i("Cause_Deny", sResult);
 					}
 				}
 			}
 
 			if (catWorkEntityTctd.getBts_Cat_WorkEntity().getStatus() != -1 && catWorkEntityTctd.getBts_Cat_WorkEntity().getStatus() == 0) {
-				 sResult = StringUtil
-				 .getString(R.string.supervision_bts_kl_tiepdia_khongdat);
-				 Log.i("Cause_Deny", sResult);
+				sResult = StringUtil
+						.getString(R.string.supervision_bts_kl_tiepdia_khongdat);
+				Log.i("Cause_Deny", sResult);
 			}
 
 			if (causeCatWorkEntityPm.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityPm.getBts_Cat_WorkEntity().getStatus() == 0) {
-				 sResult = StringUtil
-				 .getString(R.string.supervision_bts_kl_phongmay_khongdat);
-				 Log.i("Cause_Deny", sResult);
+				sResult = StringUtil
+						.getString(R.string.supervision_bts_kl_phongmay_khongdat);
+				Log.i("Cause_Deny", sResult);
 			}
 
 			if (causeCatWorkEntityNmn.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityNmn.getBts_Cat_WorkEntity().getStatus() == 0) {
-				 sResult = StringUtil
-				 .getString(R.string.supervision_bts_kl_nhamayno_khongdat);
-				 Log.i("Cause_Deny", sResult);
+				sResult = StringUtil
+						.getString(R.string.supervision_bts_kl_nhamayno_khongdat);
+				Log.i("Cause_Deny", sResult);
 			}
 
 			if (causeCatWorkEntityKdd_Nmn.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityKdd_Nmn.getBts_Cat_WorkEntity().getStatus() == 0) {
-				 sResult = StringUtil
-				 .getString(R.string.supervision_bts_kl_keodaydien_nmn_khongdat);
-				 Log.i("Cause_Deny", sResult);
+				sResult = StringUtil
+						.getString(R.string.supervision_bts_kl_keodaydien_nmn_khongdat);
+				Log.i("Cause_Deny", sResult);
 			}
 
 			if (causeCatWorkEntityKdd.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityKdd.getBts_Cat_WorkEntity().getStatus() == 0) {
-				 sResult = StringUtil
-				 .getString(R.string.supervision_bts_kl_keodaydien_khongdat);
-				 Log.i("Cause_Deny", sResult);
+				sResult = StringUtil
+						.getString(R.string.supervision_bts_kl_keodaydien_khongdat);
+				Log.i("Cause_Deny", sResult);
 			}
 
 			if (listPowerPole.size() > 0) {
-				 sResult = StringUtil
-				 .getString(R.string.supervision_bts_kl_cottrongmoi_khongdat);
-				 Log.i("Cause_Deny", sResult);
+				sResult = StringUtil
+						.getString(R.string.supervision_bts_kl_cottrongmoi_khongdat);
+				Log.i("Cause_Deny", sResult);
 			}
 
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkEquipEntity) {
 				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_lapdatthietbi_khongdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_lapdatthietbi_khongdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkLowVibaEntity) {
 				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_lapdatviba_low_khongdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_lapdatviba_low_khongdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkHeighVibaEntity) {
 				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_lapdatviba_heigh_khongdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_lapdatviba_heigh_khongdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 
@@ -945,14 +941,14 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 								feeder2G.get(i).getCat_Supv_Constr_Measure_Id());
 				if (supvBtsMeasureEntity != null
 						&& supvBtsMeasureEntity.getMeasure_Status() != -1 && supvBtsMeasureEntity.getMeasure_Status() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_hangmuc)
-					 + " "
-					 + feeder2G.get(i).getMeasure_Name()
-					 + " "
-					 + StringUtil
-					 .getString(R.string.supervision_bts_kl_danhgia_hannoi_kdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_hangmuc)
+							+ " "
+							+ feeder2G.get(i).getMeasure_Name()
+							+ " "
+							+ StringUtil
+							.getString(R.string.supervision_bts_kl_danhgia_hannoi_kdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 
@@ -962,14 +958,14 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 								feeder3G.get(i).getCat_Supv_Constr_Measure_Id());
 				if (supvBtsMeasureEntity != null
 						&& supvBtsMeasureEntity.getMeasure_Status() != -1 && supvBtsMeasureEntity.getMeasure_Status() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_hangmuc)
-					 + " "
-					 + feeder3G.get(i).getMeasure_Name()
-					 + " "
-					 + StringUtil
-					 .getString(R.string.supervision_bts_kl_danhgia_hannoi_kdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_hangmuc)
+							+ " "
+							+ feeder3G.get(i).getMeasure_Name()
+							+ " "
+							+ StringUtil
+							.getString(R.string.supervision_bts_kl_danhgia_hannoi_kdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 
@@ -979,22 +975,22 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 								viba.get(i).getCat_Supv_Constr_Measure_Id());
 				if (supvBtsMeasureEntity != null
 						&& supvBtsMeasureEntity.getMeasure_Status() != -1 && supvBtsMeasureEntity.getMeasure_Status() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_hangmuc)
-					 + " "
-					 + viba.get(i).getMeasure_Name()
-					 + " "
-					 + StringUtil
-					 .getString(R.string.supervision_bts_kl_danhgia_hannoi_kdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_hangmuc)
+							+ " "
+							+ viba.get(i).getMeasure_Name()
+							+ " "
+							+ StringUtil
+							.getString(R.string.supervision_bts_kl_danhgia_hannoi_kdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 		} else {
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkEquipEntity) {
 				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
-					 sResult = StringUtil
-					 .getString(R.string.supervision_bts_kl_lapdatthietbi_khongdat);
-					 Log.i("Cause_Deny", sResult);
+					sResult = StringUtil
+							.getString(R.string.supervision_bts_kl_lapdatthietbi_khongdat);
+					Log.i("Cause_Deny", sResult);
 				}
 			}
 		}
@@ -1010,36 +1006,36 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 	@Override
 	public void onItemSelected(int position) {
 		// TODO Auto-generated method stub
-		
-		switch (position) {
-		case 0:
-			gotoHomeActivity(new Bundle());
-			finish();
-			break;
-		case 1:
-			
-			break;
-		case 2:
-			gotoMakePlanActivity(new Bundle());
-			break;
-		case 3:
-			requestSync(this);
-	
-			break;
-		case 4:
-			gotoAboutActivity(new Bundle());
-			break;
-		case 5:
-			
-			break;
-		case 6:
-			gotoLogOut();
-			break;
 
-		default:
-			break;
+		switch (position) {
+			case 0:
+				gotoHomeActivity(new Bundle());
+				finish();
+				break;
+			case 1:
+
+				break;
+			case 2:
+				gotoMakePlanActivity(new Bundle());
+				break;
+			case 3:
+				requestSync(this);
+
+				break;
+			case 4:
+				gotoAboutActivity(new Bundle());
+				break;
+			case 5:
+
+				break;
+			case 6:
+				gotoLogOut();
+				break;
+
+			default:
+				break;
 		}
-		
+
 	}
 
 }

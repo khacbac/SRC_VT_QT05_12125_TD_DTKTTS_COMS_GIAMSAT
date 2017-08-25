@@ -1,12 +1,10 @@
 package com.viettel.gsct.fragment;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +31,8 @@ import com.viettel.gsct.View.SubWorkItemTienDoBTSView;
 import com.viettel.gsct.View.TiendoBTSItemView;
 import com.viettel.gsct.View.WorkItemTienDoBTSView;
 import com.viettel.ktts.R;
+import com.viettel.view.listener.InterfacePassDataFromTienDoToActivity;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -76,8 +74,14 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
 
     private ConcurrentHashMap<Integer, TiendoBTSItemView> hashTienDoViews = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Long, WorkItemTienDoBTSView> hashWorkItemViews = new ConcurrentHashMap<>();
+    private InterfacePassDataFromTienDoToActivity mInterfacePassDataFromTienDoToActivity;
+    private ConcurrentHashMap<Integer,
+            ArrayList<SubWorkItemTienDoBTSView>> subWorkItemTienDoBTSViewHashMap = new ConcurrentHashMap<>();
+    private ArrayList<SubWorkItemTienDoBTSView> doBTSViews;
 
     private long last_cat_work_item_type_id = 0;
+
+    public boolean isValidate;
 
     public static BaseFragment newInstance() {
         BtsTiendoFragment fragment = new BtsTiendoFragment();
@@ -152,6 +156,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                     Work_ItemsEntity workItem = hashWorkItems.get(type.getItem_type_id());
                     ArrayList<Sub_Work_ItemEntity> subWorkItems = sub_work_itemController.getItems(workItem.getId());
                     for (Sub_Work_ItemEntity subWorkItem : subWorkItems) {
+//                        workItem.addSubWorkItem(subWorkItem);
                         hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
                     }
                     view.setChecked(true);
@@ -184,7 +189,8 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
 
     private WorkItemTienDoBTSView lastWorkItemView = null;
 
-    private void showSubWorkItem(final Cat_Work_Item_TypesEntity cat_work_item_type) {
+    private void showSubWorkItem(int parentIndex,final Cat_Work_Item_TypesEntity cat_work_item_type) {
+        doBTSViews = new ArrayList<>();
         WorkItemTienDoBTSView view = hashWorkItemViews.get(cat_work_item_type.getItem_type_id());
         if (lastWorkItemView != null) {
             lastWorkItemView.setBackgroundResource(R.color.white);
@@ -211,8 +217,10 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                 hashWorkItems.put(work_itemsEntity.getItem_type_id(), work_itemsEntity);
             ArrayList<Sub_Work_ItemEntity> subWorkItems = sub_work_itemController.getItems(work_itemsEntity.getId());
             for (Sub_Work_ItemEntity subWorkItem : subWorkItems) {
-                if (!hashSubWorkItems.containsKey(subWorkItem.getCat_sub_work_item_id()))
+                work_itemsEntity.addSubWorkItem(subWorkItem);
+                if (!hashSubWorkItems.containsKey(subWorkItem.getCat_sub_work_item_id())) {
                     hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
+                }
             }
         } else  {
             work_itemsEntity = new Work_ItemsEntity();
@@ -251,12 +259,15 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                     subWorkItem = new Sub_Work_ItemEntity();
                     subWorkItem.setCat_sub_work_item_id(catSubWorkItem.getId());
                     subWorkItem.setCreatorId(userId);
+                    work_itemsEntity.addSubWorkItem(subWorkItem);
                     hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
                 }
 //                Log.e(TAG, "showSubWorkItem: " + subWorkItem.getId() + " " + catSubWorkItem.getName() + " " + subWorkItem.getWork_item_id() + " " + subWorkItem.getFinishDate() );
                 subWorkItem.setCode(catSubWorkItem.getCode());
                 subView.setFinish(subWorkItem.getFinishDate() != null && subWorkItem.getFinishDate().length() > 0);
                 subView.setEnableTiendo(!subWorkItem.isCompleted() || GSCTUtils.getDateNow().equals(subWorkItem.getFinishDate()));
+                subView.setFinishDate(subWorkItem.getFinishDate());
+                doBTSViews.add(subView);
                 layoutRight.addView(subView);
             }
 //            etBbnt.setEnabled(true);
@@ -271,17 +282,24 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
             });
             subView.setFinish(work_itemsEntity.isReady() || work_itemsEntity.hasCompletedDate());
             subView.setEnableTiendo(!work_itemsEntity.hasCompletedDate() || GSCTUtils.getDateNow().equals(work_itemsEntity.getComplete_date()));
+            subView.setFinishDate(work_itemsEntity.getComplete_date());
+            doBTSViews.add(subView);
+
             if (work_itemsEntity.isReady())
                 subView.setEnableTiendo(false);
             layoutRight.addView(subView);
 //            etBbnt.setEnabled(false);
         }
+        subWorkItemTienDoBTSViewHashMap.put(parentIndex,doBTSViews);
+        Log.d("BacHK","Parent index = " + parentIndex);
+
     }
 
 
     @Override
     public void save() {
         boolean flagWorkItemChecked = false;
+        isValidate = true;
         Enumeration<Integer> keys = hashTienDoViews.keys();
         while (keys.hasMoreElements()) {
             TiendoBTSItemView parentView = hashTienDoViews.get(keys.nextElement());
@@ -292,6 +310,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
         }
         if (flagWorkItemChecked) {
             showError("Bạn phải điền đủ thông tin các hạng mục chính");
+            isValidate = false;
             return;
         }
 
@@ -382,6 +401,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                         && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE
                         && (workItem.getAccept_note_code() == null || workItem.getAccept_note_code().length() == 0)) {
                     showError("Bạn chưa nhập BBNT cho " + workItem.getWork_item_name());
+                    isValidate = false;
                     return;
                 }
             } else {
@@ -393,6 +413,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                         && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE
                         && (workItem.getAccept_note_code() == null || workItem.getAccept_note_code().length() == 0)) {
                     showError("Bạn chưa nhập BBNT cho " + workItem.getWork_item_name());
+                    isValidate = false;
                     return;
                 }
             }
@@ -447,11 +468,129 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
             }
         }
 
-        Toast.makeText(getContext(), "Cập nhật dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Cập nhật tiến độ thành công!", Toast.LENGTH_SHORT).show();
     }
 
+    public boolean checkTiendoFragmentValidate() {
+        boolean flagWorkItemChecked = false;
+        isValidate = true;
+        Enumeration<Integer> keys = hashTienDoViews.keys();
+        while (keys.hasMoreElements()) {
+            TiendoBTSItemView parentView = hashTienDoViews.get(keys.nextElement());
+            if (parentView.getCatWorkItemTypeId() == 0) {
+                flagWorkItemChecked = true;
+                break;
+            }
+        }
+        if (flagWorkItemChecked) {
+            showError("Bạn phải điền đủ thông tin các hạng mục chính");
+            return false;
+        }
 
+        updateBBNT();
 
+        Enumeration<Work_ItemsEntity> enumWorkItems = hashWorkItems.elements();
+        while (enumWorkItems.hasMoreElements()) {
+            Work_ItemsEntity workItem = enumWorkItems.nextElement();
+            workItem.setIsActive(Constants.ISACTIVE.DEACTIVE);
+        }
+
+        Enumeration<Sub_Work_ItemEntity> enumSubWorkItems = hashSubWorkItems.elements();
+        while (enumWorkItems.hasMoreElements()) {
+            Sub_Work_ItemEntity subWorkItem = enumSubWorkItems.nextElement();
+            subWorkItem.setIsActive(Constants.ISACTIVE.DEACTIVE);
+        }
+
+        Enumeration<TiendoBTSItemView> parentViews = hashTienDoViews.elements();
+        while (parentViews.hasMoreElements()) {
+            TiendoBTSItemView parentView = parentViews.nextElement();
+            Work_ItemsEntity workItem = hashWorkItems.get(parentView.getCatWorkItemTypeId());
+            if (workItem == null) {
+                workItem = new Work_ItemsEntity();
+                WorkItemTienDoBTSView view = hashWorkItemViews.get(parentView.getCatWorkItemTypeId());
+                Cat_Work_Item_TypesEntity catWorkItem = view.getEntity();
+                workItem.setItem_type_id(catWorkItem.getItem_type_id());
+                workItem.setConstr_id(constr_ConstructionItem.getConstructId());
+                workItem.setWork_item_name(catWorkItem.getItem_type_name());
+                if (workItem.isReady())
+                    workItem.setStatus_id(403);
+                hashWorkItems.put(workItem.getItem_type_id(), workItem);
+                workItem.setChange(true);
+            }
+            workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
+        }
+
+        Plan_Constr_DetailController planController = new Plan_Constr_DetailController(getContext());
+
+        enumWorkItems = hashWorkItems.elements();
+        boolean flagConstructions = true;
+        while (enumWorkItems.hasMoreElements()) {
+            Work_ItemsEntity workItem = enumWorkItems.nextElement();
+            //WorkItem da hoan thanh, ngay hoan thanh khong phai ngay hien tai, khong can phai them sua xoa gi nua
+//            Log.e(TAG, "save: complete " + workItem.getId() + " " + workItem.isCompleted() );
+            if (workItem.isCompleted() && !workItem.isChange())
+                continue;
+
+            workItem.setSyncStatus(workItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            workItem.setEmployeeId(userId);
+
+            workItem.updateDate();
+            long workItemId = workItem.getId() == 0 ?
+                    Ktts_KeyController.getInstance().getKttsNextKey(Work_ItemsField.TABLE_NAME) : workItem.getId();
+
+            ArrayList<Cat_Sub_Work_ItemEntity> arrCatSubWorkItems = cat_sub_work_itemControler.getsubCates(workItem.getItem_type_id());
+            Log.e(TAG, "save: " + workItem.getWork_item_name() + " " + arrCatSubWorkItems.size() + " " + workItem.getStatus_id());
+
+            if (arrCatSubWorkItems.size() > 0) {
+                // Nếu có subWorkItem
+                boolean flagComplete = true;
+                boolean flagWorking = false;
+                for (Cat_Sub_Work_ItemEntity catSubWorkItemEntity : arrCatSubWorkItems) {
+                    Sub_Work_ItemEntity subWorkItemEntity = hashSubWorkItems.get(catSubWorkItemEntity.getId());
+                    if (subWorkItemEntity != null) {
+                        subWorkItemEntity.setIsActive(Constants.ISACTIVE.ACTIVE);
+                        subWorkItemEntity.setWork_item_id(workItemId);
+                        if (flagComplete)
+                            flagComplete = subWorkItemEntity.isCompleted();
+                        if (!flagWorking)
+                            flagWorking = subWorkItemEntity.isCompleted();
+                        if (workItem.getStarting_date().length() == 0 && subWorkItemEntity.isCompleted()) {
+                            workItem.setStarting_date(GSCTUtils.getDateNow());
+                        }
+
+                        if (hashPlanCodes.containsKey(subWorkItemEntity.getCode())) {
+                            planController.updateRealFinishDate(constr_ConstructionItem.getConstructId()
+                                    , hashPlanCodes.get(subWorkItemEntity.getCode()), subWorkItemEntity.getFinishDate());
+                        }
+                    }
+                }
+                if (flagConstructions)
+                    flagConstructions = flagComplete;
+                workItem.setStatus_id(flagWorking ? Work_ItemsEntity.STATUS_WORKING : Work_ItemsEntity.STATUS_NOT_START);
+                workItem.setStatus_id(flagComplete ? Work_ItemsEntity.STATUS_COMPLETE : workItem.getStatus_id());
+
+                if (workItem.getIsActive() == Constants.ISACTIVE.ACTIVE
+                        && !workItem.isReady()
+                        && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE
+                        && (workItem.getAccept_note_code() == null || workItem.getAccept_note_code().length() == 0)) {
+                    showError("Bạn chưa nhập BBNT cho " + workItem.getWork_item_name());
+                    return false;
+                }
+            } else {
+                if (flagConstructions)
+                    flagConstructions = (workItem.hasCompletedDate());
+
+                if (workItem.getIsActive() == Constants.ISACTIVE.ACTIVE
+                        && !workItem.isReady()
+                        && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE
+                        && (workItem.getAccept_note_code() == null || workItem.getAccept_note_code().length() == 0)) {
+                    showError("Bạn chưa nhập BBNT cho " + workItem.getWork_item_name());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     @Override
     public void onDestroyView() {
@@ -478,12 +617,29 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                 hashWorkItems.get(cat_work_item_type.getItem_type_id()).setChange(true);
             }
 
-            showSubWorkItem(cat_work_item_type);
+            showSubWorkItem(parentIndex,cat_work_item_type);
         }
     }
 
     @Override
-    public void onTextviewClicked(Cat_Work_Item_TypesEntity cat_work_item_type) {
-        showSubWorkItem(cat_work_item_type);
+    public void onTextviewClicked(int parentIndex,Cat_Work_Item_TypesEntity cat_work_item_type) {
+        showSubWorkItem(parentIndex,cat_work_item_type);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mInterfacePassDataFromTienDoToActivity = (InterfacePassDataFromTienDoToActivity) context;
+    }
+
+    public void onPassDataFromTienDoToActivity() {
+        ArrayList<TiendoBTSItemView> listParent = new ArrayList<>();
+        Enumeration<Integer> keyParentItem = hashTienDoViews.keys();
+        while (keyParentItem.hasMoreElements()) {
+            TiendoBTSItemView parentView = hashTienDoViews.get(keyParentItem.nextElement());
+            listParent.add(parentView);
+        }
+        mInterfacePassDataFromTienDoToActivity
+                .passDataFromTienDoToActivity(listParent,subWorkItemTienDoBTSViewHashMap,hashWorkItems);
     }
 }

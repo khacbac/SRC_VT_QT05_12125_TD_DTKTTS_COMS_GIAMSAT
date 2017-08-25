@@ -1,5 +1,6 @@
 package com.viettel.gsct.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.viettel.common.GlobalInfo;
+import com.viettel.common.KeyEventCommon;
 import com.viettel.constants.Constants;
 import com.viettel.database.Cat_Constr_TeamController;
 import com.viettel.database.Constr_Team_ProgressController;
@@ -35,10 +37,14 @@ import com.viettel.database.field.Constr_Work_LogsField;
 import com.viettel.gsct.GSCTUtils;
 import com.viettel.gsct.View.TeamView;
 import com.viettel.ktts.R;
+import com.viettel.view.listener.InterfacePassDataFromNhatKyToActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -70,12 +76,14 @@ public class BtsNhatkyFragment extends BaseFragment {
     LinearLayout trLoaiVuong;
     @BindView(R.id.sp_thoitiet)
     Spinner spThoitiet;
-    @BindView(R.id.et_thay_doi)
-    AppCompatEditText etThayDoi;
+    @BindView(R.id.et_noi_dung_cong_viec)
+    public AppCompatEditText etNoiDungCongViec;
+    @BindView(R.id.etThayDoiBoSung)
+    AppCompatEditText etThayDoiBoSung;
     @BindView(R.id.et_y_kien_giam_sat)
-    AppCompatEditText etYKienGiamSat;
+    public AppCompatEditText etYKienGiamSat;
     @BindView(R.id.et_y_kien_thi_cong)
-    AppCompatEditText etYKienThiCong;
+    public AppCompatEditText etYKienThiCong;
     Unbinder unbinder1;
     @BindView(R.id.title1)
     TextView title1;
@@ -87,6 +95,8 @@ public class BtsNhatkyFragment extends BaseFragment {
     LinearLayout rootLayout;
 
     private Unbinder unbinder;
+
+    public boolean isValidate;
 
     public static final int TYPE_TUYEN_DEFAULT = 0;
     public static final int TYPE_TUYEN_NGAM = 2;
@@ -107,6 +117,11 @@ public class BtsNhatkyFragment extends BaseFragment {
     private ConcurrentHashMap<Integer, Constr_ObStruction_TypeEntity> hashObStructionsByPosition = new ConcurrentHashMap<>();
 
     private Set<String> filterCodes = new HashSet<>();
+
+    private boolean flagValidateTeamNumber;
+
+    private InterfaceCheckSwitchCombatStatus mInterfaceCheckSwitchCombatStatusStatus;
+    private InterfacePassDataFromNhatKyToActivity mInterfacePassDataFromNhatKyToActivity;
 
     public static BaseFragment newInstance() {
         BtsNhatkyFragment fragment = new BtsNhatkyFragment();
@@ -136,7 +151,7 @@ public class BtsNhatkyFragment extends BaseFragment {
 //        sThicong.add(title3);
 //        sThicong.add(etYKienGiamSat);
 //        sThicong.add(etYKienThiCong);
-//        sThicong.add(etThayDoi);
+//        sThicong.add(etNoiDungCongViec);
 
         Bundle args = getArguments();
         if (args != null)
@@ -198,6 +213,7 @@ public class BtsNhatkyFragment extends BaseFragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 updateViewByIsWork(swThiCong.isChecked());
+                mInterfaceCheckSwitchCombatStatusStatus.checkSwitchCombatStatus(swThiCong.isChecked());
             }
         });
     }
@@ -228,6 +244,7 @@ public class BtsNhatkyFragment extends BaseFragment {
             rootLayout.addView(view, ++i);
             hashTeamView.put(entity.getCat_constr_team_id(), view);
             sThicong.add(view);
+
         }
 
         constrWorkLogsEntity = new Constr_Work_LogsController(getContext()).getItem(constr_ConstructionItem.getConstructId(), GSCTUtils.getDateNow());
@@ -237,7 +254,8 @@ public class BtsNhatkyFragment extends BaseFragment {
         updateViewByIsWork(swThiCong.isChecked());
 
 
-        etThayDoi.setText(constrWorkLogsEntity.getWork_content());
+        etNoiDungCongViec.setText(constrWorkLogsEntity.getWork_content());
+        etThayDoiBoSung.setText(constrWorkLogsEntity.getAddition_change_arise());
         etYKienThiCong.setText(constrWorkLogsEntity.getConstructor_comments());
         etYKienGiamSat.setText(constrWorkLogsEntity.getMonitor_comments());
 
@@ -273,7 +291,9 @@ public class BtsNhatkyFragment extends BaseFragment {
     }
 
     public void save() {
+        EventBus.getDefault().post(this);
         boolean isInsert = false;
+        isValidate = true;
 
         Constr_Work_LogsController controller = new Constr_Work_LogsController(getContext());
         Supervision_CNVController vuongConller = new Supervision_CNVController(getContext());
@@ -285,42 +305,12 @@ public class BtsNhatkyFragment extends BaseFragment {
             isInsert = true;
         }
 
-        if (swThiCong.isChecked()) {
-            boolean flagValidateTeamNumber = true;
-            Enumeration<Long> keys = hashTeamView.keys();
-            while (keys.hasMoreElements()) {
-                TeamView view = hashTeamView.get(keys.nextElement());
-                if (view.getTeamNumber() > 0) {
-                    flagValidateTeamNumber = false;
-                    break;
-                }
-            }
-
-            if (flagValidateTeamNumber) {
-                showError("Bạn phải nhập số người cho ít nhất một đội!");
-                return;
-            }
-        }
-
         long idUser = GlobalInfo.getInstance().getUserId();
-        if (etThayDoi.getEditableText().toString().length() == 0) {
-            showError("Bạn phải nhập thay đổi, bổ sung!");
-            return;
-        }
-        // có thi công
-        if (etYKienGiamSat.getEditableText().toString().length() == 0) {
-            showError("Bạn phải nhập ý kiến giám sát!");
-            return;
-        }
 
-
-        if (etYKienThiCong.getEditableText().toString().length() == 0) {
-            showError("Bạn phải nhập ý kiến thi công!");
-            return;
-        }
         constrWorkLogsEntity.setConstructor_comments(etYKienThiCong.getText().toString());
         constrWorkLogsEntity.setMonitor_comments(etYKienGiamSat.getText().toString());
-        constrWorkLogsEntity.setWork_content(etThayDoi.getEditableText().toString());
+        constrWorkLogsEntity.setWork_content(etNoiDungCongViec.getEditableText().toString());
+        constrWorkLogsEntity.setAddition_change_arise(etThayDoiBoSung.getEditableText().toString());
         constrWorkLogsEntity.setLog_date(GSCTUtils.getDateNow());
         constrWorkLogsEntity.setCat_Weather_id(spThoitiet.getSelectedItemPosition() + 1);
         constrWorkLogsEntity.setConstruct_id(constr_ConstructionItem.getConstructId());
@@ -406,7 +396,7 @@ public class BtsNhatkyFragment extends BaseFragment {
             }
         }
 
-        Toast.makeText(getContext(), ret ? "Cập nhật thành công" : "fail", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), ret ? "Cập nhật nhật ký thành công" : "fail", Toast.LENGTH_SHORT).show();
     }
 
     private void updateViewByIsWork(boolean isWork) {
@@ -427,4 +417,94 @@ public class BtsNhatkyFragment extends BaseFragment {
         unbinder.unbind();
     }
 
+    public void setOnCheckSwitchCombatStatus(InterfaceCheckSwitchCombatStatus combat) {
+        this.mInterfaceCheckSwitchCombatStatusStatus = combat;
+    }
+
+    public interface InterfaceCheckSwitchCombatStatus {
+        void checkSwitchCombatStatus(boolean isChecked);
+    }
+
+    public boolean checkValidateNumberCapNhatNhatKy() {
+        flagValidateTeamNumber = true;
+        Enumeration<Long> keys = hashTeamView.keys();
+        while (keys.hasMoreElements()) {
+            TeamView view = hashTeamView.get(keys.nextElement());
+            if (view.getTeamNumber() > 0) {
+                flagValidateTeamNumber = false;
+                break;
+            }
+        }
+        return flagValidateTeamNumber;
+    }
+
+    public boolean checkValidateEdtNoiDungCongViec() {
+        return etNoiDungCongViec.getEditableText().toString().length() != 0;
+    }
+
+    public boolean checkValidateEdtThayDoiBoSung() {
+        return etThayDoiBoSung.getEditableText().toString().length() != 0;
+    }
+
+    public boolean checkValidateEdtYKienGiamSat() {
+        return etYKienGiamSat.getEditableText().toString().length() != 0;
+    }
+
+    public boolean checkValidateEdtYKienThiCong() {
+        return etYKienThiCong.getEditableText().toString().length() != 0;
+    }
+
+    public void onPassDataFromNhatKyBtsToActivity() {
+        HashMap<String,String> listHashMap = new HashMap<>();
+        listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
+        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_GIAMSAT,etYKienGiamSat.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_THICONG,etYKienThiCong.getEditableText().toString());
+        Enumeration<Long> keys = hashTeamView.keys();
+        ArrayList<Integer> mListNumber = new ArrayList<>();
+        while (keys.hasMoreElements()) {
+            TeamView view = hashTeamView.get(keys.nextElement());
+            mListNumber.add(view.getTeamNumber());
+        }
+        listHashMap.put(KeyEventCommon.KEY_DOI_XAYDUNG,""+mListNumber.get(0));
+        listHashMap.put(KeyEventCommon.KEY_DOI_LAPDAT,""+mListNumber.get(1));
+        listHashMap.put(KeyEventCommon.KEY_DOI_TIEPDIA,""+mListNumber.get(2));
+        listHashMap.put(KeyEventCommon.KEY_DOI_TKCAP,""+mListNumber.get(3));
+        listHashMap.put(KeyEventCommon.KEY_DOI_TKDIEN,""+mListNumber.get(4));
+        listHashMap.put(KeyEventCommon.KEY_DOI_THIETBI,""+mListNumber.get(5));
+
+        mInterfacePassDataFromNhatKyToActivity.passDataFromNhatKyToActivity(listHashMap);
+    }
+
+    public void onPassDataFromNhatKyTuyenNgamToActivity() {
+        HashMap<String,String> listHashMap = new HashMap<>();
+        listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
+        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_GIAMSAT,etYKienGiamSat.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_THICONG,etYKienThiCong.getEditableText().toString());
+        Enumeration<Long> keys = hashTeamView.keys();
+        ArrayList<Integer> mListNumber = new ArrayList<>();
+        while (keys.hasMoreElements()) {
+            TeamView view = hashTeamView.get(keys.nextElement());
+            mListNumber.add(view.getTeamNumber());
+        }
+        listHashMap.put(KeyEventCommon.KEY_DOI_DAORANH,""+mListNumber.get(0));
+        listHashMap.put(KeyEventCommon.KEY_DOI_XAYBE,""+mListNumber.get(1));
+        listHashMap.put(KeyEventCommon.KEY_DOI_KEOCAP,""+mListNumber.get(2));
+        listHashMap.put(KeyEventCommon.KEY_DOI_MAY,""+mListNumber.get(3));
+
+        mInterfacePassDataFromNhatKyToActivity.passDataFromNhatKyToActivity(listHashMap);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mInterfacePassDataFromNhatKyToActivity = (InterfacePassDataFromNhatKyToActivity) context;
+    }
+
+    public AppCompatEditText getEtThayDoiBoSung() {
+        return etThayDoiBoSung;
+    }
 }
