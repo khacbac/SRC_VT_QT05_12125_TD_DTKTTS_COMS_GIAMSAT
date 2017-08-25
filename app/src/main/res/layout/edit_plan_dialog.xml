@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_make_plan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <LinearLayout
+        android:id="@+id/ln_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_plan_item"
+        android:paddingTop="@dimen/padding_plan_item" >
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_right_icon"
+            android:gravity="center_vertical"
+            android:text="@string/text_from_date"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_plan_size2"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imv_choose_date"
+            android:layout_width="@dimen/actionbar_height"
+            android:layout_height="@dimen/actionbar_height"
+            android:layout_marginLeft="@dimen/margin_right_icon"
+            android:src="@drawable/icon_calendar" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imv_save"
+            android:layout_width="@dimen/actionbar_height"
+            android:layout_height="@dimen/actionbar_height"
+            android:src="@drawable/icon_success" />
+
+        <ImageView
+            android:id="@+id/imv_close"
+            android:layout_width="@dimen/actionbar_height"
+            android:layout_height="@dimen/actionbar_height"
+            android:layout_marginLeft="@dimen/margin_right_icon"
+            android:layout_marginRight="@dimen/margin_right_icon"
+            android:src="@drawable/selector_bg_button_clear_text" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/ed_make_plan"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/ln_top"
+        android:gravity="left"
+        android:textStyle="bold"
+        android:hint="@string/text_view_dot"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_plan_size2" />
+
+</RelativeLayout>

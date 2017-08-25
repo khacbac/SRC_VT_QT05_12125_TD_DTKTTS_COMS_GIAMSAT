@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_supervision_line_hg_mx"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:baselineAligned="false"
+    android:minHeight="@dimen/list_item_min_height"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/edt_supervision_line_hg_fiber_stt"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_box_heigh"
+        android:layout_weight="0.1"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="@string/text_empty"
+        android:padding="@dimen/padding"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_common"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/edt_supervision_line_hg_fiber_ten"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_box_heigh"
+        android:layout_weight="0.4"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="@string/text_empty"
+        android:padding="@dimen/padding"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_common"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:padding="@dimen/padding1"
+        android:gravity="center_horizontal|center_vertical" >
+
+        <TextView
+            android:id="@+id/edt_supervision_line_hg_fiber_ketqua"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_box_heigh"
+            style="@style/vOfficeeditTextView"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:padding="@dimen/padding1"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày cập nhật" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/Header.Textview_Disable"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="04/04/2017" />
+
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/layout_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/disable_light"/>
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_title_right"
+                style="@style/Header.Textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_horizontal"
+                android:text="Tiến độ"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layout_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_title_bbnt"
+                style="@style/Header.Textview"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_horizontal"
+                android:text="Biên bản nghiệm thu"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_bbnt"
+                style="@style/Header.Textview"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_horizontal"
+                android:hint="Số BBNT" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

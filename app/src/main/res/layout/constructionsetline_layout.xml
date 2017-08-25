@@ -1,0 +1,200 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_login"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_constr_construction_setline_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/constr_construction_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/constr_sonstruction_setline_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/tl_constr_construction_setline_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_constr_construction_setline_rootmenu"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:padding="@dimen/padding"
+        android:shrinkColumns="*"
+        android:stretchColumns="1,3"
+        android:visibility="visible" >
+
+        <TableRow
+            android:id="@+id/trl_constr_construction_setline_row1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/table_row_height"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/trl_constr_construction_setline_row1_tv_mct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin"
+                android:text="@string/constr_sonstruction_macongtrinh"
+                android:textSize="@dimen/text_size_common" />
+
+            <EditText
+                android:id="@+id/trl_constr_construction_setline_row1_edt_mct"
+                style="@style/vOfficeeditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/constr_sonstruction_macongtrinh"
+                android:inputType="text"
+                android:singleLine="true" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/trl_constr_construction_setline_row1_tv_mt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="@string/constr_sonstruction_setline_mt"
+                android:textSize="@dimen/text_size_common" />
+
+            <EditText
+                android:id="@+id/trl_constr_construction_setline_row1_edt_mt"
+                style="@style/vOfficeeditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/constr_sonstruction_macongtrinh"
+                android:inputType="text"
+                android:singleLine="true" >
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trl_constr_construction_setline_row2"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/table_row_height"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/trl_constr_construction_setline_row2_tv_dd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin"
+                android:text="@string/constr_sonstruction_setline_dd"
+                android:textSize="@dimen/text_size_common" />
+
+            <EditText
+                android:id="@+id/trl_constr_construction_setline_row2_edt_dd"
+                style="@style/vOfficeeditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/constr_sonstruction_macongtrinh"
+                android:inputType="text"
+                android:singleLine="true" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/trl_constr_construction_setline_row2_tv_dc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="@string/constr_sonstruction_setline_dc"
+                android:textSize="@dimen/text_size_common" />
+
+            <EditText
+                android:id="@+id/trl_constr_construction_setline_row2_edt_dc"
+                style="@style/vOfficeeditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/constr_sonstruction_macongtrinh"
+                android:inputType="text"
+                android:singleLine="true" >
+            </EditText>
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_constr_construction_setline_lt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tl_constr_construction_setline_info"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/ll_constr_construction_setline_lt_tv_lt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin"
+                android:layout_weight="0.3"
+                android:gravity="center_vertical"
+                android:text="@string/constr_sonstruction_setline_lt"
+                android:textSize="@dimen/text_size_common" />
+
+            <CheckBox
+                android:id="@+id/cb_constr_construction_setline_lt_tn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.3"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:text="@string/constr_sonstruction_setline_tn"
+                android:textSize="@dimen/text_size_common" />
+
+            <CheckBox
+                android:id="@+id/cb_constr_construction_setline_lt_tt"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_margin="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:text="@string/constr_sonstruction_setline_tt"
+                android:textSize="@dimen/text_size_common" />
+
+            <Button                
+                android:id="@+id/btn_constr_construction_save"
+                style="@style/ViettelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="@string/text_save" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

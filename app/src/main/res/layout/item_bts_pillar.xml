@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_supervision_bts_pillar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:maxHeight="@dimen/list_item_min_height"
+    android:orientation="horizontal" > 
+  
+    <TextView
+        android:id="@+id/tv_mahieumong"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:gravity="center"
+        android:text="@string/trl_supervision_bts_pillar_thicong_row1_mahieumong"
+        android:textSize="@dimen/text_size_common"
+        android:textStyle="bold" /> 
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:gravity="center" > 
+  
+        <RadioButton
+            android:id="@+id/rd_dat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" /> 
+    </RelativeLayout> 
+  
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:gravity="center" > 
+  
+        <RadioButton
+            android:id="@+id/rd_khongdat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" /> 
+    </RelativeLayout>
+  
+    <RelativeLayout
+        android:id="@+id/rl_nnkd"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_box_heigh"
+        android:layout_weight="0.25"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:gravity="center"
+         >  
+    
+         <TextView
+            android:id="@+id/bt_nnkd"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:background="@drawable/icon_textbox"
+            android:singleLine="true"
+            android:gravity="center"
+            android:padding="@dimen/padding"
+             />  
+    </RelativeLayout>  
+    
+    <!-- <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_box_heigh"
+        android:layout_weight="0.25"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:gravity="center" >  
+        <EditText
+            android:id="@+id/iv_anh"
+            android:layout_width="@dimen/edittext_width_common"
+            android:inputType="text"
+            android:gravity="center"
+            style="@style/vOfficeeditText"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/padding"
+            />  
+          
+    </RelativeLayout>  -->
+  
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding" > 
+  
+        <TextView
+            android:id="@+id/iv_anh"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:background="@drawable/icon_textbox"
+            android:gravity="center"
+            android:hint="@string/text_empty"
+            android:singleLine="true"
+            android:padding="@dimen/padding"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_common" /> 
+    </RelativeLayout>   
+  
+</LinearLayout>

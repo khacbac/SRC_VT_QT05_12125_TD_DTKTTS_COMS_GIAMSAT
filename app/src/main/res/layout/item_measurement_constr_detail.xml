@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:baselineAligned="false"
+    android:minHeight="@dimen/list_item_min_height"
+    android:orientation="horizontal" >
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/padding" >
+
+        <EditText
+            android:id="@+id/edt_measurement_constr_detail_name_component"
+            style="@style/vOfficeeditText"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:inputType="text"
+            android:padding="@dimen/padding"
+            android:singleLine="true"
+            android:maxLength="99"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/padding" >
+
+        <EditText
+            android:id="@+id/edt_measurement_constr_detail_long_value"
+            style="@style/vOfficeeditText"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:inputType="text"
+            android:padding="@dimen/padding"
+            android:maxLength="99"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/padding" >
+
+        <EditText
+            android:id="@+id/edt_measurement_constr_detail_width_value"
+            style="@style/vOfficeeditText"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:inputType="text"
+            android:padding="@dimen/padding"
+            android:maxLength="99"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/padding" >
+
+        <EditText
+            android:id="@+id/edt_measurement_constr_detail_height_value"
+            style="@style/vOfficeeditText"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:inputType="text"
+            android:padding="@dimen/padding"
+            android:maxLength="99"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/padding" >
+
+        <EditText
+            android:id="@+id/edt_measurement_constr_detail_dk_value"
+            style="@style/vOfficeeditText"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:inputType="text"
+            android:padding="@dimen/padding"
+            android:maxLength="99"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/padding" >
+
+        <EditText
+            android:id="@+id/edt_measurement_constr_detail_other_value"
+            style="@style/vOfficeeditText"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="@string/text_empty"
+            android:inputType="text"
+            android:padding="@dimen/padding"
+            android:maxLength="99"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="center_horizontal|center_vertical" >
+
+        <ImageView
+            android:id="@+id/edt_measurement_constr_detail_delete"
+            android:layout_width="@dimen/icon_listview_width"
+            android:layout_height="@dimen/icon_listview_height"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/delete_item_detail" />
+    </RelativeLayout>
+</LinearLayout>

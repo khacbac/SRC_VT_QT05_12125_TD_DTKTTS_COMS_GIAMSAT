@@ -1,0 +1,84 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Theme.GSTC" parent="Base.Theme.GSTC">
+    </style>
+
+    <style name="Theme.GSTC.Login" parent="Base.Theme.GSTC">
+        <item name="actionBarSize">0dp</item>
+    </style>
+
+    <style name="Base.Theme.GSTC" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarSize">60dp</item>
+    </style>
+
+    <style name="CustomSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorAccent</item>
+
+        <!--&lt;!&ndash; inactive thumb color &ndash;&gt;-->
+        <item name="colorSwitchThumbNormal">@color/light_gray_color</item>
+
+        <!--&lt;!&ndash; inactive track color (30% transparency) &ndash;&gt;-->
+        <!--<item name="android:colorForeground">@color/red_color</item>-->
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black_color</item>
+    </style>
+
+    <style name="Toolbar.SubTitleText" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black_color</item>
+    </style>
+
+    <style name="Header">
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="Header.Textview" parent="Header">
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Content.TableLayout" parent="@style/Base.Theme.AppCompat">
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Content.Textview" parent="Header">
+        <item name="android:layout_marginRight">8dp</item>
+    </style>
+
+    <style name="Content.EditText" parent="Header">
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:inputType">number</item>
+    </style>
+
+    <style name="Header.Textview_Disable" parent="Header">
+        <item name="android:background">@color/background_light</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/app_name</item>
+    </style>
+
+    <style name="BtnCollapse" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@android:drawable/ic_menu_more</item>
+    </style>
+
+    <style name="Spinner" parent="Base.Widget.AppCompat.Spinner"></style>
+
+    <style name="vOfficeeditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/edit_hight_light</item>
+        <item name="android:layout_height">@dimen/text_box_heigh</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:padding">@dimen/padding</item>
+        <item name="android:textColor">@color/black_color</item>
+    </style>
+</resources>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.viettel.actionbar.Header
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:id="@+id/rl_supervision_bts_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/supervision_bts_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/supervision_bts_title_posision"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_supervision_bts_position_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_supervision_bts_rootmenu"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:orientation="vertical"
+        android:padding="@dimen/padding" >
+
+        <LinearLayout
+            android:id="@+id/rl_supervision_bts_posision_pillar_row1"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row1__tv_tenmx"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="@string/supervision_bts_tt"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row1_tenmx"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.4"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" >
+
+                <Button
+                    android:id="@+id/rl_supervision_bts_posision_pillar_anten_row1_bt_chotvitri"
+                    android:layout_width="120dp"
+                    style="@style/ViettelButton"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/rl_supervision_bts_posision_pillar_row1_bt_chotvitri" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_supervision_bts_posision_pillar_row2"
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:layout_below="@+id/rl_supervision_bts_posision_pillar_row1"
+            android:layout_marginTop="@dimen/padding"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row2_tv_toado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="@string/supervision_bts_pillar_posision_toado"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row2_tv_kinhdo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:paddingRight="@dimen/padding"
+                android:text="@string/supervision_bts_pillar_posision_kinhdo"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row2_kinhdo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row2_tv_vido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="@string/supervision_bts_pillar_posision_vido"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rl_supervision_bts_posision_pillar_row2_vido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_supervision_bts_position_mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_supervision_bts_position_rootmenu"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:background="@drawable/border_layout"
+        android:padding="@dimen/padding" >
+        
+        
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/tracks"
+        android:layout_width="@dimen/dropdown_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dip"
+        android:background="@drawable/popup"
+        android:fadingEdgeLength="5dip"
+        android:orientation="horizontal"
+        android:padding="5dip" >
+
+        <ListView
+            android:id="@+id/lv_menu_popup_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:fadingEdgeLength="5dip" >
+        </ListView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/arrow_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_up" />
+
+    <ImageView
+        android:id="@+id/arrow_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tracks"
+        android:layout_marginTop="-4dip"
+        android:src="@drawable/arrow_down" />
+
+</RelativeLayout>

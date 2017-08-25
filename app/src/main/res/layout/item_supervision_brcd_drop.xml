@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_supervision_line_bg_pipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:baselineAligned="false"
+    android:minHeight="@dimen/list_item_min_height"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="@dimen/padding" >
+
+            <TextView
+                android:id="@+id/tv_supervision_brcd_drop_stt"
+                android:layout_width="@dimen/edittext_width_common"
+                android:layout_height="@dimen/text_box_heigh"
+                android:gravity="center_vertical|center_horizontal"
+                android:hint="@string/text_empty"
+                android:padding="@dimen/padding"
+                android:singleLine="true"
+                android:text="@string/line_cable_type_mot"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding" >
+
+            <TextView
+                android:id="@+id/tv_supervision_brcd_name_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="SC0"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+        </LinearLayout>
+<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding" >
+
+            <TextView
+                android:id="@+id/tv_supervision_brcd_cable_type_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="SC0"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_box_heigh"
+            android:layout_weight="1.8"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="@dimen/padding" >
+
+            <EditText
+                android:id="@+id/edt_supervision_brcd_drop_macap"
+                style="@style/vOfficeeditText"
+                android:layout_width="@dimen/edittext_width_common"
+                android:layout_height="@dimen/text_box_heigh"
+                android:gravity="center_vertical|center_horizontal"
+                android:hint="@string/text_empty"
+                android:padding="@dimen/padding"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_common"
+                android:textStyle="bold" />
+            
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_box_heigh"
+            android:layout_weight="0.4"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center_horizontal|center_vertical" >
+
+                <Button
+                    android:id="@+id/bt_supervision_brcd_drop_next"
+                    style="@style/Next_Button"
+                    android:layout_width="@dimen/icon_listview_width"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/margin_left_35"
+                    android:layout_marginRight="@dimen/margin_left_35"
+                    android:gravity="center_vertical|center_horizontal" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_box_heigh"
+            android:layout_weight="0.40"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center_horizontal|center_vertical" >
+
+                <Button
+                    android:id="@+id/bt_supervision_brcd_next_giamsat_drop"
+                    style="@style/Next_Button"
+                    android:layout_width="@dimen/icon_listview_width"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/margin_left_35"
+                    android:layout_marginRight="@dimen/margin_left_35"
+                    android:gravity="center_vertical|center_horizontal" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <Button
+                android:id="@+id/bt_brcd_drop_delete"
+                android:layout_width="@dimen/icon_listview_width"
+                android:layout_height="@dimen/icon_listview_height"
+                android:background="@drawable/ic_delete"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

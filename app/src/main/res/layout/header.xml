@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/actionbar_height"
+    android:background="@drawable/background_header" >
+
+    <ImageButton
+        android:id="@+id/actionbar_back_btn"
+        style="@style/ActionBarHomeItem"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/actionbar_btn"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/actionbar_user_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/actionbar_back_btn"
+        android:background="@drawable/user"
+        android:padding="0dip" />
+
+    <com.viettel.actionbar.MyTextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/actionbar_user_icon"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:scrollHorizontally="true"
+        android:textColor="@color/actionbar_title"
+        android:textSize="@dimen/text_size_common"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:id="@+id/header_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="0dp"
+        android:layout_toLeftOf="@+id/logoviettel"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:padding="0dp" >
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/logoviettel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/actionbar_back_btn"
+        android:background="@drawable/logo_viettel_lg"
+        android:padding="0dip" />
+
+</RelativeLayout>

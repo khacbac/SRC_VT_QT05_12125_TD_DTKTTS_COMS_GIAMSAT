@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TableLayout
+                style="@style/Content.TableLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_weight="1">
+
+                <include layout="@layout/layout_khong_thi_cong"/>
+
+                <TableRow android:id="@+id/tr_doi_dao_ranh">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Đội đào rãnh" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/Content.EditText"
+                        android:id="@+id/et_doi_dao_ranh"
+                        android:layout_weight="1"
+                        android:hint="Điền số người" />
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="người" />
+                </TableRow>
+
+
+                <TableRow android:id="@+id/tr_doi_xay_be">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đội xây bể" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/Content.EditText"
+                        android:id="@+id/et_doi_xay_be"
+                        android:layout_weight="1"
+                        android:hint="Điền số người" />
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="người" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tr_doi_keo_cap">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đội kéo cáp" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/Content.EditText"
+                        android:id="@+id/et_doi_keo_cap"
+                        android:layout_weight="1"
+                        android:hint="Điền số người" />
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="người" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tr_doi_may">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Máy" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/Content.EditText"
+                        android:id="@+id/et_doi_may"
+                        android:layout_weight="1"
+                        android:hint="Điền số người" />
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="người" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tr_doi_dao_ho">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Đội đào hố trồng cột" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_doi_dao_ho"
+                        style="@style/Content.EditText"
+                        android:layout_weight="1"
+                        android:hint="Điền số người" />
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="người" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                style="@style/Content.TableLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <include layout="@layout/layout_thoi_tiet" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,213 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_login"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <com.viettel.actionbar.Header
+        android:id="@+id/actionbar"
+        style="@style/ActionBar"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_line_bg_kl_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/line_bg_kl_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/line_background_header_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_line_bg_kl_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_line_bg_kl_rootmenu"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding" >
+
+        <TextView
+            android:id="@+id/tv_line_bg_kl_info_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:gravity="center_vertical"
+            android:text="@string/line_background_info_title"
+            android:textSize="@dimen/text_size_common" />
+
+        <RelativeLayout
+            android:id="@+id/rl_line_bg_kl_info_box"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.3"
+            android:gravity="center_vertical" >
+
+            <com.viettel.view.control.VNMTextViewCombo
+                android:id="@+id/tv_line_bg_kl_dropdown"
+                style="@style/vOfficeeditTextView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drop_box_heigh"
+                android:drawableRight="@drawable/icon_combo"
+                android:gravity="center_vertical"
+                android:text="@string/line_background_info_line_design"
+                android:textSize="@dimen/text_size_common" >
+            </com.viettel.view.control.VNMTextViewCombo>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_line_bg_kl_info_line"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:gravity="center_vertical"
+            android:text="@string/line_background_info_line_title"
+            android:textSize="@dimen/text_size_common" />
+
+        <RelativeLayout
+            android:id="@+id/rl_line_bg_kl_info_line"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.2"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tv_line_bg_kl_info_line_station_code_value"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drop_box_heigh"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:background="@drawable/bg_title"
+                android:gravity="center_vertical"
+                android:padding="@dimen/text_padding"
+                android:singleLine="true"
+                android:text="AGG0002_AGG0002"
+                android:textSize="@dimen/text_size_common" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_line_bg_kl_info_stationcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:gravity="center_vertical"
+            android:text="@string/line_background_info_line_station_code_title"
+            android:textSize="@dimen/text_size_common" />
+
+        <RelativeLayout
+            android:id="@+id/rl_line_bg_kl_info_line_station_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.2"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tv_line_bg_kl_info_line_value"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drop_box_heigh"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:background="@drawable/bg_title"
+                android:gravity="center_vertical"
+                android:padding="@dimen/text_padding"
+                android:singleLine="true"
+                android:text="ML ABC DDD"
+                android:textSize="@dimen/text_size_common" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/ll_line_bg_kl_info"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:id="@+id/ll_line_bg_kl_ttcv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding" >
+
+            <TextView
+                android:id="@+id/tv_line_bg_kl_status"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drop_box_heigh"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:gravity="center_vertical"
+                android:padding="@dimen/text_padding"
+                android:text="@string/line_bg_mx_kl_trangthai"
+                android:textSize="@dimen/text_size_common" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/border_layout"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5" >
+
+                    <CheckBox
+                        android:id="@+id/rd_line_bg_kl_tt_dat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:text="@string/line_bg_mx_kl_tt_dat"
+                        android:textColor="@color/black_color" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5" >
+
+                    <CheckBox
+                        android:id="@+id/rd_line_bg_kl_tt_khongdat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:text="@string/line_bg_mx_kl_tt_kd"
+                        android:textColor="@color/black_color" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <Button
+                    android:id="@+id/btn_line_bg_kl_save"
+                    style="@style/ViettelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:filterTouchesWhenObscured="true"
+                    android:text="@string/text_save" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

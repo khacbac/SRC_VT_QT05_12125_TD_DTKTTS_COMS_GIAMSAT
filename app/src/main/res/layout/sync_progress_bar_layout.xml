@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sync_border"
+    android:orientation="vertical"
+    android:padding="17dp" >
+
+    <!-- android:background="@drawable/sync_border" -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="5dp" >
+
+        <com.viettel.view.control.MaterialProgressBar
+            android:id="@+id/xxxxxx"
+            android:layout_width="50dp"
+            android:layout_height="50dp" >
+        </com.viettel.view.control.MaterialProgressBar>
+
+        <TextView
+            android:id="@+id/tvSyncTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:text="@string/txt_syncing"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF" />
+
+    <ProgressBar
+        android:id="@+id/pbSync"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:max="100"
+        android:progressDrawable="@drawable/sync_progressbar" />
+
+    <TextView
+        android:id="@+id/tvSyncDataType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:text="@string/txt_sync_data_type"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="7dp"
+        android:background="#FFFFFF"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/butHide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="23dp"
+        android:paddingRight="23dp"
+        android:paddingTop="7dp"
+        android:text="@string/txt_hide"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+</LinearLayout>

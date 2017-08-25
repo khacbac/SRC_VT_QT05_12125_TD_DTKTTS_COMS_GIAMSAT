@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày cập nhật" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/Header.Textview_Disable"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="04/04/2017" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="0.6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/layout_root"
+                android:animateLayoutChanges="true">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/table_border_color"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/padding">
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Tên hạng mục" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/padding">
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Đơn vị" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/padding">
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Khối lượng" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/padding">
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Lũy kế" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<include-->
+                    <!--layout="@layout/layout_work_item_gpon"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"/>-->
+
+            </LinearLayout>
+           <!---->
+            <LinearLayout
+                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/layout_root_right"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/table_border_color"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

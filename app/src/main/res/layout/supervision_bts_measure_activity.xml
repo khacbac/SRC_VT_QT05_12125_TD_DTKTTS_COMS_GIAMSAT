@@ -1,0 +1,290 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/rl_spv_bts_measure" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/rl_supervision_bts_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+        
+
+        <TextView
+            android:id="@+id/supervision_bts_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/supervision_bts_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tl_supervision_bts_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_supervision_bts_rootmenu"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/trl_supervision_bts_measure_row1_tv_thongtin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_weight="0.1"
+            android:text="@string/supervision_bts_tt"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_supervision_bts_measure_search_thietke"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/drop_box_heigh"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.3"
+            android:paddingLeft="@dimen/padding_left" >
+
+            
+            <com.viettel.view.control.VNMTextViewCombo
+                android:id="@+id/rl_supervision_bts_measure_tv_thietke"
+                style="@style/vOfficeeditTextView"
+                android:layout_width="250dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:layout_height="wrap_content" >
+           </com.viettel.view.control.VNMTextViewCombo>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_measure_tv_tram"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:paddingRight="5dip"
+            android:text="@string/supervision_bts_tram"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_measure_tv_matram"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/drop_box_heigh"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_weight="0.2"
+            android:background="@drawable/bg_title"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="@string/supervision_bts_matram"
+            android:textSize="@dimen/text_size_common" />
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_measure_tv_ct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:text="@string/supervision_bts_ct"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_measure_tv_mact"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/drop_box_heigh"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.2"
+            android:background="@drawable/bg_title"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="@string/supervision_bts_mact"
+            android:textSize="@dimen/text_size_common" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_supervision_bts_measure_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tl_supervision_bts_header"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding" >
+
+        <ExpandableListView
+            android:id="@+id/rl_supervision_bts_measure_header_expandlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ExpandableListView>
+
+        <LinearLayout
+            android:id="@+id/rl_supervision_bts_measure_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:background="@drawable/border_layout"
+            android:orientation="vertical"
+            android:padding="@dimen/padding" >
+            
+            <TableLayout
+                    android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_layout"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="1,3" > 
+  
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" > 
+  
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1_trangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" /> 
+  
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_chontrangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/drop_box_heigh"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
+                            android:paddingLeft="@dimen/padding_left" > 
+  
+                            <TextView
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_tv_chontrangthai"
+                                android:layout_width="250dp"
+                                android:layout_height="@dimen/drop_box_heigh"
+                                android:background="@drawable/icon_dropdown"
+                                android:gravity="center_vertical"
+                                android:padding="@dimen/padding"
+                                android:text="@string/rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chontrangthai"
+                                android:textSize="@dimen/text_size_common" /> 
+                        </RelativeLayout> 
+  
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1_nnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" /> 
+  
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_chonnnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/text_box_heigh"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding_left" > 
+  
+                            <TextView
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_tv_chonnnkd"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/icon_textbox"
+                                android:gravity="center"
+                                android:padding="@dimen/padding"
+                                android:singleLine="true" /> 
+                        </RelativeLayout> 
+                    </TableRow> 
+  
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" > 
+  
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2_diengiai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" /> 
+  
+                        <RelativeLayout
+                            android:id="@+id/layoutnhamayno"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:paddingLeft="@dimen/padding_left" > 
+  
+                            <EditText
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row2_et_diengiai"
+                                style="@style/vOfficeeditText"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/padding_left"
+                                android:textSize="@dimen/text_size_common" /> 
+                        </RelativeLayout> 
+  
+                        <TextView
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row2_tv_anh"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" /> 
+  
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row2_rl_anh"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/padding_left" > 
+  
+                            
+                        </RelativeLayout> 
+                    </TableRow> 
+                </TableLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

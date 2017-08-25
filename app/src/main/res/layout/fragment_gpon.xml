@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TableLayout
+                style="@style/Content.TableLayout"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true">
+
+                <TableRow
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ngày cập nhật" />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        style="@style/Header.Textview_Disable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="04/04/2017" />
+                </TableRow>
+
+
+                <TableRow android:id="@+id/tr_doi_xay_dung">
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Số đội thi công" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/Content.EditText"
+                        android:layout_weight="1"
+                        android:hint="Điền số người" />
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="đội" />
+                </TableRow>
+
+                <TableRow >
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Loại vướng" />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/sp_loai_vuong"
+                        style="@style/Content.EditText"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:clickable="false"
+                        android:hint="Điền số người" />
+                </TableRow>
+                <TableRow >
+
+                    <TextView
+                        style="@style/Content.Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Thời tiết" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_noi_dung"
+                        android:layout_marginLeft="10dp"
+                        style="@style/Content.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="bottom|left"
+                        android:imeOptions="flagNoEnterAction"
+                        android:inputType="text|textMultiLine"
+                        android:paddingBottom="10dp"
+                        android:layout_weight="1"
+                        android:lines="5"
+                        android:maxLines="5"
+                        android:scrollbars="vertical"
+                        android:text="" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

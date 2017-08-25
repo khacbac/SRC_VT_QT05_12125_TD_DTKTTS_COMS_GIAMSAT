@@ -1,0 +1,368 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_supervision_line_bg_tank"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_constr_line_tank_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/constr_line_tank_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/line_background_header_title_brcd_mt"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_constr_line_background_design_type_info"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_constr_line_tank_rootmenu"
+        android:background="@drawable/border_layout"
+        android:orientation="vertical"
+        android:padding="@dimen/padding" >
+
+        <LinearLayout
+            android:id="@+id/ll_constr_line_tank_info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/border_layout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding" >
+
+            <TextView
+                android:id="@+id/tv_constr_line_tank_info_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.1"
+                android:gravity="center_vertical"
+                android:text="@string/line_background_info_title"
+                android:textSize="@dimen/text_size_common" />
+
+            <RelativeLayout
+                android:id="@+id/rl_constr_line_tank_info_box"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.3"
+                android:gravity="center_vertical" >
+
+                <com.viettel.view.control.VNMTextViewCombo
+                    android:id="@+id/tv_constr_brcd_dropgo_dropdown"
+                    style="@style/vOfficeeditTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:drawableRight="@drawable/icon_combo"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_background_info_line_design"
+                    android:textSize="@dimen/text_size_common" >
+                </com.viettel.view.control.VNMTextViewCombo>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_constr_line_tank_info_line"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.1"
+                android:gravity="center_vertical"
+                android:text="@string/line_background_info_line_title_tram"
+                android:textSize="@dimen/text_size_common" />
+
+            <RelativeLayout
+                android:id="@+id/rl_constr_line_tank_info_line"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.2"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_constr_brcd_dropgo_station_code_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:singleLine="true"
+                    android:text="AGG0002_AGG0002"
+                    android:textSize="@dimen/text_size_common" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_constr_brcd_kct_stationcode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.1"
+                android:gravity="center_vertical"
+                android:text="@string/line_background_info_line_station_code_title"
+                android:textSize="@dimen/text_size_common" />
+
+            <RelativeLayout
+                android:id="@+id/rl_constr_line_tank_info_line_station_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.2"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_constr_brcd_dropgo_info_line_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:singleLine="true"
+                    android:text="ML ABC DDD"
+                    android:textSize="@dimen/text_size_common" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_brcd_drop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_constr_line_tank_rootmenu"
+            android:fillViewport="true" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_constr_line_tank_rootmenu"
+                android:orientation="vertical"
+                android:padding="@dimen/padding" >
+
+                <TextView
+                    android:id="@+id/supervision_brcd_dropandgo_complete_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:textSize="@dimen/text_size_common"
+                    android:visibility="gone"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_left_15" >
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="@dimen/margin"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.03"
+                            android:text="@string/supervision_brcd_kcn_text_yeucaunhap" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="43dp"
+                            android:layout_weight="0.03"
+                            android:text=" (*)"
+                            android:textColor="#ff0000"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true" >
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.99"
+                            android:gravity="center_vertical" >
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.99"
+                            android:gravity="center_vertical" >
+
+                            <Button
+                                android:id="@+id/rl_supervision_dropandgo_save"
+                                style="@style/ViettelButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:filterTouchesWhenObscured="true"
+                                android:gravity="center"
+                                android:padding="@dimen/padding"
+                                android:text="@string/text_save" />
+
+                            <Button
+                                android:id="@+id/rl_supervision_dropgo_ht"
+                                style="@style/ViettelButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/rl_supervision_dropandgo_save"
+                                android:layout_alignBottom="@+id/rl_supervision_dropandgo_save"
+                                android:layout_marginRight="38dp"
+                                android:layout_toLeftOf="@+id/rl_supervision_dropandgo_save"
+                                android:filterTouchesWhenObscured="true"
+                                android:gravity="center"
+                                android:padding="@dimen/padding"
+                                android:text="@string/text_add_perpect" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_constr_line_tank_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin1"
+                    android:background="@drawable/border_right"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.04"
+                        android:background="@drawable/border_top_bottom_left"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/stt_work"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.38"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_top_bottom_left"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:minHeight="@dimen/table_row_height"
+                            android:text="@string/supervision_brcd_kct_text_name2"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.3"
+                                android:background="@drawable/border_bottom_left"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:minHeight="@dimen/table_row_height"
+                                android:text="@string/line_bg_special_name"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.3"
+                                android:background="@drawable/border_bottom_left"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:minHeight="@dimen/table_row_height"
+                                android:text="@string/supervision_brcd_kct_text_loaicap"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.9"
+                                android:background="@drawable/border_bottom_left"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:minHeight="@dimen/table_row_height" >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/line_bg_special_macap"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(*)"
+                                    android:textColor="#ff0000"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:background="@drawable/border_top_bottom_left"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/thongtinthietke"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:background="@drawable/border_top_bottom_left"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/constr_line_tank_giamsat"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.05"
+                        android:background="@drawable/border_top_bottom_left"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/lv_constr_brcd_dropgo_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_right_bottom_left"
+                    android:choiceMode="singleChoice"
+                    android:minHeight="400dp" >
+                </ListView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

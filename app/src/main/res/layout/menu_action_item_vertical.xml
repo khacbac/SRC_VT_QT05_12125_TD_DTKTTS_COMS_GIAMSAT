@@ -1,0 +1,28 @@
+<!-- danv5 tao menu -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/action_item_btn"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_left"
+        android:text="@string/loading"
+        android:textColor="#fff"
+        android:textSize="@dimen/text_size_common" />
+
+</LinearLayout>

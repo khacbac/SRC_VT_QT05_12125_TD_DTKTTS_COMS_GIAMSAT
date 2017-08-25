@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_contruction_unqualify_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_dropdown_item"
+    android:gravity="fill_vertical|center_horizontal"
+    android:minHeight="@dimen/list_item_min_height"
+    android:orientation="horizontal" >
+	<TextView
+        android:id="@+id/tv_contruction_unqualify_category"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/noncategary"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_left"
+        android:textSize="@dimen/text_size_common" />
+	<ImageView
+        android:id="@+id/ic_warning"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_warning"
+        android:visibility="visible" />
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+        android:layout_height="match_parent"
+	    >
+	    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left_10"
+            android:layout_toLeftOf="@+id/img_contruction_unqualify_item_status_approval"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_left"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/margin"
+             >
+
+            <TextView
+                android:id="@+id/tv_contruction_unqualify_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_common" />
+            
+            <TextView
+                android:id="@+id/tv_contruction_unqualify_item_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_common"
+                android:textColor="@color/counter_text_comment_reject"
+                android:text="Đây là nội dung diễn giải tại sao không đạt"
+                android:visibility="gone"
+                android:textStyle="italic"
+                 />
+        </LinearLayout>
+	    
+	    <ImageView
+            android:id="@+id/img_contruction_unqualify_item_status_approval"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_reject"
+            android:layout_toLeftOf="@+id/layout_chk_contruction_unqualify_item"
+            android:visibility="gone"
+            android:padding="10dp"
+             />
+
+    <LinearLayout
+         android:id="@+id/layout_chk_contruction_unqualify_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="fill_vertical|center_horizontal" 
+        android:layout_toLeftOf="@+id/layout_contruction_unqualify_item"
+        >
+
+        <CheckBox
+            android:id="@+id/chk_contruction_unqualify_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_contruction_unqualify_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="fill_vertical|center_horizontal" 
+        android:layout_alignParentRight="true"
+        >
+
+        <ImageView
+            android:id="@+id/iv_contruction_unqualify_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_img_take" />
+    </LinearLayout>
+	    
+	</RelativeLayout>
+    
+
+</LinearLayout>

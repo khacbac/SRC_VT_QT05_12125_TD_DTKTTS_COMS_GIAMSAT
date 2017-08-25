@@ -1,0 +1,1340 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/rlspv_bt_catwork" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/rl_supervision_bts_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/supervision_bts_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/supervision_bts_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tl_supervision_bts_catwork_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_supervision_bts_rootmenu"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/trl_supervision_bts_cat_work_row1_tv_thongtin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_weight="0.1"
+            android:text="@string/supervision_bts_tt"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_supervision_bts_cat_work_search_thietke"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/drop_box_heigh"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.3"
+            android:paddingLeft="@dimen/padding_left" >
+
+            <com.viettel.view.control.VNMTextViewCombo
+                android:id="@+id/rl_supervision_bts_cat_work_tv_thietke"
+                style="@style/vOfficeeditTextView"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:singleLine="true" >
+            </com.viettel.view.control.VNMTextViewCombo>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_cat_work_tv_tram"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:paddingRight="5dip"
+            android:text="@string/supervision_bts_tram"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_cat_work_tv_matram"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/drop_box_heigh"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_weight="0.2"
+            android:background="@drawable/bg_title"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="@string/supervision_bts_matram"
+            android:textSize="@dimen/text_size_common" />
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_cat_work_tv_ct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.1"
+            android:text="@string/supervision_bts_ct"
+            android:textSize="@dimen/text_size_common"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_cat_work_tv_mact"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/drop_box_heigh"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_weight="0.2"
+            android:background="@drawable/bg_title"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="@string/supervision_bts_mact"
+            android:textSize="@dimen/text_size_common" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_supervision_bts_cat_work_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tl_supervision_bts_catwork_header"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:orientation="vertical"
+        android:padding="@dimen/padding" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/rl_supervision_bts_cat_work_header_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin1"
+                android:gravity="center_vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/rl_supervision_bts_cat_work_complete"
+                        style="@style/ViettelButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:filterTouchesWhenObscured="true"
+                        android:gravity="center"
+                        android:padding="@dimen/padding"
+                        android:text="@string/rl_constr_bt_complete"
+                        android:textSize="@dimen/text_size_common" />
+
+                    <Button
+                        android:id="@+id/rl_supervision_bts_cat_work_save"
+                        style="@style/ViettelButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:filterTouchesWhenObscured="true"
+                        android:text="@string/rl_supervision_bts_body_row6_1_bt_save"
+                        android:textSize="@dimen/text_size_common" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TabHost
+                android:id="@+id/supervision_bts_cat_work_tabhost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical" />
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/border_layout" >
+
+                        <RelativeLayout
+                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/margin"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:id="@+id/supervision_bts_catwork_notification_pm"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/margin"
+                                android:orientation="vertical"
+                                android:visibility="invisible" >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_catwork_notification_pm"
+                                    android:textSize="@dimen/text_size_large_common"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+
+                            <ScrollView
+                                android:id="@+id/sc_supervision_bts_catwork_pm"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:overScrollMode="ifContentScrolls" >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical" >
+
+                                    <TextView
+                                        android:id="@+id/supervision_bts_pm_complete_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:text="@string/supervision_date_complete"
+                                        android:textSize="@dimen/text_size_common"
+                                        android:textStyle="bold"
+                                        android:visibility="gone"
+                                         />
+
+                                    <TableLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:background="@drawable/border_top_right_bottom_left"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/padding"
+                                        android:shrinkColumns="*"
+                                        android:stretchColumns="1,3" >
+
+                                        <TableRow
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/table_row_height"
+                                            android:layout_marginBottom="@dimen/margin"
+                                            android:layout_marginTop="@dimen/margin"
+                                            android:gravity="center_vertical" >
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.1"
+                                                android:gravity="center_vertical|left"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_chontrangthai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="@dimen/drop_box_heigh"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_weight="0.5"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewCombo
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chontrangthai"
+                                                    style="@style/vOfficeeditTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center_vertical"
+                                                    android:singleLine="true" >
+                                                </com.viettel.view.control.VNMTextViewCombo>
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_chonnnkd"
+                                                android:layout_width="0dp"
+                                                android:layout_height="40dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="10dip"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewNnkd
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chonnnkd"
+                                                    style="@style/ViettelTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="40dp"
+                                                    android:gravity="center"
+                                                    android:padding="@dimen/padding"
+                                                    android:singleLine="true" />
+                                            </RelativeLayout>
+                                        </TableRow>
+
+                                        <TableRow
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row2"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="@dimen/table_row_height"
+                                            android:layout_marginBottom="@dimen/margin"
+                                            android:layout_marginTop="@dimen/margin"
+                                            android:gravity="center_vertical" >
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.1"
+                                                android:gravity="center_vertical|left"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/layout"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginRight="10dip"
+                                                android:layout_weight="0.9"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <EditText
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row2_et_diengiai"
+                                                    style="@style/vOfficeeditText"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="@dimen/edit_text_height"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:gravity="top|left"
+                                                    android:inputType="textMultiLine"
+                                                    android:maxLength="200"
+                                                    android:paddingLeft="@dimen/padding_left"
+                                                    android:scrollHorizontally="false"
+                                                    android:scrollbars="vertical"
+                                                    android:textSize="@dimen/text_size_common" />
+                                            </RelativeLayout>
+                                        </TableRow>
+                                    </TableLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc"
+                                        android:textSize="@dimen/text_size_common"
+                                        android:textStyle="bold" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="@dimen/margin"
+                                        android:background="@drawable/border_top_right_bottom_left"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/padding" >
+
+                                        <TextView
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.1"
+                                            android:gravity="center_vertical|left"
+                                            android:paddingLeft="@dimen/padding"
+                                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke"
+                                            android:textSize="@dimen/text_size_common"
+                                            android:textStyle="normal" />
+
+                                        <RelativeLayout
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_rl_thietke"
+                                            android:layout_width="0dp"
+                                            android:layout_height="@dimen/drop_box_heigh"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_weight="0.5"
+                                            android:paddingLeft="@dimen/padding_left" >
+
+                                            <EditText
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_et_thietke"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="250dp"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center_vertical"
+                                                android:inputType="text"
+                                                android:singleLine="true" >
+                                            </EditText>
+                                        </RelativeLayout>
+
+                                        <TextView
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_tv_thucte"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.2"
+                                            android:paddingLeft="@dimen/padding"
+                                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_tv_thucte"
+                                            android:textSize="@dimen/text_size_common"
+                                            android:textStyle="normal" />
+
+                                        <RelativeLayout
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_rl_thucte"
+                                            android:layout_width="0dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginRight="10dip"
+                                            android:layout_weight="0.2"
+                                            android:paddingLeft="@dimen/padding_left" >
+
+                                            <EditText
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_et_thucte"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="250dp"
+                                                android:layout_height="40dp"
+                                                android:inputType="text"
+                                                android:padding="@dimen/padding"
+                                                android:singleLine="true" />
+                                        </RelativeLayout>
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </ScrollView>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/margin"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:id="@+id/supervision_bts_catwork_notification_nmn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/margin"
+                                android:orientation="vertical"
+                                android:visibility="invisible" >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_catwork_notification_nmn"
+                                    android:textSize="@dimen/text_size_large_common"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+
+                            <ScrollView
+                                android:id="@+id/sc_supervision_bts_catwork_nmn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="ifContentScrolls" >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical" >
+
+                                    <TextView
+                                        android:id="@+id/supervision_bts_nmn_complete_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:text="@string/supervision_date_complete"
+                                        android:textSize="@dimen/text_size_common"
+                                        android:textStyle="bold"
+                                        android:visibility="gone"
+                                         />
+                                    
+                                    <TableLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:background="@drawable/border_top_right_bottom_left"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/padding"
+                                        android:shrinkColumns="*"
+                                        android:stretchColumns="1,3" >
+
+                                        <TableRow
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/table_row_height"
+                                            android:layout_marginBottom="@dimen/margin"
+                                            android:layout_marginTop="@dimen/margin"
+                                            android:gravity="center_vertical" >
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1_trangthai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.1"
+                                                android:gravity="center_vertical|left"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_chontrangthai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="@dimen/drop_box_heigh"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_weight="0.5"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewCombo
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_tv_chontrangthai"
+                                                    style="@style/vOfficeeditTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center_vertical"
+                                                    android:singleLine="true" >
+                                                </com.viettel.view.control.VNMTextViewCombo>
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1_nnkd"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_chonnnkd"
+                                                android:layout_width="0dp"
+                                                android:layout_height="40dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="10dip"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewNnkd
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_tv_chonnnkd"
+                                                    style="@style/ViettelTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="40dp"
+                                                    android:gravity="center"
+                                                    android:padding="@dimen/padding"
+                                                    android:singleLine="true" />
+                                            </RelativeLayout>
+                                        </TableRow>
+
+                                        <TableRow
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="@dimen/table_row_height"
+                                            android:layout_marginBottom="@dimen/margin"
+                                            android:layout_marginTop="@dimen/margin"
+                                            android:gravity="center_vertical" >
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2_diengiai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.1"
+                                                android:gravity="center_vertical|left"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/layoutnhamayno"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginRight="10dip"
+                                                android:layout_weight="0.9"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <EditText
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row2_et_diengiai"
+                                                    style="@style/vOfficeeditText"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="@dimen/edit_text_height"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:gravity="top|left"
+                                                    android:inputType="textMultiLine"
+                                                    android:maxLength="200"
+                                                    android:paddingLeft="@dimen/padding_left"
+                                                    android:scrollHorizontally="false"
+                                                    android:scrollbars="vertical"
+                                                    android:textSize="@dimen/text_size_common" />
+                                            </RelativeLayout>
+                                        </TableRow>
+                                    </TableLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc"
+                                        android:textSize="@dimen/text_size_common"
+                                        android:textStyle="bold" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="@dimen/margin"
+                                        android:background="@drawable/border_top_right_bottom_left"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/padding" >
+
+                                        <TextView
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_thietke"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.1"
+                                            android:gravity="center_vertical|left"
+                                            android:paddingLeft="@dimen/padding"
+                                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke"
+                                            android:textSize="@dimen/text_size_common"
+                                            android:textStyle="normal" />
+
+                                        <RelativeLayout
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_rl_thietke"
+                                            android:layout_width="0dp"
+                                            android:layout_height="@dimen/drop_box_heigh"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_weight="0.5"
+                                            android:paddingLeft="@dimen/padding_left" >
+
+                                            <EditText
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_et_thietke"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="250dp"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center_vertical"
+                                                android:inputType="text"
+                                                android:singleLine="true" >
+                                            </EditText>
+                                        </RelativeLayout>
+
+                                        <TextView
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_tv_thucte"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.2"
+                                            android:paddingLeft="@dimen/padding"
+                                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_tv_thucte"
+                                            android:textSize="@dimen/text_size_common"
+                                            android:textStyle="normal" />
+
+                                        <RelativeLayout
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_rl_thucte"
+                                            android:layout_width="0dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginRight="10dip"
+                                            android:layout_weight="0.2"
+                                            android:paddingLeft="@dimen/padding_left" >
+
+                                            <EditText
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_et_thucte"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="250dp"
+                                                android:layout_height="40dp"
+                                                android:inputType="text"
+                                                android:padding="@dimen/padding"
+                                                android:singleLine="true" />
+                                        </RelativeLayout>
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </ScrollView>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/supervision_bts_catwork_tl_thicongkeodaydien"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/margin"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:id="@+id/supervision_bts_catwork_notification_keodaydien"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/margin"
+                                android:orientation="vertical"
+                                android:visibility="invisible" >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_catwork_notification_nmn"
+                                    android:textSize="@dimen/text_size_large_common"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+
+                            <ScrollView
+                                android:id="@+id/supervision_bts_catwork_tl_thicongkeoday"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="ifContentScrolls" >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical" >
+
+                                    <TextView
+                                        android:id="@+id/supervision_bts_kdd_complete_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:text="@string/supervision_date_complete"
+                                        android:textSize="@dimen/text_size_common"
+                                        android:textStyle="bold"
+                                        android:visibility="gone"
+                                         />
+                                    
+                                    <TableLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:background="@drawable/border_top_right_bottom_left"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/padding"
+                                        android:shrinkColumns="*"
+                                        android:stretchColumns="1,3" >
+
+                                        <TableRow
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/table_row_height"
+                                            android:layout_marginBottom="@dimen/margin"
+                                            android:layout_marginTop="@dimen/margin"
+                                            android:gravity="center_vertical" >
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1_trangthai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.1"
+                                                android:gravity="center_vertical|left"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_chontrangthai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="@dimen/drop_box_heigh"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_weight="0.5"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewCombo
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_tv_chontrangthai"
+                                                    style="@style/vOfficeeditTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center_vertical"
+                                                    android:singleLine="true" >
+                                                </com.viettel.view.control.VNMTextViewCombo>
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1_nnkd"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_chonnnkd"
+                                                android:layout_width="0dp"
+                                                android:layout_height="40dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="10dip"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewNnkd
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_tv_chonnnkd"
+                                                    style="@style/ViettelTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="40dp"
+                                                    android:gravity="center"
+                                                    android:padding="@dimen/padding"
+                                                    android:singleLine="true" />
+                                            </RelativeLayout>
+                                        </TableRow>
+
+                                        <TableRow
+                                            android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row2"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="@dimen/table_row_height"
+                                            android:layout_marginBottom="@dimen/margin"
+                                            android:layout_marginTop="@dimen/margin"
+                                            android:gravity="center_vertical" >
+
+                                            <TextView
+                                                android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row2_diengiai"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.1"
+                                                android:gravity="center_vertical|left"
+                                                android:maxLength="200"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/layoutkeoday"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.5"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <EditText
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_et_diengiai"
+                                                    style="@style/vOfficeeditText"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:inputType="text"
+                                                    android:maxLength="200"
+                                                    android:paddingLeft="@dimen/padding_left"
+                                                    android:textSize="@dimen/text_size_common" />
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_tv_loaididay"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0.2"
+                                                android:paddingLeft="@dimen/padding"
+                                                android:text="@string/rl_supervision_bts_catwork_tl_thicongkeoday_row2_tv_loaididay"
+                                                android:textSize="@dimen/text_size_common"
+                                                android:textStyle="normal" />
+
+                                            <RelativeLayout
+                                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_rl_anh"
+                                                android:layout_width="0dp"
+                                                android:layout_height="@dimen/drop_box_heigh"
+                                                android:layout_marginRight="10dip"
+                                                android:layout_weight="0.2"
+                                                android:gravity="left"
+                                                android:paddingLeft="@dimen/padding_left" >
+
+                                                <com.viettel.view.control.VNMTextViewCombo
+                                                    android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_loaididay"
+                                                    style="@style/vOfficeeditTextView"
+                                                    android:layout_width="250dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center_vertical"
+                                                    android:singleLine="true" >
+                                                </com.viettel.view.control.VNMTextViewCombo>
+                                            </RelativeLayout>
+                                        </TableRow>
+                                    </TableLayout>
+                                </LinearLayout>
+                            </ScrollView>
+                        </RelativeLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!--
+    <ScrollView
+        android:id="@+id/sv_supervision_bts_catwork_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tl_supervision_bts_catwork_header"
+        android:overScrollMode="ifContentScrolls" >
+
+        <RelativeLayout
+            android:id="@+id/rl_supervision_bts_pillar_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_layout"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_body"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin"
+                android:background="@drawable/border_layout"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="@dimen/padding" >
+
+                <TextView
+                    android:id="@+id/supervision_bts_catwork_tv_thicongphongmay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:text="@string/supervision_bts_catwork_tv_thicongphongmay"
+                    android:textSize="@dimen/text_size_large_common"
+                    android:textStyle="bold" />
+
+                <TableLayout
+                    android:id="@+id/supervision_bts_catwork_tl_thicongphongmay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="1,3" >
+
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_chontrangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/drop_box_heigh"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewCombo
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chontrangthai"
+                                style="@style/vOfficeeditTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:singleLine="true" >
+                            </com.viettel.view.control.VNMTextViewCombo>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_chonnnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewNnkd
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chonnnkd"
+                                style="@style/ViettelTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:padding="@dimen/padding"
+                                android:singleLine="true" />
+                        </RelativeLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.9"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <EditText
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongphongmay_row2_et_diengiai"
+                                style="@style/vOfficeeditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/text_box_heigh"
+                                android:layout_gravity="center_vertical"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/padding_left"
+                                android:textSize="@dimen/text_size_common" />
+                        </RelativeLayout>
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/supervision_bts_catwork_tv_thicongnhamayno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:text="@string/supervision_bts_catwork_tv_thicongnhamayno"
+                    android:textSize="@dimen/text_size_large_common"
+                    android:textStyle="bold" />
+
+                <TableLayout
+                    android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="1,3" >
+
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1_trangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_chontrangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/drop_box_heigh"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewCombo
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_tv_chontrangthai"
+                                style="@style/vOfficeeditTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:singleLine="true" >
+                            </com.viettel.view.control.VNMTextViewCombo>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1_nnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_chonnnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewNnkd
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row1_tv_chonnnkd"
+                                style="@style/ViettelTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:padding="@dimen/padding"
+                                android:singleLine="true" />
+                        </RelativeLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2_diengiai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/layoutnhamayno"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.9"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <EditText
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongnhamayno_row2_et_diengiai"
+                                style="@style/vOfficeeditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/text_box_heigh"
+                                android:layout_gravity="center_vertical"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/padding_left"
+                                android:textSize="@dimen/text_size_common" />
+                        </RelativeLayout>
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/supervision_bts_catwork_tv_thicongkeoday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:text="@string/supervision_bts_catwork_tv_thicongkeoday"
+                    android:textSize="@dimen/text_size_large_common"
+                    android:textStyle="bold" />
+
+                <TableLayout
+                    android:id="@+id/supervision_bts_catwork_tl_thicongkeoday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="1,3" >
+
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1_trangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_chontrangthai"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/drop_box_heigh"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewCombo
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_tv_chontrangthai"
+                                style="@style/vOfficeeditTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:singleLine="true" >
+                            </com.viettel.view.control.VNMTextViewCombo>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1_nnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_chonnnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewNnkd
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row1_tv_chonnnkd"
+                                style="@style/ViettelTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:padding="@dimen/padding"
+                                android:singleLine="true" />
+                        </RelativeLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/table_row_height"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row2_diengiai"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/layoutkeoday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <EditText
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_et_diengiai"
+                                style="@style/vOfficeeditText"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/padding_left"
+                                android:textSize="@dimen/text_size_common" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_tv_loaididay"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:paddingLeft="@dimen/padding"
+                            android:text="@string/rl_supervision_bts_catwork_tl_thicongkeoday_row2_tv_loaididay"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="normal" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_rl_anh"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/drop_box_heigh"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="0.2"
+                            android:gravity="left"
+                            android:paddingLeft="@dimen/padding_left" >
+
+                            <com.viettel.view.control.VNMTextViewCombo
+                                android:id="@+id/rl_supervision_bts_catwork_tl_thicongkeoday_row2_loaididay"
+                                style="@style/vOfficeeditTextView"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:singleLine="true" >
+                            </com.viettel.view.control.VNMTextViewCombo>
+                        </RelativeLayout>
+                    </TableRow>
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/rl_supervision_bts_cat_work_save"
+                    style="@style/ViettelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_top_common"
+                    android:padding="@dimen/padding"
+                    android:text="@string/rl_supervision_bts_body_row6_1_bt_save"
+                    android:textSize="@dimen/text_size_common" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>-->
+
+</RelativeLayout>

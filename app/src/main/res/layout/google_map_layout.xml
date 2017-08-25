@@ -1,0 +1,159 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_map"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_map_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/constr_line_tank_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/text_location"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_map_rootmenu"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >		
+        <fragment
+            android:id="@+id/mapview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            class="com.google.android.gms.maps.MapFragment" >
+        </fragment>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:baselineAligned="false"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_name_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:text="Tên bể"
+                    android:textSize="@dimen/text_size_common" />
+
+                <TextView
+                    android:id="@+id/tv_name_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:text="B001"
+                    android:textSize="@dimen/text_size_common" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_long_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_map_long"
+                    android:textSize="@dimen/text_size_common" />
+
+                <TextView
+                    android:id="@+id/tv_long_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:text="B001"
+                    android:textSize="@dimen/text_size_common" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_lat_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_map_lat"
+                    android:textSize="@dimen/text_size_common" />
+
+                <TextView
+                    android:id="@+id/tv_lat_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:text="B001"
+                    android:textSize="@dimen/text_size_common" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:baselineAligned="false"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btn_map_save"
+                    style="@style/ViettelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_map_setlocation" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

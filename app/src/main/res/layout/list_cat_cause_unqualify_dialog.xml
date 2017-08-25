@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<ListView 
+	    android:id="@+id/lv_cat_cause_unqualify_dialog"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/border_layout"
+	    >
+	    
+	</ListView>
+
+	<Button
+	    android:id="@+id/bt_cat_cause_unqualify_dialog"
+	    android:layout_width="wrap_content"
+	    android:layout_height="50dp"
+	    android:layout_gravity="center_horizontal|bottom"
+	    android:text="@string/bt_cat_cause_unqualify_dialog"
+	    />
+
+</LinearLayout>

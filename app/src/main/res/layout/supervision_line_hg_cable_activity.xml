@@ -1,0 +1,331 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_supervision_line_hg_cable"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_line_hg_cable_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/line_hg_cable_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/line_hang_header_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_constr_line_hang_design_type_info"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_line_hg_cable_rootmenu"
+        android:background="@drawable/border_layout"
+        android:orientation="vertical"
+        android:padding="@dimen/padding2" >
+
+        <LinearLayout
+            android:id="@+id/ll_line_hg_cable_info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/border_layout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding" >
+
+            <TextView
+                android:id="@+id/tv_line_hg_cable_info_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.1"
+                android:gravity="center_vertical"
+                android:text="@string/line_hang_info_title"
+                android:textSize="@dimen/text_size_common" />
+
+            <RelativeLayout
+                android:id="@+id/rl_line_hg_cable_info_box"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.3"
+                android:gravity="center_vertical" >
+
+                <com.viettel.view.control.VNMTextViewCombo
+                    android:id="@+id/tv_line_hg_cable_dropdown"
+                    style="@style/vOfficeeditTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/icon_combo"
+                    android:hint="@string/line_hang_info_line_design" >
+                </com.viettel.view.control.VNMTextViewCombo>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_line_hg_cable_info_line"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.1"
+                android:gravity="center_vertical"
+                android:text="@string/line_hang_info_line_title"
+                android:textSize="@dimen/text_size_common" />
+
+            <RelativeLayout
+                android:id="@+id/rl_line_hg_cable_info_line"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.2"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_line_hg_cable_info_line_station_code_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:text="AGG0002_AGG0002"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_common" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_line_hg_cable_info_stationcode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.1"
+                android:gravity="center_vertical"
+                android:text="@string/line_hang_info_line_station_code_title"
+                android:textSize="@dimen/text_size_common" />
+
+            <RelativeLayout
+                android:id="@+id/rl_line_hg_cable_info_line_station_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_weight="0.2"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_line_hg_cable_info_line_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/bg_title"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/text_padding"
+                    android:text="ML ABC DDD"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_common" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/supervision_hg_cable_complete_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/supervision_date_complete"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/rl_supervision_hg_cable_bt_complete"
+                style="@style/ViettelButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:filterTouchesWhenObscured="true"
+                android:gravity="center"
+                android:padding="@dimen/padding"
+                android:text="@string/rl_constr_bt_complete"
+                android:textSize="@dimen/text_size_common" />
+
+            <Button
+                android:id="@+id/btn_line_hang_cable_add"
+                style="@style/ViettelButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="@string/text_add_new_pipe" />
+
+            <Button
+                android:id="@+id/btn_line_hang_cable_save"
+                style="@style/ViettelButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:filterTouchesWhenObscured="true"
+                android:layout_weight="0.1"
+                android:text="@string/text_save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_line_hg_cable_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin1"
+            android:background="@drawable/border_right"
+            android:baselineAligned="false"
+            android:minHeight="@dimen/table_row_height"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom_left"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:minHeight="@dimen/table_row_height"
+                    android:text="@string/line_bg_cable_doancap"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:minHeight="@dimen/table_row_height"
+                        android:text="@string/line_bg_cable_doancap_tukhoang"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_bottom"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:minHeight="@dimen/table_row_height"
+                        android:text="@string/line_bg_cable_doancap_denkhoang"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:minHeight="@dimen/table_row_height"
+                    android:text="@string/line_bg_cable_danhgia"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_bottom"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:minHeight="@dimen/table_row_height"
+                        android:text="@string/line_bg_cable_danhgia_dat"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_bottom"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:minHeight="@dimen/table_row_height"
+                        android:text="@string/line_bg_cable_danhgia_khongdat"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:background="@drawable/border_top_right_bottom"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/line_bg_cable_doancap_nn_khongdat"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:background="@drawable/border_top_right_bottom"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/line_bg_cable_doancap_diengiai"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/border_top_bottom"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/text_empty"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_line_hg_cable_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:background="@drawable/border_right_bottom_left"
+            android:choiceMode="singleChoice"
+            android:minHeight="400dp"
+            android:padding="@dimen/padding1" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

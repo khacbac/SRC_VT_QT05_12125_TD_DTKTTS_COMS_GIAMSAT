@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sclayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="always" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableLayout
+            android:id="@+id/supervision_bts_measure_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_layout"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/padding"
+            android:shrinkColumns="*"
+            android:stretchColumns="1,3" >
+
+            <TableRow
+                android:id="@+id/supervision_bts_measure_tl_row1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/table_row_height"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row1_trangthai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical|left"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_supervision_bts_measure_tl_row1_chontrangthai"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.5"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <com.viettel.view.control.VNMTextViewCombo
+                        android:id="@+id/rl_supervision_bts_measure_tl_row1_tv_chontrangthai"
+                        style="@style/vOfficeeditTextView"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:singleLine="true" >
+                    </com.viettel.view.control.VNMTextViewCombo>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/supervision_bts_measure_row1_lo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:paddingLeft="@dimen/padding" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_supervision_bts_measure_tl"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/text_box_heigh"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_weight="0.3"
+                    android:paddingLeft="@dimen/padding_left" >
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/supervision_bts_measure_tl_row2"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/table_row_height"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row2_ketquado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical|left"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_measure_tl_row2_ketquado"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <EditText
+                        android:id="@+id/supervision_bts_measure_tl_row2_et_ketquado"
+                        style="@style/vOfficeeditText"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:textSize="@dimen/text_size_common" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row2_donvi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_measure_tl_row2_donvi"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginRight="10dip"
+                    android:layout_weight="0.3"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <EditText
+                        android:id="@+id/supervision_bts_measure_tl_row2_et_donvi"
+                        style="@style/vOfficeeditText"
+                        android:layout_width="250dp"
+                        android:layout_height="@dimen/drop_box_heigh"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:maxLength="100"
+                        android:padding="@dimen/padding"
+                        android:singleLine="true" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/supervision_bts_measure_tl_row3"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/table_row_height"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row3_loaimaydo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical|left"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_measure_tl_row2_loaimaydo"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <EditText
+                        android:id="@+id/supervision_bts_measure_tl_row3_et_loaimaydo"
+                        style="@style/vOfficeeditText"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:singleLine="true"
+                        android:maxLength="100"
+                        android:textSize="@dimen/text_size_common" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row3_Serial"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_measure_tl_row2_Serial"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginRight="10dip"
+                    android:layout_weight="0.3"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <EditText
+                        android:id="@+id/supervision_bts_measure_tl_row3_et_serial"
+                        style="@style/vOfficeeditText"
+                        android:layout_width="250dp"
+                        android:layout_height="@dimen/drop_box_heigh"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:maxLength="10"
+                        android:padding="@dimen/padding"
+                        android:singleLine="true" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/supervision_bts_measure_tl_row4"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/table_row_height"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row4_nguoido"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical|left"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_measure_tl_row4_nguoido"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <EditText
+                        android:id="@+id/supervision_bts_measure_tl_row2_et_nguoido"
+                        style="@style/vOfficeeditText"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_common" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/supervision_bts_measure_tl_row4_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:paddingLeft="@dimen/padding"
+                    android:text="@string/supervision_bts_measure_tl_row4_phone"
+                    android:textSize="@dimen/text_size_common"
+                    android:textStyle="normal" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/drop_box_heigh"
+                    android:layout_marginRight="10dip"
+                    android:layout_weight="0.3"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_left" >
+
+                    <EditText
+                        android:id="@+id/supervision_bts_measure_tl_row4_et_phone"
+                        style="@style/vOfficeeditText"
+                        android:layout_width="250dp"
+                        android:layout_height="@dimen/drop_box_heigh"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:inputType="phone"
+                        android:maxLength="15"
+                        android:padding="@dimen/padding"
+                        android:singleLine="true" />
+                </RelativeLayout>
+            </TableRow>
+        </TableLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/supervision_bts_measure_tl"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/rl_supervision_bts_measurelayout_save"
+                style="@style/ViettelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:filterTouchesWhenObscured="true"
+                android:padding="@dimen/padding"
+                android:text="@string/rl_supervision_bts_body_row6_1_bt_save"
+                android:textSize="@dimen/text_size_common" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            style="@style/Header.Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày cập nhật" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/Header.Textview_Disable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="04/04/2017" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            style="@style/Header.Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Có thi công không" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw_thi_cong"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            android:paddingRight="10dp"
+            android:theme="@style/CustomSwitch" />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/tr_nguyen_nhan"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/Header.Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Nguyên nhân" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_nguyen_nhan"
+            style="@style/Content.EditText"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Điền số người" />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/tr_loai_vuong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/Header.Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Loại vướng" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_loai_vuong"
+            style="@style/Content.EditText"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:clickable="false"
+            android:hint="Điền số người" />
+    </LinearLayout>
+</merge>

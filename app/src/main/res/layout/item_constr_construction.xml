@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_Constr_Construction"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="40dip"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/tv_stt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.05"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/constr_sonstruction_list_stt"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_macongtrinh"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="left|center_vertical"
+        android:text="@string/constr_sonstruction_list_mct"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_loaicongtrinh"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="left|center_vertical"
+        android:text="@string/constr_sonstruction_list_loaicongtrinh"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_tiendo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/constr_sonstruction_list_trangthai"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_weight="0.3">
+
+            <ImageView
+                android:id="@+id/iv_progress"
+
+                android:layout_width="80dip"
+                android:layout_height="50dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/action_progress_btn" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_trangthai"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="left|center_vertical"
+        android:text="@string/constr_sonstruction_list_trangthai"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_request_date"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="left|center_vertical"
+        android:text="@string/constr_sonstruction_list_request_date"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/rl_background"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.14"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" >
+
+        <TextView
+            android:id="@+id/tv_finish_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.08"
+        android:gravity="center_horizontal|center_vertical" >
+
+        <ImageView
+            android:id="@+id/iv_thaotac"
+            android:layout_width="@dimen/icon_listview_width"
+            android:layout_height="@dimen/icon_listview_height"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_edit" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.08"
+        android:gravity="center_vertical|center_horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_loaituyen"
+            android:layout_width="@dimen/icon_listview_width"
+            android:layout_height="@dimen/icon_listview_height"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_edit" />
+    </RelativeLayout>
+
+</LinearLayout>

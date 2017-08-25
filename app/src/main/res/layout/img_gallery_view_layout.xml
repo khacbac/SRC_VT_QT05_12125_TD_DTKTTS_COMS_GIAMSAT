@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_title"
+    android:orientation="vertical"
+    android:padding="@dimen/padding" >
+
+    <RelativeLayout
+        android:id="@+id/rl_img_gallery_popup_menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_title_height"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/tv_img_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/img_view_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/iv_img_take"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_right_icon"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/padding"
+                android:src="@drawable/icon_img_take" />
+
+            <ImageView
+                android:id="@+id/iv_img_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_right_icon"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/padding"
+                android:visibility="visible"
+                android:src="@drawable/icon_image_add" />
+
+            <ImageView
+                android:id="@+id/iv_img_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_right_icon"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/padding"
+                android:src="@drawable/icon_img_delete" />
+
+            <ImageView
+                android:id="@+id/iv_img_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_right_icon"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/padding"
+                android:src="@drawable/icon_exit" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/lv_img_gallery_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+        android:choiceMode="multipleChoice"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" >
+    </GridView>
+
+</LinearLayout>

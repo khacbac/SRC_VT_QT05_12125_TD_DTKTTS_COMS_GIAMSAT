@@ -1,0 +1,134 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_supervision_bts_pillar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/list_item_min_height"
+    android:orientation="horizontal" > 
+  
+    <TextView
+        android:id="@+id/tv_mahieumong"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:gravity="center"
+        android:text="@string/trl_supervision_bts_pillar_thicong_row1_mahieumong"
+        android:textSize="@dimen/text_size_common"
+        android:textStyle="bold" /> 
+  
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding" > 
+  
+        <TextView
+            android:id="@+id/size_drc_thietke"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            style="@style/vOfficeeditTextView"
+            android:gravity="center"
+            android:hint="@string/text_empty"
+            android:singleLine="true"
+            android:padding="@dimen/padding"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_common" /> 
+    </RelativeLayout>   
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding" > 
+  
+        <TextView
+            android:id="@+id/size_drc_thucte"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            style="@style/vOfficeeditTextView"
+            android:gravity="center"
+            android:hint="@string/text_empty"
+            android:singleLine="true"
+            android:padding="@dimen/padding"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_common" /> 
+    </RelativeLayout>   
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:gravity="center" > 
+  		<CheckBox 
+  		    android:id="@+id/rd_dat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+  		    />
+         
+    </RelativeLayout> 
+  
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:gravity="center" > 
+  		<CheckBox 
+  		    android:id="@+id/rd_khongdat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+  		    />
+        
+    </RelativeLayout>
+  
+    <RelativeLayout
+        android:id="@+id/rl_nnkd"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:gravity="center"
+         >  
+    
+         <com.viettel.view.control.VNMTextViewNnkd
+            android:id="@+id/bt_nnkd"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            style="@style/vOfficeeditTextView"
+            android:singleLine="true"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="@dimen/padding"
+             />  
+    </RelativeLayout>  
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding" > 
+  
+        <TextView
+            android:id="@+id/iv_anh"
+            android:layout_width="@dimen/edittext_width_common"
+            android:layout_height="@dimen/text_box_heigh"
+            style="@style/vOfficeeditTextView"
+            android:gravity="center"
+            android:hint="@string/text_empty"
+            android:singleLine="true"
+            android:padding="@dimen/padding"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_common" /> 
+    </RelativeLayout>   
+  
+ 
+    
+ 
+  
+</LinearLayout>

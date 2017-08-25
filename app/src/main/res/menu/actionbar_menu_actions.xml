@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_save"
+        app:showAsAction="ifRoom|withText"
+        android:visible="false"
+        android:title="Lưu"/>
+
+    <item
+        android:id="@+id/action_checkin"
+        android:icon="@drawable/icon_checkin"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/check_in"/>
+    
+     <item
+        android:id="@+id/action_collapse"
+        android:visible="false"
+        android:icon="@drawable/icon_up"
+         app:showAsAction="ifRoom|withText"
+        android:title="@string/arrow_up"/>
+
+</menu>

@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="actionbar_height">40dp</dimen>
+    <dimen name="margin">5dip</dimen>
+    <dimen name="margin1">1dip</dimen>
+    <dimen name="margin2">1dip</dimen>    
+    <dimen name="padding">5dip</dimen>
+    <dimen name="text_padding">5dip</dimen>
+    <dimen name="padding1">1dip</dimen>
+    <dimen name="padding2">1dip</dimen>
+    <dimen name="margin_top_common">5dip</dimen>    
+    <dimen name="padding_left">5dip</dimen>
+    <dimen name="margin_left_dg">17dip</dimen>
+    <dimen name="margin_left">5dip</dimen>    
+    
+    <dimen name="margin_left_15">15dip</dimen>
+    <dimen name="margin_left_10">10dip</dimen>        
+    <dimen name="margin_left_35">35dip</dimen>
+    <dimen name="text_size_common">15sp</dimen>
+    <dimen name="text_size_large_common">20dp</dimen>
+    <dimen name="edittext_width_common">250dp</dimen>
+    <dimen name="text_multi_hight">80dp</dimen>
+    <dimen name="actionbar_item_width">30dip</dimen>
+    <dimen name="table_row_height">30dip</dimen>
+    <dimen name="table_cell_padding">1dip</dimen>
+    <dimen name="text_box_heigh">46dip</dimen>
+    <dimen name="dropdown_item_height">40dip</dimen>
+    <dimen name="drop_box_heigh">35dip</dimen>
+    <dimen name="drop_box_common_width">200dip</dimen>
+    <dimen name="dropdown_width">300dip</dimen>
+    <dimen name="icon_listview_height">50dip</dimen>
+    <dimen name="icon_listview_width">50dip</dimen>
+    <dimen name="icon_img_width">30dip</dimen>
+    <dimen name="icon_img_height">30dip</dimen>
+    <dimen name="list_item_min_height">40dip</dimen>
+    <dimen name="list_item_min_height_1">45dip</dimen>
+    <dimen name="btn_save_width">90dip</dimen>
+    <dimen name="chk_item_width">120dip</dimen>
+    <dimen name="table_border_width">1dip</dimen>
+    <dimen name="margin_right">5dip</dimen>
+    <dimen name="margin_right_icon">10dip</dimen>
+    <dimen name="text_size_width">105dip</dimen>
+    <dimen name="header_title_height">50dip</dimen>
+    <dimen name="img_menu_height">40dip</dimen>
+    <dimen name="dialog_min_height">200dip</dimen>
+    <dimen name="dialog_min_width">200dip</dimen>
+    <dimen name="dialog_width">400dip</dimen>
+    <dimen name="dialog_button_margin_top">40dip</dimen>
+    <dimen name="edit_text_height">100dip</dimen>
+    <dimen name="edit_plan_date_width">180dp</dimen>
+    <dimen name="edit_plan_date_height">50dp</dimen>
+    <dimen name="padding_plan_item">3dp</dimen>
+    <dimen name="text_plan_size">20sp</dimen>
+    <dimen name="text_plan_size2">22sp</dimen>
+    
+</resources>

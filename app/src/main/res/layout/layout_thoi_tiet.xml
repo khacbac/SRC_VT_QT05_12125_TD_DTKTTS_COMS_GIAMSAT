@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        style="@style/Header.Textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Thời tiết:" />
+
+    <Spinner
+        android:id="@+id/sp_thoitiet"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <TextView
+        style="@style/Header.Textview"
+        android:id="@+id/title1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:text="Những thay đổi, bổ sung, phát sinh *" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_thay_doi"
+        android:layout_marginLeft="10dp"
+        style="@style/Content.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|left"
+        android:imeOptions="flagNoEnterAction"
+        android:inputType="text|textMultiLine"
+        android:paddingBottom="10dp"
+        android:lines="2"
+        android:maxLines="2"
+        android:scrollbars="vertical"
+        android:text="" />
+    <TextView
+        style="@style/Header.Textview"
+        android:id="@+id/title2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:text="Ý kiến đơn vị giám sát *" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_y_kien_giam_sat"
+        android:layout_marginLeft="10dp"
+        style="@style/Content.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|left"
+        android:imeOptions="flagNoEnterAction"
+        android:inputType="text|textMultiLine"
+        android:paddingBottom="10dp"
+        android:lines="2"
+        android:maxLines="2"
+        android:scrollbars="vertical"
+        android:text="" />
+    <TextView
+        android:id="@+id/title3"
+        style="@style/Header.Textview"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:text="Ý kiến đơn vị thi công *" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_y_kien_thi_cong"
+        android:layout_marginLeft="10dp"
+        style="@style/Content.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|left"
+        android:imeOptions="flagNoEnterAction"
+        android:inputType="text|textMultiLine"
+        android:paddingBottom="10dp"
+        android:lines="2"
+        android:maxLines="2"
+        android:scrollbars="vertical"
+        android:text="" />
+
+</merge>

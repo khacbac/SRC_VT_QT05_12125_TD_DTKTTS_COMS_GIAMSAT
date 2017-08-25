@@ -1,0 +1,2381 @@
+package com.viettel.sync;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+
+import com.commonsware.cwac.cache.MemoryUtils;
+import com.viettel.common.ActionEvent;
+import com.viettel.common.ActionEventConstant;
+import com.viettel.common.ErrorConstants;
+import com.viettel.common.FileManager;
+import com.viettel.common.GlobalInfo;
+import com.viettel.common.ModelEvent;
+import com.viettel.constants.Constants;
+import com.viettel.constants.IntentConstants;
+import com.viettel.controller.Home_Controller;
+import com.viettel.database.Acceptance_Bts_Cat_WorkController;
+import com.viettel.database.Acceptance_Bts_PillarController;
+import com.viettel.database.Acceptance_Line_Bg_PipeController;
+import com.viettel.database.Acceptance_Line_Bg_SpecialController;
+import com.viettel.database.Acceptance_Line_Bg_TankController;
+import com.viettel.database.Cat_Cause_Constr_AcceptanceController;
+import com.viettel.database.Cat_Cause_Constr_UnQualifyController;
+import com.viettel.database.Cat_Progress_WorkController;
+import com.viettel.database.Cat_Supervision_Constr_WorkController;
+import com.viettel.database.Cat_Supv_Constr_MeasureController;
+import com.viettel.database.Cause_Bts_Cat_WorkController;
+import com.viettel.database.Cause_Bts_Pillar_AntenController;
+import com.viettel.database.Cause_Bts_Power_PoleController;
+import com.viettel.database.Cause_Line_BG_CableController;
+import com.viettel.database.Cause_Line_BG_MXController;
+import com.viettel.database.Cause_Line_BG_PipeController;
+import com.viettel.database.Cause_Line_BG_SpecialController;
+import com.viettel.database.Cause_Line_BG_TankController;
+import com.viettel.database.Cause_Line_Hg_CableController;
+import com.viettel.database.Cause_Line_Hg_MxController;
+import com.viettel.database.Cause_Line_Hg_PillarController;
+import com.viettel.database.Constr_ConstructionController;
+import com.viettel.database.Ktts_KeyController;
+import com.viettel.database.Login_Log_ConstrController;
+import com.viettel.database.Measurement_Detail_ConstrController;
+import com.viettel.database.Product_CompanyController;
+import com.viettel.database.Special_LocationController;
+import com.viettel.database.SqlliteSyncModel;
+import com.viettel.database.Supervision_BtsController;
+import com.viettel.database.Supervision_Bts_Cat_WorkController;
+import com.viettel.database.Supervision_Bts_EquipController;
+import com.viettel.database.Supervision_Bts_MeasureController;
+import com.viettel.database.Supervision_Bts_Pillar_AntenController;
+import com.viettel.database.Supervision_Bts_Power_PoleController;
+import com.viettel.database.Supervision_ConstrController;
+import com.viettel.database.Supervision_Constr_REQController;
+import com.viettel.database.Supervision_Line_BG_CableController;
+import com.viettel.database.Supervision_Line_BG_FiberController;
+import com.viettel.database.Supervision_Line_BG_MxController;
+import com.viettel.database.Supervision_Line_BG_PipeController;
+import com.viettel.database.Supervision_Line_BG_TankController;
+import com.viettel.database.Supervision_Line_BackgroundController;
+import com.viettel.database.Supervision_Line_HangController;
+import com.viettel.database.Supervision_Line_Hg_CableController;
+import com.viettel.database.Supervision_Line_Hg_FiberController;
+import com.viettel.database.Supervision_Line_Hg_MxController;
+import com.viettel.database.Supervision_Line_Hg_PillarController;
+import com.viettel.database.Supervision_Measure_ConstrController;
+import com.viettel.database.Supervision_ProgressController;
+import com.viettel.database.Supv_Constr_Attach_FileController;
+import com.viettel.database.entity.EmployeeEntity;
+import com.viettel.database.entity.Ktts_KeyEntity;
+import com.viettel.database.entity.Supv_Constr_Attach_FileEntity;
+import com.viettel.database.field.Acceptance_Bts_Cat_WorkField;
+import com.viettel.database.field.Acceptance_Bts_PillarField;
+import com.viettel.database.field.Acceptance_Line_Bg_PipeField;
+import com.viettel.database.field.Acceptance_Line_Bg_SpecialField;
+import com.viettel.database.field.Acceptance_Line_Bg_TankField;
+import com.viettel.database.field.BaseField;
+import com.viettel.database.field.Cat_Cause_Constr_AcceptanceField;
+import com.viettel.database.field.Cat_Cause_Constr_UnQualifyField;
+import com.viettel.database.field.Cat_Progress_WorkField;
+import com.viettel.database.field.Cat_Supervision_Constr_WorkField;
+import com.viettel.database.field.Cat_Supv_Constr_MeasureField;
+import com.viettel.database.field.Cause_Bts_Cat_WorkField;
+import com.viettel.database.field.Cause_Bts_Pillar_AntenField;
+import com.viettel.database.field.Cause_Bts_Power_PoleField;
+import com.viettel.database.field.Cause_Line_BG_CableField;
+import com.viettel.database.field.Cause_Line_BG_MXField;
+import com.viettel.database.field.Cause_Line_BG_PipeField;
+import com.viettel.database.field.Cause_Line_BG_SpecialField;
+import com.viettel.database.field.Cause_Line_BG_TankField;
+import com.viettel.database.field.Cause_Line_Hg_CableField;
+import com.viettel.database.field.Cause_Line_Hg_MxField;
+import com.viettel.database.field.Cause_Line_Hg_PillarField;
+import com.viettel.database.field.Constr_ConstructionField;
+import com.viettel.database.field.EmployeeField;
+import com.viettel.database.field.Login_Log_ConstrField;
+import com.viettel.database.field.Measurement_Detail_ConstrField;
+import com.viettel.database.field.Product_CompanyField;
+import com.viettel.database.field.Special_LocationField;
+import com.viettel.database.field.Supervision_BtsField;
+import com.viettel.database.field.Supervision_Bts_Cat_WorkField;
+import com.viettel.database.field.Supervision_Bts_EquipField;
+import com.viettel.database.field.Supervision_Bts_MeasureField;
+import com.viettel.database.field.Supervision_Bts_Pillar_AntenField;
+import com.viettel.database.field.Supervision_Bts_Power_PoleField;
+import com.viettel.database.field.Supervision_ConstrField;
+import com.viettel.database.field.Supervision_Constr_REQField;
+import com.viettel.database.field.Supervision_Line_BG_CableField;
+import com.viettel.database.field.Supervision_Line_BG_FiberField;
+import com.viettel.database.field.Supervision_Line_BG_MXField;
+import com.viettel.database.field.Supervision_Line_BG_PipeField;
+import com.viettel.database.field.Supervision_Line_BG_TankField;
+import com.viettel.database.field.Supervision_Line_BackgroundField;
+import com.viettel.database.field.Supervision_Line_HangField;
+import com.viettel.database.field.Supervision_Line_Hg_CableField;
+import com.viettel.database.field.Supervision_Line_Hg_FiberField;
+import com.viettel.database.field.Supervision_Line_Hg_MxField;
+import com.viettel.database.field.Supervision_Line_Hg_PillarField;
+import com.viettel.database.field.Supervision_Measure_ConstrField;
+import com.viettel.database.field.Supervision_ProgressField;
+import com.viettel.database.field.Supv_Constr_Attach_FileField;
+import com.viettel.database.field.Supv_Constr_DailyField;
+import com.viettel.dialog.MessagerDialog;
+import com.viettel.ktts.R;
+import com.viettel.service.GpsServices;
+import com.viettel.utils.Mylog;
+import com.viettel.utils.PreferenceUtil;
+import com.viettel.utils.SqliteUtil;
+import com.viettel.utils.StringUtil;
+import com.viettel.viettellib.json.me.JSONArray;
+import com.viettel.viettellib.json.me.JSONException;
+import com.viettel.viettellib.json.me.JSONObject;
+import com.viettel.viettellib.network.http.HTTPClient;
+import com.viettel.viettellib.network.http.HTTPMessage;
+import com.viettel.viettellib.network.http.HTTPRequest;
+import com.viettel.viettellib.network.http.HTTPResponse;
+import com.viettel.viettellib.network.http.HttpAsyncTask;
+import com.viettel.view.base.BaseActivity;
+
+public class SyncModel extends AbstractSyncService {
+	// TODO phan nay con chua kiem tra ky
+	public static boolean bStop = false;
+	public static boolean bRunning = false;
+	protected static SyncModel instance;
+	public static Context mContext = null;
+
+	protected SyncModel() {
+		if (SyncModel.mContext == null) {
+			SyncModel.mContext = GlobalInfo.getInstance().getAppContext();
+		}
+	}
+
+	public static SyncModel getInstance() {
+		if (instance == null) {
+			instance = new SyncModel();
+		}
+		return instance;
+	}
+
+	public void onReceiveData(HTTPMessage mes) {
+		ActionEvent actionEvent = (ActionEvent) mes.getUserData();
+		ModelEvent model = new ModelEvent();
+		model.setDataText(mes.getDataText());
+		model.setCode(mes.getCode());
+		model.setParams(((HTTPResponse) mes).getRequest().getDataText());
+		model.setActionEvent(actionEvent);
+		// DMD check null or empty
+		if (StringUtil.isNullOrEmpty((String) mes.getDataText())) {
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			Home_Controller.getInstance().handleErrorModelEvent(model);
+			return;
+		}
+
+		switch (mes.getAction()) {
+		case ActionEventConstant.REQEST_LOGIN:
+			this.receiveLogin_Handler(mes, model);
+			break;
+		// REQUEST KEY
+		case ActionEventConstant.REQUEST_KEYKTTS:
+			this.receiveKttsKeyHandler(mes, model);
+			break;
+
+		case ActionEventConstant.REQUEST_GETDATA:
+			this.receiveGetDataHandler(mes, model);
+			break;
+
+		case ActionEventConstant.REQUEST_UPDATEDATA:
+			this.receiveUpdateDataHandler(mes, model);
+			break;
+		case ActionEventConstant.REQUEST_UPDATEIMAGE:
+			this.receiveUpdateImageHandler(mes, model);
+			break;
+		case ActionEventConstant.REQUEST_DOWNLOADIMAGE:
+			this.receiveGetImageHandler(mes, model);
+			break;
+
+		}
+	}
+
+	public void onReceiveError(HTTPResponse response) {
+		SyncModel.bStop = true;
+		ActionEvent actionEvent = (ActionEvent) response.getUserData();
+		ModelEvent model = new ModelEvent();
+		model.setDataText(response.getDataText());
+		model.setParams(((HTTPResponse) response).getRequest().getDataText());
+		model.setActionEvent(actionEvent);
+		// model.setModelCode(response.getErrorCode());
+		model.setModelCode(ErrorConstants.ERROR_NO_CONNECTION);
+		model.setModelMessage(response.getErrMessage());
+		Home_Controller.getInstance().handleErrorModelEvent(model);
+	}
+
+	/* Dang nhap he thong */
+
+	public HTTPRequest requestLoginHTTP(ActionEvent e) {
+		HTTPRequest re = null;
+		try {
+			Bundle bundle = (Bundle) e.viewData;
+			JSONObject json = new JSONObject();
+			json.put(IntentConstants.INTENT_LOGIN_NAME,
+					bundle.getString(IntentConstants.INTENT_LOGIN_NAME));
+			json.put(IntentConstants.INTENT_PASSWORD,
+					bundle.getString(IntentConstants.INTENT_PASSWORD));
+			json.put(IntentConstants.INTENT_CLIENTID,
+					bundle.getString(IntentConstants.INTENT_CLIENTID));
+			re = (HTTPRequest) sendHttpRequest("authenticate.login", json, e,
+					HttpAsyncTask.CONNECT_TIMEOUT);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return (HTTPRequest) re;
+	}
+
+	/* Don nhan thong bao dang nhap */
+
+	protected void receiveLogin_Handler(HTTPMessage mes, ModelEvent model) {
+		JSONObject json;
+		try {
+			json = new JSONObject(mes.getDataText());
+			JSONObject jsonresult = json.getJSONObject("result");
+			int errCode = jsonresult.getInt("errorCode");
+			int userId = jsonresult.getJSONObject("response").getInt(
+					EmployeeField.COLUMN_EMPLOYEE_ID);
+			String sessionId = jsonresult.getJSONObject("response").getString(
+					"sessionId");
+			if (errCode == ErrorConstants.ERROR_CODE_SUCCESS && userId > 0) {
+				HTTPClient.sessionID = sessionId;
+				model.setModelCode(errCode);
+				EmployeeEntity loginItem = EmployeeEntity.parseJson(jsonresult
+						.getJSONObject("response"));
+				model.setModelData(loginItem);
+				Home_Controller.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(errCode);
+				Home_Controller.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception e) {
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			Home_Controller.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * Ham yeu cau cap moi khoan khoa cho bang
+	 * 
+	 * @param item
+	 * @return
+	 */
+	protected HTTPRequest requestKttsKey(ActionEvent e) {
+		HTTPRequest re = null;
+		try {
+			Ktts_KeyEntity curItem = (Ktts_KeyEntity) e.userData;
+			JSONObject json = new JSONObject();
+			json.put(IntentConstants.INTENT_USER_ID, GlobalInfo.getInstance()
+					.getUserId());
+			json.put(IntentConstants.INTENT_CLIENTID, GlobalInfo.getInstance()
+					.getClientId());
+			json.put(IntentConstants.INTENT_TABLE_NAME, curItem.getTableName());
+			json.put(IntentConstants.INTENT_KEY_MIN, curItem.getMin());
+			json.put(IntentConstants.INTENT_KEY_MAX, curItem.getMax());
+
+			re = sendHttpRequest("provideGId.processGId", json, e,
+					HttpAsyncTask.CONNECT_TIMEOUT);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return re;
+	}
+
+	/**
+	 * Ham lay khoang gia tri Id he thong
+	 * 
+	 * @param mes
+	 * @param model
+	 */
+
+	protected void receiveKttsKeyHandler(HTTPMessage mes, ModelEvent model) {
+		JSONObject json;
+		try {
+			json = new JSONObject(mes.getDataText());
+			JSONObject jsonresult = json.getJSONObject("result");
+			JSONObject jsonResponseData = jsonresult.getJSONObject("response");
+			int errCode = jsonresult.getInt("errorCode");
+			if (errCode == ErrorConstants.ERROR_CODE_SUCCESS) {
+				model.setModelCode(errCode);
+				Ktts_KeyEntity item = (Ktts_KeyEntity) model.getActionEvent().userData;
+				Ktts_KeyEntity itemGet = Ktts_KeyEntity
+						.parseJson(jsonResponseData);
+				if (itemGet.getClientId().equals(
+						GlobalInfo.getInstance().getClientId())) {
+					if (item.getMax() == 0L) {
+						Ktts_KeyEntity addItem = new Ktts_KeyEntity();
+						addItem.setTableName(itemGet.getTableName());
+						addItem.setClientId(itemGet.getClientId());
+						addItem.setMin(itemGet.getMin());
+						addItem.setMax(itemGet.getMax());
+						addItem.setNewMin(0L);
+						addItem.setNewMax(0L);
+						Ktts_KeyController.getInstance().addKttsKey(addItem);
+					} else {
+						Ktts_KeyController.getInstance().updateNewKttsKey(
+								itemGet.getMin(), itemGet.getMax(),
+								itemGet.getTableName());
+					}
+				}
+				SyncQueue.getInstance().removeTableGetKey(item.getTableName());
+				/* Neu ket thuc qua trinh lay khoa thi chuyen buoc */
+				if (SyncQueue.getInstance().checkGetKeyFinish()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					SyncModel.getInstance().syncGetData(model.getActionEvent());
+				}
+
+			} else {
+				/* Goi ham bat thong bao loi */
+				model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+				Home_Controller.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception e) {
+			/* Su ly khi bi loi */
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Ham request du lieu tren server ve
+	 * 
+	 * @param item
+	 * @return
+	 */
+
+	protected HTTPRequest requestGetData(boolean pFilterUser, ActionEvent e,
+			String pMethod, SyncTableInfo pTableInfo) {
+		HTTPRequest re = null;
+		try {
+			// vao bang req
+//			if (pTableInfo.getTableName().equals("CAT_CAUSE_CONSTR_UNQUALIFY")) {
+				// Log.i("id", "bang can tao");
+				// JSONArray jsonScDataTest = SqlliteSyncModel
+				// .getDataJsonSyncTest(Cat_Supervision_Constr_WorkField.TABLE_NAME,
+				// Cat_Supervision_Constr_WorkController.allColumn, null, 0,
+				// 1000);
+				//
+				// Log.i("id", "bang can tao");
+				//
+				// }
+				// //vao bang supv_constr
+				// if (pTableInfo.getTableName().equals(
+				// "CAT_CAUSE_CONSTR_UNQUALIFY")) {
+
+				// JSONArray jsonScDataTest = SqlliteSyncModel
+				// .getDataJsonSyncTest(Cat_Progress_WorkField.TABLE_NAME,
+				// Cat_Progress_WorkController.allColumn, null, 0,
+				// 1000);
+				//
+//				Log.i("id", "bang can tao");
+				// }
+//			}
+			long idUser = GlobalInfo.getInstance().getUserId();
+			ActionEvent action = new ActionEvent();
+			action.sender = e.sender;
+			action.action = pTableInfo.getActionId();
+			action.isBlockRequest = true;
+			action.userData = pTableInfo;
+			long iMaxProcessId = 0;
+			if (pFilterUser) {
+				iMaxProcessId = SqlliteSyncModel.getInstance().getMaxProcessId(
+						pTableInfo.getTableName(), idUser);
+			} else {
+				iMaxProcessId = SqlliteSyncModel.getInstance().getMaxProcessId(
+						pTableInfo.getTableName());
+			}
+			JSONObject json = new JSONObject();
+			json.put("CAT_EMPLOYEE_ID", String.valueOf(idUser));
+			json.put("PROCESS_ID", iMaxProcessId);
+			json.put("tableName", pTableInfo.getTableName());
+			re = sendHttpRequest(pMethod, json, action,
+					HttpAsyncTask.CONNECT_TIMEOUT);
+			// Gan vao hang doi
+			SyncQueue.getInstance().addTableGet(pTableInfo.getTableName());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return re;
+	}
+
+	/**
+	 * ham don nhan ket qua lay du lieu tu server ve
+	 * 
+	 * @param mes
+	 * @param model
+	 */
+
+	protected void receiveGetDataHandler(HTTPMessage mes, ModelEvent model) {
+		JSONObject json;
+		try {
+			json = new JSONObject(mes.getDataText());
+			JSONObject jsonresult = json.getJSONObject("result");
+			JSONObject jsonResponseData = jsonresult.getJSONObject("response");
+			ActionEvent actionEvent = model.getActionEvent();
+			int errCode = jsonresult.getInt("errorCode");
+
+			SyncTableInfo tableInfo = (SyncTableInfo) actionEvent.userData;
+//			if (tableInfo.getTableName().equals("CAT_CAUSE_CONSTR_UNQUALIFY")) {
+				// JSONArray jsonScDataTest = SqlliteSyncModel
+				// .getDataJsonSyncTest(
+				// Supervision_ProgressField.TABLE_NAME,
+				// Supervision_ProgressController.allColumn, null,
+				// 0, 1000);
+//				Mylog.i("id", "bang can tao");
+//			}
+			Log.i("nhan bang", tableInfo.getTableName());
+			// Log.i("-------", jsonresult.toString());
+			if (errCode == ErrorConstants.ERROR_CODE_SUCCESS) {
+				/* Update du lieu vao co so du lieu */
+				ArrayList<HashMap<String, String>> listData;
+				/* Chi ra 2 truong hop voi 2 bang tu them idUser vao bang */
+				if (tableInfo.getTableName().equals(
+						Supervision_ConstrField.TABLE_NAME)
+						|| tableInfo.getTableName().equals(
+								Constr_ConstructionField.TABLE_NAME)
+						|| tableInfo.getTableName().equals(
+								Supervision_Constr_REQField.TABLE_NAME)) {
+
+					listData = SqliteUtil.converJsonToHasMap(jsonResponseData,
+							tableInfo.getAllColumn(), GlobalInfo.getInstance()
+									.getUserId());
+					Mylog.i("id", "update du lieu 3 bang");
+
+				} else {
+					listData = SqliteUtil.converJsonToHasMap(jsonResponseData,
+							tableInfo.getAllColumn());
+				}
+
+				/* Kiem tra xem co phai lay du lieu file khong */
+				if (tableInfo.getTableName().equals(
+						Supv_Constr_Attach_FileField.TABLE_NAME)) {
+					SqlliteSyncModel.updateInsertGetFileData(listData,
+							tableInfo);
+				} else {
+					SqlliteSyncModel.updateInsertGetData(listData, tableInfo);
+				}
+
+				SyncQueue.getInstance()
+						.removeTableGet(tableInfo.getTableName());
+				// TODO new listData ma size > maxsize yeu cau dong bo lan nua
+				if (SyncQueue.getInstance().checkGetFinish()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					SyncModel.getInstance().syncUpateData(actionEvent);
+				}
+
+			} else {
+				SyncQueue.getInstance()
+						.removeTableGet(tableInfo.getTableName());
+				if (SyncQueue.getInstance().checkGetFinish()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					SyncModel.getInstance().syncUpateData(actionEvent);
+				}
+				model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+				Home_Controller.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+			Home_Controller.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * Ham yeu cau update du lieu len server
+	 * 
+	 * @param actionEvent
+	 * @return
+	 */
+
+	protected HTTPRequest requesttUpdateData(ActionEvent e,
+			SyncTableInfo pTableInfo) {
+		HTTPRequest re = null;
+		try {
+			/* Them vao danh sach bang dang cap nhat */
+			SyncQueue.getInstance().addTableUpdate(pTableInfo.getTableName());
+			ActionEvent actionEvent = new ActionEvent();
+			actionEvent.action = pTableInfo.getActionId();
+			actionEvent.sender = e.sender;
+			actionEvent.isBlockRequest = e.isBlockRequest;
+			actionEvent.userData = pTableInfo;
+			JSONObject json = new JSONObject();
+			json.put(IntentConstants.INTENT_LIST_DATA, pTableInfo.getJsonData());
+			json.put("tableName", pTableInfo.getTableName());
+			if (pTableInfo.getTableName().equalsIgnoreCase(
+					Supv_Constr_DailyField.TABLE_NAME)) {
+				re = sendHttpRequest(
+						"serverDataProcess.processReceivedDataDaily", json,
+						actionEvent, HttpAsyncTask.CONNECT_TIMEOUT);
+			} else if (pTableInfo.getTableName().equalsIgnoreCase(
+					Login_Log_ConstrField.TABLE_NAME)) {
+
+				String sUserName = "";
+				try {
+					PreferenceUtil preUtil = new PreferenceUtil(mContext);
+					sUserName = preUtil
+							.getStringPreference(Constants.LONGIN_NAME_SETTING);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				json.put("loginName", sUserName);
+				re = sendHttpRequest("serverDataProcess.insertLoginData", json,
+						actionEvent, HttpAsyncTask.CONNECT_TIMEOUT);
+			} else
+
+				re = sendHttpRequest("serverDataProcess.processReceivedData",
+						json, actionEvent, HttpAsyncTask.CONNECT_TIMEOUT);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return re;
+	}
+
+	/**
+	 * ham don nhan update du lieu tu client
+	 * 
+	 * @param mes
+	 * @param model
+	 */
+	protected void receiveUpdateDataHandler(HTTPMessage mes, ModelEvent model) {
+		JSONObject json;
+		try {
+			ActionEvent actionEvent = model.getActionEvent();
+			SyncTableInfo tableInfo = (SyncTableInfo) actionEvent.userData;
+
+			json = new JSONObject(mes.getDataText());
+			JSONObject jsonresult = json.getJSONObject("result");
+			JSONObject jsonResponseData = jsonresult.getJSONObject("response");
+
+			int errCode = jsonresult.getInt("errorCode");
+
+			// if (tableInfo.getTableName().equals("SUPERVISION_LINE_HANG")) {
+			// Log.i("update bang", tableInfo.getTableName());
+			// }
+			if (errCode == ErrorConstants.ERROR_CODE_SUCCESS) {
+				if (tableInfo.getTableName().equalsIgnoreCase(
+						Login_Log_ConstrField.TABLE_NAME)) {
+					String[] sColumnPid = new String[] {
+							tableInfo.getColumnKey(), "status" };
+					ArrayList<HashMap<String, String>> listData = SqliteUtil
+							.converJsonToHasMap(jsonResponseData, sColumnPid);
+					Login_Log_ConstrController loginLogController = new Login_Log_ConstrController(
+							mContext);
+					for (HashMap<String, String> map : listData) {
+						if (map.get("status").equals("true")) {
+							loginLogController
+									.deleteLoginLogConstr(Long.valueOf(map
+											.get(Login_Log_ConstrField.COLUMN_LOG_ID)));
+						}
+					}
+
+					/* 2. Kiem tra xem co update tiep bang hien tai khong */
+					if (tableInfo.isRequestNext()) {
+						JSONArray jsonUpdateData = SqlliteSyncModel
+								.getDataJsonFromLogUser(GlobalInfo
+										.getInstance().getUserId(), tableInfo
+										.getTableName(), tableInfo
+										.getAllColumn(), 0,
+										Constants.NUMBER_MAX_ITEM_SYNC);
+						if (jsonUpdateData.length() > Constants.NUMBER_MAX_ITEM_SYNC) {
+							tableInfo.setRequestNext(true);
+						} else {
+							tableInfo.setRequestNext(false);
+						}
+						if (jsonUpdateData.length() > 0) {
+							SyncModel.getInstance().requesttUpdateData(
+									model.getActionEvent(), tableInfo);
+						}
+					} else {
+
+						SyncQueue.getInstance().removeTableUpdate(
+								tableInfo.getTableName());
+					}
+				} else {
+					/* 1. Cap nhat lai processId va syncstatus cho database */
+					String[] sColumnPid = new String[] {
+							BaseField.COLUMN_PROCESS_ID,
+							tableInfo.getColumnKey() };
+					ArrayList<HashMap<String, String>> listData = SqliteUtil
+							.converJsonToHasMap(jsonResponseData, sColumnPid);
+
+					SqlliteSyncModel.updateSyncStatusProcessId(listData,
+							tableInfo);
+
+					/* 2. Kiem tra xem co update tiep bang hien tai khong */
+					if (tableInfo.isRequestNext()) {
+						JSONArray jsonUpdateData = SqlliteSyncModel
+								.getDataJsonSync(GlobalInfo.getInstance()
+										.getUserId(), tableInfo.getTableName(),
+										tableInfo.getAllColumn(), null, 0,
+										Constants.NUMBER_MAX_ITEM_SYNC);
+						if (jsonUpdateData.length() > Constants.NUMBER_MAX_ITEM_SYNC) {
+							tableInfo.setRequestNext(true);
+						} else {
+							tableInfo.setRequestNext(false);
+						}
+						if (jsonUpdateData.length() > 0) {
+							SyncModel.getInstance().requesttUpdateData(
+									model.getActionEvent(), tableInfo);
+						}
+					} else {
+
+						SyncQueue.getInstance().removeTableUpdate(
+								tableInfo.getTableName());
+					}
+				}
+
+				if (SyncQueue.getInstance().checkUpdateFinish()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					SyncModel.getInstance().syncGetImage(actionEvent);
+				}
+
+			} else {
+				SyncQueue.getInstance().removeTableUpdate(
+						tableInfo.getTableName());
+				if (SyncQueue.getInstance().checkUpdateFinish()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+					Home_Controller.getInstance().handleModelEvent(model);
+				}
+				model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+				Home_Controller.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception e) {
+			/* Su ly khi bi loi */
+			e.printStackTrace();
+			model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+			Home_Controller.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * Ham update file dung json va base string 64
+	 * 
+	 * @param e
+	 * @param pFilePath
+	 * @param pAction
+	 * @param idFile
+	 * @return
+	 */
+	protected HTTPRequest requestGetImage(ActionEvent e,
+			Supv_Constr_Attach_FileEntity pFileEntity, int pAction) {
+		HTTPRequest re = null;
+		try {
+			ActionEvent action = new ActionEvent();
+			action.sender = e.sender;
+			action.action = pAction;
+			action.isBlockRequest = true;
+			action.userData = pFileEntity;
+			JSONObject json = new JSONObject();
+			json.put(
+					Supv_Constr_Attach_FileField.COLUMN_SUPV_CONSTR_ATTACH_FILE_ID,
+					String.valueOf(pFileEntity.getSupv_Constr_Attach_file_Id()));
+			json.put(Supv_Constr_Attach_FileField.COLUMN_FILE_PATH,
+					String.valueOf(pFileEntity.getFile_Path()));
+			re = sendHttpRequest("fileUpload.requestFile", json, action,
+					HttpAsyncTask.CONNECT_TIMEOUT);
+			System.out.println("sending -------");
+			// Gan vao hang doi
+			SyncQueue.getInstance().addFileDownload(
+					pFileEntity.getSupv_Constr_Attach_file_Id());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Log.e("Loi file:", "Co Loi");
+		}
+		return re;
+	}
+
+	/**
+	 * ham don nhan lay anh tu server ve du lieu tu client
+	 * 
+	 * @param mes
+	 * @param model
+	 */
+	protected void receiveGetImageHandler(HTTPMessage mes, ModelEvent model) {
+		JSONObject json;
+		try {
+			json = new JSONObject(mes.getDataText());
+			JSONObject jsonresult = json.getJSONObject("result");
+			JSONObject jsonResponseData = jsonresult.getJSONObject("response");
+			ActionEvent actionEvent = model.getActionEvent();
+			int errCode = jsonresult.getInt("errorCode");
+			Supv_Constr_Attach_FileEntity pFileEntity = (Supv_Constr_Attach_FileEntity) actionEvent.userData;
+			if (errCode == ErrorConstants.ERROR_CODE_SUCCESS) {
+				/* Lay thong tin file */
+
+				String sRESULT_CODE = jsonResponseData.getString("RESULT_CODE");
+				if (sRESULT_CODE.equals("1")) {
+					Log.i("Ghi file", "Ghi file");
+					/* Ghi file theo duong dan */
+					String sFileData = jsonResponseData.getString("DATA_FILE");
+					boolean bSaveFile = FileManager.saveFileDownload(sFileData,
+							GlobalInfo.getInstance().getFilePath()
+									+ pFileEntity.getFile_Path());
+					if (bSaveFile) {
+						SqlliteSyncModel.updateDownloadFileSuccess(pFileEntity
+								.getSupv_Constr_Attach_file_Id());
+					}
+				} else {
+					Log.i("idFile", pFileEntity.getSupv_Constr_Attach_file_Id() + "," + pFileEntity.getEmployeeId());
+					Log.i("Ghi file", "File khong ton tai");
+				}
+				SyncQueue.getInstance().removeFileDownload(
+						pFileEntity.getSupv_Constr_Attach_file_Id());
+				if (SyncQueue.getInstance().checkFileDownload()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					SyncModel.getInstance().syncUpdateImage(actionEvent);
+				}
+			} else {
+				Log.i("Ghi file", "Nhan file khong thanh cong");
+				SyncQueue.getInstance().removeFileUpload(
+						pFileEntity.getSupv_Constr_Attach_file_Id());
+				if (SyncQueue.getInstance().checkFileUpload()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					SyncModel.getInstance().syncUpdateImage(actionEvent);
+				}
+				model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+				Home_Controller.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception e) {
+			Log.i("Ghi file", "Co su co");
+			/* Su ly khi bi loi */
+			model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+			Home_Controller.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * Ham update file dung json va base string 64
+	 * 
+	 * @param e
+	 * @param pFilePath
+	 * @param pAction
+	 * @param idFile
+	 * @return
+	 */
+	protected HTTPRequest requestUpdateImage(ActionEvent e, int pAction,
+			Supv_Constr_Attach_FileEntity pFileUpload) {
+		HTTPRequest re = null;
+		try {
+			Log.i("Day file:", "Day file:" + pFileUpload.getFile_Path());
+			ActionEvent action = new ActionEvent();
+			action.sender = e.sender;
+			action.action = pAction;
+			action.isBlockRequest = true;
+//			action.userData = pFileUpload.getSupv_Constr_Attach_file_Id();
+			action.userData = pFileUpload;
+			Vector<String> data = new Vector<String>();
+			data.add(Supv_Constr_Attach_FileField.COLUMN_SUPV_CONSTR_ATTACH_FILE_ID);
+			data.add(String.valueOf(pFileUpload.getSupv_Constr_Attach_file_Id()));
+			data.add(Supv_Constr_Attach_FileField.COLUMN_FILE_PATH);
+			data.add(pFileUpload.getFile_Path());
+			// Gan vao hang doi
+			SyncQueue.getInstance().addFileUpload(
+					pFileUpload.getSupv_Constr_Attach_file_Id());
+			re = httpMultiPartRequestWithDeoceImageFromImagePath(
+					"fileUpload.addImage", data, GlobalInfo.getInstance()
+							.getFilePath() + pFileUpload.getFile_Path(),
+					action, pFileUpload.getFile_Name(), "photo", "image/png");
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Log.e("Loi file:", "Loi file:" + pFileUpload.getFile_Path());
+			
+		} catch (Throwable ex1) {
+			// TODO Auto-generated catch block
+			ex1.printStackTrace();
+			Log.e("Loi file:", "Loi file:" + pFileUpload.getFile_Path());
+			
+		}
+		return re;
+	}
+
+	/**
+	 * ham don nhan update du lieu tu client
+	 * 
+	 * @param mes
+	 * @param model
+	 */
+	protected void receiveUpdateImageHandler(HTTPMessage mes, ModelEvent model) {
+		JSONObject json;
+		try {
+			json = new JSONObject(mes.getDataText());
+			JSONObject jsonresult = json.getJSONObject("result");
+			ActionEvent actionEvent = model.getActionEvent();
+			int errCode = jsonresult.getInt("errorCode");
+//			long idFile = Long.parseLong(actionEvent.userData.toString());
+			Supv_Constr_Attach_FileEntity itemFile = ((Supv_Constr_Attach_FileEntity)actionEvent.userData);
+			long idFile = itemFile.getSupv_Constr_Attach_file_Id();
+			
+			if (errCode == ErrorConstants.ERROR_CODE_SUCCESS) {
+				Log.i("Day file:", "Thanh cong day file:" + idFile);
+				SqlliteSyncModel.updateUploadFileSuccess(idFile);
+				SyncQueue.getInstance().removeFileUpload(idFile);
+				if (SyncQueue.getInstance().checkFileUpload()) {
+					//neu co yeu cau upload anh tiep thi req upload tiep
+					if(itemFile.isRequestNext()){
+//						MemoryUtils.getInstance().getCacheCleanTask()
+//						.execute(MemoryUtils.getInstance().cacheRootPath);
+						List<Supv_Constr_Attach_FileEntity> listUpLoad = new Supv_Constr_Attach_FileController(
+								SyncModel.mContext).getAttachFileUploadTest(0//itemFile.getNumberUpload()+Constants.NUMBER_MAX_ITEM_SYNC_IMG
+										,Constants.NUMBER_MAX_ITEM_SYNC_IMG);
+						
+						int iSizeDownLoad = listUpLoad.size();
+						
+						boolean bRequestNext = (iSizeDownLoad == Constants.NUMBER_MAX_ITEM_SYNC_IMG) ? true : false;
+						
+						if (iSizeDownLoad > 0) { 
+							File fileSave = null;
+							int chekcFileUp = 0;
+							for (Supv_Constr_Attach_FileEntity itemFileUpload : listUpLoad) {
+								fileSave = new File(GlobalInfo.getInstance()
+										.getFilePath()+itemFileUpload.getFile_Path());
+								if (fileSave.exists() && fileSave.length() > 0) {
+									itemFileUpload.setRequestNext(bRequestNext);
+									
+//									itemFileUpload.setNumberUpload(itemFile.getNumberUpload()
+//											+Constants.NUMBER_MAX_ITEM_SYNC_IMG);
+									this.requestUpdateImage(model.getActionEvent(),
+											ActionEventConstant.REQUEST_UPDATEIMAGE, itemFileUpload);
+									
+									chekcFileUp++;
+								}
+							}
+							if(chekcFileUp == 0){
+								model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+								model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+								Home_Controller.getInstance().handleModelEvent(model);
+							}
+						} else {
+							model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+							model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+							Home_Controller.getInstance().handleModelEvent(model);
+						}
+					} else {
+						model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+						model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+						Home_Controller.getInstance().handleModelEvent(model);
+					}
+					
+				}
+			} else {
+				Log.i("Day file:", "khong thanh cong day file:" + idFile);
+				SyncQueue.getInstance().removeFileUpload(idFile);
+				if (SyncQueue.getInstance().checkFileUpload()) {
+					model.getActionEvent().action = ActionEventConstant.REQEST_SYNC;
+					model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+					Home_Controller.getInstance().handleModelEvent(model);
+				}
+				model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+				Home_Controller.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception e) {
+			Log.e("Loi file:", "co loi xay ra---------------------------------------------------------");
+			/* Su ly khi bi loi */
+			model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);
+			Home_Controller.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * Ham lay key cho cac bang
+	 */
+	public void syncKttsKey(ActionEvent e) {
+		boolean bUpdateKey = false;
+		for (String tableName : Ktts_KeyController.ListTableName) {
+			Ktts_KeyEntity curItem = Ktts_KeyController.getInstance().getItem(
+					tableName);
+			/* Lan dau cai dat curItem.getTableName() trong */
+			if (StringUtil.isNullOrEmpty(curItem.getTableName())) {
+				SyncQueue.getInstance().addTableGetKey(tableName);
+				curItem.setTableName(tableName);
+				curItem.setClientId(GlobalInfo.getInstance().getClientId());
+				curItem.setMin(0L);
+				curItem.setMax(0L);
+				ActionEvent curActionEvent = new ActionEvent();
+				curActionEvent.action = ActionEventConstant.REQUEST_KEYKTTS;
+				curActionEvent.sender = e.sender;
+				curActionEvent.isBlockRequest = true;
+				curActionEvent.userData = curItem;
+				this.requestKttsKey(curActionEvent);
+				bUpdateKey = true;
+			} else {
+				Long lDistance = curItem.getMax() - curItem.getMin();
+				if (lDistance < Constants.DISTANCEKTTSKEY
+						&& curItem.getMax() == curItem.getNewMax()) {
+					SyncQueue.getInstance().addTableGetKey(tableName);
+					curItem.setTableName(tableName);
+					curItem.setClientId(GlobalInfo.getInstance().getClientId());
+					curItem.setMin(curItem.getMin());
+					curItem.setMax(curItem.getMax());
+					ActionEvent curActionEvent = new ActionEvent();
+					curActionEvent.action = ActionEventConstant.REQUEST_KEYKTTS;
+					curActionEvent.sender = e.sender;
+					curActionEvent.isBlockRequest = true;
+					curActionEvent.userData = curItem;
+					this.requestKttsKey(curActionEvent);
+					bUpdateKey = true;
+				}
+			}
+		}
+		/* Neu khong co khoa can update */
+		if (!bUpdateKey) {
+			e.action = ActionEventConstant.REQEST_SYNC;
+			SyncModel.getInstance().syncGetData(e);
+		}
+	}
+
+	/* Lay du lieu tu tren server ve */
+
+	public void syncGetData(ActionEvent e) {
+		// CONSTR_CONSTRUCTIONS
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.processServerData",
+				new SyncTableInfo(Constr_ConstructionField.TABLE_NAME,
+						Constr_ConstructionField.COLUMN_CONSTRUCT_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Constr_ConstructionController.allColumn));
+		// SUPERVISION_CONSTR_REQ
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.processServerData",
+						new SyncTableInfo(
+								Supervision_Constr_REQField.TABLE_NAME,
+								Supervision_Constr_REQField.COLUMN_SUPERVISION_CONSTR_REQ_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Constr_REQController.allColumn));
+		// SUPERVISION_CONSTR
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.processServerData",
+				new SyncTableInfo(Supervision_ConstrField.TABLE_NAME,
+						Supervision_ConstrField.COLUMN_SUPERVISION_CONSTR_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Supervision_ConstrController.allColumn));
+
+		// CAT_CAUSE_CONSTR_UNQUALIFY
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						false,
+						e,
+						"serverDataProcess.getCategoryTable",
+						new SyncTableInfo(
+								Cat_Cause_Constr_UnQualifyField.TABLE_NAME,
+								Cat_Cause_Constr_UnQualifyField.COLUMN_CAT_CAUSE_CONSTR_UNQUALIFY_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cat_Cause_Constr_UnQualifyController.allColumn));
+
+		// CAT_CAUSE_CONSTR_ACCEPTANCE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						false,
+						e,
+						"serverDataProcess.getCategoryTable",
+						new SyncTableInfo(
+								Cat_Cause_Constr_AcceptanceField.TABLE_NAME,
+								Cat_Cause_Constr_AcceptanceField.COLUMN_CAT_CAUSE_CONSTR_ACCEPTANCE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cat_Cause_Constr_AcceptanceController.allColumn));
+
+		// CAT_SUPERVISION_CONSTR_WORK
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						false,
+						e,
+						"serverDataProcess.getCategoryTable",
+						new SyncTableInfo(
+								Cat_Supervision_Constr_WorkField.TABLE_NAME,
+								Cat_Supervision_Constr_WorkField.COLUMN_CAT_SUPERVISION_CONSTR_WORK_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cat_Supervision_Constr_WorkController.allColumn));
+
+		// PRODUCT_COMPANY
+		SyncModel.getInstance().requestGetData(
+				false,
+				e,
+				"serverDataProcess.getListProductCompanyTable",
+				new SyncTableInfo(Product_CompanyField.TABLE_NAME,
+						Product_CompanyField.COLUMN_COMPANY_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Product_CompanyController.allColumn));
+
+		// CAT_PROGRESS_WORK
+		SyncModel.getInstance().requestGetData(
+				false,
+				e,
+				"serverDataProcess.getCategoryTable",
+				new SyncTableInfo(Cat_Progress_WorkField.TABLE_NAME,
+						Cat_Progress_WorkField.COLUMN_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cat_Progress_WorkController.allColumn));
+
+		// CAT_SUPV_CONSTR_MEASURE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						false,
+						e,
+						"serverDataProcess.getCategoryTable",
+						new SyncTableInfo(
+								Cat_Supv_Constr_MeasureField.TABLE_NAME,
+								Cat_Supv_Constr_MeasureField.COLUMN_CAT_SUPV_CONSTR_MEASURE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cat_Supv_Constr_MeasureController.allColumn)); //
+		// SUPERVISION_PROGRESS
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						false,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_ProgressField.TABLE_NAME,
+								Supervision_ProgressField.COLUMN_SUPERVISION_PROGRESS_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_ProgressController.allColumn)); //
+		// SUPERVISION_LINE_BACKGROUND
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_BackgroundField.TABLE_NAME,
+								Supervision_Line_BackgroundField.COLUMN_SUPERVISION_LINE_BACKGROUND_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_BackgroundController.allColumn)); //
+		// SPECIAL_LOCATION
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Special_LocationField.TABLE_NAME,
+						Special_LocationField.COLUMN_SPECIAL_LOCATION_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Special_LocationController.allColumn)); //
+		// SUPERVISION_LINE_BG_FIBER
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_BG_FiberField.TABLE_NAME,
+								Supervision_Line_BG_FiberField.COLUMN_SUPERVISION_LINE_BG_FIBER_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_BG_FiberController.allColumn)); //
+		// SUPERVISION_LINE_BG_TANK
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_BG_TankField.TABLE_NAME,
+								Supervision_Line_BG_TankField.COLUMN_SUPERVISION_LINE_BG_TANK_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_BG_TankController.allColumn)); //
+		// SUPERVISION_LINE_BG_CABLE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_BG_CableField.TABLE_NAME,
+								Supervision_Line_BG_CableField.COLUMN_SUPERVISION_LINE_BG_CABLE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_BG_CableController.allColumn)); //
+		// SUPERVISION_LINE_BG_PIPE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_BG_PipeField.TABLE_NAME,
+								Supervision_Line_BG_PipeField.COLUMN_SUPERVISION_LINE_BG_PIPE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_BG_PipeController.allColumn)); //
+		// SUPERVISION_LINE_BG_MX
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_BG_MXField.TABLE_NAME,
+								Supervision_Line_BG_MXField.COLUMN_SUPERVISION_LINE_BG_MX_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_BG_MxController.allColumn));
+		// CAUSE_LINE_BG_TANK
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Line_BG_TankField.TABLE_NAME,
+						Cause_Line_BG_TankField.COLUMN_CAUSE_LINE_BG_TANK_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Line_BG_TankController.allColumn));
+		// CAUSE_LINE_BG_SPECIAL
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Cause_Line_BG_SpecialField.TABLE_NAME,
+								Cause_Line_BG_SpecialField.COLUMN_CAUSE_LINE_BG_SPECIAL_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cause_Line_BG_SpecialController.allColumn));
+		// CAUSE_LINE_BG_PIPE
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Line_BG_PipeField.TABLE_NAME,
+						Cause_Line_BG_PipeField.COLUMN_CAUSE_LINE_BG_PIPE_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Line_BG_PipeController.allColumn));
+		// CAUSE_LINE_BG_CABLE
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Line_BG_CableField.TABLE_NAME,
+						Cause_Line_BG_CableField.COLUMN_CAUSE_LINE_BG_CABLE_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Line_BG_CableController.allColumn));
+		// CAUSE_LINE_BG_MX
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Line_BG_MXField.TABLE_NAME,
+						Cause_Line_BG_MXField.COLUMN_CAUSE_LINE_BG_MX_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Line_BG_MXController.allColumn)); // Tuyen Treo //
+		// SUPERVISION_LINE_HANG
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_HangField.TABLE_NAME,
+								Supervision_Line_HangField.COLUMN_SUPERVISION_LINE_HANG_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_HangController.allColumn)); //
+		// SUPERVISION_LINE_HG_FIBER
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_Hg_FiberField.TABLE_NAME,
+								Supervision_Line_Hg_FiberField.COLUMN_SUPERVISION_LINE_HG_FIBER_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_Hg_FiberController.allColumn)); //
+		// SUPERVISION_LINE_HG_PILLAR
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_Hg_PillarField.TABLE_NAME,
+								Supervision_Line_Hg_PillarField.COLUMN_SUPERVISION_LINE_HG_PILLAR_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_Hg_PillarController.allColumn)); //
+		// SUPERVISION_LINE_HG_MX
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_Hg_MxField.TABLE_NAME,
+								Supervision_Line_Hg_MxField.COLUMN_SUPERVISION_LINE_HG_MX_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_Hg_MxController.allColumn)); //
+		// SUPERVISION_LINE_HG_CABLE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Line_Hg_CableField.TABLE_NAME,
+								Supervision_Line_Hg_CableField.COLUMN_SUPERVISION_LINE_HG_CABLE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Line_Hg_CableController.allColumn)); //
+		// CAUSE_LINE_HG_PILLAR
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Cause_Line_Hg_PillarField.TABLE_NAME,
+								Cause_Line_Hg_PillarField.COLUMN_CAUSE_LINE_HG_PILLAR_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cause_Line_Hg_PillarController.allColumn));
+		// CAUSE_LINE_HG_MX
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Line_Hg_MxField.TABLE_NAME,
+						Cause_Line_Hg_MxField.COLUMN_CAUSE_LINE_HG_MX_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Line_Hg_MxController.allColumn));
+		// CAUSE_LINE_HG_CABLE
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Line_Hg_CableField.TABLE_NAME,
+						Cause_Line_Hg_CableField.COLUMN_CAUSE_LINE_HG_CABLE_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Line_Hg_CableController.allColumn));
+		// SUPERVISION_BTS
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Supervision_BtsField.TABLE_NAME,
+						Supervision_BtsField.COLUMN_SUPERVISION_BTS_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Supervision_BtsController.allColumn));
+		// SUPERVISION_BTS_EQUIP
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Bts_EquipField.TABLE_NAME,
+								Supervision_Bts_EquipField.COLUMN_SUPERVISION_BTS_EQUIP_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Bts_EquipController.allColumn)); //
+		// SUPERVISION_BTS_MEASURE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Bts_MeasureField.TABLE_NAME,
+								Supervision_Bts_MeasureField.COLUMN_SUPERVISION_BTS_MEASURE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Bts_MeasureController.allColumn)); //
+		// SUPERVISION_BTS_POWER_POLE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Bts_Power_PoleField.TABLE_NAME,
+								Supervision_Bts_Power_PoleField.COLUMN_SUPERVISION_BTS_POWER_POLE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Bts_Power_PoleController.allColumn));
+
+		// SUPERVISION_BTS_PILLAR_ANTEN
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Bts_Pillar_AntenField.TABLE_NAME,
+								Supervision_Bts_Pillar_AntenField.COLUMN_SUPV_BTS_PILLAR_ANTEN_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Bts_Pillar_AntenController.allColumn)); //
+		// SUPERVISION_BTS_CAT_WORK
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Bts_Cat_WorkField.TABLE_NAME,
+								Supervision_Bts_Cat_WorkField.COLUMN_SUPERVISION_BTS_CAT_WORK_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Bts_Cat_WorkController.allColumn)); //
+		// CAUSE_BTS_PILLAR_ANTEN
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Cause_Bts_Pillar_AntenField.TABLE_NAME,
+								Cause_Bts_Pillar_AntenField.COLUMN_CAUSE_BTS_PILLAR_ANTEN_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cause_Bts_Pillar_AntenController.allColumn));
+
+		// CAUSE_BTS_CAT_WORK
+		SyncModel.getInstance().requestGetData(
+				true,
+				e,
+				"serverDataProcess.getClientData",
+				new SyncTableInfo(Cause_Bts_Cat_WorkField.TABLE_NAME,
+						Cause_Bts_Cat_WorkField.COLUMN_CAUSE_BTS_CAT_WORK_ID,
+						ActionEventConstant.REQUEST_GETDATA,
+						Cause_Bts_Cat_WorkController.allColumn));
+		// CAUSE_BTS_POWER_POLE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Cause_Bts_Power_PoleField.TABLE_NAME,
+								Cause_Bts_Power_PoleField.COLUMN_CAUSE_BTS_POWER_POLE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Cause_Bts_Power_PoleController.allColumn));
+
+		// ACCEPTANCE_LINE_BG_SPECIAL
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Acceptance_Line_Bg_SpecialField.TABLE_NAME,
+								Acceptance_Line_Bg_SpecialField.COLUMN_ACCEPTANCE_LINE_BG_SPECIAL_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Acceptance_Line_Bg_SpecialController.allColumn));
+
+		// ACCEPTANCE_LINE_BG_TANK
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Acceptance_Line_Bg_TankField.TABLE_NAME,
+								Acceptance_Line_Bg_TankField.COLUMN_ACCEPTANCE_LINE_BG_TANK_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Acceptance_Line_Bg_TankController.allColumn));
+
+		// ACCEPTANCE_LINE_BG_PIPE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Acceptance_Line_Bg_PipeField.TABLE_NAME,
+								Acceptance_Line_Bg_PipeField.COLUMN_ACCEPTANCE_LINE_BG_PIPE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Acceptance_Line_Bg_PipeController.allColumn));
+
+		// ACCEPTANCE_BTS_PILLAR
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Acceptance_Bts_PillarField.TABLE_NAME,
+								Acceptance_Bts_PillarField.COLUMN_ACCEPTANCE_BTS_PILLAR_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Acceptance_Bts_PillarController.allColumn));
+
+		// ACCEPTANCE_BTS_CAT_WORK
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Acceptance_Bts_Cat_WorkField.TABLE_NAME,
+								Acceptance_Bts_Cat_WorkField.COLUMN_ACCEPTANCE_BTS_CATWORK_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Acceptance_Bts_Cat_WorkController.allColumn));
+
+		// SUPERVISION_MEASURE_CONSTR
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supervision_Measure_ConstrField.TABLE_NAME,
+								Supervision_Measure_ConstrField.COLUMN_SUPERVISION_MEASURE_CONSTR_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supervision_Measure_ConstrController.allColumn));
+
+		// MEASUREMENT_DETAIL_CONSTR
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Measurement_Detail_ConstrField.TABLE_NAME,
+								Measurement_Detail_ConstrField.COLUMN_MEASUREMENT_DETAIL_CONSTR_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Measurement_Detail_ConstrController.allColumn));
+
+		// SUPV_CONSTR_ATTACH_FILE
+		SyncModel
+				.getInstance()
+				.requestGetData(
+						true,
+						e,
+						"serverDataProcess.getClientData",
+						new SyncTableInfo(
+								Supv_Constr_Attach_FileField.TABLE_NAME,
+								Supv_Constr_Attach_FileField.COLUMN_SUPV_CONSTR_ATTACH_FILE_ID,
+								ActionEventConstant.REQUEST_GETDATA,
+								Supv_Constr_Attach_FileController.allColumn));
+
+	}
+
+	/* gui du lieu tu client len server */
+
+	public void syncUpateData(ActionEvent e) {
+		boolean bUpdateData = false;
+		boolean bRequestNext = false;
+		long idUser = GlobalInfo.getInstance().getUserId();
+		int iMaxGet = Constants.NUMBER_MAX_ITEM_SYNC;
+
+		// LOGIN_LOG_CONSTR
+		JSONArray jsonLlcData = SqlliteSyncModel.getDataJsonFromLogUser(idUser,
+				Login_Log_ConstrField.TABLE_NAME,
+				Login_Log_ConstrController.allColumn, 0, iMaxGet);
+
+		int lCountItem = jsonLlcData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Login_Log_ConstrField.TABLE_NAME,
+					Login_Log_ConstrField.COLUMN_LOG_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonLlcData,
+					Login_Log_ConstrController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// SUPERVISION_CONSTR
+		JSONArray jsonScData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_ConstrField.TABLE_NAME,
+				Supervision_ConstrController.allColumnUpate, null, 0, iMaxGet);
+
+		lCountItem = jsonScData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Supervision_ConstrField.TABLE_NAME,
+					Supervision_ConstrField.COLUMN_SUPERVISION_CONSTR_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonScData,
+					Supervision_ConstrController.allColumnUpate, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// SUPV_CONSTR_DAILY (nhat ki giam sat)
+		try {
+			SimpleDateFormat dateView = new SimpleDateFormat(
+					"yyyy-MM-dd hh:mm:ss");
+			JSONObject itemSupv = null;
+			JSONArray jsonScDailyData = new JSONArray();
+			for (int i = 0; i < jsonScData.length(); i++) {
+				JSONObject itemDaily = new JSONObject();
+
+				itemSupv = jsonScData.getJSONObject(i);
+
+				itemDaily
+						.put(Supv_Constr_DailyField.COLUMN_SUPERVISION_CONSTR_ID,
+								itemSupv.get(Supervision_ConstrField.COLUMN_SUPERVISION_CONSTR_ID));
+				itemDaily.put(Supv_Constr_DailyField.COLUMN_SYNC_DATE,
+						dateView.format(Calendar.getInstance().getTime()));
+				itemDaily.put(Supv_Constr_DailyField.COLUMN_LONGITUDE,
+						GpsServices.longLocation);
+				itemDaily.put(Supv_Constr_DailyField.COLUMN_LATITUDE,
+						GpsServices.latLocation);
+
+				jsonScDailyData.put(itemDaily);
+			}
+
+			lCountItem = jsonScDailyData.length();
+			bRequestNext = (lCountItem == iMaxGet) ? true : false;
+			if (lCountItem > 0) {
+				this.requesttUpdateData(e, new SyncTableInfo(
+						Supv_Constr_DailyField.TABLE_NAME,
+						Supv_Constr_DailyField.COLUMN_SUPV_CONSTR_DAILY_ID,
+						ActionEventConstant.REQUEST_UPDATEDATA,
+						jsonScDailyData,
+						Supervision_ConstrController.allColumnDailyUpate,
+						bRequestNext));
+				bUpdateData = true;
+			}
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+
+		// SUPERVISION_PROGRESS
+		JSONArray jsonProgressData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_ProgressField.TABLE_NAME,
+				Supervision_ProgressController.allColumn, null, 0, iMaxGet);
+		lCountItem = jsonProgressData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Supervision_ProgressField.TABLE_NAME,
+					Supervision_ProgressField.COLUMN_SUPERVISION_PROGRESS_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonProgressData,
+					Supervision_ProgressController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		/* 1. Tuyen ngam */
+		// SUPERVISION_LINE_BACKGROUND
+		JSONArray jsonBgData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_BackgroundField.TABLE_NAME,
+				Supervision_Line_BackgroundController.allColumn, null, 0,
+				iMaxGet);
+		lCountItem = jsonBgData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_BackgroundField.TABLE_NAME,
+							Supervision_Line_BackgroundField.COLUMN_SUPERVISION_LINE_BACKGROUND_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA, jsonBgData,
+							Supervision_Line_BackgroundController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_BG_FIBER
+		JSONArray jsonBgFiberData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Supervision_Line_BG_FiberField.TABLE_NAME,
+						Supervision_Line_BG_FiberController.allColumn, null, 0,
+						iMaxGet);
+
+		lCountItem = jsonBgFiberData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_BG_FiberField.TABLE_NAME,
+							Supervision_Line_BG_FiberField.COLUMN_SUPERVISION_LINE_BG_FIBER_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgFiberData,
+							Supervision_Line_BG_FiberController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_BG_TANK
+		JSONArray jsonBgTankData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_BG_TankField.TABLE_NAME,
+				Supervision_Line_BG_TankController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgTankData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_BG_TankField.TABLE_NAME,
+							Supervision_Line_BG_TankField.COLUMN_SUPERVISION_LINE_BG_TANK_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgTankData,
+							Supervision_Line_BG_TankController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_BG_CABLE
+		JSONArray jsonBgCableData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Supervision_Line_BG_CableField.TABLE_NAME,
+						Supervision_Line_BG_CableController.allColumn, null, 0,
+						iMaxGet);
+
+		lCountItem = jsonBgCableData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_BG_CableField.TABLE_NAME,
+							Supervision_Line_BG_CableField.COLUMN_SUPERVISION_LINE_BG_CABLE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgCableData,
+							Supervision_Line_BG_CableController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SPECIAL_LOCATION
+		JSONArray jsonBgSpecialLocationData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Special_LocationField.TABLE_NAME,
+				Special_LocationController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgSpecialLocationData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Special_LocationField.TABLE_NAME,
+					Special_LocationField.COLUMN_SPECIAL_LOCATION_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBgSpecialLocationData,
+					Special_LocationController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_BG_PIPE
+		JSONArray jsonBgPipeData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_BG_PipeField.TABLE_NAME,
+				Supervision_Line_BG_PipeController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgPipeData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_BG_PipeField.TABLE_NAME,
+							Supervision_Line_BG_PipeField.COLUMN_SUPERVISION_LINE_BG_PIPE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgPipeData,
+							Supervision_Line_BG_PipeController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_BG_MX
+		JSONArray jsonBgMxData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_BG_MXField.TABLE_NAME,
+				Supervision_Line_BG_MxController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgMxData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_BG_MXField.TABLE_NAME,
+							Supervision_Line_BG_MXField.COLUMN_SUPERVISION_LINE_BG_MX_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgMxData,
+							Supervision_Line_BG_MxController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_BG_TANK
+		JSONArray jsonBgCauseTankData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Line_BG_TankField.TABLE_NAME,
+				Cause_Line_BG_TankController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgCauseTankData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_BG_TankField.TABLE_NAME,
+					Cause_Line_BG_TankField.COLUMN_CAUSE_LINE_BG_TANK_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBgCauseTankData,
+					Cause_Line_BG_TankController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_BG_SPECIAL
+		JSONArray jsonBgCauseSpecialData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Line_BG_SpecialField.TABLE_NAME,
+				Cause_Line_BG_SpecialController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgCauseSpecialData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_BG_SpecialField.TABLE_NAME,
+					Cause_Line_BG_SpecialField.COLUMN_CAUSE_LINE_BG_SPECIAL_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBgCauseSpecialData,
+					Cause_Line_BG_SpecialController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_BG_PIPE
+		JSONArray jsonBgCausePipeData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Line_BG_PipeField.TABLE_NAME,
+				Cause_Line_BG_PipeController.allColumn, null, 0, iMaxGet);
+		lCountItem = jsonBgCausePipeData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_BG_PipeField.TABLE_NAME,
+					Cause_Line_BG_PipeField.COLUMN_CAUSE_LINE_BG_PIPE_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBgCausePipeData,
+					Cause_Line_BG_PipeController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_BG_CABLE
+		JSONArray jsonBgCauseCableData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Line_BG_CableField.TABLE_NAME,
+				Cause_Line_BG_CableController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgCauseCableData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_BG_CableField.TABLE_NAME,
+					Cause_Line_BG_CableField.COLUMN_CAUSE_LINE_BG_CABLE_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBgCauseCableData,
+					Cause_Line_BG_CableController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_BG_MX
+		JSONArray jsonBgCauseMxData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Cause_Line_BG_MXField.TABLE_NAME,
+				Cause_Line_BG_MXController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgCauseMxData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_BG_MXField.TABLE_NAME,
+					Cause_Line_BG_MXField.COLUMN_CAUSE_LINE_BG_MX_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonBgCauseMxData,
+					Cause_Line_BG_MXController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// ACCEPTANCE_LINE_BG_SPECIAL
+		JSONArray jsonBgAcceptSpecialData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Acceptance_Line_Bg_SpecialField.TABLE_NAME,
+				Acceptance_Line_Bg_SpecialController.allColumn, null, 0,
+				iMaxGet);
+
+		lCountItem = jsonBgAcceptSpecialData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Acceptance_Line_Bg_SpecialField.TABLE_NAME,
+							Acceptance_Line_Bg_SpecialField.COLUMN_ACCEPTANCE_LINE_BG_SPECIAL_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgAcceptSpecialData,
+							Acceptance_Line_Bg_SpecialController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// ACCEPTANCE_LINE_BG_TANK
+		JSONArray jsonBgAcceptTankData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Acceptance_Line_Bg_TankField.TABLE_NAME,
+				Acceptance_Line_Bg_TankController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgAcceptTankData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Acceptance_Line_Bg_TankField.TABLE_NAME,
+							Acceptance_Line_Bg_TankField.COLUMN_ACCEPTANCE_LINE_BG_TANK_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgAcceptTankData,
+							Acceptance_Line_Bg_TankController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// ACCEPTANCE_LINE_BG_PIPE
+		JSONArray jsonBgAcceptPipeData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Acceptance_Line_Bg_PipeField.TABLE_NAME,
+				Acceptance_Line_Bg_PipeController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBgAcceptPipeData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Acceptance_Line_Bg_PipeField.TABLE_NAME,
+							Acceptance_Line_Bg_PipeField.COLUMN_ACCEPTANCE_LINE_BG_PIPE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBgAcceptPipeData,
+							Acceptance_Line_Bg_PipeController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		/* 2. Tuyen treo */
+		// SUPERVISION_LINE_HANG
+		JSONArray jsonHgData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_HangField.TABLE_NAME,
+				Supervision_Line_HangController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonHgData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Supervision_Line_HangField.TABLE_NAME,
+					Supervision_Line_HangField.COLUMN_SUPERVISION_LINE_HANG_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonHgData,
+					Supervision_Line_HangController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_HG_FIBER
+		JSONArray jsonHgFiberData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Supervision_Line_Hg_FiberField.TABLE_NAME,
+						Supervision_Line_Hg_FiberController.allColumn, null, 0,
+						iMaxGet);
+
+		lCountItem = jsonHgFiberData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_Hg_FiberField.TABLE_NAME,
+							Supervision_Line_Hg_FiberField.COLUMN_SUPERVISION_LINE_HG_FIBER_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonHgFiberData,
+							Supervision_Line_Hg_FiberController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_HG_PILLAR
+		JSONArray jsonHgPillarData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_Hg_PillarField.TABLE_NAME,
+				Supervision_Line_Hg_PillarController.allColumn, null, 0,
+				iMaxGet);
+
+		lCountItem = jsonHgPillarData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_Hg_PillarField.TABLE_NAME,
+							Supervision_Line_Hg_PillarField.COLUMN_SUPERVISION_LINE_HG_PILLAR_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonHgPillarData,
+							Supervision_Line_Hg_PillarController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_HG_MX
+		JSONArray jsonHgMxData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Line_Hg_MxField.TABLE_NAME,
+				Supervision_Line_Hg_MxController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonHgMxData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_Hg_MxField.TABLE_NAME,
+							Supervision_Line_Hg_MxField.COLUMN_SUPERVISION_LINE_HG_MX_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonHgMxData,
+							Supervision_Line_Hg_MxController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_LINE_HG_CABLE
+		JSONArray jsonHgCableData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Supervision_Line_Hg_CableField.TABLE_NAME,
+						Supervision_Line_Hg_CableController.allColumn, null, 0,
+						iMaxGet);
+
+		lCountItem = jsonHgCableData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Line_Hg_CableField.TABLE_NAME,
+							Supervision_Line_Hg_CableField.COLUMN_SUPERVISION_LINE_HG_CABLE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonHgCableData,
+							Supervision_Line_Hg_CableController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// JSONArray jsonScDataTest = SqlliteSyncModel.getDataJsonSyncTest(
+		// Cause_Line_Hg_PillarField.TABLE_NAME,
+		// Cause_Line_Hg_PillarController.allColumn, null, 0, iMaxGet);
+		// CAUSE_LINE_HG_PILLAR
+		JSONArray jsonHgCausePillarData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Line_Hg_PillarField.TABLE_NAME,
+				Cause_Line_Hg_PillarController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonHgCausePillarData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_Hg_PillarField.TABLE_NAME,
+					Cause_Line_Hg_PillarField.COLUMN_CAUSE_LINE_HG_PILLAR_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonHgCausePillarData,
+					Cause_Line_Hg_PillarController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_HG_MX
+		JSONArray jsonHgCauseMxData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Cause_Line_Hg_MxField.TABLE_NAME,
+				Cause_Line_Hg_MxController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonHgCauseMxData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_Hg_MxField.TABLE_NAME,
+					Cause_Line_Hg_MxField.COLUMN_CAUSE_LINE_HG_MX_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonHgCauseMxData,
+					Cause_Line_Hg_MxController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// CAUSE_LINE_HG_CABLE
+		JSONArray jsonHgCauseCableData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Line_Hg_CableField.TABLE_NAME,
+				Cause_Line_Hg_CableController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonHgCauseCableData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Line_Hg_CableField.TABLE_NAME,
+					Cause_Line_Hg_CableField.COLUMN_CAUSE_LINE_HG_CABLE_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonHgCauseCableData,
+					Cause_Line_Hg_CableController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		/* 3. BTS */
+		// SUPERVISION_BTS
+		JSONArray jsonBtsData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_BtsField.TABLE_NAME,
+				Supervision_BtsController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Supervision_BtsField.TABLE_NAME,
+					Supervision_BtsField.COLUMN_SUPERVISION_BTS_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonBtsData,
+					Supervision_BtsController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_BTS_EQUIP
+		JSONArray jsonBtsEquipData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Bts_EquipField.TABLE_NAME,
+				Supervision_Bts_EquipController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsEquipData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Supervision_Bts_EquipField.TABLE_NAME,
+					Supervision_Bts_EquipField.COLUMN_SUPERVISION_BTS_EQUIP_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA, jsonBtsEquipData,
+					Supervision_Bts_EquipController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// SUPERVISION_BTS_MEASURE
+		JSONArray jsonBtsMeasureData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Bts_MeasureField.TABLE_NAME,
+				Supervision_Bts_MeasureController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsMeasureData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Bts_MeasureField.TABLE_NAME,
+							Supervision_Bts_MeasureField.COLUMN_SUPERVISION_BTS_MEASURE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBtsMeasureData,
+							Supervision_Bts_MeasureController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_BTS_POWER_POLE
+		JSONArray jsonBtsPowerPoleData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Supervision_Bts_Power_PoleField.TABLE_NAME,
+				Supervision_Bts_Power_PoleController.allColumn, null, 0,
+				iMaxGet);
+
+		lCountItem = jsonBtsPowerPoleData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Bts_Power_PoleField.TABLE_NAME,
+							Supervision_Bts_Power_PoleField.COLUMN_SUPERVISION_BTS_POWER_POLE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBtsPowerPoleData,
+							Supervision_Bts_Power_PoleController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+		// SUPERVISION_BTS_PILLAR_ANTEN
+		JSONArray jsonBtsPillarAntenData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Supervision_Bts_Pillar_AntenField.TABLE_NAME,
+				Supervision_Bts_Pillar_AntenController.allColumn, null, 0,
+				iMaxGet);
+
+		lCountItem = jsonBtsPillarAntenData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Bts_Pillar_AntenField.TABLE_NAME,
+							Supervision_Bts_Pillar_AntenField.COLUMN_SUPV_BTS_PILLAR_ANTEN_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBtsPillarAntenData,
+							Supervision_Bts_Pillar_AntenController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// SUPERVISION_BTS_CAT_WORK
+		JSONArray jsonBtsCatWorkData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supervision_Bts_Cat_WorkField.TABLE_NAME,
+				Supervision_Bts_Cat_WorkController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsCatWorkData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Bts_Cat_WorkField.TABLE_NAME,
+							Supervision_Bts_Cat_WorkField.COLUMN_SUPERVISION_BTS_CAT_WORK_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBtsCatWorkData,
+							Supervision_Bts_Cat_WorkController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// CAUSE_BTS_PILLAR_ANTEN
+		JSONArray jsonBtsCausePillarAntenData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Cause_Bts_Pillar_AntenField.TABLE_NAME,
+						Cause_Bts_Pillar_AntenController.allColumn, null, 0,
+						iMaxGet);
+
+		lCountItem = jsonBtsCausePillarAntenData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Cause_Bts_Pillar_AntenField.TABLE_NAME,
+							Cause_Bts_Pillar_AntenField.COLUMN_CAUSE_BTS_PILLAR_ANTEN_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBtsCausePillarAntenData,
+							Cause_Bts_Pillar_AntenController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// CAUSE_BTS_CAT_WORK
+		JSONArray jsonBtsCauseCatWorkData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Bts_Cat_WorkField.TABLE_NAME,
+				Cause_Bts_Cat_WorkController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsCauseCatWorkData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Bts_Cat_WorkField.TABLE_NAME,
+					Cause_Bts_Cat_WorkField.COLUMN_CAUSE_BTS_CAT_WORK_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBtsCauseCatWorkData,
+					Cause_Bts_Cat_WorkController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// CAUSE_BTS_POWER_POLE
+		JSONArray jsonBtsCausePowerPoleData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Cause_Bts_Power_PoleField.TABLE_NAME,
+				Cause_Bts_Power_PoleController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsCausePowerPoleData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Cause_Bts_Power_PoleField.TABLE_NAME,
+					Cause_Bts_Power_PoleField.COLUMN_CAUSE_BTS_POWER_POLE_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBtsCausePowerPoleData,
+					Cause_Bts_Power_PoleController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// ACCEPTANCE_BTS_PILLAR
+		JSONArray jsonBtsAcceptPillarData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Acceptance_Bts_PillarField.TABLE_NAME,
+				Acceptance_Bts_PillarController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsAcceptPillarData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(e, new SyncTableInfo(
+					Acceptance_Bts_PillarField.TABLE_NAME,
+					Acceptance_Bts_PillarField.COLUMN_ACCEPTANCE_BTS_PILLAR_ID,
+					ActionEventConstant.REQUEST_UPDATEDATA,
+					jsonBtsAcceptPillarData,
+					Acceptance_Bts_PillarController.allColumn, bRequestNext));
+			bUpdateData = true;
+		}
+
+		// ACCEPTANCE_BTS_CAT_WORK
+		JSONArray jsonBtsAcceptCatWorkData = SqlliteSyncModel.getDataJsonSync(
+				idUser, Acceptance_Bts_Cat_WorkField.TABLE_NAME,
+				Acceptance_Bts_Cat_WorkController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonBtsAcceptCatWorkData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Acceptance_Bts_Cat_WorkField.TABLE_NAME,
+							Acceptance_Bts_Cat_WorkField.COLUMN_ACCEPTANCE_BTS_CATWORK_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonBtsAcceptCatWorkData,
+							Acceptance_Bts_Cat_WorkController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// SUPERVISION_MEASURE_CONSTR
+		JSONArray jsonSupervisionMeasureData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Supervision_Measure_ConstrField.TABLE_NAME,
+						Supervision_Measure_ConstrController.allColumn, null,
+						0, iMaxGet);
+
+		lCountItem = jsonSupervisionMeasureData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supervision_Measure_ConstrField.TABLE_NAME,
+							Supervision_Measure_ConstrField.COLUMN_SUPERVISION_MEASURE_CONSTR_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonSupervisionMeasureData,
+							Supervision_Measure_ConstrController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// MEASUREMENT_DETAIL_CONSTR
+		JSONArray jsonMeasurementDetailData = SqlliteSyncModel
+				.getDataJsonSync(idUser,
+						Measurement_Detail_ConstrField.TABLE_NAME,
+						Measurement_Detail_ConstrController.allColumn, null, 0,
+						iMaxGet);
+
+		lCountItem = jsonMeasurementDetailData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Measurement_Detail_ConstrField.TABLE_NAME,
+							Measurement_Detail_ConstrField.COLUMN_MEASUREMENT_DETAIL_CONSTR_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonMeasurementDetailData,
+							Measurement_Detail_ConstrController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		// SUPV_CONSTR_ATTACH_FILE
+		JSONArray jsonFileData = SqlliteSyncModel.getDataJsonSync(idUser,
+				Supv_Constr_Attach_FileField.TABLE_NAME,
+				Supv_Constr_Attach_FileController.allColumn, null, 0, iMaxGet);
+
+		lCountItem = jsonFileData.length();
+		bRequestNext = (lCountItem == iMaxGet) ? true : false;
+
+		if (lCountItem > 0) {
+			this.requesttUpdateData(
+					e,
+					new SyncTableInfo(
+							Supv_Constr_Attach_FileField.TABLE_NAME,
+							Supv_Constr_Attach_FileField.COLUMN_SUPV_CONSTR_ATTACH_FILE_ID,
+							ActionEventConstant.REQUEST_UPDATEDATA,
+							jsonFileData,
+							Supv_Constr_Attach_FileController.allColumn,
+							bRequestNext));
+			bUpdateData = true;
+		}
+
+		if (!bUpdateData) {
+			e.action = ActionEventConstant.REQEST_SYNC;
+			// ModelEvent model = new ModelEvent();
+			// model.setActionEvent(e);
+			// model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+			// Home_Controller.getInstance().handleModelEvent(model);
+			SyncModel.getInstance().syncGetImage(e);
+		}
+	}
+
+	/* Lay anh tren server ve */
+	public void syncGetImage(ActionEvent e) {
+
+		Supv_Constr_Attach_FileController fileController = new Supv_Constr_Attach_FileController(
+				SyncModel.mContext);
+		List<Supv_Constr_Attach_FileEntity> listDownLoad = fileController
+				.getAttachFileDownLoad(1000);
+		int iSizeDownLoad = listDownLoad.size();
+		if (iSizeDownLoad > 0) {
+			for (Supv_Constr_Attach_FileEntity itemFileDownLoad : listDownLoad) {
+				this.requestGetImage(e, itemFileDownLoad,
+						ActionEventConstant.REQUEST_DOWNLOADIMAGE);
+			}
+		}
+		/*
+		 * Neu lay anh tu server ve xong thi chuyen sang update anh len server
+		 */
+		else {
+			SyncModel.getInstance().syncUpdateImage(e);
+		}
+		// SyncModel.getInstance().syncUpdateImage(e);
+	}
+
+	/* Upload anh tu Tablet len server */
+	public void syncUpdateImage(ActionEvent e) {
+		Supv_Constr_Attach_FileController fileController = new Supv_Constr_Attach_FileController(
+				SyncModel.mContext);
+//		List<Supv_Constr_Attach_FileEntity> listUpLoad = fileController
+//				.getAttachFileUpload(2);
+		
+		List<Supv_Constr_Attach_FileEntity> listUpLoad = fileController
+				.getAttachFileUploadTest(0,Constants.NUMBER_MAX_ITEM_SYNC_IMG);
+		
+		int iSizeDownLoad = listUpLoad.size();
+		
+		boolean bRequestNext = (iSizeDownLoad == Constants.NUMBER_MAX_ITEM_SYNC_IMG) ? true : false;
+		
+		if (iSizeDownLoad > 0) {
+			File fileSave = null;
+			int chekcFileUp = 0;
+			for (Supv_Constr_Attach_FileEntity itemFileUpload : listUpLoad) {
+				fileSave = new File(GlobalInfo.getInstance()
+						.getFilePath()+itemFileUpload.getFile_Path());
+				
+				if (fileSave.exists() && fileSave.length() > 0 ) {
+					itemFileUpload.setRequestNext(bRequestNext);
+//					itemFileUpload.setNumberUpload(0);
+					this.requestUpdateImage(e,
+							ActionEventConstant.REQUEST_UPDATEIMAGE, itemFileUpload);
+					chekcFileUp++;
+				}
+			}
+			if(chekcFileUp == 0){
+				e.action = ActionEventConstant.REQEST_SYNC;
+				ModelEvent model = new ModelEvent();
+				model.setActionEvent(e);
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				Home_Controller.getInstance().handleModelEvent(model);
+			}
+			
+		}
+		/* Neu update anh len server het thi thong bao thanh cong */
+		else {
+			e.action = ActionEventConstant.REQEST_SYNC;
+			ModelEvent model = new ModelEvent();
+			model.setActionEvent(e);
+			model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+			Home_Controller.getInstance().handleModelEvent(model);
+		}
+	}
+}

@@ -1,0 +1,831 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_supervision_line_hg_design"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.viettel.actionbar.Header
+        android:visibility="gone"
+        android:id="@+id/actionbar"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_constr_line_hang_rootmenu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@drawable/bg_tbarmenu" >
+
+        <TextView
+            android:id="@+id/constr_line_hang_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical|left"
+            android:text="@string/line_hang_header_title"
+            android:textSize="@dimen/text_size_large_common"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_constr_line_hang_rootmenu"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/border_layout"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:id="@+id/ll_constr_line_hang_design_type_info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding2" >
+
+            <LinearLayout
+                android:id="@+id/ll_constr_line_hang_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@drawable/border_layout"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding" >
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_info_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_hang_info_title"
+                    android:textSize="@dimen/text_size_common" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_constr_line_hang_info_box"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.3"
+                    android:gravity="center_vertical" >
+
+                    <com.viettel.view.control.VNMTextViewCombo
+                        android:id="@+id/tv_constr_line_hang_dropdown"
+                        style="@style/vOfficeeditTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/icon_combo"
+                        android:text="@string/line_hang_info_line_design" >
+                    </com.viettel.view.control.VNMTextViewCombo>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_info_line"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_hang_info_line_title"
+                    android:textSize="@dimen/text_size_common" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_constr_line_hang_info_line"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.2"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_constr_line_hang_info_line_station_code_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/drop_box_heigh"
+                        android:layout_marginLeft="@dimen/margin_left"
+                        android:background="@drawable/bg_title"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/text_padding"
+                        android:text="AGG0002_AGG0002"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_common" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_info_stationcode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_hang_info_line_station_code_title"
+                    android:textSize="@dimen/text_size_common" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_constr_line_hang_info_line_station_code"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.2"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_constr_line_hang_info_line_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/drop_box_heigh"
+                        android:layout_marginLeft="@dimen/margin_left"
+                        android:background="@drawable/bg_title"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/text_padding"
+                        android:text="ML ABC DDD"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_common" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_constr_line_hang_design_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_common"
+                android:background="@color/white_color"
+                android:gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_design_type_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left_15"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_hang_design_type"
+                    android:textSize="@dimen/text_size_common" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_constr_line_hang_design_type_box"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.15"
+                    android:gravity="center_vertical" >
+
+                    <com.viettel.view.control.VNMTextViewCombo
+                        android:id="@+id/tv_constr_line_hang_design_type_dropdown"
+                        style="@style/vOfficeeditTextView"
+                        android:layout_width="@dimen/drop_box_common_width"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/icon_combo"
+                        android:hint="@string/text_choice" >
+                    </com.viettel.view.control.VNMTextViewCombo>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_review_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_hang_design_review"
+                    android:textSize="@dimen/text_size_common" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_constr_line_hang_review_box"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.15"
+                    android:gravity="center_vertical" >
+
+                    <com.viettel.view.control.VNMTextViewCombo
+                        android:id="@+id/tv_constr_line_hang_review_dropdown"
+                        style="@style/vOfficeeditTextView"
+                        android:layout_width="@dimen/drop_box_common_width"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/icon_combo"
+                        android:hint="@string/text_choice" >
+                    </com.viettel.view.control.VNMTextViewCombo>
+                </RelativeLayout>
+                
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_startcode_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/constr_sonstruction_diemdau"
+                    android:textSize="@dimen/text_size_common" />
+
+                <EditText
+                    android:id="@+id/edt_constr_line_hang_startcode_value"
+                    style="@style/vOfficeeditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:hint="@string/constr_sonstruction_diemdau"
+                    android:maxLength="10"
+                    android:enabled="false"
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_common" />
+                
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_endcode_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/constr_sonstruction_diemcuoi"
+                    android:textSize="@dimen/text_size_common" />
+
+                <EditText
+                    android:id="@+id/edt_constr_line_hang_endcode_value"
+                    style="@style/vOfficeeditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:hint="@string/constr_sonstruction_diemcuoi"
+                    android:enabled="false"
+                    android:maxLength="10"
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_common" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_constr_line_hang_design_inter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_common"
+                android:layout_marginRight="@dimen/margin"
+                android:background="@color/white_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding1" >
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_inter_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_15"
+                    android:layout_weight="0.1"
+                    android:gravity="center_vertical"
+                    android:text="@string/line_hang_design_inter"
+                    android:textSize="@dimen/text_size_common" />
+
+                <EditText
+                    android:id="@+id/edt_constr_line_hang_inter_value"
+                    style="@style/vOfficeeditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:gravity="top"
+                    android:hint="@string/line_hang_design_inter"
+                    android:lines="2"
+                    android:padding="@dimen/padding"
+                    android:textSize="@dimen/text_size_common" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_constr_line_hang_save"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/margin"
+                android:layout_marginTop="@dimen/margin_top_common"
+                android:background="@color/white_color"
+                android:layout_gravity="center_vertical"
+                 >
+
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_long"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="@string/line_hang_design_long"
+                    android:textSize="@dimen/text_size_common" />
+
+                <EditText
+                    android:id="@+id/edt_constr_line_hang_long_value"
+                    style="@style/vOfficeeditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:hint="@string/line_hang_design_long"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_common" />
+                
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_deployday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="@string/ll_supervision_bts_body_row4_1_deployday"
+                    android:textSize="@dimen/text_size_common" />
+
+                <EditText
+                    android:id="@+id/edt_constr_line_hang_deployday_value"
+                    style="@style/vOfficeeditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_common" />
+                
+                <TextView
+                    android:id="@+id/tv_constr_line_hang_ngay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="@string/constr_ngay"
+                    android:textSize="@dimen/text_size_common" />
+
+                <Button
+                    android:id="@+id/btn_constr_line_hang_save"
+                    style="@style/ViettelButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:filterTouchesWhenObscured="true"
+                    android:text="@string/text_save" />
+            </LinearLayout>
+
+            <TabHost
+                android:id="@+id/tabHost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical" >
+                    </TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/border_layout" >
+
+                        <LinearLayout
+                            android:id="@+id/ll_constr_line_hang_tab_pillar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical" >
+
+                            <TableLayout
+                                android:id="@+id/tbl_line_hang_design"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin"
+                                android:background="@drawable/border_layout"
+                                android:shrinkColumns="*"
+                                android:stretchColumns="0,2,4,6,8,10" >
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" >
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_new"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_span="9"
+                                        android:gravity="center_horizontal"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_new"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_old"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_span="3"
+                                        android:gravity="center_horizontal"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_old"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+                                </TableRow>
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" >
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/table_border_width"
+                                        android:layout_span="13"
+                                        android:background="@color/table_border_color" />
+                                </TableRow>
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" >
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_size"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_size"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_be_tong"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_be_tong"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_go"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_go"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_chieu_cao"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_chieu_cao"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_long"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_long"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_size_cs"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_size"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <TextView
+                                        android:id="@+id/tv_line_hang_design_pillar_long_cs"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_vertical"
+                                        android:padding="5dp"
+                                        android:text="@string/line_hang_design_pillar_long"
+                                        android:textSize="@dimen/text_size_large_common" >
+                                    </TextView>
+                                </TableRow>
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" >
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/table_border_width"
+                                        android:layout_span="13"
+                                        android:background="@color/table_border_color" />
+                                </TableRow>
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding" >
+
+                                        <EditText
+                                            android:id="@+id/edt_line_hang_design_pillar_size"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@string/text_empty"
+                                            android:inputType="number"
+                                            android:padding="@dimen/padding"
+                                            android:maxLength="10"
+                                            android:singleLine="true" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:padding="@dimen/padding" >
+
+                                        <CheckBox
+                                            android:id="@+id/rbt_line_hang_design_pillar_be_tong"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="true" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:padding="@dimen/padding" >
+
+                                        <CheckBox
+                                            android:id="@+id/rbt_line_hang_design_pillar_go"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding" >
+
+                                        <EditText
+                                            android:id="@+id/edt_line_hang_design_pillar_chieu_cao"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@string/text_empty"
+                                            android:inputType="number"
+                                            android:maxLength="10"
+                                            android:padding="@dimen/padding"
+                                            android:singleLine="true" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding" >
+
+                                        <EditText
+                                            android:id="@+id/edt_line_hang_design_pillar_long_new"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@string/text_empty"
+                                            android:inputType="numberDecimal"
+                                            android:maxLength="10"
+                                            android:padding="@dimen/padding"
+                                            android:singleLine="true" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding" >
+
+                                        <EditText
+                                            android:id="@+id/edt_line_hang_design_pillar_size_old"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@string/text_empty"
+                                            android:inputType="number"
+                                            android:maxLength="10"
+                                            android:padding="@dimen/padding"
+                                            android:singleLine="true" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="@dimen/table_border_width"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/table_border_color" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding" >
+
+                                        <EditText
+                                            android:id="@+id/edt_line_hang_design_pillar_long_old"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@string/text_empty"
+                                            android:inputType="numberDecimal"
+                                            android:maxLength="10"
+                                            android:padding="@dimen/padding"
+                                            android:singleLine="true" />
+                                    </LinearLayout>
+                                </TableRow>
+                            </TableLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_constr_line_hang_tab_cable"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical" >
+
+                            <TableLayout
+                                android:id="@+id/tl_constr_line_hang"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin"
+                                android:background="@color/white_color"
+                                android:padding="@dimen/padding"
+                                android:shrinkColumns="*"
+                                android:stretchColumns="1,3"
+                                android:visibility="visible" >
+
+                                <TableRow
+                                    android:id="@+id/trl_constr_line_hang_row1"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_marginTop="@dimen/margin2"
+                                    android:gravity="center_vertical" >
+
+                                    <TextView
+                                        android:id="@+id/tv_constr_line_hang_loai_cap"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="@dimen/margin"
+                                        android:text="@string/line_hang_design_cable_loai_cap"
+                                        android:textSize="@dimen/text_size_common" />
+
+                                    <RelativeLayout
+                                        android:id="@+id/rl_constr_line_hang_lc_box"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="0.4"
+                                        android:gravity="center_vertical" >
+
+                                        <com.viettel.view.control.VNMTextViewCombo
+                                            android:id="@+id/tv_constr_line_hang_lc_dropdown"
+                                            style="@style/vOfficeeditTextView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/drop_box_heigh"
+                                            android:drawableRight="@drawable/icon_combo"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/text_choice"
+                                            android:textSize="@dimen/text_size_common" >
+                                        </com.viettel.view.control.VNMTextViewCombo>
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:id="@+id/tv_constr_line_hang_khoang_vuot"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/margin"
+                                        android:text="@string/line_hang_design_cable_khoang_vuot"
+                                        android:textSize="@dimen/text_size_common" />
+
+                                    <EditText
+                                        android:id="@+id/edt_constr_line_hang_khoang_vuot"
+                                        style="@style/vOfficeeditText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:ems="10"
+                                        android:hint="@string/line_hang_design_cable_khoang_vuot"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:singleLine="true"
+                                        android:textSize="@dimen/text_size_common" >
+                                    </EditText>
+                                </TableRow>
+
+                                <TableRow
+                                    android:id="@+id/trl_constr_line_hang_row2"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_marginTop="@dimen/margin2"
+                                    android:gravity="center_vertical" >
+
+                                    <TextView
+                                        android:id="@+id/tv_constr_line_hang_tong_mx"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="@dimen/margin"
+                                        android:text="@string/line_hang_design_cable_tong_mx"
+                                        android:textSize="@dimen/text_size_common" />
+
+                                    <EditText
+                                        android:id="@+id/edt_constr_line_hang_tong_mx"
+                                        style="@style/vOfficeeditText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:ems="10"
+                                        android:hint="@string/line_hang_design_cable_tong_mx"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:singleLine="true"
+                                        android:textSize="@dimen/text_size_common" >
+                                    </EditText>
+                                </TableRow>
+                            </TableLayout>
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

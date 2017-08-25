@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.05"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:padding="@dimen/padding"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding">
+        <TextView
+            style="@style/Header.Textview"
+            android:id="@+id/tv_title"
+            android:paddingRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="normal"
+            android:gravity="right|center_vertical"
+            android:text="Đào rãnh và đặt cống" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding">
+        <TextView
+            android:id="@+id/tv_don_vi"
+            style="@style/Header.Textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_value"
+            style="@style/vOfficeeditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding">
+        <TextView
+            style="@style/Header.Textview"
+            android:id="@+id/tv_luyke"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding"/>
+</merge>

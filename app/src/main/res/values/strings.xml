@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="thongtincaptruc">Thông tin cáp trục</string>
+    <string name="ghilaithongtin">Ghi lại</string>
+    <string name="thongtincapnhanh">Thông tin cáp nhánh</string>
+    <string name="loaicap">Loại cáp </string>
+    <string name="cottrongmoi">Số cột trồng mới</string>
+    <string name="cotcosan">Số cột có sẵn</string>
+    <string name="sotuthuebao">Số tủ thuê bao</string>
+    <string name="soicapnhanh">Số sợi cáp nhánh</string>
+    <string name="soicaptruc_ht">Số sợi cáp trục loại 24</string>
+    <string name="soicaptruc_bt">Số sợi cáp trục loại 48</string>
+    <string name="soicaptruc_cs">Số sợi cáp trục loại 96</string>
+    <string name="soidropgo">Số sợi Drop và Go</string>
+    <string name="sotunhanh">Số tủ nhánh</string>
+    <string name="thongtinthietke">Thiết kế</string>
+    <string name="app_name">GSCT Test</string>
+    <string name="action_settings">Cấu hình</string>
+    <string name="text_loading">Đang tải dữ liệu....</string>
+    <string name="text_sync_loading">Đang đồng bộ dữ liệu....</string>
+    <string name="text_sync_error">Đồng bộ dữ liệu bị lỗi, vui lòng thử lại....</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="loading">&#160;đang tải &#8230;</string>
+    <string name="text_acc">TÀI KHOẢN (ACC SSO)</string>
+    <string name="text_pass">MẬT KHẨU (PASS SSO)</string>
+    <string name="text_login">ĐĂNG NHẬP</string>
+    <string name="text_slogen">TẬP ĐOÀN VIỄN THÔNG QUÂN ĐỘI VIETTEL</string>
+    <string name="text_system_supervision">HỆ THỐNG GIÁM SÁT CÔNG TRÌNH</string>
+    <string name="text_copyright">Bản quyền thuộc về VT <font fgcolor="#FFFF0000">ICT</font></string>
+    <string name="text_version">Version 2.0</string>
+    <string name="text_search">Tìm kiếm</string>
+    <string name="text_location">Vị trí của bạn</string>
+    <string name="text_map_long">Kinh độ</string>
+    <string name="text_map_lat">Vĩ độ</string>
+    <string name="text_map_setlocation">Chốt vị trí</string>
+    <string name="text_map_location_no_open">Bạn chưa bật GPS để xác định vị trí</string>
+    <string name="text_save">Lưu</string>
+    <string name="text_back">Quay lại</string>
+    <string name="text_add_new_pipe">Thêm mới</string>
+    <string name="text_add_perpect">Hoàn thành</string>
+    <string name="text_delete_new_pipe">Xóa cột</string>
+    <string name="text_empty"></string>
+    <string name="text_view_dot">....</string>
+    <string name="text_close">Đóng</string>
+    <string name="text_choice">Chọn</string>
+    <string name="text_choice1">---Chọn---</string>
+    <string name="text_delete_title">Thông báo hệ thống</string>
+    <string name="text_messager_header">Thông báo hệ thống</string>
+    <string name="text_delete_button">Xóa</string>
+    <string name="text_close_button">Đóng</string>
+    <string name="text_update_success">Thao tác thành công</string>
+    <string name="khongthexoa">Công trình này đã hoàn thành nên không thể xóa</string>
+    <string name="null_text">Bạn chưa nhập</string>
+    <string name="text_update_error">Lưu không thành công</string>
+    <string name="actionbar_activity_not_found">Failed to open intent</string>
+    <string name="text_search_value_default">Tất cả</string>
+    <string name="text_empty_message">Bạn chưa nhập giá trị</string>
+    <string name="img_path">/mnt/sdcard/imgtemplate/</string>
+    <string name="img_view_title">Hiển thị ảnh</string>
+    <string name="text_set_value_title">Nhập giá trị</string>
+    <string name="text_warning_logout">Bạn chắc muốn đăng xuất khỏi chương trình</string>
+    <string name="text_ok">Đồng ý</string>
+    <string name="app_permission_name">Bảo mật broadcast</string>
+    <string name="text_confirm_title">Xác nhận thông tin trước khi ghi lại</string>
+    <string name="text_confirm_save">Bạn có chắc chắn thực hiện không?</string>
+    <string name="text_confirm_save_change">Dữ liệu bảng cáp nhánh và dữ liệu bảng Drop và go có thể bị thay đổi bạn có chắc thực hiện không?</string>
+    <string name="text_tiendo">Bạn có muốn chuyển sang tiến độ "%1$s" hay không?</string>
+    <string name="text_tiendo_complete">Tiến độ đã ở trạng thái "%1$s" nên không thể cập nhật được tiến độ</string>
+    <string name="text_tiendo_not_complete">Bạn chưa cập nhật ngày hoàn thành ở từng mục giám sát nên chưa thể cập nhật tiến độ sang Đã hoàn thành</string>
+    <string name="text_tiendo_loaituyen">Bạn phải xác định loại tuyến trước khi cập nhật tiến độ</string>
+    <string name="text_confirm_found_num">Số móng co trong thi công cột đang là %1$d, bạn có chắc chắn muốn xóa móng bị thừa?</string>
+    <string name="text_confirm_fiber_num">Số sợi trong thiết kế đã giảm đi, bạn có chắc chắn muốn xóa các sợi bị thừa?</string>
+    <string name="text_confirm_tank_num">Số bể trong thiết kế đã giảm đi, bạn có chắc chắn muốn xóa bể bị thừa?</string>
+    <string name="text_confirm_tank_fiber_num">Số bể và sợi trong thiết kế đã giảm đi, bạn có chắc chắn muốn xóa bể và sợi bị thừa?</string>
+    <string name="text_unvalid_message">Bạn chưa nhập đầy đủ thông tin</string>
+    <string name="error_common">Có lỗi xảy ra, vui lòng thử lại.</string>
+    <string name="text_sync_success">Đồng bộ dữ liệu thành công</string>
+    <string name="text_out_of_key">Khoảng khóa đã hết bạn cần click đồng bộ để lấy mới</string>
+    <string name="text_3g_wifi_offline">Hãy bật 3G hoặc Wifi để đồng bộ dữ liệu</string>
+    <string name="field_is_null">Thông tin trống</string>
+    <string name="fomat_is_wrong">Sai định dạng</string>
+    <string name="field_is_equal_zero">Thông tin nhập phải lớn hơn 0</string>
+    <string name="text_progcessing">Đang xử lí dữ liệu....</string>
+    <string name="text_copy">Copy</string>
+    <string name="text_paste">Paste</string>
+    <string name="text_temp_memory_copy">Đã chép văn bản vào bộ nhớ tạm</string>
+    <string name="image_unqualify_check_image_null">Bạn phải chọn ít nhất 1 ảnh trước khi xóa</string>
+    <string name="out_of_max_image_capture">Bạn chỉ được chụp tối đa 5 ảnh</string>
+    <string name="measurement_constr_detail_title">Thông tin đo kích thước chi tiết</string>
+    <string name="plan_edit_notify">Không cập nhật được kế hoạch</string>
+
+    <!-- Login -->
+    <string name="login_error_messager">Tài khoản không đúng</string>
+    <string name="login_offline_error_messager">Tài khoản không đúng, hay bật 3G, Wifi để đăng nhập online</string>
+    <!-- Danh sach cong trinh -->
+    <string name="constr_sonstruction_title">Danh sách công trình được giao giám sát</string>
+    <string name="constr_sonstruction_setline_title">Xác định loại tuyến cho công trình</string>
+    <string name="constr_sonstruction_macongtrinh">Mã công trình</string>
+    <string name="constr_sonstruction_loaicongtrinh">Loại công trình</string>
+    <string name="constr_sonstruction_matram">Mã trạm</string>
+    <string name="constr_sonstruction_trangthai">Trạng thái</string>
+    <string name="constr_sonstruction_bts">BTS</string>
+    <string name="constr_sonstruction_tuyen">Tuyến</string>
+    <string name="constr_sonstruction_status">Tất cả</string>
+    <string name="constr_sonstruction_list_stt">STT</string>
+    <string name="constr_sonstruction_list_mct">Mã công trình</string>
+    <string name="constr_sonstruction_list_mt">Mã trạm</string>
+    <string name="constr_sonstruction_matuyen">Mã tuyến</string>
+    <string name="constr_sonstruction_diemdau">Điểm đầu</string>
+    <string name="constr_sonstruction_diemcuoi">Điểm cuối</string>
+    <string name="constr_sonstruction_list_loaicongtrinh">Loại công trình</string>
+    <string name="constr_sonstruction_list_trangthai">Trạng thái</string>
+    <string name="constr_sonstruction_list_request_date">Ngày giao việc</string>
+    <string name="constr_sonstruction_list_finish_date">Hạn hoàn thành (ngày)</string>
+    <string name="constr_sonstruction_list_tiendo">Tiến độ</string>
+    <string name="constr_sonstruction_list_thaotac">Thao tác</string>
+    <string name="constr_sonstruction_list_loaituyen">Loại tuyến</string>
+    <string name="constr_sonstruction_progress_doing">Đã bàn giao mặt bằng</string>
+    <string name="constr_sonstruction_progress_uncomplete">Chưa hoàn thành</string>
+    <string name="constr_sonstruction_progress_complete">Đã khởi công</string>
+    <string name="constr_sonstruction_progress_uncompleted">Đã hoàn thành</string>
+    <string name="constr_sonstruction_progress_unrealzed">Chờ bàn giao mặt bằng</string>
+    <string name="constr_sonstruction_status_chuadat">Chưa đạt</string>
+    <string name="constr_sonstruction_status_dat">Đạt</string>
+    <string name="constr_sonstruction_status_chuadanhgia">Chưa đánh giá</string>
+    <string name="constr_sonstruction_type_bts">BTS</string>
+    <string name="constr_sonstruction_type_line">Tuyến</string>
+    <string name="constr_sonstruction_type_brcd">Băng rộng cố định</string>
+    <string name="constr_sonstruction_type_sh">SubHeadend</string>
+    <string name="constr_sonstruction_no_set_line_type">Bạn chưa xác định tuyến ngầm hay tuyến treo</string>
+    <string name="constr_sonstruction_no_set_sh">SubHeadend đang trong quá trình xây dựng</string>
+    <!-- layout set loai tuyen cong trinh -->
+    <string name="constr_sonstruction_setline_mt">Mã tuyến</string>
+    <string name="constr_sonstruction_setline_dd">Điểm đấu</string>
+    <string name="constr_sonstruction_setline_dc">Điểm cuối</string>
+    <string name="constr_sonstruction_setline_lt">Loại tuyến</string>
+    <string name="constr_sonstruction_setline_tn">Tuyến ngầm</string>
+    <string name="constr_sonstruction_setline_brcd">Băng rộng cố định</string>
+    <string name="constr_sonstruction_setline_sh">SubHeadend</string>
+    <string name="constr_sonstruction_setline_tt">Tuyến treo</string>
+    <string name="constr_sonstruction_setline_noselectline">Bạn chưa chọn loại tuyến</string>
+    <!-- end layout set loai tuyen cong trinh -->
+    <!-- Danh gia cong trinh tuyen ngam -->
+    <string name="line_background_header_title">Đánh giá chất lượng công trình tuyến ngầm</string>
+    <string name="line_background_header_title_brcd_mt">Đánh giá chất lượng công trình mạng ngoại vi</string>
+    <string name="line_background_header_title_sub_mt">Đánh giá chất lượng công trình SubHeadEnd</string>
+    <string name="line_background_info_title">Thông tin</string>
+    <string name="line_background_info_line_title">Tuyến</string>
+    <string name="line_background_info_line_title_tram">Trạm</string>
+    <string name="line_background_info_line_station_code_title">Mã công trình</string>
+    <string name="line_background_info_line_design">Đánh giá thiết kế</string>
+    <string name="line_background_design_type">Loại thiết kế <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_review">Đánh giá <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_inter">Diễn giải</string>
+    <string name="line_background_design_long">Tổng chiều dài tuyến	<font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_tank">Bể</string>
+    <string name="line_background_design_tank_old">Bể có sẵn</string>
+    <string name="line_background_design_tank_new">Bể xây mới</string>
+    <string name="line_background_design_tank_size">SL</string>
+    <string name="line_background_design_tank_dan1">Số bể đan 1</string>
+    <string name="line_background_design_tank_dan2">Số bể đan 2</string>
+    <string name="line_background_design_tank_dan3">Số bể đan 3</string>
+    <string name="line_background_design_tank_long">Chiều dài</string>
+    <string name="line_background_design_cable">Cáp</string>
+    <string name="line_background_design_point_to_bridge">Điểm qua cầu cống</string>
+    <string name="line_background_design_point_to_pond">Điểm qua ao hồ</string>
+    <string name="ll_constr_line_background_tab_point_to_bridge_from_stage">Từ đoạn</string>
+    <string name="ll_constr_line_background_tab_point_to_pond_name">Sợi cáp</string>
+    <string name="ll_constr_line_background_tab_point_to_pond_name_cable">Tên tủ</string>
+    <string name="ll_constr_line_background_tab_point_to_pond_code_cable">Mã tủ</string>
+    <string name="ll_constr_line_background_tab_point_to_bridge_to_stage">Đến đoạn</string>
+    <string name="ll_constr_line_background_tab_point_to_bridge_bridge_name">Tên cầu cống</string>
+    <string name="ll_constr_line_background_tab_point_to_bridge_supplie_type">Chủng loại vật tư</string>
+    <string name="line_background_design_cable_ctt">Phương pháp thi công <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_cable_cdctt">Chiều dài <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_cable_tsmx">Tổng số măng xông <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_cable_lc">Loại cáp <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_cable_lc_fo">fo</string>
+    <string name="line_background_design_cable_lo">Loại ống <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_background_design_cable_so">Số ống</string>
+    <string name="sub_background_design_info_giamsat">Giám sát lắp đặt thiết bị</string>
+    <string name="sub_background_design_hsx_nokia">NOKIA</string>
+    <string name="sub_background_design_hsx_huawei">HUAWEI</string>
+    <string name="sub_background_design_hsx_ericsson">ERICSSON</string>
+    <string name="sub_background_design_hsx_zte">ZTE</string>
+    <string name="sub_background_design_hsx_alcatel">ALCATEL</string>
+    <string name="sub_background_design_info_kl">Kết luận</string>
+    <!-- HungTN add new 25/08/2016 -->
+    <string name="sub_background_design_info_cndtc">Cập nhật đội thi công</string>
+    <string name="sub_background_design_info_cnv">Cập nhật vướng</string>
+    <!-- end -->
+    <string name="brcd_background_design_info_mst">Giám sát thi công măng xông trục</string>
+    <string name="brcd_background_design_info_tttk">Thông tin thiết kế</string>
+    <string name="brcd_background_design_info_kct">Giám sát kéo cáp trục</string>
+    <string name="brcd_background_design_info_tn">Giám sát thi công tủ nhánh</string>
+    <string name="brcd_background_design_info_ttb">Giám sát thi công tủ thuê bao </string>
+    <string name="brcd_background_design_info_keocapnhanh">Giám sát thi công kéo cáp nhánh </string>
+    <string name="brcd_background_design_info_dropgo">Giám sát thi công cáp Drop và Go </string>
+    <string name="brcd_background_design_info_kt">Kết luận</string>
+    <!-- HungTN add new 23/08/2016 -->
+    <string name="brcd_background_design_info_cndtc">Cập nhật đội thi công </string>
+    <string name="brcd_background_design_info_cnv">Cập nhật vướng </string>
+    <!-- end -->
+    <string name="line_background_design_info">Đánh giá thiết kế</string>
+    <string name="line_background_nhatky_info">Cập nhật nhật ký</string>
+    <string name="line_background_tiendo_info">Cập nhật tiến độ</string>
+    <string name="line_background_vtdb_info">Giám sát vị trí đặc biệt</string>
+    <string name="measure_constr_info">Giám sát đo kích thước công trình</string>
+    <string name="line_background_gsbc_info">Giám sát thi công bể cáp</string>
+    <string name="line_background_gscrc_info">Giám sát thi công cống và rãnh cáp</string>
+    <string name="line_background_gskc_info">Giám sát thi công kéo cáp</string>
+    <string name="line_background_gshndk_info">Giám sát hàn và nối đo kiểm</string>
+    <!-- HungTN add new 23/08/2016 -->
+    <string name="line_background_cndtc_info">Cập nhật đội thi công </string>
+    <string name="line_background_cnv_info">Cập nhật vướng </string>
+    <!-- end -->
+    <string name="line_background_keluan_info">Kết luận</string>
+    <string name="line_background_design_type_dh">Điển hình</string>
+    <string name="line_background_design_type_ct">Chi tiết</string>
+    <string name="line_background_design_assess_phtt">Phù hợp thực tế</string>
+    <string name="line_background_design_assess_kphtt">Không phù hợp thực tế</string>
+    <string name="line_background_bury_type_bbh">Chôn trực tiếp dùng Băng báo hiệu</string>
+    <string name="line_background_bury_type_ohm">Chôn trực tiếp dùng Ống hai mảnh</string>
+    <string name="line_background_bury_type_bbh_ohm">Chôn trực tiếp dùng Băng báo hiệu và Ống 2 mảnh</string>
+    <string name="line_background_bury_type_tuyen_tructiep">Tuyến cống bể trên hè và chôn trực tiếp</string>
+    <string name="line_background_bury_type_tuyen_diduong">Tuyến cống bể trên hè và đi đường</string>
+    <string name="line_background_save_susses_message">Cập nhật đánh giá thành công</string>
+    <string name="line_background_design_noinfo_message">Bạn chưa cập nhật thông tin thiết kế</string>
+    <string name="line_background_design_type_is_null">Bạn chưa chọn loại thiết kế</string>
+    <string name="line_background_accept_choice">Bạn phải chọn đánh giá trước</string>
+    <string name="line_background_construction_type_is_null">Bạn chưa chọn loại xây dựng</string>
+    <string name="line_background_design_assess_is_null">Bạn chưa chọn đánh giá</string>
+    <string name="line_background_design_long_is_null">Bạn chưa nhập tổng chiều dài tuyến</string>
+    <string name="edt_line_background_design_tank_size_is_null">Bạn chưa nhập số lượng bể xây mới</string>
+    <string name="edt_line_background_design_tank_size_old_is_null">Bạn chưa nhập số lượng bể có sẵn</string>
+    <string name="tv_constr_line_background_ctt_dropdown_is_null">Bạn chưa chọn phương pháp thi công</string>
+    <string name="edt_constr_line_background_cdctt_is_null">Bạn chưa chọn chiều dài chôn trực tiếp</string>
+    <string name="edt_constr_line_background_tsmx_is_null">Bạn chưa nhập tổng số măng xông</string>
+    <string name="tv_constr_line_background_lc_is_null">Bạn chưa chọn loại cáp</string>
+    <string name="edt_constr_line_background_lo_is_null">Bạn chưa chọn loại ống</string>
+    <string name="line_background_design_from_stage_is_empty">Bạn chưa nhập từ đoạn</string>
+    <string name="line_background_design_to_stage_is_empty">Bạn chưa nhập tới đoạn</string>
+    <string name="line_background_design_bridge_name_is_empty">Bạn chưa nhập tên cầu cống</string>
+    <string name="line_background_design_supplie_type_is_empty">Bạn chưa nhập chủng loại vật tư</string>
+    <string name="line_background_design_tab_bridge">ở tab điểm qua cầu cống</string>
+    <string name="line_background_design_tab_pond">ở tab điểm qua ao hồ</string>
+    <string name="line_background_design_long_message">Chiều dài chôn trực tiếp nhỏ hơn hoặc bằng tổng chiều dài tuyến</string>
+    <string name="line_background_design_tank_size_message">Tổng số lượng bể không khớp</string>
+    <string name="line_background_design_pipe_message">Loại ống phải lớn hơn 1 và nhỏ hơn 100 sợi</string>
+    <string name="line_background_save_susses_ketluan_message">Cập nhật kết</string>
+    <string name="line_cable_type_mot">1</string>
+    <string name="line_cable_type_khong">0</string>
+    <string name="line_cable_type_hai">2</string>
+    <string name="line_cable_type_ba">3</string>
+    <string name="line_cable_type_bon">4</string>
+    <string name="line_cable_type_nam">5</string>
+    <string name="line_cable_type_sau">6</string>
+    <string name="line_cable_type_bay">7</string>
+    <string name="line_cable_type_tam">8</string>
+    <string name="line_cable_type_chin">9</string>
+    <string name="line_cable_type_muoihai">12</string>
+    <string name="line_cable_type_haibon">24</string>
+    <string name="line_cable_type_bontam">48</string>
+    <string name="line_cable_type_chinsau">96</string>
+    <string name="line_mx_enough">Bạn đã thêm đủ số măng xông</string>
+
+    <!-- End danh gia cong trinh tuyen ngam -->
+
+
+    <!-- Danh gia cong trinh tuyen treo -->
+    <string name="line_hang_header_title">Đánh giá chất lượng công trình tuyến cáp quang treo</string>
+    <string name="line_hang_info_title">Thông tin</string>
+    <string name="line_hang_info_line_title">Tuyến</string>
+    <string name="line_hang_info_line_station_code_title">Mã công trình</string>
+    <string name="line_hang_info_line_design">Đánh giá thiết kế</string>
+    <string name="line_hang_design_type">Loại thiết kế <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_review">Đánh giá <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_inter">Diễn giải</string>
+    <string name="line_hang_design_long">Tổng chiều dài tuyến <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_pillar">Cột</string>
+    <string name="line_hang_design_pillar_old">Cột có sẵn</string>
+    <string name="line_hang_design_pillar_new">Cột trồng mới</string>
+    <string name="line_hang_design_pillar_size">SL</string>
+    <string name="line_hang_design_pillar_be_tong">Cột bê tông</string>
+    <string name="line_hang_design_pillar_go">Cột gỗ</string>
+    <string name="line_hang_design_pillar_chieu_cao">Chiều cao <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_pillar_long">Chiều dài</string>
+    <string name="line_hang_design_cable">Cáp</string>
+    <string name="line_hang_design_cable_loai_cap">Loại cáp <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_cable_khoang_vuot">Khoảng vượt <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_cable_tong_mx">Tổng số măng xông <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hang_design_info">Đánh giá thiết kế</string>
+    <string name="line_hang_nhatky_info">Cập nhật nhật ký</string>
+    <string name="line_hang_tiendo_info">Cập nhật tiến độ</string>
+    <string name="line_hang_pillar_info">Giám sát thi công cột</string>
+    <string name="line_hang_cable_info">Giám sát thi công kéo cáp</string>
+    <string name="line_hang_measure_constr">Giám sát đo kích thước công trình</string>
+    <string name="line_hang_mx_info">Giám sát thi công hàn nối và đo kiểm</string>
+    <!-- HungTN add new 23/08/2016 -->
+    <string name="line_hang_design_info_cndtc">Cập nhật đội thi công </string>
+    <string name="line_hang_design_info_cnv">Cập nhật vướng </string>
+    <!-- end -->
+    <string name="line_hang_keluan_info">Kết luận</string>
+    <string name="line_hang_design_type_dh">Điển hình</string>
+    <string name="line_hang_design_type_ct">Chi tiết</string>
+    <string name="line_hang_design_assess_phtt">Phù hợp thực tế</string>
+    <string name="line_hang_design_assess_kphtt">Không phù hợp thực tế</string>
+    <string name="line_hang_bury_type_bbh">Băng báo hiệu</string>
+    <string name="line_hang_bury_type_ohm">Ống hai mảnh</string>
+    <string name="line_hang_save_susses_message">Cập nhật đánh giá thành công</string>
+    <string name="line_hang_design_long_message">Tổng chiều dài tuyến trồng cột phải nhỏ hơn hoặc bằng chiều dài cáp</string>
+    <string name="line_hang_design_cap_type_message">Loại cáp phải lớn hơn 1 và nhỏ hơn 100</string>
+    <string name="line_hang_design_khoang_vuot_message">khoảng vượt phải lớn hơn 0</string>
+    <string name="line_hang_design_noinfo_message">Bạn chưa cập nhật thông tin thiết kế</string>
+    <!-- Valid Pillar -->
+    <string name="line_hang_pilar_code_valid">Bạn chưa nhập mã hiệu cột</string>
+    <string name="line_hang_pilar_isupper_valid">Mã hiệu cột phải viết hoa</string>
+    <string name="line_hang_pilar_faildesc_valid">Bạn chưa nhập diễn giải</string>
+    <string name="line_hang_pilar_catcause_valid">Bạn chưa chọn nguyên nhân lỗi</string>
+    <!-- Valid Cable -->
+    <string name="line_hang_cable_from_valid">Bạn chưa chọn đoạn cáp từ khoảng</string>
+    <string name="line_hang_cable_todislast_eual_longtotal">Đến khoảng của đoạn cáp cuối cùng phải bằng tổng chiều dài tuyến</string>
+    <string name="line_hang_cable_fromdis_begin_equal_1">Từ khoảng của dòng đầu tiên phải là 1</string>
+    <string name="line_hang_cable_todisbefore">Giá trị đến khoảng ở dòng</string>
+    <string name="line_hang_cable_not_equal">phải bằng</string>
+    <string name="line_hang_cable_fromdislast">giá trị từ khoảng ở dòng</string>
+    <string name="line_hang_cable_to_valid">Bạn chưa chọn đoạn cáp đến khoảng</string>
+    <string name="line_hang_cable_status_valid">Bạn chưa chọn đánh giá</string>
+    <string name="line_hang_cable_fromdis_less_todis">Từ khoảng phải nhỏ hơn hoặc bằng đến khoảng ở đoạn cáp thứ</string>
+    <string name="line_hang_cable_cause_valid">Bạn chưa chọn nguyên nhân không đạt</string>
+    <string name="line_hang_cable_cause_choice">Bạn phải chọn không đạt trước</string>
+    <string name="line_hang_cable_faildesc_valid">Bạn chưa nhập diễn giải</string>
+    <!-- End danh gia cong trinh tuyen treo -->
+
+
+    <!-- Danh gia cột tuyen treo -->
+    <string name="line_hg_pillar_code">Mã hiệu cột</string>
+    <string name="line_hg_pillar_nn_khongdat">Nguyên nhân không đạt</string>
+    <string name="line_hg_pillar_diengiai">Diễn giải</string>
+    <!-- End danh gia cột tuyen treo -->
+
+
+    <!-- Danh gia be tuyen ngam -->
+    <string name="constr_line_tank_name">Tên bể</string>
+    <string name="constr_line_name">Tên</string>
+    <string name="constr_line_doancapdau">Từ đoạn</string>
+    <string name="constr_line_doancapcuoi">Đến đoạn</string>
+    <string name="constr_line_tank_sodan">Số đan</string>
+    <string name="constr_line_tank_danhgia">Đánh giá</string>
+    <string name="constr_line_tank_dg_dat">Đạt</string>
+    <string name="constr_line_tank_dg">Đánh giá</string>
+    <string name="constr_line_tank_dg_kd">Không đạt</string>
+    <string name="constr_line_tank_nn_khongdat">Nguyên nhân không đạt/Nghiệm thu</string>
+    <string name="constr_line_tank_diengiai">Diễn giải</string>
+    <string name="constr_line_tank_anhchup">Ảnh chụp</string>
+    <string name="constr_line_tank_giamsat">Giám sát</string>
+    <string name="constr_line_tank_vitri">Vị trí</string>
+    <string name="edt_line_hang_design_pillar_size_is_null">Bạn chưa nhập số lượng cột xây mới</string>
+    <string name="edt_line_hang_design_pillar_chieu_cao_is_null">Bạn chưa nhập chiều cao cột xây mới</string>
+    <string name="edt_line_hang_design_pillar_long_new_is_null">Bạn chưa nhập chiều dài cột xây mới</string>
+    <string name="edt_line_hang_design_pillar_size_old_is_null">Bạn chưa nhập số lượng cột có sẵn</string>
+    <string name="edt_line_hang_design_pillar_long_old_is_null">Bạn chưa nhập chiều dài cột có sẵn</string>
+    <string name="edt_constr_line_hang_loai_cap_is_null">Bạn chưa chọn loại cáp</string>
+    <string name="edt_constr_line_hang_khoang_vuot_is_null">Bạn chưa chọn khoảng vượt</string>
+    <string name="edt_constr_line_hang_tong_mx_is_null">Bạn chưa chọn tổng số măng xông</string>
+    <string name="constr_line_tank_unqualify_title">Nguyên nhân không đạt</string>
+    <string name="constr_line_acceptance_title">Chụp ảnh nghiệm thu</string>
+    <string name="constr_line_tank_unqualify_uncheck_message">Bạn phải chọn nguyên nhân không đạt trước</string>
+    <string name="constr_line_tank_sodan_empty">Bạn chưa nhập số đan cho bể:</string>
+    <string name="constr_line_tank_danhgia_empty">Bạn chưa chọn thông tin đánh giá cho bể:</string>
+    <string name="constr_line_tank_nn_khongdat_tempty">Bạn chưa chọn nguyên nhân không đạt cho bể:</string>
+    <string name="constr_line_special_nn_khongdat_tempty">Bạn chưa chọn nguyên nhân không đạt</string>
+    <string name="constr_take_unqualify_not_enough">Bạn chưa chụp ảnh cho nguyên nhân không đạt: </string>
+    <string name="constr_take_acceptance_not_enough">Bạn chưa chụp đủ ảnh nghiệm thu</string>
+    <string name="constr_line_tank_unqualify_choice_message">Bạn phải chọn đánh giá trước</string>
+    <string name="constr_line_pipe_danhgia_empty">Bạn chưa chọn thông tin đánh giá</string>
+    <string name="constr_line_tank_location">Bạn chưa chọn vị trí</string>
+    <!-- End danh gia be tuyen ngam -->
+    <!-- Giam sat cong va ranh cap -->
+    <string name="line_bg_pipe_title">Danh sách đoạn cáp kiểm tra giám sát</string>
+    <string name="line_bg_pipe_doancap">Đoạn cáp: </string>
+    <string name="line_bg_pipe_thongtincap_vatutb">Thông tin cáp Drop-Go và Tủ thuê bao </string>
+    <string name="line_bg_pipe_doancap_tube">Từ bể</string>
+    <string name="line_bg_pipe_doancap_tukhoang">Từ khoảng</string>
+    <string name="line_bg_pipe_doancap_denbe">Đến bể</string>
+    <string name="line_bg_pipe_doancap_denkhoang">Đến khoảng</string>
+    <string name="line_bg_pipe_doancap_nn_khongdat">Nguyên nhân không đạt / Ảnh nghiệm thu</string>
+    <string name="line_bg_pipe_doancap_diengiai">Diễn giải</string>
+    <string name="line_bg_pipe_delete_message">Bạn thực sự muốn xóa ống</string>
+    <string name="line_bg_pipe_unvalid_message">Bạn chưa nhập đầy đủ thông tin</string>
+    <string name="line_bg_pipe_fromTank_toTank_wrong">Bạn đã nhập sai tên bể ở đoạn cáp thứ</string>
+    <string name="line_bg_pipe_fromTank_diffirence_toTank">Tên bể phần từ bể phải khác tên bể trong đến bể ở đoạn cáp thứ</string>
+    <!-- End giam sat cong va danh cap -->
+    <!-- Giam sat bang rong co dinh -->
+    <string name="brcd_chon_loai_cap_truc">Bạn chưa chọn loại cáp trục</string>
+    <string name="brcd_chon_so_cot_chong_moi">Bạn chưa chọn số cột trồng mới </string>
+    <string name="brcd_chon_so_cot_co_san">Bạn chưa chọn số cột có sẵn </string>
+    <string name="brcd_chon_loai_cap_nhanh">Bạn chưa chọn loại cáp nhánh</string>
+    <string name="brcd_chon_so_soi_cap_nhanh">Bạn chưa chọn số sợi cáp nhánh</string>
+    <string name="brcd_chon_so_soi_cap_truc">Bạn chưa chọn số sợi cáp trục</string>
+    <string name="brcd_chon_so_tu_nhanh">Bạn chưa chọn số tủ nhánh</string>
+    <string name="brcd_chon_so_tu_thue_bao_loai_hai">Bạn chưa chọn số tủ thuê bao loại 2</string>
+    <string name="brcd_chon_so_tu_thue_bao_loai_bon">Bạn chưa chọn số tủ thuê bao loại 4</string>
+    <string name="brcd_chon_so_tu_thue_bao_loai_tam">Bạn chưa chọn số tủ thuê bao loại 8</string>
+    <string name="brcd_chon_so_tu_thue_bao_loai_muoi_hai">Bạn chưa chọn số tủ thuê bao loại 12</string>
+    <string name="brcd_chon_so_tu_thue_bao_vuot_qua">Số tủ thuê bao không được vượt quá 20</string>
+    <string name="brcd_chon_so_soi_drop">Bạn chưa chọn số sợi drop</string>
+    <string name="brcd_chon_loai_drop">Bạn chưa chọn loại cáp drop và go</string>
+    <string name="brcd_chon_do_cao">Bạn chưa chọn độ cao</string>
+    <string name="brcd_chon_thieu_tucot">Bạn nhập thiếu dữ liệu từ cột</string>
+    <string name="brcd_chon_toado">Bạn chưa nhập tọa độ</string>
+    <string name="brcd_chon_thieu_diemdau">Bạn chưa nhập điểm đầu</string>
+    <string name="brcd_chon_thieu_diemcuoi">Bạn chưa nhập điểm cuối</string>
+    <string name="brcd_diemcuoinhohondau"> điểm cuối nhỏ hơn điểm đầu </string>
+    <string name="brcd_diemdaunhohoncuoi"> điểm đầu nhỏ hơn điểm cuối </string>
+    <string name="brcd_cotdaunhohoncuoi"> từ cột nhỏ hơn đến cột </string>
+    <string name="brcd_cotcuoinhohondau">  đến cột nhỏ hơn từ cột </string>
+    <string name="brcd_nhapthieudulieu_tainhanh"> Bạn nhập thiếu dữ liệu tại đoạn </string>
+    <string name="brcd_chon_thieu_trangthai">Bạn chưa chọn đánh giá</string>
+    <string name="brcd_chon_thieu_dencot">Bạn nhập thiếu dữ liệu tới cột</string>
+    <string name="brcd_chon_thieu_chieudai">Bạn nhập thiếu dữ liệu chiều dài</string>
+    <string name="brcd_chon_thieu_code">Bạn nhập thiếu dữ liệu mã cáp</string>
+    <string name="brcd_chon_thieu_matu">Bạn nhập thiếu dữ liệu mã tủ thuê bao</string>
+    <string name="brcd_chon_chieu_dai_cap_truc">Bạn chưa chọn tổng chiều dài cáp trục</string>
+    <string name="brcd_chon_chieu_dai_cap">Bạn chưa chọn chiều dài cáp</string>
+    <!-- End giam sat bang rong co dinh -->
+    <!-- Giam sat subheadend -->
+    <string name="brcd_chon_so_luong_thiet_bi">Bạn chưa chọn số lương thiết bị</string>
+    <string name="brcd_chon_hang_san_xuat">Bạn chưa chọn hãng sản xuất </string>
+    <!-- End giam sat subheadend -->
+    <!-- Giam sat vi tri dac biet -->
+    <string name="line_bg_special_name">Tên</string>
+    <string name="line_bg_special_danhgia">Đánh giá</string>
+    <string name="line_bg_special_dat">Đạt</string>
+    <string name="line_bg_special_kdat">Không đạt</string>
+    <string name="line_bg_special_nn_kdat">Nguyên nhân không đạt / Nghiệm thu</string>
+    <string name="line_bg_special_vitri">Vị trí</string>
+    <string name="line_bg_special_diemdau">Điểm đầu</string>
+    <string name="line_bg_special_macap">Mã cáp</string>
+    <string name="line_bg_special_diemcuoi">Điểm cuối</string>
+    <!-- End giam sat vi tri dac biet -->
+
+
+    <!-- Giam sat do kich thuoc cong trinh -->
+    <string name="item_name_measure">Tên hạng mục</string>
+    <string name="item_measure">Hạng mục</string>
+    <string name="component_name_measure">Tên thành phần đo</string>
+    <string name="info_measure_detail">Thông tin đo kích thước chi tiết</string>
+    <string name="long_value_detail_measure">Chiều dài (dày)</string>
+    <string name="width_value_detail_measure">Chiều rộng (hở)</string>
+    <string name="heigh_value_detail_measure">Chiều cao (sâu)</string>
+    <string name="dk_value_detail_measure">Đường kính (bán kính cong)</string>
+    <string name="other_value_detail_measure">Kích thước khác</string>
+    <string name="delete_row_measurement_constr">Bạn thực sự muốn xóa hạng mục này</string>
+    <string name="delete_item_measure">Xóa</string>
+    <string name="measure_constr_name_empty">Bạn chưa nhập tên hạng mục đo</string>
+
+    <!-- End giam sat do kich thuoc cong trinh -->
+
+
+    <!-- Giam sat keo cap -->
+    <string name="line_bg_cable_doancap">Đoạn cáp</string>
+    <string name="line_bg_cable_doancap_tukhoang">Từ khoảng</string>
+    <string name="line_bg_cable_doancap_denkhoang">Đến khoảng</string>
+    <string name="line_bg_cable_doancap_nn_khongdat">Nguyên nhân không đạt</string>
+    <string name="line_bg_cable_danhgia">Đánh giá</string>
+    <string name="line_bg_cable_danhgia_dat">Đạt</string>
+    <string name="line_bg_cable_danhgia_khongdat">Không đạt</string>
+    <string name="line_bg_cable_doancap_diengiai">Diễn giải</string>
+    <string name="line_bg_cable_delete_message">Bạn thực sự muốn xóa đoạn cáp</string>
+    <string name="line_bg_cable_unvalid_message">Bạn chưa nhập đầy đủ thông tin</string>
+    <string name="line_bg_pilar_catcause_valid">Bạn chưa chọn nguyên nhân lỗi</string>
+    <!-- End giam sat keo cap -->
+    <!-- Giam sat mang xong -->
+    <string name="line_bg_mx_mangxongkhongdat">Măng xông không đạt</string>
+    <string name="line_bg_mx_doancap_dokiemsoi">Đo kiểm sợi</string>
+    <string name="line_bg_mx_doancap_tenmx">Tên măng xông</string>
+    <string name="line_bg_mx_doancap_nnkhongdat">Nguyên nhân không đạt</string>
+    <string name="line_bg_mx_doancap_diengiai">Diễn giải</string>
+    <string name="line_bg_mx_doancap_vitri">Vị trí</string>
+    <string name="line_bg_mx_dk_stt">STT</string>
+    <string name="line_bg_mx_dk_trangthai">Trạng thái <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_bg_mx_dk_nguoido">Người đo <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_bg_mx_dk_maydo">Tên máy đo</string>
+    <string name="line_bg_mx_dk_donvi">Đơn vị <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_bg_mx_dk_sdt">Số điện thoại</string>
+    <string name="line_bg_mx_dk_serialmay">Serial máy</string>
+    <string name="line_bg_mx_dk_soi">Sợi</string>
+    <string name="line_bg_mx_dk_ketqua">Kết quả(dB)</string>
+    <string name="line_bg_mx_vailid_message">Bạn chưa nhập đủ thông tin măng xông</string>
+    <string name="line_bg_mx_vailid_fiber">Bạn chưa nhập giá trị đo sợi:</string>
+    <string name="line_bg_mx_fiber_status">Bạn chưa nhập trạng thái đo sợi</string>
+    <string name="line_bg_mx_fiber_nd">Bạn chưa nhập người đo</string>
+    <string name="line_bg_mx_fiber_md">Bạn chưa nhập tên máy đo</string>
+    <string name="line_bg_mx_fiber_dv">Bạn chưa nhập đơn vị đo</string>
+    <string name="line_bg_mx_fiber_sdt">Bạn chưa nhập số điện thoại</string>
+    <string name="line_bg_mx_fiber_serialmay">Bạn chưa nhập serial máy</string>
+    <!-- End giam sat keo cap -->
+    <!-- Ket luan -->
+    <string name="line_bg_mx_kl_trangthai">Trạng thái công trình</string>
+    <string name="line_bg_mx_kl_tt_dat">Đạt</string>
+    <string name="line_bg_mx_kl_tt_kd">Không đạt</string>
+    <string name="line_bg_mx_kl_tdcv">Tiến độ công việc</string>
+    <string name="line_bg_mx_kl_tdcv_cht">Chưa hoàn thành</string>
+    <string name="line_bg_mx_kl_tdcv_ht">Hoàn thành</string>
+    <string name="line_bg_mx_kl_xn_title">Xác nhận trước khi chốt kết quả</string>
+    <string name="line_bg_mx_kl_no_add_tank">Bạn chưa nhập thông tin giám sát bể</string>
+    <string name="line_bg_mx_kl_no_add_fiber">Bạn chưa nhập thông tin giám sát sợi cáp</string>
+    <string name="line_bg_mx_kl_tank_khongdat">Có bể giám sát không đạt, Bạn không thể kết luận là đạt</string>
+    <string name="line_bg_mx_kl_cable_khongdat">Có đoạn cáp không đạt, Bạn không thể kết luận là đạt</string>
+    <string name="line_bg_mx_kl_mx_khongdat">Có măng xong không đạt, Bạn không thể kết luận là đạt</string>
+    <string name="line_bg_mx_kl_fiber_khongdat">Thông tin đo sợi không đạt, Bạn không thể kết luận là đạt</string>
+    <string name="line_bg_mx_kl_ttct">Trạng thái công trình</string>
+    <string name="line_bg_mx_kl_xn">Xác nhận</string>
+    <string name="line_bg_mx_kl_huy">Hủy</string>
+    <!-- End ket luan -->
+    <!-- Giam sat mang xong tuyen treo -->
+    <string name="line_hg_mx_mangxongkhongdat">Măng xông không đạt</string>
+    <string name="line_hg_mx_doancap_dokiemsoi">Đo kiểm sợi</string>
+    <string name="line_hg_mx_doancap_tenmx">Tên măng xông</string>
+    <string name="line_hg_mx_doancap_nnkhongdat">Nguyên nhân không đạt</string>
+    <string name="line_hg_mx_doancap_diengiai">Diễn giải</string>
+    <string name="line_hg_mx_doancap_vitri">Vị trí</string>
+    <string name="line_hg_mx_dk_stt">STT</string>
+    <string name="line_hg_mx_dk_trangthai">Trạng thái <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hg_mx_dk_nguoido">Người đo <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hg_mx_dk_maydo">Tên máy đo</string>
+    <string name="line_hg_mx_dk_donvi">Đơn vị <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="line_hg_mx_dk_sdt">Số điện thoại</string>
+    <string name="line_hg_mx_dk_serialmay">Serial máy</string>
+    <string name="line_hg_mx_dk_soi">Sợi</string>
+    <string name="line_hg_mx_dk_ketqua">Kết quả(dB)</string>
+    <string name="line_hg_mx_vailid_message">Bạn chưa nhập đủ thông tin măng xông</string>
+    <string name="line_hg_mx_name_message">Bạn chưa nhập tên măng xông</string>
+    <string name="line_hg_mx_vailid_fiber">Bạn chưa nhập giá trị đo sợi:</string>
+    <string name="line_hg_mx_fiber_status">Bạn chưa nhập trạng thái đo sợi</string>
+    <string name="line_hg_mx_fiber_nd">Bạn chưa nhập người đo</string>
+    <string name="line_hg_mx_fiber_md">Bạn chưa nhập tên máy đo</string>
+    <string name="line_hg_mx_fiber_dv">Bạn chưa nhập đơn vị đo</string>
+    <string name="line_hg_mx_donvi_dv">Bạn chưa nhập đơn vị đo</string>
+    <string name="line_hg_mx_fiber_sdt">Bạn chưa nhập số điện thoại</string>
+    <string name="line_hg_mx_fiber_serialmay">Bạn chưa nhập serial máy</string>
+    <!-- Ket luan -->
+    <string name="line_hg_mx_kl_trangthai">Trạng thái công trình</string>
+    <string name="line_hg_mx_kl_tt_dat">Đạt</string>
+    <string name="line_hg_mx_kl_tt_kd">Không đạt</string>
+    <string name="line_hg_mx_kl_tdcv">Tiến độ công việc</string>
+    <string name="line_hg_mx_kl_tdcv_cht">Chưa hoàn thành</string>
+    <string name="line_hg_mx_kl_tdcv_ht">Hoàn thành</string>
+    <string name="line_hg_mx_kl_xn_title">Xác nhận trước khi chốt kết quả</string>
+    <string name="line_hg_mx_kl_no_add_tank">Bạn chưa nhập thông tin giám sát bể</string>
+    <string name="line_hg_mx_kl_no_add_fiber">Bạn chưa nhập thông tin giám sát sợi cáp</string>
+    <string name="line_hg_mx_kl_tank_khongdat">Có bể giám sát không đạt, Bạn không thể kết luận đạt</string>
+    <string name="line_hg_mx_kl_cable_khongdat">Có đoạn cáp không đạt, Bạn không thể kết luận đạt</string>
+    <string name="line_hg_mx_kl_mx_khongdat">Có măng xong không đạt, Bạn không thể kết luận đạt</string>
+    <string name="sub_hg_mx_kl_mx_khongdat">Có thiết bị không đạt, Bạn không thể kết luận đạt</string>
+    <string name="sub_hg_mx_kl_mx_dat">Tất cả thiết bị đạt, Bạn không thể kết luận không đạt</string>
+    <string name="line_hg_pl_kl_khongdat">Có cột không đạt, Bạn không thể kết luận đạt</string>
+    <string name="line_hg_mx_kl_fiber_khongdat">Thông tin đo sợi không đạt, Bạn không thể kết luận đạt</string>
+    <string name="line_hg_mx_kl_ttct">Trạng thái công trình</string>
+    <string name="line_hg_mx_kl_xn">Xác nhận</string>
+    <string name="line_hg_mx_kl_huy">Hủy</string>
+    <!-- End ket luan -->
+
+
+    <!-- Ket luan -->
+    <string name="brcd_dropgo_khongdat">Có sợi cáp drop và go không đạt, Bạn không thể kết luận đạt</string>
+    <string name="brcd_kcn_khongdat">Có sợi cáp nhánh không đạt, Bạn không thể kết luận đạt</string>
+    <string name="brcd_kct_khongdat">Có sợi cáp trục không đạt, Bạn không thể kết luận đạt</string>
+    <string name="brcd_tn_khongdat">Có tủ nhánh không đạt, Bạn không thể kết luận đạt</string>
+    <string name="brcd_ttb_khongdat">Có tủ thuê bao không đạt, Bạn không thể kết luận đạt</string>
+
+    <!-- End ket luan -->
+    <!-- Giam sat cong va ranh cap tuyen treo -->
+    <string name="line_hg_pipe_title">Danh sách đoạn cáp, bể không đạt</string>
+    <string name="line_hg_pipe_doancap">Đoạn cáp</string>
+    <string name="line_hg_pipe_doancap_tube">Từ bể</string>
+    <string name="line_hg_pipe_doancap_tukhoang">Từ khoảng</string>
+    <string name="line_hg_pipe_doancap_denbe">Đến bể</string>
+    <string name="line_hg_pipe_doancap_denkhoang">Đến khoảng</string>
+    <string name="line_hg_pipe_doancap_nn_khongdat">Nguyên nhân không đạt</string>
+    <string name="line_hg_pipe_doancap_diengiai">Diễn giải</string>
+    <string name="line_hg_pipe_delete_message">Bạn thực sự muốn xóa</string>
+    <string name="line_hg_pipe_unvalid_message">Bạn chưa nhập đầy đủ thông tin</string>
+    <!-- End giam sat cong va danh cap -->
+    <!-- Danh gia Tram BTS -->
+    <string name="bts_info_design">Đánh giá thiết kế</string>
+    <string name="bts_info_nhatky">Cập nhật nhật ký</string>
+    <string name="bts_info_tiendo">Cập nhật tiến độ</string>
+    <string name="bts_info_tctd_design">Giám sát thi công cột và tiếp địa</string>
+    <string name="bts_info_tcpm_design">Giám sát thi công phòng máy và nhà máy nổ</string>
+    <string name="bts_info_tckd_design">Giám sát thi công kéo điện</string>
+    <string name="bts_info_tcldtb_design">Giám sát thi công lắp đặt thiết bị</string>
+    <string name="bts_info_tcldvb_design">Giám sát thi công lắp đặt viba</string>
+    <string name="bts_info_tchn_design">Giám sát đo kiểm</string>
+    <string name="bts_info_measure_constr">Giám sát đo kích thước công trình</string>
+    <!-- HungTN add new 23/08/2016 -->
+    <string name="bts_info_cndtc">Cập nhật đội thi công </string>
+    <string name="bts_info_cnv">Cập nhật vướng </string>
+    <string name="bts_info_cntd">Cập nhật tiến độ </string>
+    <string name="bts_info_cnnk">Cập nhật nhật ký </string>
+    <!-- end -->
+    <string name="bts_info_kl_design">Kết luận</string>
+    <string name="bts_info_nhat_ky">Nhật ký</string>
+    <string name="bts_info_tien_do">Tiến độ</string>
+    <string name="bts_design_type_dh">Điển hình</string>
+    <string name="bts_design_type_ct">Chi tiết</string>
+    <string name="bts_design_assess_phtt">Phù hợp thực tế</string>
+    <string name="bts_design_assess_kphtt">Không phù hợp thực tế</string>
+    <string name="bts_design_pillar_trenmai">Trên mái</string>
+    <string name="bts_design_pillar_duoidat">Dưới đất</string>
+    <string name="bts_design_pillar_cosan">Có sẵn</string>
+    <string name="bts_design_pillar_type_dayco">Dây co</string>
+    <string name="bts_design_pillar_type_tudung">Tự đứng</string>
+    <string name="bts_design_pillar_type_cotthap">Cột tháp</string>
+    <string name="bts_design_pillar_type_cotcoc">Cột cóc</string>
+    <string name="bts_design_house_type_lapghep">Lắp ghép</string>
+    <string name="bts_design_house_type_xaymoi">Xây mới</string>
+    <string name="bts_design_house_type_caitao">Cải tạo</string>
+    <string name="bts_design_house_type_cosan">Có sẵn</string>
+    <string name="bts_design_house_type_xaymoi_vuotlu">Nhà xây mới vượt lũ</string>
+    <string name="bts_design_house_type_lapghep_vuotlu">Nhà lắp ghép vượt lũ</string>
+    <string name="bts_design_factory_type_nhaxaymoi">Nhà xây mới</string>
+    <string name="bts_design_factory_type_nhavuotlu">Nhà vượt lũ</string>
+    <string name="bts_design_factory_type_nhatienche">Nhà tiền chế</string>
+    <string name="bts_design_house_type_lien_phong_may">Nhà máy nổ liền phòng máy</string>
+    <string name="check_validation_false">Các trường bắt buộc nhập phải có dữ liệu</string>
+    <string name="check_somongco_khongdat">Số móng co tối đa là 5</string>
+    <string name="insert_database_complete">Thêm dữ liệu thành công</string>
+    <string name="update_database_complete">Cập nhật dữ liệu thành công</string>
+    <string name="bts_assess_pillar_dat">Đạt</string>
+    <string name="bts_assess_pillar_khongdat">Không đạt</string>
+    <string name="bts_assess_pillar_danhgia_dat">Đảm bảo chất lượng và được phép lắp dựng</string>
+    <string name="bts_assess_pillar_three_found">3</string>
+    <string name="bts_assess_pillar_four_found">4</string>
+    <string name="bts_assess_pillar_six_found">6</string>
+    <string name="bts_assess_pillar_danhgia_kodat">Không đảm bảo để lắp dựng</string>
+    <string name="bts_assess_cat_work_dingam">Đi ngầm</string>
+    <string name="bts_assess_cat_work_treocao">Treo cao</string>
+    <string name="bts_assess_power_pole_cosan">Có sẵn</string>
+    <string name="bts_assess_power_pole_phaikeomoi">Phải kéo mới</string>
+    <string name="bts_pillar_assess_is_null">Bạn chưa chọn cột Anten</string>
+    <string name="bts_pillar_type_is_null">Bạn chưa chọn loai cột</string>
+    <string name="bts_found_num_is_null">Số móng co phải khác 0</string>
+    <string name="bts_pillar_hight_is_null">Bạn chưa nhập độ cao</string>
+    <string name="bts_deploy_day_is_null">Bạn chưa nhập thời gian triển khai dự kiến</string>
+    <string name="bts_pillar_found_num_is_null">Bạn chưa chọn số móng co</string>
+    <string name="bts_pillar_house_type_is_null">Bạn chưa chọn loại nhà</string>
+    <string name="bts_deploy_day_is_integer">Thời gian triển khai dự kiến phải > 0</string>
+    <!-- loai tram -->
+    <string name="bts_pillar_station_type_2g">2G</string>
+    <string name="bts_pillar_station_type_3g">3G</string>
+    <string name="bts_pillar_station_type_cosite">Cosite</string>
+    <string name="bts_pillar_station_type_ap_depend">AP phụ thuộc</string>
+    <string name="bts_pillar_station_type_ap_independ">AP độc lập</string>
+    <string name="bts_pillar_station_type_xe_ps_luudong">Xe phát sóng lưu động</string>
+    <string name="bts_pillar_station_type_4g">4G</string>
+    <string name="bts_pillar_station_type_pop">POP</string>
+    <string name="bts_pillar_station_type_tram_repeater">Trạm Repeater</string>
+    <string name="bts_pillar_station_type_tram_truyen_dan">Trạm Truyền Dẫn</string>
+    <string name="bts_pillar_station_type_tram_khach_hang">Trạm khách hàng</string>
+    <string name="bts_pillar_station_type_tong_tram_kv">Tổng trạm khu vực</string>
+    <string name="bts_pillar_station_type_tong_tram_chi_nhanh">Tổng trạm chi nhánh</string>
+    <string name="bts_pillar_station_type_tong_tram_duong_truc">Tổng trạm đường trục</string>
+    <string name="bts_pillar_station_type_phong_lab">Phòng Lab</string>
+    <string name="bts_pillar_station_type_diem_truyen_dan">Điểm truyền dẫn</string>
+    <string name="bts_pillar_station_type_head_end">HeadEnd</string>
+    <string name="bts_pillar_station_type_sub_headend">Sub-HeadEnd</string>
+    <string name="bts_pillar_station_type_dai_truyen_hinh">Đài truyền hình</string>
+    <string name="bts_pillar_station_type_tram_accu">Trạm phục hồi ACCU</string>
+    <string name="bts_pillar_station_type_truyenhinhcap">Trạm truyền hình cáp</string>
+    <!-- loai xay dung -->
+    <string name="bts_pillar_construction_type_xaymoi">Xây mới</string>
+    <string name="bts_pillar_construction_type_nangcap">Nâng cấp</string>
+
+    <!-- danh sach cong trinh -->
+    <string name="title_activity_construction">ConstructionActivity</string>
+    <string name="update">Cập nhật</string>
+    <string name="sperate">|</string>
+    <string name="list_works_title">Danh sách công trình được giao giám sát</string>
+    <string name="id_work">Mã Công Trình</string>
+    <string name="category_work">Loại Công Trình</string>
+    <string name="category_work_prompt">Chọn loại công trình</string>
+    <string name="search_listwork">Tìm kiếm</string>
+    <string name="id_station">Mã trạm</string>
+    <string name="txt_status">Trạng thái</string>
+    <string name="stt_work">STT</string>
+    <string name="action">Thao tác</string>
+    <string name="noncategary">Chưa có</string>
+    <string name="line_category">Loại tuyến</string>
+    <!-- Danh gia thiet ke BTS -->
+    <string name="supervision_bts_title">Đánh giá chất lượng công trình trạm BTS</string>
+    <string name="supervision_bts_tt">Thông tin</string>
+    <string name="supervision_bts_tram">Trạm</string>
+    <string name="supervision_bts_matram">AGG001</string>
+    <string name="supervision_bts_ct">Mã Công Trình</string>
+    <string name="supervision_bts_mact">AGG001</string>
+    <string name="supervision_bts_body_row1_tv_loaitk">Loại thiết kế <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_body_row1_tv_loaithietke">--Chọn--</string>
+    <string name="trl_supervision_bts_body_row1_tv_danhgia">Đánh giá <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_body_row1_tv_chondanhgia">--Chọn--</string>
+    <string name="supervision_bts_body_row2_tv_diengiai">Diễn giải</string>
+    <string name="supervision_bts_body_row2_tv_loai_tram">Loại trạm</string>
+    <string name="trl_supervision_bts_body_row2_tv_loai_xay_dung">Loại xây dựng <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_body_row2_et_diengiai">Điền vào đây...</string>
+    <string name="ll_supervision_bts_body_row3_1_cotanten">Cột Anten <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="ll_supervision_bts_body_row3_1_tv_chonanten">--Chọn--</string>
+    <string name="ll_supervision_bts_body_row3_1_loaicot">Loại cột <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="ll_supervision_bts_body_row3_1_docao">Độ cao <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="ll_supervision_bts_body_row3_1_tv_chonloaicot">--Chọn--</string>
+    <string name="ll_supervision_bts_body_row4_1_somongco">Số móng co <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="ll_supervision_bts_body_row4_1_tennha">Tên nhà</string>
+    <string name="ll_supervision_bts_body_row4_1_deployday">Thời gian triển khai dự kiến <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="ll_supervision_bts_body_row4_1_loainha">Loại nhà <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="ll_supervision_bts_body_row4_1_tv_chonloainha">--Chọn--</string>
+    <string name="constr_ngay">ngày</string>
+    <string name="ll_supervision_bts_body_row5_1_nhamayno">Nhà máy nổ</string>
+    <string name="rl_supervision_bts_body_row5_1_tv_chonnhamayno">--Chọn--</string>
+    <string name="supervision_bts_infomation_design_not_fill">Bạn chưa nhập thông tin thiết kế</string>
+    <string name="supervision_deploy_day_not_fill">Bạn chưa có thời gian triển khai dự kiến</string>
+    <string name="supervision_bts_found_number_not_change">Bạn phải sửa lại số móng co trong giám sát thi công cột và tiếp địa</string>
+    <string name="rl_supervision_bts_body_row6_1_bt_save">Lưu</string>
+    <string name="rl_constr_bt_complete">Hoàn thành</string>
+    <string name="supervision_brcd_kct_text_sc">Số cột có sẵn</string>
+    <string name="supervision_brcd_kct_text_loaicap">Loại cáp</string>
+    <string name="supervision_brcd_kct_text_chieudaicaptruc">Tổng chiều dài cáp trục</string>
+    <string name="supervision_brcd_kcn_text_yeucaunhap">Yêu cầu nhập thông tin thiết kế trước khi giám sát</string>
+    <string name="supervision_brcd_kct_text_sccm">Số cột chồng mới</string>
+    <string name="supervision_brcd_kct_text_docao">Độ cao </string>
+    <string name="supervision_brcd_kct_text_stt">STT </string>
+    <string name="supervision_brcd_kct_text_dc">Đoạn cáp </string>
+    <string name="supervision_brcd_kct_text_tc">Từ cột </string>
+    <string name="supervision_brcd_kct_text_dencot">Đến cột </string>
+    <string name="supervision_brcd_kct_text_chieudai">Chiều dài </string>
+    <string name="supervision_brcd_kct_text_ghichu">Ghi chú </string>
+    <string name="supervision_brcd_kct_text_diengiai">Diễn giải</string>
+    <string name="supervision_brcd_kct_text_ttn">Tên tủ</string>
+    <string name="supervision_brcd_kct_text_map_tn">Tọa độ</string>
+    <string name="supervision_brcd_kct_text_nht">Ngày hoàn thành </string>
+    <string name="supervision_brcd_kct_text_name">Tên tủ thuê bao</string>
+    <string name="supervision_brcd_kct_text_name2">Đoạn cáp</string>
+    <string name="supervision_bts_found_number_is_new">Bạn chưa lưu móng mới thêm</string>
+    <string name="supervision_bts_title_posision">Vị trí của bạn</string>
+    <string name="supervision_bts_pillar_posision_toado">Tọa độ</string>
+    <string name="supervision_bts_pillar_posision_kinhdo">Kinh độ</string>
+    <string name="supervision_bts_pillar_posision_vido">Vĩ độ</string>
+    <string name="bts_pillar_anten_position_chotvitri_null">Bạn phải chốt vị trí trước</string>
+    <string name="rl_supervision_bts_posision_pillar_row1_bt_chotvitri">Chốt vị trí</string>
+    <string name="constr_pillar_anten_danhgia_empty">Bạn chưa chọn thông tin đánh giá cho cột:</string>
+    <string name="constr_pillar_anten_pillar_name_empty">Bạn chưa nhập tên cột</string>
+    <string name="constr_pillar_anten_nn_khongdat_tempty">Bạn chưa chọn nguyên nhân không đạt cho cột:</string>
+    <string name="constr_pillar_anten_vitri_chuachot">Vị trí chưa được chốt</string>
+    <string name="constr_pillar_anten_danhgia_ldc_empty">Bạn chưa chọn đánh giá chất lượng lắp dựng cột</string>
+    <string name="constr_pillar_anten_nn_khongdat_ldc_tempty">Bạn chưa chọn nguyên nhân không đạt cho mục lắp dựng cột</string>
+    <string name="constr_pillar_anten_danhgia_tctd_empty">Bạn chưa chọn trạng thái cho mục thi công tiếp địa</string>
+    <string name="constr_pillar_anten_nn_khongdat_tctd_tempty">Bạn chưa chọn nguyên nhân không đạt cho mục thi công tiếp địa</string>
+    <string name="constr_pillar_anten_dtclc_tempty">Bạn chưa đánh giá chất lượng cột</string>
+    <string name="constr_pillar_anten_found_number_min">Số móng co tối thiểu là 4, bạn không thể xóa nữa</string>
+    <string name="constr_pillar_anten_not_can_delete">Bạn không thể xóa cột</string>
+    <string name="constr_pillar_anten_not_can_add">Bạn không thể thêm mới</string>
+    <string name="constr_cat_work_danhgia_tcpm_empty">Bạn chưa chọn trạng thái cho mục thi công phòng máy</string>
+    <string name="constr_cat_work_danhgia_tcnmn_empty">Bạn chưa chọn trạng thái cho mục thi công nhà máy nổ</string>
+    <string name="constr_cat_work_danhgia_kdd_empty">Bạn chưa chọn trạng thái cho mục kéo dây điện nhà máy nổ</string>
+    <string name="constr_cat_work_nn_khongdat_tcpm_tempty">Bạn chưa chọn nguyên nhân không đạt cho mục thi công phòng máy</string>
+    <string name="constr_cat_work_nn_danhgia_brcdmx_tempty">Bạn chưa chọn đánh giá</string>
+    <string name="constr_cat_work_nn_khongdat_brcdmx_tempty">Bạn chưa chọn nguyên nhân không đạt cho thi công măng xông</string>
+    <string name="constr_cat_work_nn_khongdat_sub_tempty">Bạn chưa nhập thông tin đánh giá giám sát lắp đặt thiết bị</string>
+    <string name="constr_cat_work_nn_khongdat_tcnmn_tempty">Bạn chưa chọn nguyên nhân không đạt cho mục thi công nhà máy nổ</string>
+    <string name="constr_cat_work_nn_khongdat_kdd_tempty">Bạn chưa chọn nguyên nhân không đạt cho mục thi công kéo dây điện nhà máy nổ</string>
+    <string name="constr_cat_work_loai_diday_kdd_tempty">Bạn chưa chọn loại đi dây cho mục thi công kéo dây điện nhà máy nổ</string>
+    <string name="bts_constr_power_pole_dgtckd_tempty">Bạn chưa chọn trạng thái thi công kéo điện</string>
+    <string name="bts_constr_power_pole_cottrongmoi_kd_empty">Bạn chưa nhập đủ trường dữ liệu đánh giá cột trồng mới</string>
+    <string name="constr_cat_work_nn_khongdat_kd_tempty">Bạn chưa chọn nguyên nhân không đạt cho mục thi công kéo điện</string>
+
+    <!-- Danh gia thi cong cot va tiep dia -->
+    <string name="description_image_location">Image Button vị trí</string>
+    <string name="supervision_bts_pillar_tv_vitri">Vị trí cột <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_pillar_tv_thicongcot">Thi công cột</string>
+    <string name="supervision_date_complete">Ngày hoàn thành: </string>
+    <string name="supervision_brcd_dg">Diễn giải</string>
+    <string name="supervision_brcd_dg_ed">Điền vào đây</string>
+    <string name="supervision_brcd_td">Xác định tọa độ</string>
+    <string name="supervision_sub_sltb">Số lượng thiết bị</string>
+    <string name="supervision_sub_hsx">Hãng sản xuất</string>
+    <string name="supervision_brcd_lt">Loại trạm</string>
+    <string name="supervision_brcd_tt">Trạm trục</string>
+    <string name="supervision_bts_pillar_tv_lapdungcot">Lắp dựng cột anten và thang cáp ngoài trời</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row1_dgclc">Đánh giá chất lượng cột <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_pillar_tl_lapdung_row2_dgclldc">Đánh giá chất lượng lắp dựng cột <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_pillar_tl_lapdung_row1_chondgclc">--Chọn--</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row2_chondgclldc">--Chọn--</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row2_nnkd">Nguyên nhân không đạt / Nghiệm thu</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row2_chonnnkd">--Chọn--</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row3_tv_diengiai">Diễn giải</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row3_tv_anh">Ảnh</string>
+    <string name="supervision_bts_pillar_tl_lapdung_row3_tv_thicongtiepdia">Thi công tiếp địa</string>
+    <string name="supervision_bts_pillar_tl_thicongtiepdia_row1_trangthai">Trạng thái <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_pillar_tl_lapdung_row1_chontrangthai">--Chọn--</string>
+    <string name="trl_supervision_bts_pillar_thicong_row1_mahieumong">Mã hiệu móng</string>
+    <string name="trl_supervision_bts_pillar_thicong_row1_danhgia">Đánh giá</string>
+    <string name="trl_supervision_bts_pillar_thicong_tl_row2_dat">Đạt</string>
+    <string name="trl_supervision_bts_pillar_thicong_tl_row2_khongdat">Không đạt</string>
+    <string name="bts_pillar_progressdialog_title">Processing...</string>
+    <string name="bts_pillar_progressdialog_message">Please wait</string>
+    <string name="bts_pillar_network_error">Network error!</string>
+    <string name="trl_supervision_bts_pillar_notification">Cột anten trong đánh giá thiết kế là "có sẵn" nên không phải đánh giá hạng mục này</string>
+    <string name="trl_supervision_bts_pillar_notification_tv">Loại cột trong đánh giá thiết kế là "Cột Cóc" nên không phải đánh giá hạng mục này</string>
+
+    <!-- Danh gia thi cong phong may va nha may no -->
+    <string name="supervision_bts_catwork_tv_thicongphongmay">Thi công phòng máy</string>
+    <string name="supervision_bts_catwork_tl_thicongphongmay_row1_trangthai">Trạng thái <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chontrangthai">--Chọn--</string>
+    <string name="supervision_bts_catwork_tl_thicongphongmay_row1_nnkd">Nguyên nhân không đạt</string>
+    <string name="rl_supervision_bts_catwork_tl_thicongphongmay_row1_tv_chonnnkd">--Chọn--</string>
+    <string name="supervision_bts_catwork_tl_thicongphongmay_row2_diengiai">Diễn giải</string>
+    <string name="supervision_bts_catwork_tl_thicongphongmay_size_drc">Kích thước (DxRxC)</string>
+    <string name="rl_supervision_bts_catwork_tl_thicongphongmay_row2_tv_anh">Ảnh</string>
+    <string name="supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke">Thiết kế</string>
+    <string name="supervision_bts_catwork_tl_thicongphongmay_size_drc_tv_thucte">Thực tế</string>
+    <string name="trl_supervision_bts_catwork_notification_pm">Loaị nhà trong đánh giá thiết kế là "có sẵn" nên không phải đánh giá hạng mục này</string>
+    <string name="trl_supervision_bts_catwork_notification_nmn">Bạn không chọn nhà máy nổ trong đánh giá thiết kế nên không phải đánh giá hạng mục này</string>
+
+    <!-- Danh gia thi cong keo dien -->
+    <string name="trl_supervision_bts_power_pole_cottrongmoi_khongdat">Cột trồng mới không đạt</string>
+    <string name="trl_supervision_bts_power_pole_row1_tv_diemdau">Điểm đấu <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="rl_supervision_bts_power_pole_tv_socottrong">Số cột trồng mới <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="rl_supervision_bts_power_pole_tv_loaicap">Loại cáp <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="trl_supervision_bts_power_pole_thicong_tencot">Tên cột</string>
+    <string name="trl_supervision_bts_power_pole_thicong_nnkd">Nguyên nhân không đạt</string>
+    <string name="trl_supervision_bts_power_pole_thicong_diengiai">Diễn giải</string>
+    <string name="trl_supervision_bts_power_pole_thicong_huy">Hủy</string>
+    <string name="trl_supervision_bts_power_pole_thicongkeoday">Thi công kéo dây điện</string>
+    <string name="bts_new_pillar_delete_message">Bạn thực sự muốn xóa cột</string>
+    <string name="bts_special_location_delete_message">Bạn thực sự muốn xóa vị trí này</string>
+    <string name="bts_power_pole_diemdau_is_null">Bạn chưa chọn điểm đấu</string>
+    <string name="bts_power_pole_socot_is_null">Bạn chưa nhập số cột trồng mới</string>
+    <string name="bts_power_pole_cap_type_is_null">Bạn chưa nhập loại cáp</string>
+
+    <!-- Danh gia thi cong lap dat thiet bi -->
+    <string name="trl_supervision_bts_equip_thongtin_thietbi">Thông tin thiết bị</string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_row4_tt2g">Thiết bị 2G</string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_row4_tt3g">Thiết bị 3G</string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_row1_hangsx">Hãng sản xuất <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_row1_sotu_2g">Số tủ 2G </string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_row2_sotu_3g">Số tủ 3G </string>
+    <string name="rl_supervision_bts_equip_tl_thongtinthietbi_row2_tv_loaitu_3g">Loại tủ 3G </string>
+    <string name="rl_supervision_bts_equip_tl_thongtinthietbi_row2_tv_loaitu_2g">Loại tủ 2G </string>
+    <string name="trl_supervision_bts_equip_row1_stt">STT</string>
+    <string name="trl_supervision_bts_equip_giamsat_tiepdat">GS lắp đặt: Phần tiếp đất</string>
+    <string name="trl_supervision_bts_equip_giamsat_ngoaitroi">GS lắp đặt: Phần ngoài trời</string>
+    <string name="trl_supervision_bts_equip_giamsat_trongnha">GS lắp đặt: Phần trong nhà</string>
+    <string name="trl_supervision_bts_equip_row1_tenhangmuc">Tên hạng mục</string>
+    <string name="bts_equip_3g_type_phantan">Phân tán</string>
+    <string name="bts_equip_3g_type_taptrung">Tập trung</string>
+    <string name="bts_equip_equip_type_quang">Quang</string>
+    <string name="bts_equip_equip_type_viba">Viba</string>
+    <string name="bts_equip_equip_type_vsat">VSAT</string>
+    <string name="bts_equip_tanso_hai">2</string>
+    <string name="bts_equip_tanso_bay">7</string>
+    <string name="bts_equip_tanso_muoi_lam">15</string>
+    <string name="bts_equip_tanso_muoi_tam">18</string>
+    <string name="bts_equip_tanso_hai_ba">23</string>
+    <string name="bts_equip_kichthuoctrong_khong_phay_ba">0.3</string>
+    <string name="bts_equip_kichthuoctrong_khong_phay_sau">0.6</string>
+    <string name="bts_equip_kichthuoctrong_mot_phay_hai">1.2</string>
+    <string name="bts_equip_kichthuoctrong_mot_phay_nam">1.5</string>
+    <string name="bts_equip_kichthuoctrong_hai_phay_bon">2.4</string>
+    <string name="bts_equip_kichthuoctrong_ba">3</string>
+    <string name="bts_spiner_prompt">Hãng sản xuất</string>
+    <string name="bts_equip_2g_null">Chưa nhập số tủ 2G</string>
+    <string name="bts_equip_3g_null">Chưa nhập số tủ 3G</string>
+    <string name="bts_equip_3gtype_null">Chưa chọn loại tủ 3G</string>
+    <string name="bts_equip_2gtype_null">Chưa chọn loại tủ 2G</string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_bts_row1">Thông tin thiết bị BTS</string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_truyendan_tv_row1">Thông tin thiết bị truyền dẫn</string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_truyendan_row1_loaithietbi">Loại thiết bị <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_equip_tl_thongtinthietbi_truyendan_row2_tanso">Tần số</string>
+    <string name="bts_equip_equip_type_null">Chưa nhập loại thiết bị</string>
+    <string name="rl_supervision_bts_equip_tl_thongtinthietbi_truyendan_row2_tv_kichthuoctrong">Kích thước trống</string>
+
+    <!-- Danh gia lap dat viba -->
+    <string name="bts_viba_danhgia_empty">Bạn chưa chọn đánh giá là không đạt cho hạng mục:</string>
+    <string name="bts_viba_nn_access_tempty">Bạn chưa chọn đánh giá là không đạt cho hạng mục:</string>
+    <string name="bts_viba_nn_khongdat_tempty">Bạn chưa chọn nguyên nhân không đạt cho hạng mục:</string>
+    <string name="bts_viba_nn_danhgia_tempty">Bạn phải chọn đánh giá là không đạt</string>
+    <string name="bts_viba_nn_diengiai_tempty">Bạn phải nhập trường diễn giải cho hạng mục này</string>
+    <string name="bts_viba_giamsat_dauthap">Giám sát đầu thấp</string>
+    <string name="bts_viba_giamsat_daucao">Giám sát đầu cao</string>
+    <string name="bts_viba_thicong_ngoaitroi">Thi công ngoài trời</string>
+    <string name="bts_viba_thicong_trongnha">Thi công trong nhà</string>
+
+    <!-- Giam sat thi cong do kiem va tich hop -->
+    <string name="bts_measure_tile_expandlist_feeder_2G">Đo kiểm chất lượng tuyến anten-feeder 2G</string>
+    <string name="bts_measure_tile_expandlist_feeder_3G">Đo kiểm chất lượng tuyến anten-feeder 3G</string>
+    <string name="bts_measure_tile_expandlist_viba">Đo kiểm Viba</string>
+    <string name="supervision_bts_measure_tl_row2_ketquado">Kết quả đo <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_measure_tl_row2_donvi">Đơn vị <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_measure_tl_row2_loaimaydo">Loại máy đo</string>
+    <string name="supervision_bts_measure_tl_row2_Serial">Serial <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_measure_tl_row4_nguoido">Người đo <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="supervision_bts_measure_tl_row4_phone">Số điện thoại</string>
+    <string name="supervision_bts_measure_field_null">Bạn chưa nhập đủ trường dữ liệu</string>
+    <string name="supervision_bts_measure_tl_row2_ketquado_is_null">Bạn chưa nhập kết quả đo</string>
+    <string name="supervision_bts_measure_tl_row2_status_is_null">Bạn chưa chọn trạng thái</string>
+    <string name="supervision_bts_measure_tl_row2_donvi_is_null">Bạn chưa nhập đơn vị</string>
+    <string name="supervision_bts_measure_tl_row2_serial_is_null">Bạn chưa nhập serial</string>
+    <string name="supervision_bts_measure_tl_row2_nguoido_is_null">Bạn chưa nhập người đo</string>
+    <string name="supervision_bts_measure_tl_row2_sdt_is_null">Nhập sai định dạng số điện thoại</string>
+
+    <!-- ket luan giam sat bts -->
+    <string name="supervision_bts_kl_danhgia_chooice_status_null">Bạn chưa chọn trạng thái công trình</string>
+    <string name="supervision_bts_kl_danhgia_thicongcot_null">Bạn chưa có thông tin đánh giá thi công cột</string>
+    <string name="supervision_bts_kl_danhgia_lapdungcot_null">Bạn chưa có thông tin đánh giá lắp dựng cột</string>
+    <string name="supervision_bts_kl_danhgia_danhgia_clc_null">Bạn chưa có thông tin đánh giá chất lượng cột</string>
+    <string name="supervision_bts_kl_danhgia_thicongtiepdia_null">Bạn chưa có thông tin đánh giá thi công tiếp địa</string>
+    <string name="supervision_bts_kl_danhgia_thicongphongmay_null">Bạn chưa có thông tin đánh giá thi công phòng máy</string>
+    <string name="supervision_bts_kl_danhgia_thicongnhamayno_null">Bạn chưa có thông tin đánh giá thi công nhà máy nổ</string>
+    <string name="supervision_bts_kl_danhgia_keodaydien_nmn_null">Bạn chưa có thông tin đánh giá thi công kéo dây điện nhà máy nổ</string>
+    <string name="supervision_bts_kl_danhgia_thicongkeodaydien_null">Bạn chưa có thông tin đánh giá thi công kéo dây điện</string>
+    <string name="supervision_bts_kl_danhgia_lapdatthietbi_null">Bạn chưa có thông tin đánh giá thi công lắp đặt thiết bị</string>
+    <string name="supervision_bts_kl_danhgia_lapdatviba_null">Bạn chưa có thông tin đánh giá thi công lắp đặt viba</string>
+    <string name="supervision_bts_kl_hangmuc">Hạng mục</string>
+    <string name="supervision_bts_kl_danhgia_hannoi_kdat">trong giám sát đo kiểm được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_danhgia_hannoi_null">trong giám sát đo kiểm chưa được đánh giá, chưa thể kết luận</string>
+    <string name="supervision_bts_kl_pillar_khongdat">Có hạng mục cột trong giám sát thi công tiếp địa không đạt</string>
+    <string name="supervision_bts_kl_tiepdia_khongdat">Hạng mục thi công tiếp địa được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_lapdungcot_khongdat">Hạng mục lắp dựng cột được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_danhgia_chatluong_cot_khongdat">Đánh giá chất lượng cột là không không đảm bảo để lắp dựng, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_phongmay_khongdat">Hạng mục thi công phòng máy được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_nhamayno_khongdat">Hạng mục thi công nhà máy nổ được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_keodaydien_nmn_khongdat">Hạng mục thi công kéo dây điện nhà máy nổ được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_keodaydien_khongdat">Hạng mục thi công kéo điện được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_cottrongmoi_khongdat">Có hạng mục cột trồng mới được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_lapdatthietbi_khongdat">Có hạng mục lắp đặt thiết bị được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_lapdatviba_low_khongdat">Có hạng mục lắp đặt viba đầu thấp được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_lapdatviba_heigh_khongdat">Có hạng mục lắp đặt viba đầu cao được đánh giá là không đạt, chưa thể kết luận là đạt</string>
+    <string name="supervision_bts_kl_access_dat">Tất cả các hạng mục được đánh giá là đạt, không thể kết luận là không đạt</string>
+    <string name="constr_deployday_home_is_empty">Bạn không thể cập nhật tiến độ khi chưa có thời gian triển khai dự kiến</string>
+
+    <!-- hien thi update du lieu thanh cong tren dialog -->
+    <string name="supervision_bts_catwork_tv_thicongnhamayno">Thi công nhà máy nổ</string>
+    <string name="supervision_bts_catwork_tv_thicongkeoday">Thi công kéo dây điện nhà máy nổ</string>
+    <string name="rl_supervision_bts_catwork_tl_thicongkeoday_row2_tv_loaididay">Loại đi dây <font fgcolor="#FFFF0000">(*)</font></string>
+    <string name="insert_database_compelete">Thêm dữ liệu thành công!</string>
+    <string name="update_database_compelete">Cập nhật dữ liệu thành công!</string>
+    <string name="bt_cat_cause_unqualify_dialog">OK</string>
+    <string name="unused">unused</string>
+    <string name="supv_thicongcot_is_empty">Bạn chưa có thông tin giám sát thi công cột</string>
+    <string name="supv_lapdungcot_is_empty">Bạn chưa có thông tin giám sát lắp dựng cột</string>
+    <string name="supv_tiepdia_is_empty">Bạn chưa có thông tin giám sát tiếp địa</string>
+    <string name="txt_sync_title">Sync Title</string>
+    <string name="txt_syncing">Đang đồng bộ ...</string>
+    <string name="txt_percentage">0%</string>
+    <string name="txt_sync_data_type">Đang đồng bộ: ...</string>
+    <string name="txt_hide">Hide</string>
+    <string name="txt_sync">Đồng bộ: </string>
+    <string name="txt_hethong_gsct">Hệ thống giám sát công trình</string>
+    <string name="txt_sync_success">Đồng bộ thành công!</string>
+    <string name="txt_thicong_drop_go_chua_gs">Hạng mục thi công cáp Drop &#38; Go chưa giám sát nên chưa thể kết luận!</string>
+    <string name="txt_thicong_keo_cap_nhanh_chua_gs">Hạng mục thi công kéo cáp nhánh chưa giám sát nên chưa thể kết luận!</string>
+    <string name="txt_thicong_keo_cap_truc_chua_gs">Hạng mục thi công kéo cáp trục chưa giám sát nên chưa thể kết luận!</string>
+    <string name="txt_thicong_tu_nhanh_chua_gs">Hạng mục thi công tủ nhanh chưa giám sát nên chưa thể kết luận!</string>
+    <string name="txt_thicong_tu_thue_bao_chua_gs">Hạng mục thi công tủ thuê bao chưa giám sát nên chưa thể kết luận!</string>
+    <string name="txt_thicong_mxt_chua_gs">Hạng mục thi công măng xông trục chưa giám sát nên chưa thể kết luận!</string>
+
+    <!-- hungkm -->
+    <!-- make new plan title -->
+    <string name="title_make_new_plan">Tạo kế hoạch mới</string>
+    <string name="make_new_plan_description">Nhập kế hoạch mới sau đó nhấn nút để cập nhật</string>
+    <string name="make_new_plan_success">Cập nhật kế hoạch mới thành công!</string>
+    <!--  slide menu bar  -->
+    <string name="hello_world">Hello world!</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Màn hình chính</item>
+        <item>Ẩn thanh tìm kiếm</item>
+        <item>Kế Hoạch</item>
+        <item>Đồng Bộ</item>
+        <item>Thông tin</item>
+        <item>Dashboard</item>
+        <item>Thoát</item>
+    </string-array>
+    <string name="arrow_up">Ẩn thanh tìm kiếm</string>
+    <string name="arrow_down">Hiển thị thanh tìm kiếm</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="notify_name">Thông báo</string>
+    <string name="checkout_confirm">Bạn chắc chắn muốn check out?</string>
+    <string name="checkin_notify">Bạn vừa Check In</string>
+    <string name="checkout_notify">Bạn đã Check Out</string>
+    <string name="force_checkout_notify">Quá 4 giờ, hệ thống tự động check out công việc hiện tại</string>
+    <string name="checkin_require">Bạn phải Check In mới có thể thực hiện chức năng này</string>
+    <string name="input_plan_require">Hãy nhập kế hoạch trước khi Check In</string>
+    <string name="checkin_time_require">Vui lòng đợi, mỗi lần Check In cách nhau ít nhất 4 giờ</string>
+    <string name="checkin_distance_require">Không nằm trong khu vực cần Check In</string>
+    <string name="checkin_gps_require">Không thể xác định vị trí của bạn, vui lòng kiểm tra lại GPS cuả thiết bị</string>
+    <string name="text_from_date">Từ ngày</string>
+    <string name="text_to_date">Đến ngày</string>
+    <string name="no_input_date_plan">Chưa chọn thời gian cho kế hoạch</string>
+    <string name="no_input_text_plan">Vui lòng nhập kế hoạch</string>
+    <string name="error_compare_2date">Chọn thời gian lớn hơn thời gian trong danh sách kế hoạch</string>
+    <string name="title_about_activity">Thông tin phần mềm</string>
+    <string name="label_choose_date">Chọn Ngày</string>
+    <string name="input_plan_description">Nhập mới kế hoạch</string>
+    <string name="delete_notify">Bạn chắc chắn muốn xóa kế hoạch này</string>
+    <string name="edit_plan_require">Không thể chỉnh sửa trước ngày hiện tại</string>
+    <string name="edit_plan_require2">Ngày lập kế hoạch đã tồn tại, vui lòng chọn ngày khác</string>
+    <string name="plan_edit_success">Sửa kế hoạch thành công</string>
+    <string name="plan_delete_success">Xóa kế hoạch thành công</string>
+    <string name="plan_add_new_success">Thêm mới kế hoạch thành công</string>
+
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/icon_up</item>
+        <item>@drawable/icon_plan</item>
+        <item>@drawable/icon_syn</item>
+        <item>@drawable/icon_info</item>
+        <item>@drawable/icon_dashboard</item>
+        <item>@drawable/icon_logout</item>
+    </array>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+    <!-- HungTN add new 23/08/2016 -->
+    <string name="txt_date_update">Ngày cập nhật</string>
+    <string name="txt_group_builder">Đội xây dựng</string>
+    <string name="txt_group_assembly">Đội lắp dựng</string>
+    <string name="txt_group_equiment">Đội lắp TB</string>
+    <string name="text_message_must_choice">Bạn phải chọn ít nhất 1 đội</string>
+    <string name="cnv_list_stt">STT</string>
+    <string name="cnv_list_type">Loại vướng</string>
+    <string name="cnv_list_date">Ngày xảy ra vướng</string>
+    <string name="cnv_list_result">Kết quả xử lý vướng</string>
+    <string name="cnv_list_process">Xử lý</string>
+    <string name="cnv_list_view">Xem</string>
+    <string name="cnv_loai_vuong">Loại vướng</string>
+    <string name="cnv_Thiet_ke_du_toan">Thiết kế dự toán</string>
+    <string name="cnv_gpxd">Giấy phép xây dựng</string>
+    <string name="cnv_dan_kien">Dân kiện</string>
+    <string name="cnv_quy_hoach">Quy hoạch</string>
+    <string name="cnv_xac_nhan_4_ben">Xác nhận 4 bên</string>
+    <string name="cnv_khac">khác</string>
+    <string name="cnv_ket_qua_xu_ly">Kết quả xử lý</string>
+    <string name="cnv_trien_khai_tiep">Triển khai tiếp</string>
+    <string name="cnv_huy_cong_trinh">Hủy công trình</string>
+    <string name="cnv_dien_giai">Nhập diễn giải</string>
+    <string name="cnv_ngay_cap_nhat_vuong_error">Ngày vướng không được lớn hơn ngày hiện tại</string>
+    <!-- end -->
+    <!-- KienPV add new 9/9/2016 -->
+    <string name="cnv_thong_tin_vuong">Thông tin vướng</string>
+    <string name="cnv_dien_giai_qua_trinh_xl_vuong">Diễn giải quá trình xử lý vướng</string>
+    <string name="cnv_txt_delete_error">Xóa không thành công !</string>
+    <string name="cnv_txt_delete_success">Xóa danh sách thành công !</string>
+    <string name="cndtc_ten_doi">Tên đội</string>
+    <string name="cndtc_so_nhan_cong">Số nhân công</string>
+    <!-- end -->
+    <string name="image_check_image_approve">Ảnh đã được phê duyệt không thể xóa</string>
+    <string name="not_coordine">Chưa xác định được vị trí</string>
+    <string name="constr_code">Mã công trình:</string>
+    <string name="supervisor_name">Người giám sát:</string>
+    <string name="employee_code">Mã nhân viên:</string>
+
+    <string-array name="array_bts">
+        <item>BTS - Cập nhật nhật ký</item>
+        <item>BTS - Cập nhật tiến độ</item>
+        <item>Truyền dẫn ngầm - Cập nhật nhật ký</item>
+        <item>Truyền dẫn ngầm - Cập nhật tiến độ</item>
+        <item>Truyền dẫn treo - Cập nhật nhật ký</item>
+        <item>Truyền dẫn treo - Cập nhật tiến độ</item>
+        <item>GPON - Nhập nhật ký</item>
+        <item>GPON - Nhập tiến độ</item>
+    </string-array>
+
+    <string-array name="array_bts_info">
+        <item>@string/bts_info_design</item>
+        <item>@string/bts_info_cnnk</item>
+        <item>@string/bts_info_cntd</item>
+        <item>@string/bts_info_tctd_design</item>
+        <item>@string/bts_info_tcpm_design</item>
+        <item>@string/bts_info_tckd_design</item>
+        <item>@string/bts_info_tcldtb_design</item>
+        <item>@string/bts_info_tcldvb_design</item>
+        <item>@string/bts_info_tchn_design</item>
+        <item>@string/bts_info_measure_constr</item>
+        <!--<item>@string/bts_info_cndtc</item>-->
+        <!--<item>@string/bts_info_cnv</item>-->
+        <item>@string/bts_info_kl_design</item>
+    </string-array>
+
+    <string-array name="array_line_background_info">
+        <item>@string/line_background_design_info</item>
+        <item>@string/line_background_nhatky_info</item>
+        <item>@string/line_background_tiendo_info</item>
+        <item>@string/line_background_vtdb_info</item>
+        <item>@string/line_background_gsbc_info</item>
+        <item>@string/line_background_gscrc_info</item>
+        <item>@string/line_background_gskc_info</item>
+        <item>@string/line_background_gshndk_info</item>
+        <item>@string/measure_constr_info</item>
+        <!--<item>@string/line_background_cndtc_info</item>-->
+        <!--<item>@string/line_background_cnv_info</item>-->
+        <item>@string/line_background_keluan_info</item>
+    </string-array>
+
+    <string-array name="array_line_hang_info">
+        <item>@string/line_hang_design_info</item>
+        <item>@string/line_hang_nhatky_info</item>
+        <item>@string/line_hang_tiendo_info</item>
+        <item>@string/line_hang_pillar_info</item>
+        <item>@string/line_hang_cable_info</item>
+        <item>@string/line_hang_mx_info</item>
+        <item>@string/line_hang_measure_constr</item>
+        <!--<item>@string/line_hang_design_info_cndtc</item>-->
+        <!--<item>@string/line_hang_design_info_cnv</item>-->
+        <item>@string/line_hang_keluan_info</item>
+    </string-array>
+
+
+    <string-array name="array_gpon_info">
+        <item>@string/brcd_background_design_info_tttk</item>
+        <item>@string/line_hang_nhatky_info</item>
+        <item>@string/line_hang_tiendo_info</item>
+        <item>@string/brcd_background_design_info_kct</item>
+        <item>@string/brcd_background_design_info_mst</item>
+        <item>@string/brcd_background_design_info_keocapnhanh</item>
+        <item>@string/brcd_background_design_info_tn</item>
+        <item>@string/brcd_background_design_info_dropgo</item>
+        <item>@string/brcd_background_design_info_ttb</item>
+        <!--<item>@string/brcd_background_design_info_cndtc</item>-->
+        <!--<item>@string/brcd_background_design_info_cnv</item>-->
+        <item>@string/brcd_background_design_info_kt</item>
+    </string-array>
+
+
+
+    <string-array name="array_bts_thoi_tiet">
+        <item>Mưa</item>
+        <item>Bão</item>
+        <item>Lũ</item>
+        <item>Nắng</item>
+        <item>Bình thường</item>
+    </string-array>
+
+    <string-array name="array_bts_nguyen_nhan">
+        <item>Đối tác không có đội</item>
+        <item>Thiêu VTTB</item>
+        <item>Chờ đủ điều kiện mới thi công tiếp</item>
+        <item>Vướng</item>
+    </string-array>
+
+    <string-array name="array_bts_loai_vuong">
+        <item>Dân kiện</item>
+        <item>Giấy phép</item>
+        <item>Điện lực</item>
+        <item>Thủ tục</item>
+        <item>Mặt bằng</item>
+        <item>Thiết kế</item>
+    </string-array>
+</resources>

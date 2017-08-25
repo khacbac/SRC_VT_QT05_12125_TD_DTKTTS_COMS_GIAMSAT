@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_supervision_bts_viba_tl_thongtinthietbi_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/rl_supervision_bts_viba_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.85"
+            android:gravity="center"
+            android:background="@drawable/bg_title"
+            android:padding="@dimen/padding"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_large_common" />
+        
+        <Button
+            android:id="@+id/rl_supervision_bts_viba_bt_save"
+            android:filterTouchesWhenObscured="true"
+            style="@style/ViettelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:padding="@dimen/padding"
+            android:text="@string/rl_supervision_bts_body_row6_1_bt_save"
+            android:textSize="@dimen/text_size_common" />
+    </LinearLayout>
+
+    <TabHost
+        android:id="@+id/supervision_bts_viba_tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_layout" >
+
+                <LinearLayout
+                    android:id="@+id/ll_supervision_bts_viba_tl_thongtinthietbi_thicong_ngoaitroi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible" >
+
+                        <TextView
+                            android:id="@+id/trl_supervision_bts_viba_row1_stt"
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.05"
+                            android:background="@drawable/border_top_right_bottom_left"
+                            android:gravity="center"
+                            android:text="@string/trl_supervision_bts_equip_row1_stt"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/trl_supervision_bts_viba_row1_tenhangmuc"
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.25"
+                            android:background="@drawable/border_top_right_bottom"
+                            android:gravity="center"
+                            android:text="@string/trl_supervision_bts_equip_row1_tenhangmuc"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+
+                        <TableLayout
+                            android:id="@+id/trl_supervision_bts_viba_thicong_tl"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:background="@drawable/border_layout"
+                            android:gravity="center_vertical"
+                            android:shrinkColumns="*"
+                            android:stretchColumns="0,1" >
+
+                            <TableRow
+                                android:id="@+id/trl_supervision_bts_viba_thicong_tl_row1"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/table_row_height" >
+
+                                <TextView
+                                    android:id="@+id/trl_supervision_bts_viba_thicong_row1_danhgia"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_span="2"
+                                    android:background="@drawable/border_top_bottom"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_pillar_thicong_row1_danhgia"
+                                    android:textSize="@dimen/text_size_common"
+                                    android:textStyle="bold" />
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/trl_supervision_bts_viba_thicong_tl_row2"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/table_row_height" >
+
+                                <TextView
+                                    android:id="@+id/trl_supervision_bts_viba_thicong_tl_row2_dat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/border_right_bottom"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_pillar_thicong_tl_row2_dat"
+                                    android:textSize="@dimen/text_size_common"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/trl_supervision_bts_viba_thicong_tl_row2_khongdat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/border_bottom"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_pillar_thicong_tl_row2_khongdat"
+                                    android:textSize="@dimen/text_size_common"
+                                    android:textStyle="bold" />
+                            </TableRow>
+                        </TableLayout>
+
+                        <TextView
+                            android:id="@+id/trl_supervision_viba_equip_thicong_row1_nnkd"
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.2"
+                            android:background="@drawable/border_top_right_bottom_left"
+                            android:gravity="center"
+                            android:text="@string/supervision_bts_pillar_tl_lapdung_row2_nnkd"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/trl_supervision_viba_equip_thicong_row1_diengiai"
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.2"
+                            android:background="@drawable/border_top_right_bottom"
+                            android:gravity="center"
+                            android:text="@string/supervision_bts_pillar_tl_lapdung_row3_tv_diengiai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/supervision_bts_viba_lv_thicong_ngoaitroi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_right_bottom_left" >
+                    </ListView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_supervision_bts_viba_tl_thongtinthietbi_thicong_trongnha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible" >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.05"
+                            android:background="@drawable/border_top_right_bottom_left"
+                            android:gravity="center"
+                            android:text="@string/trl_supervision_bts_equip_row1_stt"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.25"
+                            android:background="@drawable/border_top_right_bottom"
+                            android:gravity="center"
+                            android:text="@string/trl_supervision_bts_equip_row1_tenhangmuc"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+
+                        <TableLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:background="@drawable/border_layout"
+                            android:gravity="center_vertical"
+                            android:shrinkColumns="*"
+                            android:stretchColumns="0,1" >
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/table_row_height" >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_span="2"
+                                    android:background="@drawable/border_top_bottom"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_pillar_thicong_row1_danhgia"
+                                    android:textSize="@dimen/text_size_common"
+                                    android:textStyle="bold" />
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/table_row_height" >
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/border_right_bottom"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_pillar_thicong_tl_row2_dat"
+                                    android:textSize="@dimen/text_size_common"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/table_row_height"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/border_bottom"
+                                    android:gravity="center"
+                                    android:text="@string/trl_supervision_bts_pillar_thicong_tl_row2_khongdat"
+                                    android:textSize="@dimen/text_size_common"
+                                    android:textStyle="bold" />
+                            </TableRow>
+                        </TableLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.2"
+                            android:background="@drawable/border_top_right_bottom_left"
+                            android:gravity="center"
+                            android:text="@string/supervision_bts_pillar_tl_lapdung_row2_nnkd"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="60dip"
+                            android:layout_weight="0.2"
+                            android:background="@drawable/border_top_right_bottom"
+                            android:gravity="center"
+                            android:text="@string/supervision_bts_pillar_tl_lapdung_row3_tv_diengiai"
+                            android:textSize="@dimen/text_size_common"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/supervision_bts_viba_lv_thicong_trongnha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_right_bottom_left" >
+                    </ListView>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
