@@ -91,4 +91,7 @@
     <color name="bg_order_item">#e7e9e6</color>
     <color name="unit_text_dashboard">#878787</color>
     <color name="white_tran_75">#e6ffffff</color>
+
+    <drawable name="yellow">#FFEB3B</drawable>
+    <drawable name="white">#FFFFFFFF</drawable>
 </resources>

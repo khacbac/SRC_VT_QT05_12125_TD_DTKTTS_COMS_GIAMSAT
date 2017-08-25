@@ -203,6 +203,7 @@
     <string name="brcd_background_design_info_cnv">Cập nhật vướng </string>
     <!-- end -->
     <string name="line_background_design_info">Đánh giá thiết kế</string>
+    <string name="line_background_nhatky_tiendo_info">Cập nhật nhật ký và tiến độ</string>
     <string name="line_background_nhatky_info">Cập nhật nhật ký</string>
     <string name="line_background_tiendo_info">Cập nhật tiến độ</string>
     <string name="line_background_vtdb_info">Giám sát vị trí đặc biệt</string>
@@ -291,8 +292,8 @@
     <string name="line_hang_design_cable_khoang_vuot">Khoảng vượt <font fgcolor="#FFFF0000">(*)</font></string>
     <string name="line_hang_design_cable_tong_mx">Tổng số măng xông <font fgcolor="#FFFF0000">(*)</font></string>
     <string name="line_hang_design_info">Đánh giá thiết kế</string>
-    <string name="line_hang_nhatky_info">Cập nhật nhật ký</string>
-    <string name="line_hang_tiendo_info">Cập nhật tiến độ</string>
+    <string name="line_hang_nhatky_tiendo_info">Cập nhật nhật ký và tiến độ</string>
+    <!--<string name="line_hang_tiendo_info">Cập nhật tiến độ</string>-->
     <string name="line_hang_pillar_info">Giám sát thi công cột</string>
     <string name="line_hang_cable_info">Giám sát thi công kéo cáp</string>
     <string name="line_hang_measure_constr">Giám sát đo kích thước công trình</string>
@@ -586,8 +587,8 @@
     <!-- End giam sat cong va danh cap -->
     <!-- Danh gia Tram BTS -->
     <string name="bts_info_design">Đánh giá thiết kế</string>
-    <string name="bts_info_nhatky">Cập nhật nhật ký</string>
-    <string name="bts_info_tiendo">Cập nhật tiến độ</string>
+    <string name="bts_info_nhatky">Cập nhật nhật ký và tiến độ</string>
+    <!--<string name="bts_info_tiendo">Cập nhật tiến độ</string>-->
     <string name="bts_info_tctd_design">Giám sát thi công cột và tiếp địa</string>
     <string name="bts_info_tcpm_design">Giám sát thi công phòng máy và nhà máy nổ</string>
     <string name="bts_info_tckd_design">Giám sát thi công kéo điện</string>
@@ -598,8 +599,8 @@
     <!-- HungTN add new 23/08/2016 -->
     <string name="bts_info_cndtc">Cập nhật đội thi công </string>
     <string name="bts_info_cnv">Cập nhật vướng </string>
-    <string name="bts_info_cntd">Cập nhật tiến độ </string>
-    <string name="bts_info_cnnk">Cập nhật nhật ký </string>
+    <!--<string name="bts_info_cntd">Cập nhật tiến độ </string>-->
+    <string name="bts_info_cnnk_cntd">Cập nhật nhật ký và tiến độ </string>
     <!-- end -->
     <string name="bts_info_kl_design">Kết luận</string>
     <string name="bts_info_nhat_ky">Nhật ký</string>
@@ -1067,6 +1068,37 @@
     <string name="supervisor_name">Người giám sát:</string>
     <string name="employee_code">Mã nhân viên:</string>
 
+    <string name="str_check_validate_number">Bạn phải nhập số người cho ít nhất một đội!</string>
+    <string name="str_check_validate_edt_thaydoi">Bạn phải nhập thay đổi, bổ sung!</string>
+    <string name="str_check_validate_edt_noidung_congviec">Bạn phải nhập nội dung công việc trong ngày!</string>
+    <string name="str_check_validate_edt_y_kien_giam_sat">Bạn phải nhập ý kiến giám sát!</string>
+    <string name="str_check_validate_edt_y_kien_thi_cong">Bạn phải nhập ý kiến thi công!</string>
+    <string name="str_check_da_cap_nhat_tien_do">Vui lòng cập nhật tiến độ trước khi lưu!</string>
+    <string name="str_chua_co_du_lieu">Chưa có dữ liệu</string>
+    <string name="str_nhat_ky_va_tien_do">Nhật ký và tiến độ</string>
+
+    <string name="str_trong_ngay_to_chuc_thi_cong">Trong ngày tổ chức thi công:</string>
+    <string name="str_tai_tram_tuyen">Tại trạm/tuyến:</string>
+    <string name="str_thoi_tiet">1. Thời tiết:</string>
+    <string name="str_quan_so_doi_thi_cong">2. Quân số đội thi công:</string>
+    <string name="str_noidung_congviec_thicong_trongngay">3. Nội dung công việc thi công trong ngày:</string>
+    <string name="str_tiendo_thicong_trongngay">4. Khối lượng/tiến độ thi công trong ngày:</string>
+    <string name="str_thaydoi_bosung_phatsinh">5. Những thay đổi,bổ sung,phát sinh:</string>
+    <string name="str_ykien_donvi_thicong">6. Ý kiến đơn vị thi công:</string>
+    <string name="str_ykien_giamsat">7. Ý kiến giám sát:</string>
+    <string name="txt_doi_xay_dung">Đội xây dựng</string>
+    <string name="txt_doi_lap_dung">Đội lắp dựng</string>
+    <string name="txt_doi_tiep_dia">Đội tiếp địa</string>
+    <string name="txt_doi_trienkhai_cap">Đội triển khai cáp</string>
+    <string name="txt_doi_trienkhai_dien">Đội triển khai điện</string>
+    <string name="txt_doi_dao_ranh">Đội đào rãnh</string>
+    <string name="txt_doi_xay_be">Đội xây bể</string>
+    <string name="txt_doi_keo_cap">Đội kéo cáp</string>
+    <string name="txt_may">Máy</string>
+    <string name="txt_doi_thietbi">Đội thiết bị</string>
+    <string name="str_edt_thay_doi_bo_sung">Những thay đổi, bổ sung, phát sinh *</string>
+    <string name="str_edt_noidung_congviec">Nội dung công việc thi công trong ngày.</string>
+
     <string-array name="array_bts">
         <item>BTS - Cập nhật nhật ký</item>
         <item>BTS - Cập nhật tiến độ</item>
@@ -1080,8 +1112,8 @@
 
     <string-array name="array_bts_info">
         <item>@string/bts_info_design</item>
-        <item>@string/bts_info_cnnk</item>
-        <item>@string/bts_info_cntd</item>
+        <item>@string/bts_info_cnnk_cntd</item>
+        <!--<item>@string/bts_info_cntd</item>-->
         <item>@string/bts_info_tctd_design</item>
         <item>@string/bts_info_tcpm_design</item>
         <item>@string/bts_info_tckd_design</item>
@@ -1096,8 +1128,8 @@
 
     <string-array name="array_line_background_info">
         <item>@string/line_background_design_info</item>
-        <item>@string/line_background_nhatky_info</item>
-        <item>@string/line_background_tiendo_info</item>
+        <item>@string/line_background_nhatky_tiendo_info</item>
+        <!--<item>@string/line_background_tiendo_info</item>-->
         <item>@string/line_background_vtdb_info</item>
         <item>@string/line_background_gsbc_info</item>
         <item>@string/line_background_gscrc_info</item>
@@ -1111,8 +1143,8 @@
 
     <string-array name="array_line_hang_info">
         <item>@string/line_hang_design_info</item>
-        <item>@string/line_hang_nhatky_info</item>
-        <item>@string/line_hang_tiendo_info</item>
+        <item>@string/line_hang_nhatky_tiendo_info</item>
+        <!--<item>@string/line_hang_tiendo_info</item>-->
         <item>@string/line_hang_pillar_info</item>
         <item>@string/line_hang_cable_info</item>
         <item>@string/line_hang_mx_info</item>
@@ -1125,8 +1157,8 @@
 
     <string-array name="array_gpon_info">
         <item>@string/brcd_background_design_info_tttk</item>
-        <item>@string/line_hang_nhatky_info</item>
-        <item>@string/line_hang_tiendo_info</item>
+        <item>@string/line_hang_nhatky_tiendo_info</item>
+        <!--<item>@string/line_hang_tiendo_info</item>-->
         <item>@string/brcd_background_design_info_kct</item>
         <item>@string/brcd_background_design_info_mst</item>
         <item>@string/brcd_background_design_info_keocapnhanh</item>
@@ -1137,7 +1169,6 @@
         <!--<item>@string/brcd_background_design_info_cnv</item>-->
         <item>@string/brcd_background_design_info_kt</item>
     </string-array>
-
 
 
     <string-array name="array_bts_thoi_tiet">
