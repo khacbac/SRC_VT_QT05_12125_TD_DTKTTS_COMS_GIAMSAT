@@ -618,6 +618,34 @@
             android:theme="@style/Theme.GSTC"
             android:windowSoftInputMode="stateHidden" >
         </activity>
+        <activity
+            android:name="com.mvp.example.three.view.ThreeActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.GSTC"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.mvp.example.four.FourActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.GSTC"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.mvp.example.mvp.first.login.Login2Activity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.GSTC"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.mvp.example.mvp.first.main.Main2Activity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.GSTC"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
     </application>
 
 </manifest>

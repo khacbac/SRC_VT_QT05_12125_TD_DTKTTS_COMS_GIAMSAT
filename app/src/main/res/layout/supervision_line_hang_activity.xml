@@ -382,447 +382,451 @@
                         android:gravity="center_vertical" >
                     </TabWidget>
 
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/border_layout" >
-
-                        <LinearLayout
-                            android:id="@+id/ll_constr_line_hang_tab_pillar"
+                        android:layout_height="match_parent">
+                        <FrameLayout
+                            android:id="@android:id/tabcontent"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical" >
+                            android:background="@drawable/border_layout" >
 
-                            <TableLayout
-                                android:id="@+id/tbl_line_hang_design"
+                            <LinearLayout
+                                android:id="@+id/ll_constr_line_hang_tab_pillar"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/margin"
-                                android:background="@drawable/border_layout"
-                                android:shrinkColumns="*"
-                                android:stretchColumns="0,2,4,6,8,10" >
+                                android:layout_height="match_parent"
+                                android:orientation="vertical" >
 
-                                <TableRow
+                                <TableLayout
+                                    android:id="@+id/tbl_line_hang_design"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" >
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/margin"
+                                    android:background="@drawable/border_layout"
+                                    android:shrinkColumns="*"
+                                    android:stretchColumns="0,2,4,6,8,10" >
 
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_new"
+                                    <TableRow
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_span="9"
-                                        android:gravity="center_horizontal"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_new"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
+                                        android:layout_height="wrap_content" >
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_old"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_span="3"
-                                        android:gravity="center_horizontal"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_old"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" >
-
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/table_border_width"
-                                        android:layout_span="13"
-                                        android:background="@color/table_border_color" />
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" >
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_size"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_size"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_be_tong"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_be_tong"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_go"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_go"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_chieu_cao"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_chieu_cao"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_long"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_long"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_size_cs"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_size"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
-
-                                    <TextView
-                                        android:id="@+id/tv_line_hang_design_pillar_long_cs"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:padding="5dp"
-                                        android:text="@string/line_hang_design_pillar_long"
-                                        android:textSize="@dimen/text_size_large_common" >
-                                    </TextView>
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" >
-
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/table_border_width"
-                                        android:layout_span="13"
-                                        android:background="@color/table_border_color" />
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" >
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/padding" >
-
-                                        <EditText
-                                            android:id="@+id/edt_line_hang_design_pillar_size"
-                                            style="@style/vOfficeeditText"
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_new"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:hint="@string/text_empty"
-                                            android:inputType="number"
-                                            android:padding="@dimen/padding"
-                                            android:maxLength="10"
-                                            android:singleLine="true" />
-                                    </LinearLayout>
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_span="9"
+                                            android:gravity="center_horizontal"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_new"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
 
-                                    <LinearLayout
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_old"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_span="3"
+                                            android:gravity="center_horizontal"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_old"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
+                                    </TableRow>
+
+                                    <TableRow
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:padding="@dimen/padding" >
+                                        android:layout_height="wrap_content" >
 
-                                        <CheckBox
-                                            android:id="@+id/rbt_line_hang_design_pillar_be_tong"
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/table_border_width"
+                                            android:layout_span="13"
+                                            android:background="@color/table_border_color" />
+                                    </TableRow>
+
+                                    <TableRow
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" >
+
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_size"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="true" />
-                                    </LinearLayout>
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_size"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:padding="@dimen/padding" >
-
-                                        <CheckBox
-                                            android:id="@+id/rbt_line_hang_design_pillar_go"
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_be_tong"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-                                    </LinearLayout>
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_be_tong"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
 
-                                    <LinearLayout
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_go"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_go"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_chieu_cao"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_chieu_cao"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_long"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_long"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_size_cs"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_size"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <TextView
+                                            android:id="@+id/tv_line_hang_design_pillar_long_cs"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:padding="5dp"
+                                            android:text="@string/line_hang_design_pillar_long"
+                                            android:textSize="@dimen/text_size_large_common" >
+                                        </TextView>
+                                    </TableRow>
+
+                                    <TableRow
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/padding" >
+                                        android:layout_height="wrap_content" >
 
-                                        <EditText
-                                            android:id="@+id/edt_line_hang_design_pillar_chieu_cao"
-                                            style="@style/vOfficeeditText"
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/table_border_width"
+                                            android:layout_span="13"
+                                            android:background="@color/table_border_color" />
+                                    </TableRow>
+
+                                    <TableRow
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" >
+
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:hint="@string/text_empty"
-                                            android:inputType="number"
-                                            android:maxLength="10"
-                                            android:padding="@dimen/padding"
-                                            android:singleLine="true" />
-                                    </LinearLayout>
+                                            android:padding="@dimen/padding" >
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
+                                            <EditText
+                                                android:id="@+id/edt_line_hang_design_pillar_size"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:hint="@string/text_empty"
+                                                android:inputType="number"
+                                                android:padding="@dimen/padding"
+                                                android:maxLength="10"
+                                                android:singleLine="true" />
+                                        </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/padding" >
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
 
-                                        <EditText
-                                            android:id="@+id/edt_line_hang_design_pillar_long_new"
-                                            style="@style/vOfficeeditText"
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:hint="@string/text_empty"
-                                            android:inputType="numberDecimal"
-                                            android:maxLength="10"
-                                            android:padding="@dimen/padding"
-                                            android:singleLine="true" />
-                                    </LinearLayout>
+                                            android:layout_gravity="center"
+                                            android:padding="@dimen/padding" >
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
+                                            <CheckBox
+                                                android:id="@+id/rbt_line_hang_design_pillar_be_tong"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="true" />
+                                        </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/padding" >
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
 
-                                        <EditText
-                                            android:id="@+id/edt_line_hang_design_pillar_size_old"
-                                            style="@style/vOfficeeditText"
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:hint="@string/text_empty"
-                                            android:inputType="number"
-                                            android:maxLength="10"
-                                            android:padding="@dimen/padding"
-                                            android:singleLine="true" />
-                                    </LinearLayout>
+                                            android:layout_gravity="center"
+                                            android:padding="@dimen/padding" >
 
-                                    <View
-                                        android:layout_width="@dimen/table_border_width"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/table_border_color" />
+                                            <CheckBox
+                                                android:id="@+id/rbt_line_hang_design_pillar_go"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center" />
+                                        </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/padding" >
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
 
-                                        <EditText
-                                            android:id="@+id/edt_line_hang_design_pillar_long_old"
-                                            style="@style/vOfficeeditText"
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:hint="@string/text_empty"
-                                            android:inputType="numberDecimal"
-                                            android:maxLength="10"
-                                            android:padding="@dimen/padding"
-                                            android:singleLine="true" />
-                                    </LinearLayout>
-                                </TableRow>
-                            </TableLayout>
-                        </LinearLayout>
+                                            android:padding="@dimen/padding" >
 
-                        <LinearLayout
-                            android:id="@+id/ll_constr_line_hang_tab_cable"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical" >
+                                            <EditText
+                                                android:id="@+id/edt_line_hang_design_pillar_chieu_cao"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:hint="@string/text_empty"
+                                                android:inputType="number"
+                                                android:maxLength="10"
+                                                android:padding="@dimen/padding"
+                                                android:singleLine="true" />
+                                        </LinearLayout>
 
-                            <TableLayout
-                                android:id="@+id/tl_constr_line_hang"
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/padding" >
+
+                                            <EditText
+                                                android:id="@+id/edt_line_hang_design_pillar_long_new"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:hint="@string/text_empty"
+                                                android:inputType="numberDecimal"
+                                                android:maxLength="10"
+                                                android:padding="@dimen/padding"
+                                                android:singleLine="true" />
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/padding" >
+
+                                            <EditText
+                                                android:id="@+id/edt_line_hang_design_pillar_size_old"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:hint="@string/text_empty"
+                                                android:inputType="number"
+                                                android:maxLength="10"
+                                                android:padding="@dimen/padding"
+                                                android:singleLine="true" />
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_width="@dimen/table_border_width"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/table_border_color" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/padding" >
+
+                                            <EditText
+                                                android:id="@+id/edt_line_hang_design_pillar_long_old"
+                                                style="@style/vOfficeeditText"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:hint="@string/text_empty"
+                                                android:inputType="numberDecimal"
+                                                android:maxLength="10"
+                                                android:padding="@dimen/padding"
+                                                android:singleLine="true" />
+                                        </LinearLayout>
+                                    </TableRow>
+                                </TableLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_constr_line_hang_tab_cable"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/margin"
-                                android:background="@color/white_color"
-                                android:padding="@dimen/padding"
-                                android:shrinkColumns="*"
-                                android:stretchColumns="1,3"
-                                android:visibility="visible" >
+                                android:layout_height="match_parent"
+                                android:orientation="vertical" >
 
-                                <TableRow
-                                    android:id="@+id/trl_constr_line_hang_row1"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="@dimen/table_row_height"
-                                    android:layout_marginTop="@dimen/margin2"
-                                    android:gravity="center_vertical" >
+                                <TableLayout
+                                    android:id="@+id/tl_constr_line_hang"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/margin"
+                                    android:background="@color/white_color"
+                                    android:padding="@dimen/padding"
+                                    android:shrinkColumns="*"
+                                    android:stretchColumns="1,3"
+                                    android:visibility="visible" >
 
-                                    <TextView
-                                        android:id="@+id/tv_constr_line_hang_loai_cap"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="@dimen/margin"
-                                        android:text="@string/line_hang_design_cable_loai_cap"
-                                        android:textSize="@dimen/text_size_common" />
-
-                                    <RelativeLayout
-                                        android:id="@+id/rl_constr_line_hang_lc_box"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="0.4"
+                                    <TableRow
+                                        android:id="@+id/trl_constr_line_hang_row1"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="@dimen/table_row_height"
+                                        android:layout_marginTop="@dimen/margin2"
                                         android:gravity="center_vertical" >
 
-                                        <com.viettel.view.control.VNMTextViewCombo
-                                            android:id="@+id/tv_constr_line_hang_lc_dropdown"
-                                            style="@style/vOfficeeditTextView"
+                                        <TextView
+                                            android:id="@+id/tv_constr_line_hang_loai_cap"
                                             android:layout_width="match_parent"
-                                            android:layout_height="@dimen/drop_box_heigh"
-                                            android:drawableRight="@drawable/icon_combo"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/text_choice"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="@dimen/margin"
+                                            android:text="@string/line_hang_design_cable_loai_cap"
+                                            android:textSize="@dimen/text_size_common" />
+
+                                        <RelativeLayout
+                                            android:id="@+id/rl_constr_line_hang_lc_box"
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.4"
+                                            android:gravity="center_vertical" >
+
+                                            <com.viettel.view.control.VNMTextViewCombo
+                                                android:id="@+id/tv_constr_line_hang_lc_dropdown"
+                                                style="@style/vOfficeeditTextView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="@dimen/drop_box_heigh"
+                                                android:drawableRight="@drawable/icon_combo"
+                                                android:gravity="center_vertical"
+                                                android:text="@string/text_choice"
+                                                android:textSize="@dimen/text_size_common" >
+                                            </com.viettel.view.control.VNMTextViewCombo>
+                                        </RelativeLayout>
+
+                                        <TextView
+                                            android:id="@+id/tv_constr_line_hang_khoang_vuot"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/margin"
+                                            android:text="@string/line_hang_design_cable_khoang_vuot"
+                                            android:textSize="@dimen/text_size_common" />
+
+                                        <EditText
+                                            android:id="@+id/edt_constr_line_hang_khoang_vuot"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10"
+                                            android:hint="@string/line_hang_design_cable_khoang_vuot"
+                                            android:inputType="number"
+                                            android:maxLength="3"
+                                            android:singleLine="true"
                                             android:textSize="@dimen/text_size_common" >
-                                        </com.viettel.view.control.VNMTextViewCombo>
-                                    </RelativeLayout>
+                                        </EditText>
+                                    </TableRow>
 
-                                    <TextView
-                                        android:id="@+id/tv_constr_line_hang_khoang_vuot"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
-                                        android:text="@string/line_hang_design_cable_khoang_vuot"
-                                        android:textSize="@dimen/text_size_common" />
+                                    <TableRow
+                                        android:id="@+id/trl_constr_line_hang_row2"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="@dimen/table_row_height"
+                                        android:layout_marginTop="@dimen/margin2"
+                                        android:gravity="center_vertical" >
 
-                                    <EditText
-                                        android:id="@+id/edt_constr_line_hang_khoang_vuot"
-                                        style="@style/vOfficeeditText"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:ems="10"
-                                        android:hint="@string/line_hang_design_cable_khoang_vuot"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:singleLine="true"
-                                        android:textSize="@dimen/text_size_common" >
-                                    </EditText>
-                                </TableRow>
+                                        <TextView
+                                            android:id="@+id/tv_constr_line_hang_tong_mx"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="@dimen/margin"
+                                            android:text="@string/line_hang_design_cable_tong_mx"
+                                            android:textSize="@dimen/text_size_common" />
 
-                                <TableRow
-                                    android:id="@+id/trl_constr_line_hang_row2"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="@dimen/table_row_height"
-                                    android:layout_marginTop="@dimen/margin2"
-                                    android:gravity="center_vertical" >
-
-                                    <TextView
-                                        android:id="@+id/tv_constr_line_hang_tong_mx"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="@dimen/margin"
-                                        android:text="@string/line_hang_design_cable_tong_mx"
-                                        android:textSize="@dimen/text_size_common" />
-
-                                    <EditText
-                                        android:id="@+id/edt_constr_line_hang_tong_mx"
-                                        style="@style/vOfficeeditText"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:ems="10"
-                                        android:hint="@string/line_hang_design_cable_tong_mx"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:singleLine="true"
-                                        android:textSize="@dimen/text_size_common" >
-                                    </EditText>
-                                </TableRow>
-                            </TableLayout>
-                        </LinearLayout>
-                    </FrameLayout>
+                                        <EditText
+                                            android:id="@+id/edt_constr_line_hang_tong_mx"
+                                            style="@style/vOfficeeditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10"
+                                            android:hint="@string/line_hang_design_cable_tong_mx"
+                                            android:inputType="number"
+                                            android:maxLength="3"
+                                            android:singleLine="true"
+                                            android:textSize="@dimen/text_size_common" >
+                                        </EditText>
+                                    </TableRow>
+                                </TableLayout>
+                            </LinearLayout>
+                        </FrameLayout>
+                    </ScrollView>
                 </LinearLayout>
             </TabHost>
         </LinearLayout>

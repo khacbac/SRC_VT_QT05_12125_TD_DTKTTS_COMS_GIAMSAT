@@ -9,7 +9,8 @@ public class ContentProgressPreview {
     private String tenHangMuc;
     private String ngayBatDau;
     private String ngayHoanThanh;
-    private boolean isTxtActive;
+    private boolean isNewEdit;
+    private boolean hasNgayHoanThanh;
 
     public ContentProgressPreview(String sttProgress, String tenHangMuc, String ngayBatDau, String ngayHoanThanh) {
         this.sttProgress = sttProgress;
@@ -30,7 +31,7 @@ public class ContentProgressPreview {
         return tenHangMuc;
     }
 
-    public void setTenHangMuc(String workItemTienDoBTSView) {
+    public void setTenHangMuc(String tenHangMuc) {
         this.tenHangMuc = tenHangMuc;
     }
 
@@ -48,5 +49,17 @@ public class ContentProgressPreview {
 
     public void setNgayHoanThanh(String ngayHoanThanh) {
         this.ngayHoanThanh = ngayHoanThanh;
+    }
+
+    public boolean isNewEdit() {
+        return isNewEdit;
+    }
+
+    public void setNewEdit(boolean newEdit) {
+        isNewEdit = newEdit;
+    }
+
+    public boolean isHasNgayHoanThanh() {
+        return ngayHoanThanh != null && ngayHoanThanh.length() > 0;
     }
 }

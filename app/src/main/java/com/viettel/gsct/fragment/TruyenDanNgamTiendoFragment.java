@@ -18,6 +18,8 @@ import com.viettel.database.Plan_Constr_DetailController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
+import com.viettel.database.entity.ContentDetailItemProgressPreview;
+import com.viettel.database.entity.ContentProgressPreview;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
@@ -33,7 +35,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -226,7 +230,6 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     @Override
     public void save() {
-        EventBus.getDefault().post(layoutRoot);
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
             Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
             return;
@@ -362,12 +365,21 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     }
 
+    public boolean checkValidateTuyenNgamTienDo() {
+        if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
+            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
 
-
-
+    public void registerListenerEventBus() {
+        EventBus.getDefault().post(layoutRoot);
+    }
 }

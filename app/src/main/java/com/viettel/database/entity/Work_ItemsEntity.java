@@ -191,6 +191,10 @@ public class Work_ItemsEntity extends BaseEntity{
         return  hasCompletedDate() && !complete_date.equals(GSCTUtils.getDateNow());
     }
 
+    public boolean hasStartedDate() {
+        return starting_date != null && starting_date.length() > 0;
+    }
+
     public boolean hasCompletedDate() {
         return  complete_date != null && complete_date.length() > 0 ;
     }

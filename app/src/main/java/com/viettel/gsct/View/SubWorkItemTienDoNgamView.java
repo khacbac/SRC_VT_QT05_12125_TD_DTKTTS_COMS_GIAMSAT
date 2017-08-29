@@ -93,6 +93,14 @@ public class SubWorkItemTienDoNgamView extends LinearLayout {
         return tvTitle.getText().toString();
     }
 
+    public String getEtValueNumber() {
+        return etValue.getEditableText().toString();
+    }
+
+    public String getTvLuykeNumber() {
+        return tvLuyke.getText().toString();
+    }
+
     public Sub_Work_ItemEntity getSubWorkItemEntity() {
         return entity;
     }

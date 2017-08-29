@@ -1,8 +1,7 @@
 package com.viettel.gsct.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.AppCompatEditText;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.viettel.common.ActionEvent;
 import com.viettel.common.ActionEventConstant;
 import com.viettel.common.KeyEventCommon;
@@ -26,23 +24,20 @@ import com.viettel.database.Supervision_BtsController;
 import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
 import com.viettel.database.entity.Supervision_BtsEntity;
 import com.viettel.database.entity.Supervision_Line_BackgroundEntity;
-import com.viettel.database.entity.Work_ItemsEntity;
-import com.viettel.gsct.View.SubWorkItemTienDoNgamView;
-import com.viettel.gsct.View.WorkItemTienDoNgamView;
 import com.viettel.gsct.fragment.BtsNhatkyFragment;
 import com.viettel.gsct.fragment.TruyenDanNgamTiendoFragment;
 import com.viettel.ktts.R;
 import com.viettel.sync.SyncTask;
+import com.viettel.utils.DeactivatedViewPager;
 import com.viettel.utils.StringUtil;
 import com.viettel.view.base.LineBaseActivity;
-import com.viettel.view.listener.InterfacePassDataFromNhatKyToActivity;
+import com.viettel.view.control.CapNhatNhatKyTienDoPagerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
 import java.util.HashMap;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,7 +46,8 @@ import butterknife.OnClick;
  * Created by admin2 on 04/04/2017.
  */
 
-public class LineBackgroundActivity extends LineBaseActivity implements InterfacePassDataFromNhatKyToActivity {
+public class LineBackgroundActivity extends LineBaseActivity
+        implements ViewPager.OnPageChangeListener {
     private static final String TAG = "BtsActivity";
     public static final String ARG_INFO = "LineBackgroundActivity.INFO";
 
@@ -66,11 +62,14 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
     @BindView(R.id.btnTienDoTab)
     Button mBtnCapNhatTienDo;
     @BindView(R.id.fr_content)
-    FrameLayout mFrameLayoutNhatKy;
+    FrameLayout mFrameLayoutPreview;
     @BindView(R.id.layout_root)
     LinearLayout mLayoutRoot;
     @BindView(R.id.layoutHeader)
     LinearLayout mLayoutHeader;
+    @BindView(R.id.view_pager_content)
+    DeactivatedViewPager mViewPagerContent;
+
 
     private Constr_Construction_EmployeeEntity constr_ConstructionItem;
     private Supervision_Line_BackgroundEntity supervision_Line_BackgroundData;
@@ -80,16 +79,14 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
     private BtsNhatkyFragment fragmentCapNhatNhatKy;
     private TruyenDanNgamTiendoFragment fragmentCapNhatTienDo;
     private CapNhatNhatKyTienDoPreviewFragment mCapNhatNhatKyTienDoPreviewFragment;
+    private CapNhatNhatKyTienDoPagerAdapter pagerAdapter;
     // All bien check.
     private boolean flagFirstTime = true;
     private boolean mHasClickBtnTienDo = false;
     private boolean mIsCoThiCong = true;
-    private boolean mIsClickCapNhatTienDo = false;
-    private boolean mIsClickCapNhatNhatKy = false;
-    private boolean mIsClickPreview = false;
-    private boolean mCheckCapNhatTienDo = false;
-    private boolean mCheckCapNhatNhatKy = false;
-    private boolean mCheckPreview = false;
+    // All Key.
+    private static final int KEY_SWITCH_NHATKY  = 0;
+    private static final int KEY_SWITCH_TIENDO  = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +113,11 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (mIsClickPreview) {
-            onFragmentNhatKyClick();
+        if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
+            onShowNhatKyTienDoPreview(false);
         } else {
-            gotoHomeActivity(new Bundle());
-            finish();
+        gotoHomeActivity(new Bundle());
+        finish();
         }
     }
 
@@ -164,15 +161,18 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
 
 
     private void initViews() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.array_line_background_info, R.layout.spinner_textview);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         spThongTin.setAdapter(adapter);
         spThongTin.setSelection(infoId - 1);
         if (infoId == Constants.LINE_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO) {
             fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance(BtsNhatkyFragment.TYPE_TUYEN_NGAM);
-            fragmentCapNhatTienDo = (TruyenDanNgamTiendoFragment) TruyenDanNgamTiendoFragment.newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_NGAM);
-            mCapNhatNhatKyTienDoPreviewFragment = new CapNhatNhatKyTienDoPreviewFragment();
+            fragmentCapNhatTienDo = (TruyenDanNgamTiendoFragment)
+                    TruyenDanNgamTiendoFragment.newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_NGAM);
+            mCapNhatNhatKyTienDoPreviewFragment = (CapNhatNhatKyTienDoPreviewFragment)
+                    CapNhatNhatKyTienDoPreviewFragment.newInstance();
+//            mCapNhatNhatKyTienDoPreviewFragment = new CapNhatNhatKyTienDoPreviewFragment();
         }
         if (fragmentCapNhatNhatKy != null) {
             fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
@@ -183,14 +183,20 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
         if (mCapNhatNhatKyTienDoPreviewFragment == null) {
             return;
         }
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fr_content, fragmentCapNhatNhatKy, KeyEventCommon.KEY_NHATKY_FRAGMENT)
-                .add(R.id.fr_content, fragmentCapNhatTienDo, KeyEventCommon.KEY_TIENDO_FRAGMENT)
-                .add(R.id.fr_content, mCapNhatNhatKyTienDoPreviewFragment,
-                        KeyEventCommon.KEY_PREVIEW_FRAGMENT)
-                .hide(fragmentCapNhatTienDo)
-                .hide(mCapNhatNhatKyTienDoPreviewFragment)
+
+        // Init Preview Fragment.
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fr_content,mCapNhatNhatKyTienDoPreviewFragment)
                 .commit();
+        // Init Nhat Ky va Tien Do fragment.
+        pagerAdapter = new CapNhatNhatKyTienDoPagerAdapter(
+                getSupportFragmentManager(),
+                fragmentCapNhatNhatKy,
+                fragmentCapNhatTienDo);
+
+        mViewPagerContent.setAdapter(pagerAdapter);
+        mViewPagerContent.setOnPageChangeListener(this);
 
         mBtnCapNhatNhatKy.setBackgroundResource(R.drawable.action_button_focused);
         mBtnCapNhatTienDo.setBackgroundResource(R.drawable.action_button_not_focus);
@@ -201,9 +207,11 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
                 if (isChecked) {
                     mBtnCapNhatTienDo.setVisibility(View.VISIBLE);
                     mIsCoThiCong = true;
+                    mViewPagerContent.setEnabledSwipe(true);
                 } else {
                     mBtnCapNhatTienDo.setVisibility(View.GONE);
                     mIsCoThiCong = false;
+                    mViewPagerContent.setEnabledSwipe(false);
                 }
             }
         });
@@ -222,25 +230,11 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
                 }
                 Log.e(TAG, "onItemSelected: " + isInfomation );
                 switch (isInfomation) {
-//                    case Constants.BTS_INFO.THIET_TKE_INFO:
-//                        gotoSupervisionBtsActivity(bundleMonitorData);
-//                        break;
                     case Constants.LINE_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO:
-//                        fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance(BtsNhatkyFragment.TYPE_TUYEN_NGAM);
-//                        fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, fragmentCapNhatNhatKy).commit();
-//
-//
-//                        fragmentCapNhatTienDo = (TruyenDanNgamTiendoFragment) TruyenDanNgamTiendoFragment.newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_NGAM);
-//                        fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fr_content_tiendo, fragmentCapNhatTienDo).commit();
-                        onFragmentNhatKyClick();
+                        if (mViewPagerContent != null) {
+                            mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
+                        }
                         break;
-//                    case Constants.LINE_BACKGROUND_INFO.TIEN_DO_INFO:
-//                        fragmentCapNhatNhatKy = TruyenDanNgamTiendoFragment.newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_NGAM);
-//                        fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, fragmentCapNhatNhatKy).commit();
-//                        break;
                     default:
                         gotoLineBackgroupActivity(bundleMonitorData);
                         break;
@@ -264,7 +258,7 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (!checkValidateFromCapNhatNhatKy()) {
+            if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
@@ -273,97 +267,56 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-                if (!mIsClickPreview) {
-                    showPreviewNhatKyTienDoClick();
-                    mIsClickCapNhatNhatKy = false;
-                    mIsClickCapNhatTienDo = false;
-                    mIsClickPreview = true;
+                if (!fragmentCapNhatTienDo.checkValidateTuyenNgamTienDo()) {
+                    return false;
                 }
-                fragmentCapNhatNhatKy.onPassDataFromNhatKyTuyenNgamToActivity();
-//                fragmentCapNhatTienDo.onPassDataFromTienDoToActivity();
-                fragmentCapNhatTienDo.save();
-                fragmentCapNhatNhatKy.save();
+                if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
+                    fragmentCapNhatTienDo.save();
+                    fragmentCapNhatNhatKy.save();
+                } else {
+                    showPreviewNhatKyTienDoClick();
+                    fragmentCapNhatNhatKy.registerListenerEventBusTuyenNgamNhatKy();
+                    fragmentCapNhatTienDo.registerListenerEventBus();
+                }
             } else {
                 fragmentCapNhatNhatKy.save();
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.btnNhatKyTab)
     public void onBtnCapNhatNhatKyClick() {
-        if (!mIsClickCapNhatNhatKy) {
-            onFragmentNhatKyClick();
-        }
+        setColorForBtnNhatKyTienDoClick(mBtnCapNhatNhatKy);
+        mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
     }
 
     @OnClick(R.id.btnTienDoTab)
     public void onBtnCapNhatTienDoClick() {
         mHasClickBtnTienDo = true;
-        if (!checkValidateFromCapNhatNhatKy()) {
+        if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
             return;
         }
-        if (!mIsClickCapNhatTienDo) {
-            onFragmentTienDoClick();
-        }
-    }
-
-    private boolean checkValidateFromCapNhatNhatKy() {
-        if (mIsCoThiCong && fragmentCapNhatNhatKy.checkValidateNumberCapNhatNhatKy()) {
-            fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_number));
-            return false;
-        }
-        if (!fragmentCapNhatNhatKy.checkValidateEdtNoiDungCongViec()) {
-            fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_noidung_congviec));
-            return false;
-        }
-        if (!fragmentCapNhatNhatKy.checkValidateEdtThayDoiBoSung()) {
-            fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_thaydoi));
-            return false;
-        }
-        if (!fragmentCapNhatNhatKy.checkValidateEdtYKienGiamSat()) {
-            fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_y_kien_giam_sat));
-            return false;
-        }
-        if (!fragmentCapNhatNhatKy.checkValidateEdtYKienThiCong()) {
-            fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_y_kien_thi_cong));
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * When click button cap nhat nhat ky.
-     */
-    private void onFragmentNhatKyClick() {
-        // isNhatKy = true, isTienDo = false, isPreview = false.
-        showFragmentFollowEvent(true,false,false);
-        setColorForBtnNhatKyTienDoClick(mBtnCapNhatNhatKy);
-        setVisibilityForLayoutPreview(false);
-        setCheckFlagFollowEventClick(mCheckCapNhatNhatKy);
-    }
-
-    /**
-     * When click button cap nhat tien do.
-     */
-    private void onFragmentTienDoClick() {
-        // isNhatKy = false, isTienDo = true, isPreview = false.
-        showFragmentFollowEvent(false,true,false);
         setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
-        setVisibilityForLayoutPreview(false);
-        setCheckFlagFollowEventClick(mCheckCapNhatTienDo);
+        mViewPagerContent.setCurrentItem(KEY_SWITCH_TIENDO);
     }
 
     /**
      * When switch to preview screen.
      */
     private void showPreviewNhatKyTienDoClick() {
-        // isNhatKy = false, isTienDo = false, isPreview = true.
-        showFragmentFollowEvent(false,false,true);
-        setVisibilityForLayoutPreview(true);
-        setCheckFlagFollowEventClick(mCheckPreview);
+        onShowNhatKyTienDoPreview(true);
+    }
+
+    private void onShowNhatKyTienDoPreview(boolean isShow) {
+        if (isShow) {
+            setVisibilityForLayoutPreview(true);
+            mFrameLayoutPreview.setVisibility(View.VISIBLE);
+        } else {
+            setVisibilityForLayoutPreview(false);
+            mFrameLayoutPreview.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -390,66 +343,18 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
         }
     }
 
-    /**
-     * Set flag for events click.
-     * @param isItemClick boolean.
-     */
-    private void setCheckFlagFollowEventClick(boolean isItemClick) {
-        mCheckCapNhatNhatKy = false;
-        mCheckCapNhatTienDo = false;
-        mCheckPreview = false;
-        isItemClick = true;
-    }
-
-    /**
-     * Hide and show fragment follow events click.
-     * @param isNhatKy boolean.
-     * @param isTienDo boolean.
-     * @param isPreview boolean.
-     */
-    private void showFragmentFollowEvent(boolean isNhatKy,boolean isTienDo,boolean isPreview) {
-        BtsNhatkyFragment nhatkyFragment = (BtsNhatkyFragment)
-                getSupportFragmentManager().findFragmentByTag(KeyEventCommon.KEY_NHATKY_FRAGMENT);
-        TruyenDanNgamTiendoFragment tiendoFragment = (TruyenDanNgamTiendoFragment)
-                getSupportFragmentManager().findFragmentByTag(KeyEventCommon.KEY_TIENDO_FRAGMENT);
-        CapNhatNhatKyTienDoPreviewFragment previewFragment = (CapNhatNhatKyTienDoPreviewFragment)
-                getSupportFragmentManager().findFragmentByTag(KeyEventCommon.KEY_PREVIEW_FRAGMENT);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (isNhatKy) {
-            ft.show(nhatkyFragment);
-        } else {
-            ft.hide(nhatkyFragment);
-        }
-        if (isTienDo) {
-            ft.show(tiendoFragment);
-        } else {
-            ft.hide(tiendoFragment);
-        }
-        if (isPreview) {
-            ft.show(previewFragment);
-        } else {
-            ft.hide(previewFragment);
-        }
-        ft.commit();
-    }
-
-    /**
-     * Pass data from cap nhat nhat ky to activity.
-     * @param listData HashMap<String, String>.
-     */
-    @Override
-    public void passDataFromNhatKyToActivity(HashMap<String, String> listData) {
-        if (mCapNhatNhatKyTienDoPreviewFragment != null) {
-            if (listData != null) {
-                listData.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN,""+tvTram.getText());
-                mCapNhatNhatKyTienDoPreviewFragment.updateDataForCapNhatNhatKy(listData,KeyEventCommon.KEY_TUYEN_NGAM);
-            }
-        }
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataFromTuyenNgamTienDoEvent(LinearLayout layoutRoot) {
         mCapNhatNhatKyTienDoPreviewFragment.initDataForTuyenNgamTienDoExpandable(layoutRoot);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+        mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
+                hashMaps,
+                KeyEventCommon.KEY_DOI_TUYENNGAM_ARR,
+                KeyEventCommon.KEY_TEN_HM_TUYENNGAM_ARR
+        );
     }
 
     @Override
@@ -462,5 +367,36 @@ public class LineBackgroundActivity extends LineBaseActivity implements Interfac
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (mViewPagerContent == null) {
+            return;
+        }
+        switch (position) {
+            case KEY_SWITCH_NHATKY:
+                setColorForBtnNhatKyTienDoClick(mBtnCapNhatNhatKy);
+                break;
+            case KEY_SWITCH_TIENDO:
+                mHasClickBtnTienDo = true;
+                if (fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+                    setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
+                } else {
+                    mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
+                    mHasClickBtnTienDo = true;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 }

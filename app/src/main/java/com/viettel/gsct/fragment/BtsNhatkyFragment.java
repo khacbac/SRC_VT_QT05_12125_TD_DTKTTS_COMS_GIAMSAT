@@ -1,6 +1,5 @@
 package com.viettel.gsct.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
@@ -37,7 +36,6 @@ import com.viettel.database.field.Constr_Work_LogsField;
 import com.viettel.gsct.GSCTUtils;
 import com.viettel.gsct.View.TeamView;
 import com.viettel.ktts.R;
-import com.viettel.view.listener.InterfacePassDataFromNhatKyToActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -121,7 +119,6 @@ public class BtsNhatkyFragment extends BaseFragment {
     private boolean flagValidateTeamNumber;
 
     private InterfaceCheckSwitchCombatStatus mInterfaceCheckSwitchCombatStatusStatus;
-    private InterfacePassDataFromNhatKyToActivity mInterfacePassDataFromNhatKyToActivity;
 
     public static BaseFragment newInstance() {
         BtsNhatkyFragment fragment = new BtsNhatkyFragment();
@@ -291,7 +288,6 @@ public class BtsNhatkyFragment extends BaseFragment {
     }
 
     public void save() {
-        EventBus.getDefault().post(this);
         boolean isInsert = false;
         isValidate = true;
 
@@ -425,6 +421,35 @@ public class BtsNhatkyFragment extends BaseFragment {
         void checkSwitchCombatStatus(boolean isChecked);
     }
 
+    /**
+     * Kiem tra dieu kien cho viec cap nhat nhat ky.
+     * @param mIsCoThiCong boolean.
+     * @return boolean.
+     */
+    public boolean checkValidateFromCapNhatNhatKy(boolean mIsCoThiCong) {
+        if (mIsCoThiCong && checkValidateNumberCapNhatNhatKy()) {
+            showError(getString(R.string.str_check_validate_number));
+            return false;
+        }
+        if (!checkValidateEdtNoiDungCongViec()) {
+            showError(getString(R.string.str_check_validate_edt_noidung_congviec));
+            return false;
+        }
+        if (!checkValidateEdtThayDoiBoSung()) {
+            showError(getString(R.string.str_check_validate_edt_thaydoi));
+            return false;
+        }
+        if (!checkValidateEdtYKienGiamSat()) {
+            showError(getString(R.string.str_check_validate_edt_y_kien_giam_sat));
+            return false;
+        }
+        if (!checkValidateEdtYKienThiCong()) {
+            showError(getString(R.string.str_check_validate_edt_y_kien_thi_cong));
+            return false;
+        }
+        return true;
+    }
+
     public boolean checkValidateNumberCapNhatNhatKy() {
         flagValidateTeamNumber = true;
         Enumeration<Long> keys = hashTeamView.keys();
@@ -454,7 +479,46 @@ public class BtsNhatkyFragment extends BaseFragment {
         return etYKienThiCong.getEditableText().toString().length() != 0;
     }
 
-    public void onPassDataFromNhatKyBtsToActivity() {
+    /**
+     * Lang nghe su kien cap nhat nhat ky voi truong hop la Tuyen Ngam.
+     */
+    public void registerListenerEventBusTuyenNgamNhatKy() {
+        EventBus.getDefault().post(passHashMapDataForNhatKy(
+                KeyEventCommon.KEY_DOI_TUYENNGAM_ARR
+        ));
+    }
+
+    /**
+     * Lang nghe su kien cap nhat nhat ky voi truong hop la Bts.
+     */
+    public void registerListenerEventBusBtsNhatKy() {
+        EventBus.getDefault().post(passHashMapDataForNhatKy(
+                KeyEventCommon.KEY_DOI_BTS_ARR));
+    }
+
+    /**
+     * Lang nghe su kien cap nhat nhat ky voi truong hop la Tuyen treo.
+     */
+    public void registerListenerEventBusTuyenTreoNhatKy() {
+        EventBus.getDefault().post(passHashMapDataForNhatKy(
+                KeyEventCommon.KEY_DOI_TUYENTREO_ARR
+        ));
+    }
+
+    /**
+     * Lang nghe su kien cap nhat nhat ky voi truong hop la Tuyen treo.
+     */
+    public void registerListenerEventBusBangRongNhatKy() {
+        EventBus.getDefault().post(passHashMapDataForNhatKy(
+                KeyEventCommon.KEY_DOI_BANGRONG_ARR
+        ));
+    }
+
+    /**
+     * Pass data to Bts Nhat Ky.
+     * @return HashMap
+     */
+    private HashMap<String,String> passHashMapDataForNhatKy(String[] keyDoiArr) {
         HashMap<String,String> listHashMap = new HashMap<>();
         listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
         listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
@@ -467,17 +531,43 @@ public class BtsNhatkyFragment extends BaseFragment {
             TeamView view = hashTeamView.get(keys.nextElement());
             mListNumber.add(view.getTeamNumber());
         }
-        listHashMap.put(KeyEventCommon.KEY_DOI_XAYDUNG,""+mListNumber.get(0));
-        listHashMap.put(KeyEventCommon.KEY_DOI_LAPDAT,""+mListNumber.get(1));
-        listHashMap.put(KeyEventCommon.KEY_DOI_TIEPDIA,""+mListNumber.get(2));
-        listHashMap.put(KeyEventCommon.KEY_DOI_TKCAP,""+mListNumber.get(3));
-        listHashMap.put(KeyEventCommon.KEY_DOI_TKDIEN,""+mListNumber.get(4));
-        listHashMap.put(KeyEventCommon.KEY_DOI_THIETBI,""+mListNumber.get(5));
-
-        mInterfacePassDataFromNhatKyToActivity.passDataFromNhatKyToActivity(listHashMap);
+        if (keyDoiArr.length == mListNumber.size()) {
+            for (int i = 0; i < mListNumber.size(); i++) {
+                listHashMap.put(keyDoiArr[i], "" + mListNumber.get(i));
+            }
+        }
+        return listHashMap;
     }
 
-    public void onPassDataFromNhatKyTuyenNgamToActivity() {
+    /**
+     * Pass data to Tuyen Ngam Nhat Ky.
+     * @return HashMap.
+     */
+    public HashMap<String,String> passHashMapDataForTuyenNgamNhatKy() {
+        HashMap<String, String> listHashMap = new HashMap<>();
+        listHashMap.put(KeyEventCommon.KEY_THOITIET, spThoitiet.getSelectedItem().toString());
+        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC, etNoiDungCongViec.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_GIAMSAT, etYKienGiamSat.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_THICONG, etYKienThiCong.getEditableText().toString());
+        Enumeration<Long> keys = hashTeamView.keys();
+        ArrayList<Integer> mListNumber = new ArrayList<>();
+        while (keys.hasMoreElements()) {
+            TeamView view = hashTeamView.get(keys.nextElement());
+            mListNumber.add(view.getTeamNumber());
+        }
+        listHashMap.put(KeyEventCommon.KEY_DOI_DAORANH, "" + mListNumber.get(0));
+        listHashMap.put(KeyEventCommon.KEY_DOI_XAYBE, "" + mListNumber.get(1));
+        listHashMap.put(KeyEventCommon.KEY_DOI_KEOCAP_NGAM, "" + mListNumber.get(2));
+        listHashMap.put(KeyEventCommon.KEY_DOI_MAY, "" + mListNumber.get(3));
+        return listHashMap;
+    }
+
+    /**
+     * Pass data to Bts Nhat Ky.
+     * @return HashMap
+     */
+    private HashMap<String,String> passHashMapDataForTuyenTreoNhatKy() {
         HashMap<String,String> listHashMap = new HashMap<>();
         listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
         listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
@@ -490,21 +580,9 @@ public class BtsNhatkyFragment extends BaseFragment {
             TeamView view = hashTeamView.get(keys.nextElement());
             mListNumber.add(view.getTeamNumber());
         }
-        listHashMap.put(KeyEventCommon.KEY_DOI_DAORANH,""+mListNumber.get(0));
-        listHashMap.put(KeyEventCommon.KEY_DOI_XAYBE,""+mListNumber.get(1));
-        listHashMap.put(KeyEventCommon.KEY_DOI_KEOCAP,""+mListNumber.get(2));
-        listHashMap.put(KeyEventCommon.KEY_DOI_MAY,""+mListNumber.get(3));
-
-        mInterfacePassDataFromNhatKyToActivity.passDataFromNhatKyToActivity(listHashMap);
+        listHashMap.put(KeyEventCommon.KEY_DOI_KEOCAP_TREO,""+mListNumber.get(0));
+        listHashMap.put(KeyEventCommon.KEY_DOI_TRONGCOT,""+mListNumber.get(1));
+        return listHashMap;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mInterfacePassDataFromNhatKyToActivity = (InterfacePassDataFromNhatKyToActivity) context;
-    }
-
-    public AppCompatEditText getEtThayDoiBoSung() {
-        return etThayDoiBoSung;
-    }
 }

@@ -1,6 +1,7 @@
 package com.viettel.view.control;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,17 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
         viewHolderForHeader.txtTenHangMuc.setText(progressPreview.getTenHangMuc());
         viewHolderForHeader.txtNgayBatDau.setText(progressPreview.getNgayBatDau());
         viewHolderForHeader.txtNgayHoanThanh.setText(progressPreview.getNgayHoanThanh());
+        if (((ContentProgressPreview) getGroup(groupPosition)).isNewEdit()) {
+            viewHolderForHeader.txtSttProgress.setTextColor(Color.CYAN);
+            viewHolderForHeader.txtTenHangMuc.setTextColor(Color.CYAN);
+            viewHolderForHeader.txtNgayBatDau.setTextColor(Color.CYAN);
+            viewHolderForHeader.txtNgayHoanThanh.setTextColor(Color.CYAN);
+        } else {
+            viewHolderForHeader.txtSttProgress.setTextColor(Color.BLACK);
+            viewHolderForHeader.txtTenHangMuc.setTextColor(Color.BLACK);
+            viewHolderForHeader.txtNgayBatDau.setTextColor(Color.BLACK);
+            viewHolderForHeader.txtNgayHoanThanh.setTextColor(Color.BLACK);
+        }
         return convertView;
     }
 
@@ -103,6 +115,15 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
         viewHolderForItem.txttxtDetailNgayBatDau.setText(item.getDetailNgayBatDau());
         viewHolderForItem.txttxtDetailNgayHoanThanh.setText(item.getDetailNgayHoanThanh());
 
+        if (((ContentDetailItemProgressPreview) getChild(groupPosition,childPosition)).isNewEdit()) {
+            viewHolderForItem.txtDetailTenHangMuc.setTextColor(Color.CYAN);
+            viewHolderForItem.txttxtDetailNgayBatDau.setTextColor(Color.CYAN);
+            viewHolderForItem.txttxtDetailNgayHoanThanh.setTextColor(Color.CYAN);
+        } else {
+            viewHolderForItem.txtDetailTenHangMuc.setTextColor(Color.BLACK);
+            viewHolderForItem.txttxtDetailNgayBatDau.setTextColor(Color.BLACK);
+            viewHolderForItem.txttxtDetailNgayHoanThanh.setTextColor(Color.BLACK);
+        }
         return convertView;
     }
 

@@ -28,6 +28,8 @@ import com.viettel.gsct.View.WorkItemGPONView;
 import com.viettel.gsct.View.WorkItemRightGPONView;
 import com.viettel.ktts.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -299,5 +301,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public void registerListenerEventBus() {
+        EventBus.getDefault().post(layoutRoot);
     }
 }

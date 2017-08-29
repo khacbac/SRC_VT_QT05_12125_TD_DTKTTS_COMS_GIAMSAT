@@ -94,8 +94,16 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
         this.listener = listener;
     }
 
+    public boolean hasFinishDate() {
+        return finishDate != null && finishDate.length() > 0;
+    }
+
     public interface FinishListener {
         void onFinishListener(boolean isFinish, long catSubWorkItemId);
+    }
+
+    public boolean isFinish() {
+        return isFinish;
     }
 
     public String getButtonTienDoStatus() {

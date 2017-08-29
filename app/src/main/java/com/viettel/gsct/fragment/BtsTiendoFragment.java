@@ -33,6 +33,8 @@ import com.viettel.gsct.View.WorkItemTienDoBTSView;
 import com.viettel.ktts.R;
 import com.viettel.view.listener.InterfacePassDataFromTienDoToActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -291,7 +293,6 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
 //            etBbnt.setEnabled(false);
         }
         subWorkItemTienDoBTSViewHashMap.put(parentIndex,doBTSViews);
-        Log.d("BacHK","Parent index = " + parentIndex);
 
     }
 

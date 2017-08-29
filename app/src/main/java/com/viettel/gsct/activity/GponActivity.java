@@ -2,7 +2,9 @@ package com.viettel.gsct.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,11 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.viettel.common.ActionEvent;
 import com.viettel.common.ActionEventConstant;
+import com.viettel.common.KeyEventCommon;
 import com.viettel.common.ModelEvent;
 import com.viettel.constants.Constants;
 import com.viettel.constants.IntentConstants;
@@ -25,8 +29,16 @@ import com.viettel.gsct.fragment.BtsNhatkyFragment;
 import com.viettel.gsct.fragment.GPONTiendoFragment;
 import com.viettel.ktts.R;
 import com.viettel.sync.SyncTask;
+import com.viettel.utils.DeactivatedViewPager;
 import com.viettel.utils.StringUtil;
 import com.viettel.view.base.HomeBaseActivity;
+import com.viettel.view.control.CapNhatNhatKyTienDoPagerAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,7 +47,7 @@ import butterknife.OnClick;
  * Created by admin2 on 04/04/2017.
  */
 
-public class GponActivity extends HomeBaseActivity {
+public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageChangeListener {
     private static final String TAG = "GponActivity";
     public static final String ARG_INFO = "SupervisionBtsBaseActivity.INFO";
 
@@ -50,18 +62,30 @@ public class GponActivity extends HomeBaseActivity {
     @BindView(R.id.btnTienDoTab)
     Button mBtnCapNhatTienDo;
     @BindView(R.id.fr_content)
-    FrameLayout mFragmentLayoutNhatKy;
-    @BindView(R.id.fr_content_tiendo)
-    FrameLayout mFragmentLayoutTienDo;
+    FrameLayout mFrameLayoutPreview;
+    @BindView(R.id.layout_root)
+    LinearLayout mLayoutRoot;
+    @BindView(R.id.layoutHeader)
+    LinearLayout mLayoutHeader;
+    @BindView(R.id.view_pager_content)
+    DeactivatedViewPager mViewPagerContent;
 
+    // All Constructor.
+    private CapNhatNhatKyTienDoPagerAdapter pagerAdapter;
     private Constr_Construction_EmployeeEntity constr_ConstructionItem;
     private Supervision_BtsEntity btsEntity;
-    private boolean flagFirstTime = true;
-    private int infoId = 0;
+    // All fragment.
+    private CapNhatNhatKyTienDoPreviewFragment mCapNhatNhatKyTienDoPreviewFragment;
     private BtsNhatkyFragment fragmentCapNhatNhatKy;
     private GPONTiendoFragment fragmentCapNhatTienDo;
+    // All check boolean.
     private boolean mIsCoThiCong = true;
-    private boolean mIsClickCapNhatTienDo = false;
+    private boolean mHasClickBtnTienDo = false;
+    private boolean flagFirstTime = true;
+    private int infoId = 0;
+    // All Key.
+    private static final int KEY_SWITCH_NHATKY  = 0;
+    private static final int KEY_SWITCH_TIENDO  = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +112,12 @@ public class GponActivity extends HomeBaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        gotoHomeActivity(new Bundle());
-        finish();
+        if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
+            onShowNhatKyTienDoPreview(false);
+        } else {
+            gotoHomeActivity(new Bundle());
+            finish();
+        }
     }
 
     public void handleModelViewEvent(ModelEvent modelEvent) {
@@ -138,22 +166,37 @@ public class GponActivity extends HomeBaseActivity {
         if (infoId == Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO) {
             fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance();
             fragmentCapNhatTienDo = (GPONTiendoFragment) GPONTiendoFragment.newInstance();
-            capNhatTrangThaiNhatKyClick();
+            mCapNhatNhatKyTienDoPreviewFragment = (CapNhatNhatKyTienDoPreviewFragment)
+                    CapNhatNhatKyTienDoPreviewFragment.newInstance();
         }
-//        else if (infoId == Constants.BTS_INFO.TIEN_DO_INFO) {
-//            fragmentCapNhatNhatKy = GPONTiendoFragment.newInstance();
-//        }
 
         if (fragmentCapNhatNhatKy != null) {
             fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fr_content, fragmentCapNhatNhatKy).commit();
         }
         if (fragmentCapNhatTienDo != null) {
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fr_content_tiendo,fragmentCapNhatTienDo).commit();
         }
+
+        if (mCapNhatNhatKyTienDoPreviewFragment == null) {
+            return;
+        }
+
+        // Init Preview Fragment.
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fr_content,mCapNhatNhatKyTienDoPreviewFragment)
+                .commit();
+        // Init Nhat Ky va Tien Do fragment.
+        pagerAdapter = new CapNhatNhatKyTienDoPagerAdapter(
+                getSupportFragmentManager(),
+                fragmentCapNhatNhatKy,
+                fragmentCapNhatTienDo);
+
+        mViewPagerContent.setAdapter(pagerAdapter);
+        mViewPagerContent.setOnPageChangeListener(this);
+
+        mBtnCapNhatNhatKy.setBackgroundResource(R.drawable.action_button_focused);
+        mBtnCapNhatTienDo.setBackgroundResource(R.drawable.action_button_not_focus);
 
         fragmentCapNhatNhatKy.setOnCheckSwitchCombatStatus(new BtsNhatkyFragment.InterfaceCheckSwitchCombatStatus() {
             @Override
@@ -161,9 +204,11 @@ public class GponActivity extends HomeBaseActivity {
                 if (isChecked) {
                     mBtnCapNhatTienDo.setVisibility(View.VISIBLE);
                     mIsCoThiCong = true;
+                    mViewPagerContent.setEnabledSwipe(true);
                 } else {
                     mBtnCapNhatTienDo.setVisibility(View.GONE);
                     mIsCoThiCong = false;
+                    mViewPagerContent.setEnabledSwipe(false);
                 }
             }
         });
@@ -181,22 +226,10 @@ public class GponActivity extends HomeBaseActivity {
                 }
                 switch (isInfomation) {
                     case Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO:
-                        fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance();
-                        fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fr_content, fragmentCapNhatNhatKy).commit();
-                        capNhatTrangThaiNhatKyClick();
-
-                        fragmentCapNhatTienDo = (GPONTiendoFragment) GPONTiendoFragment.newInstance();
-                        fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fr_content_tiendo, fragmentCapNhatTienDo).commit();
+                        if (mViewPagerContent != null) {
+                            mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
+                        }
                         break;
-//                    case Constants.BTS_INFO.TIEN_DO_INFO:
-//                        fragmentCapNhatNhatKy = GPONTiendoFragment.newInstance();
-//                        fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, fragmentCapNhatNhatKy).commit();
-//                        break;
                     default:
                         gotoBRCDActivityFromFragment(bundleMonitorData);
 //                        ActionEvent e = new ActionEvent();
@@ -226,6 +259,12 @@ public class GponActivity extends HomeBaseActivity {
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
+            if (mIsCoThiCong) {
+                if (fragmentCapNhatNhatKy.checkValidateNumberCapNhatNhatKy()) {
+                    fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_number));
+                    return false;
+                }
+            }
             if (!fragmentCapNhatNhatKy.checkValidateEdtNoiDungCongViec()) {
                 fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_noidung_congviec));
                 return false;
@@ -243,18 +282,21 @@ public class GponActivity extends HomeBaseActivity {
                 return false;
             }
             if (mIsCoThiCong) {
-                if (fragmentCapNhatNhatKy.checkValidateNumberCapNhatNhatKy()) {
-                    fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_number));
-                    return false;
-                }
-                if (!mIsClickCapNhatTienDo) {
+                if (!mHasClickBtnTienDo) {
                     fragmentCapNhatNhatKy.showError(getString(R.string.str_check_da_cap_nhat_tien_do));
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-                fragmentCapNhatTienDo.save();
-                if (fragmentCapNhatTienDo.mIsCheckValidate) {
+//                if (!fragmentCapNhatTienDo.checkValidateTuyenNgamTienDo()) {
+//                    return false;
+//                }
+                if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
+                    fragmentCapNhatTienDo.save();
                     fragmentCapNhatNhatKy.save();
+                } else {
+                    showPreviewNhatKyTienDoClick();
+                    fragmentCapNhatNhatKy.registerListenerEventBusBangRongNhatKy();
+                    fragmentCapNhatTienDo.registerListenerEventBus();
                 }
             } else {
                 fragmentCapNhatNhatKy.save();
@@ -267,28 +309,117 @@ public class GponActivity extends HomeBaseActivity {
     // Lister button cap nhat ky click.
     @OnClick(R.id.btnNhatKyTab)
     public void onBtnCapNhatNhatKyClick() {
-        capNhatTrangThaiNhatKyClick();
+        setColorForBtnNhatKyTienDoClick(mBtnCapNhatNhatKy);
+        mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
     }
 
     // Lister button cap nhat tien do click.
     @OnClick(R.id.btnTienDoTab)
     public void onBtnCapNhatTienDoClick() {
-        mIsClickCapNhatTienDo = true;
-        capNhatTrangThaiTienDoClick();
+        mHasClickBtnTienDo = true;
+        if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+            return;
+        }
+        setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
+        mViewPagerContent.setCurrentItem(KEY_SWITCH_TIENDO);
     }
 
-    private void capNhatTrangThaiNhatKyClick() {
-        mFragmentLayoutNhatKy.setVisibility(View.VISIBLE);
-        mFragmentLayoutTienDo.setVisibility(View.GONE);
-        mBtnCapNhatNhatKy.setBackgroundColor(Color.CYAN);
-        mBtnCapNhatTienDo.setBackgroundColor(Color.WHITE);
+    /**
+     * When switch to preview screen.
+     */
+    private void showPreviewNhatKyTienDoClick() {
+        onShowNhatKyTienDoPreview(true);
     }
 
-    private void capNhatTrangThaiTienDoClick() {
-        mFragmentLayoutNhatKy.setVisibility(View.GONE);
-        mFragmentLayoutTienDo.setVisibility(View.VISIBLE);
-        mBtnCapNhatNhatKy.setBackgroundColor(Color.WHITE);
-        mBtnCapNhatTienDo.setBackgroundColor(Color.CYAN);
+    private void onShowNhatKyTienDoPreview(boolean isShow) {
+        if (isShow) {
+            setVisibilityForLayoutPreview(true);
+            mFrameLayoutPreview.setVisibility(View.VISIBLE);
+        } else {
+            setVisibilityForLayoutPreview(false);
+            mFrameLayoutPreview.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Set color for button when click.
+     * @param isBtnClick Button.
+     */
+    private void setColorForBtnNhatKyTienDoClick (Button isBtnClick) {
+        mBtnCapNhatNhatKy.setBackgroundResource(R.drawable.action_button_not_focus);
+        mBtnCapNhatTienDo.setBackgroundResource(R.drawable.action_button_not_focus);
+        isBtnClick.setBackgroundResource(R.drawable.action_button_focused);
+    }
+
+    /**
+     * Set visibility status for layout when switch to preview.
+     * @param isLayoutPreview boolean.
+     */
+    private void setVisibilityForLayoutPreview(boolean isLayoutPreview) {
+        if (isLayoutPreview) {
+            mLayoutHeader.setVisibility(View.GONE);
+            mLayoutRoot.setVisibility(View.GONE);
+        } else {
+            mLayoutHeader.setVisibility(View.VISIBLE);
+            mLayoutRoot.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDataFromTuyenNgamTienDoEvent(LinearLayout layoutRoot) {
+        mCapNhatNhatKyTienDoPreviewFragment.initDataForBangRongTienDoExpandable(layoutRoot);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+        mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
+                hashMaps,
+                KeyEventCommon.KEY_DOI_BANGRONG_ARR,
+                KeyEventCommon.KEY_TEN_HM_BANGRONG_ARR
+        );
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (mViewPagerContent == null) {
+            return;
+        }
+        switch (position) {
+            case KEY_SWITCH_NHATKY:
+                setColorForBtnNhatKyTienDoClick(mBtnCapNhatNhatKy);
+                break;
+            case KEY_SWITCH_TIENDO:
+                mHasClickBtnTienDo = true;
+                if (fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+                    setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
+                } else {
+                    mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
+                    mHasClickBtnTienDo = true;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 
 }
