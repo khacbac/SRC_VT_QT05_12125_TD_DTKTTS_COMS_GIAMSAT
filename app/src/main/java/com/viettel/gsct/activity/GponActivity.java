@@ -259,26 +259,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (mIsCoThiCong) {
-                if (fragmentCapNhatNhatKy.checkValidateNumberCapNhatNhatKy()) {
-                    fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_number));
-                    return false;
-                }
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtNoiDungCongViec()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_noidung_congviec));
-                return false;
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtThayDoiBoSung()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_thaydoi));
-                return false;
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtYKienGiamSat()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_y_kien_giam_sat));
-                return false;
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtYKienThiCong()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_y_kien_thi_cong));
+            if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
@@ -287,9 +268,9 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-//                if (!fragmentCapNhatTienDo.checkValidateTuyenNgamTienDo()) {
-//                    return false;
-//                }
+                if (!fragmentCapNhatTienDo.checkValidateGponTienDo()) {
+                    return false;
+                }
                 if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
                     fragmentCapNhatTienDo.save();
                     fragmentCapNhatNhatKy.save();
@@ -372,6 +353,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+        hashMaps.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
         mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
                 hashMaps,
                 KeyEventCommon.KEY_DOI_BANGRONG_ARR,

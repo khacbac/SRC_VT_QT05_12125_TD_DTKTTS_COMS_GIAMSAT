@@ -2,6 +2,7 @@ package com.viettel.gsct.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.viettel.gsct.GSCTUtils;
 import com.viettel.gsct.View.SubWorkItemTienDoBTSView;
 import com.viettel.gsct.View.SubWorkItemTienDoNgamView;
 import com.viettel.gsct.View.TiendoBTSItemView;
+import com.viettel.gsct.View.WorkItemRightGPONView;
 import com.viettel.gsct.View.WorkItemTienDoBTSView;
 import com.viettel.gsct.View.WorkItemTienDoNgamView;
 import com.viettel.gsct.fragment.BaseFragment;
@@ -105,7 +107,7 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                             .get(workItemTienDoBTSView.getEntity().getItem_type_id());
                     // Get work item.
                     ContentProgressPreview content
-                            = initDataForWokItemList(workItemTienDoBTSView, work_itemsEntity, stt);
+                            = initDataForWokItemList(workItemTienDoBTSView, work_itemsEntity, ++stt);
                     contentList.add(content);
                 }
             }
@@ -141,7 +143,7 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
             Work_ItemsEntity work_itemsEntity,
             int stt) {
         ContentProgressPreview content = new ContentProgressPreview(
-                "" + ++stt,
+                "" + stt,
                 workItemTienDoBTSView.getTitle(),
                 work_itemsEntity.getStarting_date(),
                 work_itemsEntity.getComplete_date()
@@ -177,8 +179,7 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                     "",
                     view.getFinishDate()
             );
-            if (view.getButtonTienDoStatus().equals("Hoàn thành")
-                    && view.getFinishDate().equals(GSCTUtils.getDateNow())) {
+            if (view.hasChangeTrangThaiTienDo()) {
                 detail.setNewEdit(true);
             } else {
                 detail.setNewEdit(false);
@@ -211,21 +212,23 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                         tienDoNgamView.getWorkItemEntity().getStarting_date(),
                         tienDoNgamView.getWorkItemEntity().getComplete_date()
                 );
-                if (tienDoNgamView.getWorkItemEntity().isCompleted()
-                        && !tienDoNgamView.getWorkItemEntity().getComplete_date().equals(GSCTUtils.getDateNow())) {
-                    content.setNewEdit(false);
-                } else {
+                if (!tienDoNgamView.getWorkItemEntity().isCompleted()
+                        || tienDoNgamView.getWorkItemEntity()
+                        .getComplete_date().equals(GSCTUtils.getDateNow())) {
                     if (!tienDoNgamView.getWorkItemEntity().hasStartedDate()
                             && !(tienDoNgamView.getTrangThaiTienDo().equals("Chưa làm"))) {
                         content.setNgayBatDau(GSCTUtils.getDateNow());
-                        content.setNewEdit(true);
                     }
                     if (tienDoNgamView.getTrangThaiTienDo().equals("Hoàn thành")) {
                         content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                        content.setNewEdit(true);
                     } else {
                         content.setNgayHoanThanh("");
                     }
+                }
+                if (tienDoNgamView.hasChangeTrangThaiTienDo()) {
+                    content.setNewEdit(true);
+                } else {
+                    content.setNewEdit(false);
                 }
                 contentList.add(content);
                 ArrayList<SubWorkItemTienDoNgamView> subWorkItemList = tienDoNgamView.getArrSubItems();
@@ -257,8 +260,49 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
         mListViewDpTienDoThiCong.setAdapter(adapter);
     }
 
+    /**
+     * Khoi tao data cho phan xem truoc cua Gpon.
+     * @param layoutRoot Layout.
+     */
     public void initDataForBangRongTienDoExpandable(LinearLayout layoutRoot) {
-
+        // Get List data for adapter.
+        List<ContentProgressPreview> contentList = new ArrayList<>();
+        List<ContentDetailItemProgressPreview> subWorkList;
+        HashMap<ContentProgressPreview,
+                List<ContentDetailItemProgressPreview>> contentHashMaps = new HashMap<>();
+        if (layoutRoot.getChildCount() > 0 ) {
+            int stt = 0;
+            for (int i = 0; i < layoutRoot.getChildCount(); i++) {
+                if (layoutRoot.getChildAt(i) instanceof WorkItemRightGPONView) {
+                    WorkItemRightGPONView view = (WorkItemRightGPONView) layoutRoot.getChildAt(i);
+                    if (view.getStatusTienDo().equals("Hoàn thành")) {
+                        if (!view.getWorkItem().hasCompletedDate()) {
+                            view.getWorkItem().setComplete_date(GSCTUtils.getDateNow());
+                        }
+                    } else {
+                        view.getWorkItem().setComplete_date("");
+                    }
+                    ContentProgressPreview content = new ContentProgressPreview(
+                            "" + ++stt,
+                            view.getTitle(),
+                            view.getWorkItem().getStarting_date(),
+                            view.getWorkItem().getComplete_date()
+                    );
+                    if (view.getBtnTienDo().isEnabled()) {
+                        content.setNewEdit(true);
+                    } else {
+                        content.setNewEdit(false);
+                    }
+                    contentList.add(content);
+                    subWorkList = new ArrayList<>();
+                    contentHashMaps.put(content,subWorkList);
+                }
+            }
+        }
+        BtsXemTienDoExpandableAdapter adapter =
+                new BtsXemTienDoExpandableAdapter(contentList,
+                        contentHashMaps, getActivity());
+        mListViewDpTienDoThiCong.setAdapter(adapter);
     }
 
     @Override

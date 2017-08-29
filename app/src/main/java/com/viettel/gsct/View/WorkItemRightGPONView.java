@@ -89,4 +89,19 @@ public class WorkItemRightGPONView extends LinearLayout {
         public boolean onFinishListener();
     }
 
+    public String getStatusTienDo() {
+        return btnTienDo.getText().toString();
+    }
+
+    public String getTitle() {
+        return tvTitle.getText().toString();
+    }
+
+    public AppCompatButton getBtnTienDo() {
+        return btnTienDo;
+    }
+
+    public Work_ItemsEntity getWorkItem() {
+        return workItem;
+    }
 }

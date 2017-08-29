@@ -269,6 +269,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                 subView.setFinish(subWorkItem.getFinishDate() != null && subWorkItem.getFinishDate().length() > 0);
                 subView.setEnableTiendo(!subWorkItem.isCompleted() || GSCTUtils.getDateNow().equals(subWorkItem.getFinishDate()));
                 subView.setFinishDate(subWorkItem.getFinishDate());
+                subView.setStrTrangThaiTienDoBanDau(subView.getButtonTienDoStatus());
                 doBTSViews.add(subView);
                 layoutRight.addView(subView);
             }
@@ -285,6 +286,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
             subView.setFinish(work_itemsEntity.isReady() || work_itemsEntity.hasCompletedDate());
             subView.setEnableTiendo(!work_itemsEntity.hasCompletedDate() || GSCTUtils.getDateNow().equals(work_itemsEntity.getComplete_date()));
             subView.setFinishDate(work_itemsEntity.getComplete_date());
+            subView.setStrTrangThaiTienDoBanDau(subView.getButtonTienDoStatus());
             doBTSViews.add(subView);
 
             if (work_itemsEntity.isReady())

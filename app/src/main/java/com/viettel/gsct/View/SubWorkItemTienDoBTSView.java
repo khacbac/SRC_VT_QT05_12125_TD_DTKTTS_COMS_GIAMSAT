@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
     private boolean isFinish = false;
     private FinishListener listener;
     private String finishDate;
+    private String strTrangThaiTienDoBanDau;
 
     public SubWorkItemTienDoBTSView(Context context) {
         super(context);
@@ -61,7 +63,6 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
                 }
             }
         });
-
     }
 
     public void setFinish(boolean finish) {
@@ -108,5 +109,17 @@ public class SubWorkItemTienDoBTSView extends LinearLayout {
 
     public String getButtonTienDoStatus() {
         return ""+btnTienDo.getText();
+    }
+
+    public String getStrTrangThaiTienDoBanDau() {
+        return strTrangThaiTienDoBanDau;
+    }
+
+    public void setStrTrangThaiTienDoBanDau(String strTrangThaiTienDoBanDau) {
+        this.strTrangThaiTienDoBanDau = strTrangThaiTienDoBanDau;
+    }
+
+    public boolean hasChangeTrangThaiTienDo() {
+        return !(getButtonTienDoStatus().equals(getStrTrangThaiTienDoBanDau()));
     }
 }

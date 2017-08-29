@@ -258,40 +258,23 @@ public class LineHangActivity extends LineBaseActivity implements ViewPager.OnPa
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtNoiDungCongViec()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_noidung_congviec));
-                mBtnCapNhatNhatKy.performClick();
-                return false;
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtThayDoiBoSung()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_thaydoi));
-                return false;
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtYKienGiamSat()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_y_kien_giam_sat));
-                mBtnCapNhatNhatKy.performClick();
-                return false;
-            }
-            if (!fragmentCapNhatNhatKy.checkValidateEdtYKienThiCong()) {
-                fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_edt_y_kien_thi_cong));
-                mBtnCapNhatNhatKy.performClick();
+            if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
-                if (fragmentCapNhatNhatKy.checkValidateNumberCapNhatNhatKy()) {
-                    fragmentCapNhatNhatKy.showError(getString(R.string.str_check_validate_number));
-                    mBtnCapNhatNhatKy.performClick();
+                if (!mHasClickBtnTienDo) {
+                    fragmentCapNhatNhatKy.showError(getString(R.string.str_check_da_cap_nhat_tien_do));
+                    mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-//                if (!fragmentCapNhatTienDo.checkValidateTuyenNgamTienDo()) {
-//                    return false;
-//                }
+                if (!fragmentCapNhatTienDo.checkValidateTuyenNgamTienDo()) {
+                    return false;
+                }
                 if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
                     fragmentCapNhatTienDo.save();
                     fragmentCapNhatNhatKy.save();
                 } else {
                     showPreviewNhatKyTienDoClick();
-//                    fragmentCapNhatNhatKy.registerListenerEventBusTuyenNgamNhatKy();
                     fragmentCapNhatNhatKy.registerListenerEventBusTuyenTreoNhatKy();
                     fragmentCapNhatTienDo.registerListenerEventBus();
                 }
@@ -371,6 +354,7 @@ public class LineHangActivity extends LineBaseActivity implements ViewPager.OnPa
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+        hashMaps.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
         mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
                 hashMaps,
                 KeyEventCommon.KEY_DOI_TUYENTREO_ARR,

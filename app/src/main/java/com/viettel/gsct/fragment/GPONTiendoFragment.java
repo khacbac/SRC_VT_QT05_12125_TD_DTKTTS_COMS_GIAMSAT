@@ -304,6 +304,42 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
     }
 
     public void registerListenerEventBus() {
-        EventBus.getDefault().post(layoutRoot);
+        EventBus.getDefault().post(layoutRootRight);
+    }
+
+    public boolean checkValidateGponTienDo() {
+        if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
+            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        Enumeration<Long> keys = hashWorkItems.keys();
+        while (keys.hasMoreElements()) {
+            Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
+            if (workItem.isCompleted() || workItem.getWork_item_code() == null)
+                continue;
+
+            workItem.setSyncStatus(workItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            workItem.setEmployeeId(userId);
+            workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
+            workItem.updateDate();
+
+            if (workItem.getStatus_id() == 403 && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
+                boolean flagValue = false;
+                Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
+                while (enums.hasMoreElements()) {
+                    SubWorkItemGPONView view = enums.nextElement();
+                    if (view.getValue() > 0) {
+                        flagValue = true;
+                        break;
+                    }
+                }
+                if (!flagValue) {
+                    mIsCheckValidate = false;
+                    showError("Bạn chưa nhập khối lượng cho hạng mục");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

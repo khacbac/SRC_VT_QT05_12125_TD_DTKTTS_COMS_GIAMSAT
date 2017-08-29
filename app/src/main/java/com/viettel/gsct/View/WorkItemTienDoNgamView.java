@@ -32,6 +32,7 @@ public class WorkItemTienDoNgamView extends LinearLayout {
     TextView tvTitle;
     @BindView(R.id.btn_tien_do)
     AppCompatButton btnTienDo;
+    private String trangThaiLucDauBtn;
     Work_ItemsEntity entity;
     private ArrayList<SubWorkItemTienDoNgamView> arrSubItems = new ArrayList<>();
     private boolean flagIsWorking = false; // = true neu co mot truong subWorkItem da nhap du lieu
@@ -138,6 +139,18 @@ public class WorkItemTienDoNgamView extends LinearLayout {
         arrSubItems.add(view);
 //        Log.e(TAG, "addSubItem: " + entity.getStatus_id() );
         view.setEditeTextEnable(entity.getStatus_id() != Work_ItemsEntity.STATUS_COMPLETE || GSCTUtils.getDateNow().equals(entity.getComplete_date()));
+    }
+
+    public String getTrangThaiLucDauBtn() {
+        return trangThaiLucDauBtn;
+    }
+
+    public void setTrangThaiLucDauBtn(String trangThaiLucDauBtn) {
+        this.trangThaiLucDauBtn = trangThaiLucDauBtn;
+    }
+
+    public boolean hasChangeTrangThaiTienDo() {
+        return !(getTrangThaiTienDo().equals(getTrangThaiLucDauBtn()));
     }
 
     public ArrayList<SubWorkItemTienDoNgamView> getArrSubItems() {

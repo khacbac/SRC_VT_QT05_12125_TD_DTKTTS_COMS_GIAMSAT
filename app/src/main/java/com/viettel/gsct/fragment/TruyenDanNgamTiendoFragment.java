@@ -175,6 +175,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
             workItem.setWork_item_code(entity.getCode());
 //            Log.e(TAG, "initData: " + workItem.getId() + " " + workItem.getWork_item_name() );
             view.setWorkItemEntity(workItem);
+            view.setTrangThaiLucDauBtn(view.getTrangThaiTienDo());
+            Log.d("BacHK","Trang thai ban dau = " + view.getTrangThaiTienDo());
             layoutRoot.addView(view, childCount++);
 
             ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = cat_sub_work_itemControler.getsubCates(entity.getItem_type_id());

@@ -350,6 +350,7 @@ public class LineBackgroundActivity extends LineBaseActivity
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+        hashMaps.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
         mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
                 hashMaps,
                 KeyEventCommon.KEY_DOI_TUYENNGAM_ARR,
