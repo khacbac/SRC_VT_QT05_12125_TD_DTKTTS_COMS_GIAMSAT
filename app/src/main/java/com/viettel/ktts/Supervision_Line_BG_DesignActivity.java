@@ -1,9 +1,11 @@
 package com.viettel.ktts;
 
+import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -70,7 +72,8 @@ import java.util.List;
  * 
  */
 public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
-	private View spvLineBG_DesignView;
+    private final String TAG = this.getClass().getSimpleName();
+    private View spvLineBG_DesignView;
 	private TabHost tabHost;
 	private int tabHeight = 40;
 	private int tabWidth = 400;
@@ -1689,9 +1692,16 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 	 * @return
 	 */
 	private TextView makeTabIndicator(String text) {
+        TelephonyManager manager = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+            Log.d(TAG,"Tablet");
+        }else{
+            Log.d(TAG,"Mobile");
+            tabHeight = 120;
+        }
 		TextView tabView = new TextView(this);
 		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				tabHeight, 1);
+                tabHeight, 1);
 		lp3.setMargins(1, 0, 1, 0);
 		tabView.setLayoutParams(lp3);
 		tabView.setWidth(tabWidth);
@@ -1700,7 +1710,7 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 		tabView.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
 		tabView.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.tab_indicator));
-		tabView.setPadding(13, 0, 13, 0);
+		tabView.setPadding(13, 0, 13, 10);
 		return tabView;
 	}
 

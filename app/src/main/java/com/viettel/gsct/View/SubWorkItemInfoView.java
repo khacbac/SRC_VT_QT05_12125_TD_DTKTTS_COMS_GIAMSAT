@@ -25,6 +25,10 @@ public class SubWorkItemInfoView extends LinearLayout {
     TextView tvStartDate;
     @BindView(R.id.tv_end_date)
     TextView tvEndDate;
+    @BindView(R.id.tv_khoi_luong)
+    TextView tvKhoiLuong;
+    @BindView(R.id.layoutKhoiLuong)
+    LinearLayout layoutKhoiLuong;
 
     public SubWorkItemInfoView(Context context) {
         super(context);
@@ -48,9 +52,22 @@ public class SubWorkItemInfoView extends LinearLayout {
         ButterKnife.bind(this);
     }
 
-    public void setValue(String title, String startDate, String endDate) {
+    public void setValue(String title, String khoiluong,String startDate, String endDate) {
         tvTitle.setText(title);
+        tvKhoiLuong.setText(khoiluong);
         tvStartDate.setText(GSCTUtils.standardlizeTime(startDate));
         tvEndDate.setText(GSCTUtils.standardlizeTime(endDate));
+    }
+
+    public void setHienThiCotKhoiLuong(boolean isDisplay) {
+        if (isDisplay) {
+            layoutKhoiLuong.setVisibility(VISIBLE);
+        } else {
+            layoutKhoiLuong.setVisibility(GONE);
+        }
+    }
+
+    public TextView getTvKhoiLuong() {
+        return tvKhoiLuong;
     }
 }

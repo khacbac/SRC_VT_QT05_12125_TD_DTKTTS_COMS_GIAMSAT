@@ -576,7 +576,7 @@ public class GloablUtils {
                             R.string.brcd_background_design_info_tttk),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
             listData.add(new DropdownItemEntity(
-                    Constants.BRCD_BACKGROUND_INFO.NHAT_KY, GlobalInfo
+                    Constants.BRCD_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO, GlobalInfo
                     .getInstance()
                     .getAppContext()
                     .getResources()
@@ -1132,15 +1132,15 @@ public class GloablUtils {
                         Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
             }
             listData.add(new DropdownItemEntity(
-                    Constants.BRCD_BACKGROUND_INFO.NHAT_KY, GlobalInfo
+                    Constants.BRCD_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO, GlobalInfo
                     .getInstance().getAppContext().getResources()
                     .getString(R.string.line_cable_type_bon),
                     Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
-            listData.add(new DropdownItemEntity(
-                    Constants.BRCD_BACKGROUND_INFO.TIEN_DO, GlobalInfo
-                    .getInstance().getAppContext().getResources()
-                    .getString(R.string.line_cable_type_tam),
-                    Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
+//            listData.add(new DropdownItemEntity(
+//                    Constants.BRCD_BACKGROUND_INFO.TIEN_DO, GlobalInfo
+//                    .getInstance().getAppContext().getResources()
+//                    .getString(R.string.line_cable_type_tam),
+//                    Constants.DROPDOWN_TYPE.DESIGN_SO_NHANH));
             listData.add(new DropdownItemEntity(
                     Constants.BRCD_BACKGROUND_INFO.THONG_TIN_TK, GlobalInfo
                     .getInstance().getAppContext().getResources()

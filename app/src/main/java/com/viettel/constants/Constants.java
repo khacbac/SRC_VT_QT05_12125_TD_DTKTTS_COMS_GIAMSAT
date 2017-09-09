@@ -482,17 +482,18 @@ public class Constants {
 	/* Thong tin giam sat bang rong co dinh */
 	public interface BRCD_BACKGROUND_INFO {
 		public static final int THONG_TIN_TK = 1;
-		public static final int NHAT_KY = 2;
-		public static final int TIEN_DO = 3;
-		public static final int KEO_CAP_TRUC = 4;
-		public static final int MANG_SONG_TRUC = 5;
-		public static final int KEO_CAP_NHANH = 6;
-		public static final int TU_NHANH = 7;
-		public static final int DROP_GO = 8;
-		public static final int TU_THUE_BAO = 9;
-		public static final int CAP_NHAT_DOI_THI_CONG = 11;
-		public static final int CAP_NHAT_VUONG = 12;
-		public static final int KET_LUAN_INFO = 10;
+		public static final int NHAT_KY_TIEN_DO_INFO = 2;
+//		public static final int NHAT_KY = 2;
+//		public static final int TIEN_DO = 3;
+		public static final int KEO_CAP_TRUC = 3;
+		public static final int MANG_SONG_TRUC = 4;
+		public static final int KEO_CAP_NHANH = 5;
+		public static final int TU_NHANH = 6;
+		public static final int DROP_GO = 7;
+		public static final int TU_THUE_BAO = 8;
+		public static final int CAP_NHAT_DOI_THI_CONG = 10;
+		public static final int CAP_NHAT_VUONG = 11;
+		public static final int KET_LUAN_INFO = 9;
 
 
 		// ---HungTN add 23/08/2016
@@ -533,14 +534,14 @@ public class Constants {
 		public static final int THIE_TKE_INFO = 1;
 		public static final int NHAT_KY_TIEN_DO_INFO = 2;
 		//		public static final int TIEN_DO_INFO = 3;
-		public static final int GS_COT_INFO = 4;
-		public static final int GS_CAP_INFO = 5;
-		public static final int MEASURE_CONSTR_INFO = 7;
-		public static final int GS_HNDK_INFO = 6;
-		public static final int KET_LUAN_INFO = 8;
+		public static final int GS_COT_INFO = 3;
+		public static final int GS_CAP_INFO = 4;
+		public static final int MEASURE_CONSTR_INFO = 6;
+		public static final int GS_HNDK_INFO = 5;
+		public static final int KET_LUAN_INFO = 7;
 		// ---HungTN add 25/08/2016
-		public static final int CAP_NHAT_DOI_THI_CONG = 9;
-		public static final int CAP_NHAT_VUONG = 10;
+		public static final int CAP_NHAT_DOI_THI_CONG = 8;
+		public static final int CAP_NHAT_VUONG = 9;
 		// ---
 
 	}

@@ -79,16 +79,18 @@ public class WorkItemTienDoNgamView extends LinearLayout {
                 } else if (entity.getStatus_id() == Work_ItemsEntity.STATUS_WORKING) {
                     boolean isFinish = true;
                     for (SubWorkItemTienDoNgamView view : arrSubItems) {
-                        isFinish = !(view.getEtValueNumber().equals("") && view.getTvLuykeNumber().equals(""));
-                        if (!isFinish) {
-                            Toast.makeText(getContext(),"Bạn phải nhập khối lượng cho "
-                                    + view.getTvTitle(),Toast.LENGTH_SHORT).show();
+                        isFinish = !(view.getEtValueNumber().equals("")
+                                && view.getTvLuykeNumber().equals(""));
+                        if (isFinish) {
                             break;
                         }
                     }
                     if (isFinish) {
                         entity.setStatus_id(Work_ItemsEntity.STATUS_COMPLETE);
                         btnTienDo.setText("Hoàn thành");
+                    } else {
+                        Toast.makeText(getContext(),"Bạn phải nhập khối lượng cho hạng mục!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     entity.setStatus_id(Work_ItemsEntity.STATUS_WORKING);

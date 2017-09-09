@@ -270,7 +270,8 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 				// this.supervision_hg_pillar_complete_date.setVisibility(View.GONE);
 				this.btn_line_hg_pillar_add.setVisibility(View.GONE);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			Log.i("KTTS_ERR", e.getMessage());
 		}
 	}

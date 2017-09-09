@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.ktts.R;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -25,10 +27,12 @@ public class WorkItemRightGPONView extends LinearLayout {
     TextView tvTitle;
     @BindView(R.id.btn_tien_do)
     AppCompatButton btnTienDo;
+    private ArrayList<View> views = new ArrayList<>();
 
     private Work_ItemsEntity workItem;
 
     private FinishListener listener;
+    private OnStatusBtnTienDo statusTienDo;
 
     public WorkItemRightGPONView(Context context) {
         super(context);
@@ -57,12 +61,18 @@ public class WorkItemRightGPONView extends LinearLayout {
                 if (workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE) {
                     workItem.setStatus_id(0);
                     btnTienDo.setText("Chưa làm");
+                    if (statusTienDo != null) {
+                        statusTienDo.onStatusHoanThanh(btnTienDo.getText().toString().equals("Hoàn thành"));
+                    }
                 } else {
                     workItem.setStatus_id(Work_ItemsEntity.STATUS_COMPLETE);
                     btnTienDo.setText("Hoàn thành");
                     if (listener != null && !listener.onFinishListener()) {
                         workItem.setStatus_id(0);
                         btnTienDo.setText("Chưa làm");
+                    }
+                    if (statusTienDo != null) {
+                        statusTienDo.onStatusHoanThanh(btnTienDo.getText().toString().equals("Hoàn thành"));
                     }
                 }
             }
@@ -81,12 +91,22 @@ public class WorkItemRightGPONView extends LinearLayout {
         btnTienDo.setEnabled(!workItem.isCompleted());
     }
 
+
+
     public void setFinishListener(FinishListener listener) {
         this.listener = listener;
     }
 
     public interface FinishListener {
         public boolean onFinishListener();
+    }
+
+    public interface OnStatusBtnTienDo {
+        void onStatusHoanThanh(boolean isHoanThanh);
+    }
+
+    public void setOnStatusBtnTienDo(OnStatusBtnTienDo status) {
+        this.statusTienDo = status;
     }
 
     public String getStatusTienDo() {
@@ -103,5 +123,13 @@ public class WorkItemRightGPONView extends LinearLayout {
 
     public Work_ItemsEntity getWorkItem() {
         return workItem;
+    }
+
+    public void addViews(View view) {
+        views.add(view);
+    }
+
+    public ArrayList<View> getListSubViews() {
+        return views;
     }
 }

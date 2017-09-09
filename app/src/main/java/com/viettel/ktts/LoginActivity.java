@@ -97,55 +97,70 @@ public class LoginActivity extends HomeBaseActivity {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnLogin:
-			Log.d("Location", "gps : "+GpsServices.latLocation+", "+GpsServices.longLocation);
-			/* Check open GPS */
-			if (this.checkOpenGps()) {
-				sUserName = editTextUser.getText().toString().trim();
-				sPassWord = editTextPassword.getText().toString().trim();
-				String clientId = this.getMacAddress();
-				/* Check login online */
-				if (this.check3GWifi()) {
-					this.requestLogin(sUserName, sPassWord, clientId);
-				}
-				/* Check login offline */
-				else {
-					EmployeeEntity loginAcount = this.getLoginOffline(
-							sUserName, sPassWord);
-					if (loginAcount.getId() > 0) {
-						GlobalInfo.getInstance().setFullName(
-								loginAcount.getFullName());
-						GlobalInfo.getInstance().setUserId(loginAcount.getId());
-						GlobalInfo.getInstance().setGroupCode(
-								loginAcount.getGroupCode());
-						GlobalInfo.getInstance().setEmployeeCode(loginAcount.getCode());
-						GlobalInfo.getInstance().saveGlobalInfo();
-						this.setLoginNameSetting(sUserName);
+			// insert login offline
+			Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
+			loginLogConstr.setUserName(sUserName);
+			loginLogConstr.setMac(this.getMacAddress());
+			SimpleDateFormat dateView = new SimpleDateFormat(
+					"yyyy-dd-MM HH:mm:ss");
 
-						// insert login offline
-						Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
-						loginLogConstr.setUserName(sUserName);
-						loginLogConstr.setMac(this.getMacAddress());
-						SimpleDateFormat dateView = new SimpleDateFormat(
-								"yyyy-dd-MM HH:mm:ss");
+			loginLogConstr.setLogDate(dateView.format(Calendar
+					.getInstance().getTime()));
 
-						loginLogConstr.setLogDate(dateView.format(Calendar
-								.getInstance().getTime()));
+			new Login_Log_ConstrController(this)
+					.insertLoginLogConstr(loginLogConstr);
+			this.gotoHomeActivity(new Bundle());
+			this.finish();
 
-						new Login_Log_ConstrController(this)
-								.insertLoginLogConstr(loginLogConstr);
-						this.gotoHomeActivity(new Bundle());
-						this.finish();
-					} else {
-						this.textViewResult
-								.setText(getString(R.string.login_offline_error_messager));
-					}
-				}
-				editTextPassword.setText(StringUtil.EMPTY_STRING);
-
-			} else {
-				this.showDialog(StringUtil
-						.getString(R.string.text_map_location_no_open));
-			}
+//			Log.d("Location", "gps : "+GpsServices.latLocation+", "+GpsServices.longLocation);
+//			/* Check open GPS */
+//			if (this.checkOpenGps()) {
+//				sUserName = editTextUser.getText().toString().trim();
+//				sPassWord = editTextPassword.getText().toString().trim();
+//				String clientId = this.getMacAddress();
+//				/* Check login online */
+//				if (this.check3GWifi()) {
+//					this.requestLogin(sUserName, sPassWord, clientId);
+//				}
+//				/* Check login offline */
+//				else {
+//					EmployeeEntity loginAcount = this.getLoginOffline(
+//							sUserName, sPassWord);
+//					if (loginAcount.getId() > 0) {
+//						GlobalInfo.getInstance().setFullName(
+//								loginAcount.getFullName());
+//						GlobalInfo.getInstance().setUserId(loginAcount.getId());
+//						GlobalInfo.getInstance().setGroupCode(
+//								loginAcount.getGroupCode());
+//						GlobalInfo.getInstance().setEmployeeCode(loginAcount.getCode());
+//						GlobalInfo.getInstance().saveGlobalInfo();
+//						this.setLoginNameSetting(sUserName);
+//
+//						// insert login offline
+//						Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
+//						loginLogConstr.setUserName(sUserName);
+//						loginLogConstr.setMac(this.getMacAddress());
+//						SimpleDateFormat dateView = new SimpleDateFormat(
+//								"yyyy-dd-MM HH:mm:ss");
+//
+//						loginLogConstr.setLogDate(dateView.format(Calendar
+//								.getInstance().getTime()));
+//
+//						new Login_Log_ConstrController(this)
+//								.insertLoginLogConstr(loginLogConstr);
+//						this.gotoHomeActivity(new Bundle());
+//						this.finish();
+//					} else {
+//						this.textViewResult
+//								.setText(getString(R.string.login_offline_error_messager));
+//					}
+//				}
+//				editTextPassword.setText(StringUtil.EMPTY_STRING);
+//
+//			} else {
+//				this.showDialog(StringUtil
+//						.getString(R.string.text_map_location_no_open));
+//			}
 			break;
 		default:
 			super.onClick(view);

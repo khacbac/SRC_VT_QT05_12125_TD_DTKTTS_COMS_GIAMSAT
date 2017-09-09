@@ -22,6 +22,23 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.2"
+        android:id="@+id/layoutKhoiLuong"
+        android:orientation="horizontal"
+        android:background="@drawable/border_right_bottom_left"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding">
+        <TextView
+            style="@style/Header.Textview"
+            android:id="@+id/tv_khoi_luong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
         android:orientation="horizontal"
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"

@@ -9,6 +9,7 @@ import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -75,7 +76,8 @@ import java.util.List;
 
 public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements OnTabChangeListener{
 
-	private View spvBTS_PillarView;
+    private final String TAG = this.getClass().getSimpleName();
+    private View spvBTS_PillarView;
 	/**
 	 * textview
 	 */
@@ -256,30 +258,40 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 	public void initComponent() {
 		spvBTS_PillarView = addView(R.layout.supervision_bts_pillar, R.id.rl_spv_bts_pillar);
 		// textview
-		supervision_bts_tv_matram = (TextView) spvBTS_PillarView.findViewById(R.id.rl_supervision_bts_tv_matram);
-		supervision_bts_tv_mact = (TextView) spvBTS_PillarView.findViewById(R.id.rl_supervision_bts_tv_mact);
-		supervision_bts_pillar_notification_tv = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_notification_tv);
+		supervision_bts_tv_matram = (TextView) spvBTS_PillarView
+                .findViewById(R.id.rl_supervision_bts_tv_matram);
+		supervision_bts_tv_mact = (TextView) spvBTS_PillarView
+                .findViewById(R.id.rl_supervision_bts_tv_mact);
+		supervision_bts_pillar_notification_tv = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_notification_tv);
 
-		supervision_bts_complete_date = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_complete_date);
+		supervision_bts_complete_date = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_complete_date);
 
 		// edit text
-		supervision_bts_pillar_et_diengiai_ldc = (EditText) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_lapdung_row3_et_diengiai);
-		supervision_bts_pillar_et_diengiai_tctd = (EditText) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_thicongtiepdia_row2_et_diengiai);
+		supervision_bts_pillar_et_diengiai_ldc = (EditText) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_lapdung_row3_et_diengiai);
+		supervision_bts_pillar_et_diengiai_tctd = (EditText) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_thicongtiepdia_row2_et_diengiai);
 		registerForContextMenu(supervision_bts_pillar_et_diengiai_ldc);
 		registerForContextMenu(supervision_bts_pillar_et_diengiai_tctd);
 
 		// button
-		save = (Button) spvBTS_PillarView.findViewById(R.id.rl_supervision_bts_pillar_row6_1_bt_save);
+		save = (Button) spvBTS_PillarView
+                .findViewById(R.id.rl_supervision_bts_pillar_row6_1_bt_save);
 		save.setOnClickListener(this);
 
-		rl_supervision_bts_bt_complete = (Button) spvBTS_PillarView.findViewById(R.id.rl_supervision_bts_bt_complete);
+		rl_supervision_bts_bt_complete = (Button) spvBTS_PillarView
+                .findViewById(R.id.rl_supervision_bts_bt_complete);
 		rl_supervision_bts_bt_complete.setOnClickListener(this);
 
-		supervision_bts_pillar_ib_vitri = (Button) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_ib_vitri);
+		supervision_bts_pillar_ib_vitri = (Button) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_ib_vitri);
 		supervision_bts_pillar_ib_vitri.setOnClickListener(this);
 
 		// combobox
-		supervision_bts_pillar_tv_thietke = (TextView) spvBTS_PillarView.findViewById(R.id.rl_supervision_bts_cat_work_tv_thietke);
+		supervision_bts_pillar_tv_thietke = (TextView) spvBTS_PillarView
+                .findViewById(R.id.rl_supervision_bts_cat_work_tv_thietke);
 		supervision_bts_pillar_tv_thietke.setOnClickListener(this);
 
 		supervision_bts_pillar_notification = (RelativeLayout) spvBTS_PillarView
@@ -314,24 +326,29 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 		tabs.addTab(specTctd);
 		tabs.setOnTabChangedListener(this);
 
-		supervision_bts_pillar_tv_chondgclc = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_lapdung_row1_chondgclc);
+		supervision_bts_pillar_tv_chondgclc = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_lapdung_row1_chondgclc);
 		supervision_bts_pillar_tv_chondgclc.setOnClickListener(this);
 
-		supervision_bts_pillar_tv_dgclldc = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_lapdung_row2_chondgclldc);
+		supervision_bts_pillar_tv_dgclldc = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_lapdung_row2_chondgclldc);
 		supervision_bts_pillar_tv_dgclldc.setOnClickListener(this);
 
-		supervision_bts_pillar_tv_nnkd_ldc = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_lapdung_row2_chonnnkd);
+		supervision_bts_pillar_tv_nnkd_ldc = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_lapdung_row2_chonnnkd);
 		supervision_bts_pillar_tv_nnkd_ldc.setOnClickListener(this);
 
-		supervision_bts_pillar_tv_trangthai = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_lapdung_row1_chontrangthai);
+		supervision_bts_pillar_tv_trangthai = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_lapdung_row1_chontrangthai);
 
 		supervision_bts_pillar_tv_trangthai.setOnClickListener(this);
 
-		supervision_bts_pillar_tv_nnkd_tctd = (TextView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_tl_thicongtiepdia_row1_chonnnkd);
+		supervision_bts_pillar_tv_nnkd_tctd = (TextView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_tl_thicongtiepdia_row1_chonnnkd);
 		supervision_bts_pillar_tv_nnkd_tctd.setOnClickListener(this);
 
-		listview = (ListView) spvBTS_PillarView.findViewById(R.id.supervision_bts_pillar_thicong_lv);
-
+		listview = (ListView) spvBTS_PillarView
+                .findViewById(R.id.supervision_bts_pillar_thicong_lv);
 	}
 
 	public void clearFocus() {
@@ -390,11 +407,10 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			ll_supervision_bts_pillar_thicong.setVisibility(View.GONE);
 		}
 
-		Cat_Cause_Constr_UnQualifyController unqualifyController = new Cat_Cause_Constr_UnQualifyController(
-				this);
+		Cat_Cause_Constr_UnQualifyController unqualifyController
+                = new Cat_Cause_Constr_UnQualifyController(this);
 
-		supvConstrAttachFileController = new Supv_Constr_Attach_FileController(
-				this);
+		supvConstrAttachFileController = new Supv_Constr_Attach_FileController(this);
 
 		refreshThicongcot();
 
@@ -472,10 +488,13 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 				Constants.PROGRESS_TYPE.THI_CONG_COT_BTS,
 				supervision_bts_complete_date, rl_supervision_bts_bt_complete);
 
-		if (constr_ConstructionItem.getConstrProgressId() == Constants.SUPERVISION_PROGRESS.COMPLETED
-				|| constr_ConstructionItem.getConstrProgressId() == Constants.SUPERVISION_PROGRESS.UNCOMPLETED
-				|| constr_ConstructionItem.getCatStationTypeId() == Constants.STATION_TYPE.TYPE_COSITE) {
-			this.save.setVisibility(View.GONE);
+        if (constr_ConstructionItem.getConstrProgressId() == Constants
+                .SUPERVISION_PROGRESS.COMPLETED
+                || constr_ConstructionItem.getConstrProgressId() == Constants
+                .SUPERVISION_PROGRESS.UNCOMPLETED
+                || constr_ConstructionItem.getCatStationTypeId() == Constants
+                .STATION_TYPE.TYPE_COSITE) {
+            this.save.setVisibility(View.GONE);
 //			this.rl_supervision_bts_bt_complete.setVisibility(View.GONE);
 		}
 		if (constr_ConstructionItem.getCatStationTypeId() != Constants.STATION_TYPE.TYPE_COSITE
@@ -508,8 +527,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 				/* Gan anh nghiem thu */
 				for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : curItemSupervison
 						.getListAcceptance()) {
-					List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-							.getLstAttachFile(
+					List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                            = this.supvConstrAttachFileController.getLstAttachFile(
 									Acceptance_Bts_PillarField.TABLE_NAME,
 									curUnqualifyItem.getCause_Line_Bg_Id());
 					for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
@@ -521,8 +540,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 				/* Gan anh nguyen nhan loi */
 				for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : listUnqualifyItem) {
 
-					List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-							.getLstAttachFile(
+					List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                            = this.supvConstrAttachFileController.getLstAttachFile(
 									Cause_Bts_Pillar_AntenField.TABLE_NAME,
 									curUnqualifyItem.getCause_Line_Bg_Id());
 					for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
@@ -534,7 +553,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 			if (listData.size() < (btsEntity.getFoundation_NUM() + 1)) {
 				for (int i = listData.size(); i < btsEntity.getFoundation_NUM() + 1; i++) {
-					Cause_Bts_Pillar_AntenEntity cause_bts_pillarAnten = new Cause_Bts_Pillar_AntenEntity();
+					Cause_Bts_Pillar_AntenEntity cause_bts_pillarAnten
+                            = new Cause_Bts_Pillar_AntenEntity();
 					cause_bts_pillarAnten
 							.getSupervision_Bts_Pillar_AntenEntity()
 							.setFOUNDATION_NAME(GloablUtils.getPillarName(i));
@@ -555,7 +575,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 		} else
 			// truong hop chua co du lieu
 			for (int i = 0; i < found_num_bts; i++) {
-				Cause_Bts_Pillar_AntenEntity cause_bts_pillarAnten = new Cause_Bts_Pillar_AntenEntity();
+				Cause_Bts_Pillar_AntenEntity cause_bts_pillarAnten
+                        = new Cause_Bts_Pillar_AntenEntity();
 				cause_bts_pillarAnten.getSupervision_Bts_Pillar_AntenEntity()
 						.setFOUNDATION_NAME(GloablUtils.getPillarName(i));
 				cause_bts_pillarAnten.getSupervision_Bts_Pillar_AntenEntity()
@@ -606,7 +627,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			/* Gan anh nghiem thu */
 			for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : curEditItemLdc
 					.getListAcceptance()) {
-				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
+				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                        = this.supvConstrAttachFileController
 						.getLstAttachFile(
 								Acceptance_Bts_Cat_WorkField.TABLE_NAME,
 								curUnqualifyItem.getCause_Line_Bg_Id());
@@ -618,9 +640,10 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 			/* Gan anh nguyen nhan loi */
 			for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : listUnqualifyItem) {
-				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-						.getLstAttachFile(Cause_Bts_Cat_WorkField.TABLE_NAME,
-								curUnqualifyItem.getCause_Line_Bg_Id());
+				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                        = this.supvConstrAttachFileController
+                        .getLstAttachFile(Cause_Bts_Cat_WorkField.TABLE_NAME,
+                                curUnqualifyItem.getCause_Line_Bg_Id());
 				for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
 					curUnqualifyItem.getLstAttachFile().add(itemFile);
 				}
@@ -695,8 +718,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			/* Gan anh nghiem thu */
 			for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : curEditItemTctd
 					.getListAcceptance()) {
-				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-						.getLstAttachFile(
+				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                        = this.supvConstrAttachFileController.getLstAttachFile(
 								Acceptance_Bts_Cat_WorkField.TABLE_NAME,
 								curUnqualifyItem.getCause_Line_Bg_Id());
 				for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
@@ -707,9 +730,10 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 			/* Gan anh nguyen nhan loi */
 			for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : listUnqualifyItem) {
-				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-						.getLstAttachFile(Cause_Bts_Cat_WorkField.TABLE_NAME,
-								curUnqualifyItem.getCause_Line_Bg_Id());
+				List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                        = this.supvConstrAttachFileController.getLstAttachFile(
+                                Cause_Bts_Cat_WorkField.TABLE_NAME,
+                        curUnqualifyItem.getCause_Line_Bg_Id());
 				for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
 					curUnqualifyItem.getLstAttachFile().add(itemFile);
 				}
@@ -821,7 +845,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			}
 			if ((itemCheck.getSupervision_Bts_Pillar_AntenEntity().getStatus() >= 0)
 					|| (itemCheck.getSupervision_Bts_Pillar_AntenEntity()
-							.getStatus() == Constants.BTS_ASSESS_PILLAR.KHONG_DAT && countNnkdCheck < 1)) {
+							.getStatus() == Constants.BTS_ASSESS_PILLAR.KHONG_DAT
+                    && countNnkdCheck < 1)) {
 				if (itemCheck.getSupervision_Bts_Pillar_AntenEntity()
 						.getStatus() < 0) {
 					sReslut = StringUtil
@@ -850,8 +875,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					countAcceptCheck++;
 				}
 			}
-			if (itemCheck.getSupervision_Bts_Pillar_AntenEntity().getStatus() == Constants.TANK_STATUS.DAT
-					&& countAcceptCheck < 1) {
+			if (itemCheck.getSupervision_Bts_Pillar_AntenEntity().getStatus()
+                    == Constants.TANK_STATUS.DAT && countAcceptCheck < 1) {
 				sReslut = StringUtil
 						.getString(R.string.constr_take_acceptance_not_enough);
 			}
@@ -976,7 +1001,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 		// click hoan thanh
 		case R.id.rl_supervision_bts_bt_complete:
 			if(!GlobalInfo.getInstance().isCheckIn()){
-				showAlertDialogCheckInRequire(this, getString(R.string.checkin_require), getString(R.string.text_close));
+				showAlertDialogCheckInRequire(this, getString(R.string.checkin_require),
+                        getString(R.string.text_close));
 				break;
 			}
 			confirmSave = new ConfirmDialog(this,
@@ -988,7 +1014,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 		// click save
 		case R.id.rl_supervision_bts_pillar_row6_1_bt_save:
 			if(!GlobalInfo.getInstance().isCheckIn()){
-				showAlertDialogCheckInRequire(this, getString(R.string.checkin_require), getString(R.string.text_close));
+				showAlertDialogCheckInRequire(this, getString(R.string.checkin_require),
+                        getString(R.string.text_close));
 				break;
 			}
 			// neu cot anten trong thiet ke bts la co san thi khong danh gia
@@ -1061,6 +1088,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			Bundle data = new Bundle();
 			// data.putSerializable(IntentConstants.INTENT_DATA,
 			// constr_ConstructionEmployeeItem);
+            Log.d(TAG,"Pillar Long = " + btsEntity.getPillar_LONGITUDE());
+            Log.d(TAG,"Pillar Lat = " + btsEntity.getPillar_LATITUDE());
 			data.putDouble(IntentConstants.INTENT_LONG,
 					btsEntity.getPillar_LONGITUDE());
 			data.putDouble(IntentConstants.INTENT_LAT,
@@ -1364,8 +1393,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 							this, null, this.listPillarAntenUnqualifyItemDif);
 					contructionUnqualifyPopup.showAtCenter();
 				} else if (this.curEditItem
-						.getSupervision_Bts_Pillar_AntenEntity().getStatus() == Constants.BTS_ASSESS_PILLAR.DAT) {
-					this.setAcceptance();
+						.getSupervision_Bts_Pillar_AntenEntity().getStatus()
+                        == Constants.BTS_ASSESS_PILLAR.DAT) {this.setAcceptance();
 					contruoctionAcceptancePopup = new Contruction_AcceptancePopup(
 							this, null, this.listPillarAntenAcceptanceItem);
 					contruoctionAcceptancePopup.showAtCenter();
@@ -1387,8 +1416,9 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 							this, null, this.listPillarAntenUnqualifyItem);
 					contructionUnqualifyPopup.showAtCenter();
 				} else if (this.curEditItem
-						.getSupervision_Bts_Pillar_AntenEntity().getStatus() == Constants.BTS_ASSESS_PILLAR.DAT) {
-					this.setAcceptance();
+						.getSupervision_Bts_Pillar_AntenEntity().getStatus()
+                        == Constants.BTS_ASSESS_PILLAR.DAT) {
+                    this.setAcceptance();
 					contruoctionAcceptancePopup = new Contruction_AcceptancePopup(
 							this, null, this.listPillarAntenAcceptanceItem);
 					contruoctionAcceptancePopup.showAtCenter();
@@ -1477,7 +1507,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 		/* Xu ly su kien anh */
 		case OnEventControlListener.EVENT_UNQUALIFY_CHECK_UCHECK:
-			Supervision_LBG_UnqualifyItemEntity unqualifyItem = (Supervision_LBG_UnqualifyItemEntity) data;
+			Supervision_LBG_UnqualifyItemEntity unqualifyItem
+                    = (Supervision_LBG_UnqualifyItemEntity) data;
 			if (unqualifyItem.isUnqulify()) {
 				unqualifyItem.setDelete(false);
 			} else {
@@ -1693,7 +1724,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					this.curAcceptanceItem.getLstAttachFile().clear();
 					this.curAcceptanceItem.getLstNewAttachFile().clear();
 					for (ImageEntity imageEntity : lstData) {
-						Supv_Constr_Attach_FileEntity curAttachFile = new Supv_Constr_Attach_FileEntity();
+						Supv_Constr_Attach_FileEntity curAttachFile
+                                = new Supv_Constr_Attach_FileEntity();
 						curAttachFile.setSupv_Constr_Attach_file_Id(imageEntity
 								.getId());
 						curAttachFile.setFile_Path(imageEntity.getUrl());
@@ -1704,11 +1736,13 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					}
 					this.contruoctionAcceptancePopup.refreshData();
 				} else if (this.curEditItem
-						.getSupervision_Bts_Pillar_AntenEntity().getStatus() == Constants.BTS_ASSESS_PILLAR.KHONG_DAT) {
+						.getSupervision_Bts_Pillar_AntenEntity().getStatus()
+                        == Constants.BTS_ASSESS_PILLAR.KHONG_DAT) {
 					this.curUnqualifyItem.getLstAttachFile().clear();
 					this.curUnqualifyItem.getLstNewAttachFile().clear();
 					for (ImageEntity imageEntity : lstData) {
-						Supv_Constr_Attach_FileEntity curAttachFile = new Supv_Constr_Attach_FileEntity();
+						Supv_Constr_Attach_FileEntity curAttachFile
+                                = new Supv_Constr_Attach_FileEntity();
 						curAttachFile.setSupv_Constr_Attach_file_Id(imageEntity
 								.getId());
 						curAttachFile.setFile_Path(imageEntity.getUrl());
@@ -1726,7 +1760,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					this.curAcceptanceItem.getLstAttachFile().clear();
 					this.curAcceptanceItem.getLstNewAttachFile().clear();
 					for (ImageEntity imageEntity : lstData) {
-						Supv_Constr_Attach_FileEntity curAttachFile = new Supv_Constr_Attach_FileEntity();
+						Supv_Constr_Attach_FileEntity curAttachFile
+                                = new Supv_Constr_Attach_FileEntity();
 						curAttachFile.setSupv_Constr_Attach_file_Id(imageEntity
 								.getId());
 						curAttachFile.setFile_Path(imageEntity.getUrl());
@@ -1740,7 +1775,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					this.curUnqualifyItem.getLstAttachFile().clear();
 					this.curUnqualifyItem.getLstNewAttachFile().clear();
 					for (ImageEntity imageEntity : lstData) {
-						Supv_Constr_Attach_FileEntity curAttachFile = new Supv_Constr_Attach_FileEntity();
+						Supv_Constr_Attach_FileEntity curAttachFile
+                                = new Supv_Constr_Attach_FileEntity();
 						curAttachFile.setSupv_Constr_Attach_file_Id(imageEntity
 								.getId());
 						curAttachFile.setFile_Path(imageEntity.getUrl());
@@ -1758,7 +1794,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					this.curAcceptanceItem.getLstAttachFile().clear();
 					this.curAcceptanceItem.getLstNewAttachFile().clear();
 					for (ImageEntity imageEntity : lstData) {
-						Supv_Constr_Attach_FileEntity curAttachFile = new Supv_Constr_Attach_FileEntity();
+						Supv_Constr_Attach_FileEntity curAttachFile
+                                = new Supv_Constr_Attach_FileEntity();
 						curAttachFile.setSupv_Constr_Attach_file_Id(imageEntity
 								.getId());
 						curAttachFile.setFile_Path(imageEntity.getUrl());
@@ -1772,7 +1809,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					this.curUnqualifyItem.getLstAttachFile().clear();
 					this.curUnqualifyItem.getLstNewAttachFile().clear();
 					for (ImageEntity imageEntity : lstData) {
-						Supv_Constr_Attach_FileEntity curAttachFile = new Supv_Constr_Attach_FileEntity();
+						Supv_Constr_Attach_FileEntity curAttachFile
+                                = new Supv_Constr_Attach_FileEntity();
 						curAttachFile.setSupv_Constr_Attach_file_Id(imageEntity
 								.getId());
 						curAttachFile.setFile_Path(imageEntity.getUrl());
@@ -1842,24 +1880,24 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 	private void saveAcceptance() {
 		List<Supervision_LBG_UnqualifyItemEntity> curListUnqualify = this.curEditItem
 				.getListAcceptance();
-		for (Supervision_LBG_UnqualifyItemEntity curCauseUniqualify : listPillarAntenAcceptanceItem) {
-			Supervision_LBG_UnqualifyItemEntity curItem = this
-					.getCauseAcceptFromList(curListUnqualify,
-							curCauseUniqualify
-									.getCat_Cause_Constr_Acceptance_Id());
-			if (curItem == null) {
-				/* Them moi */
-				Supervision_LBG_UnqualifyItemEntity addItem = new Supervision_LBG_UnqualifyItemEntity();
-				addItem.setCat_Cause_Constr_Acceptance_Id(curCauseUniqualify
-						.getCat_Cause_Constr_Acceptance_Id());
-				addItem.setCause_Line_Bg_Id(Constants.ID_ENTITY_DEFAULT);
-				addItem.setUnqulify(true);
-				addItem.setLstNewAttachFile(curCauseUniqualify
-						.getLstNewAttachFile());
-				addItem.setTitle(curCauseUniqualify.getTitle());
-				curListUnqualify.add(addItem);
-			}
-		}
+        for (Supervision_LBG_UnqualifyItemEntity curCauseUniqualify : listPillarAntenAcceptanceItem) {
+            Supervision_LBG_UnqualifyItemEntity curItem = this
+                    .getCauseAcceptFromList(curListUnqualify,
+                            curCauseUniqualify
+                                    .getCat_Cause_Constr_Acceptance_Id());
+            if (curItem == null) {
+                /* Them moi */
+                Supervision_LBG_UnqualifyItemEntity addItem = new Supervision_LBG_UnqualifyItemEntity();
+                addItem.setCat_Cause_Constr_Acceptance_Id(curCauseUniqualify
+                        .getCat_Cause_Constr_Acceptance_Id());
+                addItem.setCause_Line_Bg_Id(Constants.ID_ENTITY_DEFAULT);
+                addItem.setUnqulify(true);
+                addItem.setLstNewAttachFile(curCauseUniqualify
+                        .getLstNewAttachFile());
+                addItem.setTitle(curCauseUniqualify.getTitle());
+                curListUnqualify.add(addItem);
+            }
+        }
 	}
 
 	/**
@@ -2062,8 +2100,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 	}
 
 	public void deletePillarAntenRow(Cause_Bts_Pillar_AntenEntity itemDelete) {
-		Supervision_Bts_Pillar_AntenController btsPillarAntenController = new Supervision_Bts_Pillar_AntenController(
-				this);
+		Supervision_Bts_Pillar_AntenController btsPillarAntenController
+                = new Supervision_Bts_Pillar_AntenController(this);
 
 		btsPillarAntenController
 				.deleteSupervision_Bts_PillarAntenEntity(itemDelete
@@ -2141,10 +2179,10 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 		try {
 			long idUser = GlobalInfo.getInstance().getUserId();
-			Supervision_Bts_Pillar_AntenController btsPillarAntenController = new Supervision_Bts_Pillar_AntenController(
-					this);
-			Cause_Bts_Pillar_AntenController causeBtsPillarAntenController = new Cause_Bts_Pillar_AntenController(
-					this);
+			Supervision_Bts_Pillar_AntenController btsPillarAntenController
+                    = new Supervision_Bts_Pillar_AntenController(this);
+			Cause_Bts_Pillar_AntenController causeBtsPillarAntenController
+                    = new Cause_Bts_Pillar_AntenController(this);
 
 			for (Cause_Bts_Pillar_AntenEntity curItemData : listData) {
 				List<Supervision_LBG_UnqualifyItemEntity> curListUnqualify = curItemData
@@ -2178,7 +2216,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 									.getSupervision_Bts_Pillar_AntenEntity(),
 									idBtsPillarLast);
 
-					Cause_Bts_Pillar_AntenEntity causeBtsPillarEntity = new Cause_Bts_Pillar_AntenEntity();
+					Cause_Bts_Pillar_AntenEntity causeBtsPillarEntity
+                            = new Cause_Bts_Pillar_AntenEntity();
 					causeBtsPillarEntity
 							.getSupervision_Bts_Pillar_AntenEntity()
 							.setSupervision_BTS_PILLAR_ANTEN_ID(idBtsPillarLast);
@@ -2296,7 +2335,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 								.updateSupervisionBtsPillarAnten(curItemData
 										.getSupervision_Bts_Pillar_AntenEntity());
 
-						Cause_Bts_Pillar_AntenEntity causeBtsPillarEntity = new Cause_Bts_Pillar_AntenEntity();
+						Cause_Bts_Pillar_AntenEntity causeBtsPillarEntity
+                                = new Cause_Bts_Pillar_AntenEntity();
 						causeBtsPillarEntity
 								.getSupervision_Bts_Pillar_AntenEntity()
 								.setSupervision_BTS_PILLAR_ANTEN_ID(
@@ -2325,8 +2365,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 										|| (addItemCause.getLstNewAttachFile()
 												.size() == 0 && addItemCause
 												.getLstAttachFile().size() == 0)) {
-									List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-											.getLstAttachFile(
+									List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                            = this.supvConstrAttachFileController.getLstAttachFile(
 													Acceptance_Bts_PillarField.TABLE_NAME,
 													addItemCause
 															.getCause_Line_Bg_Id());
@@ -2362,8 +2402,9 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 								if (curItemData
 										.getSupervision_Bts_Pillar_AntenEntity()
 										.getStatus() == Constants.SUPERVISION_STATUS.DAT) {
-									Acceptance_Bts_PillarEntity addCauseItem = new Acceptance_Bts_PillarEntity();
-									addCauseItem
+									Acceptance_Bts_PillarEntity addCauseItem
+                                            = new Acceptance_Bts_PillarEntity();
+                                    addCauseItem
 											.setCat_Cause_Constr_Acceptance_Id(addItemCause
 													.getCat_Cause_Constr_Acceptance_Id());
 									addCauseItem
@@ -2447,8 +2488,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 													.getLstNewAttachFile()
 													.size() == 0 && addItemCause
 													.getLstAttachFile().size() == 0)) {
-										List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-												.getLstAttachFile(
+										List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                                = this.supvConstrAttachFileController.getLstAttachFile(
 														Cause_Bts_Pillar_AntenField.TABLE_NAME,
 														addItemCause
 																.getCause_Line_Bg_Id());
@@ -2496,7 +2537,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 										return true;
 									}
 
-									Cause_Bts_Pillar_AntenEntity addCauseItem = new Cause_Bts_Pillar_AntenEntity();
+									Cause_Bts_Pillar_AntenEntity addCauseItem
+                                            = new Cause_Bts_Pillar_AntenEntity();
 									addItemCause
 											.setSync_Status(Constants.SYNC_STATUS.ADD);
 									addItemCause
@@ -2555,13 +2597,12 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 		/* Tinh toan gia tri */
 		try {
 			long idUser = GlobalInfo.getInstance().getUserId();
-			Cat_Supervision_Constr_WorkController constrWorkController = new Cat_Supervision_Constr_WorkController(
-					this);
-			Supervision_Bts_Cat_WorkController catWorkController = new Supervision_Bts_Cat_WorkController(
-					this);
+			Cat_Supervision_Constr_WorkController constrWorkController
+                    = new Cat_Supervision_Constr_WorkController(this);
+			Supervision_Bts_Cat_WorkController catWorkController
+                    = new Supervision_Bts_Cat_WorkController(this);
 
-			Supervision_BtsController bts_Controller = new Supervision_BtsController(
-					this);
+			Supervision_BtsController bts_Controller = new Supervision_BtsController(this);
 
 			Cause_Bts_Cat_WorkController cauCatWorkController = new Cause_Bts_Cat_WorkController(
 					this);
@@ -2597,7 +2638,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 				bts_Controller.updatePillarStatusQuality(btsEntity);
 
-				Supervision_Bts_Cat_WorkEntity btsCatWorkLdcEntity = getSupervisionBtsCatWorkLdcEntity();
+				Supervision_Bts_Cat_WorkEntity btsCatWorkLdcEntity
+                        = getSupervisionBtsCatWorkLdcEntity();
 
 				if (curEditItemLdc.getBts_Cat_WorkEntity().getStatus() < 0) {
 					/**
@@ -2606,7 +2648,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					if (isDgclc == Constants.BTS_ASSESS_PILLAR.DAT) {
 						// them constr work co work_code tuong ung vao csdl
 						int idConstrWorkLdc = constrWorkController
-								.getConstrWorkEntityByWorkCodeReturnId(Constants.BTS_CONSTR_WORK.WORK_CODE_LDCAT);
+                                .getConstrWorkEntityByWorkCodeReturnId(
+								        Constants.BTS_CONSTR_WORK.WORK_CODE_LDCAT);
 
 						// btsCatWork
 						btsCatWorkLdcEntity
@@ -2640,7 +2683,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 						catWorkController
 								.insertBtsCatWorkEntity(btsCatWorkLdcEntity);
 
-						Cause_Bts_Cat_WorkEntity causeCatWorkLdcEntity = new Cause_Bts_Cat_WorkEntity();
+						Cause_Bts_Cat_WorkEntity causeCatWorkLdcEntity
+                                = new Cause_Bts_Cat_WorkEntity();
 						causeCatWorkLdcEntity
 								.getBts_Cat_WorkEntity()
 								.setSupervision_Bts_Cat_Work_Id(idBtsCatWorkLdc);
@@ -2712,7 +2756,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 							List<Supervision_LBG_UnqualifyItemEntity> curListAcceptance = curEditItemLdc
 									.getListAcceptance();
 							for (Supervision_LBG_UnqualifyItemEntity curItemUnqualify : curListAcceptance) {
-								Acceptance_Bts_Cat_WorkEntity addCauseItem = new Acceptance_Bts_Cat_WorkEntity();
+								Acceptance_Bts_Cat_WorkEntity addCauseItem
+                                        = new Acceptance_Bts_Cat_WorkEntity();
 								addCauseItem
 										.setCat_Cause_Constr_Acceptance_Id(curItemUnqualify
 												.getCat_Cause_Constr_Acceptance_Id());
@@ -2780,7 +2825,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 						catWorkController
 								.updateBtsCatWorkEntity(btsCatWorkLdcEntity);
 
-						Cause_Bts_Cat_WorkEntity causeCatWorkLdcEntity = new Cause_Bts_Cat_WorkEntity();
+						Cause_Bts_Cat_WorkEntity causeCatWorkLdcEntity
+                                = new Cause_Bts_Cat_WorkEntity();
 						causeCatWorkLdcEntity
 								.getBts_Cat_WorkEntity()
 								.setSupervision_Bts_Cat_Work_Id(
@@ -2808,8 +2854,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 										|| (addItemCause.getLstNewAttachFile()
 												.size() == 0 && addItemCause
 												.getLstAttachFile().size() == 0)) {
-									List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-											.getLstAttachFile(
+									List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                            = this.supvConstrAttachFileController.getLstAttachFile(
 													Acceptance_Bts_Cat_WorkField.TABLE_NAME,
 													addItemCause
 															.getCause_Line_Bg_Id());
@@ -2842,7 +2888,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 							/* 2. Them moi nghiem thu */
 							else {
 								if (isDgclldc == Constants.SUPERVISION_STATUS.DAT) {
-									Acceptance_Bts_Cat_WorkEntity addCauseItem = new Acceptance_Bts_Cat_WorkEntity();
+									Acceptance_Bts_Cat_WorkEntity addCauseItem
+                                            = new Acceptance_Bts_Cat_WorkEntity();
 									addCauseItem
 											.setCat_Cause_Constr_Acceptance_Id(addItemCause
 													.getCat_Cause_Constr_Acceptance_Id());
@@ -2922,8 +2969,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 													.getLstNewAttachFile()
 													.size() == 0 && addItemCause
 													.getLstAttachFile().size() == 0)) {
-										List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-												.getLstAttachFile(
+										List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                                = this.supvConstrAttachFileController.getLstAttachFile(
 														Cause_Bts_Cat_WorkField.TABLE_NAME,
 														addItemCause
 																.getCause_Line_Bg_Id());
@@ -2957,7 +3004,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 							}
 							/* 2. Them moi nguyen nhan khong dat */
 							else {
-								if (btsCatWorkLdcEntity.getStatus() == Constants.BTS_CAT_WORK_STATUS.KHONG_DAT) {
+								if (btsCatWorkLdcEntity.getStatus()
+                                        == Constants.BTS_CAT_WORK_STATUS.KHONG_DAT) {
 
 									ArrayList<Long> ListIdCause = new ArrayList<Long>();
 
@@ -2972,7 +3020,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 									} else
 										outOfKey = false;
 
-									Cause_Bts_Cat_WorkEntity addCauseItem = new Cause_Bts_Cat_WorkEntity();
+									Cause_Bts_Cat_WorkEntity addCauseItem
+                                            = new Cause_Bts_Cat_WorkEntity();
 									addItemCause
 											.setSync_Status(Constants.SYNC_STATUS.ADD);
 									addItemCause
@@ -3035,7 +3084,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 					// kttsKey
 					// .getKttsNextKey(Cat_Supervision_Constr_WorkField.TABLE_NAME);
 					int idConstrWorkTd = constrWorkController
-							.getConstrWorkEntityByWorkCodeReturnId(Constants.BTS_CONSTR_WORK.WORK_CODE_TDBTS);
+							.getConstrWorkEntityByWorkCodeReturnId(
+							        Constants.BTS_CONSTR_WORK.WORK_CODE_TDBTS);
 
 					btsCatWorkTdEntity
 							.setCat_Supervision_Constr_Work_Id(idConstrWorkTd);
@@ -3218,8 +3268,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 									|| (addItemCause.getLstNewAttachFile()
 											.size() == 0 && addItemCause
 											.getLstAttachFile().size() == 0)) {
-								List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-										.getLstAttachFile(
+								List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                        = this.supvConstrAttachFileController.getLstAttachFile(
 												Acceptance_Bts_Cat_WorkField.TABLE_NAME,
 												addItemCause
 														.getCause_Line_Bg_Id());
@@ -3252,7 +3302,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 						/* 2. Them moi nghiem thu */
 						else {
 							if (isStatus == Constants.SUPERVISION_STATUS.DAT) {
-								Acceptance_Bts_Cat_WorkEntity addCauseItem = new Acceptance_Bts_Cat_WorkEntity();
+								Acceptance_Bts_Cat_WorkEntity addCauseItem
+                                        = new Acceptance_Bts_Cat_WorkEntity();
 								addCauseItem
 										.setCat_Cause_Constr_Acceptance_Id(addItemCause
 												.getCat_Cause_Constr_Acceptance_Id());
@@ -3330,7 +3381,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 										|| (addItemCause.getLstNewAttachFile()
 												.size() == 0 && addItemCause
 												.getLstAttachFile().size() == 0)) {
-									List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
+									List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                            = this.supvConstrAttachFileController
 											.getLstAttachFile(
 													Cause_Bts_Cat_WorkField.TABLE_NAME,
 													addItemCause
@@ -3702,7 +3754,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			if (curItem == null) {
 				/* Them moi */
 				if (curCauseUniqualify.isUnqulify()) {
-					Supervision_LBG_UnqualifyItemEntity addItem = new Supervision_LBG_UnqualifyItemEntity();
+					Supervision_LBG_UnqualifyItemEntity addItem
+                            = new Supervision_LBG_UnqualifyItemEntity();
 					addItem.setCat_Cause_Constr_Unqualify_Id(curCauseUniqualify
 							.getCat_Cause_Constr_Unqualify_Id());
 					addItem.setCause_Line_Bg_Id(this.curEditItemLdc
@@ -3744,7 +3797,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 			if (curItem == null) {
 				/* Them moi */
 				if (curCauseUniqualify.isUnqulify()) {
-					Supervision_LBG_UnqualifyItemEntity addItem = new Supervision_LBG_UnqualifyItemEntity();
+					Supervision_LBG_UnqualifyItemEntity addItem
+                            = new Supervision_LBG_UnqualifyItemEntity();
 					addItem.setCat_Cause_Constr_Unqualify_Id(curCauseUniqualify
 							.getCat_Cause_Constr_Unqualify_Id());
 					addItem.setCause_Line_Bg_Id(this.curEditItemTctd
@@ -4004,4 +4058,8 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
 
 	}
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
 }

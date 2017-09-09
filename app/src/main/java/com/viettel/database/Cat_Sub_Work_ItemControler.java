@@ -82,6 +82,24 @@ public class Cat_Sub_Work_ItemControler {
         return ret;
     }
 
+    public Cat_Sub_Work_ItemEntity getCatSubWorkItems(long catSubWorkItemId) {
+//        Log.e(TAG, "getCatSubWorkItem() called with: catSubWorkItemId = [" + catSubWorkItemId + "]");
+        Cat_Sub_Work_ItemEntity ret = null;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Cat_Sub_Work_ItemField.TABLE_NAME, allColumn,
+                        Cat_Sub_Work_ItemField.ID + "=? AND "
+                        + Cat_Sub_Work_ItemField.COLUMN_IS_ACTIVE + "=1",
+                        new String[] { String.valueOf(catSubWorkItemId)}, null, null,
+                        null, null);
+        if (cursor.moveToFirst()) {
+            ret = this.converCursorToItem(cursor);
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
     public ArrayList<Cat_Sub_Work_ItemEntity> getsubCates(long catWorkItemID) {
         ArrayList<Cat_Sub_Work_ItemEntity> ret = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);

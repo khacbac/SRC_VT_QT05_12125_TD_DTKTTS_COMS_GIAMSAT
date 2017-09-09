@@ -36,6 +36,8 @@ import com.viettel.database.field.Constr_Work_LogsField;
 import com.viettel.gsct.GSCTUtils;
 import com.viettel.gsct.View.TeamView;
 import com.viettel.ktts.R;
+import com.viettel.view.listener.IeSave;
+import com.viettel.view.listener.IeValidate;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,6 +47,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -57,7 +60,8 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class BtsNhatkyFragment extends BaseFragment {
+public class BtsNhatkyFragment extends BaseFragment
+        implements IeSave.IeCapNhatNhatKyInteractor, IeValidate.IecheckValidateNhatKy {
     private static final String TAG = "BtsNhatkyFragment";
 
     @BindView(R.id.tv_date)
@@ -109,7 +113,8 @@ public class BtsNhatkyFragment extends BaseFragment {
 
     private Cat_Constr_TeamController cat_constr_teamController;
 
-    private ConcurrentHashMap<Long, TeamView> hashTeamView = new ConcurrentHashMap<>();
+//    private ConcurrentHashMap<Long, TeamView> hashTeamView = new ConcurrentHashMap<>();
+    private LinkedHashMap<Long, TeamView> hashTeamViewOrder = new LinkedHashMap<>();
     private ConcurrentHashMap<Long, Constr_Team_ProgressEntity> hashTeams = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Long, Constr_ObStruction_TypeEntity> hashObStructionsById = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, Constr_ObStruction_TypeEntity> hashObStructionsByPosition = new ConcurrentHashMap<>();
@@ -237,9 +242,11 @@ public class BtsNhatkyFragment extends BaseFragment {
                 continue;
 
             TeamView view = new TeamView(getContext());
+            Log.d(TAG, "initData() called" + "name = " + entity.getName());
             view.setTitle(entity.getName());
             rootLayout.addView(view, ++i);
-            hashTeamView.put(entity.getCat_constr_team_id(), view);
+//            hashTeamView.put(entity.getCat_constr_team_id(), view);
+            hashTeamViewOrder.put(entity.getCat_constr_team_id(), view);
             sThicong.add(view);
 
         }
@@ -278,8 +285,8 @@ public class BtsNhatkyFragment extends BaseFragment {
         ArrayList<Constr_Team_ProgressEntity> arrTeamEntity = teamController.getItems(constrWorkLogsEntity.getConstr_work_logs_id());
         if (arrTeamEntity != null && arrTeamEntity.size() > 0) {
             for (Constr_Team_ProgressEntity team : arrTeamEntity) {
-
-                TeamView view = hashTeamView.get(team.getCat_constr_team_id());
+                Log.d(TAG, "initData() called" + "tem num = " + team.getNum_of_team());
+                TeamView view = hashTeamViewOrder.get(team.getCat_constr_team_id());
                 hashTeams.put(team.getCat_constr_team_id(), team);
                 if (view != null && team.getNum_of_team() > 0)
                     view.setNumber(team.getNum_of_team() + "");
@@ -349,10 +356,35 @@ public class BtsNhatkyFragment extends BaseFragment {
 
         if (constrWorkLogsEntity.getIs_work() == 1) {
             // tinh so leng de dam bao khong bi lay quá số phần tử
-            Enumeration<Long> keys = hashTeamView.keys();
-            while (keys.hasMoreElements()) {
-                long key = keys.nextElement();
-                TeamView view = hashTeamView.get(key);
+//            Enumeration<Long> keys = hashTeamView.keys();
+//
+//            while (keys.hasMoreElements()) {
+//                long key = keys.nextElement();
+//                TeamView view = hashTeamView.get(key);
+//                int num = view.getTeamNumber();
+//                Constr_Team_ProgressEntity item = hashTeams.get(key);
+//                if (item == null) {
+//                    long id = Ktts_KeyController.getInstance().getKttsNextKey(Constr_Team_ProgressField.TABLE_NAME);
+//                    item = new Constr_Team_ProgressEntity();
+//                    item.setConstr_team_progress_id(id);
+//                    item.setConstruct_id(constr_ConstructionItem.getConstructId());
+//                    item.setCat_constr_team_id(key);
+//                    item.setCreator_id(idUser);
+//                    item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
+//                    item.setNum_of_team(num);
+//                    item.setSyncStatus(Constants.SYNC_STATUS.ADD);
+//                    item.setEmployeeId(idUser);
+//                    teamController.addItem(item);
+//                } else {
+//                    item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
+//                    item.setNum_of_team(num);
+//                    item.setEmployeeId(idUser);
+//                    item.setSyncStatus(Constants.SYNC_STATUS.EDIT);
+//                    teamController.updateItem(item);
+//                }
+//            }
+            for (Long key : hashTeamViewOrder.keySet()) {
+                TeamView view = hashTeamViewOrder.get(key);
                 int num = view.getTeamNumber();
                 Constr_Team_ProgressEntity item = hashTeams.get(key);
                 if (item == null) {
@@ -417,6 +449,16 @@ public class BtsNhatkyFragment extends BaseFragment {
         this.mInterfaceCheckSwitchCombatStatusStatus = combat;
     }
 
+    @Override
+    public void saveNhatKy() {
+        save();
+    }
+
+    @Override
+    public boolean checkValidateNhatKy(boolean isThiCong) {
+        return checkValidateFromCapNhatNhatKy(isThiCong);
+    }
+
     public interface InterfaceCheckSwitchCombatStatus {
         void checkSwitchCombatStatus(boolean isChecked);
     }
@@ -452,9 +494,16 @@ public class BtsNhatkyFragment extends BaseFragment {
 
     public boolean checkValidateNumberCapNhatNhatKy() {
         flagValidateTeamNumber = true;
-        Enumeration<Long> keys = hashTeamView.keys();
-        while (keys.hasMoreElements()) {
-            TeamView view = hashTeamView.get(keys.nextElement());
+//        Enumeration<Long> keys = hashTeamView.keys();
+//        while (keys.hasMoreElements()) {
+//            TeamView view = hashTeamView.get(keys.nextElement());
+//            if (view.getTeamNumber() > 0) {
+//                flagValidateTeamNumber = false;
+//                break;
+//            }
+//        }
+        for (Long key : hashTeamViewOrder.keySet()) {
+            TeamView view = hashTeamViewOrder.get(key);
             if (view.getTeamNumber() > 0) {
                 flagValidateTeamNumber = false;
                 break;
@@ -518,17 +567,22 @@ public class BtsNhatkyFragment extends BaseFragment {
      * Pass data to Bts Nhat Ky.
      * @return HashMap
      */
-    private HashMap<String,String> passHashMapDataForNhatKy(String[] keyDoiArr) {
-        HashMap<String,String> listHashMap = new HashMap<>();
+    private LinkedHashMap<String,String> passHashMapDataForNhatKy(String[] keyDoiArr) {
+        LinkedHashMap<String,String> listHashMap = new LinkedHashMap<>();
         listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
         listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
         listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
         listHashMap.put(KeyEventCommon.KEY_GIAMSAT,etYKienGiamSat.getEditableText().toString());
         listHashMap.put(KeyEventCommon.KEY_THICONG,etYKienThiCong.getEditableText().toString());
-        Enumeration<Long> keys = hashTeamView.keys();
         ArrayList<Integer> mListNumber = new ArrayList<>();
-        while (keys.hasMoreElements()) {
-            TeamView view = hashTeamView.get(keys.nextElement());
+//        while (keys.hasMoreElements()) {
+//            TeamView view = hashTeamView.get(keys.nextElement());
+//            Log.d(TAG, "passHashMapDataForNhatKy() called with: title = " + view.getTitle());
+//            mListNumber.add(view.getTeamNumber());
+//            Log.d(TAG, "passHashMapDataForNhatKy() called with: keyDoiArr = " + view.getTeamNumber());
+//        }
+        for (Long key : hashTeamViewOrder.keySet()) {
+            TeamView view = hashTeamViewOrder.get(key);
             mListNumber.add(view.getTeamNumber());
         }
         if (keyDoiArr.length == mListNumber.size()) {
@@ -536,52 +590,6 @@ public class BtsNhatkyFragment extends BaseFragment {
                 listHashMap.put(keyDoiArr[i], "" + mListNumber.get(i));
             }
         }
-        return listHashMap;
-    }
-
-    /**
-     * Pass data to Tuyen Ngam Nhat Ky.
-     * @return HashMap.
-     */
-    public HashMap<String,String> passHashMapDataForTuyenNgamNhatKy() {
-        HashMap<String, String> listHashMap = new HashMap<>();
-        listHashMap.put(KeyEventCommon.KEY_THOITIET, spThoitiet.getSelectedItem().toString());
-        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC, etNoiDungCongViec.getEditableText().toString());
-        listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
-        listHashMap.put(KeyEventCommon.KEY_GIAMSAT, etYKienGiamSat.getEditableText().toString());
-        listHashMap.put(KeyEventCommon.KEY_THICONG, etYKienThiCong.getEditableText().toString());
-        Enumeration<Long> keys = hashTeamView.keys();
-        ArrayList<Integer> mListNumber = new ArrayList<>();
-        while (keys.hasMoreElements()) {
-            TeamView view = hashTeamView.get(keys.nextElement());
-            mListNumber.add(view.getTeamNumber());
-        }
-        listHashMap.put(KeyEventCommon.KEY_DOI_DAORANH, "" + mListNumber.get(0));
-        listHashMap.put(KeyEventCommon.KEY_DOI_XAYBE, "" + mListNumber.get(1));
-        listHashMap.put(KeyEventCommon.KEY_DOI_KEOCAP_NGAM, "" + mListNumber.get(2));
-        listHashMap.put(KeyEventCommon.KEY_DOI_MAY, "" + mListNumber.get(3));
-        return listHashMap;
-    }
-
-    /**
-     * Pass data to Bts Nhat Ky.
-     * @return HashMap
-     */
-    private HashMap<String,String> passHashMapDataForTuyenTreoNhatKy() {
-        HashMap<String,String> listHashMap = new HashMap<>();
-        listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
-        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
-        listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
-        listHashMap.put(KeyEventCommon.KEY_GIAMSAT,etYKienGiamSat.getEditableText().toString());
-        listHashMap.put(KeyEventCommon.KEY_THICONG,etYKienThiCong.getEditableText().toString());
-        Enumeration<Long> keys = hashTeamView.keys();
-        ArrayList<Integer> mListNumber = new ArrayList<>();
-        while (keys.hasMoreElements()) {
-            TeamView view = hashTeamView.get(keys.nextElement());
-            mListNumber.add(view.getTeamNumber());
-        }
-        listHashMap.put(KeyEventCommon.KEY_DOI_KEOCAP_TREO,""+mListNumber.get(0));
-        listHashMap.put(KeyEventCommon.KEY_DOI_TRONGCOT,""+mListNumber.get(1));
         return listHashMap;
     }
 

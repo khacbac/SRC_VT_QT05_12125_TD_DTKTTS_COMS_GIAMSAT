@@ -10,6 +10,7 @@
         android:layout_weight="0.5"
         style="@style/Header.Textview"
         android:textStyle="bold"
+        android:gravity="center"
         android:background="@drawable/border_right"
         android:id="@+id/txtSttProgress"/>
     <RelativeLayout
@@ -34,9 +35,19 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        style="@style/Content.Textview"
+        android:textStyle="bold"
+        android:id="@+id/txtKhoiLuong"
+        android:gravity="center"
+        android:background="@drawable/border_top_right_bottom_left"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         style="@style/Content.Textview"
         android:textStyle="bold"
+        android:gravity="center"
         android:id="@+id/txtNgayBatDau"
         android:background="@drawable/border_top_right_bottom_left"/>
     <TextView
@@ -46,5 +57,6 @@
         style="@style/Content.Textview"
         android:id="@+id/txtNgayHoanThanh"
         android:textStyle="bold"
+        android:gravity="center"
         android:background="@drawable/border_top_right_bottom_left"/>
 </LinearLayout>

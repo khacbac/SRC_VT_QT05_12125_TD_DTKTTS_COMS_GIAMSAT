@@ -28,155 +28,23 @@
         <!--android:background="@color/home_background_light" />-->
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:id="@+id/linear_content_nhatky_tiendo">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/linearLayoutHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:layout_centerVertical="true">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    style="@style/Header.Textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ngày cập nhật"
-                    android:textStyle="bold" />
-
-                <!--<TextView-->
-                <!--android:id="@+id/tv_date"-->
-                <!--style="@style/Header.Textview_Disable"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:text="04/04/2017" />-->
-
-                <Spinner
-                    android:id="@+id/spinner_choose_log_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </Spinner>
-
-            </LinearLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/border_layout"
-                android:layout_margin="5dp"
-                android:paddingRight="15dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:layout_alignParentRight="true">
-
-                <ImageView
-                    android:id="@+id/iv_antenna_nk_td"
-                    android:layout_centerVertical="true"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/antenna"/>
-
-                <TextView
-                    android:id="@+id/tv_ma_tram_nk_td"
-                    style="@style/Header.Textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_antenna_nk_td"
-                    android:layout_toRightOf="@+id/iv_antenna_nk_td"
-                    android:textStyle="bold"
-                    android:text="Mã trạm"/>
-
-                <TextView
-                    android:id="@+id/tv_ma_cong_trinh_nk_td"
-                    style="@style/Header.Textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/iv_antenna_nk_td"
-                    android:layout_alignBottom="@+id/iv_antenna_nk_td"
-                    android:text="Mã công trình"/>
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            android:paddingBottom="@dimen/margin"
-            android:id="@+id/linearLayoutBtnSwitch"
-            android:paddingLeft="@dimen/margin_15"
-            android:paddingRight="@dimen/margin_15">
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.9"
-                android:text="Tiến độ thi công hàng mục"
-                android:id="@+id/btnTienDoThiCongHangMuc"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.2"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.9"
-                android:text="Nhật ký hàng ngày"
-                android:id="@+id/btnNhatKyHangNgay"/>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <FrameLayout
-                android:id="@+id/fr_content_nhatky"
-                android:padding="@dimen/margin"
-                android:layout_margin="@dimen/margin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </FrameLayout>
-            <FrameLayout
-                android:id="@+id/fr_content_tiendo"
-                android:padding="@dimen/margin"
-                android:layout_margin="@dimen/margin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </FrameLayout>
-        </RelativeLayout>
-
-    </LinearLayout>
-
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/border_layout"
         android:layout_margin="5dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
+        android:background="@drawable/border_layout"
+        android:orientation="vertical"
         android:paddingBottom="5dp"
-        android:layout_alignParentRight="true">
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp">
 
         <ImageView
             android:id="@+id/iv_antenna"
-            android:layout_centerVertical="true"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/antenna"/>
+            android:background="@drawable/antenna" />
 
         <TextView
             android:id="@+id/tv_ma_tram"
@@ -185,93 +53,89 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_antenna"
             android:layout_toRightOf="@+id/iv_antenna"
-            android:textStyle="bold"
-            android:text="Mã trạm"/>
+            android:text="Mã trạm"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_ma_cong_trinh"
             style="@style/Header.Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/iv_antenna"
             android:layout_alignBottom="@+id/iv_antenna"
-            android:text="Mã công trình"/>
+            android:layout_toRightOf="@+id/iv_antenna"
+            android:text="Mã công trình" />
+
     </RelativeLayout>
-
-
     <!--<FrameLayout-->
     <!--android:id="@+id/fr_content"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"/>-->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/border_layout"
+        android:layout_margin="5dp"
+        android:padding="10dp">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@drawable/border_layout"
-            android:layout_margin="5dp"
-            android:padding="10dp">
-            <LinearLayout
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="1dp"
+            android:background="@drawable/shape_border">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_chi_tiet"
+                style="@style/Header.Textview.Info"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="1dp"
-                android:background="@drawable/shape_border">
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_chi_tiet"
-                    style="@style/Header.Textview.Info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="Thông tin chi tiết công trình"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimary"/>
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_tien_do"
-                    style="@style/Header.Textview.Info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Tiến độ thi công hạng mục"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimary"/>
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_nhat_ky_tien_do"
-                    style="@style/Header.Textview.Info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="@string/str_nhat_ky_va_tien_do"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimary"/>
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_ke_hoach"
-                    style="@style/Header.Textview.Info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Kế hoạch chi tiết"/>
-            </LinearLayout>
-            <FrameLayout
-                android:id="@+id/fr_content"
-                android:layout_weight="0.6"
-                android:layout_marginLeft="10dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"></FrameLayout>
+                android:gravity="left"
+                android:text="Thông tin chi tiết công trình"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_tien_do"
+                style="@style/Header.Textview.Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:background="?attr/selectableItemBackground"
+                android:text="Tiến độ thi công hạng mục"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_nhat_ky"
+                style="@style/Header.Textview.Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:background="?attr/selectableItemBackground"
+                android:text="Nhật ký hàng ngày"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_ke_hoach"
+                style="@style/Header.Textview.Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:background="?attr/selectableItemBackground"
+                android:text="Kế hoạch chi tiết"/>
         </LinearLayout>
+        <FrameLayout
+            android:id="@+id/fr_content"
+            android:layout_weight="0.6"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></FrameLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
+
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.viettel.view.control;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
     private List<ContentProgressPreview> progresslHeaderPreviewList;
     private HashMap<ContentProgressPreview,List<ContentDetailItemProgressPreview>> progresslItemPreviewList;
     private Context mContext;
+    private boolean needDisplayKhoiLuong;
 
     public BtsXemTienDoExpandableAdapter(
             List<ContentProgressPreview> progresslHeaderPreviewList,
@@ -87,15 +87,18 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
         viewHolderForHeader.txtNgayBatDau.setText(progressPreview.getNgayBatDau());
         viewHolderForHeader.txtNgayHoanThanh.setText(progressPreview.getNgayHoanThanh());
         if (((ContentProgressPreview) getGroup(groupPosition)).isNewEdit()) {
-            viewHolderForHeader.txtSttProgress.setTextColor(Color.CYAN);
-            viewHolderForHeader.txtTenHangMuc.setTextColor(Color.CYAN);
-            viewHolderForHeader.txtNgayBatDau.setTextColor(Color.CYAN);
-            viewHolderForHeader.txtNgayHoanThanh.setTextColor(Color.CYAN);
+            viewHolderForHeader.txtSttProgress.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.teal));
         } else {
-            viewHolderForHeader.txtSttProgress.setTextColor(Color.BLACK);
-            viewHolderForHeader.txtTenHangMuc.setTextColor(Color.BLACK);
-            viewHolderForHeader.txtNgayBatDau.setTextColor(Color.BLACK);
-            viewHolderForHeader.txtNgayHoanThanh.setTextColor(Color.BLACK);
+            viewHolderForHeader.txtSttProgress.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+        }
+        if (!needDisplayKhoiLuong) {
+            viewHolderForHeader.txtKhoiLuong.setVisibility(View.GONE);
         }
         return convertView;
     }
@@ -112,17 +115,23 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
         }
         ContentDetailItemProgressPreview item = (ContentDetailItemProgressPreview) getChild(groupPosition,childPosition);
         viewHolderForItem.txtDetailTenHangMuc.setText(item.getDetailTenHangMuc());
-        viewHolderForItem.txttxtDetailNgayBatDau.setText(item.getDetailNgayBatDau());
-        viewHolderForItem.txttxtDetailNgayHoanThanh.setText(item.getDetailNgayHoanThanh());
+        viewHolderForItem.txtDetailNgayBatDau.setText(item.getDetailNgayBatDau());
+        viewHolderForItem.txtDetailNgayHoanThanh.setText(item.getDetailNgayHoanThanh());
+        viewHolderForItem.txtDetailKhoiLuong.setText(item.getDetailKhoiLuong());
 
         if (((ContentDetailItemProgressPreview) getChild(groupPosition,childPosition)).isNewEdit()) {
-            viewHolderForItem.txtDetailTenHangMuc.setTextColor(Color.CYAN);
-            viewHolderForItem.txttxtDetailNgayBatDau.setTextColor(Color.CYAN);
-            viewHolderForItem.txttxtDetailNgayHoanThanh.setTextColor(Color.CYAN);
+            viewHolderForItem.txtDetailTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailKhoiLuong.setTextColor(mContext.getResources().getColor(R.color.teal));
         } else {
-            viewHolderForItem.txtDetailTenHangMuc.setTextColor(Color.BLACK);
-            viewHolderForItem.txttxtDetailNgayBatDau.setTextColor(Color.BLACK);
-            viewHolderForItem.txttxtDetailNgayHoanThanh.setTextColor(Color.BLACK);
+            viewHolderForItem.txtDetailTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailKhoiLuong.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+        }
+        if (!needDisplayKhoiLuong) {
+            viewHolderForItem.txtDetailKhoiLuong.setVisibility(View.GONE);
         }
         return convertView;
     }
@@ -137,23 +146,34 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
         TextView txtTenHangMuc;
         TextView txtNgayBatDau;
         TextView txtNgayHoanThanh;
+        TextView txtKhoiLuong;
         public ViewHolderForHeader(View view) {
             txtSttProgress = (TextView) view.findViewById(R.id.txtSttProgress);
             txtTenHangMuc = (TextView) view.findViewById(R.id.txtTenHangMuc);
             txtNgayBatDau = (TextView) view.findViewById(R.id.txtNgayBatDau);
             txtNgayHoanThanh = (TextView) view.findViewById(R.id.txtNgayHoanThanh);
+            txtKhoiLuong = (TextView) view.findViewById(R.id.txtKhoiLuong);
         }
     }
 
     private class ViewHolderForItem {
         TextView txtDetailTenHangMuc;
-        TextView txttxtDetailNgayBatDau;
-        TextView txttxtDetailNgayHoanThanh;
+        TextView txtDetailNgayBatDau;
+        TextView txtDetailNgayHoanThanh;
+        TextView txtDetailKhoiLuong;
         public ViewHolderForItem(View view) {
             txtDetailTenHangMuc = (TextView) view.findViewById(R.id.txtDetailTenHangMuc);
-            txttxtDetailNgayBatDau = (TextView) view.findViewById(R.id.txtDetailNgayBatDau);
-            txttxtDetailNgayHoanThanh = (TextView) view.findViewById(R.id.txtDetailNgayHoanThanh);
+            txtDetailNgayBatDau = (TextView) view.findViewById(R.id.txtDetailNgayBatDau);
+            txtDetailNgayHoanThanh = (TextView) view.findViewById(R.id.txtDetailNgayHoanThanh);
+            txtDetailKhoiLuong = (TextView) view.findViewById(R.id.txtDetailKhoiLuong);
         }
     }
 
+    public boolean isNeedDisplayKhoiLuong() {
+        return needDisplayKhoiLuong;
+    }
+
+    public void setNeedDisplayKhoiLuong(boolean needDisplayKhoiLuong) {
+        this.needDisplayKhoiLuong = needDisplayKhoiLuong;
+    }
 }

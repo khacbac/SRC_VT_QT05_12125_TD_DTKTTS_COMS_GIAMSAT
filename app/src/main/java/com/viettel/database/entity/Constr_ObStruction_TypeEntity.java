@@ -1,7 +1,10 @@
 package com.viettel.database.entity;
 
+import android.util.Log;
+
 public class Constr_ObStruction_TypeEntity {
 
+	private final String TAG = this.getClass().getSimpleName();
 	private long constrObStructionTypeId;
 	private String name;
 	private int isActive;
@@ -19,6 +22,7 @@ public class Constr_ObStruction_TypeEntity {
 	}
 
 	public long getConstrObStructionTypeId() {
+		Log.d(TAG,"ConstrObStruction Type Id = " + constrObStructionTypeId);
 		return constrObStructionTypeId;
 	}
 	public void setConstrObStructionTypeId(long constrObStructionTypeId) {

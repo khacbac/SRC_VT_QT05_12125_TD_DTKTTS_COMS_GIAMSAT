@@ -31,9 +31,9 @@ import com.viettel.gsct.View.SubWorkItemTienDoBTSView;
 import com.viettel.gsct.View.TiendoBTSItemView;
 import com.viettel.gsct.View.WorkItemTienDoBTSView;
 import com.viettel.ktts.R;
+import com.viettel.view.listener.IeSave;
+import com.viettel.view.listener.IeValidate;
 import com.viettel.view.listener.InterfacePassDataFromTienDoToActivity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,8 +48,10 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTienDoBTSView.RadioCheckListener {
-    private static final String TAG = "BtsTiendoFragment";
+public class BtsTiendoFragment extends BaseTienDoFragment
+        implements WorkItemTienDoBTSView.RadioCheckListener, IeSave.IeCapNhatTienDoInteractor,
+        IeValidate.IecheckValidateTienDo {
+    private final String TAG = this.getClass().getSimpleName();
     @BindView(R.id.tv_date)
     TextView tvDate;
     AppCompatEditText etDien;
@@ -228,7 +230,6 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
             work_itemsEntity = new Work_ItemsEntity();
             work_itemsEntity.setItem_type_id(cat_work_item_type.getItem_type_id());
             work_itemsEntity.setWork_item_name(cat_work_item_type.getItem_type_name());
-            work_itemsEntity.setConstr_id(constr_ConstructionItem.getConstructId());
             work_itemsEntity.setChange(true);
             if (work_itemsEntity.isReady())
                 work_itemsEntity.setStatus_id(403);
@@ -434,8 +435,11 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                 }
             }
             if (workItem.getId() > 0) {
+                workItem.setUpdate_date(GSCTUtils.getDateNow());
                 work_itemsControler.updateItem(workItem);
+                Log.d(TAG,"Work Item Id > 0");
             } else {
+                Log.d(TAG,"Work Item Id <= 0");
                 workItem.setId(workItemId);
                 workItem.setUpdate_date(GSCTUtils.getDateNow());
                 work_itemsControler.addItem(workItem);
@@ -443,7 +447,8 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
         }
 
         if (flagConstructions) {
-            Log.e(TAG, "save hoan thanh: " + constr_ConstructionItem.getConstructId() + " " + constr_ConstructionItem.getConstrType());
+            Log.e(TAG, "save hoan thanh: " + constr_ConstructionItem.getConstructId()
+                    + " " + constr_ConstructionItem.getConstrType());
             constr_ConstructionItem.setStatus(396);
         } else {
             constr_ConstructionItem.setStatus(0);
@@ -456,22 +461,26 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
         while (enumCatSubWorkItems.hasMoreElements()) {
             Sub_Work_ItemEntity subWorkItem = enumCatSubWorkItems.nextElement();
 
-            if (subWorkItem.getFinishDate() != null && subWorkItem.getFinishDate().length() > 0 && !subWorkItem.getFinishDate().equals(GSCTUtils.getDateNow()))
+            if (subWorkItem.getFinishDate() != null && subWorkItem.getFinishDate().length() > 0
+                    && !subWorkItem.getFinishDate().equals(GSCTUtils.getDateNow()))
                 continue;
 
-            subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0
+                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
             subWorkItem.setEmployeeId(userId);
-//            Log.e(TAG, "save subWorkItem: " + subWorkItem.getWork_item_id() + " " + subWorkItem.getId() + " " + subWorkItem.getFinishDate());
+            subWorkItem.setIsActive(Constants.IS_ACTIVE);
             if (subWorkItem.getId() > 0) {
                 sub_work_itemController.updateItem(subWorkItem);
             } else {
-                long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
+                long id = Ktts_KeyController.getInstance()
+                        .getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
                 subWorkItem.setId(id);
                 sub_work_itemController.addItem(subWorkItem);
             }
         }
 
-        Toast.makeText(getContext(), "Cập nhật tiến độ thành công!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Cập nhật tiến độ thành công!",
+                Toast.LENGTH_SHORT).show();
     }
 
     public boolean checkTiendoFragmentValidate() {
@@ -513,7 +522,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
                 WorkItemTienDoBTSView view = hashWorkItemViews.get(parentView.getCatWorkItemTypeId());
                 Cat_Work_Item_TypesEntity catWorkItem = view.getEntity();
                 workItem.setItem_type_id(catWorkItem.getItem_type_id());
-                workItem.setConstr_id(constr_ConstructionItem.getConstructId());
+//                workItem.setConstr_id(constr_ConstructionItem.getConstructId());
                 workItem.setWork_item_name(catWorkItem.getItem_type_name());
                 if (workItem.isReady())
                     workItem.setStatus_id(403);
@@ -644,5 +653,15 @@ public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTie
         }
         mInterfacePassDataFromTienDoToActivity
                 .passDataFromTienDoToActivity(listParent,subWorkItemTienDoBTSViewHashMap,hashWorkItems);
+    }
+
+    @Override
+    public void saveTienDo() {
+        save();
+    }
+
+    @Override
+    public boolean checkValidateTienDo() {
+        return checkTiendoFragmentValidate();
     }
 }

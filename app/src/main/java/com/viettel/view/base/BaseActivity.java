@@ -23,6 +23,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
@@ -36,13 +37,16 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -55,6 +59,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.viettel.actionbar.Edit_Text_Popup;
 import com.viettel.actionbar.Image_ViewGalleryPopup;
 import com.viettel.actionbar.NavDrawerItem;
 import com.viettel.actionbar.NavDrawerListAdapter;
@@ -100,8 +105,14 @@ import com.viettel.sync.SyncTask;
 import com.viettel.utils.Mylog;
 import com.viettel.utils.PreferenceUtil;
 import com.viettel.utils.StringUtil;
+import com.viettel.view.listener.IeSave;
+import com.viettel.view.listener.IeValidate;
 import com.viettel.view.listener.MyItemSelected;
 import com.viettel.view.listener.OnEventControlListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.Serializable;
@@ -116,8 +127,9 @@ import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public abstract class BaseActivity extends AppCompatActivity
-        implements OnClickListener, OnEventControlListener, DialogInterface.OnCancelListener, MyItemSelected {
-    private static final String TAG = "BaseActivity";
+        implements OnClickListener, OnEventControlListener,
+        DialogInterface.OnCancelListener, MyItemSelected {
+    private final String TAG = "BaseActivity";
     public boolean isFinished = false;
     public Uri imgUri = null;
     public static final String VT_ACTION = "com.viettel.ktts.BROADCAST";
@@ -158,6 +170,10 @@ public abstract class BaseActivity extends AppCompatActivity
     public MenuItem mItemCheckIn, mItemCollapse, mSave;
     protected boolean isCheckIn;
 
+    private Button btnActionTouch;
+
+    private boolean isPopupShowing = false;
+
     // service dem thoi gian, sau 4 tieng thi checkout va stop
     protected Intent serviceIntent;
     // datatbase luu thoi diem check in
@@ -171,6 +187,10 @@ public abstract class BaseActivity extends AppCompatActivity
 
     Toolbar toolbar;
     AppBarLayout appbar;
+
+    // Interface save.
+    private IeSave.IeCapNhatNhatKyInteractor ieCapNhatNhatKyInteractor;
+    private IeSave.IeCapNhatTienDoInteractor ieCapNhatTienDoInteractor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1021,6 +1041,8 @@ public abstract class BaseActivity extends AppCompatActivity
         mTvUserName = (TextView) findViewById(R.id.tv_user);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
         mFrameLayout = (FrameLayout) findViewById(R.id.frame_container);
+        btnActionTouch = (Button) findViewById(R.id.btnActionTouch);
+
         if (GlobalInfo.getInstance().getFullName() != null) {
             mTvUserName.setText(GlobalInfo.getInstance().getFullName());
         }
@@ -1079,6 +1101,20 @@ public abstract class BaseActivity extends AppCompatActivity
         }
         // enabling action bar app icon and behaving it as toggle button
         initToolbar();
+        btnActionTouch.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard();
+            }
+        });
+//        btnActionTouch.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.d("BacHK","touch event");
+//                dispatchTouchEvent(event);
+//                return true;
+//            }
+//        });
     }
 
     protected void initToolbar() {
@@ -1309,5 +1345,76 @@ public abstract class BaseActivity extends AppCompatActivity
         adapter.changeIcon(position, icon, title);
     }
 
+    // Bat dau lang nghe su kien save tu cap nhat nhat ky.
+    public void listenerSaveFromNhatKy(IeSave.IeCapNhatNhatKyInteractor interactor) {
+        interactor.saveNhatKy();
+    }
+    // Bat dau lang nghe su kien save tu cap nhat nhat ky.
+    public void listenerSaveFromTienDo(IeSave.IeCapNhatTienDoInteractor interactor) {
+        interactor.saveTienDo();
+    }
+    // Check validate tu nhat ky.
+    public boolean listenerValidateFromNhatKy(
+            IeValidate.IecheckValidateNhatKy validateNhatKy, boolean isThiCong) {
+        return validateNhatKy.checkValidateNhatKy(isThiCong);
+    }
+    // Check validate tu nhat ky.
+    public boolean listenerValidateFromTienDo(
+            IeValidate.IecheckValidateTienDo validateTienDo) {
+        return validateTienDo.checkValidateTienDo();
+    }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View view = getCurrentFocus();
+        boolean ret = super.dispatchTouchEvent(ev);
+
+        if (view instanceof EditText) {
+            View w = getCurrentFocus();
+            int scrcoords[] = new int[2];
+            if (w != null) {
+                w.getLocationOnScreen(scrcoords);
+                float x = ev.getRawX() + w.getLeft() - scrcoords[0];
+                float y = ev.getRawY() + w.getTop() - scrcoords[1];
+                if (ev.getAction() == MotionEvent.ACTION_UP
+                        && (x < w.getLeft() || x >= w.getRight()
+                        || y < w.getTop() || y > w.getBottom())) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDismissPopupWindow(PopupWindow popupWindow) {
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnActionTouch.performClick();
+//                        btnActionTouch.requestFocus();
+//                        btnActionTouch.requestFocusFromTouch();
+                    }
+                },50);
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 }

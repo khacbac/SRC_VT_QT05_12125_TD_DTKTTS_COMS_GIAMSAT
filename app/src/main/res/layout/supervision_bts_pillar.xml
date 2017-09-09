@@ -426,11 +426,10 @@
                             android:id="@+id/supervision_bts_pillar_thicong_lv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@drawable/border_right_bottom_left"
                             android:layout_below="@+id/ll_supervision_bts_pillar_thicong"
-                            android:layout_marginBottom="@dimen/margin"
-                            android:layout_marginLeft="@dimen/margin"
-                            android:layout_marginRight="@dimen/margin"
-                            android:background="@drawable/border_right_bottom_left" >
+                            android:layout_alignLeft="@+id/ll_supervision_bts_pillar_thicong"
+                            android:layout_alignStart="@+id/ll_supervision_bts_pillar_thicong">
                         </ListView>
                     </RelativeLayout>
 

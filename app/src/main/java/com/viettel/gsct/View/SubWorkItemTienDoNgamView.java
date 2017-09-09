@@ -81,6 +81,17 @@ public class SubWorkItemTienDoNgamView extends LinearLayout {
         }
     }
 
+    public double getLuyKe() {
+        String ret = tvLuyke.getText().toString();
+        if (ret.equals("")) return 0L;
+        try {
+            return Double.parseDouble(ret);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0L;
+        }
+    }
+
     public void setEditeTextEnable(boolean enable) {
         etValue.setEnabled(enable);
     }
@@ -101,7 +112,7 @@ public class SubWorkItemTienDoNgamView extends LinearLayout {
         return tvLuyke.getText().toString();
     }
 
-    public Sub_Work_ItemEntity getSubWorkItemEntity() {
-        return entity;
+    public double getKhoiLuong() {
+        return getLuyKe() + getValue();
     }
 }

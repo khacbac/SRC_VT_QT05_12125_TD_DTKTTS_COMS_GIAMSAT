@@ -305,7 +305,7 @@ public class Home_Controller extends AbstractController {
 						base.startActivity(intent);
 						break;
 
-					case Constants.BRCD_BACKGROUND_INFO.NHAT_KY:
+					case Constants.BRCD_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO:
 						intent = new Intent(base, GponActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
@@ -315,17 +315,17 @@ public class Home_Controller extends AbstractController {
 						}
 						base.startActivity(intent);
 						break;
-
-					case Constants.BRCD_BACKGROUND_INFO.TIEN_DO:
-						intent = new Intent(base, GponActivity.class);
-//				intent.setComponent(new ComponentName("com.viettel.ktts",
-//						"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
-						if (extras != null) {
-							extras.putInt(GponActivity.ARG_INFO, iDesignInfo);
-							intent.putExtras(extras);
-						}
-						base.startActivity(intent);
-						break;
+//
+//					case Constants.BRCD_BACKGROUND_INFO.TIEN_DO:
+//						intent = new Intent(base, GponActivity.class);
+////				intent.setComponent(new ComponentName("com.viettel.ktts",
+////						"com.viettel.ktts.Supervision_BRCD_MTrucActivity"));
+//						if (extras != null) {
+//							extras.putInt(GponActivity.ARG_INFO, iDesignInfo);
+//							intent.putExtras(extras);
+//						}
+//						base.startActivity(intent);
+//						break;
 
 					case Constants.BRCD_BACKGROUND_INFO.KEO_CAP_TRUC:
 						intent = new Intent(base, Supervision_BRCD_KeoCTActivity.class);

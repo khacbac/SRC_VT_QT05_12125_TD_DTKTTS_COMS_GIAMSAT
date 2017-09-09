@@ -1,8 +1,10 @@
 package com.viettel.ktts;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -58,6 +60,7 @@ import java.util.List;
  */
 
 public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
+	private final String TAG = this.getClass().getSimpleName();
 	private View spvLineHG_DesignView;
 	private TabHost tabHost;
 	private int tabHeight = 40;
@@ -759,6 +762,13 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	}
 
 	private TextView makeTabIndicator(String text) {
+		TelephonyManager manager = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+		if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+			Log.d(TAG,"Tablet");
+		}else{
+			Log.d(TAG,"Mobile");
+			tabHeight = 120;
+		}
 		TextView tabView = new TextView(this);
 		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				tabHeight, 1);

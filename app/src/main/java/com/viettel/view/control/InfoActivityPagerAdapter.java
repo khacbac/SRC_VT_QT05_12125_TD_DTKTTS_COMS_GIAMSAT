@@ -4,24 +4,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.viettel.gsct.activity.CapNhatNhatKyTienDoPreviewFragment;
 import com.viettel.gsct.fragment.BaseFragment;
-import com.viettel.gsct.fragment.BtsNhatkyFragment;
-import com.viettel.gsct.fragment.TruyenDanNgamTiendoFragment;
 
 /**
- * Created by doanLV4 on 8/26/2017.
+ * Created by doanlv4 on 9/5/2017.
  */
 
-public class CapNhatNhatKyTienDoPagerAdapter extends FragmentPagerAdapter {
+public class InfoActivityPagerAdapter extends FragmentPagerAdapter {
     private static final int NUM_PAGER_DEFAULT = 2;
     private BaseFragment nhatkyFragment;
     private BaseFragment tiendoFragment;
 
-    public CapNhatNhatKyTienDoPagerAdapter(
-            FragmentManager fm,
-            BaseFragment nhatkyFragment,
-            BaseFragment tiendoFragment) {
+    public InfoActivityPagerAdapter(FragmentManager fm, BaseFragment nhatkyFragment, BaseFragment tiendoFragment) {
         super(fm);
         this.nhatkyFragment = nhatkyFragment;
         this.tiendoFragment = tiendoFragment;
@@ -46,6 +40,13 @@ public class CapNhatNhatKyTienDoPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Page = " + NUM_PAGER_DEFAULT;
+        switch (position) {
+            case 0:
+                return "Cập nhật nhật ký";
+            case 1:
+                return "Cập nhật tiến độ";
+            default:
+                return null;
+        }
     }
 }

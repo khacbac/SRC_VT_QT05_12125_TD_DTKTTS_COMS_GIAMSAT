@@ -25,6 +25,8 @@ public class WorkItemInfoView extends LinearLayout {
     TextView tvStartDate;
     @BindView(R.id.tv_end_date)
     TextView tvEndDate;
+    @BindView(R.id.layoutKhoiLuong)
+    LinearLayout layoutKhoiLuong;
 
     public WorkItemInfoView(Context context) {
         super(context);
@@ -52,5 +54,13 @@ public class WorkItemInfoView extends LinearLayout {
         tvTitle.setText(title);
         tvStartDate.setText(GSCTUtils.standardlizeTime(startDate));
         tvEndDate.setText(GSCTUtils.standardlizeTime(endDate));
+    }
+
+    public void setHienThiCotKhoiLuong(boolean isDisplay) {
+        if (isDisplay) {
+            layoutKhoiLuong.setVisibility(VISIBLE);
+        } else {
+            layoutKhoiLuong.setVisibility(GONE);
+        }
     }
 }

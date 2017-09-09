@@ -65,12 +65,12 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     int currentZoom = 1;
 
     private OrientationEventListener mOrientationListener;
-    private String strOrientation = null;
-    private String strOrientationPre = null;
     private final String NORMAL_ORIENTATION = "Normal";
     private final String UPSIDE_DOWN_ORIENTATION = "UpsideDown";
     private final String RIGHT_POINT_UP_ORIENTATION = "RightPointUp";
     private final String LEFT_POINT_UP_ORIENTATION = "LeftPointUp";
+    private String strOrientation = RIGHT_POINT_UP_ORIENTATION;
+    private String strOrientationPre = RIGHT_POINT_UP_ORIENTATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,12 +8,15 @@ public class ContentDetailItemProgressPreview {
     private String detailTenHangMuc;
     private String detailNgayBatDau;
     private String detailNgayHoanThanh;
+    private String detailKhoiLuong;
     private boolean isNewEdit;
 
-    public ContentDetailItemProgressPreview(String detailTenHangMuc, String detailNgayBatDau, String detailNgayHoanThanh) {
+    public ContentDetailItemProgressPreview(String detailTenHangMuc, String detailNgayBatDau,
+                                            String detailNgayHoanThanh, String detailKhoiLuong) {
         this.detailTenHangMuc = detailTenHangMuc;
         this.detailNgayBatDau = detailNgayBatDau;
         this.detailNgayHoanThanh = detailNgayHoanThanh;
+        this.detailKhoiLuong = detailKhoiLuong;
     }
 
     public String getDetailTenHangMuc() {
@@ -46,5 +49,13 @@ public class ContentDetailItemProgressPreview {
 
     public void setNewEdit(boolean newEdit) {
         isNewEdit = newEdit;
+    }
+
+    public String getDetailKhoiLuong() {
+        return detailKhoiLuong;
+    }
+
+    public void setDetailKhoiLuong(String detailKhoiLuong) {
+        this.detailKhoiLuong = detailKhoiLuong;
     }
 }

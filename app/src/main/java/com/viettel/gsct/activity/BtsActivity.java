@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,8 @@ import com.viettel.utils.DeactivatedViewPager;
 import com.viettel.utils.StringUtil;
 import com.viettel.view.base.SupervisionBtsBaseActivity;
 import com.viettel.view.control.CapNhatNhatKyTienDoPagerAdapter;
+import com.viettel.view.listener.IeSave;
+import com.viettel.view.listener.IeValidate;
 import com.viettel.view.listener.InterfacePassDataFromTienDoToActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,6 +46,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.BindView;
@@ -54,7 +58,7 @@ import butterknife.OnClick;
 
 public class BtsActivity extends SupervisionBtsBaseActivity
         implements InterfacePassDataFromTienDoToActivity, ViewPager.OnPageChangeListener {
-    private static final String TAG = "BtsActivity";
+    private final String TAG = this.getClass().getSimpleName();
     public static final String ARG_INFO = "SupervisionBtsBaseActivity.INFO";
 
     @BindView(R.id.tv_tram)
@@ -77,11 +81,10 @@ public class BtsActivity extends SupervisionBtsBaseActivity
     LinearLayout mLayoutHeader;
     @BindView(R.id.view_pager_content)
     DeactivatedViewPager mViewPagerContent;
+    private boolean isSaved = false;
     // All Contructor.
     private Constr_Construction_EmployeeEntity constr_ConstructionItem;
     private Supervision_BtsEntity btsEntity;
-    // All Adpater.
-    private CapNhatNhatKyTienDoPagerAdapter pagerAdapter;
     // All Fragment.
     private BtsNhatkyFragment fragmentCapNhatNhatKy;
     private BtsTiendoFragment fragmentCapNhatTienDo;
@@ -93,7 +96,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
     private boolean mHasClickBtnTienDo = false;
     // All Key.
     private static final int KEY_SWITCH_NHATKY  = 0;
-    private static final int KEY_SWITCH_TIENDO  = 1;;
+    private static final int KEY_SWITCH_TIENDO  = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +142,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
     public void onBackPressed() {
         super.onBackPressed();
         if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
+            isSaved = false;
             onShowNhatKyTienDoPreview(false);
         } else {
             gotoHomeActivity(new Bundle());
@@ -148,6 +152,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
 
     private void initVariables() {
         constr_ConstructionItem = getConstr_Construction_Employee();
+        Log.d(TAG,"Contruction id = " + constr_ConstructionItem.getConstructId());
         infoId = getIntent().getExtras().getInt(ARG_INFO, 0);
     }
 
@@ -184,8 +189,8 @@ public class BtsActivity extends SupervisionBtsBaseActivity
         if (fragmentCapNhatTienDo != null) {
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
-        if (mCapNhatNhatKyTienDoPreviewFragment == null) {
-            return;
+        if (mCapNhatNhatKyTienDoPreviewFragment != null) {
+            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -194,7 +199,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
                 .replace(R.id.fr_content,mCapNhatNhatKyTienDoPreviewFragment)
                 .commit();
         // Init Nhat Ky va Tien Do fragment.
-        pagerAdapter = new CapNhatNhatKyTienDoPagerAdapter(
+        CapNhatNhatKyTienDoPagerAdapter pagerAdapter = new CapNhatNhatKyTienDoPagerAdapter(
                 getSupportFragmentManager(),
                 fragmentCapNhatNhatKy,
                 fragmentCapNhatTienDo);
@@ -294,7 +299,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+            if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
@@ -303,20 +308,28 @@ public class BtsActivity extends SupervisionBtsBaseActivity
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-                if (!fragmentCapNhatTienDo.checkTiendoFragmentValidate()) {
+                if (!listenerValidateFromTienDo(fragmentCapNhatTienDo)) {
                     return false;
                 }
                 if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
-                    fragmentCapNhatTienDo.save();
-                    fragmentCapNhatNhatKy.save();
+                    if (!isSaved) {
+                        // Save nhat ky.
+                        listenerSaveFromNhatKy(fragmentCapNhatNhatKy);
+                        // Save tien do.
+                        listenerSaveFromTienDo(fragmentCapNhatTienDo);
+                        isSaved = true;
+                    }
                 } else {
+                    Toast.makeText(this,""+getResources()
+                            .getString(R.string.str_thong_bao_truoc_khi_luu),Toast.LENGTH_SHORT)
+                            .show();
                     showPreviewNhatKyTienDoClick();
-//                    fragmentCapNhatNhatKy.onPassDataFromNhatKyBtsToActivity();
                     fragmentCapNhatNhatKy.registerListenerEventBusBtsNhatKy();
                     fragmentCapNhatTienDo.onPassDataFromTienDoToActivity();
                 }
             } else {
-                fragmentCapNhatNhatKy.save();
+                // Save nhat ky.
+                listenerSaveFromNhatKy(fragmentCapNhatNhatKy);
             }
             return true;
         }
@@ -333,7 +346,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
     @OnClick(R.id.btnTienDoTab)
     public void onBtnCapNhatTienDoClick() {
         mHasClickBtnTienDo = true;
-        if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+        if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
             return;
         }
         setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
@@ -346,7 +359,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public  void passDataFromBtsNhatKy(HashMap<String,String> hashMap) {
+    public void passDataFromBtsNhatKy(LinkedHashMap<String,String> hashMap) {
         hashMap.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
         mCapNhatNhatKyTienDoPreviewFragment
                 .initDataForNhatKy(
@@ -441,7 +454,7 @@ public class BtsActivity extends SupervisionBtsBaseActivity
                 break;
             case KEY_SWITCH_TIENDO:
                 mHasClickBtnTienDo = true;
-                if (fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+                if (listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
                     setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
                 } else {
                     mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
@@ -457,15 +470,16 @@ public class BtsActivity extends SupervisionBtsBaseActivity
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        EventBus.getDefault().register(this);
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        EventBus.getDefault().unregister(this);
+//    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
 }

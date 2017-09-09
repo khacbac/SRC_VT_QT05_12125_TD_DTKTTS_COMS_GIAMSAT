@@ -29,7 +29,7 @@ import com.viettel.view.base.HomeBaseActivity;
 public class GoogleMapActivity extends HomeBaseActivity implements
 		OnMapClickListener, OnClickListener {
 
-	private static final String TAG = "GoogleMapActivity";
+	private final String TAG = this.getClass().getSimpleName();
 
 	private GoogleMap googleMap;
 	private MarkerOptions googleMarker;
@@ -79,9 +79,11 @@ public class GoogleMapActivity extends HomeBaseActivity implements
 
 		if (dLong == Constants.ID_DOUBLE_ENTITY_DEFAULT) {
 			dLong = GpsServices.longLocation;
+			Log.d(TAG,"Long = " + dLong);
 		}
 		if (dLat == Constants.ID_DOUBLE_ENTITY_DEFAULT) {
 			dLat = GpsServices.latLocation;
+			Log.d(TAG,"Lat = " + dLat);
 		}
 		
 

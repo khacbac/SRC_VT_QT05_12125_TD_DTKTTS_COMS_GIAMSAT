@@ -1,12 +1,19 @@
 package com.viettel.gsct.View;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.viettel.ktts.R;
 
@@ -45,7 +52,7 @@ public class SubWorkItemGPONView extends LinearLayout {
     }
 
 
-    private void init(Context context) {
+    private void init(final Context context) {
         setOrientation(HORIZONTAL);
         rootView = inflate(context, R.layout.layout_sub_work_item_gpon, this);
         ButterKnife.bind(this);
@@ -68,6 +75,16 @@ public class SubWorkItemGPONView extends LinearLayout {
             tvLuyke.setText("");
     }
 
+    public double getLuyKe() {
+        String ret = tvLuyke.getText().toString();
+        if (ret.equals("")) return 0L;
+        try {
+            return Double.parseDouble(ret);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0L;
+        }
+    }
 
     public double getValue() {
         String value = etValue.getEditableText().toString();
@@ -83,4 +100,11 @@ public class SubWorkItemGPONView extends LinearLayout {
         return ret;
     }
 
+    public String getTvTitle() {
+        return tvTitle.getText().toString();
+    }
+
+    public AppCompatEditText getEtValue() {
+        return etValue;
+    }
 }

@@ -76,6 +76,27 @@ public class Sub_Work_ItemController {
         return ret;
     }
 
+    public ArrayList<Sub_Work_ItemEntity> getListItems(long work_item_id) {
+//        Log.e(TAG, "getItems: " + work_item_id );
+        ArrayList<Sub_Work_ItemEntity> ret = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Sub_Work_ItemField.TABLE_NAME, allColumn,
+                        Sub_Work_ItemField.WORK_ITEM_ID + "=? AND "
+                        + Sub_Work_ItemField.COLUMN_IS_ACTIVE + "=1",
+                        new String[]{String.valueOf(work_item_id)}, null, null,
+                        null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Sub_Work_ItemEntity curItem = this.converCursorToItem(cursor);
+                ret.add(curItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
     public Sub_Work_ItemEntity getItem(long work_item_id, long cat_sub_work_item_id) {
         Log.e(TAG, "getItem: " + work_item_id + " " + cat_sub_work_item_id);
         Sub_Work_ItemEntity curItem;

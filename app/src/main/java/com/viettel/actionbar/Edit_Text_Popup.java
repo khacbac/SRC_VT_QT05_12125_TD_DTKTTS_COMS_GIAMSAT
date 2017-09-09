@@ -12,13 +12,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,10 +31,15 @@ import android.widget.Toast;
 import com.viettel.constants.Constants;
 import com.viettel.ktts.R;
 import com.viettel.utils.StringUtil;
+import com.viettel.view.base.BaseActivity;
+import com.viettel.view.base.SupervisionBtsBaseActivity;
 import com.viettel.view.listener.OnEventControlListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class Edit_Text_Popup implements OnClickListener {
-	private Activity popupActivity; // activity hien thi popup
+    private final String TAG = this.getClass().getSimpleName();
+    private Activity popupActivity; // activity hien thi popup
 	private PopupWindow popup;
 	private LinearLayout layout;
 	private ViewGroup viewGroup;
@@ -40,6 +48,7 @@ public class Edit_Text_Popup implements OnClickListener {
 	private Button btn_edit_text_popup_choice;
 	private int iWidth = Constants.UNQUALIFY_WIDTH;
 	private String sValue;
+    private LinearLayout layoutRoot;
 	private OnEventControlListener onEvent;
 	private int statusBarHeight;
 	private ClipboardManager myClipboard;
@@ -55,13 +64,12 @@ public class Edit_Text_Popup implements OnClickListener {
 		 this.popupActivity.getSystemService(popupActivity.CLIPBOARD_SERVICE);
 		this.viewGroup = viewGroup;
 		this.sValue = sData;
-		onEvent = (OnEventControlListener) insertActivity;
+        onEvent = (OnEventControlListener) insertActivity;
 		// Inflate the popup_layout.xml
 		layoutInflater = (LayoutInflater) popupActivity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layout = (LinearLayout) layoutInflater.inflate(
 				R.layout.edit_text_popup_layout, this.viewGroup, false);
-
 		this.edt_edit_text_popup_value = (EditText) layout
 				.findViewById(R.id.edt_edit_text_popup_value);
 
@@ -172,8 +180,9 @@ public class Edit_Text_Popup implements OnClickListener {
 		statusBarHeight = rectgle.top;
 
 		popup.setHeight(height - statusBarHeight);
-		// popup.setWindowLayoutMode(widthSpec, heightSpec);
-	}
+
+        EventBus.getDefault().post(popup);
+    }
 
 	public Activity getPopupActivity() {
 		return popupActivity;
@@ -219,9 +228,8 @@ public class Edit_Text_Popup implements OnClickListener {
 		popup.setBackgroundDrawable(new BitmapDrawable());
 		// Displaying the popup at the specified location, + offsets.
 		popup.showAtLocation(layout, Gravity.TOP, OFFSET_X, OFFSET_Y);
-
-		this.edt_edit_text_popup_value.requestFocus();
-	}
+        this.edt_edit_text_popup_value.requestFocus();
+    }
 
 	public void hidePopup() {
 		this.popup.dismiss();
@@ -286,5 +294,4 @@ public class Edit_Text_Popup implements OnClickListener {
 	// // TODO Auto-generated method stub
 	// return false;
 	// }
-
 }

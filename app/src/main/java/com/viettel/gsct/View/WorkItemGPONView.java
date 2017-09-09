@@ -79,6 +79,10 @@ public class WorkItemGPONView extends LinearLayout {
         tvTitle.setText(title);
     }
 
+    public String getTvTitle() {
+        return ""+tvTitle.getText().toString();
+    }
+
     public void addSubView(View view) {
         arrSubViews.add(view);
     }

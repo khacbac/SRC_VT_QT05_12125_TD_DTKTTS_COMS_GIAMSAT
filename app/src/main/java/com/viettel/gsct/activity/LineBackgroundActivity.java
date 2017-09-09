@@ -32,11 +32,13 @@ import com.viettel.utils.DeactivatedViewPager;
 import com.viettel.utils.StringUtil;
 import com.viettel.view.base.LineBaseActivity;
 import com.viettel.view.control.CapNhatNhatKyTienDoPagerAdapter;
+import com.viettel.view.listener.IeSave;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 
 import butterknife.BindView;
@@ -48,7 +50,7 @@ import butterknife.OnClick;
 
 public class LineBackgroundActivity extends LineBaseActivity
         implements ViewPager.OnPageChangeListener {
-    private static final String TAG = "BtsActivity";
+    private final String TAG = this.getClass().getSimpleName();
     public static final String ARG_INFO = "LineBackgroundActivity.INFO";
 
     @BindView(R.id.tv_tram)
@@ -69,7 +71,7 @@ public class LineBackgroundActivity extends LineBaseActivity
     LinearLayout mLayoutHeader;
     @BindView(R.id.view_pager_content)
     DeactivatedViewPager mViewPagerContent;
-
+    private boolean isSaved = false;
 
     private Constr_Construction_EmployeeEntity constr_ConstructionItem;
     private Supervision_Line_BackgroundEntity supervision_Line_BackgroundData;
@@ -115,6 +117,7 @@ public class LineBackgroundActivity extends LineBaseActivity
         super.onBackPressed();
         if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
             onShowNhatKyTienDoPreview(false);
+            isSaved = false;
         } else {
         gotoHomeActivity(new Bundle());
         finish();
@@ -123,6 +126,7 @@ public class LineBackgroundActivity extends LineBaseActivity
 
     private void initVariables() {
         constr_ConstructionItem = getConstr_Construction_Employee();
+        Log.d(TAG,"Contruction id = " + constr_ConstructionItem.getConstructId());
         this.supervision_Line_BackgroundData = (Supervision_Line_BackgroundEntity) getIntent().getExtras()
                 .getSerializable(IntentConstants.INTENT_DATA_EX);
         infoId = getIntent().getExtras().getInt(ARG_INFO, 0);
@@ -180,8 +184,8 @@ public class LineBackgroundActivity extends LineBaseActivity
         if (fragmentCapNhatTienDo != null) {
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
-        if (mCapNhatNhatKyTienDoPreviewFragment == null) {
-            return;
+        if (mCapNhatNhatKyTienDoPreviewFragment != null) {
+            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -258,7 +262,7 @@ public class LineBackgroundActivity extends LineBaseActivity
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+            if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
@@ -267,19 +271,28 @@ public class LineBackgroundActivity extends LineBaseActivity
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-                if (!fragmentCapNhatTienDo.checkValidateTuyenNgamTienDo()) {
+                if (!listenerValidateFromTienDo(fragmentCapNhatTienDo)) {
                     return false;
                 }
                 if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
-                    fragmentCapNhatTienDo.save();
-                    fragmentCapNhatNhatKy.save();
+                    if (!isSaved) {
+                        // Save nhat ky.
+                        listenerSaveFromNhatKy(fragmentCapNhatNhatKy);
+                        // Save tien do.
+                        listenerSaveFromTienDo(fragmentCapNhatTienDo);
+                        isSaved = true;
+                    }
                 } else {
+                    Toast.makeText(this,""+getResources()
+                            .getString(R.string.str_thong_bao_truoc_khi_luu),Toast.LENGTH_SHORT)
+                            .show();
                     showPreviewNhatKyTienDoClick();
                     fragmentCapNhatNhatKy.registerListenerEventBusTuyenNgamNhatKy();
                     fragmentCapNhatTienDo.registerListenerEventBus();
                 }
             } else {
-                fragmentCapNhatNhatKy.save();
+                // Save nhat ky.
+                listenerSaveFromNhatKy(fragmentCapNhatNhatKy);
             }
             return true;
         }
@@ -295,7 +308,7 @@ public class LineBackgroundActivity extends LineBaseActivity
     @OnClick(R.id.btnTienDoTab)
     public void onBtnCapNhatTienDoClick() {
         mHasClickBtnTienDo = true;
-        if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+        if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
             return;
         }
         setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
@@ -349,7 +362,7 @@ public class LineBackgroundActivity extends LineBaseActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+    public void onDataFromCapNhatTuyenNgamNhatKy(LinkedHashMap<String,String> hashMaps) {
         hashMaps.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
         mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
                 hashMaps,
@@ -358,17 +371,17 @@ public class LineBackgroundActivity extends LineBaseActivity
         );
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        EventBus.getDefault().register(this);
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        EventBus.getDefault().unregister(this);
+//    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -385,7 +398,7 @@ public class LineBackgroundActivity extends LineBaseActivity
                 break;
             case KEY_SWITCH_TIENDO:
                 mHasClickBtnTienDo = true;
-                if (fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+                if (listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
                     setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
                 } else {
                     mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);

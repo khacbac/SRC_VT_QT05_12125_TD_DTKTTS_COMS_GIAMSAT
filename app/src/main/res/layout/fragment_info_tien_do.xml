@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:layout_marginTop="10dp"
@@ -41,7 +41,21 @@
                     android:gravity="center"
                     android:text="Hạng mục" />
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="horizontal"
+                android:id="@+id/layoutKhoiLuong"
+                android:background="@drawable/border_right_bottom_left"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/Header.Textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Khối lượng" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -72,6 +86,18 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Ngày kết thúc" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomLayout"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bottomChildLayout"
+                android:orientation="vertical">
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

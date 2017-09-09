@@ -1,5 +1,7 @@
 package com.viettel.database.entity;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.List;
 
 public class Constr_ObStructionEntity implements Serializable {
 	private static final long serialVersionUID = 1804807171511630316L ;
+	private final String TAG = this.getClass().getSimpleName();
 
 	/* ID bang */
 	private long ConstrObStructionId;
@@ -117,6 +120,7 @@ public class Constr_ObStructionEntity implements Serializable {
 	}
 
 	public long getConstrObStructionTypeId() {
+		Log.d(TAG,"ConstrObStruction Type id = " + ConstrObStructionTypeId);
 		return ConstrObStructionTypeId;
 	}
 

@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
+        android:gravity="center"
         android:textStyle="normal"/>
 
     <RelativeLayout
@@ -36,9 +37,10 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         style="@style/Content.Textview"
-        android:id="@+id/txtDetailNgayBatDau"
+        android:id="@+id/txtDetailKhoiLuong"
+        android:gravity="center"
         android:background="@drawable/border_top_right_bottom_left"
         android:textStyle="normal"/>
     <TextView
@@ -46,6 +48,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         style="@style/Content.Textview"
+        android:id="@+id/txtDetailNgayBatDau"
+        android:gravity="center"
+        android:background="@drawable/border_top_right_bottom_left"
+        android:textStyle="normal"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/Content.Textview"
+        android:gravity="center"
         android:id="@+id/txtDetailNgayHoanThanh"
         android:background="@drawable/border_top_right_bottom_left"
         android:textStyle="normal"/>

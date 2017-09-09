@@ -1,13 +1,15 @@
 package com.viettel.gsct.activity;
 
-import android.graphics.Color;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +27,7 @@ import com.viettel.constants.IntentConstants;
 import com.viettel.database.Supervision_BtsController;
 import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
 import com.viettel.database.entity.Supervision_BtsEntity;
+import com.viettel.gsct.View.WorkItemRightGPONView;
 import com.viettel.gsct.fragment.BtsNhatkyFragment;
 import com.viettel.gsct.fragment.GPONTiendoFragment;
 import com.viettel.ktts.R;
@@ -33,12 +36,15 @@ import com.viettel.utils.DeactivatedViewPager;
 import com.viettel.utils.StringUtil;
 import com.viettel.view.base.HomeBaseActivity;
 import com.viettel.view.control.CapNhatNhatKyTienDoPagerAdapter;
+import com.viettel.view.listener.IeSave;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -69,7 +75,9 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
     LinearLayout mLayoutHeader;
     @BindView(R.id.view_pager_content)
     DeactivatedViewPager mViewPagerContent;
-
+    @BindView(R.id.frame_layout_nhatky_tiendo)
+    LinearLayout mLayoutRootForAllFragment;
+    private boolean isSaved = false;
     // All Constructor.
     private CapNhatNhatKyTienDoPagerAdapter pagerAdapter;
     private Constr_Construction_EmployeeEntity constr_ConstructionItem;
@@ -114,6 +122,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
         super.onBackPressed();
         if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
             onShowNhatKyTienDoPreview(false);
+            isSaved = false;
         } else {
             gotoHomeActivity(new Bundle());
             finish();
@@ -177,8 +186,8 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
-        if (mCapNhatNhatKyTienDoPreviewFragment == null) {
-            return;
+        if (mCapNhatNhatKyTienDoPreviewFragment != null) {
+            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -225,7 +234,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                     return;
                 }
                 switch (isInfomation) {
-                    case Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO:
+                    case Constants.BRCD_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO:
                         if (mViewPagerContent != null) {
                             mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);
                         }
@@ -259,7 +268,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+            if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
@@ -268,19 +277,29 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }
-                if (!fragmentCapNhatTienDo.checkValidateGponTienDo()) {
+                if (!listenerValidateFromTienDo(fragmentCapNhatTienDo)) {
                     return false;
                 }
                 if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
-                    fragmentCapNhatTienDo.save();
-                    fragmentCapNhatNhatKy.save();
+                    if (!isSaved) {
+                        // Save nhat ky.
+                        listenerSaveFromNhatKy(fragmentCapNhatNhatKy);
+                        // Save tien do.
+                        listenerSaveFromTienDo(fragmentCapNhatTienDo);
+                        isSaved = true;
+                    }
+
                 } else {
+                    Toast.makeText(this,""+getResources()
+                            .getString(R.string.str_thong_bao_truoc_khi_luu),Toast.LENGTH_SHORT)
+                            .show();
                     showPreviewNhatKyTienDoClick();
                     fragmentCapNhatNhatKy.registerListenerEventBusBangRongNhatKy();
                     fragmentCapNhatTienDo.registerListenerEventBus();
                 }
             } else {
-                fragmentCapNhatNhatKy.save();
+                // Save nhat ky.
+                listenerSaveFromNhatKy(fragmentCapNhatNhatKy);
             }
             return true;
         }
@@ -298,7 +317,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
     @OnClick(R.id.btnTienDoTab)
     public void onBtnCapNhatTienDoClick() {
         mHasClickBtnTienDo = true;
-        if (!fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+        if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
             return;
         }
         setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
@@ -352,7 +371,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDataFromCapNhatTuyenNgamNhatKy(HashMap<String,String> hashMaps) {
+    public void onDataFromCapNhatTuyenNgamNhatKy(LinkedHashMap<String,String> hashMaps) {
         hashMaps.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
         mCapNhatNhatKyTienDoPreviewFragment.initDataForNhatKy(
                 hashMaps,
@@ -361,17 +380,17 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
         );
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        EventBus.getDefault().register(this);
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        EventBus.getDefault().unregister(this);
+//    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -388,7 +407,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                 break;
             case KEY_SWITCH_TIENDO:
                 mHasClickBtnTienDo = true;
-                if (fragmentCapNhatNhatKy.checkValidateFromCapNhatNhatKy(mIsCoThiCong)) {
+                if (listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
                     setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
                 } else {
                     mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);

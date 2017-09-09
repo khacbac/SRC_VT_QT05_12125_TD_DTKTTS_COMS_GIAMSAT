@@ -314,8 +314,8 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 				.getSupervisionBts(constr_ConstructionItem
 						.getSupervision_Constr_Id());
 
-		Cause_Bts_Pillar_AntenController btsPillarAntenController = new Cause_Bts_Pillar_AntenController(
-				this);
+		Cause_Bts_Pillar_AntenController btsPillarAntenController
+                = new Cause_Bts_Pillar_AntenController(this);
 		Cause_Bts_Cat_WorkController causeCatWorkController = new Cause_Bts_Cat_WorkController(
 				this);
 		Cause_Bts_Power_PoleController btsPowerPoleController = new Cause_Bts_Power_PoleController(
@@ -371,32 +371,38 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		// setListDataForEquip();
 		listConstrWork = new ArrayList<Cat_Supervision_Constr_WorkEntity>();
 
-		Cat_Supervision_Constr_WorkController constrWorkController = new Cat_Supervision_Constr_WorkController(
-				this);
+		Cat_Supervision_Constr_WorkController constrWorkController
+                = new Cat_Supervision_Constr_WorkController(this);
 
 		// lay ten constr work tuong ung voi work code tiep dat thoat set
 		Cat_Supervision_Constr_WorkEntity constrWorkTiepdat_Thoatset = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK);
+				.getListConstrWorkEntityByWorkCode(
+						Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK);
 
 		// lay ten constr work tuong ung voi work code tiep dat feeder
 		Cat_Supervision_Constr_WorkEntity constrWorkTiepdat_Feeder = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_FEEDER);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_FEEDER);
 
 		// lay ten constr work tuong ung voi work code thang cap
 		Cat_Supervision_Constr_WorkEntity constrWorkThangcap = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_THANG_CAP);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_THANG_CAP);
 
 		// lay ten constr work tuong ung voi work code he thong den dieu hoa
 		Cat_Supervision_Constr_WorkEntity constrWorkHethongden = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_HT_DEN_DIEUHOA_THONGGIO);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_HT_DEN_DIEUHOA_THONGGIO);
 
 		// lay ten constr work tuong ung voi work code tu dien ac
 		Cat_Supervision_Constr_WorkEntity constrWorkTudienAc = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TU_DIEN_AC);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_TU_DIEN_AC);
 
 		// lay ten constr work tuong ung voi work code tu nguon dc acquy
 		Cat_Supervision_Constr_WorkEntity constrWorkTunguon = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TU_NGUON_DC_ACQUY);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_TU_NGUON_DC_ACQUY);
 
 		// lay ten constr work tuong ung voi work code tu bts
 		Cat_Supervision_Constr_WorkEntity constrWorkTuBts = constrWorkController
@@ -408,27 +414,33 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 		// lay ten constr work tuong ung voi work code cap nguon thang cap
 		Cat_Supervision_Constr_WorkEntity constrWorkCapnguon_Thangcap = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_THANG_CAP);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_THANG_CAP);
 
 		// lay ten constr work tuong ung voi work code den bao khong
 		Cat_Supervision_Constr_WorkEntity constrWorkDenbaokhong = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_DEN_BAO_KHONG);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_DEN_BAO_KHONG);
 
 		// lay ten constr work tuong ung voi work code antenfeeder
 		Cat_Supervision_Constr_WorkEntity constrWorkAntenFeeder = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_ANTEN_FEEDER_JUMPER);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_ANTEN_FEEDER_JUMPER);
 
 		// lay ten constr work tuong ung voi work code tam bit cap
 		Cat_Supervision_Constr_WorkEntity constrWorkTambitcap = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TAM_BIT_CAP);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_TAM_BIT_CAP);
 
 		// lay ten constr work tuong ung voi work code rru olp
 		Cat_Supervision_Constr_WorkEntity constrWorkRru = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_RRU_OLP);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_RRU_OLP);
 
 		// lay ten constr work tuong ung voi work code cap quang nguon rru
 		Cat_Supervision_Constr_WorkEntity constrWorkCapquangnguon = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_QUANG_NGUON_RRU);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_QUANG_NGUON_RRU);
 
 		listConstrWork.add(constrWorkTiepdat_Thoatset);
 		listConstrWork.add(constrWorkTiepdat_Feeder);
@@ -459,11 +471,11 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 			String workcode = listConstrWork.get(i).getWork_Code();
 
-			if (workcode
-					.equals(Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK)) {
+			if (workcode.equals(
+			        Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK)) {
 				item = causeCatWorkController
-						.getCause_Bts_Cat_WorkEntity(
-								Constants.BTS_CONSTR_WORK.WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK,
+						.getCause_Bts_Cat_WorkEntity(Constants.BTS_CONSTR_WORK
+                                        .WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK,
 								btsEntity.getSupervision_Bts_Id());
 
 			}
@@ -579,19 +591,23 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 		// lay ten constr work tuong ung voi work code cap trung tan
 		Cat_Supervision_Constr_WorkEntity constrWorkCap_trungtan = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_TRUNG_TAN);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_TRUNG_TAN);
 
 		// lay ten constr work tuong ung voi work code tinh trang phan cung
 		Cat_Supervision_Constr_WorkEntity constrWorkTinhtrang_phancung = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TINH_TRANG_PHAN_CUNG);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_TINH_TRANG_PHAN_CUNG);
 
 		// lay ten constr work tuong ung voi work code cap nguon DC
 		Cat_Supervision_Constr_WorkEntity constrWorkCapnguon_Dc = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_DC);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_DC);
 
 		// lay ten constr work tuong ung voi work code cap bang tan goc
 		Cat_Supervision_Constr_WorkEntity constrWorkCapbangtan = constrWorkController
-				.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_BANG_TAN_GOC);
+				.getListConstrWorkEntityByWorkCode(
+				        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_BANG_TAN_GOC);
 
 		listConstrWorkLow.add(constrWorkThicong_ngtroi);
 		listConstrWorkLow.add(constrWorkCap_trungtan);
@@ -667,27 +683,32 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		// lay ten constr work tuong ung voi work code thi cong ngoai troi
 		constrWorkThicong_ngtroi =
 				constrWorkController
-						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_ANTENNA);
+						.getListConstrWorkEntityByWorkCode(
+						        Constants.BTS_CONSTR_WORK.WORK_CODE_ANTENNA);
 
 		// lay ten constr work tuong ung voi work code cap trung tan
 		constrWorkCap_trungtan =
 				constrWorkController
-						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_TRUNG_TAN);
+						.getListConstrWorkEntityByWorkCode(
+						        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_TRUNG_TAN);
 
 		// lay ten constr work tuong ung voi work code tinh trang phan cung
 		constrWorkTinhtrang_phancung =
 				constrWorkController
-						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_TINH_TRANG_PHAN_CUNG);
+						.getListConstrWorkEntityByWorkCode(
+						        Constants.BTS_CONSTR_WORK.WORK_CODE_TINH_TRANG_PHAN_CUNG);
 
 		// lay ten constr work tuong ung voi work code cap nguon DC
 		constrWorkCapnguon_Dc =
 				constrWorkController
-						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_DC);
+						.getListConstrWorkEntityByWorkCode(
+						        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_NGUON_DC);
 
 		// lay ten constr work tuong ung voi work code cap bang tan goc
 		constrWorkCapbangtan =
 				constrWorkController
-						.getListConstrWorkEntityByWorkCode(Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_BANG_TAN_GOC);
+						.getListConstrWorkEntityByWorkCode(
+						        Constants.BTS_CONSTR_WORK.WORK_CODE_CAP_BANG_TAN_GOC);
 
 		listConstrWorkHeigh.add(constrWorkThicong_ngtroi);
 		listConstrWorkHeigh.add(constrWorkCap_trungtan);
@@ -756,52 +777,66 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 
 		// lay du lieu thi cong han noi
 		// prepareListData();
-		Cat_Supv_Constr_MeasureController constrMeasureController = new Cat_Supv_Constr_MeasureController(
-				this);
+		Cat_Supv_Constr_MeasureController constrMeasureController
+                = new Cat_Supv_Constr_MeasureController(this);
 
 		// 2g
 		Cat_Supv_Constr_MeasureEntity constrMeasureAll2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ALL_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ALL_2G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureJumper2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_2G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureFeeder2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_FEEDER_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_FEEDER_2G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureJumperFeeder2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_FEEDER_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_FEEDER_2G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureConnecter2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_CONNECTER_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_CONNECTER_2G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureAnten2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ANTEN_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ANTEN_2G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureResoantAnten2G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_RESOANT_ANTEN_2G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_RESOANT_ANTEN_2G);
 
 		// 3g
 		Cat_Supv_Constr_MeasureEntity constrMeasureAll3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ALL_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ALL_3G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureJumper3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_3G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureFeeder3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_FEEDER_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_FEEDER_3G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureJumperFeeder3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_FEEDER_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_JUMPER_FEEDER_3G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureConnecter3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_CONNECTER_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_CONNECTER_3G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureAnten3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ANTEN_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_ANTEN_3G);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureResoantAnten3G = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_RESOANT_ANTEN_3G);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_VSWR_RESOANT_ANTEN_3G);
 
 		// them du lieu vao tung group title
 		List<Cat_Supv_Constr_MeasureEntity> feeder2G = new ArrayList<Cat_Supv_Constr_MeasureEntity>();
@@ -825,13 +860,16 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 		List<Cat_Supv_Constr_MeasureEntity> viba = new ArrayList<Cat_Supv_Constr_MeasureEntity>();
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureCapacityViba = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_CAPACITY_VIBA);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_CAPACITY_VIBA);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureObtainViba = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_OBTAIN_VIBA);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_OBTAIN_VIBA);
 
 		Cat_Supv_Constr_MeasureEntity constrMeasureBerViba = constrMeasureController
-				.getConstrMeasureEntityByWorkCode(Constants.BTS_CONSTR_MEASURE.WORK_CODE_BER_VIBA);
+				.getConstrMeasureEntityByWorkCode(
+				        Constants.BTS_CONSTR_MEASURE.WORK_CODE_BER_VIBA);
 
 		viba.add(constrMeasureCapacityViba);
 		viba.add(constrMeasureObtainViba);
@@ -864,39 +902,45 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 					}
 				}
 				else {
-					if (btsEntity.getPillar_STATUS_QUALITY() == Constants.BTS_ASSESS_PILLAR.KHONG_DAT) {
-						sResult = StringUtil
-								.getString(R.string.supervision_bts_kl_danhgia_chatluong_cot_khongdat);
+					if (btsEntity.getPillar_STATUS_QUALITY()
+                            == Constants.BTS_ASSESS_PILLAR.KHONG_DAT) {
+						sResult = StringUtil.getString(
+						        R.string.supervision_bts_kl_danhgia_chatluong_cot_khongdat);
 						Log.i("Cause_Deny", sResult);
 					}
 				}
 			}
 
-			if (catWorkEntityTctd.getBts_Cat_WorkEntity().getStatus() != -1 && catWorkEntityTctd.getBts_Cat_WorkEntity().getStatus() == 0) {
+			if (catWorkEntityTctd.getBts_Cat_WorkEntity().getStatus() != -1
+                    && catWorkEntityTctd.getBts_Cat_WorkEntity().getStatus() == 0) {
 				sResult = StringUtil
 						.getString(R.string.supervision_bts_kl_tiepdia_khongdat);
 				Log.i("Cause_Deny", sResult);
 			}
 
-			if (causeCatWorkEntityPm.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityPm.getBts_Cat_WorkEntity().getStatus() == 0) {
+			if (causeCatWorkEntityPm.getBts_Cat_WorkEntity().getStatus() != -1
+                    && causeCatWorkEntityPm.getBts_Cat_WorkEntity().getStatus() == 0) {
 				sResult = StringUtil
 						.getString(R.string.supervision_bts_kl_phongmay_khongdat);
 				Log.i("Cause_Deny", sResult);
 			}
 
-			if (causeCatWorkEntityNmn.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityNmn.getBts_Cat_WorkEntity().getStatus() == 0) {
+			if (causeCatWorkEntityNmn.getBts_Cat_WorkEntity().getStatus() != -1
+                    && causeCatWorkEntityNmn.getBts_Cat_WorkEntity().getStatus() == 0) {
 				sResult = StringUtil
 						.getString(R.string.supervision_bts_kl_nhamayno_khongdat);
 				Log.i("Cause_Deny", sResult);
 			}
 
-			if (causeCatWorkEntityKdd_Nmn.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityKdd_Nmn.getBts_Cat_WorkEntity().getStatus() == 0) {
+			if (causeCatWorkEntityKdd_Nmn.getBts_Cat_WorkEntity().getStatus() != -1
+                    && causeCatWorkEntityKdd_Nmn.getBts_Cat_WorkEntity().getStatus() == 0) {
 				sResult = StringUtil
 						.getString(R.string.supervision_bts_kl_keodaydien_nmn_khongdat);
 				Log.i("Cause_Deny", sResult);
 			}
 
-			if (causeCatWorkEntityKdd.getBts_Cat_WorkEntity().getStatus() != -1 && causeCatWorkEntityKdd.getBts_Cat_WorkEntity().getStatus() == 0) {
+			if (causeCatWorkEntityKdd.getBts_Cat_WorkEntity().getStatus() != -1
+                    && causeCatWorkEntityKdd.getBts_Cat_WorkEntity().getStatus() == 0) {
 				sResult = StringUtil
 						.getString(R.string.supervision_bts_kl_keodaydien_khongdat);
 				Log.i("Cause_Deny", sResult);
@@ -909,7 +953,8 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 			}
 
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkEquipEntity) {
-				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
+				if (i.getBts_Cat_WorkEntity().getStatus() != -1
+                        && i.getBts_Cat_WorkEntity().getStatus() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_lapdatthietbi_khongdat);
 					Log.i("Cause_Deny", sResult);
@@ -917,7 +962,8 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 			}
 
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkLowVibaEntity) {
-				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
+				if (i.getBts_Cat_WorkEntity().getStatus() != -1
+                        && i.getBts_Cat_WorkEntity().getStatus() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_lapdatviba_low_khongdat);
 					Log.i("Cause_Deny", sResult);
@@ -925,22 +971,24 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 			}
 
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkHeighVibaEntity) {
-				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
+				if (i.getBts_Cat_WorkEntity().getStatus() != -1
+                        && i.getBts_Cat_WorkEntity().getStatus() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_lapdatviba_heigh_khongdat);
 					Log.i("Cause_Deny", sResult);
 				}
 			}
 
-			Supervision_Bts_MeasureController measureController = new Supervision_Bts_MeasureController(
-					this);
+			Supervision_Bts_MeasureController measureController
+                    = new Supervision_Bts_MeasureController(this);
 
 			for (int i = 0; i < feeder2G.size(); i++) {
 				Supervision_Bts_MeasureEntity supvBtsMeasureEntity = measureController
 						.getBtsMeasureEntity(btsEntity.getSupervision_Bts_Id(),
 								feeder2G.get(i).getCat_Supv_Constr_Measure_Id());
 				if (supvBtsMeasureEntity != null
-						&& supvBtsMeasureEntity.getMeasure_Status() != -1 && supvBtsMeasureEntity.getMeasure_Status() == 0) {
+						&& supvBtsMeasureEntity.getMeasure_Status() != -1
+                        && supvBtsMeasureEntity.getMeasure_Status() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_hangmuc)
 							+ " "
@@ -957,7 +1005,8 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 						.getBtsMeasureEntity(btsEntity.getSupervision_Bts_Id(),
 								feeder3G.get(i).getCat_Supv_Constr_Measure_Id());
 				if (supvBtsMeasureEntity != null
-						&& supvBtsMeasureEntity.getMeasure_Status() != -1 && supvBtsMeasureEntity.getMeasure_Status() == 0) {
+						&& supvBtsMeasureEntity.getMeasure_Status() != -1
+                        && supvBtsMeasureEntity.getMeasure_Status() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_hangmuc)
 							+ " "
@@ -974,7 +1023,8 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 						.getBtsMeasureEntity(btsEntity.getSupervision_Bts_Id(),
 								viba.get(i).getCat_Supv_Constr_Measure_Id());
 				if (supvBtsMeasureEntity != null
-						&& supvBtsMeasureEntity.getMeasure_Status() != -1 && supvBtsMeasureEntity.getMeasure_Status() == 0) {
+						&& supvBtsMeasureEntity.getMeasure_Status() != -1
+                        && supvBtsMeasureEntity.getMeasure_Status() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_hangmuc)
 							+ " "
@@ -987,7 +1037,8 @@ public class SupervisionBtsBaseActivity extends BaseActivity {
 			}
 		} else {
 			for (Cause_Bts_Cat_WorkEntity i : listCauseCatWorkEquipEntity) {
-				if (i.getBts_Cat_WorkEntity().getStatus() != -1 && i.getBts_Cat_WorkEntity().getStatus() == 0) {
+				if (i.getBts_Cat_WorkEntity().getStatus() != -1
+                        && i.getBts_Cat_WorkEntity().getStatus() == 0) {
 					sResult = StringUtil
 							.getString(R.string.supervision_bts_kl_lapdatthietbi_khongdat);
 					Log.i("Cause_Deny", sResult);

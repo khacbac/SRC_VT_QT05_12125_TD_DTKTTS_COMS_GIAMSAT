@@ -18,8 +18,6 @@ import com.viettel.database.Plan_Constr_DetailController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
-import com.viettel.database.entity.ContentDetailItemProgressPreview;
-import com.viettel.database.entity.ContentProgressPreview;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
@@ -30,14 +28,14 @@ import com.viettel.gsct.GSCTUtils;
 import com.viettel.gsct.View.SubWorkItemTienDoNgamView;
 import com.viettel.gsct.View.WorkItemTienDoNgamView;
 import com.viettel.ktts.R;
+import com.viettel.view.listener.IeSave;
+import com.viettel.view.listener.IeValidate;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -49,8 +47,10 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
-    private static final String TAG = "NgamTiendoFragment";
+public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment
+        implements IeSave.IeCapNhatTienDoInteractor, IeValidate.IecheckValidateTienDo {
+    private final String TAG = this.getClass().getSimpleName();
+    public static ConcurrentHashMap<Long, Sub_Work_ItemEntity> listSubWorkItems  = hashSubWorkItems;
 
     public static final int TYPE_TUYEN_NGAM = 1;
     public static final int TYPE_TUYEN_TREO = 2;
@@ -63,12 +63,12 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
     LinearLayout layoutRoot;
     private Unbinder unbinder;
     private boolean dialogDismissFlag = true;
+    public static ArrayList<Double> luykes;
 
     private ConcurrentHashMap<Long, SubWorkItemTienDoNgamView> hashSubWorkItemViews = new ConcurrentHashMap<>();
     Sub_Work_Item_ValueController sub_work_item_value_controller;
 
     private boolean flagIsRealFinish = true;
-
 
 //    private ConcurrentHashMap<Long, ArrayList<Sub_Work_ItemField>> hash
 
@@ -82,7 +82,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_truyen_dan_ngam_tien_do, container, false);
         unbinder = ButterKnife.bind(this, layout);
         if (getArguments() != null) {
@@ -100,18 +101,19 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     public void initData() {
         super.initData();
+        luykes = new ArrayList<>();
         sub_work_item_value_controller = new Sub_Work_Item_ValueController(getContext());
         if (workItems.isEmpty()) {
             showNotSyncDialog();
             return;
         }
 
-        ArrayList<Cat_Work_Item_TypesEntity> arr = cat_work_item_typesControler.getCates(constr_ConstructionItem.getConstrType());
+        ArrayList<Cat_Work_Item_TypesEntity> arr = cat_work_item_typesControler
+                .getCates(constr_ConstructionItem.getConstrType());
         if (arr.isEmpty()) {
             showNotSyncDialog();
             return;
         }
-
         HashSet<String> setCateTypeCode = new HashSet<>();
         if (type == TYPE_TUYEN_NGAM) {
             setCateTypeCode.add("TD_XD");
@@ -141,7 +143,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
                 if (!itemTypeIds.contains(workItem.getItem_type_id()))
                     continue;
                 hashWorkItems.put(workItem.getItem_type_id(), workItem);
-                ArrayList<Sub_Work_ItemEntity> subWorkItems = sub_work_itemController.getItems(workItem.getId());
+                ArrayList<Sub_Work_ItemEntity> subWorkItems = sub_work_itemController
+                        .getItems(workItem.getId());
 
                 for (Sub_Work_ItemEntity subWorkItem : subWorkItems) {
                     workItem.addSubWorkItem(subWorkItem);
@@ -176,10 +179,10 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 //            Log.e(TAG, "initData: " + workItem.getId() + " " + workItem.getWork_item_name() );
             view.setWorkItemEntity(workItem);
             view.setTrangThaiLucDauBtn(view.getTrangThaiTienDo());
-            Log.d("BacHK","Trang thai ban dau = " + view.getTrangThaiTienDo());
             layoutRoot.addView(view, childCount++);
 
-            ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = cat_sub_work_itemControler.getsubCates(entity.getItem_type_id());
+            ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = cat_sub_work_itemControler
+                    .getsubCates(entity.getItem_type_id());
             for (Cat_Sub_Work_ItemEntity catSubWorkItem : arrSubWorkItems) {
                 SubWorkItemTienDoNgamView subView = new SubWorkItemTienDoNgamView(getContext());
                 view.addSubItem(subView);
@@ -196,12 +199,15 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
                 if (!workItem.getSubWorkItems().contains(subWorkItem)) {
                     workItem.addSubWorkItem(subWorkItem);
                 }
-//                Log.e(TAG, "initData: " + catSubWorkItem.getCat_work_item_type_id() + " " + subWorkItem.getWork_item_id() );
                 hashSubWorkItemViews.put(catSubWorkItem.getId(), subView);
-                Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller.getItem(subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
-                double luyke = sub_work_item_value_controller.getLuyke(subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
+                Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller
+                        .getItem(subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
+                double luyke = sub_work_item_value_controller.getLuyke(subWorkItem.getWork_item_id(),
+                        subWorkItem.getCat_sub_work_item_id());
+                luykes.add(luyke);
                 double value = subWorkItemValue != null ? subWorkItemValue.getValue() : 0;
-                subView.setSubWorkItemEntity(subWorkItem, catSubWorkItem.getName(), value, luyke, catSubWorkItem.getUnitName());
+                subView.setSubWorkItemEntity(subWorkItem, catSubWorkItem.getName(), value, luyke,
+                        catSubWorkItem.getUnitName());
 
                 subView.setTextChangeListener(new TextWatcher() {
                     @Override
@@ -213,7 +219,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (s.length() > 0) {
                             Work_ItemsEntity wi = hashWorkItems.get(entity.getItem_type_id());
-                            if (wi != null && wi.getStatus_id() != Work_ItemsEntity.STATUS_COMPLETE && wi.getStatus_id() != Work_ItemsEntity.STATUS_WORKING) {
+                            if (wi != null && wi.getStatus_id() != Work_ItemsEntity.STATUS_COMPLETE
+                                    && wi.getStatus_id() != Work_ItemsEntity.STATUS_WORKING) {
                                 wi.setStatus_id(Work_ItemsEntity.STATUS_WORKING);
                                 view.setWorkItemEntity(wi);
                             }
@@ -233,7 +240,9 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
     @Override
     public void save() {
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
-            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),
+                    "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         super.save();
@@ -241,38 +250,49 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
         Enumeration<Long> keys = hashWorkItems.keys();
         while (keys.hasMoreElements()) {
             Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
-//            Log.e(TAG, "save: " + workItem.getId() + " " + workItem.isCompleted() + " " + workItem.getStatus_id() + " " + workItem.hashCode() );
+            workItem.setUpdate_date(GSCTUtils.getDateNow());
+            Log.d(TAG,"Work item name = " + workItem.getWork_item_name());
             if (workItem.isCompleted())
                 continue;
-
-//            Log.e(TAG, "save: " + workItem.getStatus() );
-            workItem.setSyncStatus(workItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            workItem.setSyncStatus(workItem.getProcessId() > 0
+                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
             workItem.setEmployeeId(userId);
             workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
             workItem.updateDate();
+            if (workItem.getStarting_date().length() == 0) {
+                workItem.setStarting_date(GSCTUtils.getDateNow());
+            }
             if (workItem.getId() > 0) {
                 work_itemsControler.updateItem(workItem);
             } else {
-                long id = Ktts_KeyController.getInstance().getKttsNextKey(Work_ItemsField.TABLE_NAME);
+                long id = Ktts_KeyController.getInstance()
+                        .getKttsNextKey(Work_ItemsField.TABLE_NAME);
                 workItem.setId(id);
                 work_itemsControler.addItem(workItem);
             }
-
             // tuyến cáp ngầm
             if (workItem.getWork_item_code().equals("TD_TQ")) {
-                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Ngay_hoan_thanh_han_noi", workItem.getComplete_date());
+                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                        "NGAM_Ngay_hoan_thanh_han_noi", workItem.getComplete_date());
             } else if (workItem.getWork_item_code().equals("TD_KCNGAM")) {
                 if (workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE) {
-                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Thoi_gian_hoan_thanh_keo_cap", workItem.getComplete_date());
-                    if (workItem.hasCompletedDate() && workItem.getComplete_date().equals(workItem.getStarting_date())) {
-                        planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Thoi_gian_bat_dau_keo_cap", workItem.getStarting_date());
+                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                            "NGAM_Thoi_gian_hoan_thanh_keo_cap", workItem.getComplete_date());
+                    if (workItem.hasCompletedDate() && workItem.getComplete_date()
+                            .equals(workItem.getStarting_date())) {
+                        planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                                "NGAM_Thoi_gian_bat_dau_keo_cap", workItem.getStarting_date());
                     }
                 } else if (workItem.getStatus_id() == Work_ItemsEntity.STATUS_WORKING) {
-                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Thoi_gian_bat_dau_keo_cap", workItem.getStarting_date());
-                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Thoi_gian_hoan_thanh_keo_cap", "");
+                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                            "NGAM_Thoi_gian_bat_dau_keo_cap", workItem.getStarting_date());
+                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                            "NGAM_Thoi_gian_hoan_thanh_keo_cap", "");
                 } else {
-                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Thoi_gian_bat_dau_keo_cap", "");
-                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "NGAM_Thoi_gian_hoan_thanh_keo_cap", "");
+                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                            "NGAM_Thoi_gian_bat_dau_keo_cap", "");
+                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                            "NGAM_Thoi_gian_hoan_thanh_keo_cap", "");
                 }
             }
 
@@ -280,20 +300,25 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
             for (Sub_Work_ItemEntity subWorkItem : workItem.getSubWorkItems()) {
                 subWorkItem.setWork_item_id(workItem.getId());
                 subWorkItem.setFinishDate(workItem.getComplete_date());
-                subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+                subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0
+                        ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
                 subWorkItem.setEmployeeId(userId);
                 subWorkItem.setIsActive(Constants.ISACTIVE.ACTIVE);
                 if (subWorkItem.getId() > 0) {
                     sub_work_itemController.updateItem(subWorkItem);
                 } else {
-                    long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
+                    long id = Ktts_KeyController.getInstance()
+                            .getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
                     subWorkItem.setId(id);
                     sub_work_itemController.addItem(subWorkItem);
                 }
 
-                SubWorkItemTienDoNgamView view = hashSubWorkItemViews.get(subWorkItem.getCat_sub_work_item_id());
+                SubWorkItemTienDoNgamView view = hashSubWorkItemViews
+                        .get(subWorkItem.getCat_sub_work_item_id());
                 double value = view != null ? view.getValue() : 0L;
-                Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller.getItem(subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
+                Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller
+                        .getItem(subWorkItem.getWork_item_id(),
+                                subWorkItem.getCat_sub_work_item_id());
                 if (subWorkItemValue == null) {
                     subWorkItemValue = new Sub_Work_Item_ValueEntity();
                     subWorkItemValue.setWork_item_id(subWorkItem.getWork_item_id());
@@ -305,22 +330,27 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
                 subWorkItemValue.setAdded_date(GSCTUtils.getDateNow());
                 subWorkItemValue.setEmployeeId(userId);
                 subWorkItemValue.setIsActive(Constants.ISACTIVE.ACTIVE);
-                subWorkItemValue.setSyncStatus(subWorkItemValue.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+                subWorkItemValue.setSyncStatus(subWorkItemValue.getProcessId() > 0
+                        ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
                 if (subWorkItemValue.getId() > 0) {
                     sub_work_item_value_controller.updateItem(subWorkItemValue);
                 } else {
-                    subWorkItemValue.setId(Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME));
+                    subWorkItemValue.setId(Ktts_KeyController.getInstance()
+                            .getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME));
                     sub_work_item_value_controller.addItem(subWorkItemValue);
                 }
-                double luyke = sub_work_item_value_controller.getLuyke(subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
+                double luyke = sub_work_item_value_controller.getLuyke(
+                        subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
 
                 // Tuyến cáp ngầm
                 if (workItem.getWork_item_code().equals("TD_KCNGAM")) {
                     Log.e(TAG, "save: " + subWorkItem.getCode());
                     if (subWorkItem.getCode().equals("KC_DLCCTT")) {
-                        planController.updateLuyKe(constr_ConstructionItem.getConstructId(), "NGAM_Dao_lap_cap_chon_truc_tiep", luyke);
+                        planController.updateLuyKe(constr_ConstructionItem.getConstructId(),
+                                "NGAM_Dao_lap_cap_chon_truc_tiep", luyke);
                     } else if (subWorkItem.getCode().equals("KC_KCCB")) {
-                        planController.updateLuyKe(constr_ConstructionItem.getConstructId(), "NGAM_Keo_cap_cong_be", luyke);
+                        planController.updateLuyKe(constr_ConstructionItem.getConstructId(),
+                                "NGAM_Keo_cap_cong_be", luyke);
                     }
                 }
 
@@ -329,19 +359,31 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
                     if (subWorkItem.getCode().equals("SO_M_CAP_KEO_DUOC")) {
                         if (luyke > 0) {
                             if (workItem.getStatus_id() == 403) {
-                                String realFinishDate = planController.getRealFinishDate(constr_ConstructionItem.getConstructId(), "Start_Date_Extensive_Cable");
+                                String realFinishDate = planController.getRealFinishDate(
+                                        constr_ConstructionItem.getConstructId(),
+                                        "Start_Date_Extensive_Cable");
                                 if (realFinishDate == null || realFinishDate.length() == 0) {
-                                    planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "Start_Date_Extensive_Cable", GSCTUtils.getDateNow());
+                                    planController.updateRealFinishDate(constr_ConstructionItem
+                                            .getConstructId(), "Start_Date_Extensive_Cable",
+                                            GSCTUtils.getDateNow());
                                 }
-                                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "End_Date_Extensive_Cable", GSCTUtils.getDateNow());
+                                planController.updateRealFinishDate(constr_ConstructionItem
+                                        .getConstructId(), "End_Date_Extensive_Cable",
+                                        GSCTUtils.getDateNow());
                             } else {
-                                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "Start_Date_Extensive_Cable", GSCTUtils.getDateNow());
-                                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "End_Date_Extensive_Cable", "");
+                                planController.updateRealFinishDate(constr_ConstructionItem
+                                        .getConstructId(), "Start_Date_Extensive_Cable",
+                                        GSCTUtils.getDateNow());
+                                planController.updateRealFinishDate(constr_ConstructionItem
+                                        .getConstructId(), "End_Date_Extensive_Cable", "");
                             }
                         } else {
                             if (workItem.getStatus_id() != 403) {
-                                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "End_Date_Extensive_Cable", "");
-                                if (workItem.getStatus_id() != 402) planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "Start_Date_Extensive_Cable", "");
+                                planController.updateRealFinishDate(constr_ConstructionItem
+                                        .getConstructId(), "End_Date_Extensive_Cable", "");
+                                if (workItem.getStatus_id() != 402) planController
+                                        .updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                                                "Start_Date_Extensive_Cable", "");
                             }
                         }
                     }
@@ -351,17 +393,22 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
             //Tuyến cáp treo
             if (workItem.getWork_item_code().equals("TD_TC")) {
-                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "End_Date_pillar_Cable", workItem.getStatus_id() == 403 ? workItem.getComplete_date() : "");
+                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                        "End_Date_pillar_Cable", workItem.getStatus_id() == 403
+                                ? workItem.getComplete_date() : "");
             }
 
             //Tuyến cáp treo
             if (workItem.getWork_item_code().equals("TD_TC") && workItem.getStatus_id() == 402) {
-                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "Start_Date_pillar_Cable", GSCTUtils.getDateNow());
+                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                        "Start_Date_pillar_Cable", GSCTUtils.getDateNow());
             }
         }
 
         //Tuyến cáp treo
-        planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), "End_Date_Usage", constr_ConstructionItem.getStatus() >= 395 ? GSCTUtils.getDateNow() : "");
+        planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
+                "End_Date_Usage",
+                constr_ConstructionItem.getStatus() >= 395 ? GSCTUtils.getDateNow() : "");
 
         Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
 
@@ -369,7 +416,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     public boolean checkValidateTuyenNgamTienDo() {
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
-            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành," +
+                    " bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -383,5 +431,15 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment {
 
     public void registerListenerEventBus() {
         EventBus.getDefault().post(layoutRoot);
+    }
+
+    @Override
+    public void saveTienDo() {
+        save();
+    }
+
+    @Override
+    public boolean checkValidateTienDo() {
+        return checkValidateTuyenNgamTienDo();
     }
 }

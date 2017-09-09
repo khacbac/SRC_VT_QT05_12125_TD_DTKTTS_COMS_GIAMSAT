@@ -16,6 +16,7 @@ import com.viettel.database.entity.ContentJournalPreview;
 import com.viettel.database.entity.ContentProgressPreview;
 import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.gsct.GSCTUtils;
+import com.viettel.gsct.View.SubWorkItemGPONView;
 import com.viettel.gsct.View.SubWorkItemTienDoBTSView;
 import com.viettel.gsct.View.SubWorkItemTienDoNgamView;
 import com.viettel.gsct.View.TiendoBTSItemView;
@@ -23,6 +24,8 @@ import com.viettel.gsct.View.WorkItemRightGPONView;
 import com.viettel.gsct.View.WorkItemTienDoBTSView;
 import com.viettel.gsct.View.WorkItemTienDoNgamView;
 import com.viettel.gsct.fragment.BaseFragment;
+import com.viettel.gsct.fragment.GPONTiendoFragment;
+import com.viettel.gsct.fragment.TruyenDanNgamTiendoFragment;
 import com.viettel.ktts.R;
 import com.viettel.utils.NestedExpandableListView;
 import com.viettel.utils.NestedListView;
@@ -32,6 +35,7 @@ import com.viettel.view.control.BtsXemTienDoExpandableAdapter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,6 +45,7 @@ import butterknife.Unbinder;
 
 public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
 
+    private final String TAG = this.getClass().getSimpleName();
     @BindView(R.id.txtDpThoiTiet)
     TextView txtDpThoiTiet;
     @BindView(R.id.txtDpThayDoiBoSung)
@@ -58,6 +63,8 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
     NestedExpandableListView mListViewDpTienDoThiCong;
     @BindView(R.id.txtDpCongViecThiCongTrongNgay)
     TextView mTxtCongViecTrongNgay;
+    @BindView(R.id.txtKhoiLuong)
+    TextView txtKhoiLuong;
 
     public static BaseFragment newInstance() {
         return new CapNhatNhatKyTienDoPreviewFragment();
@@ -67,9 +74,10 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_cap_nhat_nhat_ky_tien_do,container,false);
+        View view = inflater.inflate(R.layout.activity_cap_nhat_nhat_ky_tien_do, container, false);
         unbinder = ButterKnife.bind(this, view);
         listenerOnClick();
+        initData();
         return view;
     }
 
@@ -84,14 +92,18 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
 
     /**
      * Khoi tao du lieu cho phan xem truoc noi dung tien do.
+     *
      * @param listBtsTienDoView TiendoBTSItemView.
-     * @param subWorkHashMap SubWorkItemTienDoBTSView.
-     * @param hashWorkItems Work_ItemsEntity.
+     * @param subWorkHashMap    SubWorkItemTienDoBTSView.
+     * @param hashWorkItems     Work_ItemsEntity.
      */
     public void initDataForTienDoExpandable(
             ArrayList<TiendoBTSItemView> listBtsTienDoView,
             ConcurrentHashMap<Integer, ArrayList<SubWorkItemTienDoBTSView>> subWorkHashMap,
             ConcurrentHashMap<Long, Work_ItemsEntity> hashWorkItems) {
+
+        // Khong can hien thi muc khoi luong doi voi cong trinh nay.
+        txtKhoiLuong.setVisibility(View.GONE);
         // Get List data for adapter.
         List<ContentProgressPreview> contentList = new ArrayList<>();
         List<ContentDetailItemProgressPreview> subWorkList;
@@ -118,7 +130,7 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
             ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView =
                     subWorkHashMap.get(keySubWorkView.nextElement());
             // Khoi tao du lieu cho list child item ung voi moi work item.
-            subWorkList = initDataForSubWokList(itemTienDoBTSView);
+            subWorkList = initDataForSubWokList(itemTienDoBTSView, contentList.get(index));
             contentHashMaps.put(contentList.get(index), subWorkList);
             index++;
         }
@@ -126,16 +138,17 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
         BtsXemTienDoExpandableAdapter mBtsXemTienDoExpandableAdapter =
                 new BtsXemTienDoExpandableAdapter(contentList,
                         contentHashMaps, getActivity());
-
+        mBtsXemTienDoExpandableAdapter.setNeedDisplayKhoiLuong(false);
         mListViewDpTienDoThiCong.setAdapter(mBtsXemTienDoExpandableAdapter);
 
     }
 
     /**
      * Khoi tao data cho work item.
+     *
      * @param workItemTienDoBTSView WorkItemTienDo.
-     * @param work_itemsEntity WorkItemEntity.
-     * @param stt int.
+     * @param work_itemsEntity      WorkItemEntity.
+     * @param stt                   int.
      * @return ContentProgressPreview.
      */
     private ContentProgressPreview initDataForWokItemList(
@@ -148,21 +161,23 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                 work_itemsEntity.getStarting_date(),
                 work_itemsEntity.getComplete_date()
         );
-        if (workItemTienDoBTSView.getEnabledRadioBtn()) {
-            content.setNewEdit(true);
-        } else {
-            content.setNewEdit(false);
-        }
+//        if (workItemTienDoBTSView.getEnabledRadioBtn()) {
+//            content.setNewEdit(true);
+//        } else {
+//            content.setNewEdit(false);
+//        }
         return content;
     }
 
     /**
      * Khoi tao list data cho moi subwork item theo cac work item tuong ung.
+     *
      * @param itemTienDoBTSView List.
      * @return List.
      */
     private List<ContentDetailItemProgressPreview> initDataForSubWokList(
-            ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView) {
+            ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView,
+            ContentProgressPreview content) {
         // List child item.
         List<ContentDetailItemProgressPreview> subWorkList = new ArrayList<>();
         for (SubWorkItemTienDoBTSView view : itemTienDoBTSView) {
@@ -177,10 +192,13 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
             ContentDetailItemProgressPreview detail = new ContentDetailItemProgressPreview(
                     view.getTitle(),
                     "",
-                    view.getFinishDate()
+                    view.getFinishDate(),
+                    ""
             );
+            content.setNewEdit(false);
             if (view.hasChangeTrangThaiTienDo()) {
                 detail.setNewEdit(true);
+                content.setNewEdit(true);
             } else {
                 detail.setNewEdit(false);
             }
@@ -192,15 +210,19 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
 
     /**
      * Khoi tao du lieu cho phan xem truoc noi dung tuyen ngam tien do.
+     *
      * @param layoutRoot LinearLayout.
      */
     public void initDataForTuyenNgamTienDoExpandable(LinearLayout layoutRoot) {
+        // Get list luy ke ban dau.
+        ArrayList<Double> luykes = TruyenDanNgamTiendoFragment.luykes;
         // Get List data for adapter.
         List<ContentProgressPreview> contentList = new ArrayList<>();
         List<ContentDetailItemProgressPreview> subWorkList;
         HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>>
                 contentHashMaps = new HashMap<>();
         int stt = 0;
+        int index = 0;
         for (int i = 0; i < layoutRoot.getChildCount(); i++) {
             if (layoutRoot.getChildAt(i) instanceof WorkItemTienDoNgamView) {
                 subWorkList = new ArrayList<>();
@@ -233,45 +255,68 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                 contentList.add(content);
                 ArrayList<SubWorkItemTienDoNgamView> subWorkItemList = tienDoNgamView.getArrSubItems();
                 if (subWorkItemList.size() > 0) {
+                    boolean hasEdit = false;
                     for (SubWorkItemTienDoNgamView view : subWorkItemList) {
+                        double luyke = 0;
+                        if (index < luykes.size()) {
+                            luyke = luykes.get(index++);
+                        }
+                        Log.d(TAG,"Luy ke = " + luyke);
                         ContentDetailItemProgressPreview detail = new ContentDetailItemProgressPreview(
                                 view.getTvTitle(),
                                 "",
-                                view.getSubWorkItemEntity().getFinishDate()
+                                "",
+                                "" + (luyke + view.getValue())
                         );
-                        if (content.isHasNgayHoanThanh()
-                                && !(content.getNgayHoanThanh().equals(GSCTUtils.getDateNow()))) {
-                            detail.setNewEdit(false);
+                        if (luyke != (luyke + view.getValue())) {
+                            detail.setNewEdit(true);
+                            hasEdit = true;
                         } else {
-                            if (tienDoNgamView.getTrangThaiTienDo().equals("Hoàn thành")) {
-                                detail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
-                                detail.setNewEdit(true);
-                            }
+                            detail.setNewEdit(false);
                         }
                         subWorkList.add(detail);
                     }
+                    if (hasEdit) {
+                        content.setNewEdit(true);
+                    } else {
+                        content.setNewEdit(false);
+                    }
                 }
-                contentHashMaps.put(content,subWorkList);
+                contentHashMaps.put(content, subWorkList);
             }
         }
         BtsXemTienDoExpandableAdapter adapter =
                 new BtsXemTienDoExpandableAdapter(contentList,
                         contentHashMaps, getActivity());
+        adapter.setNeedDisplayKhoiLuong(true);
         mListViewDpTienDoThiCong.setAdapter(adapter);
     }
 
     /**
      * Khoi tao data cho phan xem truoc cua Gpon.
+     *
      * @param layoutRoot Layout.
      */
     public void initDataForBangRongTienDoExpandable(LinearLayout layoutRoot) {
+        // Get list luy ke ban dau.
+        ArrayList<Double> luykes = GPONTiendoFragment.luykes;
+        // Get list left data.
+        LinearLayout layoutLeft = GPONTiendoFragment.layoutRoot;
+        ArrayList<SubWorkItemGPONView> gponViews = new ArrayList<>();
+        for (int index = 0; index < layoutLeft.getChildCount(); index++) {
+            if (layoutLeft.getChildAt(index) instanceof SubWorkItemGPONView) {
+                SubWorkItemGPONView view = (SubWorkItemGPONView) layoutLeft.getChildAt(index);
+                gponViews.add(view);
+            }
+        }
         // Get List data for adapter.
         List<ContentProgressPreview> contentList = new ArrayList<>();
         List<ContentDetailItemProgressPreview> subWorkList;
         HashMap<ContentProgressPreview,
                 List<ContentDetailItemProgressPreview>> contentHashMaps = new HashMap<>();
-        if (layoutRoot.getChildCount() > 0 ) {
+        if (layoutRoot.getChildCount() > 0) {
             int stt = 0;
+            int index = 0;
             for (int i = 0; i < layoutRoot.getChildCount(); i++) {
                 if (layoutRoot.getChildAt(i) instanceof WorkItemRightGPONView) {
                     WorkItemRightGPONView view = (WorkItemRightGPONView) layoutRoot.getChildAt(i);
@@ -295,13 +340,71 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                     }
                     contentList.add(content);
                     subWorkList = new ArrayList<>();
-                    contentHashMaps.put(content,subWorkList);
+                    if (gponViews.size() > 3) {
+                        boolean hasEdit = false;
+                        if (view.getTitle().equals("Hàn nối")) {
+                            for (int j = 0; j < 3; j++) {
+                                SubWorkItemGPONView subView = gponViews.get(j);
+                                double luyke = 0;
+                                if (j < luykes.size()) {
+                                    luyke = luykes.get(j);
+                                }
+                                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(
+                                        subView.getTvTitle(),
+                                        "",
+                                        "",
+                                        "" + (luyke + subView.getValue())
+                                );
+                                if (luyke != (luyke + subView.getValue())) {
+                                    hasEdit = true;
+                                    item.setNewEdit(true);
+                                } else {
+                                    item.setNewEdit(false);
+                                }
+                                subWorkList.add(item);
+                            }
+                            if (hasEdit) {
+                                content.setNewEdit(true);
+                            } else {
+                                content.setNewEdit(false);
+                            }
+                        } else if (view.getTitle().equals("Kéo cáp")) {
+                            for (int j = 3; j < gponViews.size(); j++) {
+                                SubWorkItemGPONView subView = gponViews.get(j);
+                                double luyke = 0;
+                                if (j < luykes.size()) {
+                                    luyke = luykes.get(j);
+                                }
+                                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(
+                                        subView.getTvTitle(),
+                                        "",
+                                        "",
+                                        "" + (luyke + subView.getValue())
+                                );
+                                if (luyke != (luyke + subView.getValue())) {
+                                    hasEdit = true;
+                                    item.setNewEdit(true);
+                                } else {
+                                    item.setNewEdit(false);
+                                }
+                                subWorkList.add(item);
+                            }
+                            if (hasEdit) {
+                                content.setNewEdit(true);
+                            } else {
+                                content.setNewEdit(false);
+                            }
+                        }
+                    }
+                    contentHashMaps.put(content, subWorkList);
                 }
             }
         }
+
         BtsXemTienDoExpandableAdapter adapter =
                 new BtsXemTienDoExpandableAdapter(contentList,
                         contentHashMaps, getActivity());
+        adapter.setNeedDisplayKhoiLuong(true);
         mListViewDpTienDoThiCong.setAdapter(adapter);
     }
 
@@ -311,9 +414,10 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
 
     /**
      * Khoi tao du lieu cho phan xem truoc noi dung nhat ky.
+     *
      * @param listHashMap String.
      */
-    public void initDataForNhatKy(HashMap<String,String> listHashMap,
+    public void initDataForNhatKy(LinkedHashMap<String, String> listHashMap,
                                   String[] keyDois, String[] keyTenHangMucs) {
         txtDpTramTuyen.setText(listHashMap.get(KeyEventCommon.KEY_TEN_TRAM_TUYEN));
         mTxtCongViecTrongNgay.setText(listHashMap.get(KeyEventCommon.KEY_NOIDUNG_CONGVIEC));
@@ -340,5 +444,10 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
     }
 }

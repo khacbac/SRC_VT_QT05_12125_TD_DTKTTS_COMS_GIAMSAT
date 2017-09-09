@@ -1099,9 +1099,13 @@
     <string name="txt_may">Máy</string>
     <string name="txt_doi_thietbi">Đội thiết bị</string>
     <string name="str_edt_thay_doi_bo_sung">Những thay đổi, bổ sung, phát sinh *</string>
-    <string name="str_edt_noidung_congviec">Nội dung công việc thi công trong ngày.</string>
+    <string name="str_edt_noidung_congviec">Nội dung công việc thi công trong ngày *</string>
     <string name="username_error">User Name Error</string>
     <string name="password_error">Password Error</string>
+    <string name="str_hop_quang_8Fo">Hộp quang 8Fo</string>
+    <string name="str_fdh_16fo">FDH 16Fo</string>
+    <string name="str_hop_quang_32fo">Hộp quang 32Fo</string>
+    <string name="str_thong_bao_truoc_khi_luu">Đây là thông tin bạn vừa nhập, tiếp tục nhấn Lưu để hoàn tất</string>
 
     <string-array name="array_bts">
         <item>BTS - Cập nhật nhật ký</item>
