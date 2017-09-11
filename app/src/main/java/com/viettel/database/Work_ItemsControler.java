@@ -192,7 +192,8 @@ public class Work_ItemsControler {
                 .query(Work_ItemsField.TABLE_NAME, allColumn,
                         Work_ItemsField.CONSTR_ID + "=? AND "
                                 + Work_ItemsField.ITEM_TYPE_ID + "=?",
-                        new String[]{String.valueOf(constructId), String.valueOf(cat_work_item_id)}, null, null,
+                        new String[]{String.valueOf(constructId),
+                                String.valueOf(cat_work_item_id)}, null, null,
                         null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();

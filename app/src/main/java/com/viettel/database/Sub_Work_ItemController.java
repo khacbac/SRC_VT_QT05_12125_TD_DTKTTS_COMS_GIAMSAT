@@ -105,8 +105,8 @@ public class Sub_Work_ItemController {
                 .query(Sub_Work_ItemField.TABLE_NAME, allColumn,
                         Sub_Work_ItemField.WORK_ITEM_ID + "=? AND "
                                 + Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID + "=?",
-                        new String[]{String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)}, null, null,
-                        null, null);
+                        new String[]{String.valueOf(work_item_id),
+                                String.valueOf(cat_sub_work_item_id)}, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             curItem = this.converCursorToItem(cursor);

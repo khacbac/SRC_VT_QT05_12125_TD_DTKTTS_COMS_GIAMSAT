@@ -42,7 +42,8 @@ public class SubWorkItemTienDoNgamView extends LinearLayout {
         init(context);
     }
 
-    public SubWorkItemTienDoNgamView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SubWorkItemTienDoNgamView(Context context,
+                                     @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -53,7 +54,8 @@ public class SubWorkItemTienDoNgamView extends LinearLayout {
         ButterKnife.bind(this);
     }
 
-    public void setSubWorkItemEntity(Sub_Work_ItemEntity entity, String title, double value, double luyke, String donvi) {
+    public void setSubWorkItemEntity(Sub_Work_ItemEntity entity,
+                                     String title, double value, double luyke, String donvi) {
         this.entity = entity;
         tvTitle.setText(title);
         if (value > 0)

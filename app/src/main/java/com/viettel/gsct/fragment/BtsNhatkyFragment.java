@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.viettel.common.GlobalInfo;
 import com.viettel.common.KeyEventCommon;
 import com.viettel.constants.Constants;
@@ -38,27 +37,17 @@ import com.viettel.gsct.View.TeamView;
 import com.viettel.ktts.R;
 import com.viettel.view.listener.IeSave;
 import com.viettel.view.listener.IeValidate;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-/**
- * Created by admin2 on 05/04/2017.
- */
 
 public class BtsNhatkyFragment extends BaseFragment
         implements IeSave.IeCapNhatNhatKyInteractor, IeValidate.IecheckValidateNhatKy {
@@ -99,6 +88,7 @@ public class BtsNhatkyFragment extends BaseFragment
     private Unbinder unbinder;
 
     public boolean isValidate;
+    private boolean isAddedNew = false;
 
     public static final int TYPE_TUYEN_DEFAULT = 0;
     public static final int TYPE_TUYEN_NGAM = 2;
@@ -111,23 +101,19 @@ public class BtsNhatkyFragment extends BaseFragment
     Constr_ObStructionEntity obstructionEntity = null;
     private int type = TYPE_TUYEN_DEFAULT;
 
-    private Cat_Constr_TeamController cat_constr_teamController;
-
-//    private ConcurrentHashMap<Long, TeamView> hashTeamView = new ConcurrentHashMap<>();
     private LinkedHashMap<Long, TeamView> hashTeamViewOrder = new LinkedHashMap<>();
     private ConcurrentHashMap<Long, Constr_Team_ProgressEntity> hashTeams = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Long, Constr_ObStruction_TypeEntity> hashObStructionsById = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Integer, Constr_ObStruction_TypeEntity> hashObStructionsByPosition = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Long,
+            Constr_ObStruction_TypeEntity> hashObStructionsById = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer,
+            Constr_ObStruction_TypeEntity> hashObStructionsByPosition = new ConcurrentHashMap<>();
 
     private Set<String> filterCodes = new HashSet<>();
-
-    private boolean flagValidateTeamNumber;
 
     private InterfaceCheckSwitchCombatStatus mInterfaceCheckSwitchCombatStatusStatus;
 
     public static BaseFragment newInstance() {
-        BtsNhatkyFragment fragment = new BtsNhatkyFragment();
-        return fragment;
+        return new BtsNhatkyFragment();
     }
 
     public static BaseFragment newInstance(int type) {
@@ -140,7 +126,8 @@ public class BtsNhatkyFragment extends BaseFragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bts_thi_cong, container, false);
         unbinder = ButterKnife.bind(this, layout);
         sKhongThiCong.clear();
@@ -179,7 +166,8 @@ public class BtsNhatkyFragment extends BaseFragment
         adapterNguyennhan.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         spNguyenNhan.setAdapter(adapterNguyennhan);
 
-        ArrayList<Constr_ObStruction_TypeEntity> obStrucstions = new Supervision_CNVController(getContext()).getItemConstrObStructionTypes();
+        ArrayList<Constr_ObStruction_TypeEntity> obStrucstions
+                = new Supervision_CNVController(getContext()).getItemConstrObStructionTypes();
         int i = 0;
         List<CharSequence> names = new ArrayList<>();
         for (Constr_ObStruction_TypeEntity obstruction : obStrucstions) {
@@ -188,7 +176,8 @@ public class BtsNhatkyFragment extends BaseFragment
             hashObStructionsByPosition.put(obstruction.getPosition(), obstruction);
             hashObStructionsById.put(obstruction.getConstrObStructionTypeId(), obstruction);
         }
-        ArrayAdapter<CharSequence> adapterLoaivuong = new ArrayAdapter<CharSequence>(getContext(), R.layout.spinner_textview, names);
+        ArrayAdapter<CharSequence> adapterLoaivuong
+                = new ArrayAdapter<>(getContext(), R.layout.spinner_textview, names);
         adapterLoaivuong.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         spLoaiVuong.setAdapter(adapterLoaivuong);
 
@@ -220,10 +209,9 @@ public class BtsNhatkyFragment extends BaseFragment
         });
     }
 
-
     public void initData() {
         super.initData();
-        cat_constr_teamController = new Cat_Constr_TeamController(getContext());
+        Cat_Constr_TeamController cat_constr_teamController = new Cat_Constr_TeamController(getContext());
 
         if (type == TYPE_TUYEN_NGAM) {
             filterCodes.add("DDR");
@@ -235,23 +223,26 @@ public class BtsNhatkyFragment extends BaseFragment
             filterCodes.add("DTC");
         }
 
-        ArrayList<Cat_Constr_TeamEntity> arr = cat_constr_teamController.getCates(constr_ConstructionItem.getConstrType());
+        ArrayList<Cat_Constr_TeamEntity> arr = cat_constr_teamController
+                .getCates(constr_ConstructionItem.getConstrType());
         int i = 1;
         for (Cat_Constr_TeamEntity entity : arr) {
             if (type != TYPE_TUYEN_DEFAULT && !filterCodes.contains(entity.getCode()))
                 continue;
-
+            Log.d(TAG, "initData() called" +" code = " + entity.getCode());
             TeamView view = new TeamView(getContext());
-            Log.d(TAG, "initData() called" + "name = " + entity.getName());
+            Log.d(TAG, "initData() called" + " name = " + entity.getName());
             view.setTitle(entity.getName());
             rootLayout.addView(view, ++i);
 //            hashTeamView.put(entity.getCat_constr_team_id(), view);
             hashTeamViewOrder.put(entity.getCat_constr_team_id(), view);
+            Log.d(TAG, "initData() called" + " team view number = " + view.getTeamNumber());
             sThicong.add(view);
 
         }
 
-        constrWorkLogsEntity = new Constr_Work_LogsController(getContext()).getItem(constr_ConstructionItem.getConstructId(), GSCTUtils.getDateNow());
+        constrWorkLogsEntity = new Constr_Work_LogsController(getContext())
+                .getItem(constr_ConstructionItem.getConstructId(), GSCTUtils.getDateNow());
         if (constrWorkLogsEntity == null) return;
 
         swThiCong.setChecked(constrWorkLogsEntity == null || constrWorkLogsEntity.getIs_work() == 1);
@@ -272,24 +263,30 @@ public class BtsNhatkyFragment extends BaseFragment
         spNguyenNhan.setSelection(constrWorkLogsEntity.getCat_cause_not_work_id());
 
         Supervision_CNVController vuongConller = new Supervision_CNVController(getContext());
-        Constr_Team_ProgressController teamController = new Constr_Team_ProgressController(getContext());
+        Constr_Team_ProgressController teamController
+                = new Constr_Team_ProgressController(getContext());
 
-        obstructionEntity = vuongConller.getItemConstrObStruction(constrWorkLogsEntity.getConstr_work_logs_id());
+        obstructionEntity = vuongConller
+                .getItemConstrObStruction(constrWorkLogsEntity.getConstr_work_logs_id());
         if (obstructionEntity != null) {
-            Constr_ObStruction_TypeEntity obStructionType= hashObStructionsById.get(obstructionEntity.getConstrObStructionTypeId());
+            Constr_ObStruction_TypeEntity obStructionType
+                    = hashObStructionsById.get(obstructionEntity.getConstrObStructionTypeId());
             if (obStructionType != null) {
                 spLoaiVuong.setSelection(obStructionType.getPosition());
             }
         }
 
-        ArrayList<Constr_Team_ProgressEntity> arrTeamEntity = teamController.getItems(constrWorkLogsEntity.getConstr_work_logs_id());
+        ArrayList<Constr_Team_ProgressEntity> arrTeamEntity
+                = teamController.getItems(constrWorkLogsEntity.getConstr_work_logs_id());
         if (arrTeamEntity != null && arrTeamEntity.size() > 0) {
+            Log.d(TAG, "initData() called" + "arrTeamEntity size = " + arrTeamEntity.size());
             for (Constr_Team_ProgressEntity team : arrTeamEntity) {
-                Log.d(TAG, "initData() called" + "tem num = " + team.getNum_of_team());
                 TeamView view = hashTeamViewOrder.get(team.getCat_constr_team_id());
                 hashTeams.put(team.getCat_constr_team_id(), team);
                 if (view != null && team.getNum_of_team() > 0)
-                    view.setNumber(team.getNum_of_team() + "");
+                    view.setNumber("" + team.getNum_of_team());
+                Log.d(TAG, "initData() called" + " view title = " + view.getTitle());
+                Log.d(TAG, "initData() called" + " tem num = " + team.getNum_of_team());
             }
         }
     }
@@ -300,8 +297,10 @@ public class BtsNhatkyFragment extends BaseFragment
 
         Constr_Work_LogsController controller = new Constr_Work_LogsController(getContext());
         Supervision_CNVController vuongConller = new Supervision_CNVController(getContext());
-        Constr_Team_ProgressController teamController = new Constr_Team_ProgressController(getContext());
-        constrWorkLogsEntity = new Constr_Work_LogsController(getContext()).getItem(constr_ConstructionItem.getConstructId(), GSCTUtils.getDateNow());
+        Constr_Team_ProgressController teamController
+                = new Constr_Team_ProgressController(getContext());
+        constrWorkLogsEntity = new Constr_Work_LogsController(getContext())
+                .getItem(constr_ConstructionItem.getConstructId(), GSCTUtils.getDateNow());
 
         if (constrWorkLogsEntity == null) {
             constrWorkLogsEntity = new Constr_Work_LogsEntity();
@@ -323,7 +322,8 @@ public class BtsNhatkyFragment extends BaseFragment
         if (constrWorkLogsEntity.getIs_work() != 1) {
             // không thi công
             constrWorkLogsEntity.setCat_cause_not_work_id(spNguyenNhan.getSelectedItemPosition());
-            obstructionEntity = vuongConller.getItemConstrObStruction(constrWorkLogsEntity.getConstr_work_logs_id());
+            obstructionEntity = vuongConller
+                    .getItemConstrObStruction(constrWorkLogsEntity.getConstr_work_logs_id());
             if (obstructionEntity == null) {
                 obstructionEntity = new Constr_ObStructionEntity();
             }
@@ -331,15 +331,19 @@ public class BtsNhatkyFragment extends BaseFragment
             obstructionEntity.setUpdatedBy(String.valueOf(idUser));
             obstructionEntity.setCat_Employee_id(idUser);
 //            obstructionEntity.setConstrObStructionTypeId(spLoaiVuong.getSelectedItemPosition());
-            Constr_ObStruction_TypeEntity typeObstruction = hashObStructionsByPosition.get(spLoaiVuong.getSelectedItemPosition());
-            Log.e(TAG, "save: " + spLoaiVuong.getSelectedItemPosition() + " " + typeObstruction.getConstrObStructionTypeId() + " " + typeObstruction.getName());
-            obstructionEntity.setConstrObStructionTypeId(typeObstruction.getConstrObStructionTypeId());
+            Constr_ObStruction_TypeEntity typeObstruction = hashObStructionsByPosition
+                    .get(spLoaiVuong.getSelectedItemPosition());
+            Log.e(TAG, "save: " + spLoaiVuong.getSelectedItemPosition() + " "
+                    + typeObstruction.getConstrObStructionTypeId()
+                    + " " + typeObstruction.getName());
+            obstructionEntity
+                    .setConstrObStructionTypeId(typeObstruction.getConstrObStructionTypeId());
             obstructionEntity.setIsActive(1);
             obstructionEntity.setConstructId(constr_ConstructionItem.getConstructId());
         }
 
         // Lưu constr_work_log xuong DB
-        boolean ret = false;
+        boolean ret;
         if (isInsert) {
             constrWorkLogsEntity.setCreated_date(GSCTUtils.getDateNow());
             long id = Ktts_KeyController.getInstance()
@@ -355,50 +359,25 @@ public class BtsNhatkyFragment extends BaseFragment
         }
 
         if (constrWorkLogsEntity.getIs_work() == 1) {
-            // tinh so leng de dam bao khong bi lay quá số phần tử
-//            Enumeration<Long> keys = hashTeamView.keys();
-//
-//            while (keys.hasMoreElements()) {
-//                long key = keys.nextElement();
-//                TeamView view = hashTeamView.get(key);
-//                int num = view.getTeamNumber();
-//                Constr_Team_ProgressEntity item = hashTeams.get(key);
-//                if (item == null) {
-//                    long id = Ktts_KeyController.getInstance().getKttsNextKey(Constr_Team_ProgressField.TABLE_NAME);
-//                    item = new Constr_Team_ProgressEntity();
-//                    item.setConstr_team_progress_id(id);
-//                    item.setConstruct_id(constr_ConstructionItem.getConstructId());
-//                    item.setCat_constr_team_id(key);
-//                    item.setCreator_id(idUser);
-//                    item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
-//                    item.setNum_of_team(num);
-//                    item.setSyncStatus(Constants.SYNC_STATUS.ADD);
-//                    item.setEmployeeId(idUser);
-//                    teamController.addItem(item);
-//                } else {
-//                    item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
-//                    item.setNum_of_team(num);
-//                    item.setEmployeeId(idUser);
-//                    item.setSyncStatus(Constants.SYNC_STATUS.EDIT);
-//                    teamController.updateItem(item);
-//                }
-//            }
             for (Long key : hashTeamViewOrder.keySet()) {
                 TeamView view = hashTeamViewOrder.get(key);
                 int num = view.getTeamNumber();
                 Constr_Team_ProgressEntity item = hashTeams.get(key);
                 if (item == null) {
-                    long id = Ktts_KeyController.getInstance().getKttsNextKey(Constr_Team_ProgressField.TABLE_NAME);
-                    item = new Constr_Team_ProgressEntity();
-                    item.setConstr_team_progress_id(id);
-                    item.setConstruct_id(constr_ConstructionItem.getConstructId());
-                    item.setCat_constr_team_id(key);
-                    item.setCreator_id(idUser);
-                    item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
-                    item.setNum_of_team(num);
-                    item.setSyncStatus(Constants.SYNC_STATUS.ADD);
-                    item.setEmployeeId(idUser);
-                    teamController.addItem(item);
+                    if (!isAddedNew) {
+                        long id = Ktts_KeyController.getInstance()
+                                .getKttsNextKey(Constr_Team_ProgressField.TABLE_NAME);
+                        item = new Constr_Team_ProgressEntity();
+                        item.setConstr_team_progress_id(id);
+                        item.setConstruct_id(constr_ConstructionItem.getConstructId());
+                        item.setCat_constr_team_id(key);
+                        item.setCreator_id(idUser);
+                        item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
+                        item.setNum_of_team(num);
+                        item.setSyncStatus(Constants.SYNC_STATUS.ADD);
+                        item.setEmployeeId(idUser);
+                        teamController.addItem(item);
+                    }
                 } else {
                     item.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
                     item.setNum_of_team(num);
@@ -407,35 +386,38 @@ public class BtsNhatkyFragment extends BaseFragment
                     teamController.updateItem(item);
                 }
             }
+            isAddedNew = true;
         }
 
         // Luu loai vuong xuong DB
         if (obstructionEntity != null) {
-            Log.e(TAG, "save: obstruction constrWorkLogsEntity " + constrWorkLogsEntity.getConstr_work_logs_id());
+            Log.e(TAG, "save: obstruction constrWorkLogsEntity "
+                    + constrWorkLogsEntity.getConstr_work_logs_id());
             obstructionEntity.setConstr_work_logs_id(constrWorkLogsEntity.getConstr_work_logs_id());
             obstructionEntity.setEmployeeId(idUser);
-            obstructionEntity.setSyncStatus(obstructionEntity.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            obstructionEntity.setSyncStatus(obstructionEntity.getProcessId() > 0
+                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
             if (obstructionEntity.getConstrObStructionId() > 0) {
                 vuongConller.updateConstrObStruction(obstructionEntity);
             } else {
-                long id = Ktts_KeyController.getInstance().getKttsNextKey(Constr_ObStructionField.TABLE_NAME);
+                long id = Ktts_KeyController.getInstance()
+                        .getKttsNextKey(Constr_ObStructionField.TABLE_NAME);
                 obstructionEntity.setConstrObStructionId(id);
                 vuongConller.addItemConstrObStruction(obstructionEntity);
             }
         }
 
-        Toast.makeText(getContext(), ret ? "Cập nhật nhật ký thành công" : "fail", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), ret ? "Cập nhật nhật ký thành công" : "fail",
+                Toast.LENGTH_SHORT).show();
     }
 
     private void updateViewByIsWork(boolean isWork) {
-        Iterator<View> thicong = sThicong.iterator();
-        while (thicong.hasNext()) {
-            thicong.next().setVisibility(isWork ? View.VISIBLE : View.GONE);
+        for (View aSThicong : sThicong) {
+            aSThicong.setVisibility(isWork ? View.VISIBLE : View.GONE);
         }
 
-        Iterator<View> khongthicong = sKhongThiCong.iterator();
-        while (khongthicong.hasNext()) {
-            khongthicong.next().setVisibility(!isWork ? View.VISIBLE : View.GONE);
+        for (View aSKhongThiCong : sKhongThiCong) {
+            aSKhongThiCong.setVisibility(!isWork ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -493,15 +475,7 @@ public class BtsNhatkyFragment extends BaseFragment
     }
 
     public boolean checkValidateNumberCapNhatNhatKy() {
-        flagValidateTeamNumber = true;
-//        Enumeration<Long> keys = hashTeamView.keys();
-//        while (keys.hasMoreElements()) {
-//            TeamView view = hashTeamView.get(keys.nextElement());
-//            if (view.getTeamNumber() > 0) {
-//                flagValidateTeamNumber = false;
-//                break;
-//            }
-//        }
+        boolean flagValidateTeamNumber = true;
         for (Long key : hashTeamViewOrder.keySet()) {
             TeamView view = hashTeamViewOrder.get(key);
             if (view.getTeamNumber() > 0) {
@@ -570,17 +544,12 @@ public class BtsNhatkyFragment extends BaseFragment
     private LinkedHashMap<String,String> passHashMapDataForNhatKy(String[] keyDoiArr) {
         LinkedHashMap<String,String> listHashMap = new LinkedHashMap<>();
         listHashMap.put(KeyEventCommon.KEY_THOITIET,spThoitiet.getSelectedItem().toString());
-        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec.getEditableText().toString());
+        listHashMap.put(KeyEventCommon.KEY_NOIDUNG_CONGVIEC,etNoiDungCongViec
+                .getEditableText().toString());
         listHashMap.put(KeyEventCommon.KEY_THAYDOI, etThayDoiBoSung.getEditableText().toString());
         listHashMap.put(KeyEventCommon.KEY_GIAMSAT,etYKienGiamSat.getEditableText().toString());
         listHashMap.put(KeyEventCommon.KEY_THICONG,etYKienThiCong.getEditableText().toString());
         ArrayList<Integer> mListNumber = new ArrayList<>();
-//        while (keys.hasMoreElements()) {
-//            TeamView view = hashTeamView.get(keys.nextElement());
-//            Log.d(TAG, "passHashMapDataForNhatKy() called with: title = " + view.getTitle());
-//            mListNumber.add(view.getTeamNumber());
-//            Log.d(TAG, "passHashMapDataForNhatKy() called with: keyDoiArr = " + view.getTeamNumber());
-//        }
         for (Long key : hashTeamViewOrder.keySet()) {
             TeamView view = hashTeamViewOrder.get(key);
             mListNumber.add(view.getTeamNumber());

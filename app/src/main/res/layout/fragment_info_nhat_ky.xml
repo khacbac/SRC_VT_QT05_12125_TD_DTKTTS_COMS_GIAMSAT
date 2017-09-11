@@ -197,6 +197,45 @@
                             style="@style/Content.Textview.Info"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:text="Nội dung công việc thi công trong ngày"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/padding">
+
+                        <TextView
+                            android:id="@+id/tvNoiDungCongViec"
+                            style="@style/Textview.Info.Chitiet.Right"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/text_size_large_common" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/padding">
+
+                        <TextView
+                            style="@style/Content.Textview.Info"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:text="Những thay đổi, bổ sung phát sinh"
                             android:textStyle="bold" />
                     </LinearLayout>

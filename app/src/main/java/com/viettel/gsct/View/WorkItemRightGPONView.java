@@ -62,7 +62,8 @@ public class WorkItemRightGPONView extends LinearLayout {
                     workItem.setStatus_id(0);
                     btnTienDo.setText("Chưa làm");
                     if (statusTienDo != null) {
-                        statusTienDo.onStatusHoanThanh(btnTienDo.getText().toString().equals("Hoàn thành"));
+                        statusTienDo.onStatusHoanThanh(
+                                btnTienDo.getText().toString().equals("Hoàn thành"));
                     }
                 } else {
                     workItem.setStatus_id(Work_ItemsEntity.STATUS_COMPLETE);
@@ -72,7 +73,8 @@ public class WorkItemRightGPONView extends LinearLayout {
                         btnTienDo.setText("Chưa làm");
                     }
                     if (statusTienDo != null) {
-                        statusTienDo.onStatusHoanThanh(btnTienDo.getText().toString().equals("Hoàn thành"));
+                        statusTienDo.onStatusHoanThanh(
+                                btnTienDo.getText().toString().equals("Hoàn thành"));
                     }
                 }
             }

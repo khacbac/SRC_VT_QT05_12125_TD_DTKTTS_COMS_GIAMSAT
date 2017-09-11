@@ -165,8 +165,12 @@ public class GoogleMapActivity extends HomeBaseActivity implements
 					GoogleMapActivity.this.googleMap = googleMap;
 
 					if (Build.VERSION.SDK_INT >= 23 &&
-							ContextCompat.checkSelfPermission(GoogleMapActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-							ContextCompat.checkSelfPermission(GoogleMapActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+							ContextCompat.checkSelfPermission(GoogleMapActivity.this,
+									android.Manifest.permission.ACCESS_FINE_LOCATION)
+									!= PackageManager.PERMISSION_GRANTED &&
+							ContextCompat.checkSelfPermission(GoogleMapActivity.this,
+									android.Manifest.permission.ACCESS_COARSE_LOCATION)
+									!= PackageManager.PERMISSION_GRANTED) {
 						return;
 					}
 

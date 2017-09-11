@@ -100,7 +100,8 @@ public class InfoActivity extends AppCompatActivity {
                     return;
                 mFragment = InfoChiTietFragment.newInstance();
                 mFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionEmployee);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, mFragment).commit();
+                getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fr_content, mFragment).commit();
                 clearColorFocus();
                 v.setBackgroundResource(R.color.colorAccent);
             }
@@ -113,7 +114,8 @@ public class InfoActivity extends AppCompatActivity {
                     return;
                 mFragment = InfoTiendoFragment.newInstance();
                 mFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionEmployee);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, mFragment).commit();
+                getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fr_content, mFragment).commit();
                 clearColorFocus();
                 v.setBackgroundResource(R.color.colorAccent);
             }
@@ -126,7 +128,8 @@ public class InfoActivity extends AppCompatActivity {
                     return;
                 mFragment = InfoNhatKyFragment.newInstance();
                 mFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionEmployee);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, mFragment).commit();
+                getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fr_content, mFragment).commit();
                 clearColorFocus();
                 v.setBackgroundResource(R.color.colorAccent);
             }
@@ -139,7 +142,8 @@ public class InfoActivity extends AppCompatActivity {
                     return;
                 mFragment = InfoKeHoachFragment.newInstance();
                 mFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionEmployee);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, mFragment).commit();
+                getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fr_content, mFragment).commit();
                 clearColorFocus();
                 v.setBackgroundResource(R.color.colorAccent);
             }

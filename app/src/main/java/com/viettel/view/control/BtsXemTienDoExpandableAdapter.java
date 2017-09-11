@@ -20,13 +20,15 @@ import java.util.List;
 
 public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
     private List<ContentProgressPreview> progresslHeaderPreviewList;
-    private HashMap<ContentProgressPreview,List<ContentDetailItemProgressPreview>> progresslItemPreviewList;
+    private HashMap<ContentProgressPreview,
+            List<ContentDetailItemProgressPreview>> progresslItemPreviewList;
     private Context mContext;
     private boolean needDisplayKhoiLuong;
 
     public BtsXemTienDoExpandableAdapter(
             List<ContentProgressPreview> progresslHeaderPreviewList,
-            HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> progresslItemPreviewList,
+            HashMap<ContentProgressPreview,
+                    List<ContentDetailItemProgressPreview>> progresslItemPreviewList,
             Context mContext) {
         this.progresslHeaderPreviewList = progresslHeaderPreviewList;
         this.progresslItemPreviewList = progresslItemPreviewList;
@@ -75,7 +77,8 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         ViewHolderForHeader viewHolderForHeader;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_progress_preview_ex_listview_header,null);
+            convertView = LayoutInflater.from(mContext)
+                    .inflate(R.layout.layout_progress_preview_ex_listview_header,null);
             viewHolderForHeader = new ViewHolderForHeader(convertView);
             convertView.setTag(viewHolderForHeader);
         } else {
@@ -87,15 +90,23 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
         viewHolderForHeader.txtNgayBatDau.setText(progressPreview.getNgayBatDau());
         viewHolderForHeader.txtNgayHoanThanh.setText(progressPreview.getNgayHoanThanh());
         if (((ContentProgressPreview) getGroup(groupPosition)).isNewEdit()) {
-            viewHolderForHeader.txtSttProgress.setTextColor(mContext.getResources().getColor(R.color.teal));
-            viewHolderForHeader.txtTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.teal));
-            viewHolderForHeader.txtNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.teal));
-            viewHolderForHeader.txtNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtSttProgress
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtTenHangMuc
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtNgayBatDau
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForHeader.txtNgayHoanThanh
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
         } else {
-            viewHolderForHeader.txtSttProgress.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
-            viewHolderForHeader.txtTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
-            viewHolderForHeader.txtNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
-            viewHolderForHeader.txtNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtSttProgress
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtTenHangMuc
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtNgayBatDau
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForHeader.txtNgayHoanThanh
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
         }
         if (!needDisplayKhoiLuong) {
             viewHolderForHeader.txtKhoiLuong.setVisibility(View.GONE);
@@ -104,31 +115,42 @@ public class BtsXemTienDoExpandableAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition,
+                             boolean isLastChild, View convertView, ViewGroup parent) {
         ViewHolderForItem viewHolderForItem;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_progress_preview_ex_listview_item,null);
+            convertView = LayoutInflater.from(mContext)
+                    .inflate(R.layout.layout_progress_preview_ex_listview_item,null);
             viewHolderForItem = new ViewHolderForItem(convertView);
             convertView.setTag(viewHolderForItem);
         } else {
             viewHolderForItem = (ViewHolderForItem) convertView.getTag();
         }
-        ContentDetailItemProgressPreview item = (ContentDetailItemProgressPreview) getChild(groupPosition,childPosition);
+        ContentDetailItemProgressPreview item
+                = (ContentDetailItemProgressPreview) getChild(groupPosition,childPosition);
         viewHolderForItem.txtDetailTenHangMuc.setText(item.getDetailTenHangMuc());
         viewHolderForItem.txtDetailNgayBatDau.setText(item.getDetailNgayBatDau());
         viewHolderForItem.txtDetailNgayHoanThanh.setText(item.getDetailNgayHoanThanh());
         viewHolderForItem.txtDetailKhoiLuong.setText(item.getDetailKhoiLuong());
 
         if (((ContentDetailItemProgressPreview) getChild(groupPosition,childPosition)).isNewEdit()) {
-            viewHolderForItem.txtDetailTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.teal));
-            viewHolderForItem.txtDetailNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.teal));
-            viewHolderForItem.txtDetailNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.teal));
-            viewHolderForItem.txtDetailKhoiLuong.setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailTenHangMuc
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailNgayBatDau
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailNgayHoanThanh
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
+            viewHolderForItem.txtDetailKhoiLuong
+                    .setTextColor(mContext.getResources().getColor(R.color.teal));
         } else {
-            viewHolderForItem.txtDetailTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
-            viewHolderForItem.txtDetailNgayBatDau.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
-            viewHolderForItem.txtDetailNgayHoanThanh.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
-            viewHolderForItem.txtDetailKhoiLuong.setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailTenHangMuc
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailNgayBatDau
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailNgayHoanThanh
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
+            viewHolderForItem.txtDetailKhoiLuong
+                    .setTextColor(mContext.getResources().getColor(R.color.trans_black_50));
         }
         if (!needDisplayKhoiLuong) {
             viewHolderForItem.txtDetailKhoiLuong.setVisibility(View.GONE);

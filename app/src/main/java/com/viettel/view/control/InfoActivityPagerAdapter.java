@@ -15,7 +15,8 @@ public class InfoActivityPagerAdapter extends FragmentPagerAdapter {
     private BaseFragment nhatkyFragment;
     private BaseFragment tiendoFragment;
 
-    public InfoActivityPagerAdapter(FragmentManager fm, BaseFragment nhatkyFragment, BaseFragment tiendoFragment) {
+    public InfoActivityPagerAdapter(FragmentManager fm,
+                                    BaseFragment nhatkyFragment, BaseFragment tiendoFragment) {
         super(fm);
         this.nhatkyFragment = nhatkyFragment;
         this.tiendoFragment = tiendoFragment;

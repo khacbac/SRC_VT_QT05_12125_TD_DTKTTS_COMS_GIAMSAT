@@ -238,8 +238,10 @@ public class Constants {
 		public static final String SUB_TYPE_CAP_BANG_TAN_GOC = "CAP_BANG_TAN_GOC";
 
 		// subtype nguyen nhan loi cho form lap dat thiet bi
-		public static final String SUB_TYPE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK = "TIEP_DAT_THOAT_SET_THANG_CAP_RACK";
-		public static final String SUB_TYPE_4G_TIEP_DAT_THOAT_SET_THANG_CAP_RACK = "4G_TIEP_DAT_THOAT_SET_THANG_CAP_RACK";// danh cho loai tram 4G
+		public static final String SUB_TYPE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK
+				= "TIEP_DAT_THOAT_SET_THANG_CAP_RACK";
+		public static final String SUB_TYPE_4G_TIEP_DAT_THOAT_SET_THANG_CAP_RACK
+				= "4G_TIEP_DAT_THOAT_SET_THANG_CAP_RACK";// danh cho loai tram 4G
 		public static final String SUB_TYPE_TIEP_DAT_FEEDER = "TIEP_DAT_FEEDER";
 		public static final String SUB_TYPE_4G_TIEP_DAT_FEEDER = "4G_TIEP_DAT_FEEDER";
 		public static final String SUB_TYPE_THANG_CAP = "THANG_CAP";
@@ -703,7 +705,8 @@ public class Constants {
 		public static final String WORK_CODE_CAP_BANG_TAN_GOC = "CAP_BANG_TAN_GOC";
 
 		// workcode cho phan lap dat thiet bi
-		public static final String WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK = "TIEP_DAT_THOAT_SET_THANG_CAP_RACK";
+		public static final String WORK_CODE_TIEP_DAT_THOAT_SET_THANG_CAP_RACK
+                = "TIEP_DAT_THOAT_SET_THANG_CAP_RACK";
 		public static final String WORK_CODE_TIEP_DAT_FEEDER = "TIEP_DAT_FEEDER";
 		public static final String WORK_CODE_THANG_CAP = "THANG_CAP";
 		public static final String WORK_CODE_HT_DEN_DIEUHOA_THONGGIO = "HT_DEN_DIEUHOA_THONGGIO";

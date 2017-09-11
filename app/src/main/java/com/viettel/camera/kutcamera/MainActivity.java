@@ -90,14 +90,17 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         frame.addView(preview);
         preview.setKeepScreenOn(true);
 
-        if (PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)) {
+        if (PackageManager.PERMISSION_GRANTED == ActivityCompat
+                .checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)) {
             openCamera();
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
             return;
         }
         setCameraFlashOff();
-        mOrientationListener = new OrientationEventListener(MainActivity.this, SensorManager.SENSOR_DELAY_NORMAL) {
+        mOrientationListener = new OrientationEventListener(
+                MainActivity.this, SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
             public void onOrientationChanged(int orientation) {
                 if (0 <= orientation && orientation < 30) {
@@ -153,8 +156,9 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                     double longitude = gps.getLongitude();
 
                     // \n is for new line
-                    infoCoordinates.setText("Long: " + GpsServices.formatNumber(longitude) + " , Lat: " + GpsServices.formatNumber(latitude));
-//                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                    infoCoordinates.setText("Long: "
+                            + GpsServices.formatNumber(longitude)
+                            + " , Lat: " + GpsServices.formatNumber(latitude));
                 }else{
                     // can't get location
                     // GPS or Network is not enabled
@@ -231,8 +235,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             double longitude = gps.getLongitude();
 
             // \n is for new line
-            infoCoordinates.setText("Long: " + GpsServices.formatNumber(longitude) + " , Lat: " + GpsServices.formatNumber(latitude));
-//                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            infoCoordinates.setText("Long: " + GpsServices.formatNumber(longitude)
+                    + " , Lat: " + GpsServices.formatNumber(latitude));
         }else{
             // can't get location
             // GPS or Network is not enabled
@@ -243,14 +247,18 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     }
 
     private void startGPSService() {
-        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_GPS);
+        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(
+                MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_GPS);
             Log.d(TAG, "startGPSService() returned: " + "ACCESS_FINE_LOCATION");
             return;
         }
 
-        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_GPS);
+        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(
+                MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_GPS);
             Log.d(TAG, "startGPSService() returned: " + "ACCESS_COARSE_LOCATION");
             return;
         }
@@ -262,8 +270,10 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     }
 
     private void doTakePicture() {
-        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA);
+        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(
+                MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA);
             return;
         }
         Log.d(TAG, "doTakePicture() called");
@@ -278,8 +288,10 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     private void openCamera() {
         Log.d(TAG, "openCamera() called");
-        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(
+                MainActivity.this, Manifest.permission.CAMERA)) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
             Log.d(TAG, "openCamera() returned: ");
             return;
         }
@@ -400,7 +412,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         public void onAutoFocus(boolean success, Camera camera) {
 
             try {
-                Log.d(TAG, "onAutoFocus() called with: success = [" + success + "], camera = [" + camera + "]");
+                Log.d(TAG, "onAutoFocus() called with: success = ["
+                        + success + "], camera = [" + camera + "]");
                 camera.takePicture(mShutterCallback, null, jpegCallback);
             } catch (Exception e) {
 

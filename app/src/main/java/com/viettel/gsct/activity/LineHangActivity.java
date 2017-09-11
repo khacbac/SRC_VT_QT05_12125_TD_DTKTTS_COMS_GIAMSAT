@@ -151,7 +151,8 @@ public class LineHangActivity extends LineBaseActivity implements ViewPager.OnPa
         spThongTin.setSelection(infoId - 1);
         if (infoId == Constants.LINE_HANG_INFO.NHAT_KY_TIEN_DO_INFO) {
 //            capNhatTrangThaiNhatKyClick();
-            fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance(BtsNhatkyFragment.TYPE_TUYEN_TREO);
+            fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment
+                    .newInstance(BtsNhatkyFragment.TYPE_TUYEN_TREO);
             fragmentCapNhatTienDo = (TruyenDanNgamTiendoFragment) TruyenDanNgamTiendoFragment
                     .newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_TREO);
             mCapNhatNhatKyTienDoPreviewFragment = (CapNhatNhatKyTienDoPreviewFragment)
@@ -160,14 +161,14 @@ public class LineHangActivity extends LineBaseActivity implements ViewPager.OnPa
 
         if (fragmentCapNhatNhatKy != null) {
             fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, fragmentCapNhatNhatKy).commit();
         }
         if (fragmentCapNhatTienDo != null) {
-            fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fr_content_tiendo,fragmentCapNhatTienDo).commit();
+            fragmentCapNhatTienDo
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
         if (mCapNhatNhatKyTienDoPreviewFragment != null) {
-            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            mCapNhatNhatKyTienDoPreviewFragment
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -186,7 +187,8 @@ public class LineHangActivity extends LineBaseActivity implements ViewPager.OnPa
 
         mBtnCapNhatNhatKy.setBackgroundResource(R.drawable.action_button_focused);
         mBtnCapNhatTienDo.setBackgroundResource(R.drawable.action_button_not_focus);
-        fragmentCapNhatNhatKy.setOnCheckSwitchCombatStatus(new BtsNhatkyFragment.InterfaceCheckSwitchCombatStatus() {
+        fragmentCapNhatNhatKy.setOnCheckSwitchCombatStatus(new BtsNhatkyFragment
+                .InterfaceCheckSwitchCombatStatus() {
             @Override
             public void checkSwitchCombatStatus(boolean isChecked) {
                 if (isChecked) {
@@ -402,15 +404,4 @@ public class LineHangActivity extends LineBaseActivity implements ViewPager.OnPa
     public void onPageScrollStateChanged(int state) {
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        EventBus.getDefault().register(this);
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        EventBus.getDefault().unregister(this);
-//    }
 }

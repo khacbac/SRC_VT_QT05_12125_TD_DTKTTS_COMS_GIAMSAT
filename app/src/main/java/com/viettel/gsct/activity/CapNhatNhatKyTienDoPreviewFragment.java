@@ -155,18 +155,12 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
             WorkItemTienDoBTSView workItemTienDoBTSView,
             Work_ItemsEntity work_itemsEntity,
             int stt) {
-        ContentProgressPreview content = new ContentProgressPreview(
+        return new ContentProgressPreview(
                 "" + stt,
                 workItemTienDoBTSView.getTitle(),
                 work_itemsEntity.getStarting_date(),
                 work_itemsEntity.getComplete_date()
         );
-//        if (workItemTienDoBTSView.getEnabledRadioBtn()) {
-//            content.setNewEdit(true);
-//        } else {
-//            content.setNewEdit(false);
-//        }
-        return content;
     }
 
     /**
@@ -180,6 +174,7 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
             ContentProgressPreview content) {
         // List child item.
         List<ContentDetailItemProgressPreview> subWorkList = new ArrayList<>();
+        boolean isChange = false;
         for (SubWorkItemTienDoBTSView view : itemTienDoBTSView) {
             if (!view.hasFinishDate()) {
                 if (view.getButtonTienDoStatus().equals("Hoàn thành")
@@ -195,14 +190,16 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                     view.getFinishDate(),
                     ""
             );
-            content.setNewEdit(false);
             if (view.hasChangeTrangThaiTienDo()) {
+                isChange = true;
                 detail.setNewEdit(true);
-                content.setNewEdit(true);
             } else {
                 detail.setNewEdit(false);
             }
             subWorkList.add(detail);
+        }
+        if (isChange) {
+            content.setNewEdit(true);
         }
         return subWorkList;
     }
@@ -276,6 +273,9 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                         }
                         subWorkList.add(detail);
                     }
+                    if (tienDoNgamView.hasChangeTrangThaiTienDo()) {
+                        hasEdit = true;
+                    }
                     if (hasEdit) {
                         content.setNewEdit(true);
                     } else {
@@ -316,7 +316,6 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                 List<ContentDetailItemProgressPreview>> contentHashMaps = new HashMap<>();
         if (layoutRoot.getChildCount() > 0) {
             int stt = 0;
-            int index = 0;
             for (int i = 0; i < layoutRoot.getChildCount(); i++) {
                 if (layoutRoot.getChildAt(i) instanceof WorkItemRightGPONView) {
                     WorkItemRightGPONView view = (WorkItemRightGPONView) layoutRoot.getChildAt(i);
@@ -349,7 +348,8 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                                 if (j < luykes.size()) {
                                     luyke = luykes.get(j);
                                 }
-                                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(
+                                ContentDetailItemProgressPreview item
+                                        = new ContentDetailItemProgressPreview(
                                         subView.getTvTitle(),
                                         "",
                                         "",
@@ -375,12 +375,13 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
                                 if (j < luykes.size()) {
                                     luyke = luykes.get(j);
                                 }
-                                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(
-                                        subView.getTvTitle(),
-                                        "",
-                                        "",
-                                        "" + (luyke + subView.getValue())
-                                );
+                                ContentDetailItemProgressPreview item =
+                                        new ContentDetailItemProgressPreview(
+                                                subView.getTvTitle(),
+                                                "",
+                                                "",
+                                                "" + (luyke + subView.getValue())
+                                        );
                                 if (luyke != (luyke + subView.getValue())) {
                                     hasEdit = true;
                                     item.setNewEdit(true);
@@ -436,7 +437,8 @@ public class CapNhatNhatKyTienDoPreviewFragment extends BaseFragment {
             ));
         }
 
-        BtsXemNhatKyAdapter mBtsXemNhatKyAdapter = new BtsXemNhatKyAdapter(mContentJournalPreviewList, getActivity());
+        BtsXemNhatKyAdapter mBtsXemNhatKyAdapter =
+                new BtsXemNhatKyAdapter(mContentJournalPreviewList, getActivity());
         mListViewDpQuanSoDoiThiCong.setAdapter(mBtsXemNhatKyAdapter);
     }
 

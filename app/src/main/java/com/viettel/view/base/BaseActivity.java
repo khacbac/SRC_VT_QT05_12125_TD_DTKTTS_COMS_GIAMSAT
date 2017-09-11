@@ -312,7 +312,8 @@ public abstract class BaseActivity extends AppCompatActivity
                 SyncModel.bRunning = false;
                 // closeProgressDialog();
                 SyncTask.handErrors(StringUtil.getString(R.string.error_common));
-                Toast.makeText(this, StringUtil.getString(R.string.error_common), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, StringUtil.getString(R.string.error_common),
+                        Toast.LENGTH_SHORT).show();
                 break;
             case ErrorConstants.ERROR_NO_CONNECTION:
                 SyncModel.bRunning = false;
@@ -328,7 +329,8 @@ public abstract class BaseActivity extends AppCompatActivity
                 SyncModel.bRunning = false;
                 // closeProgressDialog();
                 SyncTask.handErrors(StringUtil.getString(R.string.text_sync_error));
-                Toast.makeText(this, StringUtil.getString(R.string.text_sync_error), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, StringUtil.getString(R.string.text_sync_error),
+                        Toast.LENGTH_SHORT).show();
                 break;
             default:
                 // closeProgressDialog();
@@ -358,7 +360,8 @@ public abstract class BaseActivity extends AppCompatActivity
 
     protected void gotoLogOut() {
         this.showConfirmDialog(StringUtil.getString(R.string.text_messager_header),
-                StringUtil.getString(R.string.text_warning_logout), OnEventControlListener.EVENT_OK_LOGOUT);
+                StringUtil.getString(R.string.text_warning_logout),
+                OnEventControlListener.EVENT_OK_LOGOUT);
     }
 
     @Override
@@ -383,7 +386,8 @@ public abstract class BaseActivity extends AppCompatActivity
                 String textCopy = myText.getText().toString();
                 myClip = ClipData.newPlainText("text", textCopy);
                 myClipboard.setPrimaryClip(myClip);
-                Toast.makeText(getApplicationContext(), R.string.text_temp_memory_copy, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.text_temp_memory_copy,
+                        Toast.LENGTH_SHORT).show();
                 return true;
             case CONTEXT_MENU.PASTE:
                 ClipData clipPaste = myClipboard.getPrimaryClip();
@@ -602,14 +606,20 @@ public abstract class BaseActivity extends AppCompatActivity
         alertDialogBuilder.setMessage(mess + "!").setCancelable(true).setPositiveButton(btn_strView,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if (CheckInUtil.updateDataAfterCheckOut(ct, supv_locate_controller, Constants.SUPV_LOCATE_CO_STATUS.TU_CHECKOUT, new Date(System.currentTimeMillis()))) {
+                        if (CheckInUtil.updateDataAfterCheckOut(ct, supv_locate_controller,
+                                Constants.SUPV_LOCATE_CO_STATUS.TU_CHECKOUT,
+                                new Date(System.currentTimeMillis()))) {
                             isCheckIn = false;
                             GlobalInfo.getInstance().setCheckIn(isCheckIn, getApplicationContext());
-                            if (getLocalClassName().toString().contains(SupervisionBtsActivity.class.getSimpleName().toString())
-                                    || getLocalClassName().toString().contains(Supervision_BRCD_Sub_Activity.class.getSimpleName().toString())
-                                    || getLocalClassName().toString().contains(Supervision_BRCD_Thongtintk_Activity.class.getSimpleName().toString())
-                                    || getLocalClassName().toString().contains(Supervision_Line_BG_DesignActivity.class.getSimpleName().toString())
-                                    || getLocalClassName().toString().contains(Supervision_Line_HG_DesignActivity.class.getSimpleName().toString())) {
+                            if (getLocalClassName().contains(SupervisionBtsActivity.class.getSimpleName())
+                                    || getLocalClassName().contains(
+                                            Supervision_BRCD_Sub_Activity.class.getSimpleName())
+                                    || getLocalClassName().contains(
+                                            Supervision_BRCD_Thongtintk_Activity.class.getSimpleName())
+                                    || getLocalClassName().contains(
+                                            Supervision_Line_BG_DesignActivity.class.getSimpleName())
+                                    || getLocalClassName().contains(
+                                            Supervision_Line_HG_DesignActivity.class.getSimpleName())) {
                                 changeMenuCheckIn(R.drawable.icon_checkin, getString(R.string.check_in));
                             } else {
                                 visiableCheckInItem(false);
@@ -625,7 +635,8 @@ public abstract class BaseActivity extends AppCompatActivity
     }
 
     public void showAskOptionDialog(String sTitle, String sMessage) {
-        AlertDialog dialogAskOption = new AlertDialog.Builder(this).setTitle(sTitle).setMessage(sMessage)
+        AlertDialog dialogAskOption = new AlertDialog.Builder(this)
+                .setTitle(sTitle).setMessage(sMessage)
                 .setIcon(R.drawable.ic_launcher)
 
                 .setPositiveButton(StringUtil.getString(R.string.text_delete_button), new DialogInterface.OnClickListener() {
@@ -646,19 +657,18 @@ public abstract class BaseActivity extends AppCompatActivity
         dialogAskOption.show();
     }
 
-    public void showAskOptionDialog(Context mContext, String sTitle, String sMessage, String btnPositiveName) {
-        AlertDialog dialogAskOption = new AlertDialog.Builder(this).setTitle(sTitle).setMessage(sMessage)
+    public void showAskOptionDialog(Context mContext, String sTitle,
+                                    String sMessage, String btnPositiveName) {
+        AlertDialog dialogAskOption
+                = new AlertDialog.Builder(this).setTitle(sTitle).setMessage(sMessage)
                 .setIcon(R.drawable.ic_launcher)
-
                 .setPositiveButton(btnPositiveName, new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int whichButton) {
                         actionBeforAccept();
                         dialog.dismiss();
                     }
 
                 })
-
                 .setNegativeButton(StringUtil.getString(R.string.line_bg_mx_kl_huy), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         actionNegative();
@@ -687,15 +697,20 @@ public abstract class BaseActivity extends AppCompatActivity
     public void takePhoto(Constr_Construction_EmployeeEntity constr_ConstructionItem) {
 
         if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(BaseActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
+                ContextCompat.checkSelfPermission(BaseActivity.this,
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
                     REQUEST_CAMERA);
             return;
         }
 
         if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(BaseActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                ContextCompat.checkSelfPermission(BaseActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                    },
                     REQUEST_READ_EXTERNAL_STORAGE);
             return;
         }
@@ -758,10 +773,15 @@ public abstract class BaseActivity extends AppCompatActivity
 //        imgPickerIntent.setType("image/*");
 //        imgPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
 //        imgPickerIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//        startActivityForResult(Intent.createChooser(imgPickerIntent, "Select Picture"), Constants.SELECT_PICTURE_RESULT);
+//        startActivityForResult(Intent.createChooser(imgPickerIntent, "Select Picture"),
+//        Constants.SELECT_PICTURE_RESULT);
         if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(BaseActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                ContextCompat.checkSelfPermission(
+                        BaseActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+            },
                     REQUEST_READ_EXTERNAL_STORAGE);
             return;
         }
@@ -811,7 +831,8 @@ public abstract class BaseActivity extends AppCompatActivity
         intent.putExtra(IntentConstants.INTENT_LAT, dLat);
         intent.putExtra(IntentConstants.INTENT_MAP_TITLE, sTitle);
         intent.putExtra(IntentConstants.INTENT_MAP_VALUE, sValue);
-//		intent.setComponent(new ComponentName("com.viettel.ktts", "com.viettel.ktts.GoogleMapActivity"));
+//		intent.setComponent(new ComponentName(
+//      "com.viettel.ktts", "com.viettel.ktts.GoogleMapActivity"));
         startActivityForResult(intent, Constants.GET_LOCATION_RESULT);
 
     }
@@ -831,14 +852,15 @@ public abstract class BaseActivity extends AppCompatActivity
 
         intent.putExtras(bundleData);
 //		intent.setComponent(
-//				new ComponentName("com.viettel.ktts", "com.viettel.ktts.Measurement_Constr_DetailActivity"));
+//		new ComponentName("com.viettel.ktts", "com.viettel.ktts.Measurement_Constr_DetailActivity"));
         startActivityForResult(intent, Constants.GET_MEASURE_INFO);
         overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
 
     /* Ham kiem tra co mo Gps */
     public boolean checkOpenGps() {
-        final LocationManager gpsManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        final LocationManager gpsManager
+                = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (gpsManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             return true;
         } else {
@@ -855,9 +877,11 @@ public abstract class BaseActivity extends AppCompatActivity
         boolean bResult = false;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         // For 3G check
-        boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+        boolean is3g = manager.getNetworkInfo(
+                ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
         // For WiFi Check
-        boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+        boolean isWifi = manager.getNetworkInfo(
+                ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
         if (is3g || isWifi) {
             bResult = true;
         }
@@ -870,7 +894,8 @@ public abstract class BaseActivity extends AppCompatActivity
      * @return Dia chi mac cua may
      */
     public String getMacAddress() {
-        @SuppressLint("WifiManagerLeak") WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        @SuppressLint("WifiManagerLeak") WifiManager wifiManager
+                = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wInfo = wifiManager.getConnectionInfo();
         String macAddress = wInfo.getMacAddress();
         return macAddress;
@@ -920,31 +945,36 @@ public abstract class BaseActivity extends AppCompatActivity
 
     public void hideKeyboard() {
         try {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
         } catch (Exception e) {
             // TODO: handle exception; kiem tra nguyen nhan loi
         }
     }
 
-    public Supervision_ProgressEntity getSupervisionProgress(Constr_Construction_EmployeeEntity constr_ConstructionItem,
-                                                             int iType, String sSubType) {
-        Supervision_ProgressController supvProgressController = new Supervision_ProgressController(this);
-        Supervision_ProgressEntity supvProgress = supvProgressController
-                .getSupvProgress(constr_ConstructionItem.getSupervision_Constr_Id(), iType, sSubType);
+    public Supervision_ProgressEntity getSupervisionProgress(
+            Constr_Construction_EmployeeEntity constr_ConstructionItem,
+            int iType, String sSubType) {
+        Supervision_ProgressController supvProgressController
+                = new Supervision_ProgressController(this);
+        Supervision_ProgressEntity supvProgress = supvProgressController.getSupvProgress(
+                constr_ConstructionItem.getSupervision_Constr_Id(), iType, sSubType);
 
         return supvProgress;
     }
 
     // hien ngay hoan thanh
-    public void showCompleteDate(Constr_Construction_EmployeeEntity constr_ConstructionItem, int iType, String sSubType,
+    public void showCompleteDate(Constr_Construction_EmployeeEntity constr_ConstructionItem,
+                                 int iType, String sSubType,
                                  TextView tvComplete, Button btnComplete) {
         if (constr_ConstructionItem.getCatProgressWorkId() <= 2) {
             btnComplete.setVisibility(View.GONE);
         } else {
-            Supervision_ProgressController supvProgressController = new Supervision_ProgressController(this);
-            Supervision_ProgressEntity supvProgress = supvProgressController
-                    .getSupvProgress(constr_ConstructionItem.getSupervision_Constr_Id(), iType, sSubType);
+            Supervision_ProgressController supvProgressController
+                    = new Supervision_ProgressController(this);
+            Supervision_ProgressEntity supvProgress = supvProgressController.getSupvProgress(
+                    constr_ConstructionItem.getSupervision_Constr_Id(), iType, sSubType);
 
             if (supvProgress.getSupervisionProgressId() > 0) {
                 tvComplete.setText(StringUtil.getString(R.string.supervision_date_complete)
@@ -960,15 +990,18 @@ public abstract class BaseActivity extends AppCompatActivity
     }
 
     /* save ngay hoan thanh */
-    public void saveCompleteDay(Constr_Construction_EmployeeEntity constr_ConstructionItem, int iType, String sSubType,
+    public void saveCompleteDay(Constr_Construction_EmployeeEntity constr_ConstructionItem,
+                                int iType, String sSubType,
                                 boolean outOfKey) {
         try {
             long idUser = GlobalInfo.getInstance().getUserId();
 
-            Supervision_ProgressController supvProgressController = new Supervision_ProgressController(this);
+            Supervision_ProgressController supvProgressController
+                    = new Supervision_ProgressController(this);
 
             // if(supvProgress.getSupervisionProgressId() <= 0 ) {
-            long idSupvProgress = Ktts_KeyController.getInstance().getKttsNextKey(Supervision_ProgressField.TABLE_NAME);
+            long idSupvProgress = Ktts_KeyController.getInstance().getKttsNextKey(
+                    Supervision_ProgressField.TABLE_NAME);
 
             if (idSupvProgress == 0) {
                 outOfKey = true;
@@ -978,7 +1011,8 @@ public abstract class BaseActivity extends AppCompatActivity
 
             Supervision_ProgressEntity supvProgressEntity = new Supervision_ProgressEntity();
             supvProgressEntity.setSupervisionProgressId(idSupvProgress);
-            supvProgressEntity.setSupervisionConstrId(constr_ConstructionItem.getSupervision_Constr_Id());
+            supvProgressEntity.setSupervisionConstrId(
+                    constr_ConstructionItem.getSupervision_Constr_Id());
             supvProgressEntity.setType(iType);
             supvProgressEntity.setSubType(sSubType);
             supvProgressEntity.setCompleteDate(Calendar.getInstance().getTime());
@@ -1080,7 +1114,8 @@ public abstract class BaseActivity extends AppCompatActivity
         adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name ) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name,
+                R.string.app_name ) {
             public void onDrawerClosed(View view) {
                 // getActionBar().setTitle(mTitle);
                 // calling onPrepareOptionsMenu() to show action bar icons
@@ -1188,20 +1223,25 @@ public abstract class BaseActivity extends AppCompatActivity
 //			changeMenuCheckIn(R.drawable.icon_checkin, getString(R.string.check_in));
 //		}
 
-//        Log.e(TAG, "createOptionMenu: " + isCheckIn + " " + getLocalClassName().toString() + " " + SupervisionBtsActivity.class.getSimpleName().toString());
+//        Log.e(TAG, "createOptionMenu: " + isCheckIn + " " + getLocalClassName().toString() + " "
+//      + SupervisionBtsActivity.class.getSimpleName().toString());
         if (isCheckIn) {
             visiableCheckInItem(true);
             changeMenuCheckIn(R.drawable.icon_checkout, getString(R.string.check_out));
-        } else if (getLocalClassName().toString().contains(SupervisionBtsActivity.class.getSimpleName().toString())
-                || getLocalClassName().toString().contains(Supervision_Line_HG_DesignActivity.class.getSimpleName().toString())
-                || getLocalClassName().toString().contains(Supervision_BRCD_Thongtintk_Activity.class.getSimpleName().toString())
-                || getLocalClassName().toString().contains(Supervision_Line_BG_DesignActivity.class.getSimpleName().toString())
-                || getLocalClassName().toString().contains(Supervision_BRCD_Sub_Activity.class.getSimpleName().toString())) {
+        } else if (getLocalClassName().contains(SupervisionBtsActivity.class.getSimpleName())
+                || getLocalClassName().contains(
+                        Supervision_Line_HG_DesignActivity.class.getSimpleName())
+                || getLocalClassName().contains(
+                        Supervision_BRCD_Thongtintk_Activity.class.getSimpleName())
+                || getLocalClassName().contains(
+                        Supervision_Line_BG_DesignActivity.class.getSimpleName())
+                || getLocalClassName().contains(
+                        Supervision_BRCD_Sub_Activity.class.getSimpleName())) {
             // visiableCollapseItem();
 //            Log.e(TAG, "createOptionMenu: 1");
             visiableCheckInItem(true);
             changeMenuCheckIn(R.drawable.icon_checkin, getString(R.string.check_in));
-        } else if (getLocalClassName().toString().contains(MakePlanActivity.class.getSimpleName().toString())) {
+        } else if (getLocalClassName().contains(MakePlanActivity.class.getSimpleName())) {
 //            Log.e(TAG, "createOptionMenu: 2");
             visiableCheckInItem(false);
             visiableCollapseItem(true);
@@ -1246,7 +1286,8 @@ public abstract class BaseActivity extends AppCompatActivity
                 if (isCheckIn == false) {
                     actionCheckInButton();
                 } else {
-                    showAlertDialogCheckOut(this, getString(R.string.checkout_confirm), getString(R.string.text_ok));
+                    showAlertDialogCheckOut(this, getString(R.string.checkout_confirm),
+                            getString(R.string.text_ok));
                 }
                 return true;
             default:
@@ -1264,7 +1305,8 @@ public abstract class BaseActivity extends AppCompatActivity
     public void showPopupPlan(View view) {
         int popupWidth = getResources().getDisplayMetrics().widthPixels / 2;
         int popupHeight = getResources().getDisplayMetrics().heightPixels;
-        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = layoutInflater.inflate(R.layout.popup_make_new_plan, null);
         popupWindow = new PopupWindow(popupView, popupWidth, popupHeight);
         popupWindow.setFocusable(true);

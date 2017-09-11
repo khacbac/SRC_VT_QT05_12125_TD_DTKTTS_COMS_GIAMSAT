@@ -83,7 +83,6 @@ public class Cat_Sub_Work_ItemControler {
     }
 
     public Cat_Sub_Work_ItemEntity getCatSubWorkItems(long catSubWorkItemId) {
-//        Log.e(TAG, "getCatSubWorkItem() called with: catSubWorkItemId = [" + catSubWorkItemId + "]");
         Cat_Sub_Work_ItemEntity ret = null;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
         Cursor cursor = db

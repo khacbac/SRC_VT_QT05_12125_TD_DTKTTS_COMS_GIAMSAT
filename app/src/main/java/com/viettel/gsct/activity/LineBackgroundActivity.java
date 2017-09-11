@@ -127,7 +127,8 @@ public class LineBackgroundActivity extends LineBaseActivity
     private void initVariables() {
         constr_ConstructionItem = getConstr_Construction_Employee();
         Log.d(TAG,"Contruction id = " + constr_ConstructionItem.getConstructId());
-        this.supervision_Line_BackgroundData = (Supervision_Line_BackgroundEntity) getIntent().getExtras()
+        this.supervision_Line_BackgroundData
+                = (Supervision_Line_BackgroundEntity) getIntent().getExtras()
                 .getSerializable(IntentConstants.INTENT_DATA_EX);
         infoId = getIntent().getExtras().getInt(ARG_INFO, 0);
     }
@@ -171,9 +172,10 @@ public class LineBackgroundActivity extends LineBaseActivity
         spThongTin.setAdapter(adapter);
         spThongTin.setSelection(infoId - 1);
         if (infoId == Constants.LINE_BACKGROUND_INFO.NHAT_KY_TIEN_DO_INFO) {
-            fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance(BtsNhatkyFragment.TYPE_TUYEN_NGAM);
-            fragmentCapNhatTienDo = (TruyenDanNgamTiendoFragment)
-                    TruyenDanNgamTiendoFragment.newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_NGAM);
+            fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment
+                    .newInstance(BtsNhatkyFragment.TYPE_TUYEN_NGAM);
+            fragmentCapNhatTienDo = (TruyenDanNgamTiendoFragment) TruyenDanNgamTiendoFragment
+                    .newInstance(TruyenDanNgamTiendoFragment.TYPE_TUYEN_NGAM);
             mCapNhatNhatKyTienDoPreviewFragment = (CapNhatNhatKyTienDoPreviewFragment)
                     CapNhatNhatKyTienDoPreviewFragment.newInstance();
 //            mCapNhatNhatKyTienDoPreviewFragment = new CapNhatNhatKyTienDoPreviewFragment();
@@ -182,10 +184,12 @@ public class LineBackgroundActivity extends LineBaseActivity
             fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
         if (fragmentCapNhatTienDo != null) {
-            fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            fragmentCapNhatTienDo
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
         if (mCapNhatNhatKyTienDoPreviewFragment != null) {
-            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            mCapNhatNhatKyTienDoPreviewFragment
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -224,8 +228,10 @@ public class LineBackgroundActivity extends LineBaseActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundleMonitorData = new Bundle();
-                bundleMonitorData.putSerializable(IntentConstants.INTENT_DATA, constr_ConstructionItem);
-                bundleMonitorData.putSerializable(IntentConstants.INTENT_DATA_EX, supervision_Line_BackgroundData);
+                bundleMonitorData.putSerializable(
+                        IntentConstants.INTENT_DATA, constr_ConstructionItem);
+                bundleMonitorData.putSerializable(
+                        IntentConstants.INTENT_DATA_EX, supervision_Line_BackgroundData);
                 int isInfomation = position + 1;
                 bundleMonitorData.putInt(IntentConstants.INTENT_DESIGNINFO, isInfomation);
                 if (flagFirstTime) {
@@ -267,7 +273,8 @@ public class LineBackgroundActivity extends LineBaseActivity
             }
             if (mIsCoThiCong) {
                 if (!mHasClickBtnTienDo) {
-                    fragmentCapNhatNhatKy.showError(getString(R.string.str_check_da_cap_nhat_tien_do));
+                    fragmentCapNhatNhatKy.showError(
+                            getString(R.string.str_check_da_cap_nhat_tien_do));
                     mBtnCapNhatTienDo.performClick();
                     return false;
                 }

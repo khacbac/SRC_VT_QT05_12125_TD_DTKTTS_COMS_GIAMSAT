@@ -233,25 +233,27 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 			if (listSupervisionPillarGS.size() > 0) {
 				/* Gan danh sach loi cho danh sach ong */
 				for (Supervision_Line_HG_PillarGSEntity itemPillarGS : listSupervisionPillarGS) {
-					List<Supervision_LBG_UnqualifyItemEntity> listLHGUnqualify = cause_Line_Hg_PillarController
-							.getAllPillarUnqulifyByPillarId(itemPillarGS
-									.getIdPillar());
+					List<Supervision_LBG_UnqualifyItemEntity> listLHGUnqualify
+                            = cause_Line_Hg_PillarController.getAllPillarUnqulifyByPillarId(
+                                    itemPillarGS.getIdPillar());
 					/* Gan anh nguyen nhan loi */
 					for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : listLHGUnqualify) {
 						// Supv_Constr_Attach_FileEntity curAttachFile =
 						// this.supvConstrAttachFileController
 						// .getAttachFile(
-						// Cause_Line_Hg_PillarField.TABLE_NAME,
-						// curUnqualifyItem.getCause_Line_Bg_Id());
-						// curUnqualifyItem.setAttachFile(curAttachFile);
-						List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-								.getLstAttachFile(
-										Cause_Line_Hg_PillarField.TABLE_NAME,
-										curUnqualifyItem.getCause_Line_Bg_Id());
-						for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
-							curUnqualifyItem.getLstAttachFile().add(itemFile);
-						}
-					}
+                        // Cause_Line_Hg_PillarField.TABLE_NAME,
+                        // curUnqualifyItem.getCause_Line_Bg_Id());
+                        // curUnqualifyItem.setAttachFile(curAttachFile);
+                        List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                = this.supvConstrAttachFileController
+                                .getLstAttachFile(
+                                        Cause_Line_Hg_PillarField.TABLE_NAME,
+                                        curUnqualifyItem.getCause_Line_Bg_Id()
+                                );
+                        for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
+                            curUnqualifyItem.getLstAttachFile().add(itemFile);
+                        }
+                    }
 					itemPillarGS.setListCauseUniQualify(listLHGUnqualify);
 				}
 			}
@@ -264,8 +266,10 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 					supervision_hg_pillar_complete_date,
 					rl_supervision_hg_pillar_bt_complete);
 
-			if (itemConstrData.getConstrProgressId() == Constants.SUPERVISION_PROGRESS.COMPLETED
-					|| itemConstrData.getConstrProgressId() == Constants.SUPERVISION_PROGRESS.UNCOMPLETED) {
+			if (itemConstrData.getConstrProgressId()
+                    == Constants.SUPERVISION_PROGRESS.COMPLETED
+					|| itemConstrData.getConstrProgressId()
+                    == Constants.SUPERVISION_PROGRESS.UNCOMPLETED) {
 				this.btn_line_hg_pillar_save.setVisibility(View.GONE);
 				// this.supervision_hg_pillar_complete_date.setVisibility(View.GONE);
 				this.btn_line_hg_pillar_add.setVisibility(View.GONE);
@@ -276,17 +280,17 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 		}
 	}
 
-	private void refreshListView() {
-		List<Supervision_Line_HG_PillarGSEntity> curlistSupervisionPillarGS = supervisionLHGPillarController
-				.getAllPillarGSBySupervistionLineHang(this.supervision_Line_HangData
-						.getSupervision_Line_Hang_Id());
+    private void refreshListView() {
+        List<Supervision_Line_HG_PillarGSEntity> curlistSupervisionPillarGS
+                = supervisionLHGPillarController.getAllPillarGSBySupervistionLineHang(
+                        this.supervision_Line_HangData.getSupervision_Line_Hang_Id());
 		/* Truong hop Load luu du lieu */
 		if (curlistSupervisionPillarGS.size() > 0) {
 			/* Gan danh sach loi cho danh sach ong */
 			for (Supervision_Line_HG_PillarGSEntity itemPillarGS : curlistSupervisionPillarGS) {
-				List<Supervision_LBG_UnqualifyItemEntity> listLHGUnqualify = cause_Line_Hg_PillarController
-						.getAllPillarUnqulifyByPillarId(itemPillarGS
-								.getIdPillar());
+				List<Supervision_LBG_UnqualifyItemEntity> listLHGUnqualify
+                        = cause_Line_Hg_PillarController.getAllPillarUnqulifyByPillarId(
+                                itemPillarGS.getIdPillar());
 				/* Gan anh nguyen nhan loi */
 				for (Supervision_LBG_UnqualifyItemEntity curUnqualifyItem : listLHGUnqualify) {
 					// Supv_Constr_Attach_FileEntity curAttachFile =
@@ -295,8 +299,8 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 					// Cause_Line_Hg_PillarField.TABLE_NAME,
 					// curUnqualifyItem.getCause_Line_Bg_Id());
 					// curUnqualifyItem.setAttachFile(curAttachFile);
-					List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
-							.getLstAttachFile(
+					List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                            = this.supvConstrAttachFileController.getLstAttachFile(
 									Cause_Line_Hg_PillarField.TABLE_NAME,
 									curUnqualifyItem.getCause_Line_Bg_Id());
 					for (Supv_Constr_Attach_FileEntity itemFile : lstCurAttachFile) {
@@ -428,7 +432,8 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 			break;
 		/* Xu ly su kien anh */
 		case OnEventControlListener.EVENT_UNQUALIFY_CHECK_UCHECK:
-			Supervision_LBG_UnqualifyItemEntity unqualifyItem = (Supervision_LBG_UnqualifyItemEntity) data;
+			Supervision_LBG_UnqualifyItemEntity unqualifyItem
+                    = (Supervision_LBG_UnqualifyItemEntity) data;
 			if (unqualifyItem.isUnqulify()) {
 				unqualifyItem.setDelete(false);
 			} else {
@@ -716,7 +721,8 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 													.getLstNewAttachFile()
 													.size() == 0 && addItemCause
 													.getLstAttachFile().size() == 0)) {
-										List<Supv_Constr_Attach_FileEntity> lstCurAttachFile = this.supvConstrAttachFileController
+										List<Supv_Constr_Attach_FileEntity> lstCurAttachFile
+                                                = this.supvConstrAttachFileController
 												.getLstAttachFile(
 														Cause_Line_Hg_PillarField.TABLE_NAME,
 														addItemCause
@@ -810,7 +816,8 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 							}
 							/* 2. Them moi nguyen nhan khong dat */
 							else {
-								Cause_Line_Hg_PillarEntity addCauseItem = new Cause_Line_Hg_PillarEntity();
+								Cause_Line_Hg_PillarEntity addCauseItem
+                                        = new Cause_Line_Hg_PillarEntity();
 								addCauseItem
 										.setCat_Cause_Constr_Unqualify_Id(addItemCause
 												.getCat_Cause_Constr_Unqualify_Id());
@@ -957,7 +964,8 @@ public class Supervision_Line_HG_PillarActivity extends LineBaseActivity {
 			if (curItem == null) {
 				/* Them moi */
 				if (curCauseUniqualify.isUnqulify()) {
-					Supervision_LBG_UnqualifyItemEntity addItem = new Supervision_LBG_UnqualifyItemEntity();
+					Supervision_LBG_UnqualifyItemEntity addItem
+                            = new Supervision_LBG_UnqualifyItemEntity();
 					addItem.setCat_Cause_Constr_Unqualify_Id(curCauseUniqualify
 							.getCat_Cause_Constr_Unqualify_Id());
 					addItem.setCause_Line_Bg_Id(Constants.ID_ENTITY_DEFAULT);

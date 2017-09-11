@@ -659,8 +659,8 @@ public class GloablUtils {
 //                    Constants.DROPDOWN_TYPE.DESIGN_INFO));
             // ---
 
-            listData.add(new DropdownItemEntity(Constants.BRCD_BACKGROUND_INFO.KET_LUAN_INFO, GlobalInfo
-                    .getInstance().getAppContext().getResources()
+            listData.add(new DropdownItemEntity(Constants.BRCD_BACKGROUND_INFO.KET_LUAN_INFO,
+                    GlobalInfo.getInstance().getAppContext().getResources()
                     .getString(R.string.line_background_keluan_info),
                     Constants.DROPDOWN_TYPE.DESIGN_INFO));
 

@@ -29,7 +29,8 @@ public class BaseTienDoFragment extends BaseFragment {
     public void initData() {
         super.initData();
 //        if (constr_ConstructionItem.getStatus() >= 395)
-//            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành, bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành,
+//        bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
         workItems = work_itemsControler.getItems(constr_ConstructionItem.getConstructId());
     }
 
@@ -65,8 +66,10 @@ public class BaseTienDoFragment extends BaseFragment {
 //            }
         }
         if (flagConstructions) {
-            Log.e(TAG, "save hoan thanh: " + constr_ConstructionItem.getConstructId() + " " + constr_ConstructionItem.getConstrType() );
-            constr_ConstructionItem.setStatus(constr_ConstructionItem.getConstrType() == 82 ? 396 : 395);
+            Log.e(TAG, "save hoan thanh: " + constr_ConstructionItem.getConstructId()
+                    + " " + constr_ConstructionItem.getConstrType() );
+            constr_ConstructionItem.setStatus(
+                    constr_ConstructionItem.getConstrType() == 82 ? 396 : 395);
         } else {
             constr_ConstructionItem.setStatus(0);
         }

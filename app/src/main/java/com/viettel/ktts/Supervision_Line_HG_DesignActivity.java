@@ -131,8 +131,10 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 
 	@Override
 	public void onClick(View v) {
-		if(!GlobalInfo.getInstance().isCheckIn() && v.getId()!=R.id.btn_popup_cancel && v.getId()!=R.id.btn_popup_save_plan){
-			showAlertDialogCheckInRequire(this, getString(R.string.checkin_require), getString(R.string.text_close));
+		if(!GlobalInfo.getInstance().isCheckIn()
+				&& v.getId()!=R.id.btn_popup_cancel && v.getId()!=R.id.btn_popup_save_plan){
+			showAlertDialogCheckInRequire(
+			        this, getString(R.string.checkin_require), getString(R.string.text_close));
 			return;
 		}
 		switch (v.getId()) {
@@ -185,7 +187,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 			// click chon save tren popup check in
 			case R.id.btn_popup_save_plan:
 				if(edtMakePlan.getText().toString().trim().length()<=0){
-					showAlertDialogCheckInRequire(this, getString(R.string.input_plan_require), getString(R.string.text_close));
+					showAlertDialogCheckInRequire(this, getString(R.string.input_plan_require),
+                            getString(R.string.text_close));
 					break;
 				}else if (addnewSupvLocatetoDB()) {
 					isCheckIn = !isCheckIn;
@@ -211,8 +214,10 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 		boolean canCheckIn = false;
 		String alertMessage = "";
 		if(constr_ConstructionData.getLatitude()!=null && constr_ConstructionData.getLongtitude()!=null){
-			reqLat = (constr_ConstructionData.getLatitude().equalsIgnoreCase(""))?-1.0:Double.parseDouble(constr_ConstructionData.getLatitude());
-			reqLong = (constr_ConstructionData.getLongtitude().equalsIgnoreCase(""))?-1.0:Double.parseDouble(constr_ConstructionData.getLongtitude());
+			reqLat = (constr_ConstructionData.getLatitude().equalsIgnoreCase(""))
+                    ?-1.0:Double.parseDouble(constr_ConstructionData.getLatitude());
+			reqLong = (constr_ConstructionData.getLongtitude().equalsIgnoreCase(""))
+                    ?-1.0:Double.parseDouble(constr_ConstructionData.getLongtitude());
 		}else {
 			reqLat = -1;
 			reqLong = -1;
@@ -233,7 +238,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 
 
 		//else {
-		//	long startTimeLater = supv_locate_controller.getSupvLocateItem(GlobalInfo.getInstance().getCheckInTBId(this)).getCheckinDate().getTime();
+		//	long startTimeLater = supv_locate_controller.getSupvLocateItem(GlobalInfo.getInstance()
+        // .getCheckInTBId(this)).getCheckinDate().getTime();
 		//	long diffTime  = System.currentTimeMillis() - startTimeLater;
 		//	if(diffTime < CheckInService.distance_require_time){
 		//		canCheckIn = false;
@@ -254,7 +260,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	}
 
 	public boolean addnewSupvLocatetoDB(){
-		long supv_locate_id = Ktts_KeyController.getInstance().getKttsNextKey(Supervision_Locate_Field.TABLE_NAME);
+		long supv_locate_id = Ktts_KeyController
+                .getInstance().getKttsNextKey(Supervision_Locate_Field.TABLE_NAME);
 		if(supv_locate_id==0){
 			showAlertDialogCheckInRequire(Supervision_Line_HG_DesignActivity.this,
 					getString(R.string.text_out_of_key),
@@ -335,7 +342,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	}
 
 	private void initView() {
-		spvLineHG_DesignView = addView(R.layout.supervision_line_hang_activity, R.id.rl_supervision_line_hg_design);
+		spvLineHG_DesignView = addView(
+		        R.layout.supervision_line_hang_activity, R.id.rl_supervision_line_hg_design);
 		this.tv_constr_line_hang_dropdown = (TextView) spvLineHG_DesignView
 				.findViewById(R.id.tv_constr_line_hang_dropdown);
 		this.tv_constr_line_hang_dropdown.setOnClickListener(this);
@@ -492,7 +500,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 					this.iDesignInfo = dropdownItem.getId();
 					this.dropdownPopupMenuDesignInfo.dismiss();
 
-					if (this.iDesignInfo == Constants.LINE_HANG_INFO.NHAT_KY_TIEN_DO_INFO /*|| this.iDesignInfo == Constants.LINE_HANG_INFO.TIEN_DO_INFO*/) {
+					if (this.iDesignInfo == Constants.LINE_HANG_INFO.NHAT_KY_TIEN_DO_INFO
+                        /*|| this.iDesignInfo == Constants.LINE_HANG_INFO.TIEN_DO_INFO*/) {
 						Bundle bundleData = new Bundle();
 						bundleData.putSerializable(IntentConstants.INTENT_DATA,
 								itemData);
@@ -599,8 +608,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 
 	// xoa soi
 	public void deleteFiberRow(Supervision_Line_Hg_FiberEntity itemDelete) {
-		Supervision_Line_Hg_FiberController bgFiberController = new Supervision_Line_Hg_FiberController(
-				this);
+		Supervision_Line_Hg_FiberController bgFiberController
+                = new Supervision_Line_Hg_FiberController(this);
 
 		bgFiberController.deleteHgFiberEntity(itemDelete);
 	}
@@ -656,10 +665,12 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 								.formatNumber(supervision_Line_HangData
 										.getLong_Total()));
 
-				if (supervision_Line_HangData.getPillar_New_Type() == Constants.LINE_HANG_PILLAR_NEW_TYPE.BE_TONG) {
+				if (supervision_Line_HangData.getPillar_New_Type()
+                        == Constants.LINE_HANG_PILLAR_NEW_TYPE.BE_TONG) {
 					this.rbt_line_hang_design_pillar_be_tong.setChecked(true);
 					this.rbt_line_hang_design_pillar_go.setChecked(false);
-				} else if (supervision_Line_HangData.getPillar_New_Type() == Constants.LINE_HANG_PILLAR_NEW_TYPE.GO) {
+				} else if (supervision_Line_HangData.getPillar_New_Type()
+                        == Constants.LINE_HANG_PILLAR_NEW_TYPE.GO) {
 					this.rbt_line_hang_design_pillar_be_tong.setChecked(false);
 					this.rbt_line_hang_design_pillar_go.setChecked(true);
 				}
@@ -738,7 +749,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 			}
 			//hungkm
 			constr_ConstructionController = new Constr_ConstructionController(this);
-			constr_ConstructionData = constr_ConstructionController.getItem(supervision_ConstrData.getConstruct_Id());
+			constr_ConstructionData = constr_ConstructionController
+                    .getItem(supervision_ConstrData.getConstruct_Id());
 		} catch (Exception e) {
 			e.printStackTrace();
 			// this.gotoHomeActivity(new Bundle());
@@ -762,7 +774,8 @@ public class Supervision_Line_HG_DesignActivity extends LineBaseActivity {
 	}
 
 	private TextView makeTabIndicator(String text) {
-		TelephonyManager manager = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+		TelephonyManager manager = (TelephonyManager)this
+                .getSystemService(Context.TELEPHONY_SERVICE);
 		if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
 			Log.d(TAG,"Tablet");
 		}else{

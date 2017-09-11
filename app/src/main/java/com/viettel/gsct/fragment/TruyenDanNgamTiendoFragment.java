@@ -65,7 +65,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment
     private boolean dialogDismissFlag = true;
     public static ArrayList<Double> luykes;
 
-    private ConcurrentHashMap<Long, SubWorkItemTienDoNgamView> hashSubWorkItemViews = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Long,
+            SubWorkItemTienDoNgamView> hashSubWorkItemViews = new ConcurrentHashMap<>();
     Sub_Work_Item_ValueController sub_work_item_value_controller;
 
     private boolean flagIsRealFinish = true;
@@ -151,7 +152,8 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment
                     hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
                 }
                 // Nếu status_id = 403 (có ngày bắt đầu vào ngày kết thúc)
-                // Nhưng ngày kết thúc == ngày hiện tại thì vẫn được sửa nội dung ==>>> Chưa thực sự kết thúc
+                // Nhưng ngày kết thúc == ngày hiện tại thì vẫn được sửa nội dung
+                // ==>>> Chưa thực sự kết thúc
                 // Ngày kết thúc khác ngày hiện tại  ====>>>> thực sự đã kết thúc
                 if (flagIsRealFinish)
                     flagIsRealFinish = workItem.isCompleted();

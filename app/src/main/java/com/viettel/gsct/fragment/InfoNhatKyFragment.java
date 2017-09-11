@@ -25,6 +25,8 @@ import com.viettel.gsct.GSCTUtils;
 import com.viettel.gsct.View.TeamInfoView;
 import com.viettel.ktts.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,8 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
     TextView tvGiamSat;
     @BindView(R.id.tv_y_kien_thi_cong)
     TextView tvYKienThiCong;
+    @BindView(R.id.tvNoiDungCongViec)
+    TextView tvNoiDungCongViec;
     @BindView(R.id.tv_no_data)
     TextView tvNoData;
     @BindView(R.id.spinner_action_swtich_date)
@@ -72,7 +76,8 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_info_nhat_ky, container, false);
         unbinder = ButterKnife.bind(this, layout);
         initData();
@@ -89,16 +94,20 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
             mScrollAllView.setVisibility(View.GONE);
             return;
         }
+        boolean hasDateNow = false;
 //        initDataWithDate(allListLogDate.get(allListLogDate.size() - 1));
-        if (allListLogDate.size() > 0) {
-            for (int i = 0; i < allListLogDate.size(); i++) {
-                if (allListLogDate.get(i).equals(GSCTUtils.getDateNow())) {
-                    initDataWithDate(GSCTUtils.getDateNow());
-                    return;
-                }
-            }
-            initDataWithDate(allListLogDate.get(allListLogDate.size() - 1));
-        }
+//        if (allListLogDate.size() > 0) {
+//            for (int i = 0; i < allListLogDate.size(); i++) {
+//                if (allListLogDate.get(i).equals(GSCTUtils.getDateNow())) {
+//                    initDataWithDate(GSCTUtils.getDateNow());
+//                    hasDateNow = true;
+//                    break;
+//                }
+//            }
+//            if (!hasDateNow) {
+//                initDataWithDate(allListLogDate.get(allListLogDate.size() - 1));
+//            }
+//        }
     }
 
     private void initDataWithDate(String date) {
@@ -149,7 +158,8 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
         if (id < 0) id = 0;
         if (id > length) id = length; //
         tvThoitiet.setText(getResources().getStringArray(R.array.array_bts_thoi_tiet)[id]);
-        tvThaydoi.setText(entity.getWork_content());
+        tvNoiDungCongViec.setText(entity.getWork_content());
+        tvThaydoi.setText(entity.getAddition_change_arise());
         tvYKienThiCong.setText(entity.getConstructor_comments());
         tvGiamSat.setText(entity.getMonitor_comments());
     }
@@ -169,7 +179,11 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
             Log.d(TAG,"Date = " + GSCTUtils.standardlizeTime(str));
         }
         spinnerSwitchDate.setOnItemSelectedListener(this);
-        spinnerSwitchDate.setSelection(allListLogDate.size() - 1);
+        if(allListLogDate.contains(GSCTUtils.getDateNow())) {
+            spinnerSwitchDate.setSelection(allListLogDate.indexOf(GSCTUtils.getDateNow()));
+        } else {
+            spinnerSwitchDate.setSelection(allListLogDate.size() - 1);
+        }
     }
 
     @Override

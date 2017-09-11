@@ -180,14 +180,16 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
         }
 
         if (fragmentCapNhatNhatKy != null) {
-            fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            fragmentCapNhatNhatKy
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
         if (fragmentCapNhatTienDo != null) {
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         if (mCapNhatNhatKyTienDoPreviewFragment != null) {
-            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            mCapNhatNhatKyTienDoPreviewFragment
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -226,7 +228,8 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundleMonitorData = new Bundle();
-                bundleMonitorData.putSerializable(IntentConstants.INTENT_DATA, constr_ConstructionItem);
+                bundleMonitorData.putSerializable(
+                        IntentConstants.INTENT_DATA, constr_ConstructionItem);
                 int isInfomation = position + 1;
                 bundleMonitorData.putInt(IntentConstants.INTENT_DESIGNINFO, isInfomation);
                 if (flagFirstTime) {

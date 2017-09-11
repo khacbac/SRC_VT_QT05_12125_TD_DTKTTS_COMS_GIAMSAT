@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class TeamView extends LinearLayout {
 
     public void setNumber(String number) {
         etTeamNumber.setText(number);
+        Log.d(TAG, "setNumber() called with: number = [" + number + "]");
     }
 
     public int getTeamNumber() {

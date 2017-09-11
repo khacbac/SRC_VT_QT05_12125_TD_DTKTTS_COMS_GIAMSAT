@@ -441,11 +441,10 @@ public class Ktts_KeyController {
 	}
 
 	/**
-	 * Lay mot cong trinh giam sat
+	 * Lay mot cong trinh giam sat.
 	 * 
-	 * @param itemId
-	 *            Id cong trinh
-	 * @return Cong trinh duoc giam sat
+	 * @param tableName Ten bang cong trinh.
+	 * @return Cong trinh duoc giam sat.
 	 */
 	public Ktts_KeyEntity getItem(String tableName) {
 		Ktts_KeyEntity curItem = new Ktts_KeyEntity();

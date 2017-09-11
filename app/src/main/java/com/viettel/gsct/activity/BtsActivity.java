@@ -190,7 +190,8 @@ public class BtsActivity extends SupervisionBtsBaseActivity
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
         if (mCapNhatNhatKyTienDoPreviewFragment != null) {
-            mCapNhatNhatKyTienDoPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            mCapNhatNhatKyTienDoPreviewFragment
+                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
         // Init Preview Fragment.
@@ -228,7 +229,8 @@ public class BtsActivity extends SupervisionBtsBaseActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundleMonitorData = new Bundle();
-                bundleMonitorData.putSerializable(IntentConstants.INTENT_DATA, constr_ConstructionItem);
+                bundleMonitorData
+                        .putSerializable(IntentConstants.INTENT_DATA, constr_ConstructionItem);
                 int isInfomation = position + 1;
                 bundleMonitorData.putInt(IntentConstants.INTENT_DESIGNINFO, isInfomation);
                 if (flagFirstTime) {
@@ -469,17 +471,4 @@ public class BtsActivity extends SupervisionBtsBaseActivity
     public void onPageScrollStateChanged(int state) {
 
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        EventBus.getDefault().register(this);
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        EventBus.getDefault().unregister(this);
-//    }
-
 }

@@ -169,7 +169,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 	}
 
 	private void initView() {
-		spvLineBG_DesignView = addView(R.layout.supervision_line_background_activity, R.id.rl_supervision_line_bg_design);
+		spvLineBG_DesignView = addView(
+				R.layout.supervision_line_background_activity, R.id.rl_supervision_line_bg_design);
 		this.tv_constr_line_background_dropdown = (TextView) spvLineBG_DesignView
 				.findViewById(R.id.tv_constr_line_background_dropdown);
 		this.tv_constr_line_background_dropdown.setOnClickListener(this);
@@ -300,15 +301,19 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 				.findViewById(R.id.edt_constr_line_background_so);
 
 		/* diem qua cau cong */
-		btn_constr_line_background_point_to_bridge_save = (Button) spvLineBG_DesignView.findViewById(R.id.btn_constr_line_background_point_to_bridge_add);
+		btn_constr_line_background_point_to_bridge_save = (Button) spvLineBG_DesignView
+                .findViewById(R.id.btn_constr_line_background_point_to_bridge_add);
 		btn_constr_line_background_point_to_bridge_save
 				.setOnClickListener(this);
-		ll_constr_line_background_tab_point_to_bridge_list = (ListView) spvLineBG_DesignView.findViewById(R.id.lv_constr_line_background_tab_point_to_bridge_list);
+		ll_constr_line_background_tab_point_to_bridge_list = (ListView) spvLineBG_DesignView
+                .findViewById(R.id.lv_constr_line_background_tab_point_to_bridge_list);
 
 		/* diem qua cau cong */
-		btn_constr_line_background_point_to_pond_save = (Button) spvLineBG_DesignView.findViewById(R.id.btn_constr_line_background_point_to_pond_add);
+		btn_constr_line_background_point_to_pond_save = (Button) spvLineBG_DesignView
+                .findViewById(R.id.btn_constr_line_background_point_to_pond_add);
 		btn_constr_line_background_point_to_pond_save.setOnClickListener(this);
-		ll_constr_line_background_tab_point_to_pond_list = (ListView) spvLineBG_DesignView.findViewById(R.id.ll_constr_line_background_tab_point_to_pond_list);
+		ll_constr_line_background_tab_point_to_pond_list = (ListView) spvLineBG_DesignView
+                .findViewById(R.id.ll_constr_line_background_tab_point_to_pond_list);
 
 		listPointBridge = new ArrayList<Special_LocationEntity>();
 		listPointPond = new ArrayList<Special_LocationEntity>();
@@ -455,9 +460,12 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 		String alertMessage = "";
 //		reqLat = Double.parseDouble(constr_ConstructionData.getLatitude());
 //		reqLong = Double.parseDouble(constr_ConstructionData.getLongtitude());
-		if(constr_ConstructionData.getLatitude()!=null && constr_ConstructionData.getLongtitude()!=null){
-			reqLat = (constr_ConstructionData.getLatitude().equalsIgnoreCase(""))?-1.0:Double.parseDouble(constr_ConstructionData.getLatitude());
-			reqLong = (constr_ConstructionData.getLongtitude().equalsIgnoreCase(""))?-1.0:Double.parseDouble(constr_ConstructionData.getLongtitude());
+		if(constr_ConstructionData.getLatitude()!=null
+                && constr_ConstructionData.getLongtitude()!=null){
+			reqLat = (constr_ConstructionData.getLatitude().equalsIgnoreCase(""))
+                    ? -1.0:Double.parseDouble(constr_ConstructionData.getLatitude());
+			reqLong = (constr_ConstructionData.getLongtitude().equalsIgnoreCase(""))
+                    ?-1.0:Double.parseDouble(constr_ConstructionData.getLongtitude());
 		}else {
 			reqLat = -1;
 			reqLong = -1;
@@ -478,7 +486,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 		
 		
 //		else {
-//			long startTimeLater = supv_locate_controller.getSupvLocateItem(GlobalInfo.getInstance().getCheckInTBId(this)).getCheckinDate().getTime();
+//			long startTimeLater = supv_locate_controller.getSupvLocateItem(
+//          GlobalInfo.getInstance().getCheckInTBId(this)).getCheckinDate().getTime();
 //			long diffTime  = System.currentTimeMillis() - startTimeLater;
 //			if(diffTime < CheckInService.distance_require_time){
 //				canCheckIn = false;
@@ -499,7 +508,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 	}
 	
 	public boolean addnewSupvLocatetoDB(){
-		long supv_locate_id = Ktts_KeyController.getInstance().getKttsNextKey(Supervision_Locate_Field.TABLE_NAME);
+		long supv_locate_id = Ktts_KeyController.getInstance()
+                .getKttsNextKey(Supervision_Locate_Field.TABLE_NAME);
 		if(supv_locate_id==0){
 			showAlertDialogCheckInRequire(Supervision_Line_BG_DesignActivity.this,
 					getString(R.string.text_out_of_key),
@@ -551,8 +561,10 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
-		if(!GlobalInfo.getInstance().isCheckIn() && v.getId()!=R.id.btn_popup_cancel && v.getId()!=R.id.btn_popup_save_plan){
-			showAlertDialogCheckInRequire(this, getString(R.string.checkin_require), getString(R.string.text_close));
+		if(!GlobalInfo.getInstance().isCheckIn()
+                && v.getId()!=R.id.btn_popup_cancel && v.getId()!=R.id.btn_popup_save_plan){
+			showAlertDialogCheckInRequire(
+			        this, getString(R.string.checkin_require), getString(R.string.text_close));
 			return;
 		}
 		switch (v.getId()) {
@@ -614,7 +626,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 			// click chon save tren popup check in
 		case R.id.btn_popup_save_plan:
 			if(edtMakePlan.getText().toString().trim().length()<=0){
-				showAlertDialogCheckInRequire(this, getString(R.string.input_plan_require), getString(R.string.text_close));
+				showAlertDialogCheckInRequire(
+				        this, getString(R.string.input_plan_require), getString(R.string.text_close));
 				break;
 			} else if (addnewSupvLocatetoDB()) {
 				isCheckIn = !isCheckIn;
@@ -864,8 +877,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 
 	// xoa soi
 	public void deleteFiberRow(Supervision_Line_BG_FiberEntity itemDelete) {
-		Supervision_Line_BG_FiberController bgFiberController = new Supervision_Line_BG_FiberController(
-				this);
+		Supervision_Line_BG_FiberController bgFiberController
+                = new Supervision_Line_BG_FiberController(this);
 
 		bgFiberController.deleteBgFiberEntity(itemDelete);
 	}
@@ -910,11 +923,12 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 						.formatNumber(supervision_Line_BackgroundData
 								.getLong_Total()));
 
-				if (supervision_Line_BackgroundData.getTank_New_Total() != Constants.ID_ENTITY_DEFAULT) {
-					this.edt_line_background_design_tank_size.setText(String
-							.valueOf(supervision_Line_BackgroundData
-									.getTank_New_Total()));
-				}
+                if (supervision_Line_BackgroundData
+                        .getTank_New_Total() != Constants.ID_ENTITY_DEFAULT) {
+                    this.edt_line_background_design_tank_size.setText(String
+                            .valueOf(supervision_Line_BackgroundData
+                                    .getTank_New_Total()));
+                }
 
 				if (supervision_Line_BackgroundData.getTank_New_One_Part() >= 0) {
 					this.edt_line_background_design_tank_dan1.setText(String
@@ -1011,7 +1025,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 			
 			//hungkm
 			constr_ConstructionController = new Constr_ConstructionController(this);
-			constr_ConstructionData = constr_ConstructionController.getItem(supervision_ConstrData.getConstruct_Id());
+			constr_ConstructionData = constr_ConstructionController
+                    .getItem(supervision_ConstrData.getConstruct_Id());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1264,7 +1279,8 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 		} else if (StringUtil.isNullOrEmpty(itemCheck.getSupplieType())) {
 			result = StringUtil
 					.getString(R.string.line_background_design_supplie_type_is_empty);
-		} else if (itemCheck.getSpecialLocationType() == Constants.SPECIAL_LOCATION_TYPE.POINT_TO_BRIDGE
+		} else if (itemCheck.getSpecialLocationType()
+                == Constants.SPECIAL_LOCATION_TYPE.POINT_TO_BRIDGE
 				&& StringUtil.isNullOrEmpty(itemCheck.getBridgeName())) {
 
 			result = StringUtil

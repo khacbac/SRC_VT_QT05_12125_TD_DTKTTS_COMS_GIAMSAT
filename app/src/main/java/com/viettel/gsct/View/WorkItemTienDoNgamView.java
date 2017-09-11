@@ -33,7 +33,7 @@ public class WorkItemTienDoNgamView extends LinearLayout {
     @BindView(R.id.btn_tien_do)
     AppCompatButton btnTienDo;
     private String trangThaiLucDauBtn;
-    Work_ItemsEntity entity;
+    private Work_ItemsEntity entity;
     private ArrayList<SubWorkItemTienDoNgamView> arrSubItems = new ArrayList<>();
     private boolean flagIsWorking = false; // = true neu co mot truong subWorkItem da nhap du lieu
     // btnTiendo chi co hai trang hai hoan thanh / dang lam
@@ -60,7 +60,8 @@ public class WorkItemTienDoNgamView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 if (entity.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE) {
-                    if (!entity.hasCompletedDate() || GSCTUtils.getDateNow().equals(entity.getComplete_date())) {
+                    if (!entity.hasCompletedDate()
+                            || GSCTUtils.getDateNow().equals(entity.getComplete_date())) {
                         if (isWorking()) {
                             entity.setStatus_id(Work_ItemsEntity.STATUS_WORKING);
                             btnTienDo.setText("Đang làm");
@@ -73,7 +74,9 @@ public class WorkItemTienDoNgamView extends LinearLayout {
                             view.setEditeTextEnable(true);
                         }
                     } else {
-                        Toast.makeText(getContext(), "Bạn chỉ được thay đổi trạng thái trong ngày!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                "Bạn chỉ được thay đổi trạng thái trong ngày!",
+                                Toast.LENGTH_SHORT).show();
                     }
                     return;
                 } else if (entity.getStatus_id() == Work_ItemsEntity.STATUS_WORKING) {
@@ -140,7 +143,8 @@ public class WorkItemTienDoNgamView extends LinearLayout {
     public void addSubItem(SubWorkItemTienDoNgamView view) {
         arrSubItems.add(view);
 //        Log.e(TAG, "addSubItem: " + entity.getStatus_id() );
-        view.setEditeTextEnable(entity.getStatus_id() != Work_ItemsEntity.STATUS_COMPLETE || GSCTUtils.getDateNow().equals(entity.getComplete_date()));
+        view.setEditeTextEnable(entity.getStatus_id() != Work_ItemsEntity.STATUS_COMPLETE
+                || GSCTUtils.getDateNow().equals(entity.getComplete_date()));
     }
 
     public String getTrangThaiLucDauBtn() {

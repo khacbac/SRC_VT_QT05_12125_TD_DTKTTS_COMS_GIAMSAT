@@ -65,7 +65,8 @@ public class GPONTiendoFragment extends BaseTienDoFragment
     private boolean isFinish = false;
     public static ArrayList<Double> luykes;
 
-    private ConcurrentHashMap<Long, SubWorkItemGPONView> hashSubWorkItemViews = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Long,
+            SubWorkItemGPONView> hashSubWorkItemViews = new ConcurrentHashMap<>();
 
     Sub_Work_Item_ValueController sub_work_item_value_controller;
 
@@ -179,7 +180,8 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                                     subWorkItem.getCat_sub_work_item_id());
                     luykes.add(luyke);
                     double value = subWorkItemValue != null ? subWorkItemValue.getValue() : 0;
-                    subView.setValue(catSubWorkItem.getName(), value, luyke, catSubWorkItem.getUnitName());
+                    subView.setValue(catSubWorkItem.getName(),
+                            value, luyke, catSubWorkItem.getUnitName());
                     layoutRoot.addView(subView, ++i);
                 }
             }
@@ -244,7 +246,8 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                         @Override
                         public boolean onFinishListener() {
                             for (Cat_Sub_Work_ItemEntity catSubWorkItem : itemEntities) {
-                                SubWorkItemGPONView view = hashSubWorkItemViews.get(catSubWorkItem.getId());
+                                SubWorkItemGPONView view
+                                        = hashSubWorkItemViews.get(catSubWorkItem.getId());
                                 if (view.getValue() > 0) {
                                     return true;
                                 }

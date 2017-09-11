@@ -36,20 +36,17 @@ import java.util.Calendar;
 
 @SuppressLint("SimpleDateFormat")
 public class LoginActivity extends HomeBaseActivity {
-	private View loginView;
-	private EditText editTextUser;
+    private EditText editTextUser;
 	private EditText editTextPassword;
-	private Button lgButton;
-	private TextView textViewResult;
-	private Intent intentGpsService;
-	private String sUserName = "";
+    private TextView textViewResult;
+    private String sUserName = "";
 	private String sPassWord = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 //		setContentView(R.layout.login);
-		loginView = addView(R.layout.login, R.id.login_act);
+        View loginView = addView(R.layout.login, R.id.login_act);
 		if (getSupportActionBar() != null)
 			getSupportActionBar().hide();
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -62,7 +59,7 @@ public class LoginActivity extends HomeBaseActivity {
 		editTextUser = (EditText) loginView.findViewById(R.id.editTextUserName);
 		editTextPassword = (EditText) loginView.findViewById(R.id.editTextUserPass);
 		textViewResult = (TextView) loginView.findViewById(R.id.tvResult);
-		lgButton = (Button) loginView.findViewById(R.id.btnLogin);
+        Button lgButton = (Button) loginView.findViewById(R.id.btnLogin);
 		lgButton.setOnClickListener(this);
 		this.editTextUser.setText(this.getLoginNameSetting());
 		/* Load Client Id de thuc hien he thong */
@@ -80,7 +77,7 @@ public class LoginActivity extends HomeBaseActivity {
 		GlobalInfo.getInstance().setFilePath(
 				Environment.getExternalStorageDirectory().getPath());
 		/* dang ky Gps */
-		intentGpsService = new Intent(this, GpsServices.class);
+        Intent intentGpsService = new Intent(this, GpsServices.class);
 		this.startService(intentGpsService);
 	}
 
@@ -97,70 +94,55 @@ public class LoginActivity extends HomeBaseActivity {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnLogin:
-			// insert login offline
-			Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
-			loginLogConstr.setUserName(sUserName);
-			loginLogConstr.setMac(this.getMacAddress());
-			SimpleDateFormat dateView = new SimpleDateFormat(
-					"yyyy-dd-MM HH:mm:ss");
+			Log.d("Location", "gps : "+GpsServices.latLocation+", "+GpsServices.longLocation);
+			/* Check open GPS */
+			if (this.checkOpenGps()) {
+				sUserName = editTextUser.getText().toString().trim();
+				sPassWord = editTextPassword.getText().toString().trim();
+				String clientId = this.getMacAddress();
+				/* Check login online */
+				if (this.check3GWifi()) {
+					this.requestLogin(sUserName, sPassWord, clientId);
+				}
+				/* Check login offline */
+				else {
+					EmployeeEntity loginAcount = this.getLoginOffline(
+							sUserName, sPassWord);
+					if (loginAcount.getId() > 0) {
+						GlobalInfo.getInstance().setFullName(
+								loginAcount.getFullName());
+						GlobalInfo.getInstance().setUserId(loginAcount.getId());
+						GlobalInfo.getInstance().setGroupCode(
+								loginAcount.getGroupCode());
+						GlobalInfo.getInstance().setEmployeeCode(loginAcount.getCode());
+						GlobalInfo.getInstance().saveGlobalInfo();
+						this.setLoginNameSetting(sUserName);
 
-			loginLogConstr.setLogDate(dateView.format(Calendar
-					.getInstance().getTime()));
+						// insert login offline.
+						Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
+						loginLogConstr.setUserName(sUserName);
+						loginLogConstr.setMac(this.getMacAddress());
+						SimpleDateFormat dateView = new SimpleDateFormat(
+								"yyyy-dd-MM HH:mm:ss");
 
-			new Login_Log_ConstrController(this)
-					.insertLoginLogConstr(loginLogConstr);
-			this.gotoHomeActivity(new Bundle());
-			this.finish();
+						loginLogConstr.setLogDate(dateView.format(Calendar
+								.getInstance().getTime()));
 
-//			Log.d("Location", "gps : "+GpsServices.latLocation+", "+GpsServices.longLocation);
-//			/* Check open GPS */
-//			if (this.checkOpenGps()) {
-//				sUserName = editTextUser.getText().toString().trim();
-//				sPassWord = editTextPassword.getText().toString().trim();
-//				String clientId = this.getMacAddress();
-//				/* Check login online */
-//				if (this.check3GWifi()) {
-//					this.requestLogin(sUserName, sPassWord, clientId);
-//				}
-//				/* Check login offline */
-//				else {
-//					EmployeeEntity loginAcount = this.getLoginOffline(
-//							sUserName, sPassWord);
-//					if (loginAcount.getId() > 0) {
-//						GlobalInfo.getInstance().setFullName(
-//								loginAcount.getFullName());
-//						GlobalInfo.getInstance().setUserId(loginAcount.getId());
-//						GlobalInfo.getInstance().setGroupCode(
-//								loginAcount.getGroupCode());
-//						GlobalInfo.getInstance().setEmployeeCode(loginAcount.getCode());
-//						GlobalInfo.getInstance().saveGlobalInfo();
-//						this.setLoginNameSetting(sUserName);
-//
-//						// insert login offline
-//						Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
-//						loginLogConstr.setUserName(sUserName);
-//						loginLogConstr.setMac(this.getMacAddress());
-//						SimpleDateFormat dateView = new SimpleDateFormat(
-//								"yyyy-dd-MM HH:mm:ss");
-//
-//						loginLogConstr.setLogDate(dateView.format(Calendar
-//								.getInstance().getTime()));
-//
-//						new Login_Log_ConstrController(this)
-//								.insertLoginLogConstr(loginLogConstr);
-//						this.gotoHomeActivity(new Bundle());
-//						this.finish();
-//					} else {
-//						this.textViewResult
-//								.setText(getString(R.string.login_offline_error_messager));
-//					}
-//				}
-//				editTextPassword.setText(StringUtil.EMPTY_STRING);
-//
-//			} else {
-//				this.showDialog(StringUtil
-//						.getString(R.string.text_map_location_no_open));
-//			}
+						new Login_Log_ConstrController(this)
+								.insertLoginLogConstr(loginLogConstr);
+						this.gotoHomeActivity(new Bundle());
+						this.finish();
+					} else {
+						this.textViewResult
+								.setText(getString(R.string.login_offline_error_messager));
+					}
+				}
+				editTextPassword.setText(StringUtil.EMPTY_STRING);
+
+			} else {
+				this.showDialog(StringUtil
+						.getString(R.string.text_map_location_no_open));
+			}
 			break;
 		default:
 			super.onClick(view);
@@ -168,16 +150,12 @@ public class LoginActivity extends HomeBaseActivity {
 		}
 	}
 
-	/**
-	 * 
-	 * Gui yeu cau login
-	 * 
-	 * @author: Duchha
-	 * @param
-	 * @param
-	 * @return:
-	 * @throws:
-	 */
+    /**
+     * Yeu cau gui login.
+     * @param userName String.
+     * @param passWord String.
+     * @param clientId String.
+     */
 	private void requestLogin(String userName, String passWord, String clientId) {
 		showProgressDialog(StringUtil.getString(R.string.text_loading));
 		Bundle bundle = new Bundle();
@@ -200,17 +178,16 @@ public class LoginActivity extends HomeBaseActivity {
 		case ActionEventConstant.REQEST_LOGIN:
 			EmployeeEntity loginAcount = this.getLoginOffline(sUserName,
 					sPassWord);
-			if (loginAcount.getId() > 0) {
-			} else {
-				EmployeeController loginControll;
-				loginControll = new EmployeeController(this);
-				loginAcount = (EmployeeEntity) modelEvent.getModelData();
-				loginControll.addLogin(loginAcount);
-				/* Tao du lieu gia de test */
-				// CreateDataTest createdb = new CreateDataTest(this);
-				// createdb.createData();
-			}
-			GlobalInfo.getInstance().setFullName(loginAcount.getFullName());
+            if (loginAcount.getId() <= 0) {
+                EmployeeController loginControll;
+                loginControll = new EmployeeController(this);
+                loginAcount = (EmployeeEntity) modelEvent.getModelData();
+                loginControll.addLogin(loginAcount);
+                /* Tao du lieu gia de test */
+                // CreateDataTest createdb = new CreateDataTest(this);
+                // createdb.createData();
+            }
+            GlobalInfo.getInstance().setFullName(loginAcount.getFullName());
 			GlobalInfo.getInstance().setUserId(loginAcount.getId());
 			GlobalInfo.getInstance().setGroupCode(loginAcount.getGroupCode());
 			GlobalInfo.getInstance().setEmployeeCode(loginAcount.getCode());
@@ -240,11 +217,13 @@ public class LoginActivity extends HomeBaseActivity {
 			if (modelEvent.getModelCode() == ErrorConstants.ERROR_NO_CONNECTION) {
 				textViewResult
 						.setText(Constants.MESSAGE_ERROR_NO_CONNECT_SERVER);
-				Toast.makeText(getApplicationContext(), Constants.MESSAGE_ERROR_NO_CONNECT_SERVER, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),
+						Constants.MESSAGE_ERROR_NO_CONNECT_SERVER, Toast.LENGTH_SHORT).show();
 			} else {
 				textViewResult
 						.setText(getString(R.string.login_error_messager));
-				Toast.makeText(getApplicationContext(), getString(R.string.login_error_messager), Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.login_error_messager),
+                        Toast.LENGTH_SHORT).show();
 			}
 			break;
 		default:
