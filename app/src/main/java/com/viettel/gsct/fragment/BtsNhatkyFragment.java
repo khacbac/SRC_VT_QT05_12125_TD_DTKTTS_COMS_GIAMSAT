@@ -245,7 +245,7 @@ public class BtsNhatkyFragment extends BaseFragment
                 .getItem(constr_ConstructionItem.getConstructId(), GSCTUtils.getDateNow());
         if (constrWorkLogsEntity == null) return;
 
-        swThiCong.setChecked(constrWorkLogsEntity == null || constrWorkLogsEntity.getIs_work() == 1);
+        swThiCong.setChecked(constrWorkLogsEntity.getIs_work() == 1);
         updateViewByIsWork(swThiCong.isChecked());
 
 
@@ -285,7 +285,9 @@ public class BtsNhatkyFragment extends BaseFragment
                 hashTeams.put(team.getCat_constr_team_id(), team);
                 if (view != null && team.getNum_of_team() > 0)
                     view.setNumber("" + team.getNum_of_team());
-                Log.d(TAG, "initData() called" + " view title = " + view.getTitle());
+                if (view != null) {
+                    Log.d(TAG, "initData() called" + " view title = " + view.getTitle());
+                }
                 Log.d(TAG, "initData() called" + " tem num = " + team.getNum_of_team());
             }
         }

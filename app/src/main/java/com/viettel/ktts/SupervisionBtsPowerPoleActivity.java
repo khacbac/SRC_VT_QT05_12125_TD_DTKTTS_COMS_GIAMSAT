@@ -1,10 +1,12 @@
 package com.viettel.ktts;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
@@ -72,6 +74,7 @@ import java.util.List;
 
 public class SupervisionBtsPowerPoleActivity extends SupervisionBtsBaseActivity
 		implements OnTabChangeListener {
+	private static final String TAG = SupervisionBtsPowerPoleActivity.class.getSimpleName();
 	private View spvBts_PowerPollView;
 	/**
 	 * text view
@@ -263,6 +266,14 @@ public class SupervisionBtsPowerPoleActivity extends SupervisionBtsBaseActivity
 	}
 
 	private TextView makeTabIndicator(String text) {
+		TelephonyManager manager = (TelephonyManager)this
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+			Log.d(TAG,"Tablet");
+		}else{
+			Log.d(TAG,"Mobile");
+			tabHeight = 120;
+		}
 		TextView tabView = new TextView(this);
 		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				tabHeight, 1);

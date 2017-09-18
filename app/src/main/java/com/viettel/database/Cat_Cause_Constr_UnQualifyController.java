@@ -148,7 +148,7 @@ public class Cat_Cause_Constr_UnQualifyController {
 	 */
 	public List<Supervision_LBG_UnqualifyItemEntity> getAllUnQualifyItemByName(
 			String sSubType, int iType) {
-		List<Supervision_LBG_UnqualifyItemEntity> listItem = new ArrayList<Supervision_LBG_UnqualifyItemEntity>();
+		List<Supervision_LBG_UnqualifyItemEntity> listItem = new ArrayList<>();
 
 		SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
 		Cursor cursor = db

@@ -324,8 +324,7 @@
             android:background="@drawable/border_right_bottom_left"
             android:choiceMode="singleChoice"
             android:minHeight="400dp"
-            android:padding="@dimen/padding1" >
-        </ListView>
+            android:padding="@dimen/padding1"></ListView>
     </LinearLayout>
 
 </RelativeLayout>

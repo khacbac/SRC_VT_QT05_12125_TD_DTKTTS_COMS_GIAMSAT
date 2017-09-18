@@ -118,7 +118,7 @@ public class Supervision_Bts_Pillar_AntenEntity {
 	}
 
 	public String getFail_DESC() {
-		return fail_DESC;
+		return ""+fail_DESC;
 	}
 
 	public void setFail_DESC(String fail_DESC) {

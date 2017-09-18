@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -47,6 +48,7 @@ import java.util.List;
 
 public class Supervision_Line_HG_Measure_ConstrActivity extends
 		LineBaseActivity {
+	private final String TAG = this.getClass().getSimpleName();
 	private View spvLineHG_MSConstrView;
 	private TextView tv_constr_line_measure_constr_dropdown;
 	private TextView tv_constr_line_measure_constr_info_line_value;
@@ -109,48 +111,48 @@ public class Supervision_Line_HG_Measure_ConstrActivity extends
 
 		rl_supervision_line_bg_measure_constr = (RelativeLayout) spvLineHG_MSConstrView
 				.findViewById(R.id.rl_supervision_line_bg_measure_constr);
-		this.rl_supervision_line_bg_measure_constr.getViewTreeObserver()
-				.addOnGlobalLayoutListener(
-						new ViewTreeObserver.OnGlobalLayoutListener() {
-
-							@Override
-							public void onGlobalLayout() {
-								Rect r = new Rect();
-								rl_supervision_line_bg_measure_constr
-										.getWindowVisibleDisplayFrame(r);
-
-								int screenHeight = rl_supervision_line_bg_measure_constr
-										.getRootView().getHeight();
-								int heightDifference = screenHeight
-										- (r.bottom - r.top);
-								int resourceId = getResources()
-										.getIdentifier("status_bar_height",
-												"dimen", "android");
-								if (resourceId > 0) {
-									heightDifference -= getResources()
-											.getDimensionPixelSize(resourceId);
-								}
-
-								if (heightDifference > 0) {
-									if (positionTouch >= heightDifference) {
-										rl_supervision_line_bg_measure_constr
-												.setScrollY(0);
-									} else {
-										if ((positionTouch + heightDifference) > screenHeight) {
-											rl_supervision_line_bg_measure_constr.setScrollY(heightDifference
-													- (screenHeight - (Math
-															.round(positionTouch) + heightDifference)));
-										} else
-											rl_supervision_line_bg_measure_constr
-													.setScrollY(heightDifference - 25);
-									}
-								} else {
-									rl_supervision_line_bg_measure_constr
-											.setScrollY(0);
-								}
-
-							}
-						});
+//		this.rl_supervision_line_bg_measure_constr.getViewTreeObserver()
+//				.addOnGlobalLayoutListener(
+//						new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//							@Override
+//							public void onGlobalLayout() {
+//								Rect r = new Rect();
+//								rl_supervision_line_bg_measure_constr
+//										.getWindowVisibleDisplayFrame(r);
+//
+//								int screenHeight = rl_supervision_line_bg_measure_constr
+//										.getRootView().getHeight();
+//								int heightDifference = screenHeight
+//										- (r.bottom - r.top);
+//								int resourceId = getResources()
+//										.getIdentifier("status_bar_height",
+//												"dimen", "android");
+//								if (resourceId > 0) {
+//									heightDifference -= getResources()
+//											.getDimensionPixelSize(resourceId);
+//								}
+//
+//								if (heightDifference > 0) {
+//									if (positionTouch >= heightDifference) {
+//										rl_supervision_line_bg_measure_constr
+//												.setScrollY(0);
+//									} else {
+//										if ((positionTouch + heightDifference) > screenHeight) {
+//											rl_supervision_line_bg_measure_constr.setScrollY(heightDifference
+//													- (screenHeight - (Math
+//															.round(positionTouch) + heightDifference)));
+//										} else
+//											rl_supervision_line_bg_measure_constr
+//													.setScrollY(heightDifference - 25);
+//									}
+//								} else {
+//									rl_supervision_line_bg_measure_constr
+//											.setScrollY(0);
+//								}
+//
+//							}
+//						});
 
 		lv_line_bg_measure_constr_list = (ListView) spvLineHG_MSConstrView
 				.findViewById(R.id.lv_line_bg_measure_constr_list);
@@ -205,16 +207,21 @@ public class Supervision_Line_HG_Measure_ConstrActivity extends
 		listMeasureConstr = supervisionMeasureController.getAllMeasureConstr(
 				itemConstrData.getSupervision_Constr_Id(),
 				Constants.MEASUREMENT_CONSTR_TYPE.MEASURE_LINE_HG);
-		List<Measurement_Detail_ConstrEntity> lstMearsureDetail = null;
+        Log.d(TAG, "refreshListView() called contruct Id = "
+                + itemConstrData.getSupervision_Constr_Id());
+        Log.d(TAG, "refreshListView() called listMeasureConstr size = " + listMeasureConstr.size());
+        List<Measurement_Detail_ConstrEntity> lstMearsureDetail = null;
 		for (Supervision_Measure_ConstrEntity curItem : listMeasureConstr) {
 			lstMearsureDetail = measurementDetailController
 					.getAllMeasureDetailyByMeasureDetailId(curItem
 							.getSupervisionMeasureConstrId());
+			Log.d(TAG, "refreshListView() called"
+					+ "lstMearsureDetail size = " + lstMearsureDetail.size());
 			curItem.setListMeasureDetail(lstMearsureDetail);
 		}
 
-		this.measureConstrAdapter = new Supervision_Line_BG_Measure_ConstrAdapter(
-				this, listMeasureConstr);
+		this.measureConstrAdapter
+                = new Supervision_Line_BG_Measure_ConstrAdapter(this, listMeasureConstr);
 		this.lv_line_bg_measure_constr_list.setAdapter(measureConstrAdapter);
 	}
 
@@ -333,10 +340,8 @@ public class Supervision_Line_HG_Measure_ConstrActivity extends
 			long idAddMeasure = 0;
 			long idAddMeasureDetail = 0;
 
-			supervisionMeasureController = new Supervision_Measure_ConstrController(
-					this);
-			measurementDetailController = new Measurement_Detail_ConstrController(
-					this);
+			supervisionMeasureController = new Supervision_Measure_ConstrController(this);
+			measurementDetailController = new Measurement_Detail_ConstrController(this);
 
 			for (Supervision_Measure_ConstrEntity curItem : listMeasureConstr) {
 				if (curItem.isNew()) {
@@ -493,14 +498,20 @@ public class Supervision_Line_HG_Measure_ConstrActivity extends
 		switch (requestCode) {
 		case Constants.GET_MEASURE_INFO:
 			if (resultCode == Activity.RESULT_OK) {
-				List<Measurement_Detail_ConstrEntity> listMeasureDetail = (List<Measurement_Detail_ConstrEntity>) data
-						.getSerializableExtra(IntentConstants.INTENT_LST_MEASURE_DETAIL);
+				List<Measurement_Detail_ConstrEntity> listMeasureDetail
+                        = (List<Measurement_Detail_ConstrEntity>) data.getSerializableExtra(
+                                IntentConstants.INTENT_LST_MEASURE_DETAIL);
 
-				List<Measurement_Detail_ConstrEntity> listDelMeasureDetail = (List<Measurement_Detail_ConstrEntity>) data
-						.getSerializableExtra(IntentConstants.INTENT_LST_DELETE_MEASURE_DETAIL);
-				this.curEditItem.getListMeasureDetail().clear();
+				List<Measurement_Detail_ConstrEntity> listDelMeasureDetail
+                        = (List<Measurement_Detail_ConstrEntity>) data.getSerializableExtra(
+                                IntentConstants.INTENT_LST_DELETE_MEASURE_DETAIL);
+				if (curEditItem.getListDelMeasureDetail() != null
+						&& curEditItem.getListDelMeasureDetail().size() > 0) {
+					this.curEditItem.getListMeasureDetail().clear();
+				}
 				this.curEditItem.setListMeasureDetail(listMeasureDetail);
-				this.curEditItem.setListDelMeasureDetail(listDelMeasureDetail);
+//                Log.d(TAG, "onActivityResult: listMeasureDetail size" + listMeasureDetail.size());
+                this.curEditItem.setListDelMeasureDetail(listDelMeasureDetail);
 
 				this.measureConstrAdapter.notifyDataSetChanged();
 			}

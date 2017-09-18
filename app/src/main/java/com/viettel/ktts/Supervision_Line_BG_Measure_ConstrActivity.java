@@ -90,7 +90,8 @@ public class Supervision_Line_BG_Measure_ConstrActivity extends
 	}
 
 	private void initView() {
-		spvLineBG_Mesure_ConstrView = addView(R.layout.supervision_line_bg_measure_constr_activity, R.id.rl_supervision_line_bg_measure_constr);
+		spvLineBG_Mesure_ConstrView = addView(R.layout.supervision_line_bg_measure_constr_activity,
+                R.id.rl_supervision_line_bg_measure_constr);
 		this.tv_constr_line_measure_constr_dropdown = (TextView) spvLineBG_Mesure_ConstrView
 				.findViewById(R.id.tv_constr_line_measure_constr_dropdown);
 		this.tv_constr_line_measure_constr_dropdown.setOnClickListener(this);
@@ -111,48 +112,48 @@ public class Supervision_Line_BG_Measure_ConstrActivity extends
 
 		rl_supervision_line_bg_measure_constr = (RelativeLayout) spvLineBG_Mesure_ConstrView
 				.findViewById(R.id.rl_supervision_line_bg_measure_constr);
-		this.rl_supervision_line_bg_measure_constr.getViewTreeObserver()
-				.addOnGlobalLayoutListener(
-						new ViewTreeObserver.OnGlobalLayoutListener() {
-
-							@Override
-							public void onGlobalLayout() {
-								Rect r = new Rect();
-								rl_supervision_line_bg_measure_constr
-										.getWindowVisibleDisplayFrame(r);
-
-								int screenHeight = rl_supervision_line_bg_measure_constr
-										.getRootView().getHeight();
-								int heightDifference = screenHeight
-										- (r.bottom - r.top);
-								int resourceId = getResources()
-										.getIdentifier("status_bar_height",
-												"dimen", "android");
-								if (resourceId > 0) {
-									heightDifference -= getResources()
-											.getDimensionPixelSize(resourceId);
-								}
-
-								if (heightDifference > 0) {
-									if (positionTouch >= heightDifference) {
-										rl_supervision_line_bg_measure_constr
-												.setScrollY(0);
-									} else {
-										if ((positionTouch + heightDifference) > screenHeight) {
-											rl_supervision_line_bg_measure_constr.setScrollY(heightDifference
-													- (screenHeight - (Math
-															.round(positionTouch) + heightDifference)));
-										} else
-											rl_supervision_line_bg_measure_constr
-													.setScrollY(heightDifference - 25);
-									}
-								} else {
-									rl_supervision_line_bg_measure_constr
-											.setScrollY(0);
-								}
-
-							}
-						});
+//		this.rl_supervision_line_bg_measure_constr.getViewTreeObserver()
+//				.addOnGlobalLayoutListener(
+//						new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//							@Override
+//							public void onGlobalLayout() {
+//								Rect r = new Rect();
+//								rl_supervision_line_bg_measure_constr
+//										.getWindowVisibleDisplayFrame(r);
+//
+//								int screenHeight = rl_supervision_line_bg_measure_constr
+//										.getRootView().getHeight();
+//								int heightDifference = screenHeight
+//										- (r.bottom - r.top);
+//								int resourceId = getResources()
+//										.getIdentifier("status_bar_height",
+//												"dimen", "android");
+//								if (resourceId > 0) {
+//									heightDifference -= getResources()
+//											.getDimensionPixelSize(resourceId);
+//								}
+//
+//								if (heightDifference > 0) {
+//									if (positionTouch >= heightDifference) {
+//										rl_supervision_line_bg_measure_constr
+//												.setScrollY(0);
+//									} else {
+//										if ((positionTouch + heightDifference) > screenHeight) {
+//											rl_supervision_line_bg_measure_constr.setScrollY(heightDifference
+//													- (screenHeight - (Math
+//															.round(positionTouch) + heightDifference)));
+//										} else
+//											rl_supervision_line_bg_measure_constr
+//													.setScrollY(heightDifference - 25);
+//									}
+//								} else {
+//									rl_supervision_line_bg_measure_constr
+//											.setScrollY(0);
+//								}
+//
+//							}
+//						});
 
 		lv_line_bg_measure_constr_list = (ListView) spvLineBG_Mesure_ConstrView
 				.findViewById(R.id.lv_line_bg_measure_constr_list);
@@ -371,7 +372,8 @@ public class Supervision_Line_BG_Measure_ConstrActivity extends
 					// them moi thong tin do chi tiet
 					for (Measurement_Detail_ConstrEntity itemAddDetail : curItem
 							.getListMeasureDetail()) {
-						Measurement_Detail_ConstrEntity itemDetail = new Measurement_Detail_ConstrEntity();
+						Measurement_Detail_ConstrEntity itemDetail
+                                = new Measurement_Detail_ConstrEntity();
 
 						idAddMeasureDetail = Ktts_KeyController
 								.getInstance()
@@ -421,7 +423,8 @@ public class Supervision_Line_BG_Measure_ConstrActivity extends
 										.updateItem(itemEditDetail);
 
 							} else {
-								Measurement_Detail_ConstrEntity itemDetail = new Measurement_Detail_ConstrEntity();
+								Measurement_Detail_ConstrEntity itemDetail
+                                        = new Measurement_Detail_ConstrEntity();
 
 								idAddMeasureDetail = Ktts_KeyController
 										.getInstance()
@@ -498,12 +501,17 @@ public class Supervision_Line_BG_Measure_ConstrActivity extends
 		switch (requestCode) {
 		case Constants.GET_MEASURE_INFO:
 			if (resultCode == Activity.RESULT_OK) {
-				List<Measurement_Detail_ConstrEntity> listMeasureDetail = (List<Measurement_Detail_ConstrEntity>) data
-						.getSerializableExtra(IntentConstants.INTENT_LST_MEASURE_DETAIL);
+				List<Measurement_Detail_ConstrEntity> listMeasureDetail
+                        = (List<Measurement_Detail_ConstrEntity>) data
+                        .getSerializableExtra(IntentConstants.INTENT_LST_MEASURE_DETAIL);
 
-				List<Measurement_Detail_ConstrEntity> listDelMeasureDetail = (List<Measurement_Detail_ConstrEntity>) data
+				List<Measurement_Detail_ConstrEntity> listDelMeasureDetail
+                        = (List<Measurement_Detail_ConstrEntity>) data
 						.getSerializableExtra(IntentConstants.INTENT_LST_DELETE_MEASURE_DETAIL);
-				this.curEditItem.getListMeasureDetail().clear();
+				if (curEditItem.getListMeasureDetail() != null
+						&& curEditItem.getListMeasureDetail().size() > 0) {
+					this.curEditItem.getListMeasureDetail().clear();
+				}
 				this.curEditItem.setListMeasureDetail(listMeasureDetail);
 				this.curEditItem.setListDelMeasureDetail(listDelMeasureDetail);
 

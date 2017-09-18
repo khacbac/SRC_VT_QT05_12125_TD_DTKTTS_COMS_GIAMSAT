@@ -89,14 +89,16 @@ public class ItemSupervision_Measure_Constr extends RelativeLayout implements
 			edt_supervision_measure_constr.setText(String
 					.valueOf(supvMeasureConstr.getName()));
 		}
-		
-		if(curItem.getListMeasureDetail().size() > 0){
-			item_view_detail.setImageDrawable(getResources()
-					.getDrawable(R.drawable.icon_measured));
-		} else {
-			item_view_detail.setImageDrawable(getResources()
-					.getDrawable(R.drawable.icon_measure));
-		}
+		if (curItem.getListDelMeasureDetail() == null) {
+            item_view_detail.setImageDrawable(getResources()
+                    .getDrawable(R.drawable.icon_measure));
+		} else if(curItem.getListMeasureDetail().size() > 0){
+            item_view_detail.setImageDrawable(getResources()
+                    .getDrawable(R.drawable.icon_measured));
+        } else {
+            item_view_detail.setImageDrawable(getResources()
+                    .getDrawable(R.drawable.icon_measure));
+        }
 		
 		item_delete.setImageDrawable(getResources()
 				.getDrawable(R.drawable.delete_item_detail));

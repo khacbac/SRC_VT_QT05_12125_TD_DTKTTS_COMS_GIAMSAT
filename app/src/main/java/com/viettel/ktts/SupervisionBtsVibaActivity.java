@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,7 +67,8 @@ import java.util.List;
 
 public class SupervisionBtsVibaActivity extends SupervisionBtsBaseActivity {
 
-	private View spvBts_VibaView;
+    private static final String TAG = SupervisionBtsVibaActivity.class.getSimpleName();
+    private View spvBts_VibaView;
 	/**
 	 * textview
 	 */
@@ -291,6 +293,14 @@ public class SupervisionBtsVibaActivity extends SupervisionBtsBaseActivity {
 	}
 
 	private TextView makeTabIndicator(String text) {
+		TelephonyManager manager = (TelephonyManager)this
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+			Log.d(TAG,"Tablet");
+		}else{
+			Log.d(TAG,"Mobile");
+			tabHeight = 120;
+		}
 		TextView tabView = new TextView(this);
 		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				tabHeight, 1);

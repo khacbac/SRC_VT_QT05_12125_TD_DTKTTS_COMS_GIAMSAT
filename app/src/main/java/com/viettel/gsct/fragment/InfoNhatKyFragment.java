@@ -90,25 +90,16 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
         super.initData();
         allListLogDate = new Constr_Work_LogsController((getContext()))
                 .getListLogDate(constr_ConstructionItem.getConstructId());
+
         if (allListLogDate.size() <= 0) {
             mScrollAllView.setVisibility(View.GONE);
             return;
         }
-        boolean hasDateNow = false;
-//        initDataWithDate(allListLogDate.get(allListLogDate.size() - 1));
-//        if (allListLogDate.size() > 0) {
-//            for (int i = 0; i < allListLogDate.size(); i++) {
-//                if (allListLogDate.get(i).equals(GSCTUtils.getDateNow())) {
-//                    initDataWithDate(GSCTUtils.getDateNow());
-//                    hasDateNow = true;
-//                    break;
-//                }
-//            }
-//            if (!hasDateNow) {
-//                initDataWithDate(allListLogDate.get(allListLogDate.size() - 1));
-//            }
-//        }
+        for (String logDate : allListLogDate) {
+            Log.d(TAG, "initData: logDate = " + logDate);
+        }
     }
+
 
     private void initDataWithDate(String date) {
         Constr_Work_LogsEntity entity = new Constr_Work_LogsController(getContext())
@@ -175,9 +166,9 @@ public class InfoNhatKyFragment extends BaseFragment implements AdapterView.OnIt
                 allListLogDate);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSwitchDate.setAdapter(adapter);
-        for (String str : allListLogDate) {
-            Log.d(TAG,"Date = " + GSCTUtils.standardlizeTime(str));
-        }
+//        for (String str : allListLogDate) {
+//            Log.d(TAG,"Date = " + GSCTUtils.standardlizeTime(str));
+//        }
         spinnerSwitchDate.setOnItemSelectedListener(this);
         if(allListLogDate.contains(GSCTUtils.getDateNow())) {
             spinnerSwitchDate.setSelection(allListLogDate.indexOf(GSCTUtils.getDateNow()));

@@ -155,47 +155,47 @@ public class Supervision_Line_BG_PipeActivity extends LineBaseActivity {
 
         this.rl_supervision_line_bg_pipe = (RelativeLayout) spvLineBG_PipeView.findViewById(R.id.rl_supervision_line_bg_pipe);
 
-        this.rl_supervision_line_bg_pipe.getViewTreeObserver()
-                .addOnGlobalLayoutListener(
-                        new ViewTreeObserver.OnGlobalLayoutListener() {
-
-                            @Override
-                            public void onGlobalLayout() {
-                                Rect r = new Rect();
-                                rl_supervision_line_bg_pipe
-                                        .getWindowVisibleDisplayFrame(r);
-
-                                int screenHeight = rl_supervision_line_bg_pipe
-                                        .getRootView().getHeight();
-                                int heightDifference = screenHeight
-                                        - (r.bottom - r.top);
-                                int resourceId = getResources()
-                                        .getIdentifier("status_bar_height",
-                                                "dimen", "android");
-                                if (resourceId > 0) {
-                                    heightDifference -= getResources()
-                                            .getDimensionPixelSize(resourceId);
-                                }
-
-                                if (heightDifference > 0) {
-                                    if (positionTouch >= heightDifference) {
-                                        rl_supervision_line_bg_pipe
-                                                .setScrollY(0);
-                                    } else {
-                                        if ((positionTouch + heightDifference) > screenHeight) {
-                                            rl_supervision_line_bg_pipe.setScrollY(heightDifference
-                                                    - (screenHeight - (Math
-                                                    .round(positionTouch) + heightDifference)));
-                                        } else
-                                            rl_supervision_line_bg_pipe
-                                                    .setScrollY(heightDifference - 25);
-                                    }
-                                } else {
-                                    rl_supervision_line_bg_pipe.setScrollY(0);
-                                }
-
-                            }
-                        });
+//        this.rl_supervision_line_bg_pipe.getViewTreeObserver()
+//                .addOnGlobalLayoutListener(
+//                        new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//                            @Override
+//                            public void onGlobalLayout() {
+//                                Rect r = new Rect();
+//                                rl_supervision_line_bg_pipe
+//                                        .getWindowVisibleDisplayFrame(r);
+//
+//                                int screenHeight = rl_supervision_line_bg_pipe
+//                                        .getRootView().getHeight();
+//                                int heightDifference = screenHeight
+//                                        - (r.bottom - r.top);
+//                                int resourceId = getResources()
+//                                        .getIdentifier("status_bar_height",
+//                                                "dimen", "android");
+//                                if (resourceId > 0) {
+//                                    heightDifference -= getResources()
+//                                            .getDimensionPixelSize(resourceId);
+//                                }
+//
+//                                if (heightDifference > 0) {
+//                                    if (positionTouch >= heightDifference) {
+//                                        rl_supervision_line_bg_pipe
+//                                                .setScrollY(0);
+//                                    } else {
+//                                        if ((positionTouch + heightDifference) > screenHeight) {
+//                                            rl_supervision_line_bg_pipe.setScrollY(heightDifference
+//                                                    - (screenHeight - (Math
+//                                                    .round(positionTouch) + heightDifference)));
+//                                        } else
+//                                            rl_supervision_line_bg_pipe
+//                                                    .setScrollY(heightDifference - 25);
+//                                    }
+//                                } else {
+//                                    rl_supervision_line_bg_pipe.setScrollY(0);
+//                                }
+//
+//                            }
+//                        });
 
     }
 

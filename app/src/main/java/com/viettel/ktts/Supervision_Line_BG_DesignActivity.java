@@ -196,46 +196,46 @@ public class Supervision_Line_BG_DesignActivity extends HomeBaseActivity {
 
 		rl_supervision_line_bg_design = (RelativeLayout) spvLineBG_DesignView
 				.findViewById(R.id.rl_supervision_line_bg_design);
-		rl_supervision_line_bg_design.getViewTreeObserver()
-				.addOnGlobalLayoutListener(
-						new ViewTreeObserver.OnGlobalLayoutListener() {
-
-							@Override
-							public void onGlobalLayout() {
-								Rect r = new Rect();
-								rl_supervision_line_bg_design
-										.getWindowVisibleDisplayFrame(r);
-
-								int screenHeight = rl_supervision_line_bg_design
-										.getRootView().getHeight();
-								int heightDifference = screenHeight
-										- (r.bottom - r.top);
-								int resourceId = getResources()
-										.getIdentifier("status_bar_height",
-												"dimen", "android");
-								if (resourceId > 0) {
-									heightDifference -= getResources()
-											.getDimensionPixelSize(resourceId);
-								}
-
-								if (heightDifference > 0) {
-									if (clickView
-											|| edt_constr_line_background_inter_value
-													.isFocused()
-											|| edt_constr_line_background_long_value
-													.isFocused()) {
-										rl_supervision_line_bg_design
-												.setScrollY(0);
-									} else {
-										rl_supervision_line_bg_design
-												.setScrollY(heightDifference - 25);
-									}
-
-								} else {
-									rl_supervision_line_bg_design.setScrollY(0);
-								}
-							}
-						});
+//		rl_supervision_line_bg_design.getViewTreeObserver()
+//				.addOnGlobalLayoutListener(
+//						new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//							@Override
+//							public void onGlobalLayout() {
+//								Rect r = new Rect();
+//								rl_supervision_line_bg_design
+//										.getWindowVisibleDisplayFrame(r);
+//
+//								int screenHeight = rl_supervision_line_bg_design
+//										.getRootView().getHeight();
+//								int heightDifference = screenHeight
+//										- (r.bottom - r.top);
+//								int resourceId = getResources()
+//										.getIdentifier("status_bar_height",
+//												"dimen", "android");
+//								if (resourceId > 0) {
+//									heightDifference -= getResources()
+//											.getDimensionPixelSize(resourceId);
+//								}
+//
+//								if (heightDifference > 0) {
+//									if (clickView
+//											|| edt_constr_line_background_inter_value
+//													.isFocused()
+//											|| edt_constr_line_background_long_value
+//													.isFocused()) {
+//										rl_supervision_line_bg_design
+//												.setScrollY(0);
+//									} else {
+//										rl_supervision_line_bg_design
+//												.setScrollY(heightDifference - 25);
+//									}
+//
+//								} else {
+//									rl_supervision_line_bg_design.setScrollY(0);
+//								}
+//							}
+//						});
 
 		this.edt_constr_line_background_startcode_value = (EditText) spvLineBG_DesignView
 				.findViewById(R.id.edt_constr_line_background_startcode_value);

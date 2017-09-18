@@ -160,47 +160,47 @@ public class Supervision_Line_BG_TankActivity extends LineBaseActivity {
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 		// final int heightScreen = displaymetrics.heightPixels;
 
-		this.rl_supervision_line_bg_tank.getViewTreeObserver()
-				.addOnGlobalLayoutListener(
-						new ViewTreeObserver.OnGlobalLayoutListener() {
-
-							@Override
-							public void onGlobalLayout() {
-								Rect r = new Rect();
-								rl_supervision_line_bg_tank
-										.getWindowVisibleDisplayFrame(r);
-
-								int screenHeight = rl_supervision_line_bg_tank
-										.getRootView().getHeight();
-								int heightDifference = screenHeight
-										- (r.bottom - r.top);
-								int resourceId = getResources()
-										.getIdentifier("status_bar_height",
-												"dimen", "android");
-								if (resourceId > 0) {
-									heightDifference -= getResources()
-											.getDimensionPixelSize(resourceId);
-								}
-
-								if (heightDifference > 0) {
-									if (positionTouch >= heightDifference) {
-										rl_supervision_line_bg_tank
-												.setScrollY(0);
-									} else {
-										if ((positionTouch + heightDifference) > screenHeight) {
-											rl_supervision_line_bg_tank.setScrollY(heightDifference
-													- (screenHeight - (Math
-															.round(positionTouch) + heightDifference)));
-										} else
-											rl_supervision_line_bg_tank
-													.setScrollY(heightDifference - 25);
-									}
-								} else {
-									rl_supervision_line_bg_tank.setScrollY(0);
-								}
-
-							}
-						});
+//		this.rl_supervision_line_bg_tank.getViewTreeObserver()
+//				.addOnGlobalLayoutListener(
+//						new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//							@Override
+//							public void onGlobalLayout() {
+//								Rect r = new Rect();
+//								rl_supervision_line_bg_tank
+//										.getWindowVisibleDisplayFrame(r);
+//
+//								int screenHeight = rl_supervision_line_bg_tank
+//										.getRootView().getHeight();
+//								int heightDifference = screenHeight
+//										- (r.bottom - r.top);
+//								int resourceId = getResources()
+//										.getIdentifier("status_bar_height",
+//												"dimen", "android");
+//								if (resourceId > 0) {
+//									heightDifference -= getResources()
+//											.getDimensionPixelSize(resourceId);
+//								}
+//
+//								if (heightDifference > 0) {
+//									if (positionTouch >= heightDifference) {
+//										rl_supervision_line_bg_tank
+//												.setScrollY(0);
+//									} else {
+//										if ((positionTouch + heightDifference) > screenHeight) {
+//											rl_supervision_line_bg_tank.setScrollY(heightDifference
+//													- (screenHeight - (Math
+//															.round(positionTouch) + heightDifference)));
+//										} else
+//											rl_supervision_line_bg_tank
+//													.setScrollY(heightDifference - 25);
+//									}
+//								} else {
+//									rl_supervision_line_bg_tank.setScrollY(0);
+//								}
+//
+//							}
+//						});
 	}
 
 	@Override

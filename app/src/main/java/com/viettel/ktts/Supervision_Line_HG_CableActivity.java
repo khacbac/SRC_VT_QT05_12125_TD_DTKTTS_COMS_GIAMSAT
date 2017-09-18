@@ -146,54 +146,54 @@ public class Supervision_Line_HG_CableActivity extends LineBaseActivity {
 		this.supervision_hg_cable_complete_date = (TextView) spvLineHG_CableView
 				.findViewById(R.id.supervision_hg_cable_complete_date);
 
-		this.rl_supervision_line_hg_cable.getViewTreeObserver()
-				.addOnGlobalLayoutListener(
-						new ViewTreeObserver.OnGlobalLayoutListener() {
-
-							@Override
-							public void onGlobalLayout() {
-								Rect r = new Rect();
-								rl_supervision_line_hg_cable
-										.getWindowVisibleDisplayFrame(r);
-
-								int screenHeight = rl_supervision_line_hg_cable
-										.getRootView().getHeight();
-								int heightDifference = screenHeight
-										- (r.bottom - r.top);
-								int resourceId = getResources()
-										.getIdentifier("status_bar_height",
-												"dimen", "android");
-								if (resourceId > 0) {
-									heightDifference -= getResources()
-											.getDimensionPixelSize(resourceId);
-								}
-
-								if (heightDifference > 0) {
-									// rl_supervision_line_hg_cable
-									// .setScrollY(
-									// heightDifference
-									// - Math.round(positionTouch)+ 15);
-									// rl_supervision_line_hg_cable
-									// .setScrollY(
-									// heightScreen - heightDifference - 30);
-									if (positionTouch >= heightDifference) {
-										rl_supervision_line_hg_cable
-												.setScrollY(0);
-									} else {
-										if ((positionTouch + heightDifference) > screenHeight) {
-											rl_supervision_line_hg_cable.setScrollY(heightDifference
-													- (screenHeight - (Math
-															.round(positionTouch) + heightDifference)));
-										} else
-											rl_supervision_line_hg_cable
-													.setScrollY(heightDifference - 25);
-									}
-								} else {
-									rl_supervision_line_hg_cable.setScrollY(0);
-								}
-
-							}
-						});
+//		this.rl_supervision_line_hg_cable.getViewTreeObserver()
+//				.addOnGlobalLayoutListener(
+//						new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//							@Override
+//							public void onGlobalLayout() {
+//								Rect r = new Rect();
+//								rl_supervision_line_hg_cable
+//										.getWindowVisibleDisplayFrame(r);
+//
+//								int screenHeight = rl_supervision_line_hg_cable
+//										.getRootView().getHeight();
+//								int heightDifference = screenHeight
+//										- (r.bottom - r.top);
+//								int resourceId = getResources()
+//										.getIdentifier("status_bar_height",
+//												"dimen", "android");
+//								if (resourceId > 0) {
+//									heightDifference -= getResources()
+//											.getDimensionPixelSize(resourceId);
+//								}
+//
+//								if (heightDifference > 0) {
+//									// rl_supervision_line_hg_cable
+//									// .setScrollY(
+//									// heightDifference
+//									// - Math.round(positionTouch)+ 15);
+//									// rl_supervision_line_hg_cable
+//									// .setScrollY(
+//									// heightScreen - heightDifference - 30);
+//									if (positionTouch >= heightDifference) {
+//										rl_supervision_line_hg_cable
+//												.setScrollY(0);
+//									} else {
+//										if ((positionTouch + heightDifference) > screenHeight) {
+//											rl_supervision_line_hg_cable.setScrollY(heightDifference
+//													- (screenHeight - (Math
+//															.round(positionTouch) + heightDifference)));
+//										} else
+//											rl_supervision_line_hg_cable
+//													.setScrollY(heightDifference - 25);
+//									}
+//								} else {
+//									rl_supervision_line_hg_cable.setScrollY(0);
+//								}
+//
+//							}
+//						});
 	}
 
 	@Override
@@ -481,12 +481,12 @@ public class Supervision_Line_HG_CableActivity extends LineBaseActivity {
 			// editTextPopup.showAtCenter();
 			// break;
 			case Constants.HG_CABLE_EDIT.UNQUALIFY:
-				if (this.curEditItem.getStatus() == Constants.SUPERVISION_STATUS.DAT || this.curEditItem.getStatus() == Constants.SUPERVISION_STATUS.CHUA_DANH_GIA
+				if (this.curEditItem.getStatus() == Constants.SUPERVISION_STATUS.DAT ||
+                        this.curEditItem.getStatus() == Constants.SUPERVISION_STATUS.CHUA_DANH_GIA
 				|| this.curEditItem.getStatus() == -1) {
 					Toast.makeText(
 							this,
-							StringUtil
-									.getString(R.string.line_hang_cable_cause_choice),
+							StringUtil.getString(R.string.line_hang_cable_cause_choice),
 							Toast.LENGTH_SHORT).show();
 				} else {
 					// Gan gia tri nguyen nhan loi
@@ -504,9 +504,8 @@ public class Supervision_Line_HG_CableActivity extends LineBaseActivity {
 				editTextPopup.showAtCenter();
 				break;
 			case Constants.HG_CABLE_EDIT.DELETE:
-				this.showAskOptionDialog(StringUtil
-						.getString(R.string.text_delete_title), StringUtil
-						.getString(R.string.line_bg_pipe_delete_message));
+				this.showAskOptionDialog(StringUtil.getString(R.string.text_delete_title),
+                        StringUtil.getString(R.string.line_bg_pipe_delete_message));
 				break;
 			default:
 				break;

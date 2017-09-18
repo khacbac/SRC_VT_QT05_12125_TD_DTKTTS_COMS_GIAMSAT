@@ -843,12 +843,15 @@ public abstract class BaseActivity extends AppCompatActivity
     public void getMeasureDetail(Supervision_Measure_ConstrEntity measureItem) {
         Intent intent = new Intent(this, GoogleMapActivity.class);
         Bundle bundleData = new Bundle();
-        bundleData.putSerializable(IntentConstants.INTENT_LST_MEASURE_DETAIL,
-                (Serializable) measureItem.getListMeasureDetail());
-        bundleData.putString(IntentConstants.INTENT_MEASURE_INFO, measureItem.getName());
+        if (measureItem.getListMeasureDetail() != null
+                && measureItem.getListMeasureDetail().size() > 0) {
+            bundleData.putSerializable(IntentConstants.INTENT_LST_MEASURE_DETAIL,
+                    (Serializable) measureItem.getListMeasureDetail());
+            bundleData.putString(IntentConstants.INTENT_MEASURE_INFO, measureItem.getName());
 
-        bundleData.putSerializable(IntentConstants.INTENT_LST_DELETE_MEASURE_DETAIL,
-                (Serializable) measureItem.getListDelMeasureDetail());
+            bundleData.putSerializable(IntentConstants.INTENT_LST_DELETE_MEASURE_DETAIL,
+                    (Serializable) measureItem.getListDelMeasureDetail());
+        }
 
         intent.putExtras(bundleData);
 //		intent.setComponent(

@@ -1,10 +1,12 @@
 package com.viettel.ktts;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -65,7 +67,8 @@ import java.util.List;
 
 public class SupervisionBtsCatWorkActivity extends SupervisionBtsBaseActivity
 		implements OnTabChangeListener {
-	private View spvBTS_CatWorkView;
+    private static final String TAG = SupervisionBtsCatWorkActivity.class.getSimpleName();
+    private View spvBTS_CatWorkView;
 	private Constr_Construction_EmployeeEntity constr_ConstructionItem;
 	private Supervision_BtsEntity btsEntity;
 
@@ -834,6 +837,14 @@ public class SupervisionBtsCatWorkActivity extends SupervisionBtsBaseActivity
 	}
 
 	private TextView makeTabIndicator(String text) {
+		TelephonyManager manager = (TelephonyManager)this
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+			Log.d(TAG,"Tablet");
+		}else{
+			Log.d(TAG,"Mobile");
+			tabHeight = 120;
+		}
 		TextView tabView = new TextView(this);
 		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				tabHeight, 1);

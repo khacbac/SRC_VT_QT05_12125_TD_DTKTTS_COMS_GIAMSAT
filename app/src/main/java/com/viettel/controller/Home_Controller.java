@@ -34,7 +34,9 @@ import com.viettel.ktts.Supervision_BRCD_Thongtintk_Activity;
 import com.viettel.ktts.Supervision_BRCD_TuNhanhActivity;
 import com.viettel.ktts.Supervision_BRCD_TuThueBaoActivity;
 import com.viettel.ktts.Supervision_CNDTC_Activity;
+import com.viettel.ktts.Supervision_Line_BG_CableActivity;
 import com.viettel.ktts.Supervision_Line_BG_DesignActivity;
+import com.viettel.ktts.Supervision_Line_BG_MXActivity;
 import com.viettel.ktts.Supervision_Line_BG_Measure_ConstrActivity;
 import com.viettel.ktts.Supervision_Line_BG_PipeActivity;
 import com.viettel.ktts.Supervision_Line_BG_SpecialActivity;
@@ -237,7 +239,7 @@ public class Home_Controller extends AbstractController {
 						break;
 					case Constants.LINE_BACKGROUND_INFO.KEO_CAP_INFO:
 						intent = new Intent(base,
-								Supervision_Line_BG_PipeActivity.class);
+								Supervision_Line_BG_CableActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_CableActivity"));
 						if (extras != null) {
@@ -247,7 +249,7 @@ public class Home_Controller extends AbstractController {
 						break;
 					case Constants.LINE_BACKGROUND_INFO.HAN_NOI_DO_KIEM_INFO:
 						intent = new Intent(base,
-								Supervision_Line_BG_PipeActivity.class);
+								Supervision_Line_BG_MXActivity.class);
 //				intent.setComponent(new ComponentName("com.viettel.ktts",
 //						"com.viettel.ktts.Supervision_Line_BG_MXActivity"));
 						if (extras != null) {

@@ -1,5 +1,6 @@
 package com.viettel.actionbar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -56,14 +57,15 @@ public class Edit_Text_Popup implements OnClickListener {
 	private String[] arrayChoise = { StringUtil.getString(R.string.text_copy),
 			StringUtil.getString(R.string.text_paste) };
 
-	@SuppressWarnings("static-access")
+	@SuppressLint("RtlHardcoded")
+    @SuppressWarnings("static-access")
 	public Edit_Text_Popup(Activity insertActivity, ViewGroup viewGroup,
 			String sData, int iInputType, boolean bMultiLine, int iMaxLength) {
 		this.popupActivity = insertActivity;
 		 myClipboard = (ClipboardManager)
 		 this.popupActivity.getSystemService(popupActivity.CLIPBOARD_SERVICE);
 		this.viewGroup = viewGroup;
-		this.sValue = sData;
+		this.sValue = ""+sData;
         onEvent = (OnEventControlListener) insertActivity;
 		// Inflate the popup_layout.xml
 		layoutInflater = (LayoutInflater) popupActivity
@@ -119,8 +121,7 @@ public class Edit_Text_Popup implements OnClickListener {
 					}
 				});
 
-		ViewGroup.LayoutParams lpEdittext = edt_edit_text_popup_value
-				.getLayoutParams();
+		ViewGroup.LayoutParams lpEdittext = edt_edit_text_popup_value.getLayoutParams();
 		switch (iInputType) {
 		case InputType.TYPE_NUMBER_FLAG_DECIMAL:
 			this.edt_edit_text_popup_value.setSingleLine(true);

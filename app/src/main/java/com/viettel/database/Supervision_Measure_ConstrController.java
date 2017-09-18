@@ -130,14 +130,15 @@ public class Supervision_Measure_ConstrController {
 	/* Lay danh sach do kich thuoc */
 	public List<Supervision_Measure_ConstrEntity> getAllMeasureConstr(
 			long idSupvConstr, int iType) {
-		List<Supervision_Measure_ConstrEntity> listItem = new ArrayList<Supervision_Measure_ConstrEntity>();
+		List<Supervision_Measure_ConstrEntity> listItem
+				= new ArrayList<Supervision_Measure_ConstrEntity>();
 		SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
 		Cursor cursor = db
 				.query(Supervision_Measure_ConstrField.TABLE_NAME,
 						allColumn,
 						Supervision_Measure_ConstrField.COLUMN_SUPERVISION_CONSTR_ID
-								+ " = ? AND "+Supervision_Measure_ConstrField.COLUMN_IS_ACTIVE+ " = ? AND "
-								+ Supervision_Measure_ConstrField.COLUMN_TYPE + " = ? ",
+								+ " = ? AND "+Supervision_Measure_ConstrField.COLUMN_IS_ACTIVE
+                                + " = ? AND " + Supervision_Measure_ConstrField.COLUMN_TYPE + " = ? ",
 						new String[] { String.valueOf(idSupvConstr),String.valueOf(Constants.IS_ACTIVE),
 							String.valueOf(iType)},
 						null,

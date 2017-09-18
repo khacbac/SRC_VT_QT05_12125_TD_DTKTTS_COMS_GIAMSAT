@@ -52,8 +52,7 @@ public class Supervision_Line_HG_CableAdapter extends BaseAdapter implements
 		View rowRoot = convertView;
 		ItemSupervision_Line_HG_Cable item;
 		if (rowRoot == null) {
-			rowRoot = inflate.inflate(R.layout.item_supervision_line_hg_cable,
-					null);
+			rowRoot = inflate.inflate(R.layout.item_supervision_line_hg_cable, null);
 			item = new ItemSupervision_Line_HG_Cable(context, rowRoot);
 			rowRoot.setTag(item);
 		} else {
@@ -72,7 +71,8 @@ public class Supervision_Line_HG_CableAdapter extends BaseAdapter implements
 			protected void publishResults(CharSequence constraint,
 					FilterResults results) {
 				// TODO Auto-generated method stub
-				listSearchSupervisionHgCable = (List<Supervision_Line_Hg_CableGSEntity>) results.values;
+				listSearchSupervisionHgCable
+						= (List<Supervision_Line_Hg_CableGSEntity>) results.values;
 				notifyDataSetChanged();
 			}
 
@@ -80,10 +80,10 @@ public class Supervision_Line_HG_CableAdapter extends BaseAdapter implements
 			protected FilterResults performFiltering(CharSequence constraint) {
 				// TODO Auto-generated method stub
 				FilterResults results = new FilterResults();
-				List<Supervision_Line_Hg_CableGSEntity> FilteredArrList = new ArrayList<Supervision_Line_Hg_CableGSEntity>();
+				List<Supervision_Line_Hg_CableGSEntity> FilteredArrList = new ArrayList<>();
 
 				if (listSearchSupervisionHgCable == null) {
-					listSearchSupervisionHgCable = new ArrayList<Supervision_Line_Hg_CableGSEntity>();
+					listSearchSupervisionHgCable = new ArrayList<>();
 				}
 				if (StringUtil.isNullOrEmpty(constraint.toString())) {
 
@@ -95,10 +95,8 @@ public class Supervision_Line_HG_CableAdapter extends BaseAdapter implements
 					for (int i = 0; i < listSupervisionLineHgCable.size(); i++) {
 						Supervision_Line_Hg_CableGSEntity data = listSupervisionLineHgCable
 								.get(i);
-						if (true) {
-							FilteredArrList.add(data);
-						}
-					}
+                        FilteredArrList.add(data);
+                    }
 					// set the Filtered result to return
 					results.count = FilteredArrList.size();
 					results.values = FilteredArrList;

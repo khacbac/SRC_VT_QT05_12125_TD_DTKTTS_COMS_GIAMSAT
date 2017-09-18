@@ -1,10 +1,12 @@
 package com.viettel.ktts;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
@@ -76,7 +78,7 @@ import java.util.List;
 
 public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements OnTabChangeListener {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = SupervisionBtsPillar.class.getSimpleName();
     private View spvBTS_PillarView;
     /**
      * textview
@@ -363,6 +365,14 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
     }
 
     private TextView makeTabIndicator(String text) {
+        TelephonyManager manager = (TelephonyManager)this
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+            Log.d(TAG,"Tablet");
+        }else{
+            Log.d(TAG,"Mobile");
+            tabHeight = 120;
+        }
         TextView tabView = new TextView(this);
         LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT,
                 tabHeight, 1);
@@ -1471,6 +1481,7 @@ public class SupervisionBtsPillar extends SupervisionBtsBaseActivity implements 
                         String sDesignTextValue = this.curEditItem
                                 .getSupervision_Bts_Pillar_AntenEntity()
                                 .getDimension_Design();
+                        Log.d(TAG, "onEvent: Thiet ke - sDesignText = " + sDesignTextValue);
                         editTextPopup = new Edit_Text_Popup(this, null,
                                 sDesignTextValue, InputType.TYPE_CLASS_TEXT, true, 100);
                         editTextPopup.showAtCenter();

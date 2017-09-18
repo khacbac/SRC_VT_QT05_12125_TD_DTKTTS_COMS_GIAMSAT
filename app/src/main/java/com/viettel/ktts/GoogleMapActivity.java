@@ -198,7 +198,6 @@ public class GoogleMapActivity extends HomeBaseActivity implements
 				} else {
 					super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 				}
-				return;
 			}
 		}
 	}
