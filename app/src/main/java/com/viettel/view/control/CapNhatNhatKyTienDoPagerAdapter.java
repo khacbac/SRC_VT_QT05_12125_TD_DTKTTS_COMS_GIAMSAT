@@ -4,10 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.viettel.gsct.activity.CapNhatNhatKyTienDoPreviewFragment;
-import com.viettel.gsct.fragment.BaseFragment;
-import com.viettel.gsct.fragment.BtsNhatkyFragment;
-import com.viettel.gsct.fragment.TruyenDanNgamTiendoFragment;
+import com.viettel.gsct.fragment.base.BaseFragment;
 
 /**
  * Created by doanLV4 on 8/26/2017.

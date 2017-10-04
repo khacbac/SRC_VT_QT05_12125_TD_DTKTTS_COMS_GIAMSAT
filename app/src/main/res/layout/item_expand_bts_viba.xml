@@ -19,7 +19,7 @@
             android:layout_weight="0.85"
             android:gravity="center"
             android:background="@drawable/bg_title"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_large_common" />
         
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.15"
             android:gravity="center"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:text="@string/rl_supervision_bts_body_row6_1_bt_save"
             android:textSize="@dimen/text_size_common" />
     </LinearLayout>
@@ -40,7 +40,7 @@
         android:id="@+id/supervision_bts_viba_tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin" >
+        android:layout_margin="@dimen/margin5" >
 
         <LinearLayout
             android:layout_width="match_parent"

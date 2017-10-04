@@ -9,10 +9,9 @@ import android.util.Log;
 import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Work_ItemsField;
-import com.viettel.gsct.GSCTUtils;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Created by hieppq3 on 4/26/17.
@@ -176,12 +175,25 @@ public class Work_ItemsControler {
         if (cursor.moveToFirst()) {
             do {
                 Work_ItemsEntity curItem = this.converCursorToItem(cursor);
+                Log.d(TAG, "getItems: From Controler - Name = " + curItem.getWork_item_name());
                 ret.add(curItem);
             } while (cursor.moveToNext());
         }
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
         return ret;
+    }
+
+    public ArrayList<String> getListColumn() {
+        ArrayList<String> allColums = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Work_ItemsField.TABLE_NAME, null, null, null, null, null, null);
+        String[] columns = cursor.getColumnNames();
+        Collections.addAll(allColums, columns);
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return allColums;
     }
 
     public Work_ItemsEntity getItem(long constructId, long cat_work_item_id) {

@@ -22,7 +22,7 @@
         android:layout_marginBottom="@dimen/dialog_min_height"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:padding="@dimen/margin" >
+        android:padding="@dimen/margin5" >
 
         <Button
             android:id="@+id/btn_popup_save_plan"

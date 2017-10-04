@@ -32,7 +32,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/rl_line_hg_mx_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:fillViewport="true" >
 
@@ -40,7 +40,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding2" >
+            android:padding="@dimen/padding1" >
 
             <LinearLayout
                 android:id="@+id/ll_constr_line_hang_design_type_info"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_layout"
                 android:orientation="vertical"
-                android:padding="@dimen/padding2" >
+                android:padding="@dimen/padding1" >
 
                 <LinearLayout
                     android:id="@+id/ll_line_hg_mx_info"
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="@dimen/padding" >
+                    android:padding="@dimen/padding5" >
 
                     <TextView
                         android:id="@+id/tv_line_hg_mx_info_title"
@@ -112,7 +112,7 @@
                             android:layout_marginLeft="@dimen/margin_left"
                             android:background="@drawable/bg_title"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/text_padding"
+                            android:padding="@dimen/padding5"
                             android:singleLine="true"
                             android:text="AGG0002_AGG0002"
                             android:textSize="@dimen/text_size_common" />
@@ -143,7 +143,7 @@
                             android:layout_marginLeft="@dimen/margin_left"
                             android:background="@drawable/bg_title"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/text_padding"
+                            android:padding="@dimen/padding5"
                             android:singleLine="true"
                             android:text="ML ABC DDD"
                             android:textSize="@dimen/text_size_common" />
@@ -154,7 +154,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:background="@drawable/border_layout" >
 
                 <LinearLayout
@@ -201,7 +201,7 @@
                     android:id="@+id/tabHost"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/margin" >
+                    android:layout_margin="@dimen/margin5" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -225,9 +225,9 @@
                                 android:id="@+id/ll_line_hg_mx_mxkhongdat"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="@dimen/margin"
-                                android:layout_marginRight="@dimen/margin"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginLeft="@dimen/margin5"
+                                android:layout_marginRight="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:orientation="vertical" >
 
                                 <LinearLayout
@@ -312,7 +312,7 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:orientation="horizontal" >
 
                                         <TextView
@@ -338,7 +338,7 @@
                                                 style="@style/vOfficeeditTextView"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="@dimen/drop_box_heigh"
-                                                android:layout_marginRight="@dimen/margin"
+                                                android:layout_marginRight="@dimen/margin5"
                                                 android:drawableRight="@drawable/icon_combo"
                                                 android:gravity="center_vertical"
                                                 android:text="@string/line_hang_info_line_design"
@@ -367,7 +367,7 @@
                                             style="@style/vOfficeeditText"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:layout_weight="0.7"
                                             android:ems="10"
                                             android:hint="@string/line_hg_mx_dk_nguoido"
@@ -398,7 +398,7 @@
                                             style="@style/vOfficeeditText"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:layout_weight="0.7"
                                             android:ems="10"
                                             android:hint="@string/line_hg_mx_dk_maydo"
@@ -428,7 +428,7 @@
                                             style="@style/vOfficeeditText"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:layout_weight="0.7"
                                             android:ems="10"
                                             android:hint="@string/line_hg_mx_dk_donvi"
@@ -458,7 +458,7 @@
                                             style="@style/vOfficeeditText"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:layout_weight="0.7"
                                             android:ems="10"
                                             android:hint="@string/line_hg_mx_dk_sdt"
@@ -488,7 +488,7 @@
                                             style="@style/vOfficeeditText"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:layout_weight="0.7"
                                             android:ems="10"
                                             android:hint="@string/line_hg_mx_dk_serialmay"
@@ -501,7 +501,7 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:layout_weight="0.5"
                                     android:baselineAligned="false"
                                     android:orientation="vertical" >

@@ -87,7 +87,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/textView2"
@@ -105,7 +105,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/tv_thicong"
@@ -152,7 +152,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             style="@style/Content.Textview.Info"
@@ -168,7 +168,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border_right_bottom_left"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/tv_thoitiet"
@@ -191,7 +191,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             style="@style/Content.Textview.Info"
@@ -207,7 +207,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border_right_bottom_left"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/tvNoiDungCongViec"
@@ -230,7 +230,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             style="@style/Content.Textview.Info"
@@ -246,7 +246,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border_right_bottom_left"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/tv_thaydoi"
@@ -269,7 +269,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             style="@style/Content.Textview.Info"
@@ -285,7 +285,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border_right_bottom_left"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/tv_giam_sat"
@@ -308,7 +308,7 @@
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/textView"
@@ -325,7 +325,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border_right_bottom_left"
                         android:orientation="horizontal"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
 
                         <TextView
                             android:id="@+id/tv_y_kien_thi_cong"

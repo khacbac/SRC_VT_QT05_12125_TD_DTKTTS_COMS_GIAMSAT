@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.7"
             android:gravity="right|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_ttb_stt"
@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:text="@string/line_cable_type_mot"
                 android:textSize="@dimen/text_size_common"
@@ -40,7 +40,7 @@
             android:layout_weight="1.4"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_name_ttb"
@@ -58,7 +58,7 @@
             android:layout_height="@dimen/text_box_heigh"
             android:layout_weight="1.4"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <EditText
                 android:id="@+id/edt_supervision_brcd_ttb_macap"
@@ -67,7 +67,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:focusableInTouchMode="true"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
@@ -79,7 +79,7 @@
             android:layout_weight="1.6"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_cab_type_ttb"
@@ -98,7 +98,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.6"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <Button
                 android:id="@+id/bt_supervision_brcd_ttb_map"
@@ -156,7 +156,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.07"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <com.viettel.view.control.VNMTextViewNnkd
                 android:id="@+id/edt_supervision_brcd_ttb_nnkhongdat"
@@ -166,7 +166,7 @@
                 android:layout_marginLeft="@dimen/margin_left"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -177,7 +177,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.07"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_ttb_diengiai"
@@ -186,7 +186,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />

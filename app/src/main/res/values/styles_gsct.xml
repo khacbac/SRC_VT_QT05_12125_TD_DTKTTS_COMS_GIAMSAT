@@ -45,6 +45,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Header.Textview.Title" parent="Header">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/border_top_right_bottom_left</item>
+    </style>
+
     <style name="Content.Textview.Info" parent="Header">
         <item name="android:layout_marginRight">8dp</item>
         <item name="android:textStyle">bold</item>
@@ -123,8 +130,25 @@
         <item name="android:background">@drawable/edit_hight_light</item>
         <item name="android:layout_height">@dimen/text_box_heigh</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:padding">@dimen/padding</item>
+        <item name="android:padding">@dimen/padding5</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="vOfficeeditTextNumber" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/edit_hight_light</item>
+        <item name="android:layout_height">@dimen/gpon_edittext_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/padding5</item>
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:layout_marginLeft">@dimen/margin5</item>
+        <item name="android:layout_marginRight">@dimen/margin5</item>
+        <item name="android:layout_marginTop">@dimen/margin2</item>
+        <item name="android:layout_marginBottom">@dimen/margin2</item>
+    </style>
+
 </resources>

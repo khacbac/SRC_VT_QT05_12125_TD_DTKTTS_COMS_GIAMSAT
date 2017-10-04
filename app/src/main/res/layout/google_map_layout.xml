@@ -51,7 +51,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="@dimen/margin5"
                 android:baselineAligned="false"
                 android:orientation="horizontal" >
 
@@ -73,7 +73,7 @@
                     android:layout_weight="0.6"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:text="B001"
                     android:textSize="@dimen/text_size_common" />
             </LinearLayout>
@@ -81,7 +81,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="@dimen/margin5"
                 android:baselineAligned="false"
                 android:orientation="horizontal" >
 
@@ -103,7 +103,7 @@
                     android:layout_weight="0.6"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:text="B001"
                     android:textSize="@dimen/text_size_common" />
             </LinearLayout>
@@ -111,7 +111,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="@dimen/margin5"
                 android:baselineAligned="false"
                 android:orientation="horizontal" >
 
@@ -133,7 +133,7 @@
                     android:layout_weight="0.6"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:text="B001"
                     android:textSize="@dimen/text_size_common" />
             </LinearLayout>
@@ -141,7 +141,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="@dimen/margin5"
                 android:baselineAligned="false"
                 android:gravity="center_vertical|center_horizontal"
                 android:orientation="horizontal" >

@@ -15,7 +15,7 @@
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding"
+        android:layout_margin="@dimen/padding5"
         android:text="@string/input_plan_description" />
 
     <ImageView

@@ -37,17 +37,17 @@
         android:layout_below="@+id/rl_constr_line_tank_rootmenu"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <LinearLayout
             android:id="@+id/ll_constr_line_tank_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:background="@drawable/border_layout"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_constr_line_tank_info_title"
@@ -104,7 +104,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:text="AGG0002_AGG0002"
                     android:textSize="@dimen/text_size_common" />
@@ -134,7 +134,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:text="ML ABC DDD"
                     android:textSize="@dimen/text_size_common" />
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_constr_line_tank_rootmenu"
                 android:orientation="vertical"
-                android:padding="@dimen/padding" >
+                android:padding="@dimen/padding5" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -184,7 +184,7 @@
                             android:layout_toRightOf="@+id/textView1"
                             android:background="@drawable/bg_title"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/text_padding"
+                            android:padding="@dimen/padding5"
                             android:singleLine="true"
                             android:text="SC01"
                             android:textSize="@dimen/text_size_common" />
@@ -199,7 +199,7 @@
                             android:layout_marginRight="29dp"
                             android:filterTouchesWhenObscured="true"
                             android:gravity="center"
-                            android:padding="@dimen/padding"
+                            android:padding="@dimen/padding5"
                             android:text="@string/text_back" />
 
                         <Button
@@ -212,7 +212,7 @@
                             android:layout_toLeftOf="@+id/bt_giamsat_drop_back"
                             android:filterTouchesWhenObscured="true"
                             android:gravity="center"
-                            android:padding="@dimen/padding"
+                            android:padding="@dimen/padding5"
                             android:text="@string/text_save" />
 
                         <Button

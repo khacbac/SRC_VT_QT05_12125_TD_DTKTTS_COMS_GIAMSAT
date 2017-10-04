@@ -923,4 +923,10 @@ public class Constants {
 	public static final String LAP_DUNG = "LD";
 	public static final String THIET_BI = "TB";
 	//---
+	//--- Work item Gpon tien do.
+	public static final String KEO_CAP = "KEO CAP";
+	public static final String LAPDAT_HANNOI = "LAP DAT HAN NOI";
+	public static final String LAPDAT_ODF = "LAP DAT ODF";
+	public static final String LAPDAT_OLT = "LAP DAT OLT";
+	public static final String DOKIEM_NGHIEMTHU = "DO KIEM NGHIEM THU";
 }

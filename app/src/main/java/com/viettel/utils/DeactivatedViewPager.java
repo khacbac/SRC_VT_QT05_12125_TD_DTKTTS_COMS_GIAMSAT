@@ -22,18 +22,12 @@ public class DeactivatedViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!mIsEnabledSwipe) {
-            return false;
-        }
-        return super.onTouchEvent(event);
+        return mIsEnabledSwipe && super.onTouchEvent(event);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        if (!mIsEnabledSwipe) {
-            return false;
-        }
-        return super.onInterceptTouchEvent(event);
+        return mIsEnabledSwipe && super.onInterceptTouchEvent(event);
     }
 
     public void setEnabledSwipe(boolean enabled) {

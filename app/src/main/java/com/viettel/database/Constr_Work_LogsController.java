@@ -9,7 +9,6 @@ import android.util.Log;
 import com.viettel.database.entity.Constr_Work_LogsEntity;
 import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Constr_Work_LogsField;
-import com.viettel.gsct.GSCTUtils;
 
 import java.util.ArrayList;
 import java.util.List;

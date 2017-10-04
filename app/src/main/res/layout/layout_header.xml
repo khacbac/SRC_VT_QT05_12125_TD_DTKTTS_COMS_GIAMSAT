@@ -70,6 +70,8 @@
             android:id="@+id/tv_ma_cong_trinh"
             style="@style/Header.Textview_Disable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"/>
     </LinearLayout>
 </LinearLayout>

@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_supervision_bts_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.1"
             android:text="@string/supervision_bts_tt"
             android:textSize="@dimen/text_size_common"
@@ -85,7 +85,7 @@
             android:id="@+id/rl_supervision_bts_cat_work_tv_matram"
             android:layout_width="0dp"
             android:layout_height="@dimen/drop_box_heigh"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.2"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
@@ -121,12 +121,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_supervision_bts_catwork_header"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin5"
+        android:layout_marginLeft="@dimen/margin5"
+        android:layout_marginRight="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:filterTouchesWhenObscured="true"
                         android:gravity="center"
-                        android:padding="@dimen/padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/rl_constr_bt_complete"
                         android:textSize="@dimen/text_size_common" />
 
@@ -172,7 +172,7 @@
                 android:id="@+id/supervision_bts_cat_work_tabhost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin" >
+                android:layout_margin="@dimen/margin5" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -202,14 +202,14 @@
                             android:id="@+id/supervision_bts_catwork_tl_thicongphongmay"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical" >
 
                             <RelativeLayout
                                 android:id="@+id/supervision_bts_catwork_notification_pm"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:orientation="vertical"
                                 android:visibility="invisible" >
 
@@ -238,7 +238,7 @@
                                         android:id="@+id/supervision_bts_pm_complete_date"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:text="@string/supervision_date_complete"
                                         android:textSize="@dimen/text_size_common"
                                         android:textStyle="bold"
@@ -248,10 +248,10 @@
                                     <TableLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:background="@drawable/border_top_right_bottom_left"
                                         android:gravity="center_vertical"
-                                        android:padding="@dimen/padding"
+                                        android:padding="@dimen/padding5"
                                         android:shrinkColumns="*"
                                         android:stretchColumns="1,3" >
 
@@ -259,8 +259,8 @@
                                             android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row1"
                                             android:layout_width="match_parent"
                                             android:layout_height="@dimen/table_row_height"
-                                            android:layout_marginBottom="@dimen/margin"
-                                            android:layout_marginTop="@dimen/margin"
+                                            android:layout_marginBottom="@dimen/margin5"
+                                            android:layout_marginTop="@dimen/margin5"
                                             android:gravity="center_vertical" >
 
                                             <TextView
@@ -269,7 +269,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.1"
                                                 android:gravity="center_vertical|left"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -297,7 +297,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.2"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -317,7 +317,7 @@
                                                     android:layout_width="250dp"
                                                     android:layout_height="40dp"
                                                     android:gravity="center"
-                                                    android:padding="@dimen/padding"
+                                                    android:padding="@dimen/padding5"
                                                     android:singleLine="true" />
                                             </RelativeLayout>
                                         </TableRow>
@@ -326,8 +326,8 @@
                                             android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_row2"
                                             android:layout_width="fill_parent"
                                             android:layout_height="@dimen/table_row_height"
-                                            android:layout_marginBottom="@dimen/margin"
-                                            android:layout_marginTop="@dimen/margin"
+                                            android:layout_marginBottom="@dimen/margin5"
+                                            android:layout_marginTop="@dimen/margin5"
                                             android:gravity="center_vertical" >
 
                                             <TextView
@@ -336,7 +336,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.1"
                                                 android:gravity="center_vertical|left"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -369,7 +369,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc"
                                         android:textSize="@dimen/text_size_common"
                                         android:textStyle="bold" />
@@ -377,11 +377,11 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:background="@drawable/border_top_right_bottom_left"
                                         android:gravity="center_vertical"
                                         android:orientation="horizontal"
-                                        android:padding="@dimen/padding" >
+                                        android:padding="@dimen/padding5" >
 
                                         <TextView
                                             android:id="@+id/supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke"
@@ -389,7 +389,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -418,7 +418,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_tv_thucte"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -438,7 +438,7 @@
                                                 android:layout_width="250dp"
                                                 android:layout_height="40dp"
                                                 android:inputType="text"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:singleLine="true" />
                                         </RelativeLayout>
                                     </LinearLayout>
@@ -450,14 +450,14 @@
                             android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical" >
 
                             <RelativeLayout
                                 android:id="@+id/supervision_bts_catwork_notification_nmn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:orientation="vertical"
                                 android:visibility="invisible" >
 
@@ -486,7 +486,7 @@
                                         android:id="@+id/supervision_bts_nmn_complete_date"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:text="@string/supervision_date_complete"
                                         android:textSize="@dimen/text_size_common"
                                         android:textStyle="bold"
@@ -496,10 +496,10 @@
                                     <TableLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:background="@drawable/border_top_right_bottom_left"
                                         android:gravity="center_vertical"
-                                        android:padding="@dimen/padding"
+                                        android:padding="@dimen/padding5"
                                         android:shrinkColumns="*"
                                         android:stretchColumns="1,3" >
 
@@ -507,8 +507,8 @@
                                             android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row1"
                                             android:layout_width="match_parent"
                                             android:layout_height="@dimen/table_row_height"
-                                            android:layout_marginBottom="@dimen/margin"
-                                            android:layout_marginTop="@dimen/margin"
+                                            android:layout_marginBottom="@dimen/margin5"
+                                            android:layout_marginTop="@dimen/margin5"
                                             android:gravity="center_vertical" >
 
                                             <TextView
@@ -517,7 +517,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.1"
                                                 android:gravity="center_vertical|left"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -545,7 +545,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.2"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -565,7 +565,7 @@
                                                     android:layout_width="250dp"
                                                     android:layout_height="40dp"
                                                     android:gravity="center"
-                                                    android:padding="@dimen/padding"
+                                                    android:padding="@dimen/padding5"
                                                     android:singleLine="true" />
                                             </RelativeLayout>
                                         </TableRow>
@@ -574,8 +574,8 @@
                                             android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_row2"
                                             android:layout_width="fill_parent"
                                             android:layout_height="@dimen/table_row_height"
-                                            android:layout_marginBottom="@dimen/margin"
-                                            android:layout_marginTop="@dimen/margin"
+                                            android:layout_marginBottom="@dimen/margin5"
+                                            android:layout_marginTop="@dimen/margin5"
                                             android:gravity="center_vertical" >
 
                                             <TextView
@@ -584,7 +584,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.1"
                                                 android:gravity="center_vertical|left"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -617,7 +617,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc"
                                         android:textSize="@dimen/text_size_common"
                                         android:textStyle="bold" />
@@ -625,11 +625,11 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:background="@drawable/border_top_right_bottom_left"
                                         android:gravity="center_vertical"
                                         android:orientation="horizontal"
-                                        android:padding="@dimen/padding" >
+                                        android:padding="@dimen/padding5" >
 
                                         <TextView
                                             android:id="@+id/supervision_bts_catwork_tl_thicongnhamayno_size_drc_thietke"
@@ -637,7 +637,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_thietke"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -666,7 +666,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_catwork_tl_thicongphongmay_size_drc_tv_thucte"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -686,7 +686,7 @@
                                                 android:layout_width="250dp"
                                                 android:layout_height="40dp"
                                                 android:inputType="text"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:singleLine="true" />
                                         </RelativeLayout>
                                     </LinearLayout>
@@ -698,14 +698,14 @@
                             android:id="@+id/supervision_bts_catwork_tl_thicongkeodaydien"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical" >
 
                             <RelativeLayout
                                 android:id="@+id/supervision_bts_catwork_notification_keodaydien"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:orientation="vertical"
                                 android:visibility="invisible" >
 
@@ -734,7 +734,7 @@
                                         android:id="@+id/supervision_bts_kdd_complete_date"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:text="@string/supervision_date_complete"
                                         android:textSize="@dimen/text_size_common"
                                         android:textStyle="bold"
@@ -744,10 +744,10 @@
                                     <TableLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/margin"
+                                        android:layout_margin="@dimen/margin5"
                                         android:background="@drawable/border_top_right_bottom_left"
                                         android:gravity="center_vertical"
-                                        android:padding="@dimen/padding"
+                                        android:padding="@dimen/padding5"
                                         android:shrinkColumns="*"
                                         android:stretchColumns="1,3" >
 
@@ -755,8 +755,8 @@
                                             android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row1"
                                             android:layout_width="match_parent"
                                             android:layout_height="@dimen/table_row_height"
-                                            android:layout_marginBottom="@dimen/margin"
-                                            android:layout_marginTop="@dimen/margin"
+                                            android:layout_marginBottom="@dimen/margin5"
+                                            android:layout_marginTop="@dimen/margin5"
                                             android:gravity="center_vertical" >
 
                                             <TextView
@@ -765,7 +765,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.1"
                                                 android:gravity="center_vertical|left"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_trangthai"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -793,7 +793,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.2"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row1_nnkd"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -813,7 +813,7 @@
                                                     android:layout_width="250dp"
                                                     android:layout_height="40dp"
                                                     android:gravity="center"
-                                                    android:padding="@dimen/padding"
+                                                    android:padding="@dimen/padding5"
                                                     android:singleLine="true" />
                                             </RelativeLayout>
                                         </TableRow>
@@ -822,8 +822,8 @@
                                             android:id="@+id/supervision_bts_catwork_tl_thicongkeoday_row2"
                                             android:layout_width="fill_parent"
                                             android:layout_height="@dimen/table_row_height"
-                                            android:layout_marginBottom="@dimen/margin"
-                                            android:layout_marginTop="@dimen/margin"
+                                            android:layout_marginBottom="@dimen/margin5"
+                                            android:layout_marginTop="@dimen/margin5"
                                             android:gravity="center_vertical" >
 
                                             <TextView
@@ -833,7 +833,7 @@
                                                 android:layout_weight="0.1"
                                                 android:gravity="center_vertical|left"
                                                 android:maxLength="200"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/supervision_bts_catwork_tl_thicongphongmay_row2_diengiai"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />
@@ -862,7 +862,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.2"
-                                                android:paddingLeft="@dimen/padding"
+                                                android:paddingLeft="@dimen/padding5"
                                                 android:text="@string/rl_supervision_bts_catwork_tl_thicongkeoday_row2_tv_loaididay"
                                                 android:textSize="@dimen/text_size_common"
                                                 android:textStyle="normal" />

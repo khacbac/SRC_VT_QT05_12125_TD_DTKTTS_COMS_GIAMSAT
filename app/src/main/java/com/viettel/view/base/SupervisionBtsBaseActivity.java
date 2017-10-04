@@ -24,7 +24,7 @@ import com.viettel.database.entity.Cause_Bts_Power_PoleEntity;
 import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
 import com.viettel.database.entity.Supervision_BtsEntity;
 import com.viettel.database.entity.Supervision_Bts_MeasureEntity;
-import com.viettel.gsct.activity.BtsActivity;
+import com.viettel.gsct.activity.bts.BtsActivity;
 import com.viettel.ktts.R;
 import com.viettel.utils.StringUtil;
 

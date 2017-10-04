@@ -7,7 +7,7 @@
     android:layout_gravity="center_vertical"
     android:checkMark="?android:attr/listChoiceIndicatorMultiple"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:paddingLeft="@dimen/padding" >
+    android:paddingLeft="@dimen/padding5" >
 
 </CheckedTextView>
 <!-- android:id="@android:id/text1" -->

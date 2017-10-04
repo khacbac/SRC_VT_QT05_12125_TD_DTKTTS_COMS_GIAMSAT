@@ -34,9 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_constr_construction_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <TableRow
@@ -49,7 +49,7 @@
                 android:id="@+id/trl_constr_construction_search_row1_tv_mct"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginRight="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_macongtrinh"
                 android:textSize="@dimen/text_size_common" />
@@ -69,7 +69,7 @@
                 android:id="@+id/trl_constr_construction_search_row1_tv_lct"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_loaicongtrinh"
                 android:textSize="@dimen/text_size_common" />
@@ -95,7 +95,7 @@
                 android:id="@+id/trl_constr_construction_search_row1_tv_tt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_trangthai" />
 
@@ -119,7 +119,7 @@
                 android:id="@+id/trl_constr_construction_search_row1_tv_td"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin5"
                 android:layout_weight="0.08"
                 android:text="@string/constr_sonstruction_list_tiendo" />
 
@@ -151,7 +151,7 @@
                 android:id="@+id/trl_constr_construction_search_row3_tv_matram"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginRight="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_matram" />
 
@@ -170,7 +170,7 @@
                 android:id="@+id/trl_constr_construction_search_row3_tv_matuyen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginRight="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_matuyen" />
 
@@ -189,7 +189,7 @@
                 android:id="@+id/trl_constr_construction_search_row4_tv_diemdau"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_diemdau" />
 
@@ -208,7 +208,7 @@
                 android:id="@+id/trl_constr_construction_search_row4_tv_diemcuoi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:layout_weight="0.1"
                 android:text="@string/constr_sonstruction_diemcuoi" />
 
@@ -227,7 +227,7 @@
                 android:id="@+id/rl_constr_construction_space"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:layout_weight="0.5" >
             </RelativeLayout>
 
@@ -254,11 +254,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_constr_construction_search"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin5"
+        android:layout_marginLeft="@dimen/margin5"
+        android:layout_marginRight="@dimen/margin5"
         android:background="@drawable/border_layout"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <LinearLayout
             android:id="@+id/ll_constr_construction_header"

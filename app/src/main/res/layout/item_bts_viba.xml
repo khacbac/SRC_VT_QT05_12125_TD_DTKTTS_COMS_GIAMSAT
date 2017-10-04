@@ -27,7 +27,7 @@
             android:background="@drawable/icon_textbox"
             android:gravity="left|center_vertical"
             android:hint="@string/text_empty"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:singleLine="true"
             android:textSize="@dimen/text_size_common"
             android:textStyle="bold" /> 
@@ -64,8 +64,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <com.viettel.view.control.VNMTextViewNnkd
             android:id="@+id/edt_supervision_bts_viba_nn_khongdat"
@@ -74,7 +74,7 @@
             android:gravity="center"
             style="@style/vOfficeeditTextView"
             android:hint="@string/text_empty"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:singleLine="true"
             android:textSize="@dimen/text_size_common"
             android:textStyle="bold" /> 
@@ -85,8 +85,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <TextView
             android:id="@+id/edt_supervision_bts_viba_diengiai"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" /> 
     </RelativeLayout> 

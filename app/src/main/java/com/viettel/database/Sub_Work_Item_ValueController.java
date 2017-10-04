@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Sub_Work_Item_ValueField;
-import com.viettel.gsct.GSCTUtils;
+import com.viettel.gsct.utils.GSCTUtils;
 
 /**
  * Created by hieppq3 on 4/26/17.

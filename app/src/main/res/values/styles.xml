@@ -75,13 +75,13 @@
         <item name="android:background">@drawable/edit_hight_light</item>
         <item name="android:layout_height">@dimen/text_box_heigh</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:padding">@dimen/padding</item>
+        <item name="android:padding">@dimen/padding5</item>
     </style>
     
     
     <style name="ViettelTextView" parent="@android:style/Widget.TextView">
         <item name="android:background">@drawable/edit_hight_light</item>
-        <item name="android:padding">@dimen/padding</item>
+        <item name="android:padding">@dimen/padding5</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -89,7 +89,7 @@
         <item name="android:background">@drawable/edit_hight_light</item>
         <item name="android:layout_height">@dimen/text_box_heigh</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:paddingRight">@dimen/padding</item>
+        <item name="android:paddingRight">@dimen/padding5</item>
     </style>
 
 

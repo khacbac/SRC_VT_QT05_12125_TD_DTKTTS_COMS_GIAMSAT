@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:gravity="center_horizontal|center_vertical" >
 
             <EditText
@@ -28,7 +28,7 @@
                 style="@style/vOfficeeditText"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:gravity="center_horizontal|center_vertical" >
 
             <EditText
@@ -49,7 +49,7 @@
                 android:inputType="number"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:gravity="center_horizontal|center_vertical" >
 
             <EditText
@@ -69,7 +69,7 @@
                 style="@style/vOfficeeditText"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:gravity="center_horizontal|center_vertical" >
 
             <EditText
@@ -90,7 +90,7 @@
                 android:inputType="number"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -139,7 +139,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:gravity="center_horizontal|center_vertical" >
 
             <com.viettel.view.control.VNMTextViewNnkd
@@ -149,7 +149,7 @@
                 style="@style/vOfficeeditTextView"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -159,7 +159,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:gravity="center_horizontal|center_vertical" >
 
             <TextView
@@ -169,7 +169,7 @@
                 style="@style/vOfficeeditTextView"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />

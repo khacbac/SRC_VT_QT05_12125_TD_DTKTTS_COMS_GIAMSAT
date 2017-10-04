@@ -7,97 +7,74 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-
     <FrameLayout
+        android:id="@+id/layoutForJournalProgressPreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layoutForJournalProgressPreview"
-        android:visibility="gone">
-    </FrameLayout>
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/tl_supervision_bts_header"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="@dimen/margin"-->
-    <!--android:background="@drawable/border_layout"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:padding="@dimen/padding"-->
-    <!--android:visibility="visible" >-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="@dimen/margin_left"-->
-    <!--android:layout_marginRight="@dimen/margin"-->
-    <!--android:layout_weight="0.1"-->
-    <!--android:text="@string/supervision_bts_tt"-->
-    <!--android:textStyle="bold" />-->
-    <!--</LinearLayout>-->
+        android:visibility="gone" />
 
     <include
+        android:id="@+id/layoutHeader"
         layout="@layout/layout_header"
-        android:layout_margin="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layoutHeader"/>
+        android:layout_margin="@dimen/margin5" />
 
     <LinearLayout
+        android:id="@+id/layout_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2"
+        android:layout_height="@dimen/button_height"
         android:orientation="horizontal"
-        android:id="@+id/layout_root">
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btnNhatKyTab"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="@string/line_background_nhatky_info">
-        </Button>
+            android:text="@string/line_background_nhatky_info"
+            android:textSize="@dimen/button_textsize" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
             android:id="@+id/btnTienDoTab"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:text="@string/line_background_tiendo_info"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
+            android:layout_weight="1"
+            android:text="@string/line_background_tiendo_info"
+            android:textSize="@dimen/button_textsize" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/frame_layout_nhatky_tiendo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/frame_layout_nhatky_tiendo"
         android:orientation="vertical">
+
         <FrameLayout
             android:id="@+id/fr_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
             android:background="@drawable/border_layout"
-            android:visibility="gone">
-        </FrameLayout>
+            android:visibility="gone" />
+
         <com.viettel.utils.DeactivatedViewPager
+            android:id="@+id/view_pager_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:id="@+id/view_pager_content">
-        </com.viettel.utils.DeactivatedViewPager>
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5" />
     </LinearLayout>
-
 
 </LinearLayout>
 

@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="right|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_giamsat_drop_stt"
@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:text="@string/line_cable_type_mot"
                 android:textSize="@dimen/text_size_common"
@@ -39,7 +39,7 @@
             android:layout_height="@dimen/text_box_heigh"
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <EditText
                 android:id="@+id/edt_supervision_brcd_gs_drop_doandau"
@@ -50,7 +50,7 @@
                 android:hint="@string/text_empty"
                 android:inputType="number"
                 android:maxLength="5"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
             android:layout_height="@dimen/text_box_heigh"
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <EditText
                 android:id="@+id/edt_supervision_brcd_gs_drop_doancuoi"
@@ -72,7 +72,7 @@
                 android:hint="@string/text_empty"
                 android:inputType="number"
                 android:maxLength="5"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -127,7 +127,7 @@
             android:layout_marginLeft="@dimen/margin_left_15"
             android:layout_weight="0.13"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <com.viettel.view.control.VNMTextViewNnkd
                 android:id="@+id/edt_supervision_brcd_giamsat_drop_nnkhongdat"
@@ -136,7 +136,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -147,7 +147,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_giamsat_drop_diengiai"
@@ -156,7 +156,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />

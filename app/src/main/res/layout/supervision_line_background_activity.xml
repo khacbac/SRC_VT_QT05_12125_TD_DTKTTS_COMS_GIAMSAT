@@ -31,14 +31,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/rl_constr_line_hang_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:fillViewport="true" >
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/rl_constr_line_background_rootmenu"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:background="@drawable/border_layout"
             android:fillViewport="true" >
 
@@ -48,17 +48,17 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_layout"
                 android:orientation="vertical"
-                android:padding="@dimen/padding2" >
+                android:padding="@dimen/padding1" >
 
                 <LinearLayout
                     android:id="@+id/ll_constr_line_background_info"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin"
+                    android:layout_margin="@dimen/margin5"
                     android:background="@drawable/border_layout"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="@dimen/padding" >
+                    android:padding="@dimen/padding5" >
 
                     <TextView
                         android:id="@+id/tv_constr_line_background_info_title"
@@ -115,7 +115,7 @@
                             android:layout_marginLeft="@dimen/margin_left"
                             android:background="@drawable/bg_title"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/text_padding"
+                            android:padding="@dimen/padding5"
                             android:singleLine="true"
                             android:text="@string/text_empty"
                             android:textSize="@dimen/text_size_common" />
@@ -146,7 +146,7 @@
                             android:layout_marginLeft="@dimen/margin_left"
                             android:background="@drawable/bg_title"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/text_padding"
+                            android:padding="@dimen/padding5"
                             android:singleLine="true"
                             android:text="@string/text_empty"
                             android:textSize="@dimen/text_size_common" />
@@ -157,7 +157,7 @@
                     android:id="@+id/ll_constr_line_background_design_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin"
+                    android:layout_margin="@dimen/margin5"
                     android:background="@color/white_color"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
@@ -241,7 +241,7 @@
                         android:enabled="false"
                         android:hint="@string/constr_sonstruction_diemdau"
                         android:maxLength="10"
-                        android:padding="@dimen/padding"
+                        android:padding="@dimen/padding5"
                         android:singleLine="true"
                         android:textSize="@dimen/text_size_common" />
 
@@ -264,7 +264,7 @@
                         android:enabled="false"
                         android:hint="@string/constr_sonstruction_diemcuoi"
                         android:maxLength="10"
-                        android:padding="@dimen/padding"
+                        android:padding="@dimen/padding5"
                         android:singleLine="true"
                         android:textSize="@dimen/text_size_common" />
                 </LinearLayout>
@@ -273,7 +273,7 @@
                     android:id="@+id/ll_constr_line_background_design_inter"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin"
+                    android:layout_margin="@dimen/margin5"
                     android:background="@color/white_color"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -299,7 +299,7 @@
                         android:hint="@string/line_background_design_inter"
                         android:lines="2"
                         android:maxLength="200"
-                        android:padding="@dimen/padding"
+                        android:padding="@dimen/padding5"
                         android:textSize="@dimen/text_size_common" />
 
                     <TextView
@@ -320,7 +320,7 @@
                         android:layout_marginLeft="5dp"
                         android:inputType="number"
                         android:maxLength="8"
-                        android:padding="@dimen/padding"
+                        android:padding="@dimen/padding5"
                         android:textSize="@dimen/text_size_common" />
 
                     <RelativeLayout
@@ -357,7 +357,7 @@
                         android:hint="@string/line_background_design_long"
                         android:inputType="numberDecimal"
                         android:maxLength="10"
-                        android:padding="@dimen/padding"
+                        android:padding="@dimen/padding5"
                         android:singleLine="true"
                         android:textSize="@dimen/text_size_common" />
                 </LinearLayout>
@@ -366,9 +366,9 @@
                     android:id="@+id/ll_constr_line_background_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin"
-                    android:layout_marginLeft="@dimen/margin"
-                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginBottom="@dimen/margin5"
+                    android:layout_marginLeft="@dimen/margin5"
+                    android:layout_marginRight="@dimen/margin5"
                     android:background="@color/white_color"
                     android:gravity="center_vertical" >
 
@@ -407,7 +407,7 @@
                         android:id="@+id/tabHost"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/margin" >
+                        android:layout_margin="@dimen/margin5" >
 
                         <LinearLayout
                             android:id="@+id/ll_supervision_line_bg_design"
@@ -564,7 +564,7 @@
                                                     android:layout_weight="0.2"
                                                     android:background="@drawable/border_right_bottom_left"
                                                     android:orientation="horizontal"
-                                                    android:padding="@dimen/padding" >
+                                                    android:padding="@dimen/padding5" >
 
                                                     <EditText
                                                         android:id="@+id/edt_line_background_design_tank_size"
@@ -574,7 +574,7 @@
                                                         android:hint="@string/text_empty"
                                                         android:inputType="number"
                                                         android:maxLength="3"
-                                                        android:padding="@dimen/padding"
+                                                        android:padding="@dimen/padding5"
                                                         android:singleLine="true" />
                                                 </LinearLayout>
 
@@ -583,7 +583,7 @@
                                                     android:layout_height="wrap_content"
                                                     android:layout_weight="0.2"
                                                     android:background="@drawable/border_right_bottom"
-                                                    android:padding="@dimen/padding" >
+                                                    android:padding="@dimen/padding5" >
 
                                                     <EditText
                                                         android:id="@+id/edt_line_background_design_tank_dan1"
@@ -593,7 +593,7 @@
                                                         android:hint="@string/text_empty"
                                                         android:inputType="number"
                                                         android:maxLength="3"
-                                                        android:padding="@dimen/padding"
+                                                        android:padding="@dimen/padding5"
                                                         android:singleLine="true" />
                                                 </LinearLayout>
 
@@ -602,7 +602,7 @@
                                                     android:layout_height="wrap_content"
                                                     android:layout_weight="0.2"
                                                     android:background="@drawable/border_right_bottom"
-                                                    android:padding="@dimen/padding" >
+                                                    android:padding="@dimen/padding5" >
 
                                                     <EditText
                                                         android:id="@+id/edt_line_background_design_tank_dan2"
@@ -612,7 +612,7 @@
                                                         android:hint="@string/text_empty"
                                                         android:inputType="number"
                                                         android:maxLength="3"
-                                                        android:padding="@dimen/padding"
+                                                        android:padding="@dimen/padding5"
                                                         android:singleLine="true" />
                                                 </LinearLayout>
 
@@ -621,7 +621,7 @@
                                                     android:layout_height="wrap_content"
                                                     android:layout_weight="0.2"
                                                     android:background="@drawable/border_bottom"
-                                                    android:padding="@dimen/padding" >
+                                                    android:padding="@dimen/padding5" >
 
                                                     <EditText
                                                         android:id="@+id/edt_line_background_design_tank_dan3"
@@ -631,7 +631,7 @@
                                                         android:hint="@string/text_empty"
                                                         android:inputType="number"
                                                         android:maxLength="3"
-                                                        android:padding="@dimen/padding"
+                                                        android:padding="@dimen/padding5"
                                                         android:singleLine="true" >
                                                     </EditText>
                                                 </LinearLayout>
@@ -648,7 +648,7 @@
                                                     android:layout_height="wrap_content"
                                                     android:layout_weight="0.5"
                                                     android:background="@drawable/border_right_bottom"
-                                                    android:padding="@dimen/padding" >
+                                                    android:padding="@dimen/padding5" >
 
                                                     <EditText
                                                         android:id="@+id/edt_line_background_design_tank_size_old"
@@ -658,7 +658,7 @@
                                                         android:hint="@string/text_empty"
                                                         android:inputType="number"
                                                         android:maxLength="3"
-                                                        android:padding="@dimen/padding"
+                                                        android:padding="@dimen/padding5"
                                                         android:singleLine="true" />
                                                 </LinearLayout>
                                             </LinearLayout>
@@ -675,9 +675,9 @@
                                             android:id="@+id/tl_constr_line_background"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:background="@color/white_color"
-                                            android:padding="@dimen/padding"
+                                            android:padding="@dimen/padding5"
                                             android:shrinkColumns="*"
                                             android:stretchColumns="1,3"
                                             android:visibility="visible" >
@@ -686,14 +686,14 @@
                                                 android:id="@+id/trl_constr_line_background_row1"
                                                 android:layout_width="fill_parent"
                                                 android:layout_height="@dimen/table_row_height"
-                                                android:layout_marginTop="@dimen/margin2"
+                                                android:layout_marginTop="@dimen/margin1"
                                                 android:gravity="center_vertical" >
 
                                                 <TextView
                                                     android:id="@+id/tv_constr_line_background_ctt"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginRight="@dimen/margin"
+                                                    android:layout_marginRight="@dimen/margin5"
                                                     android:text="@string/line_background_design_cable_ctt"
                                                     android:textSize="@dimen/text_size_common" />
 
@@ -720,7 +720,7 @@
                                                     android:id="@+id/tv_constr_line_background_cdctt"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/margin"
+                                                    android:layout_margin="@dimen/margin5"
                                                     android:text="@string/line_background_design_cable_cdctt"
                                                     android:textSize="@dimen/text_size_common" />
 
@@ -742,14 +742,14 @@
                                                 android:id="@+id/trl_constr_line_background_row2"
                                                 android:layout_width="fill_parent"
                                                 android:layout_height="@dimen/table_row_height"
-                                                android:layout_marginTop="@dimen/margin2"
+                                                android:layout_marginTop="@dimen/margin1"
                                                 android:gravity="center_vertical" >
 
                                                 <TextView
                                                     android:id="@+id/tv_constr_line_background_tsmx"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginRight="@dimen/margin"
+                                                    android:layout_marginRight="@dimen/margin5"
                                                     android:text="@string/line_background_design_cable_tsmx"
                                                     android:textSize="@dimen/text_size_common" />
 
@@ -770,7 +770,7 @@
                                                     android:id="@+id/tv_constr_line_background_lc"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/margin"
+                                                    android:layout_margin="@dimen/margin5"
                                                     android:text="@string/line_background_design_cable_lc"
                                                     android:textSize="@dimen/text_size_common" />
 
@@ -798,14 +798,14 @@
                                                 android:id="@+id/trl_constr_line_background_row3"
                                                 android:layout_width="fill_parent"
                                                 android:layout_height="@dimen/table_row_height"
-                                                android:layout_marginTop="@dimen/margin2"
+                                                android:layout_marginTop="@dimen/margin1"
                                                 android:gravity="center_vertical" >
 
                                                 <TextView
                                                     android:id="@+id/tv_constr_line_background_lo"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginRight="@dimen/margin"
+                                                    android:layout_marginRight="@dimen/margin5"
                                                     android:text="@string/line_background_design_cable_lo"
                                                     android:textSize="@dimen/text_size_common" />
 
@@ -826,7 +826,7 @@
                                                     android:id="@+id/tv_constr_line_background_so"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/margin"
+                                                    android:layout_margin="@dimen/margin5"
                                                     android:text="@string/line_background_design_cable_so"
                                                     android:textSize="@dimen/text_size_common" />
 

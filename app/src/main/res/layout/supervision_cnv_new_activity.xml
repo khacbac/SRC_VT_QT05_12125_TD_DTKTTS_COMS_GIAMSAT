@@ -35,17 +35,17 @@
         android:layout_below="@+id/rl_constr_line_measure_constr_rootmenu"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <LinearLayout
             android:id="@+id/ll_constr_line_measure_constr_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:background="@drawable/border_layout"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_constr_line_measure_constr_info_title"
@@ -102,7 +102,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
             </RelativeLayout>
@@ -132,7 +132,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
             </RelativeLayout>
@@ -142,7 +142,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/tl_supervision_bts_header"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:background="@drawable/border_layout"
             android:fillViewport="true" >
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top_common"
                     android:orientation="horizontal"
-                    android:padding="@dimen/padding" >
+                    android:padding="@dimen/padding5" >
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -268,7 +268,7 @@
 	                            android:layout_marginLeft="@dimen/margin_left"
 	                            android:enabled="false"
 	                            android:maxLength="10"
-	                            android:padding="@dimen/padding"
+	                            android:padding="@dimen/padding5"
 	                            android:text="22/08/2016"
 	                            android:singleLine="true"
 	                            android:textSize="@dimen/text_size_common" />
@@ -305,7 +305,7 @@
                                 android:enabled="true"
                                 android:hint="@string/cnv_dien_giai"
                                 android:lines="5"
-                                android:padding="@dimen/padding"
+                                android:padding="@dimen/padding5"
                                 android:textSize="@dimen/text_size_common" />
                         </LinearLayout>
                         <!-- end -->
@@ -314,7 +314,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin" >
+                    android:layout_marginTop="@dimen/margin5" >
 
                     <Button
                         android:id="@+id/btn_bts_cnv_save"

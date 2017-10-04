@@ -21,8 +21,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.12"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <TextView
             android:id="@+id/size_drc_thietke"
@@ -32,7 +32,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" /> 
     </RelativeLayout>   
@@ -42,8 +42,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.12"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <TextView
             android:id="@+id/size_drc_thucte"
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" /> 
     </RelativeLayout>   
@@ -89,8 +89,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.2"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding"
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5"
         android:gravity="center"
          >  
     
@@ -102,7 +102,7 @@
             android:singleLine="true"
             android:gravity="center"
             android:textStyle="bold"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
              />  
     </RelativeLayout>  
     
@@ -111,8 +111,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <TextView
             android:id="@+id/iv_anh"
@@ -122,7 +122,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" /> 
     </RelativeLayout>   

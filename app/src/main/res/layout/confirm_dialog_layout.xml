@@ -9,10 +9,10 @@
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/bg_title"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:text="@string/text_confirm_title"
         android:textSize="@dimen/text_size_large_common"
         android:textColor="@color/black_color"
@@ -23,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dialog_title"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/bg_title"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <TextView
             android:id="@+id/tv_message"

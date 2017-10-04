@@ -7,7 +7,7 @@
         android:layout_weight="0.2"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
 
         <TextView
             android:id="@+id/tv_title"
@@ -24,7 +24,7 @@
         android:layout_weight="0.2"
 
         android:orientation="horizontal"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/et_team_number"

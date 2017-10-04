@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.viettel.gsct.fragment.BaseFragment;
+import com.viettel.gsct.fragment.base.BaseFragment;
 
 /**
  * Created by doanlv4 on 9/5/2017.

@@ -5,7 +5,7 @@
     android:background="@drawable/bg_title"
     android:id="@+id/rootLayout"
     android:orientation="vertical"
-    android:padding="@dimen/padding"
+    android:padding="@dimen/padding5"
      >
 
     <RelativeLayout
@@ -42,7 +42,7 @@
             android:id="@+id/edt_edit_text_popup_value"
             style="@style/vOfficeeditText"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:hint="@string/text_empty"
             android:paddingLeft="40dp"
             android:inputType="none"

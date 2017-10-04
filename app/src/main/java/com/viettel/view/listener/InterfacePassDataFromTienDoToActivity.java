@@ -1,8 +1,8 @@
 package com.viettel.view.listener;
 
 import com.viettel.database.entity.Work_ItemsEntity;
-import com.viettel.gsct.View.SubWorkItemTienDoBTSView;
-import com.viettel.gsct.View.TiendoBTSItemView;
+import com.viettel.gsct.View.bts.SubWorkItemTienDoBTSView;
+import com.viettel.gsct.View.bts.TiendoBTSItemView;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;

@@ -19,8 +19,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <TextView
             android:id="@+id/bts_power_pole_tv_tencot"
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" /> 
     </RelativeLayout>
@@ -41,8 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" >
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
 
         <com.viettel.view.control.VNMTextViewNnkd
             android:id="@+id/bts_power_pole_tv_nnkd"
@@ -51,7 +51,7 @@
             style="@style/vOfficeeditTextView"
             android:gravity="center"
             android:textStyle="bold"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:singleLine="true" />
     </RelativeLayout>
     
@@ -60,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" >
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
 
         <TextView
             android:id="@+id/edt_supervision_bts_power_pole_diengiai"
@@ -71,7 +71,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
              android:maxLength="200"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" />

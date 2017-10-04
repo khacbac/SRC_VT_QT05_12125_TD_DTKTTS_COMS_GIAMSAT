@@ -45,8 +45,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/text_box_heigh"
         android:layout_weight="0.25"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding"
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5"
         android:gravity="center"
          >  
     
@@ -57,7 +57,7 @@
             android:background="@drawable/icon_textbox"
             android:singleLine="true"
             android:gravity="center"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
              />  
     </RelativeLayout>  
     
@@ -85,8 +85,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.25"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding" > 
+        android:paddingLeft="@dimen/padding5"
+        android:paddingRight="@dimen/padding5" >
   
         <TextView
             android:id="@+id/iv_anh"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:hint="@string/text_empty"
             android:singleLine="true"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_common" /> 
     </RelativeLayout>   

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Header.Textview"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_left_10"
+        android:layout_marginStart="@dimen/margin_left_10"
+        android:gravity="left|center_vertical"
+        android:text="@string/str_keo_cap"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_collapse"
+        style="@style/BtnCollapse"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="10dp" />
+
+</merge>

@@ -35,7 +35,7 @@ import com.viettel.database.entity.DropdownItemEntity;
 import com.viettel.database.entity.Supervision_BtsEntity;
 import com.viettel.database.entity.Supervision_ProgressEntity;
 import com.viettel.dialog.ConfirmDialog;
-import com.viettel.gsct.activity.InfoActivity;
+import com.viettel.gsct.activity.info.InfoActivity;
 import com.viettel.sync.SyncTask;
 import com.viettel.utils.GloablUtils;
 import com.viettel.utils.StringUtil;

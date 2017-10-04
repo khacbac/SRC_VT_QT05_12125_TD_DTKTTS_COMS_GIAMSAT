@@ -105,7 +105,7 @@
                     style="@style/vOfficeeditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin5"
                     android:singleLine="true"
                     android:inputType="none" />
 
@@ -121,7 +121,7 @@
                     style="@style/vOfficeeditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin5"
                     android:singleLine="true"
 
                     android:inputType="textPassword" />
@@ -156,14 +156,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:layout_alignParentLeft="true"
             android:text="@string/text_copyright" />
         
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:layout_alignParentRight="true"
             android:text="@string/text_version" />
     </RelativeLayout>

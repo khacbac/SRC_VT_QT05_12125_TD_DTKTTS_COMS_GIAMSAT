@@ -33,11 +33,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_line_hg_kl_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <TextView
             android:id="@+id/tv_line_hg_kl_info_title"
@@ -93,7 +93,7 @@
                 android:layout_marginLeft="@dimen/margin_left"
                 android:background="@drawable/bg_title"
                 android:gravity="center_vertical"
-                android:padding="@dimen/text_padding"
+                android:padding="@dimen/padding5"
                 android:text="AGG0002_AGG0002"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common" />
@@ -124,7 +124,7 @@
                 android:layout_marginLeft="@dimen/margin_left"
                 android:background="@drawable/bg_title"
                 android:gravity="center_vertical"
-                android:padding="@dimen/text_padding"
+                android:padding="@dimen/padding5"
                 android:text="ML ABC DDD"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common" />
@@ -135,7 +135,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/ll_line_hg_kl_info"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:fillViewport="true" >
 
@@ -144,7 +144,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_line_hg_kl_status"
@@ -152,7 +152,7 @@
                 android:layout_height="@dimen/drop_box_heigh"
                 android:layout_marginLeft="@dimen/margin_left"
                 android:gravity="center_vertical"
-                android:padding="@dimen/text_padding"
+                android:padding="@dimen/padding5"
                 android:text="@string/line_hg_mx_kl_trangthai"
                 android:textSize="@dimen/text_size_common" />
 
@@ -198,7 +198,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin" >
+                android:layout_marginTop="@dimen/margin5" >
 
                 <Button
                     android:id="@+id/btn_line_hg_kl_save"

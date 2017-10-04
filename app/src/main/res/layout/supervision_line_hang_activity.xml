@@ -32,7 +32,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/rl_constr_line_hang_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:fillViewport="true" >
 
@@ -41,17 +41,17 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding2" >
+            android:padding="@dimen/padding1" >
 
             <LinearLayout
                 android:id="@+id/ll_constr_line_hang_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:background="@drawable/border_layout"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/padding" >
+                android:padding="@dimen/padding5" >
 
                 <TextView
                     android:id="@+id/tv_constr_line_hang_info_title"
@@ -106,7 +106,7 @@
                         android:layout_marginLeft="@dimen/margin_left"
                         android:background="@drawable/bg_title"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="AGG0002_AGG0002"
                         android:singleLine="true"
                         android:textSize="@dimen/text_size_common" />
@@ -137,7 +137,7 @@
                         android:layout_marginLeft="@dimen/margin_left"
                         android:background="@drawable/bg_title"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="ML ABC DDD"
                         android:singleLine="true"
                         android:textSize="@dimen/text_size_common" />
@@ -151,7 +151,7 @@
                 android:layout_marginTop="@dimen/margin_top_common"
                 android:background="@color/white_color"
                 android:gravity="center_vertical"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginRight="@dimen/margin5"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -229,7 +229,7 @@
                     android:hint="@string/constr_sonstruction_diemdau"
                     android:maxLength="10"
                     android:enabled="false"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
                 
@@ -252,7 +252,7 @@
                     android:hint="@string/constr_sonstruction_diemcuoi"
                     android:enabled="false"
                     android:maxLength="10"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
             </LinearLayout>
@@ -262,7 +262,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_common"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginRight="@dimen/margin5"
                 android:background="@color/white_color"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -287,7 +287,7 @@
                     android:gravity="top"
                     android:hint="@string/line_hang_design_inter"
                     android:lines="2"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:textSize="@dimen/text_size_common" />
             </LinearLayout>
 
@@ -295,7 +295,7 @@
                 android:id="@+id/ll_constr_line_hang_save"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:layout_marginTop="@dimen/margin_top_common"
                 android:background="@color/white_color"
                 android:layout_gravity="center_vertical"
@@ -319,7 +319,7 @@
                     android:hint="@string/line_hang_design_long"
                     android:inputType="numberDecimal"
                     android:maxLength="10"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
                 
@@ -341,7 +341,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:inputType="number"
                     android:maxLength="8"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
                 
@@ -368,7 +368,7 @@
                 android:id="@+id/tabHost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin" >
+                android:layout_margin="@dimen/margin5" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -401,7 +401,7 @@
                                     android:id="@+id/tbl_line_hang_design"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:background="@drawable/border_layout"
                                     android:shrinkColumns="*"
                                     android:stretchColumns="0,2,4,6,8,10" >
@@ -581,7 +581,7 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <EditText
                                                 android:id="@+id/edt_line_hang_design_pillar_size"
@@ -590,7 +590,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:hint="@string/text_empty"
                                                 android:inputType="number"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:maxLength="10"
                                                 android:singleLine="true" />
                                         </LinearLayout>
@@ -604,7 +604,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <CheckBox
                                                 android:id="@+id/rbt_line_hang_design_pillar_be_tong"
@@ -622,7 +622,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <CheckBox
                                                 android:id="@+id/rbt_line_hang_design_pillar_go"
@@ -639,7 +639,7 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <EditText
                                                 android:id="@+id/edt_line_hang_design_pillar_chieu_cao"
@@ -649,7 +649,7 @@
                                                 android:hint="@string/text_empty"
                                                 android:inputType="number"
                                                 android:maxLength="10"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:singleLine="true" />
                                         </LinearLayout>
 
@@ -661,7 +661,7 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <EditText
                                                 android:id="@+id/edt_line_hang_design_pillar_long_new"
@@ -671,7 +671,7 @@
                                                 android:hint="@string/text_empty"
                                                 android:inputType="numberDecimal"
                                                 android:maxLength="10"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:singleLine="true" />
                                         </LinearLayout>
 
@@ -683,7 +683,7 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <EditText
                                                 android:id="@+id/edt_line_hang_design_pillar_size_old"
@@ -693,7 +693,7 @@
                                                 android:hint="@string/text_empty"
                                                 android:inputType="number"
                                                 android:maxLength="10"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:singleLine="true" />
                                         </LinearLayout>
 
@@ -705,7 +705,7 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:padding="@dimen/padding" >
+                                            android:padding="@dimen/padding5" >
 
                                             <EditText
                                                 android:id="@+id/edt_line_hang_design_pillar_long_old"
@@ -715,7 +715,7 @@
                                                 android:hint="@string/text_empty"
                                                 android:inputType="numberDecimal"
                                                 android:maxLength="10"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:singleLine="true" />
                                         </LinearLayout>
                                     </TableRow>
@@ -732,9 +732,9 @@
                                     android:id="@+id/tl_constr_line_hang"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:background="@color/white_color"
-                                    android:padding="@dimen/padding"
+                                    android:padding="@dimen/padding5"
                                     android:shrinkColumns="*"
                                     android:stretchColumns="1,3"
                                     android:visibility="visible" >
@@ -743,14 +743,14 @@
                                         android:id="@+id/trl_constr_line_hang_row1"
                                         android:layout_width="fill_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginTop="@dimen/margin2"
+                                        android:layout_marginTop="@dimen/margin1"
                                         android:gravity="center_vertical" >
 
                                         <TextView
                                             android:id="@+id/tv_constr_line_hang_loai_cap"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginRight="@dimen/margin"
+                                            android:layout_marginRight="@dimen/margin5"
                                             android:text="@string/line_hang_design_cable_loai_cap"
                                             android:textSize="@dimen/text_size_common" />
 
@@ -777,7 +777,7 @@
                                             android:id="@+id/tv_constr_line_hang_khoang_vuot"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/margin"
+                                            android:layout_margin="@dimen/margin5"
                                             android:text="@string/line_hang_design_cable_khoang_vuot"
                                             android:textSize="@dimen/text_size_common" />
 
@@ -799,14 +799,14 @@
                                         android:id="@+id/trl_constr_line_hang_row2"
                                         android:layout_width="fill_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginTop="@dimen/margin2"
+                                        android:layout_marginTop="@dimen/margin1"
                                         android:gravity="center_vertical" >
 
                                         <TextView
                                             android:id="@+id/tv_constr_line_hang_tong_mx"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginRight="@dimen/margin"
+                                            android:layout_marginRight="@dimen/margin5"
                                             android:text="@string/line_hang_design_cable_tong_mx"
                                             android:textSize="@dimen/text_size_common" />
 

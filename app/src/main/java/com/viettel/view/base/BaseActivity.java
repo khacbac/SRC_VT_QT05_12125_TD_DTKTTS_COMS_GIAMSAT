@@ -1148,7 +1148,6 @@ public abstract class BaseActivity extends AppCompatActivity
 //        btnActionTouch.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
-//                Log.d("BacHK","touch event");
 //                dispatchTouchEvent(event);
 //                return true;
 //            }

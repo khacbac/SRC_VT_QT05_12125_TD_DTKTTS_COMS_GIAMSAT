@@ -35,17 +35,17 @@
         android:layout_below="@+id/rl_line_hg_cable_rootmenu"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding2" >
+        android:padding="@dimen/padding1" >
 
         <LinearLayout
             android:id="@+id/ll_line_hg_cable_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
+            android:layout_margin="@dimen/margin5"
             android:background="@drawable/border_layout"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_line_hg_cable_info_title"
@@ -100,7 +100,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:text="AGG0002_AGG0002"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
@@ -131,7 +131,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:text="ML ABC DDD"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
@@ -141,7 +141,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin"
+            android:layout_marginTop="@dimen/margin5"
             android:orientation="horizontal" >
 
             <RelativeLayout
@@ -168,7 +168,7 @@
                 android:layout_weight="0.1"
                 android:filterTouchesWhenObscured="true"
                 android:gravity="center"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:text="@string/rl_constr_bt_complete"
                 android:textSize="@dimen/text_size_common" />
 
@@ -194,8 +194,8 @@
             android:id="@+id/ll_line_hg_cable_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_marginTop="@dimen/margin1"
             android:background="@drawable/border_right"
             android:baselineAligned="false"
@@ -318,9 +318,9 @@
             android:id="@+id/lv_line_hg_cable_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
             android:background="@drawable/border_right_bottom_left"
             android:choiceMode="singleChoice"
             android:minHeight="400dp"

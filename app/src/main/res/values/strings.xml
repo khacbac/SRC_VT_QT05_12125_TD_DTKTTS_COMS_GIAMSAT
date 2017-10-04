@@ -985,6 +985,8 @@
         <item>Dashboard</item>
         <item>Thoát</item>
     </string-array>
+
+
     <string name="arrow_up">Ẩn thanh tìm kiếm</string>
     <string name="arrow_down">Hiển thị thanh tìm kiếm</string>
     <string name="check_in">Check In</string>
@@ -1106,6 +1108,10 @@
     <string name="str_fdh_16fo">FDH 16Fo</string>
     <string name="str_hop_quang_32fo">Hộp quang 32Fo</string>
     <string name="str_thong_bao_truoc_khi_luu">Đây là thông tin bạn vừa nhập, tiếp tục nhấn Lưu để hoàn tất</string>
+    <string name="str_keo_cap">Kéo cáp</string>
+    <string name="str_date_dummy">04/04/2017</string>
+    <string name="str_tiendo_chualam">CHƯA LÀM</string>
+    <string name="str_tiendo_hoanthanh">HOÀN THÀNH</string>
 
     <string-array name="array_bts">
         <item>BTS - Cập nhật nhật ký</item>
@@ -1178,6 +1184,21 @@
         <item>@string/brcd_background_design_info_kt</item>
     </string-array>
 
+    <string name="keocap">Kéo cáp</string>
+    <string name="lapdat_hannoi">Lắp đặt &amp; hàn nối</string>
+    <string name="lapdat_odf_indoor">Lắp đặt ODF Indoor</string>
+    <string name="lapdat_odf_outdoor">Lắp đặt ODF Outdoor</string>
+    <string name="lapdat_olt">Lắp đặt OLT</string>
+    <string name="dokiem_nghiemthu">Đo kiểm, nghiệm thu</string>
+
+    <string-array name="gpon_work_item">
+        <item>@string/keocap</item>
+        <item>@string/lapdat_hannoi</item>
+        <item>@string/lapdat_odf_indoor</item>
+        <item>@string/lapdat_odf_outdoor</item>
+        <item>@string/lapdat_olt</item>
+        <item>@string/dokiem_nghiemthu</item>
+    </string-array>
 
     <string-array name="array_bts_thoi_tiet">
         <item>Mưa</item>

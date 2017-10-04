@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeBaseActivity extends BaseActivity {
+	private static final String TAG = HomeBaseActivity.class.getSimpleName();
+
 	protected void gotoMakePlanActivity(Bundle data) {
 		ActionEvent e = new ActionEvent();
 		e.viewData = data;
@@ -339,7 +341,6 @@ public class HomeBaseActivity extends BaseActivity {
 		}
 	}
 
-	private static final String TAG = "HomeBaseActivity";
 	@Override
 	public void onItemSelected(int position) {
 		// TODO Auto-generated method stub

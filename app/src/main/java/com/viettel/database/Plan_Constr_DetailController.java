@@ -8,7 +8,6 @@ import android.util.Log;
 import com.viettel.database.entity.Plan_Constr_DetailEntity;
 import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Plan_Constr_DetailField;
-import com.viettel.gsct.GSCTUtils;
 
 import java.util.ArrayList;
 
@@ -103,7 +102,8 @@ public class Plan_Constr_DetailController {
                 "WHERE CONTRUCT_ID = ? and " +
                 "CAT_MILESTONE_CONSTR_ID in (select ID from CAT_MILESTONE_CONSTR b where b.CODE = ?);";
 
-        cursor = db.rawQuery(MY_QUERY, new String[]{String.valueOf(luyke), String.valueOf(constructId), catMilestoneConstrCode});
+        cursor = db.rawQuery(MY_QUERY, new String[]{String.valueOf(luyke),
+                String.valueOf(constructId), catMilestoneConstrCode});
         cursor.moveToFirst();
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
@@ -111,17 +111,15 @@ public class Plan_Constr_DetailController {
     }
 
     public String getRealFinishDate(long constructId, String catMilestoneConstrCode) {
-        String ret = "";
+        String ret;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
         Cursor cursor;
 
-//        Log.e(TAG, "updateRealFinishDate() called with: constructId = [" + constructId + "], catMilestoneConstrCode = [" + catMilestoneConstrCode + "]");
         String MY_QUERY = "select REAL_FINISH_DATE from PLAN_CONSTR_DETAIL " +
                 "WHERE CONTRUCT_ID = ? and " +
                 "CAT_MILESTONE_CONSTR_ID in (select ID from CAT_MILESTONE_CONSTR b where b.CODE = ?);";
-//        Log.e(TAG, MY_QUERY );
-//        cursor = db.rawQuery(MY_QUERY, null);
-        cursor = db.rawQuery(MY_QUERY, new String[]{String.valueOf(constructId), catMilestoneConstrCode});
+        cursor = db.rawQuery(MY_QUERY,
+                new String[]{String.valueOf(constructId), catMilestoneConstrCode});
         cursor.moveToFirst();
         ret = cursor.getString(0);
         cursor.close();
@@ -129,21 +127,24 @@ public class Plan_Constr_DetailController {
         return ret;
     }
 
-    public int updateRealFinishDate(long constructId, String catMilestoneConstrCode, String finishDate) {
+    public int updateRealFinishDate(long constructId,
+                                    String catMilestoneConstrCode, String finishDate) {
         int ret = 0;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
         Cursor cursor;
 
-        Log.e(TAG, "updateRealFinishDate() called with: constructId = [" + constructId + "], catMilestoneConstrCode = [" + catMilestoneConstrCode + "], finishDate = [" + finishDate + "]");
+        Log.e(TAG, "updateRealFinishDate() called with: constructId = [" + constructId
+                + "], catMilestoneConstrCode = [" + catMilestoneConstrCode
+                + "], finishDate = [" + finishDate + "]");
         String MY_QUERY = "update PLAN_CONSTR_DETAIL SET REAL_FINISH_DATE = ?, SYNC_STATUS = 2 " +
                 "WHERE CONTRUCT_ID = ? and " +
                 "CAT_MILESTONE_CONSTR_ID in (select ID from CAT_MILESTONE_CONSTR b where b.CODE = ?);";
         Log.e(TAG, MY_QUERY );
 //        cursor = db.rawQuery(MY_QUERY, null);
-        cursor = db.rawQuery(MY_QUERY, new String[]{finishDate, String.valueOf(constructId), catMilestoneConstrCode});
+        cursor = db.rawQuery(MY_QUERY, new String[]{finishDate,
+                String.valueOf(constructId), catMilestoneConstrCode});
         cursor.moveToFirst();
         cursor.close();
-//        Log.e(TAG, "updateRealFinishDate: " + ret + " " + constructId + " " + catMilestoneConstrCode + " " + finishDate );
         KttsDatabaseHelper.INSTANCE.close();
         return ret;
     }
@@ -168,7 +169,8 @@ public class Plan_Constr_DetailController {
                 "where a.CONTRUCT_ID = ? and a.PLAN_ID = ?;";
 //                + "and <c.CREATED_DATE là max>;";
 
-        cursor = db.rawQuery(MY_QUERY, new String[]{String.valueOf(constructId), String.valueOf(maxPlanId)});
+        cursor = db.rawQuery(MY_QUERY,
+                new String[]{String.valueOf(constructId), String.valueOf(maxPlanId)});
 
         if (cursor.moveToFirst()) {
             do {

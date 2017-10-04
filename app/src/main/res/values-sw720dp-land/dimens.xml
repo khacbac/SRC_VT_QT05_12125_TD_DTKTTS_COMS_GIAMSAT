@@ -5,5 +5,8 @@
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     -->
     <dimen name="activity_horizontal_margin">128dp</dimen>
-
+    <dimen name="gpon_edittext_height">35dp</dimen>
+    <!--dimen common-->
+    <dimen name="button_height">50dp</dimen>
+    <dimen name="button_textsize">14sp</dimen>
 </resources>

@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_supervision_bts_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.1"
             android:text="@string/supervision_bts_tt"
             android:textSize="@dimen/text_size_common"
@@ -85,7 +85,7 @@
             android:id="@+id/rl_supervision_bts_tv_matram"
             android:layout_width="0dp"
             android:layout_height="@dimen/drop_box_heigh"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.2"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
@@ -121,19 +121,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_supervision_bts_header"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin5"
+        android:layout_marginLeft="@dimen/margin5"
+        android:layout_marginRight="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <LinearLayout
             android:id="@+id/trl_supervision_bts_pillar_row1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginTop="@dimen/margin5"
             android:orientation="horizontal" >
 
             <TextView
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:filterTouchesWhenObscured="true"
                     android:gravity="center"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:text="@string/rl_constr_bt_complete"
                     android:textSize="@dimen/text_size_common" />
 
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:filterTouchesWhenObscured="true"
                     android:gravity="center"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:text="@string/rl_supervision_bts_body_row6_1_bt_save"
                     android:textSize="@dimen/text_size_common" />
             </LinearLayout>
@@ -249,14 +249,14 @@
                         android:id="@+id/supervision_bts_pillar_tab1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/margin"
+                        android:layout_marginTop="@dimen/margin5"
                         android:orientation="vertical" >
 
                         <RelativeLayout
                             android:id="@+id/supervision_bts_pillar_notification"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical"
                             android:visibility="invisible" >
 
@@ -275,8 +275,8 @@
                             android:id="@+id/ll_supervision_bts_pillar_thicong"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin"
-                            android:layout_marginRight="@dimen/margin"
+                            android:layout_marginLeft="@dimen/margin5"
+                            android:layout_marginRight="@dimen/margin5"
                             android:background="@drawable/border_right"
                             android:baselineAligned="false"
                             android:gravity="center_vertical"
@@ -443,10 +443,10 @@
                             android:id="@+id/supervision_bts_pillar_tl_lapdung"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin"
+                            android:layout_margin="@dimen/margin5"
                             android:background="@drawable/border_layout"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/padding"
+                            android:padding="@dimen/padding5"
                             android:shrinkColumns="*"
                             android:stretchColumns="1,3" >
 
@@ -454,8 +454,8 @@
                                 android:id="@+id/supervision_bts_pillar_tl_lapdung_row1"
                                 android:layout_width="fill_parent"
                                 android:layout_height="@dimen/table_row_height"
-                                android:layout_marginBottom="@dimen/margin"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginBottom="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:gravity="center_vertical" >
 
                                 <TextView
@@ -464,7 +464,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.2"
                                     android:gravity="center_vertical|left"
-                                    android:paddingLeft="@dimen/padding"
+                                    android:paddingLeft="@dimen/padding5"
                                     android:text="@string/supervision_bts_pillar_tl_lapdung_row1_dgclc"
                                     android:textSize="@dimen/text_size_common"
                                     android:textStyle="normal" />
@@ -502,8 +502,8 @@
                                 android:id="@+id/supervision_bts_pillar_tl_lapdung_row2"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/table_row_height"
-                                android:layout_marginBottom="@dimen/margin"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginBottom="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:gravity="center_vertical" >
 
                                 <TextView
@@ -512,7 +512,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.2"
                                     android:gravity="center_vertical|left"
-                                    android:paddingLeft="@dimen/padding"
+                                    android:paddingLeft="@dimen/padding5"
                                     android:text="@string/supervision_bts_pillar_tl_lapdung_row2_dgclldc"
                                     android:textSize="@dimen/text_size_common"
                                     android:textStyle="normal" />
@@ -561,7 +561,7 @@
                                         android:layout_width="250dp"
                                         android:layout_height="40dp"
                                         android:gravity="center"
-                                        android:padding="@dimen/padding"
+                                        android:padding="@dimen/padding5"
                                         android:singleLine="true"
                                         android:textSize="@dimen/text_size_common" />
                                 </RelativeLayout>
@@ -571,8 +571,8 @@
                                 android:id="@+id/supervision_bts_pillar_tl_lapdung_row3"
                                 android:layout_width="fill_parent"
                                 android:layout_height="@dimen/table_row_height"
-                                android:layout_marginBottom="@dimen/margin"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginBottom="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:gravity="center_vertical" >
 
                                 <TextView
@@ -581,7 +581,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.2"
                                     android:gravity="center_vertical|left"
-                                    android:paddingLeft="@dimen/padding"
+                                    android:paddingLeft="@dimen/padding5"
                                     android:text="@string/supervision_bts_pillar_tl_lapdung_row3_tv_diengiai"
                                     android:textSize="@dimen/text_size_common" />
 
@@ -617,10 +617,10 @@
                             android:id="@+id/supervision_bts_pillar_tl_thicongtiepdia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin"
+                            android:layout_margin="@dimen/margin5"
                             android:background="@drawable/border_layout"
                             android:gravity="center_vertical"
-                            android:padding="@dimen/padding"
+                            android:padding="@dimen/padding5"
                             android:shrinkColumns="*"
                             android:stretchColumns="1,3" >
 
@@ -628,8 +628,8 @@
                                 android:id="@+id/supervision_bts_pillar_tl_thicongtiepdia_row1"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/table_row_height"
-                                android:layout_marginBottom="@dimen/margin"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginBottom="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:gravity="center_vertical" >
 
                                 <TextView
@@ -667,7 +667,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.2"
-                                    android:paddingLeft="@dimen/padding"
+                                    android:paddingLeft="@dimen/padding5"
                                     android:text="@string/supervision_bts_pillar_tl_lapdung_row2_nnkd"
                                     android:textSize="@dimen/text_size_common"
                                     android:textStyle="normal" />
@@ -687,7 +687,7 @@
                                         android:layout_width="250dp"
                                         android:layout_height="40dp"
                                         android:gravity="center"
-                                        android:padding="@dimen/padding"
+                                        android:padding="@dimen/padding5"
                                         android:singleLine="true"
                                         android:textSize="@dimen/text_size_common" />
                                 </RelativeLayout>
@@ -697,8 +697,8 @@
                                 android:id="@+id/supervision_bts_pillar_tl_thicongtiepdia_row2"
                                 android:layout_width="fill_parent"
                                 android:layout_height="@dimen/table_row_height"
-                                android:layout_marginBottom="@dimen/margin"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginBottom="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:gravity="center_vertical" >
 
                                 <TextView
@@ -707,7 +707,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.1"
                                     android:gravity="center_vertical|left"
-                                    android:paddingLeft="@dimen/padding"
+                                    android:paddingLeft="@dimen/padding5"
                                     android:text="@string/supervision_bts_pillar_tl_lapdung_row3_tv_diengiai"
                                     android:textSize="@dimen/text_size_common" />
 

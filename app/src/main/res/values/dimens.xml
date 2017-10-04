@@ -4,17 +4,23 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="actionbar_height">40dp</dimen>
-    <dimen name="margin">5dip</dimen>
+    <dimen name="margin0">0dip</dimen>
     <dimen name="margin1">1dip</dimen>
-    <dimen name="margin2">1dip</dimen>
+    <dimen name="margin2">2dp</dimen>
+    <dimen name="margin5">5dip</dimen>
+    <dimen name="margin10">10dip</dimen>
     <dimen name="margin20">20dp</dimen>
-    <dimen name="padding">5dip</dimen>
-    <dimen name="text_padding">5dip</dimen>
+    <dimen name="margin30">30dp</dimen>
+    <dimen name="margin40">40dp</dimen>
+    <dimen name="margin50">50dp</dimen>
+    <dimen name="margin80">80dp</dimen>
+    <dimen name="margin100">100dp</dimen>
     <dimen name="padding1">1dip</dimen>
-    <dimen name="padding2">1dip</dimen>
+    <dimen name="padding2">2dp</dimen>
     <dimen name="padding5">5dp</dimen>
     <dimen name="padding10">10dp</dimen>
-    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding20">20dp</dimen>
+    <dimen name="padding30">30dp</dimen>
     <dimen name="margin_top_common">5dip</dimen>
     <dimen name="padding_left">5dip</dimen>
     <dimen name="margin_left_dg">17dip</dimen>
@@ -60,5 +66,13 @@
     <dimen name="text_plan_size">20sp</dimen>
     <dimen name="text_plan_size2">22sp</dimen>
     <dimen name="margin_15">15dp</dimen>
+    <dimen name="layout_width_150">150dp</dimen>
 
+    <!--dimen for gpon.-->
+    <dimen name="gpon_height">40dp</dimen>
+    <dimen name="gpon_edittext_height">25dp</dimen>
+
+    <!--dimen common-->
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_textsize">12sp</dimen>
 </resources>

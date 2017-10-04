@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
         <TextView
             style="@style/Header.Textview"
             android:id="@+id/tv_title"
@@ -25,7 +25,7 @@
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"
         android:id="@+id/layoutKhoiLuong"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
         <TextView
             style="@style/Header.Textview"
             android:id="@+id/tv_khoi_luong"
@@ -40,7 +40,7 @@
         android:orientation="horizontal"
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
         <TextView
             style="@style/Header.Textview"
             android:id="@+id/tv_start_date"
@@ -56,7 +56,7 @@
         android:orientation="horizontal"
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
         <TextView
             style="@style/Header.Textview"
             android:id="@+id/tv_end_date"

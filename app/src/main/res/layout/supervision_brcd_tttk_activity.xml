@@ -43,17 +43,17 @@
             android:layout_height="match_parent"
             android:background="@drawable/border_top_bottom_left"
             android:orientation="vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <LinearLayout
                 android:id="@+id/ll_constr_line_tank_info"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin5"
                 android:background="@drawable/border_layout"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/padding" >
+                android:padding="@dimen/padding5" >
 
                 <TextView
                     android:id="@+id/tv_constr_line_tank_info_title"
@@ -110,7 +110,7 @@
                         android:layout_marginLeft="@dimen/margin_left"
                         android:background="@drawable/bg_title"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:singleLine="true"
                         android:text="AGG0002_AGG0002"
                         android:textSize="@dimen/text_size_common" />
@@ -141,7 +141,7 @@
                         android:layout_marginLeft="@dimen/margin_left"
                         android:background="@drawable/bg_title"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:singleLine="true"
                         android:text="ML ABC DDD"
                         android:textSize="@dimen/text_size_common" />
@@ -384,7 +384,7 @@
                             android:gravity="center"
                             android:inputType="number"
                             android:maxLength="5"
-                            android:paddingLeft="@dimen/padding"
+                            android:paddingLeft="@dimen/padding5"
                             android:singleLine="true"
                             android:textSize="@dimen/text_size_common" />
                     </RelativeLayout>
@@ -484,7 +484,7 @@
                             android:gravity="center"
                             android:inputType="number"
                             android:maxLength="5"
-                            android:paddingLeft="@dimen/padding"
+                            android:paddingLeft="@dimen/padding5"
                             android:singleLine="true"
                             android:textSize="@dimen/text_size_common" />
                     </RelativeLayout>
@@ -541,7 +541,7 @@
                             android:gravity="center"
                             android:inputType="number"
                             android:maxLength="5"
-                            android:paddingLeft="@dimen/padding"
+                            android:paddingLeft="@dimen/padding5"
                             android:singleLine="true"
                             android:textSize="@dimen/text_size_common" >
                         </com.viettel.view.control.VNMEditTextClearable>
@@ -648,7 +648,7 @@
                             android:gravity="center"
                             android:inputType="number"
                             android:maxLength="5"
-                            android:paddingLeft="@dimen/padding"
+                            android:paddingLeft="@dimen/padding5"
                             android:singleLine="true"
                             android:textSize="@dimen/text_size_common" />
                     </RelativeLayout>

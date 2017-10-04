@@ -1,8 +1,6 @@
 package com.viettel.database.entity;
 
-import android.util.Log;
-
-import com.viettel.gsct.GSCTUtils;
+import com.viettel.gsct.utils.GSCTUtils;
 
 import java.text.Normalizer;
 import java.util.ArrayList;

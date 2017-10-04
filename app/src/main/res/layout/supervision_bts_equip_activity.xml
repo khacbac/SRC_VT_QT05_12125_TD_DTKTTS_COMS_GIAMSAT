@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_supervision_bts_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.1"
             android:text="@string/supervision_bts_tt"
             android:textSize="@dimen/text_size_common"
@@ -85,7 +85,7 @@
             android:id="@+id/rl_supervision_bts_equip_tv_matram"
             android:layout_width="0dp"
             android:layout_height="@dimen/drop_box_heigh"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.2"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
@@ -121,12 +121,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_supervision_bts_header"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin5"
+        android:layout_marginLeft="@dimen/margin5"
+        android:layout_marginRight="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:filterTouchesWhenObscured="true"
                     android:gravity="center"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding5"
                     android:text="@string/rl_constr_bt_complete"
                     android:textSize="@dimen/text_size_common" />
 
@@ -166,7 +166,7 @@
                 android:id="@+id/supervision_bts_equip_tabhost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin" >
+                android:layout_margin="@dimen/margin5" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -203,13 +203,13 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 android:orientation="vertical"
-                                android:padding="@dimen/padding" >
+                                android:padding="@dimen/padding5" >
 
                                 <TextView
                                     android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_bts_tv_row1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:text="@string/supervision_bts_equip_tl_thongtinthietbi_bts_row1"
                                     android:textSize="@dimen/text_size_common"
                                     android:textStyle="bold" />
@@ -217,10 +217,10 @@
                                 <TableLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:background="@drawable/border_top_right_bottom_left"
                                     android:gravity="center_vertical"
-                                    android:padding="@dimen/padding"
+                                    android:padding="@dimen/padding5"
                                     android:shrinkColumns="*"
                                     android:stretchColumns="1,3" >
 
@@ -228,8 +228,8 @@
                                         android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_row4"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginBottom="@dimen/margin"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginBottom="@dimen/margin5"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:gravity="center_vertical" >
 
                                         <TextView
@@ -238,7 +238,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row4_tt2g"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="bold" />
@@ -258,7 +258,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row4_tt3g"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="bold" />
@@ -277,8 +277,8 @@
                                         android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_row1"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginBottom="@dimen/margin"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginBottom="@dimen/margin5"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:gravity="center_vertical" >
 
                                         <TextView
@@ -287,7 +287,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row1_hangsx"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -306,7 +306,7 @@
                                                 android:layout_height="40dp"
                                                 android:background="@drawable/spinner_background"
                                                 android:gravity="center_vertical"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:prompt="@string/bts_spiner_prompt"
                                                 android:textSize="@dimen/text_size_common" />
                                         </RelativeLayout>
@@ -317,7 +317,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row1_hangsx"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -336,7 +336,7 @@
                                                 android:layout_height="40dp"
                                                 android:background="@drawable/spinner_background"
                                                 android:gravity="center_vertical"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:prompt="@string/bts_spiner_prompt"
                                                 android:textSize="@dimen/text_size_common" />
                                         </RelativeLayout>
@@ -346,8 +346,8 @@
                                         android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_row2"
                                         android:layout_width="fill_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginBottom="@dimen/margin"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginBottom="@dimen/margin5"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:gravity="center_vertical" >
 
                                         <TextView
@@ -355,7 +355,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row1_sotu_2g"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -365,7 +365,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="@dimen/text_box_heigh"
                                             android:layout_gravity="center_vertical"
-                                            android:layout_marginRight="@dimen/margin"
+                                            android:layout_marginRight="@dimen/margin5"
                                             android:layout_weight="0.5"
                                             android:paddingLeft="@dimen/padding_left" >
 
@@ -388,7 +388,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row2_sotu_3g"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -417,8 +417,8 @@
                                         android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_row3"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginBottom="@dimen/margin"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginBottom="@dimen/margin5"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:gravity="center_vertical" >
 
                                         <TextView
@@ -426,7 +426,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/rl_supervision_bts_equip_tl_thongtinthietbi_row2_tv_loaitu_2g"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -435,7 +435,7 @@
                                             android:id="@+id/rl_supervision_bts_equip_tl_thongtinthietbi_row2_rl_chonloaitu_2g"
                                             android:layout_width="0dp"
                                             android:layout_height="@dimen/drop_box_heigh"
-                                            android:layout_marginRight="@dimen/margin"
+                                            android:layout_marginRight="@dimen/margin5"
                                             android:layout_weight="0.5"
                                             android:gravity="left"
                                             android:paddingLeft="@dimen/padding_left" >
@@ -454,9 +454,9 @@
                                             android:id="@+id/rl_supervision_bts_equip_tl_thongtinthietbi_row2_tv_loaitu_3g"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="@dimen/margin"
+                                            android:layout_marginLeft="@dimen/margin5"
                                             android:layout_weight="0.2"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/rl_supervision_bts_equip_tl_thongtinthietbi_row2_tv_loaitu_3g"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -465,7 +465,7 @@
                                             android:id="@+id/rl_supervision_bts_equip_tl_thongtinthietbi_row2_rl_chonloaitu_3g"
                                             android:layout_width="0dp"
                                             android:layout_height="@dimen/drop_box_heigh"
-                                            android:layout_marginLeft="@dimen/margin"
+                                            android:layout_marginLeft="@dimen/margin5"
                                             android:layout_weight="0.2"
                                             android:gravity="left"
                                             android:paddingLeft="@dimen/padding_left" >
@@ -486,7 +486,7 @@
                                     android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_truyendan_tv_row1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:text="@string/supervision_bts_equip_tl_thongtinthietbi_truyendan_tv_row1"
                                     android:textSize="@dimen/text_size_common"
                                     android:textStyle="bold" />
@@ -494,10 +494,10 @@
                                 <TableLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin"
+                                    android:layout_margin="@dimen/margin5"
                                     android:background="@drawable/border_top_right_bottom_left"
                                     android:gravity="center_vertical"
-                                    android:padding="@dimen/padding"
+                                    android:padding="@dimen/padding5"
                                     android:shrinkColumns="*"
                                     android:stretchColumns="1,3" >
 
@@ -505,8 +505,8 @@
                                         android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_truyendan_row1"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginBottom="@dimen/margin"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginBottom="@dimen/margin5"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:gravity="center_vertical" >
 
                                         <TextView
@@ -515,7 +515,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_truyendan_row1_loaithietbi"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -543,7 +543,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_row1_hangsx"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -553,7 +553,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="@dimen/text_box_heigh"
                                             android:layout_gravity="center_vertical"
-                                            android:layout_marginRight="@dimen/margin"
+                                            android:layout_marginRight="@dimen/margin5"
                                             android:layout_weight="0.2"
                                             android:paddingLeft="@dimen/padding_left" >
 
@@ -563,7 +563,7 @@
                                                 android:layout_height="40dp"
                                                 android:background="@drawable/spinner_background"
                                                 android:gravity="center_vertical"
-                                                android:padding="@dimen/padding"
+                                                android:padding="@dimen/padding5"
                                                 android:paddingLeft="@dimen/padding_left"
                                                 android:prompt="@string/bts_spiner_prompt"
                                                 android:textSize="@dimen/text_size_common" />
@@ -574,8 +574,8 @@
                                         android:id="@+id/supervision_bts_equip_tl_thongtinthietbi_truyendan_row2"
                                         android:layout_width="fill_parent"
                                         android:layout_height="@dimen/table_row_height"
-                                        android:layout_marginBottom="@dimen/margin"
-                                        android:layout_marginTop="@dimen/margin"
+                                        android:layout_marginBottom="@dimen/margin5"
+                                        android:layout_marginTop="@dimen/margin5"
                                         android:gravity="center_vertical" >
 
                                         <TextView
@@ -584,7 +584,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.1"
                                             android:gravity="center_vertical|left"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/supervision_bts_equip_tl_thongtinthietbi_truyendan_row2_tanso"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -611,7 +611,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="0.2"
-                                            android:paddingLeft="@dimen/padding"
+                                            android:paddingLeft="@dimen/padding5"
                                             android:text="@string/rl_supervision_bts_equip_tl_thongtinthietbi_truyendan_row2_tv_kichthuoctrong"
                                             android:textSize="@dimen/text_size_common"
                                             android:textStyle="normal" />
@@ -620,7 +620,7 @@
                                             android:id="@+id/rl_supervision_bts_equip_tl_thongtinthietbi_truyendan_row2_rl_chonkichthuoctrong"
                                             android:layout_width="0dp"
                                             android:layout_height="@dimen/drop_box_heigh"
-                                            android:layout_marginRight="@dimen/margin"
+                                            android:layout_marginRight="@dimen/margin5"
                                             android:layout_weight="0.2"
                                             android:gravity="left"
                                             android:paddingLeft="@dimen/padding_left" >
@@ -643,14 +643,14 @@
                             android:id="@+id/supervision_bts_equip_tab2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical" >
 
                             <TextView
                                 android:id="@+id/supervision_bts_equip_td_complete_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/margin"
+                                android:layout_margin="@dimen/margin5"
                                 android:text="@string/supervision_date_complete"
                                 android:textSize="@dimen/text_size_common"
                                 android:textStyle="bold"
@@ -660,7 +660,7 @@
                                 android:id="@+id/ll_supervision_bts_equip_tl_thongtinthietbi_thicong"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:background="@drawable/border_top_right_bottom_left"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
@@ -779,14 +779,14 @@
                             android:id="@+id/supervision_bts_equip_tab3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical" >
 
                             <TextView
                                 android:id="@+id/supervision_bts_equip_tn_complete_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/margin"
+                                android:layout_margin="@dimen/margin5"
                                 android:text="@string/supervision_date_complete"
                                 android:textSize="@dimen/text_size_common"
                                 android:textStyle="bold"
@@ -795,7 +795,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:background="@drawable/border_top_right_bottom_left"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
@@ -904,14 +904,14 @@
                             android:id="@+id/supervision_bts_equip_tab4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin"
+                            android:layout_marginTop="@dimen/margin5"
                             android:orientation="vertical" >
 
                             <TextView
                                 android:id="@+id/supervision_bts_equip_nt_complete_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/margin"
+                                android:layout_margin="@dimen/margin5"
                                 android:text="@string/supervision_date_complete"
                                 android:textSize="@dimen/text_size_common"
                                 android:textStyle="bold"
@@ -920,7 +920,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin"
+                                android:layout_marginTop="@dimen/margin5"
                                 android:background="@drawable/border_top_right_bottom_left"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"

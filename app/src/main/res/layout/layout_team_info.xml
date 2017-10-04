@@ -8,7 +8,7 @@
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
 
         <TextView
             style="@style/Content.Textview.Info"
@@ -26,7 +26,7 @@
         android:background="@drawable/border_right_bottom_left"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding5">
 
         <TextView
             style="@style/Textview.Info.Chitiet.Right"

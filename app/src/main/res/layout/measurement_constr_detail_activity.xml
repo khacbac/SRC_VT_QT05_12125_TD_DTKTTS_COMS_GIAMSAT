@@ -26,10 +26,10 @@
         android:id="@+id/ll_measurement_constr_detail_header"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <LinearLayout
@@ -71,7 +71,7 @@
                     android:layout_marginLeft="@dimen/margin_left"
                     android:background="@drawable/bg_title"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/text_padding"
+                    android:padding="@dimen/padding5"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_common" />
             </RelativeLayout>
@@ -123,9 +123,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
             android:background="@drawable/border_right"
             android:orientation="horizontal" >
 
@@ -197,9 +197,9 @@
             android:id="@+id/lv_measurement_constr_detail_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
             android:background="@drawable/border_right_bottom_left"
             android:choiceMode="singleChoice"
             android:minHeight="400dp"

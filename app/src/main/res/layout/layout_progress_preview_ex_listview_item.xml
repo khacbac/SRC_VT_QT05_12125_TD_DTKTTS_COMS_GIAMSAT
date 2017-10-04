@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/margin"
-    android:paddingTop="@dimen/margin">
+    android:paddingBottom="@dimen/margin5"
+    android:paddingTop="@dimen/margin5">
 
     <TextView
         android:id="@+id/txtDetailSttProgress"
@@ -31,7 +31,7 @@
             style="@style/Header.Textview"
             android:id="@+id/txtDetailTenHangMuc"
             android:layout_toRightOf="@id/imgForTenHangMuc"
-            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin5"
             android:textStyle="normal"/>
     </RelativeLayout>
     <TextView

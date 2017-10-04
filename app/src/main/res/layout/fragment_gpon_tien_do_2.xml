@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:paddingLeft="@dimen/margin5"--><!--android:paddingRight="@dimen/margin5">-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin5"
+        android:layout_marginTop="@dimen/margin5">
+
+        <TextView
+            style="@style/Header.Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày cập nhật" />
+
+        <TextView
+            android:id="@+id/txtNgayCapNhat"
+            style="@style/Header.Textview_Disable"
+            android:layout_width="@dimen/layout_width_150"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginStart="@dimen/margin10"
+            android:text="@string/str_date_dummy" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35">
+
+            <LinearLayout
+                android:id="@+id/layout_root_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/table_border_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/padding5"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Tên hạng mục" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/padding5"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Đơn vị" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/padding5"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Khối lượng" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/padding5"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/Header.Textview.Table"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Lũy kế" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<include-->
+                <!--layout="@layout/layout_work_item_gpon"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"/>-->
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65">
+
+            <LinearLayout
+                android:id="@+id/layout_root_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/table_border_color" />
+
+                <LinearLayout
+                    android:id="@+id/layoutRightForKeoCap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/gpon_height"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="Loại cáp" />
+
+                        <TextView
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Khối lượng" />
+
+                        <TextView
+                            android:id="@+id/tv_dvt"
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="ĐVT(mét)" />
+
+                        <TextView
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Lũy kế" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutRightForHanNoi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/layoutRightForHanNoiBoChia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/gpon_height"
+                            android:background="@drawable/border_right_bottom_left"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="Bộ chia" />
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Khối lượng" />
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Lũy kế" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutRightForHanNoiTuThue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/gpon_height"
+                            android:background="@drawable/border_right_bottom_left"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="Tên tủ" />
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="SL Lắp đặt" />
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Lũy kế" />
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="SL Hàn nối" />
+
+                            <TextView
+                                style="@style/Header.Textview.Title"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Lũy kế" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutRightForOdfIndoor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/layoutRightForOdfOutdoor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/gpon_height"
+                        android:background="@drawable/border_right_bottom_left"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="Tên ODF" />
+
+                        <TextView
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Khối Lượng" />
+
+                        <TextView
+                            style="@style/Header.Textview.Title"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Lũy kế" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutRightForOlt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/layoutRightForDoKiem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout><!--</ScrollView>-->

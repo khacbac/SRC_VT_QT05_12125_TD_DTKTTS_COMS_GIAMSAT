@@ -9,7 +9,7 @@
         android:id="@+id/lv_dropdown_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin2"
+        android:layout_margin="@dimen/margin1"
         android:background="@drawable/border_layout"
         android:choiceMode="singleChoice"
         android:padding="1dp" >

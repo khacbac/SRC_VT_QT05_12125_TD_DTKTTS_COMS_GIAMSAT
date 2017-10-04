@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_bts_kl_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.1"
             android:text="@string/supervision_bts_tt"
             android:textSize="@dimen/text_size_common"
@@ -85,7 +85,7 @@
             android:id="@+id/rl_supervision_bts_equip_tv_matram"
             android:layout_width="0dp"
             android:layout_height="@dimen/drop_box_heigh"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.2"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
@@ -120,7 +120,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/tl_supervision_bts_header"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:fillViewport="true" >
 
@@ -129,7 +129,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 			<LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/txt_date_update"
                         android:textSize="@dimen/text_size_common" />
                 <TextView
@@ -148,7 +148,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:background="@drawable/bg_title"
                         android:gravity="center_horizontal|center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="24/08/2016"
                         
                         android:textSize="@dimen/text_size_common" >
@@ -171,7 +171,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/cndtc_ten_doi"
                         android:textSize="@dimen/text_size_common" />
 
@@ -180,7 +180,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/txt_group_builder"
                         android:textSize="@dimen/text_size_common" />
 
@@ -189,7 +189,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/txt_group_assembly"
                         android:textSize="@dimen/text_size_common" />
 
@@ -198,7 +198,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/txt_group_equiment"
                         android:textSize="@dimen/text_size_common" />
                 </LinearLayout>
@@ -213,7 +213,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:background="@drawable/bg_title"
                         android:gravity="center_horizontal|center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="24/08/2016"
                         android:visibility="invisible"
                         android:textSize="@dimen/text_size_common" >
@@ -253,7 +253,7 @@
                         android:layout_height="@dimen/text_box_heigh"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/text_padding"
+                        android:padding="@dimen/padding5"
                         android:text="@string/cndtc_so_nhan_cong"
                         android:textSize="@dimen/text_size_common" />
 
@@ -296,7 +296,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin" >
+                android:layout_marginTop="@dimen/margin5" >
 
                 <Button
                     android:id="@+id/btn_bts_cndtc_save"

@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_brcd_stt"
@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:text="@string/line_cable_type_mot"
                 android:textSize="@dimen/text_size_common"
@@ -40,7 +40,7 @@
             android:layout_weight="1.8"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_weight="1.8"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <TextView
                 android:id="@+id/tv_supervision_type_brcd_kct"
@@ -83,7 +83,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.7"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <EditText
                 android:id="@+id/edt_supervision_brcd_kct_macaptruc"
@@ -92,7 +92,7 @@
                 android:layout_height="@dimen/text_box_heigh"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/text_empty"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" >
@@ -106,7 +106,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.7"
             android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/padding" >
+            android:padding="@dimen/padding5" >
 
             <EditText
                 android:id="@+id/edt_supervision_brcd_kct_chieudai"
@@ -117,7 +117,7 @@
                 android:hint="@string/text_empty"
                 android:inputType="number"
                 android:maxLength="9"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />

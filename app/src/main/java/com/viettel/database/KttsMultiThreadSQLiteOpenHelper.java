@@ -50,7 +50,7 @@ public class KttsMultiThreadSQLiteOpenHelper extends
 
     public KttsMultiThreadSQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//        Log.e(TAG, "KttsMultiThreadSQLiteOpenHelper: " + DATABASE_VERSION);
+        Log.e(TAG, "KttsMultiThreadSQLiteOpenHelper: " + DATABASE_VERSION);
     }
 
     @Override

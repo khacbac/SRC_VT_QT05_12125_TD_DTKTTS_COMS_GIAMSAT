@@ -56,7 +56,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
                         <TextView
                             style="@style/Header.Textview.Table"
                             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
                         <TextView
                             style="@style/Header.Textview.Table"
                             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
                         <TextView
                             style="@style/Header.Textview.Table"
                             android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border_right_bottom_left"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/padding">
+                        android:padding="@dimen/padding5">
                         <TextView
                             style="@style/Header.Textview.Table"
                             android:layout_width="match_parent"

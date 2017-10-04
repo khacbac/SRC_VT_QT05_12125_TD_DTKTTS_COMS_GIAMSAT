@@ -31,10 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_supervision_bts_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <LinearLayout
             android:id="@+id/rl_supervision_bts_posision_pillar_row1"
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dip"
             android:layout_below="@+id/rl_supervision_bts_posision_pillar_row1"
-            android:layout_marginTop="@dimen/padding"
+            android:layout_marginTop="@dimen/padding5"
             android:orientation="horizontal" >
 
             <TextView
@@ -99,7 +99,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
-                android:paddingRight="@dimen/padding"
+                android:paddingRight="@dimen/padding5"
                 android:text="@string/supervision_bts_pillar_posision_kinhdo"
                 android:textSize="@dimen/text_size_common"
                 android:textStyle="bold" />
@@ -139,7 +139,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:background="@drawable/border_layout"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
         
         
     </LinearLayout>

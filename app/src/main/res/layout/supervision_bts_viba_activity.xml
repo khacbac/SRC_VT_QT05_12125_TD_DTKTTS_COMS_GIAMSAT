@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_supervision_bts_rootmenu"
-        android:layout_margin="@dimen/margin"
+        android:layout_margin="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/padding"
+        android:padding="@dimen/padding5"
         android:visibility="visible" >
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.1"
             android:text="@string/supervision_bts_tt"
             android:textSize="@dimen/text_size_common"
@@ -85,7 +85,7 @@
             android:id="@+id/rl_supervision_bts_viba_tv_matram"
             android:layout_width="0dp"
             android:layout_height="@dimen/drop_box_heigh"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/margin5"
             android:layout_weight="0.2"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
@@ -121,17 +121,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_supervision_bts_viba_header"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin5"
+        android:layout_marginLeft="@dimen/margin5"
+        android:layout_marginRight="@dimen/margin5"
         android:background="@drawable/border_layout"
         android:orientation="vertical"
-        android:padding="@dimen/padding" >
+        android:padding="@dimen/padding5" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
             android:gravity="center_vertical|center_horizontal" >
 
             <TextView
@@ -148,7 +148,7 @@
             android:id="@+id/rl_supervision_bts_viba_bt_dauthap"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_box_heigh"
-            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:contentDescription="@string/app_name"
-                android:paddingLeft="@dimen/padding"
+                android:paddingLeft="@dimen/padding5"
                 android:text="@string/bts_viba_giamsat_dauthap"
                 android:textSize="@dimen/text_size_large_common"
                 android:textStyle="bold" />
@@ -177,7 +177,7 @@
             android:id="@+id/rl_supervision_bts_viba_bt_daucao"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_box_heigh"
-            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin5"
             android:background="@drawable/bg_title"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:contentDescription="@string/app_name"
-                android:paddingLeft="@dimen/padding"
+                android:paddingLeft="@dimen/padding5"
                 android:text="@string/bts_viba_giamsat_daucao"
                 android:textSize="@dimen/text_size_large_common"
                 android:textStyle="bold" />
@@ -213,7 +213,7 @@
                 android:layout_height="wrap_content"
                 android:filterTouchesWhenObscured="true"
                 android:gravity="center"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding5"
                 android:text="@string/rl_constr_bt_complete"
                 android:textSize="@dimen/text_size_common" />
         </RelativeLayout>
