@@ -10,6 +10,8 @@ import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
+import com.viettel.gsct.View.gpon.WorkItemRightKeoCapHeaderGpon;
+import com.viettel.gsct.View.gpon.WorkItemRightKeoCapItemGpon;
 import com.viettel.gsct.View.gpon.WorkItemRightLapDatOdfGpon;
 import com.viettel.gsct.View.gpon.WorkItemRightOltDoKiemGpon;
 import com.viettel.gsct.fragment.base.BaseFragment;
@@ -64,6 +66,11 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
     }
 
     @Override
+    public void addSWKeoCap() {
+        ieGponTienDoModel.addSWKeoCap(wItemKeoCap,this);
+    }
+
+    @Override
     public void addSWValueInDoor() {
         ieGponTienDoModel.addSWValueIndoor(this);
     }
@@ -72,6 +79,13 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
     public void addSWValueOLT() {
         ieGponTienDoModel.addSWValueOLT(this);
     }
+
+    @Override
+    public void addSWValueKeoCap(ConstrNodeEntity node) {
+        ieGponTienDoModel.addSWValueKeoCap(this);
+    }
+
+
 
     @Override
     public void addSWValueByNode(View view, ConstrNodeEntity node) {
@@ -87,6 +101,18 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
 //        gponView.setRadioButton(subView.getRadioBtnCheck());
 //        gponView.addSubView(subView);
         ieGponTienDoFragment.finishAddSubWorkItem(subView, node);
+    }
+
+    @Override
+    public void finishAddSWKeoCap(ConstrNodeEntity node, WorkItemGPONView wItemKeoCap) {
+        if (wItemKeoCap.getTvTitle().equals(this.wItemKeoCap.getTvTitle())) {
+            SubWorkItemGPONView swKeoCap = new SubWorkItemGPONView(context);
+            swKeoCap.setValue(node.getNodeName(), 0, 0, "");
+            swKeoCap.setWorkItemGPONView(wItemKeoCap);
+            wItemKeoCap.setRadioButton(swKeoCap.getRadioBtnCheck());
+            wItemKeoCap.addSubView(swKeoCap);
+            ieGponTienDoFragment.finishAddSWKeoCap(swKeoCap,node);
+        }
     }
 
     @Override
@@ -115,17 +141,49 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
     }
 
     @Override
-    public void finishAddSWValueByNode(Cat_Work_Item_TypesEntity catWorkItem, View view) {
-
+    public void finishAddSWValueKeoCap(Cat_Work_Item_TypesEntity catWorkItem) {
         switch (catWorkItem.getCode()) {
             case Constant.CODE_CAPQUANG:
             case Constant.CODE_ADSS:
+                Log.d(TAG, "finishAddSWValueByNode: called");
+                WorkItemRightKeoCapHeaderGpon header = new WorkItemRightKeoCapHeaderGpon(context);
+                header.setTvLoaiCap(catWorkItem.getItem_type_name());
+
                 ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem
                         = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
                 for (Cat_Sub_Work_ItemEntity catEntity : arrSWItem) {
-                    Log.d(TAG, "finishAddSWValueByNode: cat name = " + catEntity.getName());
+                    WorkItemRightKeoCapItemGpon item = new WorkItemRightKeoCapItemGpon(context);
+                    item.setTvItemLoaiCap(catEntity.getName());
+                    header.addItemForLoaiCap(item);
                 }
+
+                ieGponTienDoFragment.finishAddKeoCapValue(header);
+
                 break;
+        }
+    }
+
+    @Override
+    public void finishAddSWValueByNode(Cat_Work_Item_TypesEntity catWorkItem, View view) {
+
+        switch (catWorkItem.getCode()) {
+//            case Constant.CODE_CAPQUANG:
+//            case Constant.CODE_ADSS:
+//                Log.d(TAG, "finishAddSWValueByNode: called");
+//                WorkItemRightKeoCapHeaderGpon header = new WorkItemRightKeoCapHeaderGpon(context);
+//                header.setTvLoaiCap(catWorkItem.getItem_type_name());
+//
+//                ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem
+//                        = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
+//                for (Cat_Sub_Work_ItemEntity catEntity : arrSWItem) {
+//                    WorkItemRightKeoCapItemGpon item = new WorkItemRightKeoCapItemGpon(context);
+//                    item.setTvItemLoaiCap(catEntity.getName());
+//                    header.addItemForLoaiCap(item);
+//                }
+//
+//                ieGponTienDoFragment.finishAddKeoCapValue(header);
+//
+//                break;
             case Constant.CODE_LAPDAT_HANNOI:
 
                 break;

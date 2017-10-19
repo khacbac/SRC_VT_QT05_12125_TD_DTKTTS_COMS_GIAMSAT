@@ -37,7 +37,7 @@ public interface IeGponTienDoFragment {
      */
     void finishAddSubWorkItem(View view, ConstrNodeEntity node);
 
-    void finishAddSWKeoCap(View view);
+    void finishAddSWKeoCap(View view, ConstrNodeEntity node);
 
     void finishAddKeoCapValue(View view);
     void finishAddLapDatHanNoiValue(View view);

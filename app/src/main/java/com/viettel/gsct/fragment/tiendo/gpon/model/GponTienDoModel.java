@@ -8,6 +8,7 @@ import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
 import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.field.ConstrNodeController;
+import com.viettel.gsct.View.gpon.WorkItemGPONView;
 import com.viettel.gsct.fragment.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -47,6 +48,13 @@ public class GponTienDoModel implements IeGponTienDoModel {
     }
 
     @Override
+    public void addSWKeoCap(WorkItemGPONView wItemKeoCap, IeListenerAddItem addItem) {
+        for (ConstrNodeEntity node : listNode) {
+            addItem.finishAddSWKeoCap(node,wItemKeoCap);
+        }
+    }
+
+    @Override
     public void addSWValueIndoor(IeListenerAddItem addLayout) {
         for (Cat_Work_Item_TypesEntity catWorkItem : arrCat) {
             addLayout.finishAddSWValueIndoor(catWorkItem);
@@ -57,6 +65,13 @@ public class GponTienDoModel implements IeGponTienDoModel {
     public void addSWValueOLT(IeListenerAddItem addLayout) {
         for (Cat_Work_Item_TypesEntity catWorkItem : arrCat) {
             addLayout.finishAddSWValueOLT(catWorkItem);
+        }
+    }
+
+    @Override
+    public void addSWValueKeoCap(IeListenerAddItem addLayout) {
+        for (Cat_Work_Item_TypesEntity catWorkItem : arrCat) {
+            addLayout.finishAddSWValueKeoCap(catWorkItem);
         }
     }
 

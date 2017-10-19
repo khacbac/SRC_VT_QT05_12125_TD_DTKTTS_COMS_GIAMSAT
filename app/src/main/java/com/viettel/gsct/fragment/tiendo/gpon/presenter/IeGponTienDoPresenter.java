@@ -27,10 +27,14 @@ public interface IeGponTienDoPresenter {
      */
     void addSubWorkItem(WorkItemGPONView gponView);
 
+    void addSWKeoCap();
+
 
     void addSWValueInDoor();
 
     void addSWValueOLT();
+
+    void addSWValueKeoCap(ConstrNodeEntity node);
 
 
     void addSWValueByNode(View view, ConstrNodeEntity node);

@@ -30,10 +30,12 @@ public interface IeGponTienDoModel {
          * @param node SubWorkItemGPONView.
          */
         void finishAddSubWorkItem(ConstrNodeEntity node);
+        void finishAddSWKeoCap(ConstrNodeEntity node, WorkItemGPONView wItemKeoCap);
 
         // Lang nghe ket thuc vie them item right cho moi sub work item.
         void finishAddSWValueIndoor(Cat_Work_Item_TypesEntity catWorkItem);
         void finishAddSWValueOLT(Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueKeoCap(Cat_Work_Item_TypesEntity catWorkItem);
 
         void finishAddSWValueByNode(Cat_Work_Item_TypesEntity catWorkItem, View view);
 
@@ -50,7 +52,7 @@ public interface IeGponTienDoModel {
      */
     void addSubWorkItem(IeListenerAddItem addLayout);
 
-//    void addSWKeoCap(IeListenerAddItem addItem);
+    void addSWKeoCap(WorkItemGPONView wItemKeoCap, IeListenerAddItem addItem);
 
 
 
@@ -61,6 +63,7 @@ public interface IeGponTienDoModel {
      */
     void addSWValueIndoor(IeListenerAddItem addLayout);
     void addSWValueOLT(IeListenerAddItem addLayout);
+    void addSWValueKeoCap(IeListenerAddItem addLayout);
 
 
     void addSWValueByNode(View view,ConstrNodeEntity node, IeListenerAddItem addLayout);

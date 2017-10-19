@@ -133,7 +133,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
         layoutRootLeft.addView(view);
         view.setShowWorkItemByItemType(this);
 //        itemGponPresenter.addSWKeoCap();
-        itemGponPresenter.addSubWorkItem(view);
+        itemGponPresenter.addSWKeoCap();
     }
 
     @Override
@@ -189,14 +189,17 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
     }
 
     @Override
-    public void finishAddSWKeoCap(View view) {
-
+    public void finishAddSWKeoCap(View view, ConstrNodeEntity node) {
+        layoutRootLeft.addView(view);
+        // Them item cho right Sub Work Item.
+        itemGponPresenter.addSWValueKeoCap(node);
     }
 
 
     @Override
     public void finishAddKeoCapValue(View view) {
-
+        layoutForRightKeoCap.addView(view);
+//        layoutForRightKeoCap.setVisibility(View.VISIBLE);
     }
 
     @Override
