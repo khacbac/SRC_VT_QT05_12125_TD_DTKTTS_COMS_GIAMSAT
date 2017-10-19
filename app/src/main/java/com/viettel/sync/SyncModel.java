@@ -156,6 +156,8 @@ import com.viettel.database.field.Cause_Line_BG_TankField;
 import com.viettel.database.field.Cause_Line_Hg_CableField;
 import com.viettel.database.field.Cause_Line_Hg_MxField;
 import com.viettel.database.field.Cause_Line_Hg_PillarField;
+import com.viettel.database.field.ConstrNodeController;
+import com.viettel.database.field.ConstrNodeItemsField;
 import com.viettel.database.field.Constr_ConstructionField;
 import com.viettel.database.field.Constr_ObStructionField;
 import com.viettel.database.field.Constr_ObStruction_TypeField;
@@ -481,6 +483,7 @@ public class SyncModel extends AbstractSyncService {
                 iMaxProcessId = SqlliteSyncModel.getInstance().getMaxProcessId(
                         pTableInfo.getTableName());
             }
+            Log.d(TAG, "requestGetData: table get = " + pTableInfo.getTableName());
             JSONObject json = new JSONObject();
             json.put("CAT_EMPLOYEE_ID", String.valueOf(idUser));
             json.put("PROCESS_ID", iMaxProcessId);
@@ -492,8 +495,18 @@ public class SyncModel extends AbstractSyncService {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+            Log.d(TAG, "requestGetData: error message = " + ex.getMessage());
         }
         return re;
+    }
+
+    private void logLargeString(String str, String tableName) {
+        if(str.length() > 3000) {
+            Log.d(TAG,"From " + tableName + " = :" + str.substring(0, 3000));
+            logLargeString(str.substring(3000), tableName);
+        } else {
+            Log.d(TAG,"From " + tableName + " = :" + str); // continuation
+        }
     }
 
     /**
@@ -513,21 +526,10 @@ public class SyncModel extends AbstractSyncService {
             int errCode = jsonresult.getInt("errorCode");
 
             SyncTableInfo tableInfo = (SyncTableInfo) actionEvent.userData;
-            Log.e(TAG, "receiveGetDataHandler: " + tableInfo.getTableName());
-            // if
-            // (tableInfo.getTableName().equals("CAT_CAUSE_CONSTR_ACCEPTANCE"))
-            // {
-            // JSONArray jsonScDataTest = SqlliteSyncModel
-            // .getDataJsonSyncTest(
-            // Supervision_BRCD_Kcn_Field.TABLE_NAME,
-            // Supervision_BRCD_Kcn_Controller.allColumn,
-            // null, 0, 1000);
-            // Mylog.i("id", "bang can tao");
-            // }
-//			Log.e(TAG, tableInfo.getTableName());
-//			Log.e(TAG, "receiveGetDataHandler: " + jsonResponseData);
-//			LogManager.getInstance().writeFile(
-//					"nhan bang: " + tableInfo.getTableName());
+            if (tableInfo.getTableName().equals(Work_ItemsField.TABLE_NAME)) {
+                logLargeString(jsonResponseData.toString(), tableInfo.getTableName());
+            }
+            Log.d(TAG, "receiveGetDataHandler: " + tableInfo.getTableName() +  " Data get = "+ jsonResponseData);
 
             percent = percent + percentLeap;
             Message msg2 = new Message();
@@ -540,7 +542,7 @@ public class SyncModel extends AbstractSyncService {
 
             // Log.i("-------", jsonresult.toString());
             if (errCode == ErrorConstants.ERROR_CODE_SUCCESS) {
-				/* Update du lieu vao co so du lieu */
+                /* Update du lieu vao co so du lieu */
                 ArrayList<HashMap<String, String>> listData;
 				/* Chi ra 2 truong hop voi 2 bang tu them idUser vao bang */
                 if (tableInfo.getTableName().equals(
@@ -1627,6 +1629,19 @@ public class SyncModel extends AbstractSyncService {
                         ActionEventConstant.REQUEST_GETDATA,
                         Cat_Plan_For_ConstrControler.allColumn));
         Log.e(TAG, "syncGetData: xxxxxxxx" );
+
+        SyncModel
+                .getInstance()
+                .requestGetData(
+                        true,
+                        e,
+                        "serverDataProcess.getCategoryTable",
+                        new SyncTableInfo(
+                                ConstrNodeItemsField.TABLE_NAME,
+                                ConstrNodeItemsField.CONSTR_NODE_ID,
+                                ActionEventConstant.REQUEST_GETDATA,
+                                ConstrNodeController.allColumn));
+
         SyncModel.getInstance().requestGetData(
                 true,
                 e,
@@ -2633,6 +2648,7 @@ public class SyncModel extends AbstractSyncService {
                                 Supv_Constr_Attach_FileField.COLUMN_SUPV_CONSTR_ATTACH_FILE_ID,
                                 ActionEventConstant.REQUEST_GETDATA,
                                 Supv_Constr_Attach_FileController.allColumn));
+
 
 //		 SyncQueue.getInstance().checkGetFinish();
 //		 syncUpateData(e);
@@ -4002,8 +4018,8 @@ public class SyncModel extends AbstractSyncService {
                 Supv_Constr_Attach_FileField.TABLE_NAME);
         //Supervision_CNDTCField.TABLE_NAME);
 
-        // ---HungTN add new 25/08/2016
         // CONSTR_PROGRESS_CONSTRUCT
+        // ---HungTN add new 25/08/2016
 //		SyncModel
 //				.getInstance()
 //				.requestGetData(

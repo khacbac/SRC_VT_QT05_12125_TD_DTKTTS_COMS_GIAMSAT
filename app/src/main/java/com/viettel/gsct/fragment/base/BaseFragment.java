@@ -21,13 +21,13 @@ import com.viettel.ktts.R;
 
 public abstract  class BaseFragment extends Fragment {
     public Constr_Construction_EmployeeEntity constr_ConstructionEmployeeItem;
-    public Constr_ConstructionEntity constr_ConstructionItem;
+    public static Constr_ConstructionEntity constr_ConstructionItem;
 
-    public Work_ItemsControler work_itemsControler;
+    public static Work_ItemsControler work_itemsControler;
     public Sub_Work_ItemController sub_work_itemController;
 
-    public Cat_Work_Item_TypesControler cat_work_item_typesControler;
-    public Cat_Sub_Work_ItemControler cat_sub_work_itemControler;
+    public static Cat_Work_Item_TypesControler cat_work_item_typesControler;
+    public static Cat_Sub_Work_ItemControler cat_sub_work_itemControler;
 
     public long userId;
 

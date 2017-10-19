@@ -46,7 +46,7 @@ public abstract class AbstractSyncService implements HTTPListenner {
 		HTTPRequest re = new HTTPRequest();
 		re.setUrl(ServerPath.SERVER_PATH);
 		re.setAction(actionEvent.action);
-		re.setContentType(HTTPMessage.CONTENT_JSON);
+//		re.setContentType(HTTPMessage.CONTENT_JSON);
 		re.setMethod(Constants.HTTPCONNECTION_POST);
 		re.setDataText(strBuffer.toString());
 		re.setObserver(this);
@@ -73,7 +73,7 @@ public abstract class AbstractSyncService implements HTTPListenner {
 		HTTPRequest re = new HTTPRequest();
 		re.setUrl(ServerPath.SERVER_PATH);
 		re.setAction(actionEvent.action);
-		re.setContentType(HTTPMessage.CONTENT_JSON);
+//		re.setContentType(HTTPMessage.CONTENT_JSON);
 		re.setMethod(Constants.HTTPCONNECTION_POST);
 		re.setDataText(strBuffer.toString());
 		re.setObserver(this);
@@ -134,7 +134,7 @@ public abstract class AbstractSyncService implements HTTPListenner {
 		HTTPRequest re = new HTTPRequest();
 		re.setUrl(ServerPath.SERVER_PATH);
 		re.setAction(actionEvent.action);
-		re.setContentType(HTTPMessage.CONTENT_JSON);
+//		re.setContentType(HTTPMessage.CONTENT_JSON);
 		re.setMethod(Constants.HTTPCONNECTION_POST);
 		re.setDataText(strBuffer.toString());
 		re.setObserver(this);
@@ -152,7 +152,7 @@ public abstract class AbstractSyncService implements HTTPListenner {
 		HTTPRequest re = new HTTPRequest();
 		re.setUrl(ServerPath.SERVER_PATH);
 		re.setAction(actionEvent.action);
-		re.setContentType(HTTPMessage.CONTENT_JSON);
+//		re.setContentType(HTTPMessage.CONTENT_JSON);
 		re.setMethod(Constants.HTTPCONNECTION_POST);
 		re.setDataText(strBuffer.toString());
 		re.setObserver(this);
@@ -178,7 +178,7 @@ public abstract class AbstractSyncService implements HTTPListenner {
 			ActionEvent actionEvent, String fileName, String fileField,
 			String fileType) throws Throwable {		
 		HTTPRequest re = new HTTPMultiPartRequest();
-		re.setContentType(HTTPMessage.MULTIPART_JSON);
+//		re.setContentType(HTTPMessage.MULTIPART_JSON);
 		String dataText = NetworkUtil.getJSONString(method,
 				(Vector<String>) actionEvent.viewData);
 		re.setDataTypeSend(HTTPRequest.CONTENT_TYPE_BINARY);

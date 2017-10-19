@@ -43,6 +43,7 @@ import com.viettel.database.field.Cause_Line_BG_TankField;
 import com.viettel.database.field.Cause_Line_Hg_CableField;
 import com.viettel.database.field.Cause_Line_Hg_MxField;
 import com.viettel.database.field.Cause_Line_Hg_PillarField;
+import com.viettel.database.field.ConstrNodeItemsField;
 import com.viettel.database.field.Constr_ObStructionField;
 import com.viettel.database.field.Constr_Progress_Field;
 import com.viettel.database.field.Constr_Team_ProgressField;
@@ -195,6 +196,7 @@ public class Ktts_KeyController {
 			Cat_Constr_TeamField.TABLE_NAME,
 			Constr_Team_ProgressField.TABLE_NAME,
 			Cat_Cause_Not_WorkField.TABLE_NAME,
+            ConstrNodeItemsField.TABLE_NAME
 	};
 
 	public Ktts_KeyController() {

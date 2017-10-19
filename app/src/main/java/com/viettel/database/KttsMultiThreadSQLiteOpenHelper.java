@@ -26,6 +26,8 @@ import com.viettel.database.field.Cat_Milestone_ConstrField;
 import com.viettel.database.field.Cat_Plan_For_ConstrField;
 import com.viettel.database.field.Cat_Sub_Work_ItemField;
 import com.viettel.database.field.Cat_Work_Item_TypesField;
+import com.viettel.database.field.ConstrNodeController;
+import com.viettel.database.field.ConstrNodeItemsField;
 import com.viettel.database.field.Constr_ObStructionField;
 import com.viettel.database.field.Constr_Team_ProgressField;
 import com.viettel.database.field.Constr_Work_LogsField;
@@ -44,7 +46,7 @@ public class KttsMultiThreadSQLiteOpenHelper extends
             .getSimpleName();
 
     // Database Version
-    private static final int DATABASE_VERSION = 35;//32
+    private static final int DATABASE_VERSION = 48;//32
     // Database Name
     private static final String DATABASE_NAME = "KTTS_DB_MANAGER";
 
@@ -294,14 +296,15 @@ public class KttsMultiThreadSQLiteOpenHelper extends
         db.execSQL(Cat_Milestone_ConstrControler.CREATE_TABLE);
 //        db.execSQL("DROP TABLE IF EXISTS " + Cat_Plan_For_ConstrField.TABLE_NAME);
         db.execSQL(Cat_Plan_For_ConstrControler.CREATE_TABLE);
+
+        db.execSQL(ConstrNodeController.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.e(TAG, "onUpgrade() from " + oldVersion + " to " + newVersion);
 
-        int currentVersion = oldVersion;
-        if (currentVersion != DATABASE_VERSION) {
+        if (newVersion > oldVersion) {
             switch (oldVersion) {
                 case 34:
                     db.execSQL("ALTER TABLE " + Supervision_ConstrField.TABLE_NAME + " ADD COLUMN "+  Supervision_ConstrField.COLUMN_LINE_TYPE + " INTEGER;");
@@ -326,8 +329,74 @@ public class KttsMultiThreadSQLiteOpenHelper extends
                     db.execSQL(Cat_Milestone_ConstrControler.CREATE_TABLE);
                     db.execSQL(Cat_Plan_For_ConstrControler.CREATE_TABLE);
                     break;
+                case 35:
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: version 35" + "Add Constr Node Table");
+                    break;
+                case 36:
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: version " + oldVersion + " Add Constr Node Table");
+                    break;
+                case 37:
+                    String changeName = "ALTER TABLE NODE_ITEMS RENAME TO " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(changeName);
+                    Log.d(TAG, "onUpgrade: version " + oldVersion + " change name success");
+                    break;
+                case 38:
+                    String addContrNodeIdColumn = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN "+  Work_ItemsField.CONSTR_NODE_ID + " INTEGER;";
+                    db.execSQL(addContrNodeIdColumn);
+                    Log.d(TAG, "onUpgrade: version " + oldVersion + " add column success");
+                    break;
+                case 39:
+                    String dropTable = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 40:
+                    String dropTable40 = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable40);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 41:
+                    String dropTable41 = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable41);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 42:
+                    String dropTable42 = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable42);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 44:
+                    String dropTable43 = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable43);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 45:
+                    String dropTable45 = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable45);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 46:
+                    String dropTable46 = "DROP TABLE IF EXISTS " + ConstrNodeItemsField.TABLE_NAME;
+                    db.execSQL(dropTable46);
+                    db.execSQL(ConstrNodeController.CREATE_TABLE);
+                    Log.d(TAG, "onUpgrade: ReCreate Table Success");
+                    break;
+                case 47:
+                    String addWorkItemNodeId = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN "+  Work_ItemsField.CONSTR_NODE_ID + " INTEGER;";
+                    db.execSQL(addWorkItemNodeId);
+                    Log.d(TAG, "onUpgrade: add column success");
+                    break;
                 default:
                     onCreate(db);
+                    break;
             }
 //            if (newVersion == DATABASE_VERSION) { // phien ban db update them
 //				onCreate(db);

@@ -12,6 +12,7 @@ import com.viettel.common.LogManager;
 import com.viettel.constants.Constants;
 import com.viettel.sync.SyncModel;
 import com.viettel.utils.Mylog;
+import com.viettel.viettellib.json.me.JSONObject;
 import com.viettel.viettellib.network.http.DataSupplier.Data;
 import com.viettel.viettellib.oAuth.exceptions.OAuthException;
 import com.viettel.viettellib.oAuth.model.OAuthRequest;
@@ -135,7 +136,18 @@ public class HttpAsyncTask extends AsyncTask<Void, Void, Void> {
                     connection.addRequestProperty("Cache-Control", "no-cache");
                     Response response1 = oAuthRequest.doSend();
 
-                    // String res = response1.getBody();
+
+                    String res = response1.getBody();
+
+//                    Log.d(TAG, "doInBackground: response = " + res);
+                    JSONObject object = new JSONObject(request.getDataText());
+                    JSONObject ob = (JSONObject) object.get("params");
+                    Log.d(TAG, "--------------------------------------------------------------------------------");
+                    Log.d(TAG, "doInBackground: TableName = " + ob.get("tableName"));
+                    logLargeString(res);
+                    Log.d(TAG, "--------------------------------------------------------------------------------");
+
+
                     response.setDataText(response1.getBody());
                     response.setCode(response1.getCode());
                     if (response.getCode() == OAuthRequestManager.TOKEN_INVALID
@@ -218,6 +230,15 @@ public class HttpAsyncTask extends AsyncTask<Void, Void, Void> {
             }
         }
         return null;
+    }
+
+    private void logLargeString(String str) {
+        if(str.length() > 3000) {
+            Log.d(TAG, str.substring(0, 3000));
+            logLargeString(str.substring(3000));
+        } else {
+            Log.d(TAG, str); // continuation
+        }
     }
 
     /**

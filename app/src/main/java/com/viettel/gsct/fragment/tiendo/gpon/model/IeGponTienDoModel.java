@@ -3,8 +3,12 @@ package com.viettel.gsct.fragment.tiendo.gpon.model;
 import android.content.Context;
 import android.view.View;
 
-import com.viettel.database.entity.Work_ItemsEntity;
+import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
+import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
+
+import java.util.ArrayList;
 
 /**
  * Created by doanLV4 on 9/20/2017.
@@ -12,79 +16,56 @@ import com.viettel.gsct.View.gpon.WorkItemGPONView;
 
 public interface IeGponTienDoModel {
 
+
     /**
      * Interface lang nghe su kien ket thuc viec them layout.
      */
-    interface IeListenerAddLayout {
-        /**
-         * Add WorkItemGPONView cho Gpon Tien do.
-         * @param view WorkItemGPONView.
-         */
-        void addWorkItemByNode(View view);
-        /**
-         * Add WorkItemGPONView cho Gpon Tien do.
-         * @param view WorkItemGPONView.
-         */
-        void addWorkItemByCongTrinh(View view);
+    interface IeListenerAddItem {
+
+//        void finishAddWorkItem(Cat_Work_Item_TypesEntity arrCat, Context context);
         /**
          * Add SubWorkItemGPONView cho Gpon Tien do.
-         * @param view SubWorkItemGPONView.
+         * @param gponView
+         * @param context
+         * @param node SubWorkItemGPONView.
          */
-        void addSubWorkItemByNode(View view);
-        /**
-         * Add layout for Right item doi voi moi SubWorkItemGPONView tuong ung.
-         * @param subView SubWorkItemGPONView.
-         */
-        void addRightSubWorkItemByNode(View subView);
-        /**
-         * Add layout for Right item doi voi moi SubWorkItemGPONView tuong ung.
-         * @param subView SubWorkItemGPONView.
-         */
-        void addRightSubWorkItemByCongTrinh(View subView);
+        void finishAddSubWorkItem(ConstrNodeEntity node);
+
+        // Lang nghe ket thuc vie them item right cho moi sub work item.
+        void finishAddSWValueIndoor(Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueOLT(Cat_Work_Item_TypesEntity catWorkItem);
+
+        void finishAddSWValueByNode(Cat_Work_Item_TypesEntity catWorkItem, View view);
+
+        void finishAddOdfIndoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems);
+
+        void finishAddOdfOutdoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems);
     }
-
-    /**
-     * Add WorkItemGPONView cho Gpon Tien do.
-     * @param entity Work_ItemsEntity.
-     * @param context Context.
-     * @param addLayout IeListenerAddLayout.
-     */
-    void addWorkItemGponByNode(Work_ItemsEntity entity,
-                               Context context, IeListenerAddLayout addLayout);
-
-    /**
-     * Add WorkItemGPONView cho Gpon Tien do.
-     * @param entity Work_ItemsEntity.
-     * @param context Context.
-     * @param addLayout IeListenerAddLayout.
-     */
-    void addWorkItemGponByCongTrinh(Work_ItemsEntity entity,
-                               Context context, IeListenerAddLayout addLayout);
 
     /**
      * Add SubWorkItemGPONView cho Gpon Tien do.
      * @param gponView WorkItemGPONView.
      * @param context Context.
-     * @param addLayout IeListenerAddLayout.
+     * @param addLayout IeListenerAddItem.
      */
-    void addSubWorkItemGponByNode(WorkItemGPONView gponView,
-                                  Context context, IeListenerAddLayout addLayout);
+    void addSubWorkItem(IeListenerAddItem addLayout);
+
+//    void addSWKeoCap(IeListenerAddItem addItem);
+
+
 
     /**
      * Add layout for Right item doi voi moi SubWorkItemGPONView tuong ung.
-     * @param subView SubWorkItemGPONView.
      * @param context Context.
-     * @param addLayout IeListenerAddLayout.
+     * @param addLayout IeListenerAddItem.
      */
-    void addRightSubWorkGponByNode(View subView,
-                                   Context context, IeListenerAddLayout addLayout);
+    void addSWValueIndoor(IeListenerAddItem addLayout);
+    void addSWValueOLT(IeListenerAddItem addLayout);
 
-    /**
-     * Add layout for Right item doi voi moi SubWorkItemGPONView tuong ung.
-     * @param subView SubWorkItemGPONView.
-     * @param context Context.
-     * @param addLayout IeListenerAddLayout.
-     */
-    void addRightSubWorkGponByCongTrinh(View subView,
-                                   Context context, IeListenerAddLayout addLayout);
+
+    void addSWValueByNode(View view,ConstrNodeEntity node, IeListenerAddItem addLayout);
+
+    void addItemOdfIndoor(Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
+    void addItemOdfOutdoor(Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
+
 }

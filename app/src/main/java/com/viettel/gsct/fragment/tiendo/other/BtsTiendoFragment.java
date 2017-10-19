@@ -174,7 +174,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                     ArrayList<Sub_Work_ItemEntity> subWorkItems
                             = sub_work_itemController.getItems(workItem.getId());
                     for (Sub_Work_ItemEntity subWorkItem : subWorkItems) {
-//                        workItem.addSubWorkItemByNode(subWorkItem);
+//                        workItem.finishAddSubWorkItem(subWorkItem);
                         hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
                     }
                     view.setChecked(true);

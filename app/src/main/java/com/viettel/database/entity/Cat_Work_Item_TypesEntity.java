@@ -4,7 +4,7 @@ package com.viettel.database.entity;
  * Created by hieppq3 on 4/26/17.
  */
 
-public class Cat_Work_Item_TypesEntity {
+public class Cat_Work_Item_TypesEntity extends BaseEntity{
     private long item_type_id;
     private String item_type_name;
     private String description;

@@ -1,5 +1,6 @@
 package com.viettel.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -69,7 +70,8 @@ public class Work_ItemsControler {
             BaseField.COLUMN_PROCESS_ID,
             BaseField.COLUMN_SYNC_STATUS,
             BaseField.COLUMN_EMPLOYEE_ID,
-            Work_ItemsField.ACCEPT_NOTE_CODE
+            Work_ItemsField.ACCEPT_NOTE_CODE,
+            Work_ItemsField.CONSTR_NODE_ID
     };
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "
@@ -151,6 +153,10 @@ public class Work_ItemsControler {
 //            + " INTEGER,"
             + Work_ItemsField.COLUMN_IS_ACTIVE
             + " INTEGER,"
+            + Work_ItemsField.CONSTR_NODE_ID
+            + " INTEGER,"
+            + Work_ItemsField.COLUMN_CONSTRUCT_ID
+            + " INTEGER,"
             + BaseField.COLUMN_PROCESS_ID
             + " INTEGER,"
             + BaseField.COLUMN_SYNC_STATUS
@@ -184,6 +190,63 @@ public class Work_ItemsControler {
         return ret;
     }
 
+    public ArrayList<Work_ItemsEntity> getWItemsByNode(int constrIdFromNode) {
+        ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        String strQuery = "select * from WORK_ITEMS where CONSTR_ID = " + constrIdFromNode;
+        @SuppressLint("Recycle")
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Work_ItemsEntity curItem = this.converCursorToItem(cursor);
+                Log.d(TAG, "getItems: From Controler - Name = " + curItem.getWork_item_name());
+                ret.add(curItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    public ArrayList<String> getAllWorkItemName() {
+        ArrayList<String> allItemName = new ArrayList<>();
+        String query = "select WORK_ITEMS.WORK_ITEM_NAME from WORK_ITEMS INNER JOIN CONSTR_CONSTRUCTIONS on WORK_ITEMS.CONSTR_ID = CONSTR_CONSTRUCTIONS.CONSTRUCT_ID ;";
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        @SuppressLint("Recycle")
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                String worlName = cursor.getString(0);
+                allItemName.add(worlName);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return allItemName;
+
+    }
+
+    public ArrayList<Work_ItemsEntity> getItemsByCatWorkItemType(long itemTypeId) {
+        ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Work_ItemsField.TABLE_NAME, allColumn,
+                        Work_ItemsField.ITEM_TYPE_ID + "=? AND "
+                                + Work_ItemsField.COLUMN_IS_ACTIVE + "= 1",
+                        new String[]{String.valueOf(itemTypeId)}, null, null,
+                        null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Work_ItemsEntity curItem = this.converCursorToItem(cursor);
+                Log.d(TAG, "getItems: From Controler - Name = " + curItem.getWork_item_name());
+                ret.add(curItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
     public ArrayList<String> getListColumn() {
         ArrayList<String> allColums = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
@@ -194,6 +257,16 @@ public class Work_ItemsControler {
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
         return allColums;
+    }
+
+    public ArrayList<String> getConstrNodeId() {
+        ArrayList<String> allConstrNodeId = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Work_ItemsField.TABLE_NAME, null, null, null, null, null, null);
+        String nodeId = ""+cursor.getLong(cursor.getColumnIndex(Work_ItemsField.CONSTR_NODE_ID));
+        allConstrNodeId.add(nodeId);
+        return allConstrNodeId;
     }
 
     public Work_ItemsEntity getItem(long constructId, long cat_work_item_id) {
@@ -262,6 +335,7 @@ public class Work_ItemsControler {
         values.put(Work_ItemsField.COLUMN_EMPLOYEE_ID, addItem.getEmployeeId());
         values.put(Work_ItemsField.COLUMN_SYNC_STATUS, addItem.getSyncStatus());
         values.put(Work_ItemsField.COLUMN_IS_ACTIVE, addItem.getIsActive());
+        values.put(Work_ItemsField.CONSTR_NODE_ID, addItem.getNodeID());
         return values;
     }
 
@@ -297,6 +371,8 @@ public class Work_ItemsControler {
                     .getColumnIndex(Work_ItemsField.COLUMN_SYNC_STATUS)));
             curItem.setIsActive(cursor.getInt(cursor
                     .getColumnIndex(Work_ItemsField.COLUMN_IS_ACTIVE)));
+            curItem.setNodeID(cursor.getLong(cursor
+                    .getColumnIndex(Work_ItemsField.CONSTR_NODE_ID)));
         } catch (Exception e) {
             e.printStackTrace();
         }

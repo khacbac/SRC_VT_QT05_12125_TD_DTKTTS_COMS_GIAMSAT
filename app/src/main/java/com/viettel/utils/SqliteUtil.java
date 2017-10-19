@@ -1,5 +1,7 @@
 package com.viettel.utils;
 
+import android.util.Log;
+
 import com.viettel.database.field.BaseField;
 import com.viettel.viettellib.json.me.JSONArray;
 import com.viettel.viettellib.json.me.JSONObject;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SqliteUtil {
+	private static final String TAG = SqliteUtil.class.getSimpleName();
+
 	public static ArrayList<HashMap<String, String>> converJsonToHasMap(
 			JSONObject entry, String[] columnsGet) {
 		ArrayList<HashMap<String, String>> listResult = new ArrayList<HashMap<String, String>>();
@@ -26,6 +30,7 @@ public class SqliteUtil {
 				HashMap<String, String> map = new HashMap<String, String>();
 				for (int j = 0; j < length; j++) {
 					String sColumn = columnsGet[j];
+					Log.d(TAG, "converJsonToHasMap: need get = " + sColumn);
 					String sValue = jsonItem.getString(columnsGet[j]);
 					// TODO neu server tra ve thi thoi khong co doan nay
 					if (sColumn.equals(BaseField.COLUMN_SYNC_STATUS)

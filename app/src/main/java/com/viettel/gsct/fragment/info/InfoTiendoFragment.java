@@ -62,6 +62,20 @@ public class InfoTiendoFragment extends BaseTienDoFragment {
     @Override
     public void initData() {
         super.initData();
+
+        ArrayList<String> listColumn = work_itemsControler.getListColumn();
+        for (String column : listColumn) {
+            Log.d(TAG, "initData: column = " + column);
+        }
+//        ArrayList<String> lisNodeId = work_itemsControler.getConstrNodeId();
+//        if (!lisNodeId.isEmpty()) {
+//            for (String nodeId : lisNodeId) {
+//                Log.d(TAG, "initData: node id = " + nodeId);
+//            }
+//        }
+
+
+
         ArrayList<Work_ItemsEntity> workItems = work_itemsControler.getItems(
                 constr_ConstructionItem.getConstructId());
         Log.d(TAG,"Construct Id = " + constr_ConstructionEmployeeItem.getSupvConstrType());

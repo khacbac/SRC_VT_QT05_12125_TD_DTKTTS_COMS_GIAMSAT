@@ -12,7 +12,9 @@ import android.util.Log;
 
 import com.viettel.constants.Constants;
 import com.viettel.database.field.BaseField;
+import com.viettel.database.field.ConstrNodeItemsField;
 import com.viettel.database.field.Supv_Constr_Attach_FileField;
+import com.viettel.database.field.Work_ItemsField;
 import com.viettel.sync.SyncModel;
 import com.viettel.sync.SyncTableInfo;
 import com.viettel.viettellib.json.me.JSONArray;
@@ -186,10 +188,17 @@ public class SqlliteSyncModel {
 		ContentValues values = new ContentValues();
 		Set<?> set = hmValues.entrySet();
 		Iterator<?> i = set.iterator();
-		while (i.hasNext()) {
+        Log.d(TAG, "insertData: table name = " + strTblname);
+        while (i.hasNext()) {
 			Map.Entry me = (Map.Entry) i.next();
 			String column = (String) me.getKey();
 			String value = (String) me.getValue();
+//			if (strTblname.equals(Work_ItemsField.TABLE_NAME)) {
+//				Log.d(TAG, "insertData: value work item = " + value);
+//			}
+			if (strTblname.equals(ConstrNodeItemsField.TABLE_NAME)) {
+				Log.d(TAG, "insertData node : column = " + column + " --- " + "value = "+ value);
+			}
 			values.put(column, value);
 		}
 		long resutl = db.insert(strTblname, null, values);
@@ -736,8 +745,9 @@ public class SqlliteSyncModel {
 	public static void updateInsertGetData(
 			ArrayList<HashMap<String, String>> listUdpate,
 			SyncTableInfo tableInfo) {
-		
-		for (HashMap<String, String> map : listUdpate) {
+        Log.d(TAG, "updateInsertGetData: " + tableInfo.getTableName() + " called --> size = " + listUdpate.size());
+
+        for (HashMap<String, String> map : listUdpate) {
 			
 			String sKey = map.get(tableInfo.getColumnKey());
 			boolean bExit = SqlliteSyncModel.getInstance().checkExitItem(

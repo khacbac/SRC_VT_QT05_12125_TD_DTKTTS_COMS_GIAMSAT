@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseTienDoFragment extends BaseFragment {
     private static final String TAG = BaseTienDoFragment.class.getSimpleName();
-    protected ArrayList<Work_ItemsEntity> workItems;
+    public static ArrayList<Work_ItemsEntity> workItems;
     public static ConcurrentHashMap<Long, Work_ItemsEntity> hashWorkItems = new ConcurrentHashMap<>();
     protected static ConcurrentHashMap<Long, Sub_Work_ItemEntity> hashSubWorkItems = new ConcurrentHashMap<>();
 

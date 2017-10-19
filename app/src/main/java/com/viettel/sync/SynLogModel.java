@@ -56,7 +56,7 @@ public class SynLogModel extends AbstractSyncService {
 			data.add("FILE_NAME");
 			data.add(fileName);
 			ActionEvent actionEvent = new ActionEvent();
-			sendHttpRequest(method, data, actionEvent, HttpAsyncTask.CONNECT_TIMEOUT);
+//			sendHttpRequest(method, data, actionEvent, HttpAsyncTask.CONNECT_TIMEOUT);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -111,6 +111,8 @@ import com.viettel.database.field.Cause_Line_BG_TankField;
 import com.viettel.database.field.Cause_Line_Hg_CableField;
 import com.viettel.database.field.Cause_Line_Hg_MxField;
 import com.viettel.database.field.Cause_Line_Hg_PillarField;
+import com.viettel.database.field.ConstrNodeController;
+import com.viettel.database.field.ConstrNodeItemsField;
 import com.viettel.database.field.Constr_ObStructionField;
 import com.viettel.database.field.Constr_Progress_Field;
 import com.viettel.database.field.Constr_Team_ProgressField;
@@ -259,7 +261,8 @@ public class SyncTableUpdate {
             Sub_Work_Item_ValueField.TABLE_NAME,
             Constr_Work_LogsField.TABLE_NAME,
             Constr_Team_ProgressField.TABLE_NAME,
-            Plan_Constr_DetailField.TABLE_NAME
+            Plan_Constr_DetailField.TABLE_NAME,
+            ConstrNodeItemsField.TABLE_NAME
     };
 
     public static final Map<String, String[]> mapUpdateFields;
@@ -351,6 +354,8 @@ public class SyncTableUpdate {
         mapUpdateFields.put(Constr_Work_LogsField.TABLE_NAME, Constr_Work_LogsController.allColumn);
         mapUpdateFields.put(Constr_Team_ProgressField.TABLE_NAME, Constr_Team_ProgressController.allColumn);
         mapUpdateFields.put(Plan_Constr_DetailField.TABLE_NAME, Plan_Constr_DetailController.allColumn);
+
+        mapUpdateFields.put(ConstrNodeItemsField.TABLE_NAME, ConstrNodeController.allColumn);
 
     }
 

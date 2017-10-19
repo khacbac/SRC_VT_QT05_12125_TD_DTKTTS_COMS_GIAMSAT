@@ -9,6 +9,7 @@ import android.util.Log;
 import com.viettel.constants.Constants;
 import com.viettel.database.entity.Constr_ConstructionEntity;
 import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
+import com.viettel.database.field.Cat_Work_Item_TypesField;
 import com.viettel.database.field.Constr_ConstructionField;
 import com.viettel.database.field.Constr_Construction_EmployeeField;
 import com.viettel.database.field.Supervision_ConstrField;
@@ -584,6 +585,26 @@ public class Constr_ConstructionController {
 			// TODO: handle exception
 		}
 		return curItem;
+	}
+
+	public String getConstrType(long constrId) {
+		SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+
+        Cursor cursor = db
+                .query(Constr_ConstructionField.TABLE_NAME, allColumn,
+                        Constr_ConstructionField.COLUMN_CONSTRUCT_ID + "=?",
+                        new String[] { String.valueOf(constrId)}, null, null,
+                        null, null);
+        String type;
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            type = cursor.getString(cursor.getColumnIndex(Constr_ConstructionField.COLUMN_CONSTR_TYPE));
+        } else {
+            type = "";
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return type;
 	}
 
 	/**

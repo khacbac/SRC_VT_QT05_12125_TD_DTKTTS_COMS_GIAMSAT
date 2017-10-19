@@ -91,6 +91,22 @@ public class Cat_Work_Item_TypesControler {
         return ret;
     }
 
+    public ArrayList<Cat_Work_Item_TypesEntity> getCatWorkByNode(int constrIdFromNode) {
+        ArrayList<Cat_Work_Item_TypesEntity> ret = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        String strQuery = "select * from cat_work_item_types inner join constr_constructions on cat_work_item_types.constr_type_id = constr_constructions.constr_type where constr_constructions.construct_id = " + constrIdFromNode;
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Cat_Work_Item_TypesEntity curItem = this.converCursorToItem(cursor);
+                ret.add(curItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
     public ArrayList<Cat_Work_Item_TypesEntity> getCates(String[] codes) {
         ArrayList<Cat_Work_Item_TypesEntity> ret = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
@@ -121,6 +137,8 @@ public class Cat_Work_Item_TypesControler {
                 .getColumnIndex(Cat_Work_Item_TypesField.ITEM_TYPE_ID)));
         curItem.setItem_type_name(cursor.getString(cursor
                 .getColumnIndex(Cat_Work_Item_TypesField.ITEM_TYPE_NAME)));
+        curItem.setTemp_group(cursor.getString(cursor
+                .getColumnIndex(Cat_Work_Item_TypesField.TEMP_GROUP)));
         curItem.setConstr_type_id(cursor.getLong(cursor
                 .getColumnIndex(Cat_Work_Item_TypesField.CONSTR_TYPE_ID)));
         curItem.setUnitName(cursor.getString(cursor

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
 import com.viettel.gsct.View.constant.Constant;
 import com.viettel.ktts.R;
 
@@ -34,6 +35,9 @@ public class WorkItemGPONView extends LinearLayout
     Button btnCollapse;
     @BindView(R.id.rootLayout)
     LinearLayout rootLayout;
+
+    private Cat_Work_Item_TypesEntity workItemTypeId;
+    private String itemType;
 
     ArrayList<AppCompatRadioButton> radioButtons = new ArrayList<>();
 
@@ -175,5 +179,25 @@ public class WorkItemGPONView extends LinearLayout
 
     public ArrayList<View> getAllRightSubViews() {
         return allRightSubViews;
+    }
+
+    public void initRightListSubView() {
+        allRightSubViews = new ArrayList<>();
+    }
+
+    public Cat_Work_Item_TypesEntity getWorkItemTypeId() {
+        return workItemTypeId;
+    }
+
+    public void setWorkItemTypeId(Cat_Work_Item_TypesEntity workItemTypeId) {
+        this.workItemTypeId = workItemTypeId;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 }

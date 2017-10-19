@@ -1185,10 +1185,10 @@
     </string-array>
 
     <string name="keocap">Kéo cáp</string>
-    <string name="lapdat_hannoi">Lắp đặt &amp; hàn nối</string>
+    <string name="lapdat_hannoi">Lắp đặt &amp; Hàn nối</string>
     <string name="lapdat_odf_indoor">Lắp đặt ODF Indoor</string>
     <string name="lapdat_odf_outdoor">Lắp đặt ODF Outdoor</string>
-    <string name="lapdat_olt">Lắp đặt OLT</string>
+    <string name="lapdat_olt">Lắp đặt thiết bị OLT</string>
     <string name="dokiem_nghiemthu">Đo kiểm, nghiệm thu</string>
 
     <string-array name="gpon_work_item">
