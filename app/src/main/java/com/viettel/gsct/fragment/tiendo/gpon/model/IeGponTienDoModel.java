@@ -6,6 +6,7 @@ import android.view.View;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
 import com.viettel.database.entity.ConstrNodeEntity;
+import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
 
 import java.util.ArrayList;
@@ -15,60 +16,40 @@ import java.util.ArrayList;
  */
 
 public interface IeGponTienDoModel {
-
-
     /**
      * Interface lang nghe su kien ket thuc viec them layout.
      */
     interface IeListenerAddItem {
+        // Lang nghe ket thuc them subwork item.
+        void finishAddSWKeoCap(ConstrNodeEntity node);
+        void finishAddSWHanNoi(ConstrNodeEntity node);
+        void finishAddSWOutdoor(ConstrNodeEntity node);
+        void finishAddSWDoKiem(ConstrNodeEntity node);
 
-//        void finishAddWorkItem(Cat_Work_Item_TypesEntity arrCat, Context context);
-        /**
-         * Add SubWorkItemGPONView cho Gpon Tien do.
-         * @param gponView
-         * @param context
-         * @param node SubWorkItemGPONView.
-         */
-        void finishAddSubWorkItem(ConstrNodeEntity node);
-        void finishAddSWKeoCap(ConstrNodeEntity node, WorkItemGPONView wItemKeoCap);
-
-        // Lang nghe ket thuc vie them item right cho moi sub work item.
+        // Lang nghe ket thuc viec them value cho subwork item tuong ung.
         void finishAddSWValueIndoor(Cat_Work_Item_TypesEntity catWorkItem);
         void finishAddSWValueOLT(Cat_Work_Item_TypesEntity catWorkItem);
-        void finishAddSWValueKeoCap(Cat_Work_Item_TypesEntity catWorkItem);
-
-        void finishAddSWValueByNode(Cat_Work_Item_TypesEntity catWorkItem, View view);
-
-        void finishAddOdfIndoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems);
-
-        void finishAddOdfOutdoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems);
+        void finishAddSWValueKeoCap(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueHanNoi(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueOutdoor(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueDoKiem(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddOdfIndoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork);
+        void finishAddOdfOutdoor(SubWorkItemGPONView sView, ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork);
     }
-
-    /**
-     * Add SubWorkItemGPONView cho Gpon Tien do.
-     * @param gponView WorkItemGPONView.
-     * @param context Context.
-     * @param addLayout IeListenerAddItem.
-     */
-    void addSubWorkItem(IeListenerAddItem addLayout);
-
+    // Them subwork item.
     void addSWKeoCap(WorkItemGPONView wItemKeoCap, IeListenerAddItem addItem);
+    void addSWHanNoi(IeListenerAddItem addItem);
+    void addSWOutdoor(IeListenerAddItem addItem);
+    void addSWDoKiem(IeListenerAddItem addItem);
 
-
-
-    /**
-     * Add layout for Right item doi voi moi SubWorkItemGPONView tuong ung.
-     * @param context Context.
-     * @param addLayout IeListenerAddItem.
-     */
+    // Them subwork value.
     void addSWValueIndoor(IeListenerAddItem addLayout);
     void addSWValueOLT(IeListenerAddItem addLayout);
-    void addSWValueKeoCap(IeListenerAddItem addLayout);
-
-
-    void addSWValueByNode(View view,ConstrNodeEntity node, IeListenerAddItem addLayout);
-
+    void addSWValueKeoCap(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueHanNoi(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueOutdoor(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueDoKiem(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
     void addItemOdfIndoor(Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
-    void addItemOdfOutdoor(Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
+    void addItemOdfOutdoor(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
 
 }

@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by doanLV4 on 9/19/2017.
  */
 
-public class WorkItemRightHanNoiTuThueGpon extends LinearLayout {
+public class WorkItemValueHanNoiTuThue extends LinearLayout {
 
     View rootView;
 
@@ -42,17 +42,17 @@ public class WorkItemRightHanNoiTuThueGpon extends LinearLayout {
     private WorkItemRightGPONView.FinishListener listener;
     private WorkItemRightGPONView.OnStatusBtnTienDo statusTienDo;
 
-    public WorkItemRightHanNoiTuThueGpon(Context context) {
+    public WorkItemValueHanNoiTuThue(Context context) {
         super(context);
         init(context);
     }
 
-    public WorkItemRightHanNoiTuThueGpon(Context context, @Nullable AttributeSet attrs) {
+    public WorkItemValueHanNoiTuThue(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public WorkItemRightHanNoiTuThueGpon(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WorkItemValueHanNoiTuThue(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -68,11 +68,11 @@ public class WorkItemRightHanNoiTuThueGpon extends LinearLayout {
         this.tvTenTu.setText(tvTenTu);
     }
 
-    public void setTvLuyKeLapDat(String tvLuyKeLapDat) {
-        this.tvLuyKeLapDat.setText(tvLuyKeLapDat);
+    public void setTvLuyKeLapDat(double luyKeLapDat) {
+        this.tvLuyKeLapDat.setText(String.valueOf(luyKeLapDat));
     }
 
-    public void setTvLuyKeHanNoi(String tvLuyKeHanNoi) {
-        this.tvLuyKeHanNoi.setText(tvLuyKeHanNoi);
+    public void setTvLuyKeHanNoi(double luyKeHanNoi) {
+        this.tvLuyKeHanNoi.setText(String.valueOf(luyKeHanNoi));
     }
 }

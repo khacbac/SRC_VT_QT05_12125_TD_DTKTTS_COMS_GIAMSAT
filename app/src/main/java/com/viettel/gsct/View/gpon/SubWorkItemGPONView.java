@@ -41,7 +41,7 @@ public class SubWorkItemGPONView extends LinearLayout {
     private WorkItemGPONView workItemGPONView;
     private IeOnRadioCheckChangedListener ieOnRadioCheckChangedListener;
 
-    private ArrayList<View> allRightSubViews = new ArrayList<>();
+    private ArrayList<View> listSWValue = new ArrayList<>();
 
     public SubWorkItemGPONView(Context context) {
         super(context);
@@ -72,11 +72,11 @@ public class SubWorkItemGPONView extends LinearLayout {
                             radioBtnCheck, SubWorkItemGPONView.this);
                 }
                 if (isChecked) {
-                    for (View view : allRightSubViews) {
+                    for (View view : listSWValue) {
                         view.setVisibility(VISIBLE);
                     }
                 } else {
-                    for (View view : allRightSubViews) {
+                    for (View view : listSWValue) {
                         view.setVisibility(GONE);
                     }
                 }
@@ -181,13 +181,13 @@ public class SubWorkItemGPONView extends LinearLayout {
         this.ieOnRadioCheckChangedListener = listener;
     }
 
-    public void addRightItemSubView(View view) {
+    public void addListSWValue(View view) {
         view.setVisibility(GONE);
-        allRightSubViews.add(view);
+        listSWValue.add(view);
     }
 
-    public ArrayList<View> getAllRightSubViews() {
-        return allRightSubViews;
+    public ArrayList<View> getListSWValue() {
+        return listSWValue;
     }
 
     public LinearLayout getRootLayout() {

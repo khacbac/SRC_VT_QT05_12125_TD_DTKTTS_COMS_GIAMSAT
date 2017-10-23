@@ -190,6 +190,23 @@ public class Work_ItemsControler {
         return ret;
     }
 
+    public ArrayList<Work_ItemsEntity> getListWorkTest(long constrId) {
+        ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        String strQuery = "select * from work_items where work_items.constr_id = " + constrId;
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Work_ItemsEntity curItem = this.converCursorToItem(cursor);
+                Log.d(TAG, "getItems: From Controler - Name = " + curItem.getWork_item_name());
+                ret.add(curItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
     public ArrayList<Work_ItemsEntity> getWItemsByNode(int constrIdFromNode) {
         ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
@@ -267,6 +284,19 @@ public class Work_ItemsControler {
         String nodeId = ""+cursor.getLong(cursor.getColumnIndex(Work_ItemsField.CONSTR_NODE_ID));
         allConstrNodeId.add(nodeId);
         return allConstrNodeId;
+    }
+
+    public Work_ItemsEntity getWorkByCatTest(long catId, long constrId) {
+        Work_ItemsEntity ret = null;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        String strQuery = "select * from work_items where work_items.item_type_id = "+catId+" and work_items.constr_id = "+constrId;
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor.moveToFirst()) {
+            ret = this.converCursorToItem(cursor);
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
     }
 
     public Work_ItemsEntity getItem(long constructId, long cat_work_item_id) {

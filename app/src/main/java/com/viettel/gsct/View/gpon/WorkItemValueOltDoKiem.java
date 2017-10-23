@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by doanLV4 on 9/19/2017.
  */
 
-public class WorkItemRightOltDoKiemGpon extends LinearLayout {
+public class WorkItemValueOltDoKiem extends LinearLayout {
 
     View rootView;
     @BindView(R.id.tv_title)
@@ -35,17 +35,17 @@ public class WorkItemRightOltDoKiemGpon extends LinearLayout {
     private WorkItemRightGPONView.FinishListener listener;
     private WorkItemRightGPONView.OnStatusBtnTienDo statusTienDo;
 
-    public WorkItemRightOltDoKiemGpon(Context context) {
+    public WorkItemValueOltDoKiem(Context context) {
         super(context);
         init(context);
     }
 
-    public WorkItemRightOltDoKiemGpon(Context context, @Nullable AttributeSet attrs) {
+    public WorkItemValueOltDoKiem(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public WorkItemRightOltDoKiemGpon(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WorkItemValueOltDoKiem(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

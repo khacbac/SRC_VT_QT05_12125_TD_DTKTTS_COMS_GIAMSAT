@@ -5,7 +5,9 @@ import android.widget.LinearLayout;
 
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
 import com.viettel.database.entity.ConstrNodeEntity;
+import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
+import com.viettel.gsct.View.gpon.WorkItemValueOdf;
 
 import java.util.ArrayList;
 
@@ -14,35 +16,26 @@ import java.util.ArrayList;
  */
 
 public interface IeGponTienDoFragment {
-    /**
-     * Add WorkItemGPONView cho Gpon Tien do.
-     * @param view WorkItemGPONView.
-     */
+    // Thong bao hoan thanh them work item cho main view.
     void finishAddWKeoCap(WorkItemGPONView view);
     void finishAddWHanNoi(WorkItemGPONView view);
     void finishAddWOdfInDoor(WorkItemGPONView view);
     void finishAddWOdfOutDoor(WorkItemGPONView view);
     void finishAddWOlt(WorkItemGPONView view);
     void finishAddWDoKiem(WorkItemGPONView view);
-    /**
-     * Add WorkItemGPONView cho Gpon Tien do.
-     * @param view WorkItemGPONView.
-     */
 
+    // Thong bao hoan thanh them subwork item cho main view.
+    void finishAddSWKeoCap(SubWorkItemGPONView view, ConstrNodeEntity node);
+    void finishAddSWHanNoi(SubWorkItemGPONView view, ConstrNodeEntity node);
+    void finishAddSWOutdoor(SubWorkItemGPONView view, ConstrNodeEntity node);
+    void finishAddSWDoKiem(SubWorkItemGPONView view, ConstrNodeEntity node);
 
-    /**
-     * Add SubWorkItemGPONView cho Gpon Tien do.
-     * @param view SubWorkItemGPONView.
-     * @param node
-     */
-    void finishAddSubWorkItem(View view, ConstrNodeEntity node);
-
-    void finishAddSWKeoCap(View view, ConstrNodeEntity node);
-
+    // Thong bao hoan thanh them subwork value doi voi cac subwork item tuong ung cho main view.
     void finishAddKeoCapValue(View view);
-    void finishAddLapDatHanNoiValue(View view);
-    void finishAddLapDatOdfInDoorValue(ArrayList<View> listRightView);
-    void finishAddLapDatOdfOutDoorValue(View view);
+    void finishAddBoChiaValue(View view);
+    void finishAddTuThueValue(View view);
     void finishAddLapDatOltValue(ArrayList<View> listRightView);
-    void finishAddDoKiemNghiemThuValue(View view);
+    void finishAddOdfInDoorValue(View view);
+    void finishAddOdfOutDoorValue(View view);
+    void finishAddOdfDoKiemValue(View view);
 }

@@ -8,6 +8,7 @@ import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
 import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Constr_ConstructionEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
+import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
 
 import java.util.ArrayList;
@@ -17,27 +18,26 @@ import java.util.ArrayList;
  */
 
 public interface IeGponTienDoPresenter {
-
+    // them toan bo work item.
     void addWorkItem();
 
-    /**
-     * Add SubWorkItemGPONView cho Gpon Tien do.
-     * @param gponView WorkItemGPONView.
-     * @param context Context.
-     */
-    void addSubWorkItem(WorkItemGPONView gponView);
-
+    // Them cac sub work item tuong ung (node).
+    // Olt va odf indoor cap nhat theo cong trinh nen khong co node.
     void addSWKeoCap();
+    void addSWHanNoi();
+    void addSWOutdoor();
+    void addSWDoKiem();
 
-
+    // Them value cho cac sub work cap nhat theo cong trinh.
     void addSWValueInDoor();
-
     void addSWValueOLT();
 
-    void addSWValueKeoCap(ConstrNodeEntity node);
+    // Them value cho cac sub work cap nhat theo node.
+    void addSWValueKeoCap(ConstrNodeEntity node, SubWorkItemGPONView sView);
+    void addSWValueHanNoi(ConstrNodeEntity node, SubWorkItemGPONView sView);
+    void addSWValueOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView);
+    void addSWValueDoKiem(ConstrNodeEntity node, SubWorkItemGPONView sView);
 
-
-    void addSWValueByNode(View view, ConstrNodeEntity node);
-
-
+    // Save tien do.
+    void saveSWIValue();
 }

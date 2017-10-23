@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by doanLV4 on 9/19/2017.
  */
 
-public class WorkItemRightKeoCapHeaderGpon extends LinearLayout {
+public class WorkItemValueKeoCapHeader extends LinearLayout {
 
     View rootView;
     @BindView(R.id.txtLoaiCap)
@@ -37,17 +37,17 @@ public class WorkItemRightKeoCapHeaderGpon extends LinearLayout {
     private WorkItemRightGPONView.FinishListener listener;
     private WorkItemRightGPONView.OnStatusBtnTienDo statusTienDo;
 
-    public WorkItemRightKeoCapHeaderGpon(Context context) {
+    public WorkItemValueKeoCapHeader(Context context) {
         super(context);
         init(context);
     }
 
-    public WorkItemRightKeoCapHeaderGpon(Context context, @Nullable AttributeSet attrs) {
+    public WorkItemValueKeoCapHeader(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public WorkItemRightKeoCapHeaderGpon(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WorkItemValueKeoCapHeader(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

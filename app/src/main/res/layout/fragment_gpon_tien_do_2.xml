@@ -150,7 +150,7 @@
                     android:background="@color/table_border_color" />
 
                 <LinearLayout
-                    android:id="@+id/layoutRightForKeoCap"
+                    android:id="@+id/lKeoCapValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -194,14 +194,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/layoutRightForHanNoi"
+                    android:id="@+id/lHanNoidValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
 
                     <LinearLayout
-                        android:id="@+id/layoutRightForHanNoiBoChia"
+                        android:id="@+id/lBoChiaValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -237,7 +237,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/layoutRightForHanNoiTuThue"
+                        android:id="@+id/lTuThueValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_15"
@@ -289,14 +289,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/layoutRightForOdfIndoor"
+                    android:id="@+id/lIndoorValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone" />
 
                 <LinearLayout
-                    android:id="@+id/layoutRightForOdfOutdoor"
+                    android:id="@+id/lOutdoorValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -332,14 +332,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/layoutRightForOlt"
+                    android:id="@+id/lOltValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone" />
 
                 <LinearLayout
-                    android:id="@+id/layoutRightForDoKiem"
+                    android:id="@+id/lDoKiemValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"

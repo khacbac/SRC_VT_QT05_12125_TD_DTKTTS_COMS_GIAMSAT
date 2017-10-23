@@ -63,22 +63,22 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
     LinearLayout layoutRootLeft;
     @BindView(R.id.layout_root_right)
     LinearLayout layoutRootRight;
-    @BindView(R.id.layoutRightForKeoCap)
-    LinearLayout layoutForRightKeoCap;
-    @BindView(R.id.layoutRightForHanNoi)
-    LinearLayout layoutRightForHanNoi;
-    @BindView(R.id.layoutRightForHanNoiBoChia)
-    LinearLayout layoutRightForHanNoiBoChia;
-    @BindView(R.id.layoutRightForHanNoiTuThue)
-    LinearLayout layoutRightForHanNoiTuThue;
-    @BindView(R.id.layoutRightForOdfOutdoor)
-    LinearLayout layoutRightForOdfOutdoor;
-    @BindView(R.id.layoutRightForOdfIndoor)
-    LinearLayout layoutRightForOdfIndoor;
-    @BindView(R.id.layoutRightForOlt)
-    LinearLayout layoutRightForOlt;
-    @BindView(R.id.layoutRightForDoKiem)
-    LinearLayout layoutRightForDoKiem;
+    @BindView(R.id.lKeoCapValue)
+    LinearLayout lKeoCapValue;
+    @BindView(R.id.lHanNoidValue)
+    LinearLayout lHanNoidValue;
+    @BindView(R.id.lBoChiaValue)
+    LinearLayout lBoChiaValue;
+    @BindView(R.id.lTuThueValue)
+    LinearLayout lTuThueValue;
+    @BindView(R.id.lOutdoorValue)
+    LinearLayout lOutdoorValue;
+    @BindView(R.id.lIndoorValue)
+    LinearLayout lIndoorValue;
+    @BindView(R.id.lOltValue)
+    LinearLayout lOltValue;
+    @BindView(R.id.lDoKiemValue)
+    LinearLayout lDoKiemValue;
 
     private Unbinder unbinder;
     private boolean dialogDismissFlag = true;
@@ -132,7 +132,6 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
     public void finishAddWKeoCap(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
         view.setShowWorkItemByItemType(this);
-//        itemGponPresenter.addSWKeoCap();
         itemGponPresenter.addSWKeoCap();
     }
 
@@ -140,7 +139,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
     public void finishAddWHanNoi(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
         view.setShowWorkItemByItemType(this);
-        itemGponPresenter.addSubWorkItem(view);
+        itemGponPresenter.addSWHanNoi();
     }
 
     @Override
@@ -155,7 +154,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
         layoutRootLeft.addView(view);
         view.setShowWorkItemByItemType(this);
         // Doi voi truong hop cap nhat theo node moi co sub work item.
-        itemGponPresenter.addSubWorkItem(view);
+        itemGponPresenter.addSWOutdoor();
     }
 
     @Override
@@ -171,63 +170,72 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
         layoutRootLeft.addView(view);
         view.setShowWorkItemByItemType(this);
         // Doi voi truong hop cap nhat theo node moi co sub work item.
-        itemGponPresenter.addSubWorkItem(view);
-    }
-
-    /**
-     * Thêm SubWorkItem cho Gpon,được get từ mỗi WorkItem tương ứng.
-     * Chi doi voi truong hop cap nhat theo Node thi moi co subwork item.
-     *
-     * @param view SubWorkItemGPONView.
-     * @param node
-     */
-    @Override
-    public void finishAddSubWorkItem(View view, ConstrNodeEntity node) {
-        layoutRootLeft.addView(view);
-        // Them item cho right Sub Work Item.
-        itemGponPresenter.addSWValueByNode(view,node);
+        itemGponPresenter.addSWDoKiem();
     }
 
     @Override
-    public void finishAddSWKeoCap(View view, ConstrNodeEntity node) {
-        layoutRootLeft.addView(view);
+    public void finishAddSWKeoCap(SubWorkItemGPONView sView, ConstrNodeEntity node) {
+        layoutRootLeft.addView(sView);
         // Them item cho right Sub Work Item.
-        itemGponPresenter.addSWValueKeoCap(node);
+        itemGponPresenter.addSWValueKeoCap(node,sView);
     }
 
+    @Override
+    public void finishAddSWHanNoi(SubWorkItemGPONView sView, ConstrNodeEntity node) {
+        layoutRootLeft.addView(sView);
+        // Them item cho right Sub Work Item.
+        itemGponPresenter.addSWValueHanNoi(node,sView);
+    }
+
+    @Override
+    public void finishAddSWOutdoor(SubWorkItemGPONView sView, ConstrNodeEntity node) {
+        layoutRootLeft.addView(sView);
+        // Them item cho right Sub Work Item.
+        itemGponPresenter.addSWValueOutdoor(node,sView);
+    }
+
+    @Override
+    public void finishAddSWDoKiem(SubWorkItemGPONView sView, ConstrNodeEntity node) {
+        layoutRootLeft.addView(sView);
+        // Them item cho right Sub Work Item.
+        itemGponPresenter.addSWValueDoKiem(node,sView);
+    }
 
     @Override
     public void finishAddKeoCapValue(View view) {
-        layoutForRightKeoCap.addView(view);
-//        layoutForRightKeoCap.setVisibility(View.VISIBLE);
+        lKeoCapValue.addView(view);
     }
 
     @Override
-    public void finishAddLapDatHanNoiValue(View view) {
-
+    public void finishAddBoChiaValue(View bochia) {
+        lBoChiaValue.addView(bochia);
     }
 
     @Override
-    public void finishAddLapDatOdfInDoorValue(ArrayList<View> listRightView) {
-        for (View sView : listRightView) {
-            layoutRightForOdfIndoor.addView(sView);
-        }
+    public void finishAddTuThueValue(View tuthue) {
+        lTuThueValue.addView(tuthue);
     }
 
     @Override
-    public void finishAddLapDatOdfOutDoorValue(View view) {
+    public void finishAddOdfInDoorValue(View indoor) {
+        lIndoorValue.addView(indoor);
+    }
+
+    @Override
+    public void finishAddOdfOutDoorValue(View sView) {
+        lOutdoorValue.addView(sView);
+    }
+
+    @Override
+    public void finishAddOdfDoKiemValue(View view) {
+        lDoKiemValue.addView(view);
     }
 
     @Override
     public void finishAddLapDatOltValue(ArrayList<View> listRightView) {
         for (View sView : listRightView) {
-            layoutRightForOlt.addView(sView);
+            lOltValue.addView(sView);
         }
-    }
-
-    @Override
-    public void finishAddDoKiemNghiemThuValue(View view) {
-
     }
 
     /**
@@ -240,22 +248,22 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
         hideAllLayout();
         switch (strType) {
             case Constant.TAG_KEOCAP:
-                layoutForRightKeoCap.setVisibility(View.VISIBLE);
+                lKeoCapValue.setVisibility(View.VISIBLE);
                 break;
             case Constant.TAG_LAPDAT_HANNOI:
-                layoutRightForHanNoi.setVisibility(View.VISIBLE);
+                lHanNoidValue.setVisibility(View.VISIBLE);
                 break;
             case Constant.TAG_LAPDAT_ODF_INDOOR:
-                layoutRightForOdfIndoor.setVisibility(View.VISIBLE);
+                lIndoorValue.setVisibility(View.VISIBLE);
                 break;
             case Constant.TAG_LAPDAT_ODF_OUTDOOR:
-                layoutRightForOdfOutdoor.setVisibility(View.VISIBLE);
+                lOutdoorValue.setVisibility(View.VISIBLE);
                 break;
             case Constant.TAG_LAPDAT_OLT:
-                layoutRightForOlt.setVisibility(View.VISIBLE);
+                lOltValue.setVisibility(View.VISIBLE);
                 break;
             case Constant.TAG_DOKIEM_NGHIEMTHU:
-                layoutRightForDoKiem.setVisibility(View.VISIBLE);
+                lDoKiemValue.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -352,12 +360,12 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
      * Ẩn toàn bộ phần layout bên phải, hiện thị các layout tùy theo WorkItem.
      */
     private void hideAllLayout() {
-        layoutForRightKeoCap.setVisibility(View.GONE);
-        layoutRightForHanNoi.setVisibility(View.GONE);
-        layoutRightForOdfIndoor.setVisibility(View.GONE);
-        layoutRightForOdfOutdoor.setVisibility(View.GONE);
-        layoutRightForOlt.setVisibility(View.GONE);
-        layoutRightForDoKiem.setVisibility(View.GONE);
+        lKeoCapValue.setVisibility(View.GONE);
+        lHanNoidValue.setVisibility(View.GONE);
+        lIndoorValue.setVisibility(View.GONE);
+        lOutdoorValue.setVisibility(View.GONE);
+        lOltValue.setVisibility(View.GONE);
+        lDoKiemValue.setVisibility(View.GONE);
         for (int i = 0; i < layoutRootLeft.getChildCount(); i++) {
             if (layoutRootLeft.getChildAt(i) instanceof WorkItemGPONView) {
                 WorkItemGPONView gponView = (WorkItemGPONView) layoutRootLeft.getChildAt(i);
@@ -379,122 +387,123 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment
         }
 
         super.save();
-        Plan_Constr_DetailController planController = new Plan_Constr_DetailController(getContext());
-
-        Enumeration<Long> keys = hashWorkItems.keys();
-        while (keys.hasMoreElements()) {
-            Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
-            Log.d(TAG, "save() called" + "Work item entity code =" + workItem.getWork_item_code());
-            if (workItem.isCompleted()) {
-                Log.d(TAG, "save() called" + " Sub work item size complete = "
-                        + workItem.getSubWorkItems().size());
-            }
-            if (workItem.getWork_item_code() == null) {
-                Log.d(TAG, "save() called" + " Sub work item size null = "
-                        + workItem.getSubWorkItems().size());
-            }
-            if (workItem.isCompleted() || workItem.getWork_item_code() == null)
-                continue;
-
-            workItem.setSyncStatus(workItem.getProcessId() > 0
-                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-            workItem.setEmployeeId(userId);
-            workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
-            workItem.updateDate();
-            if (workItem.getStarting_date().length() == 0) {
-                workItem.setStarting_date(GSCTUtils.getDateNow());
-            }
-            Log.d(TAG, "save() called" + "Work item has updated date - name = "
-                    + workItem.getWork_item_name());
-
-            if (workItem.getStatus_id() == 403 && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
-                boolean flagValue = false;
-                Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
-                while (enums.hasMoreElements()) {
-                    SubWorkItemGPONView view = enums.nextElement();
-                    if (view.getValue() > 0) {
-                        flagValue = true;
-                        break;
-                    }
-                }
-                if (!flagValue) {
-                    showError("Bạn chưa nhập khối lượng cho hạng mục");
-                    return;
-                }
-            }
-            if (workItem.getId() > 0) {
-                work_itemsControler.updateItem(workItem);
-            } else {
-                long id = Ktts_KeyController.getInstance().getKttsNextKey(Work_ItemsField.TABLE_NAME);
-                workItem.setId(id);
-                work_itemsControler.addItem(workItem);
-            }
-            Log.e(TAG, "save: " + workItem.getId() + " "
-                    + workItem.getWork_item_code() + " " + workItem.getWork_item_name());
-            if (hashPlanCodes.containsKey(workItem.getWork_item_code())) {
-                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId()
-                        , hashPlanCodes.get(workItem.getWork_item_code()), workItem.getComplete_date());
-            }
-//            Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
-            for (Sub_Work_ItemEntity subWorkItem : workItem.getSubWorkItems()) {
-                Log.d(TAG, "save() called" + " Sub_Work_ItemEntity " + subWorkItem.getCode());
-                subWorkItem.setWork_item_id(workItem.getId());
-                subWorkItem.setFinishDate(workItem.getComplete_date());
-                subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0
-                        ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-                subWorkItem.setEmployeeId(userId);
-                subWorkItem.setIsActive(Constants.ISACTIVE.ACTIVE);
-                if (subWorkItem.getId() > 0) {
-                    sub_work_itemController.updateItem(subWorkItem);
-                } else {
-                    long id = Ktts_KeyController.getInstance()
-                            .getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
-                    subWorkItem.setId(id);
-                    sub_work_itemController.addItem(subWorkItem);
-                }
-
-                SubWorkItemGPONView view = hashSubWorkItemViews
-                        .get(subWorkItem.getCat_sub_work_item_id());
-//                SubWorkItemGPONView view = enums.nextElement();
+        itemGponPresenter.saveSWIValue();
+//        Plan_Constr_DetailController planController = new Plan_Constr_DetailController(getContext());
+//
+//        Enumeration<Long> keys = hashWorkItems.keys();
+//        while (keys.hasMoreElements()) {
+//            Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
+//            Log.d(TAG, "save() called" + "Work item entity code =" + workItem.getWork_item_code());
+//            if (workItem.isCompleted()) {
+//                Log.d(TAG, "save() called" + " Sub work item size complete = "
+//                        + workItem.getSubWorkItems().size());
+//            }
+//            if (workItem.getWork_item_code() == null) {
+//                Log.d(TAG, "save() called" + " Sub work item size null = "
+//                        + workItem.getSubWorkItems().size());
+//            }
+//            if (workItem.isCompleted() || workItem.getWork_item_code() == null)
+//                continue;
+//
+//            workItem.setSyncStatus(workItem.getProcessId() > 0
+//                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+//            workItem.setEmployeeId(userId);
+//            workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
+//            workItem.updateDate();
+//            if (workItem.getStarting_date().length() == 0) {
+//                workItem.setStarting_date(GSCTUtils.getDateNow());
+//            }
+//            Log.d(TAG, "save() called" + "Work item has updated date - name = "
+//                    + workItem.getWork_item_name());
+//
+//            if (workItem.getStatus_id() == 403 && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
+//                boolean flagValue = false;
+//                Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
 //                while (enums.hasMoreElements()) {
-//                    view = enums.nextElement();
-//                    Log.d(TAG,"SubWorkItemGPONView Name = " + view.getTvTitle());
+//                    SubWorkItemGPONView view = enums.nextElement();
+//                    if (view.getValue() > 0) {
+//                        flagValue = true;
+//                        break;
+//                    }
 //                }
-                Log.d(TAG, "SUb work item name = " + view.getTvTitle());
-                double value = view != null ? view.getValue() : 0L;
-                Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller
-                        .getItem(subWorkItem.getWork_item_id(),
-                                subWorkItem.getCat_sub_work_item_id());
-                if (subWorkItemValue == null) {
-                    subWorkItemValue = new Sub_Work_Item_ValueEntity();
-                    subWorkItemValue.setWork_item_id(subWorkItem.getWork_item_id());
-                    subWorkItemValue.setCat_sub_work_item_id(subWorkItem
-                            .getCat_sub_work_item_id());
-                    subWorkItemValue.setValue(value);
-                }
-
-                subWorkItemValue.setValue(value);
-                subWorkItemValue.setAdded_date(GSCTUtils.getDateNow());
-                subWorkItemValue.setEmployeeId(userId);
-                subWorkItemValue.setIsActive(Constants.ISACTIVE.ACTIVE);
-                subWorkItemValue.setSyncStatus(subWorkItemValue.getProcessId() > 0
-                        ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-                if (subWorkItemValue.getId() > 0) {
-                    sub_work_item_value_controller.updateItem(subWorkItemValue);
-                } else {
-                    subWorkItemValue.setId(Ktts_KeyController.getInstance()
-                            .getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME));
-                    sub_work_item_value_controller.addItem(subWorkItemValue);
-                }
-
-                double luyke = sub_work_item_value_controller.getLuyke(
-                        subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
-                Log.d(TAG, "Luy ke = " + luyke);
-                if (view != null) {
-                    view.setLuyke(luyke);
-                }
-            }
-        }
+//                if (!flagValue) {
+//                    showError("Bạn chưa nhập khối lượng cho hạng mục");
+//                    return;
+//                }
+//            }
+//            if (workItem.getId() > 0) {
+//                work_itemsControler.updateItem(workItem);
+//            } else {
+//                long id = Ktts_KeyController.getInstance().getKttsNextKey(Work_ItemsField.TABLE_NAME);
+//                workItem.setId(id);
+//                work_itemsControler.addItem(workItem);
+//            }
+//            Log.e(TAG, "save: " + workItem.getId() + " "
+//                    + workItem.getWork_item_code() + " " + workItem.getWork_item_name());
+//            if (hashPlanCodes.containsKey(workItem.getWork_item_code())) {
+//                planController.updateRealFinishDate(constr_ConstructionItem.getConstructId()
+//                        , hashPlanCodes.get(workItem.getWork_item_code()), workItem.getComplete_date());
+//            }
+////            Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
+//            for (Sub_Work_ItemEntity subWorkItem : workItem.getSubWorkItems()) {
+//                Log.d(TAG, "save() called" + " Sub_Work_ItemEntity " + subWorkItem.getCode());
+//                subWorkItem.setWork_item_id(workItem.getId());
+//                subWorkItem.setFinishDate(workItem.getComplete_date());
+//                subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0
+//                        ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+//                subWorkItem.setEmployeeId(userId);
+//                subWorkItem.setIsActive(Constants.ISACTIVE.ACTIVE);
+//                if (subWorkItem.getId() > 0) {
+//                    sub_work_itemController.updateItem(subWorkItem);
+//                } else {
+//                    long id = Ktts_KeyController.getInstance()
+//                            .getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
+//                    subWorkItem.setId(id);
+//                    sub_work_itemController.addItem(subWorkItem);
+//                }
+//
+//                SubWorkItemGPONView view = hashSubWorkItemViews
+//                        .get(subWorkItem.getCat_sub_work_item_id());
+////                SubWorkItemGPONView view = enums.nextElement();
+////                while (enums.hasMoreElements()) {
+////                    view = enums.nextElement();
+////                    Log.d(TAG,"SubWorkItemGPONView Name = " + view.getTvTitle());
+////                }
+//                Log.d(TAG, "SUb work item name = " + view.getTvTitle());
+//                double value = view != null ? view.getValue() : 0L;
+//                Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller
+//                        .getItem(subWorkItem.getWork_item_id(),
+//                                subWorkItem.getCat_sub_work_item_id());
+//                if (subWorkItemValue == null) {
+//                    subWorkItemValue = new Sub_Work_Item_ValueEntity();
+//                    subWorkItemValue.setWork_item_id(subWorkItem.getWork_item_id());
+//                    subWorkItemValue.setCat_sub_work_item_id(subWorkItem
+//                            .getCat_sub_work_item_id());
+//                    subWorkItemValue.setValue(value);
+//                }
+//
+//                subWorkItemValue.setValue(value);
+//                subWorkItemValue.setAdded_date(GSCTUtils.getDateNow());
+//                subWorkItemValue.setEmployeeId(userId);
+//                subWorkItemValue.setIsActive(Constants.ISACTIVE.ACTIVE);
+//                subWorkItemValue.setSyncStatus(subWorkItemValue.getProcessId() > 0
+//                        ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+//                if (subWorkItemValue.getId() > 0) {
+//                    sub_work_item_value_controller.updateItem(subWorkItemValue);
+//                } else {
+//                    subWorkItemValue.setId(Ktts_KeyController.getInstance()
+//                            .getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME));
+//                    sub_work_item_value_controller.addItem(subWorkItemValue);
+//                }
+//
+//                double luyke = sub_work_item_value_controller.getLuyke(
+//                        subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
+//                Log.d(TAG, "Luy ke = " + luyke);
+//                if (view != null) {
+//                    view.setLuyke(luyke);
+//                }
+//            }
+//        }
 
         Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
 

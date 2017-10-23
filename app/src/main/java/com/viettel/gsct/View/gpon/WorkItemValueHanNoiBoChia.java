@@ -20,11 +20,11 @@ import butterknife.ButterKnife;
  * Created by doanLV4 on 9/19/2017.
  */
 
-public class WorkItemRightLapDatOdfGpon extends LinearLayout {
+public class WorkItemValueHanNoiBoChia extends LinearLayout {
 
     View rootView;
-    @BindView(R.id.tv_ten_odf)
-    TextView tvTenOdf;
+    @BindView(R.id.tv_bochia)
+    TextView tvBochia;
     @BindView(R.id.tv_khoiluong)
     AppCompatEditText edtKhoiLuong;
     @BindView(R.id.tv_luyke)
@@ -37,17 +37,17 @@ public class WorkItemRightLapDatOdfGpon extends LinearLayout {
     private WorkItemRightGPONView.FinishListener listener;
     private WorkItemRightGPONView.OnStatusBtnTienDo statusTienDo;
 
-    public WorkItemRightLapDatOdfGpon(Context context) {
+    public WorkItemValueHanNoiBoChia(Context context) {
         super(context);
         init(context);
     }
 
-    public WorkItemRightLapDatOdfGpon(Context context, @Nullable AttributeSet attrs) {
+    public WorkItemValueHanNoiBoChia(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public WorkItemRightLapDatOdfGpon(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WorkItemValueHanNoiBoChia(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -55,19 +55,23 @@ public class WorkItemRightLapDatOdfGpon extends LinearLayout {
 
     private void init(Context context) {
         setOrientation(HORIZONTAL);
-        rootView = inflate(context, R.layout.layout_sub_work_item_right_lapdat_odf_gpon, this);
+        rootView = inflate(context, R.layout.layout_sub_work_item_right_hannoi_bochia_gpon, this);
         ButterKnife.bind(this);
     }
 
-    public void setTvTenOdf(String tvTenOdf) {
-        this.tvTenOdf.setText(tvTenOdf);
+    public void setTvBochia(String tvBochia) {
+        this.tvBochia.setText(tvBochia);
     }
 
-    public void setTvLuyKe(String tvLuyKe) {
-        this.tvLuyKe.setText(tvLuyKe);
+    public void setTvLuyKe(double luyKe) {
+        this.tvLuyKe.setText(String.valueOf(luyKe));
     }
 
-    public String getTvTenOdf() {
-        return tvTenOdf.getText().toString().trim();
+    public void setEdtKhoiLuong(double khoiLuong) {
+        this.edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf(khoiLuong));
+    }
+
+    public String getTextBochia() {
+        return tvBochia.getText().toString();
     }
 }
