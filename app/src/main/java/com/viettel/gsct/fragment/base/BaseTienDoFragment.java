@@ -8,6 +8,9 @@ import com.viettel.database.Constr_ConstructionController;
 import com.viettel.database.entity.Constr_ConstructionEntity;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
+import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
+import com.viettel.view.listener.IeSave;
+import com.viettel.view.listener.IeValidate;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,11 +19,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by hieppq3 on 5/6/17.
  */
 
-public class BaseTienDoFragment extends BaseFragment {
+public class BaseTienDoFragment extends BaseFragment implements IeSave.IeCapNhatTienDoInteractor, IeValidate.IecheckValidateTienDo {
     private static final String TAG = BaseTienDoFragment.class.getSimpleName();
     public static ArrayList<Work_ItemsEntity> workItems;
     public static ConcurrentHashMap<Long, Work_ItemsEntity> hashWorkItems = new ConcurrentHashMap<>();
-    protected static ConcurrentHashMap<Long, Sub_Work_ItemEntity> hashSubWorkItems = new ConcurrentHashMap<>();
+    public static ConcurrentHashMap<Long, Sub_Work_ItemEntity> hashSubWorkItems = new ConcurrentHashMap<>();
 
     protected ConcurrentHashMap<String, String> hashPlanCodes = new ConcurrentHashMap<>();
 
@@ -31,6 +34,7 @@ public class BaseTienDoFragment extends BaseFragment {
 //            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành,
 //        bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
         workItems = work_itemsControler.getItems(constr_ConstructionItem.getConstructId());
+        Log.d(TAG, "initData: constr id = " + constr_ConstructionItem.getConstructId());
 //        ArrayList<String> allColumn = work_itemsControler.getListColumn();
 //        for (String columnName : allColumn) {
 //            Log.d(TAG, "initData: column name = " + columnName);
@@ -81,4 +85,18 @@ public class BaseTienDoFragment extends BaseFragment {
         arr.add(constr_ConstructionItem);
         new Constr_ConstructionController(getContext()).updateStatus(constr_ConstructionItem);
     }
+
+    @Override
+    public void saveTienDo() {
+        save();
+    }
+
+    @Override
+    public boolean checkValidateTienDo() {
+        return false;
+    }
+
+    public void registerListenerEventBus() {}
+
+    public void showPreviewTienDo(BaseGponPreview mGponPrevFrag){}
 }

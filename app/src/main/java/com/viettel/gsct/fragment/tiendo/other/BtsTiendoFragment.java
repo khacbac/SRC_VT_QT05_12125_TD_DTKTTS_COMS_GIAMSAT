@@ -154,8 +154,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
         for (String title : leftTitle) {
             TiendoBTSItemView rootview = new TiendoBTSItemView(getContext());
             rootview.setTitle(title);
-            ArrayList<Cat_Work_Item_TypesEntity> types
-                    = cat_work_item_typesControler.getCates(codes.get(index++));
+            ArrayList<Cat_Work_Item_TypesEntity> types = cat_work_item_typesControler.getCates(codes.get(index++));
             if (types.isEmpty()) {
                 showNotSyncDialog();
                 return;

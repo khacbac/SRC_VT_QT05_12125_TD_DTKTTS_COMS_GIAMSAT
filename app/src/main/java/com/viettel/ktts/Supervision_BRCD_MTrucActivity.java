@@ -242,8 +242,7 @@ public class Supervision_BRCD_MTrucActivity extends HomeBaseActivity {
 			}
 			break;
 		case R.id.tv_constr_brcd_dropdown:
-			this.dropdownPopupMenuDesignInfo = new Menu_DropdownPopup(this,
-					this.listDesignInfo);
+			this.dropdownPopupMenuDesignInfo = new Menu_DropdownPopup(this, this.listDesignInfo);
 			dropdownPopupMenuDesignInfo.show(v);
 			break;
 		case R.id.btn_constr_brcd_save:
@@ -432,6 +431,7 @@ public class Supervision_BRCD_MTrucActivity extends HomeBaseActivity {
 			String typeItem = dropdownItem.getType();
 			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
 				if (this.iDesignInfo != dropdownItem.getId()) {
+					showProgressDialog(StringUtil.getString(R.string.text_loading));
 					bundleData = new Bundle();
 					bundleData.putSerializable(IntentConstants.INTENT_DATA,
 							itemData);

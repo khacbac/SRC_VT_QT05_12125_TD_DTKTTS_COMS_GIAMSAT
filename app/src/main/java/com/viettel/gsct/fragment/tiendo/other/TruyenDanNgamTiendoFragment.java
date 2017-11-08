@@ -275,10 +275,10 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment
                 work_itemsControler.addItem(workItem);
             }
             // tuyến cáp ngầm
-            if (workItem.getWork_item_code().equals("TD_TQ")) {
+            if ("TD_TQ".equals(workItem.getWork_item_code())) {
                 planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
                         "NGAM_Ngay_hoan_thanh_han_noi", workItem.getComplete_date());
-            } else if (workItem.getWork_item_code().equals("TD_KCNGAM")) {
+            } else if ("TD_KCNGAM".equals(workItem.getWork_item_code())) {
                 if (workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE) {
                     planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(),
                             "NGAM_Thoi_gian_hoan_thanh_keo_cap", workItem.getComplete_date());
@@ -347,7 +347,7 @@ public class TruyenDanNgamTiendoFragment extends BaseTienDoFragment
                         subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
 
                 // Tuyến cáp ngầm
-                if (workItem.getWork_item_code().equals("TD_KCNGAM")) {
+                if ("TD_KCNGAM".equals(workItem.getWork_item_code())) {
                     Log.e(TAG, "save: " + subWorkItem.getCode());
                     if (subWorkItem.getCode().equals("KC_DLCCTT")) {
                         planController.updateLuyKe(constr_ConstructionItem.getConstructId(),

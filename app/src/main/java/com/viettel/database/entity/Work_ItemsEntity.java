@@ -54,7 +54,7 @@ public class Work_ItemsEntity extends BaseEntity{
     private String idTram; // id tram
     private long item_type_id;
     private String accept_note_code;
-    private long nodeID;
+//    private long nodeID;
 
 
     private boolean isChange = false;
@@ -444,11 +444,4 @@ public class Work_ItemsEntity extends BaseEntity{
         }
     }
 
-    public long getNodeID() {
-        return nodeID;
-    }
-
-    public void setNodeID(long nodeID) {
-        this.nodeID = nodeID;
-    }
 }

@@ -11,6 +11,9 @@ public class ContentDetailItemProgressPreview {
     private String detailKhoiLuong;
     private boolean isNewEdit;
 
+    public ContentDetailItemProgressPreview() {
+    }
+
     public ContentDetailItemProgressPreview(String detailTenHangMuc, String detailNgayBatDau,
                                             String detailNgayHoanThanh, String detailKhoiLuong) {
         this.detailTenHangMuc = detailTenHangMuc;

@@ -18,10 +18,19 @@ import java.util.ArrayList;
 
 public class Sub_Work_ItemController {
     private static final String TAG = "Sub_Work_ItemController";
-    private Context mContext = null;
+    private static Context mContext = null;
+    private static Sub_Work_ItemController swiController;
 
     public Sub_Work_ItemController(Context pContext) {
-        this.mContext = pContext;
+        mContext = pContext;
+    }
+
+    public static Sub_Work_ItemController getInstance(Context context) {
+        mContext = context;
+        if (swiController == null) {
+            swiController = new Sub_Work_ItemController(context);
+        }
+        return swiController;
     }
 
     public static final String[] allColumn = new String[]{

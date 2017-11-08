@@ -17,4 +17,6 @@ public class Sub_Work_Item_ValueField implements BaseField {
     public static final String TEAM_NUMBER = "TEAM_NUMBER";
     public static final String TOTAL_PROGRESS = "TOTAL_PROGRESS";
     public static final String VALUE = "VALUE";
+    public static final String VALUE_ITEM = "VALUE_ITEM";
+    public static final String CONSTR_NODE_ID = "CONSTR_NODE_ID";
 }

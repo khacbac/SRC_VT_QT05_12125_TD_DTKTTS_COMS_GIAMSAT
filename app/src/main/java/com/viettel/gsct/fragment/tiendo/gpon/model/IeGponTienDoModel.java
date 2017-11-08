@@ -10,6 +10,7 @@ import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by doanLV4 on 9/20/2017.
@@ -29,12 +30,12 @@ public interface IeGponTienDoModel {
         // Lang nghe ket thuc viec them value cho subwork item tuong ung.
         void finishAddSWValueIndoor(Cat_Work_Item_TypesEntity catWorkItem);
         void finishAddSWValueOLT(Cat_Work_Item_TypesEntity catWorkItem);
-        void finishAddSWValueKeoCap(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
-        void finishAddSWValueHanNoi(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
-        void finishAddSWValueOutdoor(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
-        void finishAddSWValueDoKiem(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueKeoCap(ConstrNodeEntity node, SubWorkItemGPONView sView, HashMap<String, Cat_Work_Item_TypesEntity> catWorkItem);
+        void finishAddSWValueHanNoi(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
+        void finishAddSWValueDoKiem(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem);
         void finishAddOdfIndoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork);
-        void finishAddOdfOutdoor(SubWorkItemGPONView sView, ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork);
+        void finishAddOdfOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork);
     }
     // Them subwork item.
     void addSWKeoCap(WorkItemGPONView wItemKeoCap, IeListenerAddItem addItem);
@@ -45,11 +46,11 @@ public interface IeGponTienDoModel {
     // Them subwork value.
     void addSWValueIndoor(IeListenerAddItem addLayout);
     void addSWValueOLT(IeListenerAddItem addLayout);
-    void addSWValueKeoCap(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
-    void addSWValueHanNoi(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
-    void addSWValueOutdoor(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
-    void addSWValueDoKiem(SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueKeoCap(ConstrNodeEntity node, SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueHanNoi(ConstrNodeEntity node, SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, IeListenerAddItem addLayout);
+    void addSWValueDoKiem(ConstrNodeEntity node, SubWorkItemGPONView sView, IeListenerAddItem addLayout);
     void addItemOdfIndoor(Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
-    void addItemOdfOutdoor(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
+    void addItemOdfOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity entity, IeListenerAddItem addLayout);
 
 }

@@ -379,6 +379,7 @@ public class Supervision_BRCD_TuThueBaoActivity extends HomeBaseActivity {
 			String typeItem = dropdownItem.getType();
 			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
 				if (this.iDesignInfo != dropdownItem.getId()) {
+					showProgressDialog(StringUtil.getString(R.string.text_loading));
 					Bundle bundleData = new Bundle();
 					bundleData.putSerializable(IntentConstants.INTENT_DATA,
 							itemData);

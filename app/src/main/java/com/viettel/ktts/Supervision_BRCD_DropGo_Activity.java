@@ -356,6 +356,7 @@ public class Supervision_BRCD_DropGo_Activity extends HomeBaseActivity {
 			String typeItem = dropdownItem.getType();
 			if (typeItem.equals(Constants.DROPDOWN_TYPE.DESIGN_INFO)) {
 				if (this.iDesignInfo != dropdownItem.getId()) {
+					showProgressDialog(StringUtil.getString(R.string.text_loading));
 					Bundle bundleData_drop = new Bundle();
 					bundleData_drop.putSerializable(
 							IntentConstants.INTENT_DATA, itemData);

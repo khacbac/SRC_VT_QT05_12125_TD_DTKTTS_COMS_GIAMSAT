@@ -1,9 +1,6 @@
 package com.viettel.gsct.fragment.tiendo.gpon.presenter;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
-
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.Work_ItemsControler;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
@@ -14,6 +11,10 @@ import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemGPONView;
+import com.viettel.gsct.View.gpon.WorkItemHanNoi;
+import com.viettel.gsct.View.gpon.WorkItemKeoCap;
+import com.viettel.gsct.View.gpon.WorkItemOdf;
+import com.viettel.gsct.View.gpon.WorkItemOltAndDoKiem;
 import com.viettel.gsct.View.gpon.WorkItemValueHanNoiBoChia;
 import com.viettel.gsct.View.gpon.WorkItemValueHanNoiTuThue;
 import com.viettel.gsct.View.gpon.WorkItemValueKeoCapHeader;
@@ -21,19 +22,20 @@ import com.viettel.gsct.View.gpon.WorkItemValueKeoCap;
 import com.viettel.gsct.View.gpon.WorkItemValueOdf;
 import com.viettel.gsct.View.gpon.WorkItemValueOltDoKiem;
 import com.viettel.gsct.fragment.base.BaseFragment;
-import com.viettel.gsct.fragment.base.BaseTienDoFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.model.GponTienDoModel;
+import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
 import com.viettel.gsct.fragment.tiendo.gpon.view.IeGponTienDoFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.model.IeGponTienDoModel;
-
+import com.viettel.gsct.preview.common.Gpon2PreviewFragment;
+import com.viettel.gsct.utils.GSCTUtils;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by doanLV4 on 9/20/2017.
  */
 
-public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
-        IeGponTienDoModel.IeListenerAddItem {
+public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponTienDoModel.IeListenerAddItem {
 
     private static final String TAG = GponTienDoTienDoPresenter.class.getSimpleName();
     private Context context;
@@ -45,11 +47,21 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
     private WorkItemGPONView wItemOutdoor;
     private WorkItemGPONView wItemOlt;
     private WorkItemGPONView wItemDokiem;
-    private SubWorkItemGPONView subView;
 
+    // Controller.
     private Work_ItemsControler wController;
     private Sub_Work_Item_ValueController svController;
-    private ArrayList<WorkItemValueKeoCap> listSWIValue = new ArrayList<>();
+
+    // Hash map work item cap nhat theo tung node.
+    private HashMap<Long, WorkItemKeoCap> hmWKeoCap = new HashMap<>();
+    private HashMap<Long, WorkItemHanNoi> hmWHanNoi = new HashMap<>();
+    private HashMap<Long, WorkItemOdf> hmWOdfOutdoor = new HashMap<>();
+    private HashMap<Long, WorkItemOltAndDoKiem> hmWDoKiem = new HashMap<>();
+
+    // Work item cap nhat theo cong trinh.
+    private WorkItemOdf workItemOdfIndoor;
+    private WorkItemOltAndDoKiem workItemOlt;
+
 
     public GponTienDoTienDoPresenter(IeGponTienDoFragment ieGponTienDoFragment, Context context) {
         this.context = context;
@@ -59,6 +71,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         svController = new Sub_Work_Item_ValueController(context);
     }
 
+    // Them toan bo work item, do van de design nen phai hard code.
     @Override
     public void addWorkItem() {
         initWorkItemGpon();
@@ -70,63 +83,127 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         ieGponTienDoFragment.finishAddWDoKiem(wItemDokiem);
     }
 
+    // Them sub work item cho phan keo cap.
     @Override
     public void addSWKeoCap() {
         ieGponTienDoModel.addSWKeoCap(wItemKeoCap, this);
     }
 
+    // Them sub work item cho phan han noi.
     @Override
     public void addSWHanNoi() {
         ieGponTienDoModel.addSWHanNoi(this);
     }
 
+    // Them sub work item cho phan odf out door.
     @Override
     public void addSWOutdoor() {
         ieGponTienDoModel.addSWOutdoor(this);
     }
 
+    // Them sub work item cho phan do kiem nghiem thu.
     @Override
     public void addSWDoKiem() {
         ieGponTienDoModel.addSWDoKiem(this);
     }
 
+    // Them sub work item value cho phan odf indoor.
+    // Work item nay cap nhat theo cong trinh.
     @Override
     public void addSWValueInDoor() {
         ieGponTienDoModel.addSWValueIndoor(this);
     }
 
+    // Them sub work item value cho phan lap dat OLT.
+    // Work item nay cap nhat theo cong trinh.
     @Override
     public void addSWValueOLT() {
         ieGponTienDoModel.addSWValueOLT(this);
     }
 
+    // Them sub work item value cho phan keo cap.
     @Override
     public void addSWValueKeoCap(ConstrNodeEntity node, SubWorkItemGPONView sView) {
-        ieGponTienDoModel.addSWValueKeoCap(sView, this);
+        ieGponTienDoModel.addSWValueKeoCap(node, sView, this);
     }
 
+    // Them sub work item value cho phan han noi.
     @Override
     public void addSWValueHanNoi(ConstrNodeEntity node, SubWorkItemGPONView sView) {
-        ieGponTienDoModel.addSWValueHanNoi(sView, this);
+        ieGponTienDoModel.addSWValueHanNoi(node, sView, this);
     }
 
+    // Them sub work item value cho phan out door.
     @Override
     public void addSWValueOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView) {
-        ieGponTienDoModel.addSWValueOutdoor(sView, this);
+        ieGponTienDoModel.addSWValueOutdoor(node, sView, this);
     }
 
+    // Them sub work item value cho phan do kiem nghiem thu.
     @Override
     public void addSWValueDoKiem(ConstrNodeEntity node, SubWorkItemGPONView sView) {
-        ieGponTienDoModel.addSWValueDoKiem(sView, this);
+        ieGponTienDoModel.addSWValueDoKiem(node, sView, this);
     }
 
+    // Luu thong tin vua nhap xuong DB qua 2 buoc.
+    // B1: Cap nhat lai phan view hien thi ngay khi user an save.
+    // B2: Luu data xuong Database.
+    // Do su dung Thread nen phai chia ra lam 2 buoc.
     @Override
-    public void saveSWIValue() {
-        for (WorkItemValueKeoCap entity : listSWIValue) {
-//            entity.saveSWIItemToDB();
+    public void save() {
+        // Luu data vao Database.
+        saveDataToDataBase();
+        // Cap nhat lai trang thai hien thi sau khi luu.
+        updateStatusForAllItem();
+    }
+
+    // Ham luu du lieu vua nhap xuong DB.
+    private void saveDataToDataBase() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (long kcKey : hmWKeoCap.keySet()) {
+                    hmWKeoCap.get(kcKey).save(kcKey);
+                }
+                for (long hnKey : hmWHanNoi.keySet()) {
+                    hmWHanNoi.get(hnKey).save(hnKey);
+                }
+                if (!workItemOdfIndoor.getwItemEntity().hasCompletedDate()) {
+                    workItemOdfIndoor.save();
+                }
+                for (long odKey : hmWOdfOutdoor.keySet()) {
+                    if (!hmWOdfOutdoor.get(odKey).getwItemEntity().hasCompletedDate()) {
+                        hmWOdfOutdoor.get(odKey).save(odKey);
+                    }
+                }
+                workItemOlt.save();
+                for (long odKey : hmWDoKiem.keySet()) {
+                    hmWDoKiem.get(odKey).save(odKey);
+                }
+            }
+        });
+        thread.start();
+    }
+
+    // Ham cap nhat lai trang thai hien thi cua view sau khi luu.
+    private void updateStatusForAllItem() {
+        for (long kcKey : hmWKeoCap.keySet()) {
+            hmWKeoCap.get(kcKey).updateTrangThai();
+        }
+        for (long hnKey : hmWHanNoi.keySet()) {
+            hmWHanNoi.get(hnKey).updateTrangThai();
+        }
+        workItemOdfIndoor.updateTrangThai();
+        for (long odKey : hmWOdfOutdoor.keySet()) {
+            hmWOdfOutdoor.get(odKey).updateTrangThai();
+        }
+        workItemOlt.updateTrangThai();
+        for (long odKey : hmWDoKiem.keySet()) {
+            hmWDoKiem.get(odKey).updateTrangThai();
         }
     }
 
+    // Model thong bao viec hoan thanh them Node cho work item keo cap.
     @Override
     public void finishAddSWKeoCap(ConstrNodeEntity node) {
         SubWorkItemGPONView swKeoCap = new SubWorkItemGPONView(context);
@@ -137,6 +214,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         ieGponTienDoFragment.finishAddSWKeoCap(swKeoCap, node);
     }
 
+    // Model thong bao viec hoan thanh them Node cho work item han noi.
     @Override
     public void finishAddSWHanNoi(ConstrNodeEntity node) {
         SubWorkItemGPONView swHanNoi = new SubWorkItemGPONView(context);
@@ -147,6 +225,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         ieGponTienDoFragment.finishAddSWHanNoi(swHanNoi, node);
     }
 
+    // Model thong bao viec hoan thanh them Node cho work item outdoor.
     @Override
     public void finishAddSWOutdoor(ConstrNodeEntity node) {
         SubWorkItemGPONView swOutdoor = new SubWorkItemGPONView(context);
@@ -157,6 +236,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         ieGponTienDoFragment.finishAddSWOutdoor(swOutdoor, node);
     }
 
+    // Model thong bao viec hoan thanh them Node cho work item do kiem.
     @Override
     public void finishAddSWDoKiem(ConstrNodeEntity node) {
         SubWorkItemGPONView swDoKiem = new SubWorkItemGPONView(context);
@@ -167,148 +247,246 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         ieGponTienDoFragment.finishAddSWDoKiem(swDoKiem, node);
     }
 
+    // Model thong bao hoan thanh them value phan door.
     @Override
     public void finishAddSWValueIndoor(Cat_Work_Item_TypesEntity catWorkItem) {
         ieGponTienDoModel.addItemOdfIndoor(catWorkItem, this);
     }
 
+    // Model thong bao hoan thanh them value phan olt.
     @Override
     public void finishAddSWValueOLT(Cat_Work_Item_TypesEntity catWorkItem) {
-        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem
-                = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
-        ArrayList<View> listItemRight = new ArrayList<>();
-        for (Cat_Sub_Work_ItemEntity catEntity : arrSWItem) {
-            WorkItemValueOltDoKiem oltGpon = new WorkItemValueOltDoKiem(context);
-            oltGpon.setTvTitle(catEntity.getName());
-            listItemRight.add(oltGpon);
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
+        workItemOlt = new WorkItemOltAndDoKiem(context);
+
+        Work_ItemsEntity wItemEntity = wController.getItem(catWorkItem.getItem_type_id());
+        if (wItemEntity != null) {
+            workItemOlt.addWorkitem(wItemEntity);
+            for (Cat_Sub_Work_ItemEntity catEntity : arrSWItem) {
+                WorkItemValueOltDoKiem oltGpon = new WorkItemValueOltDoKiem(context);
+                oltGpon.setTvTitle(catEntity.getName());
+                oltGpon.addWIEntity(wItemEntity);
+                oltGpon.addCSWIEntity(catEntity);
+                workItemOlt.addValueItem(oltGpon);
+            }
+//            this.workItemOlt = wiOLT;
+            ieGponTienDoFragment.finishAddLapDatOltValue(workItemOlt);
         }
-        ieGponTienDoFragment.finishAddLapDatOltValue(listItemRight);
     }
 
+
+    // Model thong bao hoan thanh them value phan keo cap.
     @Override
-    public void finishAddSWValueKeoCap(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
-        Log.d(TAG, "finishAddSWValueByNode: called");
-        WorkItemValueKeoCapHeader header = new WorkItemValueKeoCapHeader(context);
-        header.setTvLoaiCap(catWorkItem.getItem_type_name());
+    public void finishAddSWValueKeoCap(ConstrNodeEntity node, SubWorkItemGPONView sView, HashMap<String, Cat_Work_Item_TypesEntity> hmCatWorkItem) {
+        WorkItemKeoCap keoCap = new WorkItemKeoCap(context);
 
-        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem
-                = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
-        Log.d(TAG, "finishAddSWValueKeoCap: arrSWItem size = " + arrSWItem.size());
-        for (Cat_Sub_Work_ItemEntity cswItem : arrSWItem) {
-
-            // Hard code 69280340 for test.
-            Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), 69280340);
-            Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), cswItem.getId());
-            double luyke = svController.getLuyke(wItem.getId(), cswItem.getId());
-            double value = svItem != null ? svItem.getValue() : 0;
-
-            WorkItemValueKeoCap item = new WorkItemValueKeoCap(context);
-            listSWIValue.add(item);
-            item.addSWIValue(svItem);
-            item.setTvItemLoaiCap(cswItem.getName());
-            item.setTvLuyKe(luyke);
-            item.setEdtKhoiLuong(value);
-            header.addItemForLoaiCap(item);
+        // Lay work item keo cap.No se chua 2 work item khac la Cap Quang so 8 va Cap Quang Adss.
+        Cat_Work_Item_TypesEntity cwiKeoCap = hmCatWorkItem.get(Constant.CODE_KEOCAP);
+        Work_ItemsEntity wIKeoCap = wController.getWorkByCatTest(cwiKeoCap.getItem_type_id(), node.getContructorId());
+        if (wIKeoCap != null) {
+            keoCap.addWorkItem(wIKeoCap);
+            // Disable cac node da hoan thanh keo cap.
+            sView.setFinish(wIKeoCap.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wIKeoCap.getComplete_date())));
         }
-        sView.addListSWValue(header);
-        ieGponTienDoFragment.finishAddKeoCapValue(header);
 
+        // Khoi tao work item cap quang hinh so 8.
+        Cat_Work_Item_TypesEntity cwiCapQuang = hmCatWorkItem.get(Constant.CODE_CAPQUANG);
+        WorkItemValueKeoCapHeader hdCapQuang = new WorkItemValueKeoCapHeader(context);
+        hdCapQuang.setTvLoaiCap(cwiCapQuang.getItem_type_name());
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem = BaseFragment.cat_sub_work_itemControler.getsubCates(cwiCapQuang.getItem_type_id());
+        Work_ItemsEntity wItemCapSo8 = wController.getWorkByCatTest(cwiCapQuang.getItem_type_id(), node.getContructorId());
+        if (wItemCapSo8 != null) {
+            for (Cat_Sub_Work_ItemEntity cswItem : arrSWItem) {
+                Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItemCapSo8.getId(), cswItem.getId(),node.getNodeID());
+                double luyke = svController.getLuykeByNode(wItemCapSo8.getId(), cswItem.getId(),node.getNodeID());
+                double value = svItem != null ? svItem.getValue() : 0;
+
+                WorkItemValueKeoCap item = new WorkItemValueKeoCap(context);
+                item.addSWIValue(svItem);
+                item.addCSWIEntity(cswItem);
+                item.setTvItemLoaiCap(cswItem.getName());
+                item.setTvLuyKe(luyke);
+                item.setEdtKhoiLuong(value);
+                hdCapQuang.addItemValue(item);
+            }
+            hdCapQuang.addWorkItem(wItemCapSo8);
+            keoCap.addCapQuangSo8(hdCapQuang);
+        }
+
+        // Khoi tao work item cap quang adss.
+        Cat_Work_Item_TypesEntity cwiAdss = hmCatWorkItem.get(Constant.CODE_ADSS);
+        WorkItemValueKeoCapHeader hdAdss = new WorkItemValueKeoCapHeader(context);
+        hdAdss.setTvLoaiCap(cwiAdss.getItem_type_name());
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItemAdss = BaseFragment.cat_sub_work_itemControler.getsubCates(cwiAdss.getItem_type_id());
+        Work_ItemsEntity wItemAdss = wController.getWorkByCatTest(cwiAdss.getItem_type_id(), node.getContructorId());
+        if (wItemAdss != null) {
+            for (Cat_Sub_Work_ItemEntity cswItem : arrSWItemAdss) {
+                Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItemAdss.getId(), cswItem.getId(),node.getNodeID());
+                double luyke = svController.getLuykeByNode(wItemAdss.getId(), cswItem.getId(),node.getNodeID());
+                double value = svItem != null ? svItem.getValue() : 0;
+
+                WorkItemValueKeoCap item = new WorkItemValueKeoCap(context);
+                item.addSWIValue(svItem);
+                item.addCSWIEntity(cswItem);
+                item.setTvItemLoaiCap(cswItem.getName());
+                item.setTvLuyKe(luyke);
+                item.setEdtKhoiLuong(value);
+                hdAdss.addItemValue(item);
+            }
+            hdAdss.addWorkItem(wItemAdss);
+            keoCap.addCapQuangAdss(hdAdss);
+        }
+        sView.addSWValue(keoCap);
+        hmWKeoCap.put(node.getNodeID(), keoCap);
+        ieGponTienDoFragment.finishAddKeoCapValue(keoCap);
     }
 
+    // Model thong bao hoan thanh them value phan han noi.
     @Override
-    public void finishAddSWValueHanNoi(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
-        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem
-                = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
-        for (Cat_Sub_Work_ItemEntity cswItem : arrSWItem) {
-            // Hard code 69280340 for test.
-            Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), 69280340);
-            Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), cswItem.getId());
-            double luyke = svController.getLuyke(wItem.getId(), cswItem.getId());
-            double value = svItem != null ? svItem.getValue() : 0;
-            if (cswItem.getCode().contains("FDH")) {
-                WorkItemValueHanNoiTuThue tuthue = new WorkItemValueHanNoiTuThue(context);
-                tuthue.setTvTenTu(cswItem.getName());
-                tuthue.setTvLuyKeHanNoi(value);
-                /*Kiem tra lai data type cua thang VALUE 2*/
-                sView.addListSWValue(tuthue);
-                ieGponTienDoFragment.finishAddTuThueValue(tuthue);
-            } else if (cswItem.getCode().contains("BO_CHIA")) {
-                WorkItemValueHanNoiBoChia bochia = new WorkItemValueHanNoiBoChia(context);
-                bochia.setTvBochia(cswItem.getName());
-                bochia.setTvLuyKe(luyke);
-                bochia.setEdtKhoiLuong(value);
-                sView.addListSWValue(bochia);
-                ieGponTienDoFragment.finishAddBoChiaValue(bochia);
+    public void finishAddSWValueHanNoi(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
+        WorkItemHanNoi wItemHanNoi = new WorkItemHanNoi(context);
+
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
+        // Hard code 69280340 for test.
+        Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), node.getContructorId());
+        if (wItem != null) {
+            wItemHanNoi.addWorkItem(wItem);
+            // Disable cac node da hoan thanh keo cap.
+            sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
+
+            for (Cat_Sub_Work_ItemEntity cswItem : arrSWItem) {
+                Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItem.getId(), cswItem.getId(),node.getNodeID());
+                double luyke = svController.getLuykeByNode(wItem.getId(), cswItem.getId(),node.getNodeID());
+                double luykeHanNoi = svController.getLuykeHanNoiByNode(wItem.getId(), cswItem.getId(),node.getNodeID());
+                double value = svItem != null ? svItem.getValue() : 0;
+                double value_item = svItem != null ? svItem.getValue_item() : 0;
+                if (cswItem.getCode().contains("FDH")) {
+                    WorkItemValueHanNoiTuThue tuthue = new WorkItemValueHanNoiTuThue(context);
+                    tuthue.setTvTenTu(cswItem.getName());
+                    tuthue.setTvLuyKeLapDat(luyke);
+                    tuthue.setTvLuyKeHanNoi(luykeHanNoi);
+                    tuthue.setEdtKhoiLuongLapDat(value);
+                    tuthue.setEdtKhoiLuongHanNoi(value_item);
+                    tuthue.addWIEntity(wItem);
+                    tuthue.addSWIValue(svItem);
+                    tuthue.addCSWIEntity(cswItem);
+                    wItemHanNoi.addValueTuThue(tuthue);
+                } else if (cswItem.getCode().contains("BO_CHIA")) {
+                    WorkItemValueHanNoiBoChia bochia = new WorkItemValueHanNoiBoChia(context);
+                    bochia.setTvBochia(cswItem.getName());
+                    bochia.setTvLuyKe(luyke);
+                    bochia.setEdtKhoiLuong(value);
+                    bochia.addWIEntity(wItem);
+                    bochia.addSWIValue(svItem);
+                    bochia.addCSWIEntity(cswItem);
+                    wItemHanNoi.addValueBoChia(bochia);
+                }
             }
         }
+        sView.addSWValue(wItemHanNoi);
+        hmWHanNoi.put(node.getNodeID(), wItemHanNoi);
+        ieGponTienDoFragment.finishAddHanNoiValue(wItemHanNoi);
     }
 
+    // Model thong bao hoan thanh them value phan outdoor.
     @Override
-    public void finishAddSWValueOutdoor(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
-        ieGponTienDoModel.addItemOdfOutdoor(sView, catWorkItem, this);
+    public void finishAddSWValueOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
+        ieGponTienDoModel.addItemOdfOutdoor(node, sView, catWorkItem, this);
     }
 
+    // Model thong bao hoan thanh them value phan do kiem.
     @Override
-    public void finishAddSWValueDoKiem(SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
-        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem
-                = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
-        for (Cat_Sub_Work_ItemEntity cswEntity : arrSWItem) {
-            // Hard code 69280340 for test.
-            Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), 69280340);
-//            BaseTienDoFragment.hashWorkItems.put(wItem.getItem_type_id(),wItem);
-            Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), cswEntity.getId());
+    public void finishAddSWValueDoKiem(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWorkItem) {
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
+        WorkItemOltAndDoKiem wiDoKiem = new WorkItemOltAndDoKiem(context);
+        // Hard code 69280340 for test.
+        Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), node.getContructorId());
+        if (wItem != null) {
+            wiDoKiem.addWorkitem(wItem);
+            // Disable cac node da hoan thanh keo cap.
+            sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
 
-            Log.d(TAG, "finishAddSWValueDoKiem: wItem id = " + wItem.getId());
-            Log.d(TAG, "finishAddSWValueDoKiem: cswEntity id = " + cswEntity.getId());
-
-            WorkItemValueOltDoKiem dokiemItem = new WorkItemValueOltDoKiem(context);
-            dokiemItem.setTvTitle(cswEntity.getName());
-            sView.addListSWValue(dokiemItem);
-            ieGponTienDoFragment.finishAddOdfDoKiemValue(dokiemItem);
+            for (Cat_Sub_Work_ItemEntity cswEntity : arrSWItem) {
+                Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItem.getId(), cswEntity.getId(),node.getNodeID());
+                WorkItemValueOltDoKiem dokiemItem = new WorkItemValueOltDoKiem(context);
+                dokiemItem.setTvTitle(cswEntity.getName());
+                dokiemItem.addWIEntity(wItem);
+                dokiemItem.addCSWIEntity(cswEntity);
+                dokiemItem.addSWIValue(svItem);
+                wiDoKiem.addValueItem(dokiemItem);
+            }
         }
+        sView.addSWValue(wiDoKiem);
+        hmWDoKiem.put(node.getNodeID(), wiDoKiem);
+        ieGponTienDoFragment.finishAddOdfDoKiemValue(wiDoKiem);
+
     }
 
+    // Model thong bao hoan thanh them value phan indoor.
     @Override
     public void finishAddOdfIndoor(ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork) {
-        for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
-            if (entity.getCode().contains("INDOOR")) {
-                // Hard code 69280340 for test.
-                Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), 69280340);
-                Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), entity.getId());
-                double luyke = svController.getLuyke(wItem.getId(), entity.getId());
-                double value = svItem != null ? svItem.getValue() : 0;
+        workItemOdfIndoor = new WorkItemOdf(context);
+        Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), BaseFragment.constr_ConstructionItem.getConstructId());
+        if (wItem != null) {
+            workItemOdfIndoor.addWorkItem(wItem);
+//            // Disable cac node da hoan thanh keo cap.
+//            sView.setFinish(wItem.hasCompletedDate());
 
-                WorkItemValueOdf odfIndoor = new WorkItemValueOdf(context);
-                odfIndoor.setTvTenOdf(entity.getName());
-                odfIndoor.setTvLuyKe(luyke);
-                odfIndoor.setEdtKhoiLuong(value);
+            for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
+                if (entity.getCode().contains("INDOOR")) {
+                    Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), entity.getId());
+                    double luyke = svController.getLuyke(wItem.getId(), entity.getId());
+                    double value = svItem != null ? svItem.getValue() : 0;
 
-                ieGponTienDoFragment.finishAddOdfInDoorValue(odfIndoor);
+                    WorkItemValueOdf odfIndoor = new WorkItemValueOdf(context);
+                    odfIndoor.setTvTenOdf(entity.getName());
+                    odfIndoor.setTvLuyKe(luyke);
+                    odfIndoor.setEdtKhoiLuong(value);
+                    odfIndoor.addCSWIEntity(entity);
+                    odfIndoor.addSWIValue(svItem);
+                    wItemOdfIndoor.addViewValue(odfIndoor);
+                    workItemOdfIndoor.addValueOdf(odfIndoor);
+                }
             }
         }
+//        this.workItemOdfIndoor = wiOdf;
+        ieGponTienDoFragment.finishAddOdfInDoorValue(workItemOdfIndoor);
     }
 
+    // Model thong bao hoan thanh them value phan outdoor.
     @Override
-    public void finishAddOdfOutdoor(SubWorkItemGPONView sView, ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork) {
-        for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
-            if (entity.getCode().contains("OUTDOOR")) {
+    public void finishAddOdfOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems, Cat_Work_Item_TypesEntity catWork) {
+        WorkItemOdf wiOdf = new WorkItemOdf(context);
+        // Hard code 69280340 for test.
+        Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), node.getContructorId());
+        if (wItem != null) {
+            wiOdf.addWorkItem(wItem);
+            // Disable cac node da hoan thanh keo cap.
+            sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
 
-                // Hard code 69280340 for test.
-                Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), 69280340);
-                Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), entity.getId());
-                double luyke = svController.getLuyke(wItem.getId(), entity.getId());
-                double value = svItem != null ? svItem.getValue() : 0;
+            for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
+                if (entity.getCode().contains("OUTDOOR")) {
+                    Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItem.getId(), entity.getId(),node.getNodeID());
+                    double luyke = svController.getLuykeByNode(wItem.getId(), entity.getId(),node.getNodeID());
+                    double value = svItem != null ? svItem.getValue() : 0;
 
-                WorkItemValueOdf odfOutdoor = new WorkItemValueOdf(context);
-                odfOutdoor.setTvTenOdf(entity.getName());
-                odfOutdoor.setTvLuyKe(luyke);
-                odfOutdoor.setEdtKhoiLuong(value);
-                sView.addListSWValue(odfOutdoor);
-                ieGponTienDoFragment.finishAddOdfOutDoorValue(odfOutdoor);
+                    WorkItemValueOdf odfOutdoor = new WorkItemValueOdf(context);
+                    odfOutdoor.setTvTenOdf(entity.getName());
+                    odfOutdoor.setTvLuyKe(luyke);
+                    odfOutdoor.setEdtKhoiLuong(value);
+                    odfOutdoor.addCSWIEntity(entity);
+                    odfOutdoor.addSWIValue(svItem);
+                    wItemOutdoor.addViewValue(odfOutdoor);
+                    wiOdf.addValueOdf(odfOutdoor);
+                }
             }
         }
+        sView.addSWValue(wiOdf);
+        hmWOdfOutdoor.put(node.getNodeID(), wiOdf);
+        ieGponTienDoFragment.finishAddOdfOutDoorValue(wiOdf);
     }
 
+    // Khoi tao work item cho cap nhat tien do Gpon.Phan nay la hard code.
     private void initWorkItemGpon() {
         // Khoi tao work tiem keo cap.
         wItemKeoCap = new WorkItemGPONView(context);
@@ -335,4 +513,26 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter,
         wItemDokiem.setTitle(Constant.TAG_DOKIEM_NGHIEMTHU);
     }
 
+    // Ham lang nghe su kien check validate tu phia GponActivity.Khi user an save.
+    @Override
+    public boolean checkValidate() {
+        for (long kcKey : hmWKeoCap.keySet()) {
+            if (!hmWKeoCap.get(kcKey).isValidate()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void showPreviewTienDo(BaseGponPreview gponPreview) {
+        Gpon2PreviewFragment gponFragment = null;
+        if (gponPreview instanceof Gpon2PreviewFragment) {
+            gponFragment = (Gpon2PreviewFragment) gponPreview;
+        }
+        if (gponFragment != null) {
+            gponFragment.initDataNewTienDoPreviewCT(workItemOdfIndoor,workItemOlt);
+            gponFragment.initDataNewTienDoPreviewNode(hmWKeoCap,hmWHanNoi,hmWOdfOutdoor,hmWDoKiem);
+        }
+    }
 }

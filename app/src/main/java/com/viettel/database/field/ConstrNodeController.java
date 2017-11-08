@@ -18,14 +18,23 @@ import java.util.Collections;
  */
 
 public class ConstrNodeController {
-    private Context mContext = null;
+    private static Context mContext = null;
     private static final String TAG = ConstrNodeController.class.getSimpleName();
+    private static ConstrNodeController cnController;
 
     public ConstrNodeController() {
     }
 
-    public ConstrNodeController(Context mContext) {
-        this.mContext = mContext;
+    public ConstrNodeController(Context context) {
+        mContext = context;
+    }
+
+    public static ConstrNodeController getInstance(Context context) {
+        mContext = context;
+        if (cnController == null) {
+            cnController = new ConstrNodeController();
+        }
+        return cnController;
     }
 
     public static final String[] allColumn = new String[]{
@@ -55,6 +64,21 @@ public class ConstrNodeController {
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
         return listColumn;
+    }
+
+    public String getNodeNameById(long nodeId) {
+        String strName = "";
+        String strQuery = "select name from constr_node where id = " + nodeId;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor != null && cursor.moveToFirst()) {
+            strName = cursor.getString(cursor.getColumnIndex(ConstrNodeItemsField.NODE_NAME));
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        KttsDatabaseHelper.INSTANCE.close();
+        return strName;
     }
 
     public ArrayList<ConstrNodeEntity> getListNode() {
@@ -190,7 +214,8 @@ public class ConstrNodeController {
     public ArrayList<ConstrNodeEntity> getListNodeTest() {
         ArrayList<ConstrNodeEntity> listNode = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
-        String strQuery = "select * from constr_node where constr_node.id between 10 and 12";
+//        String strQuery = "select * from constr_node where constr_node.id between 10 and 12";
+        String strQuery = "select * from constr_node inner join constr_constructions on constr_node.construct_id = constr_constructions.construct_id";
         Cursor cursor = db.rawQuery(strQuery,null);
         if (cursor.moveToFirst()) {
             do {

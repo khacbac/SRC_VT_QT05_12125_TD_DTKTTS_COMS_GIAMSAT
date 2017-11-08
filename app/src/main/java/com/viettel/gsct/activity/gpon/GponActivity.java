@@ -1,6 +1,7 @@
 package com.viettel.gsct.activity.gpon;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
@@ -22,12 +23,17 @@ import com.viettel.common.ModelEvent;
 import com.viettel.constants.Constants;
 import com.viettel.constants.IntentConstants;
 import com.viettel.database.Supervision_BtsController;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
 import com.viettel.database.entity.Supervision_BtsEntity;
-import com.viettel.gsct.preview.common.NhatKyTienDoPreviewFragment;
+import com.viettel.database.field.ConstrNodeController;
+import com.viettel.gsct.fragment.base.BaseTienDoFragment;
+import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
+import com.viettel.gsct.fragment.tiendo.gpon.view.GPONTiendoFragment;
+import com.viettel.gsct.preview.common.Gpon2PreviewFragment;
+import com.viettel.gsct.preview.common.GponPreviewFragment;
 import com.viettel.gsct.fragment.nhatky.BtsNhatkyFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.view.GPONTiendo2Fragment;
-import com.viettel.gsct.preview.common.NhatKyTienDoGponPreviewFragment;
 import com.viettel.ktts.R;
 import com.viettel.sync.SyncTask;
 import com.viettel.utils.DeactivatedViewPager;
@@ -38,6 +44,7 @@ import com.viettel.view.control.CapNhatNhatKyTienDoPagerAdapter;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import butterknife.BindView;
@@ -63,6 +70,8 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
     Button mBtnCapNhatTienDo;
     @BindView(R.id.fr_content)
     FrameLayout mFrameLayoutPreview;
+//    @BindView(R.id.fr_content_2)
+//    FrameLayout mFrameLayoutPreview2;
     @BindView(R.id.layout_root)
     LinearLayout mLayoutRoot;
     @BindView(R.id.layoutHeader)
@@ -77,18 +86,17 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
     private Constr_Construction_EmployeeEntity constr_ConstructionItem;
     private Supervision_BtsEntity btsEntity;
     // All fragment.
-    private NhatKyTienDoPreviewFragment mNhatKyTienDoPreviewFragment;
-    private NhatKyTienDoGponPreviewFragment mGponPreviewFragment;
+    private BaseGponPreview mGponPrevFrag;
     private BtsNhatkyFragment fragmentCapNhatNhatKy;
-    private GPONTiendo2Fragment fragmentCapNhatTienDo;
+    private BaseTienDoFragment fragmentCapNhatTienDo;
     // All check boolean.
     private boolean mIsCoThiCong = true;
     private boolean mHasClickBtnTienDo = false;
     private boolean flagFirstTime = true;
     private int infoId = 0;
     // All Key.
-    private static final int KEY_SWITCH_NHATKY  = 0;
-    private static final int KEY_SWITCH_TIENDO  = 1;
+    private static final int KEY_SWITCH_NHATKY = 0;
+    private static final int KEY_SWITCH_TIENDO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,14 +104,18 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
 //        setContentView(R.layout.activity_bts);
         addView(R.layout.activity_bts_thietket, R.id.root_view);
         initVariables();
-        initViews();
+//        initViews();
         initHeader();
+        initViews();
+
     }
 
     public Constr_Construction_EmployeeEntity getConstr_Construction_Employee() {
         return (Constr_Construction_EmployeeEntity) getIntent().getExtras()
                 .getSerializable(IntentConstants.INTENT_DATA);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,7 +130,10 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
         if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
             onShowNhatKyTienDoPreview(false);
             isSaved = false;
-        } else {
+        } /*else if(mFrameLayoutPreview2.getVisibility() == View.VISIBLE) {
+            onShowNhatKyTienDoPreview(false);
+            isSaved = false;
+        }*/ else {
             gotoHomeActivity(new Bundle());
             finish();
         }
@@ -149,67 +164,57 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
 
     private void initHeader() {
         setTitle(getString(R.string.line_background_header_title_brcd_mt));
-        tvTram.setText(constr_ConstructionItem
-                .getStationCode());
-        tvMaCongTrinh.setText(String.valueOf(constr_ConstructionItem
-                .getConstrCode()));
+        tvTram.setText(constr_ConstructionItem.getStationCode());
+        tvMaCongTrinh.setText(String.valueOf(constr_ConstructionItem.getConstrCode()));
 
-        Supervision_BtsController bts_Controller = new Supervision_BtsController(
-                this);
-        btsEntity = bts_Controller.getSupervisionBts(constr_ConstructionItem
-                .getSupervision_Constr_Id());
+        Supervision_BtsController bts_Controller = new Supervision_BtsController(this);
+        btsEntity = bts_Controller.getSupervisionBts(constr_ConstructionItem.getSupervision_Constr_Id());
     }
 
 
     private void initViews() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.array_gpon_info, R.layout.spinner_textview);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.array_gpon_info, R.layout.spinner_textview);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_textview);
         spThongTin.setAdapter(adapter);
         spThongTin.setSelection(infoId - 1);
         if (infoId == Constants.BTS_INFO.NHAT_KY_TIEN_DO_INFO) {
             fragmentCapNhatNhatKy = (BtsNhatkyFragment) BtsNhatkyFragment.newInstance();
-            fragmentCapNhatTienDo = (GPONTiendo2Fragment) GPONTiendo2Fragment.newInstance();
-//            mNhatKyTienDoPreviewFragment = (NhatKyTienDoPreviewFragment)
-//                    NhatKyTienDoPreviewFragment.newInstance();
-            mGponPreviewFragment = (NhatKyTienDoGponPreviewFragment)
-                    NhatKyTienDoGponPreviewFragment.newInstance();
 
+            // Kiem tra la cong trinh cu hay moi de cap nhat.Cong trinh moi cap nhat theo node.Cong trinh cu cap nhat theo cong trinh.
+            ArrayList<ConstrNodeEntity> listNode = ConstrNodeController.getInstance(this).getListNodeByConstrId(constr_ConstructionItem.getConstructId());
+            if (listNode.isEmpty()) {
+                fragmentCapNhatTienDo = (GPONTiendoFragment) GPONTiendoFragment.newInstance();
+                // Dung cho cac cong trinh cu.Tat ca deu chi cap nhat theo cong trinh.
+                mGponPrevFrag = GponPreviewFragment.newInstance();
+                Log.d(TAG, "initViews: Cap nhat chi theo cong trinh");
+            } else {
+                fragmentCapNhatTienDo = (GPONTiendo2Fragment) GPONTiendo2Fragment.newInstance();
+                // Dung cho truong hop bat dau chuyen sang cap nhat gpon theo node.
+                mGponPrevFrag = Gpon2PreviewFragment.newInstance();
+                Log.d(TAG, "initViews: Cap nhat theo ca node va cong trinh");
+            }
         }
 
         if (fragmentCapNhatNhatKy != null) {
-            fragmentCapNhatNhatKy
-                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+            fragmentCapNhatNhatKy.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
         if (fragmentCapNhatTienDo != null) {
             fragmentCapNhatTienDo.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
-//        if (mNhatKyTienDoPreviewFragment != null) {
-//            mNhatKyTienDoPreviewFragment
-//                    .setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
-//        }
 
-        if (mGponPreviewFragment != null) {
-            mGponPreviewFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
+        // Cho truong hop cu.Chi co cap nhat theo cong trinh.
+        if (mGponPrevFrag != null) {
+            mGponPrevFrag.setConstr_Construction_EmployeeEntity(constr_ConstructionItem);
         }
 
-        // Init Preview Fragment.
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.fr_content, mNhatKyTienDoPreviewFragment)
-//                .commit();
-        getSupportFragmentManager()
-                .beginTransaction().replace(R.id.fr_content,mGponPreviewFragment).commit();
-        // Init Nhat Ky va Tien Do fragment.
-        pagerAdapter = new CapNhatNhatKyTienDoPagerAdapter(
-                getSupportFragmentManager(),
-                fragmentCapNhatNhatKy,
-                fragmentCapNhatTienDo);
+        // Cho truong hop cu.Chi co cap nhat theo cong trinh.
+        getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, mGponPrevFrag).commit();
 
+        // Init Nhat Ky va Tien Do fragment.
+        pagerAdapter = new CapNhatNhatKyTienDoPagerAdapter(getSupportFragmentManager(), fragmentCapNhatNhatKy, fragmentCapNhatTienDo);
         mViewPagerContent.setAdapter(pagerAdapter);
         mViewPagerContent.setOnPageChangeListener(this);
-
         mBtnCapNhatNhatKy.setBackgroundResource(R.drawable.action_button_focused);
         mBtnCapNhatTienDo.setBackgroundResource(R.drawable.action_button_not_focus);
 
@@ -276,7 +281,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
             if (fragmentCapNhatTienDo == null) {
                 return false;
             }
-            if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
+            if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy, mIsCoThiCong)) {
                 return false;
             }
             if (mIsCoThiCong) {
@@ -289,11 +294,6 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                     return false;
                 }
 
-//                fragmentCapNhatNhatKy.registerListenerEventBusBangRongNhatKy();
-////                fragmentCapNhatNhatKy.setOnListenPassNhatKyData(this);
-//                fragmentCapNhatTienDo.registerListenerEventBus();
-//                showPreviewNhatKyTienDoClick();
-
                 if (mFrameLayoutPreview.getVisibility() == View.VISIBLE) {
                     if (!isSaved) {
                         // Save nhat ky.
@@ -304,12 +304,13 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                     }
 
                 } else {
-                    Toast.makeText(this,""+ getResources()
-                            .getString(R.string.str_thong_bao_truoc_khi_luu),Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "" + getResources()
+                            .getString(R.string.str_thong_bao_truoc_khi_luu), Toast.LENGTH_SHORT)
                             .show();
                     showPreviewNhatKyTienDoClick();
-                    fragmentCapNhatNhatKy.registerListenerEventBusBangRongNhatKy();
-                    fragmentCapNhatTienDo.registerListenerEventBus();
+                    fragmentCapNhatNhatKy.registerListenerEventBus();
+//                    fragmentCapNhatTienDo.registerListenerEventBus();
+                    fragmentCapNhatTienDo.showPreviewTienDo(mGponPrevFrag);
                 }
             } else {
                 // Save nhat ky.
@@ -331,7 +332,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
     @OnClick(R.id.btnTienDoTab)
     public void onBtnCapNhatTienDoClick() {
         mHasClickBtnTienDo = true;
-        if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
+        if (!listenerValidateFromNhatKy(fragmentCapNhatNhatKy, mIsCoThiCong)) {
             return;
         }
         setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
@@ -357,9 +358,10 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
 
     /**
      * Set color for button when click.
+     *
      * @param isBtnClick Button.
      */
-    private void setColorForBtnNhatKyTienDoClick (Button isBtnClick) {
+    private void setColorForBtnNhatKyTienDoClick(Button isBtnClick) {
         mBtnCapNhatNhatKy.setBackgroundResource(R.drawable.action_button_not_focus);
         mBtnCapNhatTienDo.setBackgroundResource(R.drawable.action_button_not_focus);
         isBtnClick.setBackgroundResource(R.drawable.action_button_focused);
@@ -367,6 +369,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
 
     /**
      * Set visibility status for layout when switch to preview.
+     *
      * @param isLayoutPreview boolean.
      */
     private void setVisibilityForLayoutPreview(boolean isLayoutPreview) {
@@ -378,20 +381,22 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
             mLayoutRoot.setVisibility(View.VISIBLE);
         }
     }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onDataFromBangRongTienDoEvent(LinearLayout layoutRoot) {
+////        mNhatKyTienDoPreviewFragment.initDataForBangRongTienDoExpandable(layoutRoot);
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDataFromBangRongTienDoEvent(LinearLayout layoutRoot) {
-//        mNhatKyTienDoPreviewFragment.initDataForBangRongTienDoExpandable(layoutRoot);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDataFromCapNhatGponNhatKy(LinkedHashMap<String,String> hashMaps) {
+    public void onDataFromCapNhatGponNhatKy(LinkedHashMap<String, String> hashMaps) {
         hashMaps.put(KeyEventCommon.KEY_TEN_TRAM_TUYEN, "" + tvTram.getText());
-        mGponPreviewFragment.initDataForNhatKy(
+
+        mGponPrevFrag.initDataForNhatKy(
                 hashMaps,
                 KeyEventCommon.KEY_DOI_BANGRONG_ARR,
                 KeyEventCommon.KEY_TEN_HM_BANGRONG_ARR
         );
+
     }
 
     @Override
@@ -409,7 +414,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                 break;
             case KEY_SWITCH_TIENDO:
                 mHasClickBtnTienDo = true;
-                if (listenerValidateFromNhatKy(fragmentCapNhatNhatKy,mIsCoThiCong)) {
+                if (listenerValidateFromNhatKy(fragmentCapNhatNhatKy, mIsCoThiCong)) {
                     setColorForBtnNhatKyTienDoClick(mBtnCapNhatTienDo);
                 } else {
                     mViewPagerContent.setCurrentItem(KEY_SWITCH_NHATKY);

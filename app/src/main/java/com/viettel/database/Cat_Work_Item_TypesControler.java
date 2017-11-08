@@ -17,11 +17,20 @@ import java.util.ArrayList;
  */
 
 public class Cat_Work_Item_TypesControler {
-    private Context mContext = null;
+    private static Context mContext = null;
     private static final String TAG = "Cat_Work_Item_TypesCont";
+    private static Cat_Work_Item_TypesControler cwitController;
 
     public Cat_Work_Item_TypesControler(Context pContext) {
-        this.mContext = pContext;
+        mContext = pContext;
+    }
+
+    public static Cat_Work_Item_TypesControler getInstance(Context context) {
+        mContext = context;
+        if (cwitController == null) {
+            cwitController = new Cat_Work_Item_TypesControler(context);
+        }
+        return cwitController;
     }
 
     public static final String[] allColumn = new String[] {
@@ -89,6 +98,37 @@ public class Cat_Work_Item_TypesControler {
         cursor.close();
         KttsDatabaseHelper.INSTANCE.close();
         return ret;
+    }
+
+    public Cat_Work_Item_TypesEntity getCatWorkItemType(long id) {
+        Cat_Work_Item_TypesEntity curItem = null;
+        String strQuery = "select * from cat_work_item_types where id = " + id;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                curItem = this.converCursorToItem(cursor);
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        KttsDatabaseHelper.INSTANCE.close();
+        return curItem;
+    }
+
+    // Write for test.
+    public Cat_Work_Item_TypesEntity getCateByWItemTest(long id, String code) {
+        Cat_Work_Item_TypesEntity catWorkItem = null;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        String strQuery = "select *  from cat_work_item_types where id = "+ id +" and code = " + "'"+code+"'";
+        Cursor cursor = db.rawQuery(strQuery,null);
+        if (cursor.moveToFirst()) {
+            catWorkItem = converCursorToItem(cursor);
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return catWorkItem;
     }
 
     public ArrayList<Cat_Work_Item_TypesEntity> getCatWorkByNode(int constrIdFromNode) {

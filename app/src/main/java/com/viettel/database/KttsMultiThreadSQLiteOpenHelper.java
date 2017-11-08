@@ -20,6 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.viettel.constants.Constants;
+import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Cat_Cause_Not_WorkField;
 import com.viettel.database.field.Cat_Constr_TeamField;
 import com.viettel.database.field.Cat_Milestone_ConstrField;
@@ -46,7 +47,7 @@ public class KttsMultiThreadSQLiteOpenHelper extends
             .getSimpleName();
 
     // Database Version
-    private static final int DATABASE_VERSION = 48;//32
+    private static final int DATABASE_VERSION = 51;//32
     // Database Name
     private static final String DATABASE_NAME = "KTTS_DB_MANAGER";
 
@@ -343,7 +344,7 @@ public class KttsMultiThreadSQLiteOpenHelper extends
                     Log.d(TAG, "onUpgrade: version " + oldVersion + " change name success");
                     break;
                 case 38:
-                    String addContrNodeIdColumn = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN "+  Work_ItemsField.CONSTR_NODE_ID + " INTEGER;";
+                    String addContrNodeIdColumn = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN ID INTEGER;";
                     db.execSQL(addContrNodeIdColumn);
                     Log.d(TAG, "onUpgrade: version " + oldVersion + " add column success");
                     break;
@@ -390,9 +391,83 @@ public class KttsMultiThreadSQLiteOpenHelper extends
                     Log.d(TAG, "onUpgrade: ReCreate Table Success");
                     break;
                 case 47:
-                    String addWorkItemNodeId = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN "+  Work_ItemsField.CONSTR_NODE_ID + " INTEGER;";
+                    String addWorkItemNodeId = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN ID INTEGER;";
                     db.execSQL(addWorkItemNodeId);
                     Log.d(TAG, "onUpgrade: add column success");
+                    break;
+                case 48:
+                    String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "
+                            + "WORK_ITEMS_CHANGE"
+                            + "("
+                            + Work_ItemsField.WORK_ITEM_ID
+                            + " INTEGER PRIMARY KEY,"
+                            + Work_ItemsField.WORK_ITEM_NAME
+                            + " TEXT,"
+                            + Work_ItemsField.WORK_ITEM_TYPE_NAME
+                            + " TEXT,"
+                            + Work_ItemsField.WORK_ITEM_ADDRESS
+                            + " TEXT,"
+                            + Work_ItemsField.UPDATE_DATE
+                            + " TEXT,"
+                            + Work_ItemsField.STARTING_DATE
+                            + " TEXT,"
+                            + Work_ItemsField.COMPLETE_DATE
+                            + " TEXT,"
+                            + Work_ItemsField.CONSTR_ID
+                            + " TEXT,"
+                            + Work_ItemsField.STATUS_ID
+                            + " INTEGER,"
+                            + Work_ItemsField.ITEM_TYPE_ID
+                            + " INTEGER,"
+                            + Work_ItemsField.CONSTR_TYPE
+                            + " INTEGER,"
+                            + Work_ItemsField.CONTRACT_ID
+                            + " TEXT,"
+                            + Work_ItemsField.STATUS
+                            + " INTEGER,"
+                            + Work_ItemsField.REAL_COMPLETE_DATE
+                            + " TEXT,"
+                            + Work_ItemsField.START_BY
+                            + " INTEGER,"
+                            + Work_ItemsField.UPDATE_STATUS_BY
+                            + " INTEGER,"
+                            + Work_ItemsField.ACCEPT_BY
+                            + " INTEGER,"
+                            + Work_ItemsField.WORK_ITEM_CODE
+                            + " TEXT,"
+                            + Work_ItemsField.CONSTRUCTOR_ID
+                            + " INTEGER,"
+                            + Work_ItemsField.SUPERVISOR_ID
+                            + " INTEGER,"
+                            + Work_ItemsField.COLUMN_IS_ACTIVE
+                            + " INTEGER,"
+                            + Work_ItemsField.COLUMN_CONSTRUCT_ID
+                            + " INTEGER,"
+                            + BaseField.COLUMN_PROCESS_ID
+                            + " INTEGER,"
+                            + BaseField.COLUMN_SYNC_STATUS
+                            + " INTEGER DEFAULT 0,"
+                            + BaseField.COLUMN_EMPLOYEE_ID
+                            + " INTEGER,"
+                            + Work_ItemsField.ACCEPT_NOTE_CODE
+                            + " TEXT"
+                            + " )";
+                    String strDrop = "DROP TABLE " + Work_ItemsField.TABLE_NAME;
+                    String strChangeName = "ALTER TABLE WORK_ITEMS_CHANGE RENAME TO " + Work_ItemsField.TABLE_NAME;
+                    db.execSQL(CREATE_TABLE);
+                    db.execSQL(strDrop);
+                    db.execSQL(strChangeName);
+                    Log.d(TAG, "onUpgrade: Create Success");
+                    break;
+                case 49:
+                    String strAdd = "ALTER TABLE " + Sub_Work_Item_ValueField.TABLE_NAME + " ADD COLUMN " + Sub_Work_Item_ValueField.VALUE_ITEM + " REAL";
+                    db.execSQL(strAdd);
+                    Log.d(TAG, "onUpgrade: Version " + oldVersion + "add column success!");
+                    break;
+                case 50:
+                    String strAddNodeID = "ALTER TABLE " + Sub_Work_Item_ValueField.TABLE_NAME + " ADD COLUMN " + Sub_Work_Item_ValueField.CONSTR_NODE_ID + " INTEGER";
+                    db.execSQL(strAddNodeID);
+                    Log.d(TAG, "onUpgrade: Version " + oldVersion + "add column success!");
                     break;
                 default:
                     onCreate(db);

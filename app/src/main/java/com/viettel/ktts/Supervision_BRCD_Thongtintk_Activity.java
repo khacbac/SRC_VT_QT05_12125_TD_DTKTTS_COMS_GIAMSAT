@@ -77,6 +77,7 @@ import java.util.List;
  * 
  */
 public class Supervision_BRCD_Thongtintk_Activity extends HomeBaseActivity {
+	private static final String TAG = Supervision_BRCD_Thongtintk_Activity.class.getSimpleName();
 	/* controll */
 	private View spvBRCD_TTTKView;
 	private TextView tv_constr_brcd_tttk_dropdown,
@@ -392,12 +393,14 @@ public class Supervision_BRCD_Thongtintk_Activity extends HomeBaseActivity {
 					brcd_Entity = brcd_Controller
 							.getSupervisionBRCD_Sup(itemData
 									.getSupervision_Constr_Id());
+					Log.d(TAG, "onEvent: spvs id = " + itemData.getSupervision_Constr_Id());
 					if (brcd_Entity == null) {
 						Toast.makeText(getApplicationContext(),
 								"Dữ liệu chưa có", Toast.LENGTH_LONG).show();
 						this.dropdownPopupMenuDesignInfo.dismiss();
 
 					} else {
+                        showProgressDialog(StringUtil.getString(R.string.text_loading));
 						bundleData = new Bundle();
 
 						bundleData.putSerializable(IntentConstants.INTENT_DATA,

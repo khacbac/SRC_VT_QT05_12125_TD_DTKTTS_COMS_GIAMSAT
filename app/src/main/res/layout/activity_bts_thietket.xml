@@ -67,6 +67,16 @@
             android:background="@drawable/border_layout"
             android:visibility="gone" />
 
+        <FrameLayout
+            android:id="@+id/fr_content_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin5"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5"
+            android:background="@drawable/border_layout"
+            android:visibility="gone" />
+
         <com.viettel.utils.DeactivatedViewPager
             android:id="@+id/view_pager_content"
             android:layout_width="match_parent"

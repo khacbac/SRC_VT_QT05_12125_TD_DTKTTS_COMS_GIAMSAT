@@ -2,6 +2,7 @@ package com.viettel.gsct.View.gpon;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.viettel.gsct.View.constant.Constant;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,11 +41,16 @@ public class WorkItemGPONView extends LinearLayout
     private Cat_Work_Item_TypesEntity workItemTypeId;
     private String itemType;
 
-    ArrayList<AppCompatRadioButton> radioButtons = new ArrayList<>();
+    private ArrayList<AppCompatRadioButton> radioButtons = new ArrayList<>();
 
     private ArrayList<View> arrSubViews= new ArrayList<>();
     private IeShowWorkItemByItemType ieShowWorkItemByItemType;
     private ArrayList<View> allRightSubViews = new ArrayList<>();
+    // Danh sach view value custom.
+    private ArrayList<View> listViewValue = new ArrayList<>();
+
+    private AppCompatButton[] btnTienDo;
+
 
     public WorkItemGPONView(Context context) {
         super(context);
@@ -199,5 +206,21 @@ public class WorkItemGPONView extends LinearLayout
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
+    }
+
+    public void addViewValue(View view) {
+        listViewValue.add(view);
+    }
+
+    public ArrayList<View> getListViewValue() {
+        return listViewValue;
+    }
+
+    public AppCompatButton[] getListBtnTienDo() {
+        return btnTienDo;
+    }
+
+    public void setBtnTienDo(AppCompatButton... btnTienDo) {
+        this.btnTienDo = btnTienDo;
     }
 }

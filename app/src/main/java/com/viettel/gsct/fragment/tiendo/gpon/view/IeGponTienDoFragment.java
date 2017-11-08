@@ -32,9 +32,8 @@ public interface IeGponTienDoFragment {
 
     // Thong bao hoan thanh them subwork value doi voi cac subwork item tuong ung cho main view.
     void finishAddKeoCapValue(View view);
-    void finishAddBoChiaValue(View view);
-    void finishAddTuThueValue(View view);
-    void finishAddLapDatOltValue(ArrayList<View> listRightView);
+    void finishAddHanNoiValue(View view);
+    void finishAddLapDatOltValue(View view);
     void finishAddOdfInDoorValue(View view);
     void finishAddOdfOutDoorValue(View view);
     void finishAddOdfDoKiemValue(View view);

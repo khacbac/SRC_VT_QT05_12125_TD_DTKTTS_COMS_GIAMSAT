@@ -526,10 +526,13 @@ public class SyncModel extends AbstractSyncService {
             int errCode = jsonresult.getInt("errorCode");
 
             SyncTableInfo tableInfo = (SyncTableInfo) actionEvent.userData;
-            if (tableInfo.getTableName().equals(Work_ItemsField.TABLE_NAME)) {
+            if (tableInfo.getTableName().equals(Sub_Work_Item_ValueField.TABLE_NAME)) {
                 logLargeString(jsonResponseData.toString(), tableInfo.getTableName());
             }
             Log.d(TAG, "receiveGetDataHandler: " + tableInfo.getTableName() +  " Data get = "+ jsonResponseData);
+            if (tableInfo.getTableName().equals(Work_ItemsField.TABLE_NAME)) {
+                Log.d(TAG, "receiveGetDataHandler: work_items data = " + mes.getDataText());
+            }
 
             percent = percent + percentLeap;
             Message msg2 = new Message();
@@ -612,6 +615,7 @@ public class SyncModel extends AbstractSyncService {
             }
 
         } catch (Exception e) {
+            Log.d(TAG, "receiveGetDataHandler: error = " + e.getMessage());
             e.printStackTrace();
             LogManager.getInstance().writeFile(e.getMessage());
             model.setCode(ErrorConstants.ERR_SYNC_CONNECTION);

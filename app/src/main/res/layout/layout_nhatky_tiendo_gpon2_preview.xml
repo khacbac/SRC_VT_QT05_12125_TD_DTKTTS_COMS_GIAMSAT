@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding5">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding5"
+            android:text="@string/str_trong_ngay_to_chuc_thi_cong"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/linear_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_tai_tram_tuyen" />
+
+            <TextView
+                android:id="@+id/txtDpTramTuyen"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TNH169" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_1"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_thoi_tiet" />
+
+            <TextView
+                android:id="@+id/txtDpThoiTiet"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Binh thuong" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linear_2"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_quan_so_doi_thi_cong" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/border_top_bottom">
+
+                <TextView
+                    android:id="@+id/txtSttNoiDung"
+                    style="@style/Content.Textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="STT"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtTenDoiThiCong"
+                    style="@style/Content.Textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Đội thi công"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSoNguoi"
+                    style="@style/Content.Textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Số người"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <com.viettel.utils.NestedListView
+                android:id="@+id/listViewDpQuanSoDoiThiCong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_3"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_noidung_congviec_thicong_trongngay" />
+
+            <TextView
+                android:id="@+id/txtDpCongViecThiCongTrongNgay"
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cong viec a" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_4"
+            android:orientation="vertical">
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_tiendo_thicong_trongngay" />
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_capnhat_theo_congtrinh" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/frameTiendoByCT"/>
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_capnhat_theo_node" />
+            <android.support.design.widget.TabLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tabLayout"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/frameTiendoByNode"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_5"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_thaydoi_bosung_phatsinh" />
+
+            <TextView
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDpThayDoiBoSung"
+                android:text="Cong viec b" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_6"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_ykien_donvi_thicong" />
+
+            <TextView
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDpYKienDonViThiCong"
+                android:text="Cong viec c" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_7"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Header.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_ykien_giamsat" />
+
+            <TextView
+                style="@style/Content.Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDpYKienGiamSat"
+                android:text="Cong viec d" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

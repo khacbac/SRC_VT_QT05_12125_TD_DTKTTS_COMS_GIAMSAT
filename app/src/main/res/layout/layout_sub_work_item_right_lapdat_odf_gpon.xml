@@ -14,7 +14,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/margin0"
         android:layout_marginEnd="@dimen/margin0"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:background="@drawable/border_top_right_bottom_left"
         android:gravity="center"
         android:paddingBottom="@dimen/padding1"

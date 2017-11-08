@@ -41,7 +41,9 @@ public class SubWorkItemGPONView extends LinearLayout {
     private WorkItemGPONView workItemGPONView;
     private IeOnRadioCheckChangedListener ieOnRadioCheckChangedListener;
 
-    private ArrayList<View> listSWValue = new ArrayList<>();
+    // Phan view chua toan bo value hien thi.
+    // Duoc su dung cho viec hide/show tuy theo radio button click.
+    private View valueView;
 
     public SubWorkItemGPONView(Context context) {
         super(context);
@@ -68,16 +70,15 @@ public class SubWorkItemGPONView extends LinearLayout {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (workItemGPONView != null) {
-                    ieOnRadioCheckChangedListener.onRadioCheckChange(isChecked,
-                            radioBtnCheck, SubWorkItemGPONView.this);
+                    ieOnRadioCheckChangedListener.onRadioCheckChange(isChecked, radioBtnCheck, SubWorkItemGPONView.this);
                 }
                 if (isChecked) {
-                    for (View view : listSWValue) {
-                        view.setVisibility(VISIBLE);
+                    if (valueView != null) {
+                        valueView.setVisibility(VISIBLE);
                     }
                 } else {
-                    for (View view : listSWValue) {
-                        view.setVisibility(GONE);
+                    if (valueView != null) {
+                        valueView.setVisibility(GONE);
                     }
                 }
             }
@@ -181,16 +182,20 @@ public class SubWorkItemGPONView extends LinearLayout {
         this.ieOnRadioCheckChangedListener = listener;
     }
 
-    public void addListSWValue(View view) {
+    /**
+     * TODO: Viet lai cho tat ca work item.
+     */
+    public void addSWValue(View view) {
         view.setVisibility(GONE);
-        listSWValue.add(view);
-    }
-
-    public ArrayList<View> getListSWValue() {
-        return listSWValue;
+        this.valueView = view;
     }
 
     public LinearLayout getRootLayout() {
         return rootLayout;
+    }
+
+    public void setFinish(boolean isFinish) {
+        radioBtnCheck.setChecked(isFinish);
+        radioBtnCheck.setEnabled(!isFinish);
     }
 }

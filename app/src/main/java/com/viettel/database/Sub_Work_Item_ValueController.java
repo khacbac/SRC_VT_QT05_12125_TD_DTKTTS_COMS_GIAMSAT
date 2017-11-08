@@ -16,10 +16,19 @@ import com.viettel.gsct.utils.GSCTUtils;
 
 public class Sub_Work_Item_ValueController {
     private static final String TAG = "Sub_Work_Item_ValueCont";
-    private Context mContext = null;
+    private static Context mContext = null;
+    private static Sub_Work_Item_ValueController swivController;
 
     public Sub_Work_Item_ValueController(Context pContext) {
-        this.mContext = pContext;
+        mContext = pContext;
+    }
+
+    public static Sub_Work_Item_ValueController getInstance (Context context) {
+        mContext = context;
+        if (swivController == null) {
+            swivController = new Sub_Work_Item_ValueController(context);
+        }
+        return swivController;
     }
 
     public static final String[] allColumn = new String[] {
@@ -36,7 +45,9 @@ public class Sub_Work_Item_ValueController {
             BaseField.COLUMN_SYNC_STATUS,
             BaseField.COLUMN_EMPLOYEE_ID,
             BaseField.COLUMN_IS_ACTIVE,
-            Sub_Work_Item_ValueField.WORK_ITEM_ID
+            Sub_Work_Item_ValueField.WORK_ITEM_ID,
+            Sub_Work_Item_ValueField.VALUE_ITEM,
+            Sub_Work_Item_ValueField.CONSTR_NODE_ID
     };
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "
@@ -69,7 +80,11 @@ public class Sub_Work_Item_ValueController {
             + BaseField.COLUMN_EMPLOYEE_ID
             + " INTEGER,"
             + Sub_Work_Item_ValueField.WORK_ITEM_ID
-            + " INTEGER"
+            + " INTEGER,"
+            + Sub_Work_Item_ValueField.CONSTR_NODE_ID
+            + " INTEGER,"
+            + Sub_Work_Item_ValueField.VALUE_ITEM
+            + " REAL"
             + " )";
 
     public Sub_Work_Item_ValueEntity getItem(long work_item_id, long cat_sub_work_item_id) {
@@ -94,6 +109,30 @@ public class Sub_Work_Item_ValueController {
         return curItem;
     }
 
+    public Sub_Work_Item_ValueEntity getItemByNode(long work_item_id, long cat_sub_work_item_id, long nodeId) {
+//        Log.e(TAG, "getItem: " + work_item_id + " " + cat_sub_work_item_id );
+        Sub_Work_Item_ValueEntity curItem;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Sub_Work_Item_ValueField.TABLE_NAME, allColumn,
+                        Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                                + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                                + Sub_Work_Item_ValueField.ADDED_DATE +  "=? AND "
+                                + Sub_Work_Item_ValueField.CONSTR_NODE_ID + "=?",
+                        new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id) , GSCTUtils.getDateNow(), String.valueOf(nodeId)}, null, null,
+                        null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            curItem = this.converCursorToItem(cursor);
+        } else {
+            curItem = null;
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return curItem;
+    }
+
+    // Doi voi truong hop la cac item cap nhat theo cong trinh.
     public double getLuyke(long work_item_id, long cat_sub_work_item_id) {
 //        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
         double ret = 0L;
@@ -101,6 +140,77 @@ public class Sub_Work_Item_ValueController {
         Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
                 + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
                 + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=?;", new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    // Doi voi cac truong hop la cap nhat theo node.
+    public double getLuykeByNode(long work_item_id, long cat_sub_work_item_id,long nodeId) {
+//        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
+                + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                + Sub_Work_Item_ValueField.CONSTR_NODE_ID + "=?;", new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id), String.valueOf(nodeId)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    public double getLuykeHanNoiByNode(long work_item_id, long cat_sub_work_item_id,long nodeId) {
+//        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE_ITEM + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
+                + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                + Sub_Work_Item_ValueField.CONSTR_NODE_ID + "=?;", new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id), String.valueOf(nodeId)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    public double getOldLuyke(long work_item_id, long cat_sub_work_item_id) {
+//        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
+                + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                + Sub_Work_Item_ValueField.ADDED_DATE + " != " + "'" + GSCTUtils.getDateNow() + "';",
+                new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    public double getOldLuykeHanNoi(long work_item_id, long cat_sub_work_item_id) {
+//        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE_ITEM + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
+                        + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                        + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                        + Sub_Work_Item_ValueField.ADDED_DATE + " != " + "'" + GSCTUtils.getDateNow() + "';",
+                new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)});
         if(cursor.moveToFirst())
             ret = cursor.getDouble(0);
         else
@@ -149,6 +259,8 @@ public class Sub_Work_Item_ValueController {
         values.put(Sub_Work_Item_ValueField.COLUMN_EMPLOYEE_ID, addItem.getEmployeeId());
         values.put(Sub_Work_Item_ValueField.COLUMN_SYNC_STATUS, addItem.getSyncStatus());
         values.put(Sub_Work_Item_ValueField.COLUMN_IS_ACTIVE, addItem.getIsActive());
+        values.put(Sub_Work_Item_ValueField.VALUE_ITEM, addItem.getValue_item());
+        values.put(Sub_Work_Item_ValueField.CONSTR_NODE_ID, addItem.getConstr_node_id());
         return values;
     }
 
@@ -174,6 +286,10 @@ public class Sub_Work_Item_ValueController {
                     .getColumnIndex(Sub_Work_Item_ValueField.COLUMN_SYNC_STATUS)));
             curItem.setIsActive(cursor.getInt(cursor
                     .getColumnIndex(Sub_Work_Item_ValueField.COLUMN_IS_ACTIVE)));
+            curItem.setValue_item(cursor.getDouble(cursor
+                    .getColumnIndex(Sub_Work_Item_ValueField.VALUE_ITEM)));
+            curItem.setConstr_node_id(cursor.getInt(cursor
+                    .getColumnIndex(Sub_Work_Item_ValueField.CONSTR_NODE_ID)));
         } catch (Exception e) {
             e.printStackTrace();
         }

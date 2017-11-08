@@ -27,11 +27,11 @@ import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.database.field.Sub_Work_ItemField;
 import com.viettel.database.field.Sub_Work_Item_ValueField;
 import com.viettel.database.field.Work_ItemsField;
+import com.viettel.gsct.View.gpon.SubWorkItemGponOldView;
+import com.viettel.gsct.View.gpon.WorkItemGponOldView;
 import com.viettel.gsct.fragment.base.BaseFragment;
 import com.viettel.gsct.fragment.base.BaseTienDoFragment;
 import com.viettel.gsct.utils.GSCTUtils;
-import com.viettel.gsct.View.gpon.SubWorkItemGPONView;
-import com.viettel.gsct.View.gpon.WorkItemGPONView;
 import com.viettel.gsct.View.gpon.WorkItemRightGPONView;
 import com.viettel.ktts.R;
 import com.viettel.view.listener.IeSave;
@@ -52,23 +52,21 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class GPONTiendoFragment extends BaseTienDoFragment
-        implements IeSave.IeCapNhatTienDoInteractor, IeValidate.IecheckValidateTienDo {
+public class GPONTiendoFragment extends BaseTienDoFragment {
     private final String TAG = this.getClass().getSimpleName();
     @BindView(R.id.tv_date)
     TextView tvDate;
-    //    @BindView(R.id.layout_root)
-    @SuppressLint("StaticFieldLeak")
-    public static LinearLayout layoutRoot;
+    @BindView(R.id.layout_root)
+    LinearLayout layoutRoot;
     @BindView(R.id.layout_root_right)
     LinearLayout layoutRootRight;
     private Unbinder unbinder;
     private boolean dialogDismissFlag = true;
     private boolean isFinish = false;
     public static ArrayList<Double> luykes;
+    private static GPONTiendoFragment fragment;
 
-    private ConcurrentHashMap<Long,
-            SubWorkItemGPONView> hashSubWorkItemViews = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Long, SubWorkItemGponOldView> hashSubWorkItemViews = new ConcurrentHashMap<>();
 
     Sub_Work_Item_ValueController sub_work_item_value_controller;
 
@@ -76,7 +74,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment
 //    private ConcurrentHashMap<Long, ArrayList<Sub_Work_ItemField>> hash
 
     public static BaseFragment newInstance() {
-        GPONTiendoFragment fragment = new GPONTiendoFragment();
+        if (fragment == null) {
+            fragment = new GPONTiendoFragment();
+        }
         return fragment;
     }
 
@@ -86,7 +86,6 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_gpon_tien_do, container, false);
         unbinder = ButterKnife.bind(this, layout);
-        layoutRoot = (LinearLayout) layout.findViewById(R.id.layout_root);
         initViews();
         initData();
         return layout;
@@ -150,7 +149,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment
         int j = 1;
         for (final Cat_Work_Item_TypesEntity entity : arr) {
             if (codes.contains(entity.getCode())) {
-                WorkItemGPONView view = new WorkItemGPONView(getContext());
+                WorkItemGponOldView view = new WorkItemGponOldView(getContext());
                 Work_ItemsEntity workItem = hashWorkItems.get(entity.getItem_type_id());
                 if (workItem == null) {
                     continue;
@@ -162,7 +161,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                 ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems
                         = cat_sub_work_itemControler.getsubCates(entity.getItem_type_id());
                 for (Cat_Sub_Work_ItemEntity catSubWorkItem : arrSubWorkItems) {
-                    SubWorkItemGPONView subView = new SubWorkItemGPONView(getContext());
+                    SubWorkItemGponOldView subView = new SubWorkItemGponOldView(getContext());
                     Sub_Work_ItemEntity subWorkItem = hashSubWorkItems.get(catSubWorkItem.getId());
                     if (subWorkItem == null) {
                         subWorkItem = new Sub_Work_ItemEntity();
@@ -182,8 +181,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                                     subWorkItem.getCat_sub_work_item_id());
                     luykes.add(luyke);
                     double value = subWorkItemValue != null ? subWorkItemValue.getValue() : 0;
-                    subView.setValue(catSubWorkItem.getName(),
-                            value, luyke, catSubWorkItem.getUnitName());
+                    subView.setValue(catSubWorkItem.getName(), value, luyke, catSubWorkItem.getUnitName());
                     layoutRoot.addView(subView, ++i);
                 }
             }
@@ -199,14 +197,14 @@ public class GPONTiendoFragment extends BaseTienDoFragment
 
                 //validate nut kéo c
                 if (entity.getCode().equals("KEOCAP_BRCD")) {
-                    final ArrayList<SubWorkItemGPONView> itemEntities
-                            = new ArrayList<SubWorkItemGPONView>();
+                    final ArrayList<SubWorkItemGponOldView> itemEntities
+                            = new ArrayList<SubWorkItemGponOldView>();
                     rightView.setFinishListener(new WorkItemRightGPONView.FinishListener() {
                         @Override
                         public boolean onFinishListener() {
-                            Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
+                            Enumeration<SubWorkItemGponOldView> enums = hashSubWorkItemViews.elements();
                             while (enums.hasMoreElements()) {
-                                SubWorkItemGPONView subView = enums.nextElement();
+                                SubWorkItemGponOldView subView = enums.nextElement();
                                 if (subView.getTvTitle().equals(getString(R.string.str_hop_quang_8Fo))) {
                                     continue;
                                 }
@@ -248,7 +246,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                         @Override
                         public boolean onFinishListener() {
                             for (Cat_Sub_Work_ItemEntity catSubWorkItem : itemEntities) {
-                                SubWorkItemGPONView view
+                                SubWorkItemGponOldView view
                                         = hashSubWorkItemViews.get(catSubWorkItem.getId());
                                 if (view.getValue() > 0) {
                                     return true;
@@ -273,15 +271,6 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                 layoutRootRight.addView(rightView, j++);
             }
         }
-//         Hard code chu biet lam sao duoc,haizz.
-//        for (int index = 0; index < layoutRoot.getChildCount(); index++) {
-//            if (layoutRoot.getChildAt(index) instanceof WorkItemGPONView) {
-//                WorkItemGPONView view = (WorkItemGPONView) layoutRoot.getChildAt(index);
-//            }
-//            if (layoutRoot.getChildAt(index) instanceof SubWorkItemGPONView) {
-//                SubWorkItemGPONView view = (SubWorkItemGPONView) layoutRoot.getChildAt(index);
-//            }
-//        }
     }
 
     @Override
@@ -323,9 +312,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment
 
             if (workItem.getStatus_id() == 403 && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
                 boolean flagValue = false;
-                Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
+                Enumeration<SubWorkItemGponOldView> enums = hashSubWorkItemViews.elements();
                 while (enums.hasMoreElements()) {
-                    SubWorkItemGPONView view = enums.nextElement();
+                    SubWorkItemGponOldView view = enums.nextElement();
                     if (view.getValue() > 0) {
                         flagValue = true;
                         break;
@@ -367,8 +356,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment
                     sub_work_itemController.addItem(subWorkItem);
                 }
 
-                SubWorkItemGPONView view = hashSubWorkItemViews
-                        .get(subWorkItem.getCat_sub_work_item_id());
+                SubWorkItemGponOldView view = hashSubWorkItemViews.get(subWorkItem.getCat_sub_work_item_id());
 //                SubWorkItemGPONView view = enums.nextElement();
 //                while (enums.hasMoreElements()) {
 //                    view = enums.nextElement();
@@ -453,9 +441,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment
             if (workItem.getStatus_id() == 403
                     && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
                 boolean flagValue = false;
-                Enumeration<SubWorkItemGPONView> enums = hashSubWorkItemViews.elements();
+                Enumeration<SubWorkItemGponOldView> enums = hashSubWorkItemViews.elements();
                 while (enums.hasMoreElements()) {
-                    SubWorkItemGPONView view = enums.nextElement();
+                    SubWorkItemGponOldView view = enums.nextElement();
                     if (view.getValue() > 0) {
                         flagValue = true;
                         break;

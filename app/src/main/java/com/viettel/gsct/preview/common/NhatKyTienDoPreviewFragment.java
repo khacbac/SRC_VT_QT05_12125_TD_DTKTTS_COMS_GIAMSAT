@@ -30,7 +30,7 @@ import com.viettel.ktts.R;
 import com.viettel.utils.NestedExpandableListView;
 import com.viettel.utils.NestedListView;
 import com.viettel.view.control.BtsXemNhatKyAdapter;
-import com.viettel.view.control.BtsXemTienDoExpandableAdapter;
+import com.viettel.view.control.TienDoPreviewAdapter;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -127,19 +127,16 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
         int index = 0;
         Enumeration<Integer> keySubWorkView = subWorkHashMap.keys();
         while (keySubWorkView.hasMoreElements()) {
-            ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView =
-                    subWorkHashMap.get(keySubWorkView.nextElement());
+            ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView = subWorkHashMap.get(keySubWorkView.nextElement());
             // Khoi tao du lieu cho list child item ung voi moi work item.
             subWorkList = initDataForSubWokList(itemTienDoBTSView, contentList.get(index));
             contentHashMaps.put(contentList.get(index), subWorkList);
             index++;
         }
 
-        BtsXemTienDoExpandableAdapter mBtsXemTienDoExpandableAdapter =
-                new BtsXemTienDoExpandableAdapter(contentList,
-                        contentHashMaps, getActivity());
-        mBtsXemTienDoExpandableAdapter.setNeedDisplayKhoiLuong(false);
-        mListViewDpTienDoThiCong.setAdapter(mBtsXemTienDoExpandableAdapter);
+        TienDoPreviewAdapter mTienDoPreviewAdapter = new TienDoPreviewAdapter(contentList, contentHashMaps, getActivity());
+        mTienDoPreviewAdapter.setNeedDisplayKhoiLuong(false);
+        mListViewDpTienDoThiCong.setAdapter(mTienDoPreviewAdapter);
 
     }
 
@@ -151,16 +148,8 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
      * @param stt                   int.
      * @return ContentProgressPreview.
      */
-    private ContentProgressPreview initDataForWokItemList(
-            WorkItemTienDoBTSView workItemTienDoBTSView,
-            Work_ItemsEntity work_itemsEntity,
-            int stt) {
-        return new ContentProgressPreview(
-                "" + stt,
-                workItemTienDoBTSView.getTitle(),
-                work_itemsEntity.getStarting_date(),
-                work_itemsEntity.getComplete_date()
-        );
+    private ContentProgressPreview initDataForWokItemList(WorkItemTienDoBTSView workItemTienDoBTSView, Work_ItemsEntity work_itemsEntity, int stt) {
+        return new ContentProgressPreview("" + stt, workItemTienDoBTSView.getTitle(), work_itemsEntity.getStarting_date(), work_itemsEntity.getComplete_date());
     }
 
     /**
@@ -169,27 +158,19 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
      * @param itemTienDoBTSView List.
      * @return List.
      */
-    private List<ContentDetailItemProgressPreview> initDataForSubWokList(
-            ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView,
-            ContentProgressPreview content) {
+    private List<ContentDetailItemProgressPreview> initDataForSubWokList(ArrayList<SubWorkItemTienDoBTSView> itemTienDoBTSView, ContentProgressPreview content) {
         // List child item.
         List<ContentDetailItemProgressPreview> subWorkList = new ArrayList<>();
         boolean isChange = false;
         for (SubWorkItemTienDoBTSView view : itemTienDoBTSView) {
             if (!view.hasFinishDate()) {
-                if (view.getButtonTienDoStatus().equals("Hoàn thành")
-                        && !view.getFinishDate().equals(GSCTUtils.getDateNow())) {
+                if (view.getButtonTienDoStatus().equals("Hoàn thành") && !view.getFinishDate().equals(GSCTUtils.getDateNow())) {
                     view.setFinishDate(GSCTUtils.getDateNow());
                 } else {
                     view.setFinishDate("");
                 }
             }
-            ContentDetailItemProgressPreview detail = new ContentDetailItemProgressPreview(
-                    view.getTitle(),
-                    "",
-                    view.getFinishDate(),
-                    ""
-            );
+            ContentDetailItemProgressPreview detail = new ContentDetailItemProgressPreview(view.getTitle(), "", view.getFinishDate(), "");
             if (view.hasChangeTrangThaiTienDo()) {
                 isChange = true;
                 detail.setNewEdit(true);
@@ -223,19 +204,10 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
         for (int i = 0; i < layoutRoot.getChildCount(); i++) {
             if (layoutRoot.getChildAt(i) instanceof WorkItemTienDoNgamView) {
                 subWorkList = new ArrayList<>();
-                WorkItemTienDoNgamView tienDoNgamView =
-                        (WorkItemTienDoNgamView) layoutRoot.getChildAt(i);
-                ContentProgressPreview content = new ContentProgressPreview(
-                        "" + ++stt,
-                        tienDoNgamView.getTitle(),
-                        tienDoNgamView.getWorkItemEntity().getStarting_date(),
-                        tienDoNgamView.getWorkItemEntity().getComplete_date()
-                );
-                if (!tienDoNgamView.getWorkItemEntity().isCompleted()
-                        || tienDoNgamView.getWorkItemEntity()
-                        .getComplete_date().equals(GSCTUtils.getDateNow())) {
-                    if (!tienDoNgamView.getWorkItemEntity().hasStartedDate()
-                            && !(tienDoNgamView.getTrangThaiTienDo().equals("Chưa làm"))) {
+                WorkItemTienDoNgamView tienDoNgamView = (WorkItemTienDoNgamView) layoutRoot.getChildAt(i);
+                ContentProgressPreview content = new ContentProgressPreview("" + ++stt, tienDoNgamView.getTitle(), tienDoNgamView.getWorkItemEntity().getStarting_date(), tienDoNgamView.getWorkItemEntity().getComplete_date());
+                if (!tienDoNgamView.getWorkItemEntity().isCompleted() || tienDoNgamView.getWorkItemEntity().getComplete_date().equals(GSCTUtils.getDateNow())) {
+                    if (!tienDoNgamView.getWorkItemEntity().hasStartedDate() && !(tienDoNgamView.getTrangThaiTienDo().equals("Chưa làm"))) {
                         content.setNgayBatDau(GSCTUtils.getDateNow());
                     }
                     if (tienDoNgamView.getTrangThaiTienDo().equals("Hoàn thành")) {
@@ -259,12 +231,7 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
                             luyke = luykes.get(index++);
                         }
                         Log.d(TAG,"Luy ke = " + luyke);
-                        ContentDetailItemProgressPreview detail = new ContentDetailItemProgressPreview(
-                                view.getTvTitle(),
-                                "",
-                                "",
-                                "" + (luyke + view.getValue())
-                        );
+                        ContentDetailItemProgressPreview detail = new ContentDetailItemProgressPreview(view.getTvTitle(), "", "", "" + (luyke + view.getValue()));
                         if (luyke != (luyke + view.getValue())) {
                             detail.setNewEdit(true);
                             hasEdit = true;
@@ -285,129 +252,107 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
                 contentHashMaps.put(content, subWorkList);
             }
         }
-        BtsXemTienDoExpandableAdapter adapter =
-                new BtsXemTienDoExpandableAdapter(contentList,
-                        contentHashMaps, getActivity());
+        TienDoPreviewAdapter adapter = new TienDoPreviewAdapter(contentList, contentHashMaps, getActivity());
         adapter.setNeedDisplayKhoiLuong(true);
         mListViewDpTienDoThiCong.setAdapter(adapter);
     }
 
-    /**
-     * Khoi tao data cho phan xem truoc cua Gpon.
-     *
-     * @param layoutRoot Layout.
-     */
-    public void initDataForBangRongTienDoExpandable(LinearLayout layoutRoot) {
-        // Get list luy ke ban dau.
-        ArrayList<Double> luykes = GPONTiendoFragment.luykes;
-        // Get list left data.
-        LinearLayout layoutLeft = GPONTiendoFragment.layoutRoot;
-        ArrayList<SubWorkItemGPONView> gponViews = new ArrayList<>();
-        for (int index = 0; index < layoutLeft.getChildCount(); index++) {
-            if (layoutLeft.getChildAt(index) instanceof SubWorkItemGPONView) {
-                SubWorkItemGPONView view = (SubWorkItemGPONView) layoutLeft.getChildAt(index);
-                gponViews.add(view);
-            }
-        }
-        // Get List data for adapter.
-        List<ContentProgressPreview> contentList = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> subWorkList;
-        HashMap<ContentProgressPreview,
-                List<ContentDetailItemProgressPreview>> contentHashMaps = new HashMap<>();
-        if (layoutRoot.getChildCount() > 0) {
-            int stt = 0;
-            for (int i = 0; i < layoutRoot.getChildCount(); i++) {
-                if (layoutRoot.getChildAt(i) instanceof WorkItemRightGPONView) {
-                    WorkItemRightGPONView view = (WorkItemRightGPONView) layoutRoot.getChildAt(i);
-                    if (view.getStatusTienDo().equals("Hoàn thành")) {
-                        if (!view.getWorkItem().hasCompletedDate()) {
-                            view.getWorkItem().setComplete_date(GSCTUtils.getDateNow());
-                        }
-                    } else {
-                        view.getWorkItem().setComplete_date("");
-                    }
-                    ContentProgressPreview content = new ContentProgressPreview(
-                            "" + ++stt,
-                            view.getTitle(),
-                            view.getWorkItem().getStarting_date(),
-                            view.getWorkItem().getComplete_date()
-                    );
-                    if (view.getBtnTienDo().isEnabled()) {
-                        content.setNewEdit(true);
-                    } else {
-                        content.setNewEdit(false);
-                    }
-                    contentList.add(content);
-                    subWorkList = new ArrayList<>();
-                    if (gponViews.size() > 3) {
-                        boolean hasEdit = false;
-                        if (view.getTitle().equals("Hàn nối")) {
-                            for (int j = 0; j < 3; j++) {
-                                SubWorkItemGPONView subView = gponViews.get(j);
-                                double luyke = 0;
-                                if (j < luykes.size()) {
-                                    luyke = luykes.get(j);
-                                }
-                                ContentDetailItemProgressPreview item
-                                        = new ContentDetailItemProgressPreview(
-                                        subView.getTvTitle(),
-                                        "",
-                                        "",
-                                        "" + (luyke + subView.getValue())
-                                );
-                                if (luyke != (luyke + subView.getValue())) {
-                                    hasEdit = true;
-                                    item.setNewEdit(true);
-                                } else {
-                                    item.setNewEdit(false);
-                                }
-                                subWorkList.add(item);
-                            }
-                            if (hasEdit) {
-                                content.setNewEdit(true);
-                            } else {
-                                content.setNewEdit(false);
-                            }
-                        } else if (view.getTitle().equals("Kéo cáp")) {
-                            for (int j = 3; j < gponViews.size(); j++) {
-                                SubWorkItemGPONView subView = gponViews.get(j);
-                                double luyke = 0;
-                                if (j < luykes.size()) {
-                                    luyke = luykes.get(j);
-                                }
-                                ContentDetailItemProgressPreview item =
-                                        new ContentDetailItemProgressPreview(
-                                                subView.getTvTitle(),
-                                                "",
-                                                "",
-                                                "" + (luyke + subView.getValue())
-                                        );
-                                if (luyke != (luyke + subView.getValue())) {
-                                    hasEdit = true;
-                                    item.setNewEdit(true);
-                                } else {
-                                    item.setNewEdit(false);
-                                }
-                                subWorkList.add(item);
-                            }
-                            if (hasEdit) {
-                                content.setNewEdit(true);
-                            } else {
-                                content.setNewEdit(false);
-                            }
-                        }
-                    }
-                    contentHashMaps.put(content, subWorkList);
-                }
-            }
-        }
-
-        BtsXemTienDoExpandableAdapter adapter =
-                new BtsXemTienDoExpandableAdapter(contentList,
-                        contentHashMaps, getActivity());
-        adapter.setNeedDisplayKhoiLuong(true);
-        mListViewDpTienDoThiCong.setAdapter(adapter);
-    }
+//    /**
+//     * Khoi tao data cho phan xem truoc cua Gpon.
+//     *
+//     * @param layoutRoot Layout.
+//     */
+//    public void initDataForBangRongTienDoExpandable(LinearLayout layoutRoot) {
+//        // Get list luy ke ban dau.
+//        ArrayList<Double> luykes = GPONTiendoFragment.luykes;
+//        // Get list left data.
+//        LinearLayout layoutLeft = GPONTiendoFragment.layoutRoot;
+//        ArrayList<SubWorkItemGPONView> gponViews = new ArrayList<>();
+//        for (int index = 0; index < layoutLeft.getChildCount(); index++) {
+//            if (layoutLeft.getChildAt(index) instanceof SubWorkItemGPONView) {
+//                SubWorkItemGPONView view = (SubWorkItemGPONView) layoutLeft.getChildAt(index);
+//                gponViews.add(view);
+//            }
+//        }
+//        // Get List data for adapter.
+//        List<ContentProgressPreview> contentList = new ArrayList<>();
+//        List<ContentDetailItemProgressPreview> subWorkList;
+//        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> contentHashMaps = new HashMap<>();
+//        if (layoutRoot.getChildCount() > 0) {
+//            int stt = 0;
+//            for (int i = 0; i < layoutRoot.getChildCount(); i++) {
+//                if (layoutRoot.getChildAt(i) instanceof WorkItemRightGPONView) {
+//                    WorkItemRightGPONView view = (WorkItemRightGPONView) layoutRoot.getChildAt(i);
+//                    if (view.getStatusTienDo().equals("Hoàn thành")) {
+//                        if (!view.getWorkItem().hasCompletedDate()) {
+//                            view.getWorkItem().setComplete_date(GSCTUtils.getDateNow());
+//                        }
+//                    } else {
+//                        view.getWorkItem().setComplete_date("");
+//                    }
+//                    ContentProgressPreview content = new ContentProgressPreview("" + ++stt, view.getTitle(), view.getWorkItem().getStarting_date(), view.getWorkItem().getComplete_date());
+//                    if (view.getBtnTienDo().isEnabled()) {
+//                        content.setNewEdit(true);
+//                    } else {
+//                        content.setNewEdit(false);
+//                    }
+//                    contentList.add(content);
+//                    subWorkList = new ArrayList<>();
+//                    if (gponViews.size() > 3) {
+//                        boolean hasEdit = false;
+//                        if (view.getTitle().equals("Hàn nối")) {
+//                            for (int j = 0; j < 3; j++) {
+//                                SubWorkItemGPONView subView = gponViews.get(j);
+//                                double luyke = 0;
+//                                if (j < luykes.size()) {
+//                                    luyke = luykes.get(j);
+//                                }
+//                                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(subView.getTvTitle(), "", "", "" + (luyke + subView.getValue()));
+//                                if (luyke != (luyke + subView.getValue())) {
+//                                    hasEdit = true;
+//                                    item.setNewEdit(true);
+//                                } else {
+//                                    item.setNewEdit(false);
+//                                }
+//                                subWorkList.add(item);
+//                            }
+//                            if (hasEdit) {
+//                                content.setNewEdit(true);
+//                            } else {
+//                                content.setNewEdit(false);
+//                            }
+//                        } else if (view.getTitle().equals("Kéo cáp")) {
+//                            for (int j = 3; j < gponViews.size(); j++) {
+//                                SubWorkItemGPONView subView = gponViews.get(j);
+//                                double luyke = 0;
+//                                if (j < luykes.size()) {
+//                                    luyke = luykes.get(j);
+//                                }
+//                                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(subView.getTvTitle(), "", "", "" + (luyke + subView.getValue()));
+//                                if (luyke != (luyke + subView.getValue())) {
+//                                    hasEdit = true;
+//                                    item.setNewEdit(true);
+//                                } else {
+//                                    item.setNewEdit(false);
+//                                }
+//                                subWorkList.add(item);
+//                            }
+//                            if (hasEdit) {
+//                                content.setNewEdit(true);
+//                            } else {
+//                                content.setNewEdit(false);
+//                            }
+//                        }
+//                    }
+//                    contentHashMaps.put(content, subWorkList);
+//                }
+//            }
+//        }
+//
+//        TienDoPreviewAdapter adapter = new TienDoPreviewAdapter(contentList, contentHashMaps, getActivity());
+//        adapter.setNeedDisplayKhoiLuong(true);
+//        mListViewDpTienDoThiCong.setAdapter(adapter);
+//    }
 
     @Override
     public void save() {
@@ -418,8 +363,7 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
      *
      * @param listHashMap String.
      */
-    public void initDataForNhatKy(LinkedHashMap<String, String> listHashMap,
-                                  String[] keyDois, String[] keyTenHangMucs) {
+    public void initDataForNhatKy(LinkedHashMap<String, String> listHashMap, String[] keyDois, String[] keyTenHangMucs) {
         txtDpTramTuyen.setText(listHashMap.get(KeyEventCommon.KEY_TEN_TRAM_TUYEN));
         mTxtCongViecTrongNgay.setText(listHashMap.get(KeyEventCommon.KEY_NOIDUNG_CONGVIEC));
         txtDpThoiTiet.setText(listHashMap.get(KeyEventCommon.KEY_THOITIET));
@@ -430,11 +374,7 @@ public class NhatKyTienDoPreviewFragment extends BaseFragment {
         List<ContentJournalPreview> mContentJournalPreviewList = new ArrayList<>();
         int stt = 0;
         for (int i = 0; i < keyDois.length; i++) {
-            mContentJournalPreviewList.add(new ContentJournalPreview(
-                    "" + ++stt,
-                    keyTenHangMucs[i],
-                    listHashMap.get(keyDois[i])
-            ));
+            mContentJournalPreviewList.add(new ContentJournalPreview("" + ++stt, keyTenHangMucs[i], listHashMap.get(keyDois[i])));
         }
 
         BtsXemNhatKyAdapter mBtsXemNhatKyAdapter =

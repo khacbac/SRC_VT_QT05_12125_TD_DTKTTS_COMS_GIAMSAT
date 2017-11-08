@@ -15,6 +15,8 @@ public class Sub_Work_Item_ValueEntity extends BaseEntity{
     private double value;
     private long cat_sub_work_item_id;
     private long work_item_id;
+    private double value_item;
+    private long constr_node_id;
 
     public Sub_Work_Item_ValueEntity(){
 
@@ -42,6 +44,10 @@ public class Sub_Work_Item_ValueEntity extends BaseEntity{
 
     public void setAdded_date(String added_date) {
         this.added_date = added_date;
+    }
+
+    public boolean hadAddedDate() {
+        return added_date != null && added_date.length() > 0;
     }
 
     public String getExpectation_value() {
@@ -98,5 +104,21 @@ public class Sub_Work_Item_ValueEntity extends BaseEntity{
 
     public void setWork_item_id(long work_item_id) {
         this.work_item_id = work_item_id;
+    }
+
+    public double getValue_item() {
+        return value_item;
+    }
+
+    public void setValue_item(double value_item) {
+        this.value_item = value_item;
+    }
+
+    public long getConstr_node_id() {
+        return constr_node_id;
+    }
+
+    public void setConstr_node_id(long constr_node_id) {
+        this.constr_node_id = constr_node_id;
     }
 }

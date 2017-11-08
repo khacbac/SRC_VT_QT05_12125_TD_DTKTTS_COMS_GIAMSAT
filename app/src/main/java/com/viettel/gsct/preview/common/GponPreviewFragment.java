@@ -10,17 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.viettel.common.KeyEventCommon;
 import com.viettel.database.entity.ContentJournalPreview;
-import com.viettel.gsct.fragment.base.BaseFragment;
+import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
 import com.viettel.ktts.R;
 import com.viettel.utils.NestedListView;
 import com.viettel.view.control.BtsXemNhatKyAdapter;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -33,9 +29,9 @@ import butterknife.ButterKnife;
  * Created by doanLV4 on 9/26/2017.
  */
 
-public class NhatKyTienDoGponPreviewFragment extends BaseFragment {
+public class GponPreviewFragment extends BaseGponPreview {
 
-    private static final String TAG = NhatKyTienDoGponPreviewFragment.class.getSimpleName();
+    private static final String TAG = GponPreviewFragment.class.getSimpleName();
 
     @BindView(R.id.txtDpThoiTiet)
     TextView txtDpThoiTiet;
@@ -52,8 +48,13 @@ public class NhatKyTienDoGponPreviewFragment extends BaseFragment {
     @BindView(R.id.listViewDpQuanSoDoiThiCong)
     NestedListView mListViewDpQuanSoDoiThiCong;
 
-    public static BaseFragment newInstance() {
-        return new NhatKyTienDoGponPreviewFragment();
+    private static GponPreviewFragment fragment;
+
+    public static GponPreviewFragment newInstance() {
+        if (fragment == null) {
+            fragment = new GponPreviewFragment();
+        }
+        return fragment;
     }
 
     @Nullable
@@ -96,8 +97,8 @@ public class NhatKyTienDoGponPreviewFragment extends BaseFragment {
      *
      * @param listHashMap String.
      */
-    public void initDataForNhatKy(LinkedHashMap<String, String> listHashMap,
-                                  String[] keyDois, String[] keyTenHangMucs) {
+    @Override
+    public void initDataForNhatKy(LinkedHashMap<String, String> listHashMap, String[] keyDois, String[] keyTenHangMucs) {
         txtDpTramTuyen.setText(listHashMap.get(KeyEventCommon.KEY_TEN_TRAM_TUYEN));
         mTxtCongViecTrongNgay.setText(listHashMap.get(KeyEventCommon.KEY_NOIDUNG_CONGVIEC));
         txtDpThoiTiet.setText(listHashMap.get(KeyEventCommon.KEY_THOITIET));
@@ -118,8 +119,10 @@ public class NhatKyTienDoGponPreviewFragment extends BaseFragment {
         BtsXemNhatKyAdapter mBtsXemNhatKyAdapter =
                 new BtsXemNhatKyAdapter(mContentJournalPreviewList, getActivity());
         mListViewDpQuanSoDoiThiCong.setAdapter(mBtsXemNhatKyAdapter);
-
-
     }
 
+    @Override
+    public void initDataOldTienDoPreview() {
+        super.initDataOldTienDoPreview();
+    }
 }

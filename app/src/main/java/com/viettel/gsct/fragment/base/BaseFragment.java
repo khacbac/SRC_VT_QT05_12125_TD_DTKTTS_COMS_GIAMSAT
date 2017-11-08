@@ -24,12 +24,12 @@ public abstract  class BaseFragment extends Fragment {
     public static Constr_ConstructionEntity constr_ConstructionItem;
 
     public static Work_ItemsControler work_itemsControler;
-    public Sub_Work_ItemController sub_work_itemController;
+    public static  Sub_Work_ItemController sub_work_itemController;
 
     public static Cat_Work_Item_TypesControler cat_work_item_typesControler;
     public static Cat_Sub_Work_ItemControler cat_sub_work_itemControler;
 
-    public long userId;
+    public static long userId;
 
     public void setConstr_Construction_EmployeeEntity(Constr_Construction_EmployeeEntity entity) {
         this.constr_ConstructionEmployeeItem = entity;

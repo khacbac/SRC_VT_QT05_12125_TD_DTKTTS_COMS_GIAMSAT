@@ -1,7 +1,11 @@
 package com.viettel.view.base;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.viettel.common.ActionEvent;
@@ -42,7 +46,12 @@ import java.util.List;
 public class HomeBaseActivity extends BaseActivity {
 	private static final String TAG = HomeBaseActivity.class.getSimpleName();
 
-	protected void gotoMakePlanActivity(Bundle data) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    protected void gotoMakePlanActivity(Bundle data) {
 		ActionEvent e = new ActionEvent();
 		e.viewData = data;
 		e.action = ActionEventConstant.GOTO_PLAN_ACTIVITY;

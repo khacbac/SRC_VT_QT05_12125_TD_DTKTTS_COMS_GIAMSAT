@@ -62,8 +62,7 @@ public class Menu_DropdownPopup extends Menu_PopupWindows implements
 	 * @param orientation
 	 *            Layout orientation, can be vartical or horizontal
 	 */
-	public Menu_DropdownPopup(Activity context,
-			List<DropdownItemEntity> curListData) {
+	public Menu_DropdownPopup(Activity context, List<DropdownItemEntity> curListData) {
 		super(context);
 		this.listData = curListData;
 

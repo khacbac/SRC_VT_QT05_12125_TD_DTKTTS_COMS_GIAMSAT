@@ -1078,6 +1078,7 @@
     <string name="str_check_da_cap_nhat_tien_do">Vui lòng cập nhật tiến độ trước khi lưu!</string>
     <string name="str_chua_co_du_lieu">Chưa có dữ liệu</string>
     <string name="str_nhat_ky_va_tien_do">Nhật ký và tiến độ</string>
+    <string name="str_validate_hoanthanh">Bạn phải nhập khối lượng cho ít nhất một SubWorkItem!</string>
 
     <string name="str_trong_ngay_to_chuc_thi_cong">Trong ngày tổ chức thi công:</string>
     <string name="str_tai_tram_tuyen">Tại trạm/tuyến:</string>
@@ -1085,6 +1086,8 @@
     <string name="str_quan_so_doi_thi_cong">2. Quân số đội thi công:</string>
     <string name="str_noidung_congviec_thicong_trongngay">3. Nội dung công việc thi công trong ngày:</string>
     <string name="str_tiendo_thicong_trongngay">4. Khối lượng/tiến độ thi công trong ngày:</string>
+    <string name="str_capnhat_theo_congtrinh">4.1 Cập nhật theo công trình:</string>
+    <string name="str_capnhat_theo_node">4.2 Cập nhật theo node:</string>
     <string name="str_thaydoi_bosung_phatsinh">5. Những thay đổi,bổ sung,phát sinh:</string>
     <string name="str_ykien_donvi_thicong">6. Ý kiến đơn vị thi công:</string>
     <string name="str_ykien_giamsat">7. Ý kiến giám sát:</string>
@@ -1111,6 +1114,7 @@
     <string name="str_keo_cap">Kéo cáp</string>
     <string name="str_date_dummy">04/04/2017</string>
     <string name="str_tiendo_chualam">CHƯA LÀM</string>
+    <string name="str_tiendo_danglam">ĐANG LÀM</string>
     <string name="str_tiendo_hoanthanh">HOÀN THÀNH</string>
 
     <string-array name="array_bts">

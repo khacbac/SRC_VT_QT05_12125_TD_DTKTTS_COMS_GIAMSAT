@@ -137,7 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity
     @SuppressWarnings("unused")
     private boolean broadcast;
     // dialog hien thi khi request
-    private static ProgressDialog progressDlg;
+    public static ProgressDialog progressDlg;
     private EditText myText;
     private ClipboardManager myClipboard;
     private ClipData myClip;
@@ -541,6 +541,7 @@ public abstract class BaseActivity extends AppCompatActivity
     public void showProgressDialog(String content, boolean cancleable) {
         if (progressDlg != null && progressDlg.isShowing()) {
             closeProgressDialog();
+            Log.d(TAG, "showProgressDialog: close");
         }
         progressDlg = ProgressDialog.show(this, "", content, true, true);
         progressDlg.setCancelable(cancleable);

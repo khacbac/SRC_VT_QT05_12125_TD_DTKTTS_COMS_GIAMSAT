@@ -537,12 +537,8 @@ public class BtsNhatkyFragment extends BaseFragment
     /**
      * Lang nghe su kien cap nhat nhat ky voi truong hop la bang rong.
      */
-    public void registerListenerEventBusBangRongNhatKy() {
-        EventBus.getDefault().post(passHashMapDataForNhatKy(
-                KeyEventCommon.KEY_DOI_BANGRONG_ARR
-        ));
-//        ieListenPassNhatKyData.onPassNhatKyData(passHashMapDataForNhatKy(
-//                KeyEventCommon.KEY_DOI_BANGRONG_ARR));
+    public void registerListenerEventBus() {
+        EventBus.getDefault().post(passHashMapDataForNhatKy(KeyEventCommon.KEY_DOI_BANGRONG_ARR));
     }
 
     /**
