@@ -43,11 +43,10 @@ import com.viettel.database.field.Work_Items_ValueField;
 public class KttsMultiThreadSQLiteOpenHelper extends
         MultiThreadSQLiteOpenHelper {
 
-    public static final String TAG = KttsMultiThreadSQLiteOpenHelper.class
-            .getSimpleName();
+    public static final String TAG = KttsMultiThreadSQLiteOpenHelper.class.getSimpleName();
 
     // Database Version
-    private static final int DATABASE_VERSION = 51;//32
+    private static final int DATABASE_VERSION = 52;//32
     // Database Name
     private static final String DATABASE_NAME = "KTTS_DB_MANAGER";
 
@@ -280,6 +279,7 @@ public class KttsMultiThreadSQLiteOpenHelper extends
         db.execSQL(Work_Items_ValueControler.CREATE_TABLE);
 //        db.execSQL("DROP TABLE IF EXISTS " + Sub_Work_ItemField.TABLE_NAME);
         db.execSQL(Sub_Work_ItemController.CREATE_TABLE);
+        Log.d(TAG, "onCreate: str create = " + Sub_Work_ItemController.CREATE_TABLE);
 //        db.execSQL("DROP TABLE IF EXISTS " + Sub_Work_Item_ValueField.TABLE_NAME);
         db.execSQL(Sub_Work_Item_ValueController.CREATE_TABLE);
 //        db.execSQL("DROP TABLE IF EXISTS " + Constr_Work_LogsField.TABLE_NAME);
@@ -467,6 +467,11 @@ public class KttsMultiThreadSQLiteOpenHelper extends
                 case 50:
                     String strAddNodeID = "ALTER TABLE " + Sub_Work_Item_ValueField.TABLE_NAME + " ADD COLUMN " + Sub_Work_Item_ValueField.CONSTR_NODE_ID + " INTEGER";
                     db.execSQL(strAddNodeID);
+                    Log.d(TAG, "onUpgrade: Version " + oldVersion + "add column success!");
+                    break;
+                case 51:
+                    String strAdd51 = "ALTER TABLE " + Sub_Work_ItemField.TABLE_NAME + " ADD COLUMN " + Sub_Work_ItemField.VALUE + " REAL";
+                    db.execSQL(strAdd51);
                     Log.d(TAG, "onUpgrade: Version " + oldVersion + "add column success!");
                     break;
                 default:

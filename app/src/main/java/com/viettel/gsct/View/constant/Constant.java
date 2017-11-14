@@ -14,6 +14,12 @@ public class Constant {
     public static final String TAG_LAPDAT_OLT = "Lắp đặt thiết bị OLT";
     public static final String TAG_DOKIEM_NGHIEMTHU = "Đo kiểm, nghiệm thu";
 
+    public static final String TAG_LAPDAT = "Lắp đặt";
+    public static final String TAG_HANNOI = "Hàn nối";
+    public static final String TAG_OLT = "Lắp đặt OLT";
+    public static final String TAG_CAPSO8 = "Cáp quang hình số 8";
+    public static final String TAG_CAPADSS = "Cáp quang ADSS";
+
     public static final String TYPE_CONGTRINH = "Cong trinh";
     public static final String TYPE_NODE = "Node";
 

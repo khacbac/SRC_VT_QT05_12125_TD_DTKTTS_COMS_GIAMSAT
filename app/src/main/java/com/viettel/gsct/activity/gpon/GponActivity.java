@@ -309,7 +309,6 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                             .show();
                     showPreviewNhatKyTienDoClick();
                     fragmentCapNhatNhatKy.registerListenerEventBus();
-//                    fragmentCapNhatTienDo.registerListenerEventBus();
                     fragmentCapNhatTienDo.showPreviewTienDo(mGponPrevFrag);
                 }
             } else {
@@ -384,7 +383,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
 //
 //    @Subscribe(threadMode = ThreadMode.MAIN)
 //    public void onDataFromBangRongTienDoEvent(LinearLayout layoutRoot) {
-////        mNhatKyTienDoPreviewFragment.initDataForBangRongTienDoExpandable(layoutRoot);
+//        mGponPrevFrag.initDataOldTienDoPreview(layoutRoot);
 //    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

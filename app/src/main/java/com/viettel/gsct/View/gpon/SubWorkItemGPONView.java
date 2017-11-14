@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.viettel.ktts.R;
@@ -36,7 +37,7 @@ public class SubWorkItemGPONView extends LinearLayout {
     @BindView(R.id.rb_check)
     AppCompatRadioButton radioBtnCheck;
     @BindView(R.id.root_layout)
-    LinearLayout rootLayout;
+    RelativeLayout rootLayout;
 
     private WorkItemGPONView workItemGPONView;
     private IeOnRadioCheckChangedListener ieOnRadioCheckChangedListener;
@@ -174,8 +175,7 @@ public class SubWorkItemGPONView extends LinearLayout {
     }
 
     public interface IeOnRadioCheckChangedListener {
-        void onRadioCheckChange(boolean isCheck,
-                                AppCompatRadioButton radioButton, SubWorkItemGPONView gponView);
+        void onRadioCheckChange(boolean isCheck, AppCompatRadioButton radioButton, SubWorkItemGPONView gponView);
     }
 
     public void setOnRadioCheckChangeListener(IeOnRadioCheckChangedListener listener) {
@@ -190,7 +190,7 @@ public class SubWorkItemGPONView extends LinearLayout {
         this.valueView = view;
     }
 
-    public LinearLayout getRootLayout() {
+    public RelativeLayout getRootLayout() {
         return rootLayout;
     }
 
@@ -198,4 +198,6 @@ public class SubWorkItemGPONView extends LinearLayout {
         radioBtnCheck.setChecked(isFinish);
         radioBtnCheck.setEnabled(!isFinish);
     }
+
+
 }

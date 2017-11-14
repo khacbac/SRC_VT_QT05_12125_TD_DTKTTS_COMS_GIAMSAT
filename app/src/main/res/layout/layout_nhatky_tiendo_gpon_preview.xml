@@ -226,6 +226,12 @@
                         android:text="Ngày hoàn thành"
                         android:textColor="@color/black" />
                 </LinearLayout>
+                <com.viettel.utils.NestedExpandableListView
+                    android:id="@+id/expandableListViewDpTienDoThiCongTrongNgay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_top_right_bottom_left">
+                </com.viettel.utils.NestedExpandableListView>
             </LinearLayout>
 
             <TextView

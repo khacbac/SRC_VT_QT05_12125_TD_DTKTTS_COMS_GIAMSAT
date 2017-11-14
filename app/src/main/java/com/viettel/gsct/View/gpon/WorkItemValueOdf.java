@@ -1,6 +1,7 @@
 package com.viettel.gsct.View.gpon;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -19,6 +20,7 @@ import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.database.field.Sub_Work_ItemField;
 import com.viettel.database.field.Sub_Work_Item_ValueField;
+import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.fragment.base.BaseFragment;
 import com.viettel.gsct.utils.GSCTUtils;
 import com.viettel.ktts.R;
@@ -56,6 +58,7 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     private WorkItemRightGPONView.OnStatusBtnTienDo statusTienDo;
     private AppCompatButton btnTienDo;
     private Sub_Work_ItemEntity swiEntity;
+    private String odfTAG = "";
 
 
     public WorkItemValueOdf(Context context) {
@@ -72,22 +75,6 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
         super(context, attrs, defStyleAttr);
         init(context);
     }
-
-    @Override
-    public boolean isValidate() {
-        return true;
-    }
-
-    @Override
-    public boolean isWorking() {
-        return (getDoubleKhoiLuong() + getDoubleOldLuyKe()) != 0;
-    }
-
-    @Override
-    public boolean isFinish() {
-        return true;
-    }
-
 
     private void init(Context context) {
         setOrientation(HORIZONTAL);
@@ -117,7 +104,11 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     }
 
     public double getDoubleOldLuyKe() {
-        return sWIValueController.getOldLuyke(wIEntity.getId(),cSWIEntity.getId());
+        if (Constant.TAG_LAPDAT_ODF_INDOOR.equalsIgnoreCase(odfTAG)) {
+            return Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId());
+        } else {
+            return sWIValueController.getOldLuyke(wIEntity.getId(), cSWIEntity.getId());
+        }
     }
 
     public AppCompatEditText getEdtKhoiLuong() {
@@ -126,6 +117,10 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
 
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {
         this.swiValue = entity;
+    }
+
+    public void addSWIEntity(Sub_Work_ItemEntity itemEntity) {
+        this.swiEntity = itemEntity;
     }
 
     public void addWIEntity(Work_ItemsEntity entity) {
@@ -140,78 +135,106 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     @Override
     public void save() {
         super.save();
-        boolean isSWIUpdate = false;
-        // Cap nhat sub work item vao Database.
-        swiEntity = Sub_Work_ItemController.getInstance(getContext()).getItem(wIEntity.getId(),cSWIEntity.getId());
-        if (swiEntity == null) {
-            swiEntity = new Sub_Work_ItemEntity(cSWIEntity.getId());
-            long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
-            swiEntity.setId(id);
-            swiEntity.setWork_item_id(wIEntity.getId());
-            isSWIUpdate = false;
-        } else {
-            isSWIUpdate = true;
-        }
-        if (isFinish()) {
-            if (!swiEntity.isCompleted()) {
-                swiEntity.setFinishDate(GSCTUtils.getDateNow());
-            }
-        }
-        swiEntity.setSyncStatus(swiEntity.getProcessId() > 0
-                ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-        swiEntity.setEmployeeId(BaseFragment.userId);
-        swiEntity.setIsActive(Constants.ISACTIVE.ACTIVE);
-        if (isSWIUpdate) {
-            Sub_Work_ItemController.getInstance(getContext()).updateItem(swiEntity);
-        } else {
-            Sub_Work_ItemController.getInstance(getContext()).addItem(swiEntity);
-        }
+        double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
+        new SaveAsynByCt().execute(value);
     }
 
     // Save odf out door theo node.
     @Override
     public void save(long nodeId) {
-        boolean isSWIValueUpdate = false;
-
-        // Cap nhat sub work item value vao Database.
-        if (swiValue == null) {
-            swiValue = new Sub_Work_Item_ValueEntity();
-            long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME);
-            swiValue.setId(id);
-            swiValue.setConstr_node_id(nodeId);
-            swiValue.setWork_item_id(wIEntity.getId());
-            swiValue.setCat_sub_work_item_id(cSWIEntity.getId());
-            swiValue.setAdded_date(GSCTUtils.getDateNow());
-            isSWIValueUpdate = false;
-        } else {
-            isSWIValueUpdate = true;
-        }
-        swiValue.setValue(edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString()));
-        Log.d(TAG, "save: value = " + ""+edtKhoiLuong.getText().toString());
-        swiValue.setEmployeeId(BaseFragment.userId);
-        swiValue.setIsActive(Constants.ISACTIVE.ACTIVE);
-        swiValue.setSyncStatus(swiValue.getProcessId() > 0
-                ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-
-        if (isSWIValueUpdate) {
-            sWIValueController.updateItem(swiValue);
-        } else {
-            sWIValueController.addItem(swiValue);
-        }
-    }
-
-    @Override
-    public void updateTrangThai() {
-
-    }
-
-    public void updateLuyKeLapDat() {
         double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
-        double luyke = sWIValueController.getOldLuyke(wIEntity.getId(),cSWIEntity.getId()) + value;
+        new SaveAsyncByNode().execute(nodeId, value);
+    }
+
+    public void updateLuyKe() {
+        double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
+        double luyke = 0;
+        if (Constant.TAG_LAPDAT_ODF_INDOOR.equalsIgnoreCase(odfTAG)) {
+            luyke = Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId()) + value;
+        } else {
+            luyke = sWIValueController.getOldLuyke(wIEntity.getId(), cSWIEntity.getId()) + value;
+        }
         setTvLuyKe(luyke);
     }
 
     public void setFinish(boolean finish) {
         edtKhoiLuong.setEnabled(!finish);
+    }
+
+    public void setOdfTAG(String odfTAG) {
+        this.odfTAG = odfTAG;
+    }
+
+    class SaveAsyncByNode extends AsyncTask<Object, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Object... objects) {
+            long nodeId = Long.parseLong(objects[0].toString());
+            double value = Double.parseDouble(objects[1].toString());
+            boolean isSWIValueUpdate = false;
+            if (swiValue == null) {
+                swiValue = new Sub_Work_Item_ValueEntity();
+                long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME);
+                swiValue.setId(id);
+                swiValue.setConstr_node_id(nodeId);
+                swiValue.setWork_item_id(wIEntity.getId());
+                swiValue.setCat_sub_work_item_id(cSWIEntity.getId());
+                swiValue.setAdded_date(GSCTUtils.getDateNow());
+                isSWIValueUpdate = false;
+            } else {
+                isSWIValueUpdate = true;
+            }
+            swiValue.setValue(value);
+            swiValue.setEmployeeId(BaseFragment.userId);
+            swiValue.setIsActive(Constants.ISACTIVE.ACTIVE);
+            swiValue.setSyncStatus(swiValue.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            return isSWIValueUpdate;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if (aBoolean) {
+                sWIValueController.updateItem(swiValue);
+            } else {
+                sWIValueController.addItem(swiValue);
+            }
+            updateLuyKe();
+        }
+    }
+
+    class SaveAsynByCt extends AsyncTask<Object, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Object... objects) {
+            double value = Double.parseDouble(objects[0].toString());
+            boolean isSWIUpdate = false;
+            // Cap nhat sub work item vao Database.
+            if (swiEntity == null) {
+                swiEntity = new Sub_Work_ItemEntity(cSWIEntity.getId());
+                long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
+                swiEntity.setId(id);
+                swiEntity.setWork_item_id(wIEntity.getId());
+                swiEntity.setFinishDate(GSCTUtils.getDateNow());
+                isSWIUpdate = false;
+            } else {
+                isSWIUpdate = true;
+            }
+            swiEntity.setSyncStatus(swiEntity.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            swiEntity.setEmployeeId(BaseFragment.userId);
+            swiEntity.setIsActive(Constants.ISACTIVE.ACTIVE);
+            swiEntity.setValue(value);
+            return isSWIUpdate;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if (aBoolean) {
+                Sub_Work_ItemController.getInstance(getContext()).updateItem(swiEntity);
+            } else {
+                Sub_Work_ItemController.getInstance(getContext()).addItem(swiEntity);
+            }
+            updateLuyKe();
+        }
     }
 }

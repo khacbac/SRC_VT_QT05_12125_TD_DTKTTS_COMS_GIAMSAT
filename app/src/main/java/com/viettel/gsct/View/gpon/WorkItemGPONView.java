@@ -11,6 +11,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
@@ -27,8 +28,7 @@ import butterknife.ButterKnife;
  * Created by hieppq3 on 5/2/17.
  */
 
-public class WorkItemGPONView extends LinearLayout
-        implements SubWorkItemGPONView.IeOnRadioCheckChangedListener {
+public class WorkItemGPONView extends LinearLayout implements SubWorkItemGPONView.IeOnRadioCheckChangedListener {
 
     View rootView;
     @BindView(R.id.tv_STT)
@@ -36,7 +36,7 @@ public class WorkItemGPONView extends LinearLayout
     @BindView(R.id.btn_collapse)
     Button btnCollapse;
     @BindView(R.id.rootLayout)
-    LinearLayout rootLayout;
+    RelativeLayout rootLayout;
 
     private Cat_Work_Item_TypesEntity workItemTypeId;
     private String itemType;
@@ -145,13 +145,12 @@ public class WorkItemGPONView extends LinearLayout
         }
     }
 
-    public void setRadioButton(AppCompatRadioButton radioButton) {
+    public void addRadioButton(AppCompatRadioButton radioButton) {
         radioButtons.add(radioButton);
     }
 
     @Override
-    public void onRadioCheckChange(boolean isCheck,
-                                   AppCompatRadioButton radioButton, SubWorkItemGPONView subWorkView) {
+    public void onRadioCheckChange(boolean isCheck, AppCompatRadioButton radioButton, SubWorkItemGPONView subWorkView) {
         if (isCheck) {
             if (radioButtons.size() > 0) {
                 for (AppCompatRadioButton radioBtn : radioButtons) {
@@ -172,7 +171,7 @@ public class WorkItemGPONView extends LinearLayout
         this.ieShowWorkItemByItemType = itemByItemType;
     }
 
-    public LinearLayout getRootLayout() {
+    public RelativeLayout getRootLayout() {
         return rootLayout;
     }
 

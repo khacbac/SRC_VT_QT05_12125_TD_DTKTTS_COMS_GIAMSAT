@@ -35,460 +35,66 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30">
-
+            android:layout_weight="0.35">
             <LinearLayout
                 android:id="@+id/layout_root_left"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/table_border_color" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3"
-                        android:background="@drawable/border_right_bottom_left"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding5"
-                        android:visibility="gone">
-
-                        <TextView
-                            style="@style/Header.Textview.Table"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Tên hạng mục" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:background="@drawable/border_right_bottom_left"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding5"
-                        android:visibility="gone">
-
-                        <TextView
-                            style="@style/Header.Textview.Table"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Đơn vị" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:background="@drawable/border_right_bottom_left"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding5"
-                        android:visibility="gone">
-
-                        <TextView
-                            style="@style/Header.Textview.Table"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Khối lượng" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:background="@drawable/border_right_bottom_left"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding5"
-                        android:visibility="gone">
-
-                        <TextView
-                            style="@style/Header.Textview.Table"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Lũy kế" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!--<include-->
-                <!--layout="@layout/layout_work_item_gpon"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"/>-->
-
             </LinearLayout>
-
         </ScrollView>
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.70">
-
+            android:layout_weight="0.65">
             <LinearLayout
                 android:id="@+id/layout_root_right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/table_border_color" />
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/lKeoCapValue"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:visibility="visible">-->
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="@dimen/gpon_height"-->
-                        <!--android:background="@drawable/border_right_bottom_left"-->
-                        <!--android:orientation="horizontal">-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="2"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Loại cáp" />-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Khối lượng" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/tv_dvt"-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="ĐVT(mét)" />-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Lũy kế" />-->
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Tiến độ" />-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
-
                 <LinearLayout
+                    android:id="@+id/lKeoCapValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lKeoCapValue"/>
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal">-->
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/lHanNoidValue"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="5"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:visibility="visible">-->
-
-                        <!--<LinearLayout-->
-                            <!--android:id="@+id/lBoChiaValue"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:orientation="vertical">-->
-
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="@dimen/gpon_height"-->
-                                <!--android:background="@drawable/border_right_bottom_left"-->
-                                <!--android:orientation="horizontal">-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Bộ chia" />-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Khối lượng" />-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Lũy kế" />-->
-                                <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:background="@drawable/border_top_right_bottom_left">&ndash;&gt;-->
-
-                                    <!--&lt;!&ndash;<android.support.v7.widget.AppCompatButton&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:id="@+id/btnTienDoBoChia"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;style="@style/Content.Button"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:textSize="12sp"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:text="@string/str_tiendo_chualam" />&ndash;&gt;-->
-                                <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
-                            <!--</LinearLayout>-->
-
-                        <!--</LinearLayout>-->
-
-                        <!--<LinearLayout-->
-                            <!--android:id="@+id/lTuThueValue"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="@dimen/margin_15"-->
-                            <!--android:orientation="vertical">-->
-
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="@dimen/gpon_height"-->
-                                <!--android:background="@drawable/border_right_bottom_left"-->
-                                <!--android:orientation="horizontal">-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Tên tủ" />-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="SL Lắp đặt" />-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Lũy kế" />-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="SL Hàn nối" />-->
-
-                                <!--<TextView-->
-                                    <!--style="@style/Header.Textview.Title"-->
-                                    <!--android:layout_width="0dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Lũy kế" />-->
-                                <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;android:background="@drawable/border_top_right_bottom_left">&ndash;&gt;-->
-
-                                    <!--&lt;!&ndash;<android.support.v7.widget.AppCompatButton&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:id="@+id/btnTienDoTuThue"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;style="@style/Content.Button"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:textSize="12sp"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;android:text="@string/str_tiendo_chualam" />&ndash;&gt;-->
-                                <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
-                            <!--</LinearLayout>-->
-
-                        <!--</LinearLayout>-->
-                    <!--</LinearLayout>-->
-                    <!--<FrameLayout-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_weight="1">-->
-                        <!--<android.support.v7.widget.AppCompatButton-->
-                            <!--android:id="@+id/btnTienDoHanNoi"-->
-                            <!--style="@style/Content.Button"-->
-                            <!--android:textSize="14sp"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="@string/str_tiendo_chualam" />-->
-                    <!--</FrameLayout>-->
-                <!--</LinearLayout>-->
-
-
+                    android:orientation="vertical" />
                 <LinearLayout
+                    android:id="@+id/lHanNoiValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lHanNoiValue"/>
-
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/lIndoorValue"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:visibility="visible">-->
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="@dimen/gpon_height"-->
-                        <!--android:orientation="horizontal"-->
-                        <!--android:visibility="visible">-->
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Tên ODF" />-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Khối Lượng" />-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Lũy kế" />-->
-
-                        <!--<FrameLayout-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:background="@drawable/border_top_right_bottom_left">-->
-
-                            <!--<android.support.v7.widget.AppCompatButton-->
-                                <!--android:id="@+id/btnTienDoIndoor"-->
-                                <!--style="@style/Content.Button"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:gravity="center"-->
-                                <!--android:text="@string/str_tiendo_chualam"-->
-                                <!--android:textSize="12sp" />-->
-                        <!--</FrameLayout>-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
-
+                    android:orientation="vertical" />
                 <LinearLayout
+                    android:id="@+id/lIndoorValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lIndoorValue"/>
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/lOutdoorValue"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:visibility="visible">-->
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="@dimen/gpon_height"-->
-                        <!--android:background="@drawable/border_right_bottom_left"-->
-                        <!--android:orientation="horizontal">-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Tên ODF" />-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Khối Lượng" />-->
-
-                        <!--<TextView-->
-                            <!--style="@style/Header.Textview.Title"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="Lũy kế" />-->
-                        <!--<FrameLayout-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:background="@drawable/border_top_right_bottom_left">-->
-
-                            <!--<android.support.v7.widget.AppCompatButton-->
-                                <!--android:id="@+id/btnTienDoOutdoor"-->
-                                <!--style="@style/Content.Button"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:gravity="center"-->
-                                <!--android:text="@string/str_tiendo_chualam"-->
-                                <!--android:textSize="12sp" />-->
-                        <!--</FrameLayout>-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
+                    android:orientation="vertical" />
 
                 <LinearLayout
+                    android:id="@+id/lOutdoorValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lOutdoorValue"/>
-
+                    android:orientation="vertical" />
                 <LinearLayout
                     android:id="@+id/lOltValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
-
+                    android:orientation="vertical" />
                 <LinearLayout
                     android:id="@+id/lDoKiemValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical" />
             </LinearLayout>
-
         </ScrollView>
     </LinearLayout>
 

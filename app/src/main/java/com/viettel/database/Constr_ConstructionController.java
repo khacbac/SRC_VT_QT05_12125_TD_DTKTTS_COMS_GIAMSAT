@@ -27,7 +27,8 @@ import java.util.List;
  * 
  */
 public class Constr_ConstructionController {
-	private Context mContext = null;
+	private static Context mContext = null;
+	private static  Constr_ConstructionController controller;
 	public static String[] allColumn = new String[] {
 			Constr_ConstructionField.COLUMN_STATION_CODE,
 			Constr_ConstructionField.COLUMN_START_POINT_CODE,
@@ -87,8 +88,17 @@ public class Constr_ConstructionController {
 			+ Constr_ConstructionField.COLUMN_LONGTITUDE + " TEXT" + ")";
 
 	public Constr_ConstructionController(Context pContext) {
-		this.mContext = pContext;
+		mContext = pContext;
 	}
+
+	public static Constr_ConstructionController getInstance(Context pContext) {
+//		mContext = pContext;
+		if (controller == null) {
+			controller = new Constr_ConstructionController(pContext);
+		}
+		return controller;
+	}
+
 
 	/**
 	 * Them moi 1 cong trinh giam sat, Dung cho dong bo co so du lieu

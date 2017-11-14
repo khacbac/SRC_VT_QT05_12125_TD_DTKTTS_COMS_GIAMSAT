@@ -1,6 +1,7 @@
 package com.viettel.gsct.View.gpon;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
@@ -60,16 +61,6 @@ public class WorkItemValueOltDoKiem extends BaseCustomWorkItem {
         init(context);
     }
 
-    @Override
-    public boolean isValidate() {
-        return true;
-    }
-
-    @Override
-    public boolean isWorking() {
-        return true;
-    }
-
     private void init(Context context) {
         setOrientation(HORIZONTAL);
         rootView = inflate(context, R.layout.layout_sub_work_item_right_olt_dokiem_gpon, this);
@@ -104,96 +95,54 @@ public class WorkItemValueOltDoKiem extends BaseCustomWorkItem {
 
     }
 
+    public void addSWIEntity(Sub_Work_ItemEntity itemEntity) {
+        this.swiEntity = itemEntity;
+        if (swiEntity != null) {
+            if (swiEntity.hasFinishDate()) {
+                btnTienDo.setText(getResources().getString(R.string.str_tiendo_hoanthanh));
+                if (!swiEntity.getFinishDate().equalsIgnoreCase(GSCTUtils.getDateNow())) {
+                    btnTienDo.setEnabled(false);
+                }
+            }
+        }
+    }
+
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {
         this.swiValue = entity;
+        if (swiValue != null) {
+            if (swiValue.hadAddedDate()) {
+                btnTienDo.setText(getResources().getString(R.string.str_tiendo_hoanthanh));
+                if (!swiValue.getAdded_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
+                    btnTienDo.setEnabled(false);
+                }
+            }
+        }
     }
 
     public void addCSWIEntity(Cat_Sub_Work_ItemEntity entity) {
         this.cswiEntity = entity;
-        if (wiEntity != null) {
-            swiEntity = Sub_Work_ItemController.getInstance(getContext()).getItem(wiEntity.getId(),cswiEntity.getId());
-            if (swiEntity != null) {
-                if (swiEntity.isCompleted()) {
-                    btnTienDo.setText(getResources().getString(R.string.str_tiendo_hoanthanh));
-                    if (!GSCTUtils.getDateNow().equalsIgnoreCase(swiEntity.getFinishDate())) {
-                        btnTienDo.setEnabled(false);
-                    }
-                }
-            }
-
-        }
-    }
-
-    public boolean isFinish() {
-        return getResources().getString(R.string.str_tiendo_hoanthanh).equalsIgnoreCase(btnTienDo.getText().toString().trim());
     }
 
     // Save Do kiem,cap nhat theo node.
     @Override
     public void save(long nodeId) {
-        boolean isSWIValueUpdate = false;
-
-        // Cap nhat sub work item value vao Database.
-        if (swiValue == null) {
-            swiValue = new Sub_Work_Item_ValueEntity();
-            long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME);
-            swiValue.setId(id);
-            swiValue.setConstr_node_id(nodeId);
-            swiValue.setWork_item_id(wiEntity.getId());
-            swiValue.setCat_sub_work_item_id(cswiEntity.getId());
-//            swiValue.setAdded_date(GSCTUtils.getDateNow());
-            isSWIValueUpdate = false;
-        } else {
-            isSWIValueUpdate = true;
-        }
-        if (isFinish()) {
-            swiValue.setAdded_date(GSCTUtils.getDateNow());
-        }
-        swiValue.setEmployeeId(BaseFragment.userId);
-        swiValue.setIsActive(Constants.ISACTIVE.ACTIVE);
-        swiValue.setSyncStatus(swiValue.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-
-        if (isSWIValueUpdate) {
-            Sub_Work_Item_ValueController.getInstance(getContext()).updateItem(swiValue);
-        } else {
-            Sub_Work_Item_ValueController.getInstance(getContext()).addItem(swiValue);
-        }
+        new SaveAsyncByNode().execute(nodeId,isFinish());
     }
 
     // Sace olt cap nhat theo cong trinh.
     @Override
     public void save() {
-        boolean isSWIUpdate = false;
-        // Cap nhat sub work item vao Database.
-        swiEntity = Sub_Work_ItemController.getInstance(getContext()).getItem(wiEntity.getId(),cswiEntity.getId());
-        if (swiEntity == null) {
-            swiEntity = new Sub_Work_ItemEntity(cswiEntity.getId());
-            long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
-            swiEntity.setId(id);
-            swiEntity.setWork_item_id(wiEntity.getId());
-            isSWIUpdate = false;
-        } else {
-            isSWIUpdate = true;
-        }
-        if (isFinish()) {
-            if (!swiEntity.isCompleted()) {
-                swiEntity.setFinishDate(GSCTUtils.getDateNow());
+        if (swiEntity != null) {
+            if (swiEntity.hasFinishDate() && !swiEntity.getFinishDate().equalsIgnoreCase(GSCTUtils.getDateNow())) {
+                return;
             }
         }
-        swiEntity.setSyncStatus(swiEntity.getProcessId() > 0
-                ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
-        swiEntity.setEmployeeId(BaseFragment.userId);
-        swiEntity.setIsActive(Constants.ISACTIVE.ACTIVE);
-        if (isSWIUpdate) {
-            Sub_Work_ItemController.getInstance(getContext()).updateItem(swiEntity);
-        } else {
-            Sub_Work_ItemController.getInstance(getContext()).addItem(swiEntity);
-        }
+        new SaveAsynByCt().execute(isFinish());
     }
 
-    @Override
-    public void updateTrangThai() {
-
+    // Check cong trinh hoan thanh chua,chi check trong ngay.
+    public boolean isFinish() {
+        return getResources().getString(R.string.str_tiendo_hoanthanh).equalsIgnoreCase(btnTienDo.getText().toString());
     }
 
     public Cat_Sub_Work_ItemEntity getCswiEntity() {
@@ -202,5 +151,88 @@ public class WorkItemValueOltDoKiem extends BaseCustomWorkItem {
 
     public Sub_Work_ItemEntity getSwiEntity() {
         return swiEntity;
+    }
+
+    public Sub_Work_Item_ValueEntity getSwiValue() {
+        return swiValue;
+    }
+
+    class SaveAsynByCt extends AsyncTask<Boolean, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Boolean... objects) {
+            boolean isSWIUpdate = false;
+            // Cap nhat sub work item vao Database.
+            if (swiEntity == null) {
+                swiEntity = new Sub_Work_ItemEntity(cswiEntity.getId());
+                long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
+                swiEntity.setId(id);
+                swiEntity.setWork_item_id(wiEntity.getId());
+                isSWIUpdate = false;
+            } else {
+                isSWIUpdate = true;
+            }
+            if (objects[0]) {
+                if (!swiEntity.hasFinishDate()) {
+                    swiEntity.setFinishDate(GSCTUtils.getDateNow());
+                }
+            }
+            swiEntity.setSyncStatus(swiEntity.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            swiEntity.setEmployeeId(BaseFragment.userId);
+            swiEntity.setIsActive(Constants.ISACTIVE.ACTIVE);
+            return isSWIUpdate;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if (aBoolean) {
+                Sub_Work_ItemController.getInstance(getContext()).updateItem(swiEntity);
+            } else {
+                Sub_Work_ItemController.getInstance(getContext()).addItem(swiEntity);
+            }
+        }
+    }
+
+    class SaveAsyncByNode extends AsyncTask<Object, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Object... objects) {
+            long nodeId = Long.parseLong(objects[0].toString());
+            boolean isFinish = Boolean.parseBoolean(objects[1].toString());
+            boolean isSWIValueUpdate = false;
+
+            // Cap nhat sub work item value vao Database.
+            if (swiValue == null) {
+                swiValue = new Sub_Work_Item_ValueEntity();
+                long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_Item_ValueField.TABLE_NAME);
+                swiValue.setId(id);
+                swiValue.setConstr_node_id(nodeId);
+                swiValue.setWork_item_id(wiEntity.getId());
+                swiValue.setCat_sub_work_item_id(cswiEntity.getId());
+                isSWIValueUpdate = false;
+            } else {
+                isSWIValueUpdate = true;
+            }
+            Log.d(TAG, "doInBackground: isFinish = " + isFinish);
+            if (isFinish) {
+                if (!swiValue.hadAddedDate()) {
+                    swiValue.setAdded_date(GSCTUtils.getDateNow());
+                }
+            }
+            swiValue.setEmployeeId(BaseFragment.userId);
+            swiValue.setIsActive(Constants.ISACTIVE.ACTIVE);
+            swiValue.setSyncStatus(swiValue.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            return isSWIValueUpdate;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if (aBoolean) {
+                Sub_Work_Item_ValueController.getInstance(getContext()).updateItem(swiValue);
+            } else {
+                Sub_Work_Item_ValueController.getInstance(getContext()).addItem(swiValue);
+            }
+        }
     }
 }

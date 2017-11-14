@@ -34,12 +34,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Lũy kế" />
-        <TextView
-            style="@style/Header.Textview.Title"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Tiến độ" />
     </LinearLayout>
 
 </merge>

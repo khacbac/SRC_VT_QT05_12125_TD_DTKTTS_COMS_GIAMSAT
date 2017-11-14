@@ -1,11 +1,14 @@
 package com.viettel.gsct.fragment.tiendo.gpon.presenter;
 
 import android.content.Context;
+
+import com.viettel.database.Sub_Work_ItemController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.Work_ItemsControler;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
 import com.viettel.database.entity.Cat_Work_Item_TypesEntity;
 import com.viettel.database.entity.ConstrNodeEntity;
+import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.gsct.View.constant.Constant;
@@ -62,7 +65,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
     private WorkItemOdf workItemOdfIndoor;
     private WorkItemOltAndDoKiem workItemOlt;
 
-
     public GponTienDoTienDoPresenter(IeGponTienDoFragment ieGponTienDoFragment, Context context) {
         this.context = context;
         this.ieGponTienDoFragment = ieGponTienDoFragment;
@@ -77,8 +79,8 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         initWorkItemGpon();
         ieGponTienDoFragment.finishAddWKeoCap(wItemKeoCap);
         ieGponTienDoFragment.finishAddWHanNoi(wItemHanNoi);
-        ieGponTienDoFragment.finishAddWOdfInDoor(wItemOdfIndoor);
         ieGponTienDoFragment.finishAddWOdfOutDoor(wItemOutdoor);
+        ieGponTienDoFragment.finishAddWOdfInDoor(wItemOdfIndoor);
         ieGponTienDoFragment.finishAddWOlt(wItemOlt);
         ieGponTienDoFragment.finishAddWDoKiem(wItemDokiem);
     }
@@ -153,53 +155,29 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
     public void save() {
         // Luu data vao Database.
         saveDataToDataBase();
-        // Cap nhat lai trang thai hien thi sau khi luu.
-        updateStatusForAllItem();
     }
+
+    @Override
+    public boolean checkValidate() {
+        return true;
+    }
+
 
     // Ham luu du lieu vua nhap xuong DB.
     private void saveDataToDataBase() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (long kcKey : hmWKeoCap.keySet()) {
-                    hmWKeoCap.get(kcKey).save(kcKey);
-                }
-                for (long hnKey : hmWHanNoi.keySet()) {
-                    hmWHanNoi.get(hnKey).save(hnKey);
-                }
-                if (!workItemOdfIndoor.getwItemEntity().hasCompletedDate()) {
-                    workItemOdfIndoor.save();
-                }
-                for (long odKey : hmWOdfOutdoor.keySet()) {
-                    if (!hmWOdfOutdoor.get(odKey).getwItemEntity().hasCompletedDate()) {
-                        hmWOdfOutdoor.get(odKey).save(odKey);
-                    }
-                }
-                workItemOlt.save();
-                for (long odKey : hmWDoKiem.keySet()) {
-                    hmWDoKiem.get(odKey).save(odKey);
-                }
-            }
-        });
-        thread.start();
-    }
-
-    // Ham cap nhat lai trang thai hien thi cua view sau khi luu.
-    private void updateStatusForAllItem() {
         for (long kcKey : hmWKeoCap.keySet()) {
-            hmWKeoCap.get(kcKey).updateTrangThai();
+            hmWKeoCap.get(kcKey).save(kcKey);
         }
         for (long hnKey : hmWHanNoi.keySet()) {
-            hmWHanNoi.get(hnKey).updateTrangThai();
+            hmWHanNoi.get(hnKey).save(hnKey);
         }
-        workItemOdfIndoor.updateTrangThai();
+        workItemOdfIndoor.save();
         for (long odKey : hmWOdfOutdoor.keySet()) {
-            hmWOdfOutdoor.get(odKey).updateTrangThai();
+            hmWOdfOutdoor.get(odKey).save(odKey);
         }
-        workItemOlt.updateTrangThai();
+        workItemOlt.save();
         for (long odKey : hmWDoKiem.keySet()) {
-            hmWDoKiem.get(odKey).updateTrangThai();
+            hmWDoKiem.get(odKey).save(odKey);
         }
     }
 
@@ -209,7 +187,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         SubWorkItemGPONView swKeoCap = new SubWorkItemGPONView(context);
         swKeoCap.setValue(node.getNodeName(), 0, 0, "");
         swKeoCap.setWorkItemGPONView(wItemKeoCap);
-        wItemKeoCap.setRadioButton(swKeoCap.getRadioBtnCheck());
+        wItemKeoCap.addRadioButton(swKeoCap.getRadioBtnCheck());
         wItemKeoCap.addSubView(swKeoCap);
         ieGponTienDoFragment.finishAddSWKeoCap(swKeoCap, node);
     }
@@ -220,7 +198,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         SubWorkItemGPONView swHanNoi = new SubWorkItemGPONView(context);
         swHanNoi.setValue(node.getNodeName(), 0, 0, "");
         swHanNoi.setWorkItemGPONView(wItemHanNoi);
-        wItemHanNoi.setRadioButton(swHanNoi.getRadioBtnCheck());
+        wItemHanNoi.addRadioButton(swHanNoi.getRadioBtnCheck());
         wItemHanNoi.addSubView(swHanNoi);
         ieGponTienDoFragment.finishAddSWHanNoi(swHanNoi, node);
     }
@@ -231,7 +209,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         SubWorkItemGPONView swOutdoor = new SubWorkItemGPONView(context);
         swOutdoor.setValue(node.getNodeName(), 0, 0, "");
         swOutdoor.setWorkItemGPONView(wItemOutdoor);
-        wItemOutdoor.setRadioButton(swOutdoor.getRadioBtnCheck());
+        wItemOutdoor.addRadioButton(swOutdoor.getRadioBtnCheck());
         wItemOutdoor.addSubView(swOutdoor);
         ieGponTienDoFragment.finishAddSWOutdoor(swOutdoor, node);
     }
@@ -242,7 +220,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         SubWorkItemGPONView swDoKiem = new SubWorkItemGPONView(context);
         swDoKiem.setValue(node.getNodeName(), 0, 0, "");
         swDoKiem.setWorkItemGPONView(wItemDokiem);
-        wItemDokiem.setRadioButton(swDoKiem.getRadioBtnCheck());
+        wItemDokiem.addRadioButton(swDoKiem.getRadioBtnCheck());
         wItemDokiem.addSubView(swDoKiem);
         ieGponTienDoFragment.finishAddSWDoKiem(swDoKiem, node);
     }
@@ -259,17 +237,18 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem = BaseFragment.cat_sub_work_itemControler.getsubCates(catWorkItem.getItem_type_id());
         workItemOlt = new WorkItemOltAndDoKiem(context);
 
-        Work_ItemsEntity wItemEntity = wController.getItem(catWorkItem.getItem_type_id());
+        Work_ItemsEntity wItemEntity = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), BaseFragment.constr_ConstructionItem.getConstructId());
         if (wItemEntity != null) {
             workItemOlt.addWorkitem(wItemEntity);
             for (Cat_Sub_Work_ItemEntity catEntity : arrSWItem) {
+                Sub_Work_ItemEntity swiEntity = Sub_Work_ItemController.getInstance(context).getItem(wItemEntity.getId(),catEntity.getId());
                 WorkItemValueOltDoKiem oltGpon = new WorkItemValueOltDoKiem(context);
                 oltGpon.setTvTitle(catEntity.getName());
                 oltGpon.addWIEntity(wItemEntity);
                 oltGpon.addCSWIEntity(catEntity);
+                oltGpon.addSWIEntity(swiEntity);
                 workItemOlt.addValueItem(oltGpon);
             }
-//            this.workItemOlt = wiOLT;
             ieGponTienDoFragment.finishAddLapDatOltValue(workItemOlt);
         }
     }
@@ -407,7 +386,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
             sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
 
             for (Cat_Sub_Work_ItemEntity cswEntity : arrSWItem) {
-                Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItem.getId(), cswEntity.getId(),node.getNodeID());
+                Sub_Work_Item_ValueEntity svItem = svController.getItemByNodeDoKiem(wItem.getId(), cswEntity.getId(),node.getNodeID());
                 WorkItemValueOltDoKiem dokiemItem = new WorkItemValueOltDoKiem(context);
                 dokiemItem.setTvTitle(cswEntity.getName());
                 dokiemItem.addWIEntity(wItem);
@@ -429,21 +408,19 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), BaseFragment.constr_ConstructionItem.getConstructId());
         if (wItem != null) {
             workItemOdfIndoor.addWorkItem(wItem);
-//            // Disable cac node da hoan thanh keo cap.
-//            sView.setFinish(wItem.hasCompletedDate());
-
             for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
                 if (entity.getCode().contains("INDOOR")) {
-                    Sub_Work_Item_ValueEntity svItem = svController.getItem(wItem.getId(), entity.getId());
-                    double luyke = svController.getLuyke(wItem.getId(), entity.getId());
-                    double value = svItem != null ? svItem.getValue() : 0;
+                    Sub_Work_ItemEntity swiEntity = Sub_Work_ItemController.getInstance(context).getItemForGetValue(wItem.getId(),entity.getId());
+                    double luyKe = Sub_Work_ItemController.getInstance(context).getLuyke(wItem.getId(),entity.getId());
+                    double value = swiEntity != null ? swiEntity.getValue() : 0;
 
                     WorkItemValueOdf odfIndoor = new WorkItemValueOdf(context);
+                    odfIndoor.setOdfTAG(Constant.TAG_LAPDAT_ODF_INDOOR);
                     odfIndoor.setTvTenOdf(entity.getName());
-                    odfIndoor.setTvLuyKe(luyke);
+                    odfIndoor.setTvLuyKe(luyKe);
                     odfIndoor.setEdtKhoiLuong(value);
+                    odfIndoor.addSWIEntity(swiEntity);
                     odfIndoor.addCSWIEntity(entity);
-                    odfIndoor.addSWIValue(svItem);
                     wItemOdfIndoor.addViewValue(odfIndoor);
                     workItemOdfIndoor.addValueOdf(odfIndoor);
                 }
@@ -471,6 +448,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     double value = svItem != null ? svItem.getValue() : 0;
 
                     WorkItemValueOdf odfOutdoor = new WorkItemValueOdf(context);
+                    odfOutdoor.setOdfTAG(Constant.TAG_LAPDAT_ODF_OUTDOOR);
                     odfOutdoor.setTvTenOdf(entity.getName());
                     odfOutdoor.setTvLuyKe(luyke);
                     odfOutdoor.setEdtKhoiLuong(value);
@@ -513,17 +491,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         wItemDokiem.setTitle(Constant.TAG_DOKIEM_NGHIEMTHU);
     }
 
-    // Ham lang nghe su kien check validate tu phia GponActivity.Khi user an save.
-    @Override
-    public boolean checkValidate() {
-        for (long kcKey : hmWKeoCap.keySet()) {
-            if (!hmWKeoCap.get(kcKey).isValidate()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     @Override
     public void showPreviewTienDo(BaseGponPreview gponPreview) {
         Gpon2PreviewFragment gponFragment = null;
@@ -535,4 +502,5 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
             gponFragment.initDataNewTienDoPreviewNode(hmWKeoCap,hmWHanNoi,hmWOdfOutdoor,hmWDoKiem);
         }
     }
+
 }

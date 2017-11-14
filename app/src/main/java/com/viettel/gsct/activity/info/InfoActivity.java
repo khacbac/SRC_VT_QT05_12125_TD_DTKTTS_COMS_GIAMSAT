@@ -10,19 +10,25 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.viettel.constants.Constants;
 import com.viettel.constants.IntentConstants;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Constr_Construction_EmployeeEntity;
+import com.viettel.database.field.ConstrNodeController;
 import com.viettel.gsct.fragment.base.BaseFragment;
 import com.viettel.gsct.fragment.info.InfoChiTietFragment;
 import com.viettel.gsct.fragment.info.InfoKeHoachFragment;
 import com.viettel.gsct.fragment.info.InfoNhatKyFragment;
 import com.viettel.gsct.fragment.info.InfoTiendoFragment;
+import com.viettel.gsct.fragment.info.InfoTiendoFragmentByNode;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.viettel.gsct.fragment.base.BaseFragment.constr_ConstructionItem;
 
 /**
  * Created by hieppq3 on 5/10/17.
@@ -109,12 +115,19 @@ public class InfoActivity extends AppCompatActivity {
         tvTienDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFragment instanceof InfoTiendoFragment)
+                if (mFragment instanceof InfoTiendoFragment) {
                     return;
-                mFragment = InfoTiendoFragment.newInstance();
+                }
+                // Kiem tra la cong trinh cu hay moi de cap nhat.Cong trinh moi cap nhat theo node.Cong trinh cu cap nhat theo cong trinh.
+                ArrayList<ConstrNodeEntity> listNode = ConstrNodeController.getInstance(getApplicationContext()).getListNodeByConstrId(constr_ConstructionItem.getConstructId());
+                if (constr_ConstructionEmployee.getSupvConstrType() == Constants.CONSTR_TYPE.BRCD && !listNode.isEmpty()) {
+                    Log.d(TAG, "onClick: xem info theo node");
+                    mFragment = InfoTiendoFragmentByNode.newInstance();
+                } else {
+                    mFragment = InfoTiendoFragment.newInstance();
+                }
                 mFragment.setConstr_Construction_EmployeeEntity(constr_ConstructionEmployee);
-                getSupportFragmentManager()
-                        .beginTransaction().replace(R.id.fr_content, mFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, mFragment).commit();
                 clearColorFocus();
                 v.setBackgroundResource(R.color.colorAccent);
             }

@@ -31,7 +31,6 @@ public class GponTienDoModel implements IeGponTienDoModel {
     private Cat_Work_Item_TypesControler cwitController;
 
     // Get data from database.
-    private ArrayList<Cat_Work_Item_TypesEntity> arrCat;
     private ArrayList<ConstrNodeEntity> listNode;
     private ArrayList<Work_ItemsEntity> listWorkItem;
     private Cat_Work_Item_TypesEntity cwiKeoCap;
@@ -42,21 +41,13 @@ public class GponTienDoModel implements IeGponTienDoModel {
     private Cat_Work_Item_TypesEntity cwiOlt;
     private Cat_Work_Item_TypesEntity cwiDokiem;
 
-    private boolean hasWorkItem = false;
-
     public GponTienDoModel(Context context) {
         this.context = context;
 
         nController = new ConstrNodeController(context);
         wController = new Work_ItemsControler(context);
         cwitController = new Cat_Work_Item_TypesControler(context);
-
-//        listNode = nController.getListNodeTest();
         listNode = nController.getListNodeByConstrId(BaseFragment.constr_ConstructionItem.getConstructId());
-
-        Log.d(TAG, "GponTienDoModel: Construct id = " + BaseFragment.constr_ConstructionItem.getConstructId());
-//        arrCat = BaseFragment.cat_work_item_typesControler.getCates(BaseFragment.constr_ConstructionItem.getConstrType());
-        Log.d(TAG, "GponTienDoModel: constr type = " + BaseFragment.constr_ConstructionItem.getConstrType());
     }
 
     @Override
@@ -113,24 +104,10 @@ public class GponTienDoModel implements IeGponTienDoModel {
             hmCatWorkItemType.put(Constant.CODE_ADSS,cwiAdss);
             addLayout.finishAddSWValueKeoCap(node, sView, hmCatWorkItemType);
         }
-//        if (cwiCapQuang != null) {
-//            addLayout.finishAddSWValueKeoCap(node, sView, cwiCapQuang);
-//        }
-//        if (cwiAdss != null) {
-//            addLayout.finishAddSWValueKeoCap(node, sView, cwiAdss);
-//        }
     }
 
     @Override
     public void addSWValueIndoor(IeListenerAddItem addLayout) {
-//        if (!arrCat.isEmpty()) {
-//            for (Cat_Work_Item_TypesEntity entity : arrCat) {
-//                if (entity.getCode().contains(Constant.CODE_LAPDAT_ODF)) {
-//                    cwiOdf = entity;
-//                    break;
-//                }
-//            }
-//        }
         if (!listWorkItem.isEmpty()) {
             for (Work_ItemsEntity wi : listWorkItem) {
                 Cat_Work_Item_TypesEntity entity = Cat_Work_Item_TypesControler.getInstance(context).getCatWorkItemType(wi.getItem_type_id());
@@ -147,12 +124,6 @@ public class GponTienDoModel implements IeGponTienDoModel {
 
     @Override
     public void addSWValueOLT(IeListenerAddItem addLayout) {
-//        for (Cat_Work_Item_TypesEntity entity : arrCat) {
-//            if (entity.getCode().contains(Constant.CODE_LAPDAT_OLT)) {
-//                cwiOlt = entity;
-//                break;
-//            }
-//        }
         if (!listWorkItem.isEmpty()) {
             for (Work_ItemsEntity wi : listWorkItem) {
                 Cat_Work_Item_TypesEntity entity = Cat_Work_Item_TypesControler.getInstance(context).getCatWorkItemType(wi.getItem_type_id());
@@ -193,8 +164,7 @@ public class GponTienDoModel implements IeGponTienDoModel {
 
     @Override
     public void addItemOdfIndoor(Cat_Work_Item_TypesEntity catWork, IeListenerAddItem addLayout) {
-        ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems
-                = BaseFragment.cat_sub_work_itemControler.getsubCates(catWork.getItem_type_id());
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = BaseFragment.cat_sub_work_itemControler.getsubCates(catWork.getItem_type_id());
         if (arrSubWorkItems.isEmpty()) {
             return;
         }
@@ -203,8 +173,7 @@ public class GponTienDoModel implements IeGponTienDoModel {
 
     @Override
     public void addItemOdfOutdoor(ConstrNodeEntity node, SubWorkItemGPONView sView, Cat_Work_Item_TypesEntity catWork, IeListenerAddItem addLayout) {
-        ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems
-                = BaseFragment.cat_sub_work_itemControler.getsubCates(catWork.getItem_type_id());
+        ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = BaseFragment.cat_sub_work_itemControler.getsubCates(catWork.getItem_type_id());
         if (arrSubWorkItems.isEmpty()) {
             return;
         }

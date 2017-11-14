@@ -9,6 +9,7 @@ import android.util.Log;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.field.BaseField;
 import com.viettel.database.field.Sub_Work_ItemField;
+import com.viettel.gsct.utils.GSCTUtils;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,8 @@ public class Sub_Work_ItemController {
             BaseField.COLUMN_SYNC_STATUS,
             BaseField.COLUMN_EMPLOYEE_ID,
             BaseField.COLUMN_IS_ACTIVE,
-            Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID
+            Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID,
+            Sub_Work_ItemField.VALUE
     };
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "
@@ -62,7 +64,9 @@ public class Sub_Work_ItemController {
             + BaseField.COLUMN_IS_ACTIVE
             + " INTEGER,"
             + Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID
-            + " INTEGER"
+            + " INTEGER,"
+            + Sub_Work_ItemField.VALUE
+            + " REAL"
             + " )";
 
     public ArrayList<Sub_Work_ItemEntity> getItems(long work_item_id) {
@@ -127,6 +131,63 @@ public class Sub_Work_ItemController {
         return curItem;
     }
 
+    public double getOldLuyke(long work_item_id, long cat_sub_work_item_id) {
+//        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_ItemField.VALUE + ") from " + Sub_Work_ItemField.TABLE_NAME + " where "
+                        + Sub_Work_ItemField.WORK_ITEM_ID + "=? AND "
+                        + Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                        + Sub_Work_ItemField.FINISHED_DATE + " != " + "'" + GSCTUtils.getDateNow() + "';",
+                new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    public Sub_Work_ItemEntity getItemForGetValue(long work_item_id, long cat_sub_work_item_id) {
+        Log.e(TAG, "getItem: " + work_item_id + " " + cat_sub_work_item_id);
+        Sub_Work_ItemEntity curItem;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Sub_Work_ItemField.TABLE_NAME, allColumn,
+                        Sub_Work_ItemField.WORK_ITEM_ID + "=? AND "
+                                + Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID + "=? AND "
+                                + Sub_Work_ItemField.FINISHED_DATE + "=?",
+                        new String[]{String.valueOf(work_item_id),
+                                String.valueOf(cat_sub_work_item_id), GSCTUtils.getDateNow()}, null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            curItem = this.converCursorToItem(cursor);
+        } else {
+            curItem = null;
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return curItem;
+    }
+
+    // Doi voi truong hop la cac item cap nhat theo cong trinh.
+    public double getLuyke(long work_item_id, long cat_sub_work_item_id) {
+//        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_ItemField.VALUE + ") from " + Sub_Work_ItemField.TABLE_NAME + " where "
+                + Sub_Work_ItemField.WORK_ITEM_ID + "=? AND "
+                + Sub_Work_ItemField.CAT_SUB_WORK_ITEM_ID +  "=?;", new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
     public boolean addItem(Sub_Work_ItemEntity addItem) {
         boolean bResult = false;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
@@ -165,6 +226,7 @@ public class Sub_Work_ItemController {
         values.put(Sub_Work_ItemField.COLUMN_PROCESS_ID, addItem.getProcessId());
         values.put(Sub_Work_ItemField.COLUMN_SYNC_STATUS, addItem.getSyncStatus());
         values.put(Sub_Work_ItemField.COLUMN_IS_ACTIVE, addItem.getIsActive());
+        values.put(Sub_Work_ItemField.VALUE, addItem.getValue());
         return values;
     }
 
@@ -188,6 +250,8 @@ public class Sub_Work_ItemController {
                     .getColumnIndex(Sub_Work_ItemField.COLUMN_SYNC_STATUS)));
             curItem.setIsActive(cursor.getInt(cursor
                     .getColumnIndex(Sub_Work_ItemField.COLUMN_IS_ACTIVE)));
+            curItem.setValue(cursor.getDouble(cursor
+                    .getColumnIndex(Sub_Work_ItemField.VALUE)));
         } catch (Exception e) {
             e.printStackTrace();
         }

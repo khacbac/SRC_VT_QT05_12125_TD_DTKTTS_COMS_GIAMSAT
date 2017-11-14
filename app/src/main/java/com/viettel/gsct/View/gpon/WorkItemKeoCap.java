@@ -1,6 +1,7 @@
 package com.viettel.gsct.View.gpon;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +23,6 @@ public class WorkItemKeoCap extends BaseCustomWorkItem {
     private View rootView;
     private WorkItemValueKeoCapHeader wIVKCHeaderCapSo8;
     private WorkItemValueKeoCapHeader wIVKCHeaderCapAdss;
-    private boolean isWIFinish = false;
     private Work_ItemsEntity wItemEntity;
 
     public WorkItemKeoCap(Context context) {
@@ -41,51 +41,13 @@ public class WorkItemKeoCap extends BaseCustomWorkItem {
     }
 
     @Override
-    public boolean isValidate() {
-        return wIVKCHeaderCapSo8.isValidate() && wIVKCHeaderCapAdss.isValidate();
-    }
-
-    @Override
-    public boolean isWorking() {
-        return wIVKCHeaderCapSo8.isWorking() || wIVKCHeaderCapAdss.isWorking();
-    }
-
-    @Override
-    public boolean isFinish() {
-        return wIVKCHeaderCapSo8.isFinish() && wIVKCHeaderCapAdss.isFinish();
-    }
-
-    @Override
     public void save(long nodeId) {
-        Log.d(TAG, "save: called");
-
         if (wIVKCHeaderCapSo8 != null) {
             wIVKCHeaderCapSo8.save(nodeId);
         }
-
         if (wIVKCHeaderCapAdss != null) {
             wIVKCHeaderCapAdss.save(nodeId);
         }
-
-        if (wItemEntity != null) {
-            if (!wItemEntity.hasStartedDate()) {
-                if (isWorking()) {
-                    wItemEntity.setStarting_date(GSCTUtils.getDateNow());
-                }
-            }
-            if (isFinish()) {
-                if (!wItemEntity.hasCompletedDate()) {
-                    wItemEntity.setComplete_date(GSCTUtils.getDateNow());
-                }
-            }
-            Work_ItemsControler.getInstance(getContext()).updateItem(wItemEntity);
-        }
-    }
-
-    @Override
-    public void updateTrangThai() {
-        wIVKCHeaderCapSo8.updateTrangThai();
-        wIVKCHeaderCapAdss.updateTrangThai();
     }
 
     private void initData(Context context) {
@@ -121,4 +83,5 @@ public class WorkItemKeoCap extends BaseCustomWorkItem {
     public Work_ItemsEntity getwItemEntity() {
         return wItemEntity;
     }
+
 }

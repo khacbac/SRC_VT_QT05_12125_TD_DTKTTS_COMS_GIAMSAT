@@ -35,37 +35,9 @@ public class WorkItemHanNoiTuThue extends BaseCustomWorkItem {
     }
 
     @Override
-    public boolean isValidate() {
-        return true;
-    }
-
-    @Override
-    public boolean isWorking() {
-        for (WorkItemValueHanNoiTuThue hn : listValue) {
-            if (hn.isWorking()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isFinish() {
-        return false;
-    }
-
-    @Override
     public void save(long nodeId) {
         for (WorkItemValueHanNoiTuThue tuThue : listValue) {
             tuThue.save(nodeId);
-        }
-    }
-
-    @Override
-    public void updateTrangThai() {
-        for (WorkItemValueHanNoiTuThue tuThue : listValue) {
-            tuThue.updateLuyKeLapDat();
-            tuThue.updateLuyKeHanNoi();
         }
     }
 

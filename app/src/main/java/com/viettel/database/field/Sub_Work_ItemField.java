@@ -11,4 +11,5 @@ public class Sub_Work_ItemField implements BaseField {
     public static final String FINISHED_DATE = "FINISHED_DATE";
     public static final String WORK_ITEM_ID = "WORK_ITEM_ID";
     public static final String CAT_SUB_WORK_ITEM_ID = "CAT_SUB_WORK_ITEM_ID";
+    public static final String VALUE = "VALUE";
 }

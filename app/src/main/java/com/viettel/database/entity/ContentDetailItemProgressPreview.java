@@ -14,8 +14,7 @@ public class ContentDetailItemProgressPreview {
     public ContentDetailItemProgressPreview() {
     }
 
-    public ContentDetailItemProgressPreview(String detailTenHangMuc, String detailNgayBatDau,
-                                            String detailNgayHoanThanh, String detailKhoiLuong) {
+    public ContentDetailItemProgressPreview(String detailTenHangMuc, String detailNgayBatDau, String detailNgayHoanThanh, String detailKhoiLuong) {
         this.detailTenHangMuc = detailTenHangMuc;
         this.detailNgayBatDau = detailNgayBatDau;
         this.detailNgayHoanThanh = detailNgayHoanThanh;

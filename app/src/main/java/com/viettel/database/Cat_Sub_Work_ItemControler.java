@@ -18,11 +18,18 @@ import java.util.ArrayList;
 public class Cat_Sub_Work_ItemControler {
     private static final String TAG = "Cat_Sub_Work_ItemContro";
     private Context mContext = null;
+    private static Cat_Sub_Work_ItemControler controler;
 
     public Cat_Sub_Work_ItemControler(Context pContext) {
         this.mContext = pContext;
     }
 
+    public static Cat_Sub_Work_ItemControler getInstance(Context pContext) {
+        if (controler == null) {
+            controler = new Cat_Sub_Work_ItemControler(pContext);
+        }
+        return controler;
+    }
 
     public static final String[] allColumn = new String[] {
             Cat_Sub_Work_ItemField.ID,
@@ -108,6 +115,23 @@ public class Cat_Sub_Work_ItemControler {
                         + Cat_Sub_Work_ItemField.COLUMN_IS_ACTIVE + "=1",
                         new String[] { String.valueOf(catWorkItemID)}, null, null,
                         null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Cat_Sub_Work_ItemEntity curItem = this.converCursorToItem(cursor);
+                ret.add(curItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    // Lay list sub work item dua theo code.Dung cho GPon.De lay duoc ODF phan indoor va out door.
+    public ArrayList<Cat_Sub_Work_ItemEntity> getsubCatesByCode(long catWorkItemID,String code) {
+        ArrayList<Cat_Sub_Work_ItemEntity> ret = new ArrayList<>();
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        String query = "select * from cat_sub_work_item where cat_work_item_type_id = "+catWorkItemID+ " and is_active = 1 and code like '%"+code+"%'";
+        Cursor cursor = db.rawQuery(query,null);
         if (cursor.moveToFirst()) {
             do {
                 Cat_Sub_Work_ItemEntity curItem = this.converCursorToItem(cursor);

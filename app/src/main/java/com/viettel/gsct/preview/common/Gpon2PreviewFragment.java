@@ -14,9 +14,11 @@ package com.viettel.gsct.preview.common;
         import android.widget.TextView;
 
         import com.viettel.common.KeyEventCommon;
-        import com.viettel.database.entity.ContentDetailItemProgressPreview;
+        import com.viettel.database.entity.ContentDetailItemProgressGpon2Preview;
         import com.viettel.database.entity.ContentJournalPreview;
         import com.viettel.database.entity.ContentProgressPreview;
+        import com.viettel.database.entity.Sub_Work_ItemEntity;
+        import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
         import com.viettel.database.entity.Work_ItemsEntity;
         import com.viettel.database.field.ConstrNodeController;
         import com.viettel.gsct.View.gpon.WorkItemHanNoi;
@@ -35,6 +37,7 @@ package com.viettel.gsct.preview.common;
         import com.viettel.utils.NestedExpandableListView;
         import com.viettel.utils.NestedListView;
         import com.viettel.view.control.BtsXemNhatKyAdapter;
+        import com.viettel.view.control.TienDoGpon2PreviewAdapter;
         import com.viettel.view.control.TienDoPreviewAdapter;
 
         import java.util.ArrayList;
@@ -74,9 +77,9 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
 
     private static Gpon2PreviewFragment fragment;
     // Phan xem preview theo node.
-    private TienDoPreviewAdapter adapterForNode;
+    private TienDoGpon2PreviewAdapter adapterForNode;
     // Phan xem preview theo cong trinh.
-    private TienDoPreviewAdapter adapterForCT;
+    private TienDoGpon2PreviewAdapter adapterForCT;
 
     public static Gpon2PreviewFragment newInstance() {
         if (fragment == null) {
@@ -146,7 +149,7 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     public void initDataNewTienDoPreviewCT(WorkItemOdf itemOdf, WorkItemOltAndDoKiem workItemOlt) {
         super.initDataNewTienDoPreviewCT(itemOdf, workItemOlt);
         final GponTienDoPreviewFragment fragment = new GponTienDoPreviewFragment();
-        adapterForCT = new TienDoPreviewAdapter(getActivity());
+        adapterForCT = new TienDoGpon2PreviewAdapter(getActivity());
         adapterForCT.setNeedDisplayKhoiLuong(true);
         fragment.setViewCallBack(this, adapterForCT);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameTiendoByCT, fragment).commit();
@@ -174,7 +177,7 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final GponTienDoPreviewFragment fragment = new GponTienDoPreviewFragment();
-        adapterForNode = new TienDoPreviewAdapter(getActivity());
+        adapterForNode = new TienDoGpon2PreviewAdapter(getActivity());
         adapterForNode.setNeedDisplayKhoiLuong(true);
         fragment.setViewCallBack(this, adapterForNode);
 
@@ -217,7 +220,7 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     }
 
     @Override
-    public void upDateTextView(NestedExpandableListView listView, TienDoPreviewAdapter adapter) {
+    public void upDateTextView(NestedExpandableListView listView, TienDoGpon2PreviewAdapter adapter) {
         listView.setAdapter(adapter);
     }
 
@@ -225,8 +228,8 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     public int initDataPreviewKeoCap(HashMap<Long, WorkItemKeoCap> hmkeoCap, Object nodeId, int stt) {
         // Get List data for adapterForNode.
         List<ContentProgressPreview> lHeader = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> lSubWork;
-        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
+        List<ContentDetailItemProgressGpon2Preview> lSubWork;
+        HashMap<ContentProgressPreview, List<ContentDetailItemProgressGpon2Preview>> hmItem = new HashMap<>();
 
         WorkItemKeoCap kc = hmkeoCap.get(Long.parseLong(nodeId.toString()));
 
@@ -234,17 +237,7 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
         Work_ItemsEntity wEntity = kc.getwItemEntity();
         lSubWork = new ArrayList<>();
         if (wEntity != null) {
-            ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), wEntity.getStarting_date(), wEntity.getComplete_date());
-            if (!wEntity.hasStartedDate()) {
-                if (kc.isWorking()) {
-                    content.setNgayBatDau(GSCTUtils.getDateNow());
-                }
-            }
-            if (!wEntity.hasCompletedDate()) {
-                if (kc.isFinish()) {
-                    content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
+            ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), "", "");
             lHeader.add(content);
             hmItem.put(content, lSubWork);
         }
@@ -253,21 +246,15 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
         Work_ItemsEntity wItemSo8 = kc.getwIVKCHeaderCapSo8().getwItemEntity();
         lSubWork = new ArrayList<>();
         if (wItemSo8 != null) {
-            ContentProgressPreview contentCapSo8 = new ContentProgressPreview("" + ++stt, kc.getwIVKCHeaderCapSo8().getTenLoaiCap(), wItemSo8.getStarting_date(), wItemSo8.getComplete_date());
-            if (!wItemSo8.hasStartedDate()) {
-                if (kc.isWorking()) {
-                    contentCapSo8.setNgayBatDau(GSCTUtils.getDateNow());
-                }
-            }
-            if (!wItemSo8.hasCompletedDate()) {
-                if (kc.isFinish()) {
-                    contentCapSo8.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
+            ContentProgressPreview contentCapSo8 = new ContentProgressPreview("" + ++stt, kc.getwIVKCHeaderCapSo8().getTenLoaiCap(), "", "");
             lHeader.add(contentCapSo8);
             for (int i = 0; i < kc.getwIVKCHeaderCapSo8().getListValue().size(); i++) {
                 WorkItemValueKeoCap valueKC = kc.getwIVKCHeaderCapSo8().getListValue().get(i);
-                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueKC.getTenItem(), "", "", "" + (valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueKC.getTenItem(), ""+ valueKC.getDoubleKhoiLuong(), "" , "" + (valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe()));
+                if (valueKC.getDoubleKhoiLuong() > 0) {
+                    item.setNewEdit(true);
+                    contentCapSo8.setNewEdit(true);
+                }
                 lSubWork.add(item);
             }
             hmItem.put(contentCapSo8, lSubWork);
@@ -278,20 +265,14 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
         lSubWork = new ArrayList<>();
         if (wItemAdss != null) {
             ContentProgressPreview contentAdss = new ContentProgressPreview("" + ++stt, kc.getwIVKCHeaderCapAdss().getTenLoaiCap(), wItemAdss.getStarting_date(), wItemAdss.getComplete_date());
-            if (!wItemAdss.hasStartedDate()) {
-                if (kc.isWorking()) {
-                    contentAdss.setNgayBatDau(GSCTUtils.getDateNow());
-                }
-            }
-            if (!wItemAdss.hasCompletedDate()) {
-                if (kc.isFinish()) {
-                    contentAdss.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
             lHeader.add(contentAdss);
             for (int i = 0; i < kc.getwIVKCHeaderCapAdss().getListValue().size(); i++) {
                 WorkItemValueKeoCap valueKC = kc.getwIVKCHeaderCapAdss().getListValue().get(i);
-                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueKC.getTenItem(), "", "", "" + (valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueKC.getTenItem(), ""+valueKC.getDoubleKhoiLuong(), "", "" + (valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe()));
+                if (valueKC.getDoubleKhoiLuong() > 0) {
+                    item.setNewEdit(true);
+                    contentAdss.setNewEdit(true);
+                }
                 lSubWork.add(item);
             }
             hmItem.put(contentAdss, lSubWork);
@@ -305,35 +286,31 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     private int initDataPreviewHanNoi(HashMap<Long, WorkItemHanNoi> hmWHanNoi, Object tag, int stt) {
         // Get List data for adapterForNode.
         List<ContentProgressPreview> lHeader = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> lSubWork;
-        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
+        List<ContentDetailItemProgressGpon2Preview> lSubWork;
+        HashMap<ContentProgressPreview, List<ContentDetailItemProgressGpon2Preview>> hmItem = new HashMap<>();
 
         WorkItemHanNoi hn = hmWHanNoi.get(Long.parseLong(tag.toString()));
         Work_ItemsEntity wEntity = hn.getwItemEntity();
         lSubWork = new ArrayList<>();
         if (wEntity != null) {
             ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), wEntity.getStarting_date(), wEntity.getComplete_date());
-            if (!wEntity.hasStartedDate()) {
-                if (hn.isWorking()) {
-                    content.setNgayBatDau(GSCTUtils.getDateNow());
-                }
-            }
-            if (!wEntity.hasCompletedDate()) {
-                if (hn.isFinish()) {
-                    content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
             lHeader.add(content);
             for (int i = 0; i < hn.getlBoChia().getListValue().size(); i++) {
                 WorkItemValueHanNoiBoChia valueBC = hn.getlBoChia().getListValue().get(i);
-                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueBC.getTextBochia(),
-                        "", "", "" + (valueBC.getDoubleKhoiLuong() + valueBC.getDoubleOldLuyKe()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueBC.getTextBochia(), ""+valueBC.getDoubleKhoiLuong(), "", "" + (valueBC.getDoubleKhoiLuong() + valueBC.getDoubleOldLuyKe()));
+                if (valueBC.getDoubleKhoiLuong() > 0) {
+                    item.setNewEdit(true);
+                    content.setNewEdit(true);
+                }
                 lSubWork.add(item);
             }
             for (int i = 0; i < hn.getlTuThue().getListValue().size(); i++) {
                 WorkItemValueHanNoiTuThue valueTT = hn.getlTuThue().getListValue().get(i);
-                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueTT.getTenTu(),
-                        "", "", "" + (valueTT.getDoubleKhoiLuongHanNoi() + valueTT.getDoubleOldLuyKeLapDat()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueTT.getTenTu(), ""+valueTT.getDoubleKhoiLuongLapDat(), "", "" + (valueTT.getDoubleKhoiLuongLapDat() + valueTT.getDoubleOldLuyKeLapDat()));
+                if (valueTT.getDoubleKhoiLuongHanNoi() > 0) {
+                    item.setNewEdit(true);
+                    content.setNewEdit(true);
+                }
                 lSubWork.add(item);
             }
             hmItem.put(content, lSubWork);
@@ -347,29 +324,23 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     private int initDataPreviewOdfOutdoor(HashMap<Long, WorkItemOdf> hmWOdfOutdoor, Object tag, int stt) {
         // Get List data for adapterForNode.
         List<ContentProgressPreview> lHeader = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> lSubWork;
-        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
+        List<ContentDetailItemProgressGpon2Preview> lSubWork;
+        HashMap<ContentProgressPreview, List<ContentDetailItemProgressGpon2Preview>> hmItem = new HashMap<>();
 
         WorkItemOdf odf = hmWOdfOutdoor.get(Long.parseLong(tag.toString()));
         Work_ItemsEntity wEntity = odf.getwItemEntity();
         lSubWork = new ArrayList<>();
         if (wEntity != null) {
-            ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), wEntity.getStarting_date(), wEntity.getComplete_date());
-            if (!wEntity.hasStartedDate()) {
-                if (odf.isWorking()) {
-                    content.setNgayBatDau(GSCTUtils.getDateNow());
-                }
-            }
-            if (!wEntity.hasCompletedDate()) {
-                if (odf.isFinish()) {
-                    content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
+            ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name() + " ODF Outdoor", wEntity.getStarting_date(), wEntity.getComplete_date());
             lHeader.add(content);
             for (int i = 0; i < odf.getListValue().size(); i++) {
                 WorkItemValueOdf valueOdf = odf.getListValue().get(i);
-                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueOdf.getTvTenOdf(),
-                        "", "", "" + (valueOdf.getDoubleKhoiLuong() + valueOdf.getDoubleOldLuyKe()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueOdf.getTvTenOdf(),
+                        ""+valueOdf.getDoubleKhoiLuong(), "", "" + (valueOdf.getDoubleKhoiLuong() + valueOdf.getDoubleOldLuyKe()));
+                if (valueOdf.getDoubleKhoiLuong() > 0) {
+                    item.setNewEdit(true);
+                    content.setNewEdit(true);
+                }
                 lSubWork.add(item);
             }
             hmItem.put(content, lSubWork);
@@ -383,33 +354,29 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     private int initDataPreviewDoKiem(HashMap<Long, WorkItemOltAndDoKiem> hmWDoKiem, Object tag, int stt) {
         // Get List data for adapterForNode.
         List<ContentProgressPreview> lHeader = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> lSubWork;
-        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
+        List<ContentDetailItemProgressGpon2Preview> lSubWork;
+        HashMap<ContentProgressPreview, List<ContentDetailItemProgressGpon2Preview>> hmItem = new HashMap<>();
 
         WorkItemOltAndDoKiem doKiem = hmWDoKiem.get(Long.parseLong(tag.toString()));
         Work_ItemsEntity wEntity = doKiem.getwItemEntity();
         lSubWork = new ArrayList<>();
         if (wEntity != null) {
             ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), wEntity.getStarting_date(), wEntity.getComplete_date());
-            if (!wEntity.hasCompletedDate()) {
-                if (doKiem.isFinish()) {
-                    content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
             lHeader.add(content);
             for (int i = 0; i < doKiem.getListItemValue().size(); i++) {
                 WorkItemValueOltDoKiem valueDoKiem = doKiem.getListItemValue().get(i);
-                ContentDetailItemProgressPreview itemDetail = new ContentDetailItemProgressPreview();
+                ContentDetailItemProgressGpon2Preview itemDetail = new ContentDetailItemProgressGpon2Preview();
                 itemDetail.setDetailTenHangMuc(valueDoKiem.getTenTitle());
-                itemDetail.setDetailNgayBatDau("");
-                itemDetail.setDetailKhoiLuong("");
-                if (valueDoKiem.getSwiEntity() != null) {
-                    itemDetail.setDetailNgayHoanThanh(valueDoKiem.getSwiEntity().getFinishDate());
-                } else {
+                Sub_Work_Item_ValueEntity swivEntity = valueDoKiem.getSwiValue();
+                if (swivEntity != null) {
                     if (valueDoKiem.isFinish()) {
-                        itemDetail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
-                    } else {
-                        itemDetail.setDetailNgayHoanThanh("");
+                        if (!swivEntity.hadAddedDate() || GSCTUtils.getDateNow().equalsIgnoreCase(swivEntity.getAdded_date())) {
+                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
+                            itemDetail.setNewEdit(true);
+                            content.setNewEdit(true);
+                        } else {
+                            itemDetail.setDetailNgayHoanThanh(swivEntity.getAdded_date());
+                        }
                     }
                 }
                 lSubWork.add(itemDetail);
@@ -425,26 +392,21 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     private int initDataPreviewOdfIndoor(WorkItemOdf itemOdf, int stt) {
         // Get List data for adapterForNode.
         List<ContentProgressPreview> lHeader = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> lSubWork;
-        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
+        List<ContentDetailItemProgressGpon2Preview> lSubWork;
+        HashMap<ContentProgressPreview, List<ContentDetailItemProgressGpon2Preview>> hmItem = new HashMap<>();
 
         lSubWork = new ArrayList<>();
         Work_ItemsEntity wEntity = itemOdf.getwItemEntity();
         if (wEntity != null) {
-            ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), wEntity.getStarting_date(), wEntity.getComplete_date());
-            if (!wEntity.hasStartedDate()) {
-                content.setNgayBatDau(GSCTUtils.getDateNow());
-            }
-            if (!wEntity.hasCompletedDate()) {
-                if (itemOdf.isFinish()) {
-                    content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
-
+            ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name() + " ODF Indoor", wEntity.getStarting_date(), wEntity.getComplete_date());
             lHeader.add(content);
             for (int i = 0; i < itemOdf.getListValue().size(); i++) {
                 WorkItemValueOdf valueOdf = itemOdf.getListValue().get(i);
-                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueOdf.getTvTenOdf(), "", "", "" + (valueOdf.getDoubleKhoiLuong() + valueOdf.getDoubleOldLuyKe()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueOdf.getTvTenOdf(), ""+valueOdf.getDoubleKhoiLuong(), "", "" + (valueOdf.getDoubleKhoiLuong() + valueOdf.getDoubleOldLuyKe()));
+                if (valueOdf.getDoubleKhoiLuong() > 0) {
+                    item.setNewEdit(true);
+                    content.setNewEdit(true);
+                }
                 lSubWork.add(item);
             }
             hmItem.put(content, lSubWork);
@@ -457,38 +419,30 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     private void initDataPreviewOlt(WorkItemOltAndDoKiem workItemOlt, int stt) {
         // Get List data for adapterForNode.
         List<ContentProgressPreview> lHeader = new ArrayList<>();
-        List<ContentDetailItemProgressPreview> lSubWork;
-        HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
+        List<ContentDetailItemProgressGpon2Preview> lSubWork;
+        HashMap<ContentProgressPreview, List<ContentDetailItemProgressGpon2Preview>> hmItem = new HashMap<>();
 
         lSubWork = new ArrayList<>();
         Work_ItemsEntity wEntity = workItemOlt.getwItemEntity();
         if (wEntity != null) {
             ContentProgressPreview content = new ContentProgressPreview("" + ++stt, wEntity.getWork_item_name(), wEntity.getStarting_date(), wEntity.getComplete_date());
-//            if (!wEntity.hasStartedDate()) {
-//                content.setNgayBatDau(GSCTUtils.getDateNow());
-//            }
-            if (!wEntity.hasCompletedDate()) {
-                if (workItemOlt.isFinish()) {
-                    content.setNgayHoanThanh(GSCTUtils.getDateNow());
-                }
-            }
             lHeader.add(content);
             for (int i = 0; i < workItemOlt.getListItemValue().size(); i++) {
                 WorkItemValueOltDoKiem valueDoKiem = workItemOlt.getListItemValue().get(i);
-                ContentDetailItemProgressPreview itemDetail = new ContentDetailItemProgressPreview();
+                ContentDetailItemProgressGpon2Preview itemDetail = new ContentDetailItemProgressGpon2Preview();
                 itemDetail.setDetailTenHangMuc(valueDoKiem.getTenTitle());
-                itemDetail.setDetailNgayBatDau("");
-                itemDetail.setDetailKhoiLuong("");
-                if (valueDoKiem.getSwiEntity() != null) {
-                    itemDetail.setDetailNgayHoanThanh(valueDoKiem.getSwiEntity().getFinishDate());
-                } else {
+                Sub_Work_ItemEntity swiEntity = valueDoKiem.getSwiEntity();
+                if (swiEntity != null) {
                     if (valueDoKiem.isFinish()) {
-                        itemDetail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
-                    } else {
-                        itemDetail.setDetailNgayHoanThanh("");
+                        if (!swiEntity.hasFinishDate() || GSCTUtils.getDateNow().equalsIgnoreCase(swiEntity.getFinishDate())) {
+                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
+                            itemDetail.setNewEdit(true);
+                            content.setNewEdit(true);
+                        } else {
+                            itemDetail.setDetailNgayHoanThanh(swiEntity.getFinishDate());
+                        }
                     }
                 }
-//                ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(valueDoKiem.getTenTitle(), "", valueDoKiem.getSwiEntity().getFinishDate(), "");
                 lSubWork.add(itemDetail);
             }
             hmItem.put(content, lSubWork);

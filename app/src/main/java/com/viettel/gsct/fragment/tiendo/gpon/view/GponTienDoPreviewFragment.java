@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.viettel.ktts.R;
 import com.viettel.utils.NestedExpandableListView;
+import com.viettel.view.control.TienDoGpon2PreviewAdapter;
 import com.viettel.view.control.TienDoPreviewAdapter;
 
 import butterknife.BindView;
@@ -27,7 +28,7 @@ public class GponTienDoPreviewFragment extends Fragment {
     NestedExpandableListView nExpandleListView;
 
     private ViewCallBack viewCallBack;
-    private TienDoPreviewAdapter adapter;
+    private TienDoGpon2PreviewAdapter adapter;
 
     @SuppressLint("ValidFragment")
     public GponTienDoPreviewFragment() {
@@ -44,10 +45,10 @@ public class GponTienDoPreviewFragment extends Fragment {
     }
 
     public interface ViewCallBack {
-        void upDateTextView(NestedExpandableListView listView, TienDoPreviewAdapter adapter);
+        void upDateTextView(NestedExpandableListView listView, TienDoGpon2PreviewAdapter adapter);
     }
 
-    public void setViewCallBack(ViewCallBack cb,TienDoPreviewAdapter adapter) {
+    public void setViewCallBack(ViewCallBack cb,TienDoGpon2PreviewAdapter adapter) {
         this.viewCallBack = cb;
         this.adapter = adapter;
     }

@@ -12,6 +12,7 @@ public class Sub_Work_ItemEntity extends BaseEntity{
     private String finishDate;
     private long work_item_id;
     private String code;
+    private double value;
 
     private long creatorId;
 
@@ -57,6 +58,10 @@ public class Sub_Work_ItemEntity extends BaseEntity{
         this.finishDate = finishDate;
     }
 
+    public boolean hasFinishDate() {
+        return finishDate != null && finishDate.length() > 0;
+    }
+
     public long getWork_item_id() {
         return work_item_id;
     }
@@ -77,4 +82,11 @@ public class Sub_Work_ItemEntity extends BaseEntity{
         this.creatorId = creatorId;
     }
 
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
 }

@@ -27,16 +27,13 @@ public abstract class BaseCustomWorkItem extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public abstract boolean isValidate();
-    public abstract boolean isWorking();
-    public abstract boolean isFinish();
     // Truong hop cac item chi luu theo cong trinh.
     public void save(){}
     // Truong hop cac cong trinh luu theo node.
     public void save(long nodeId){}
 
     // Ham cap nhat trang thai view hien thi sau khi user save.
-    public abstract void updateTrangThai();
+//    public abstract void updateTrangThai();
 
     // Ham show error khi validate = false.
     private void showToastValidateFinish() {

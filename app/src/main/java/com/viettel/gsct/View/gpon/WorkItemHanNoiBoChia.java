@@ -33,38 +33,12 @@ public class WorkItemHanNoiBoChia extends BaseCustomWorkItem {
     }
 
     @Override
-    public boolean isValidate() {
-        return true;
-    }
-
-    @Override
-    public boolean isWorking() {
-        for (WorkItemValueHanNoiBoChia bc : listValue) {
-            if (bc.isWorking()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isFinish() {
-        return false;
-    }
-
-    @Override
     public void save(long nodeId) {
         for (WorkItemValueHanNoiBoChia boChia : listValue) {
             boChia.save(nodeId);
         }
     }
 
-    @Override
-    public void updateTrangThai() {
-        for (WorkItemValueHanNoiBoChia boChia : listValue) {
-            boChia.updateLuyKe();
-        }
-    }
 
     private void initData(Context context) {
         setOrientation(VERTICAL);

@@ -41,37 +41,9 @@ public class WorkItemOltAndDoKiem extends BaseCustomWorkItem {
         initData(context);
     }
 
-    @Override
-    public boolean isValidate() {
-        return true;
-    }
-
-    @Override
-    public boolean isWorking() {
-        return false;
-    }
-
-    @Override
-    public boolean isFinish() {
-        for (WorkItemValueOltDoKiem item : listItemValue) {
-            if (!item.isFinish()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // Save OLT theo cong trinh.
     @Override
     public void save() {
-        if (wItemEntity != null) {
-            if (isFinish()) {
-                if (!wItemEntity.hasCompletedDate()) {
-                    wItemEntity.setComplete_date(GSCTUtils.getDateNow());
-                }
-            }
-            Work_ItemsControler.getInstance(getContext()).updateItem(wItemEntity);
-        }
         if (!listItemValue.isEmpty()) {
             for (WorkItemValueOltDoKiem item : listItemValue) {
                 item.save();
@@ -82,25 +54,11 @@ public class WorkItemOltAndDoKiem extends BaseCustomWorkItem {
     // Save do kiem theo node.
     @Override
     public void save(long nodeId) {
-        Log.d(TAG, "save: called");
-        if (wItemEntity != null) {
-            if (isFinish()) {
-                if (!wItemEntity.hasCompletedDate()) {
-                    wItemEntity.setComplete_date(GSCTUtils.getDateNow());
-                }
-            }
-            Work_ItemsControler.getInstance(getContext()).updateItem(wItemEntity);
-        }
         if (!listItemValue.isEmpty()) {
             for (WorkItemValueOltDoKiem item : listItemValue) {
                 item.save(nodeId);
             }
         }
-    }
-
-    @Override
-    public void updateTrangThai() {
-
     }
 
     private void initData(Context context) {

@@ -65,14 +65,17 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
     private IeGponTienDoPresenter itemGponPresenter;
     private boolean flagIsRealFinish = true;
 
+    private boolean isFirstShow = true;
+    // Ung voi node dau tien.
+    private SubWorkItemGPONView swiKeoCap;
+
     public static BaseFragment newInstance() {
         return new GPONTiendo2Fragment();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_gpon_tien_do_2, container, false);
         unbinder = ButterKnife.bind(this, layout);
         initViews();
@@ -99,6 +102,8 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         // Them all Work Item Entity.
         itemGponPresenter.addWorkItem();
 
+        // Hien thi item dau tien
+        swiKeoCap.getRadioBtnCheck().setChecked(true);
     }
 
 
@@ -150,6 +155,10 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
     @Override
     public void finishAddSWKeoCap(SubWorkItemGPONView sView, ConstrNodeEntity node) {
         layoutRootLeft.addView(sView);
+        if (isFirstShow) {
+            this.swiKeoCap = sView;
+            isFirstShow = false;
+        }
         // Them item cho right Sub Work Item.
         itemGponPresenter.addSWValueKeoCap(node, sView);
     }
@@ -203,9 +212,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
 
     @Override
     public void finishAddLapDatOltValue(View view) {
-//        for (View sView : listRightView) {
-            lOltValue.addView(view);
-//        }
+        lOltValue.addView(view);
     }
 
     /**
@@ -246,13 +253,6 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
      * @return boolean.
      */
     public boolean checkValidateGponTienDo() {
-        Log.d(TAG, "checkValidateGponTienDo() called");
-        if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
-            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành," +
-                    " bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
         return itemGponPresenter.checkValidate();
     }
 
@@ -281,17 +281,14 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (isHoanThanh) {
-                        Toast.makeText(getActivity(),
-                                "Bạn chỉ có thể nhâp khối lượng trong trạng thái chưa làm!",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Bạn chỉ có thể nhâp khối lượng trong trạng thái chưa làm!", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }
                 return false;
             }
         });
-        Log.d(TAG, "setStatusEdtValueFollowStatus() called with: editText = ["
-                + editText + "], isHoanThanh = [" + isHoanThanh + "]");
+        Log.d(TAG, "setStatusEdtValueFollowStatus() called with: editText = [" + editText + "], isHoanThanh = [" + isHoanThanh + "]");
     }
 
     /**
@@ -307,8 +304,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         for (int i = 0; i < layoutRootLeft.getChildCount(); i++) {
             if (layoutRootLeft.getChildAt(i) instanceof WorkItemGPONView) {
                 WorkItemGPONView gponView = (WorkItemGPONView) layoutRootLeft.getChildAt(i);
-                gponView.getRootLayout().setBackgroundColor(
-                        getResources().getColor(R.color.white_color));
+                gponView.getRootLayout().setBackgroundColor(getResources().getColor(R.color.white_color));
             }
         }
     }
@@ -326,14 +322,6 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.save();
         Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
     }
-
-//    /**
-//     * Gui thong tin thong qua Event Bus.
-//     */
-//    public void registerListenerEventBus() {
-//        EventBus.getDefault().post(layoutRootRight);
-//        Log.d(TAG, "registerListenerEventBus() called");
-//    }
 
     @Override
     public void showPreviewTienDo(BaseGponPreview mGponPrevFrag) {

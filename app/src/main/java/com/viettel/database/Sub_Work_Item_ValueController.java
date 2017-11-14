@@ -132,6 +132,29 @@ public class Sub_Work_Item_ValueController {
         return curItem;
     }
 
+    // Truong hop dac biet,danh cho item do kiem.
+    public Sub_Work_Item_ValueEntity getItemByNodeDoKiem(long work_item_id, long cat_sub_work_item_id, long nodeId) {
+//        Log.e(TAG, "getItem: " + work_item_id + " " + cat_sub_work_item_id );
+        Sub_Work_Item_ValueEntity curItem;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor = db
+                .query(Sub_Work_Item_ValueField.TABLE_NAME, allColumn,
+                        Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                                + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                                + Sub_Work_Item_ValueField.CONSTR_NODE_ID + "=?",
+                        new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id) , String.valueOf(nodeId)}, null, null,
+                        null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            curItem = this.converCursorToItem(cursor);
+        } else {
+            curItem = null;
+        }
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return curItem;
+    }
+
     // Doi voi truong hop la cac item cap nhat theo cong trinh.
     public double getLuyke(long work_item_id, long cat_sub_work_item_id) {
 //        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );

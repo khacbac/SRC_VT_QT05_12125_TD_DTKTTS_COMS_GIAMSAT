@@ -27,13 +27,6 @@ public class WorkItemOdf extends BaseCustomWorkItem {
     private Work_ItemsEntity wItemEntity;
     private ArrayList<WorkItemValueOdf> listValue = new ArrayList<>();
 
-    @BindView(R.id.btnTienDo)
-    AppCompatButton btnTienDo;
-
-    private String chuaLam;
-    private String dangLam;
-    private String hoanThanh;
-
     public WorkItemOdf(Context context) {
         super(context);
         initData(context);
@@ -49,40 +42,9 @@ public class WorkItemOdf extends BaseCustomWorkItem {
         initData(context);
     }
 
-    @Override
-    public boolean isValidate() {
-        return true;
-    }
-
-    @Override
-    public boolean isWorking() {
-        for (WorkItemValueOdf odf : listValue) {
-            if (odf.isWorking()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isFinish() {
-        return getResources().getString(R.string.str_tiendo_hoanthanh).equalsIgnoreCase(btnTienDo.getText().toString().trim());
-    }
-
     // Save odf indoor theo cong trinh.
     @Override
     public void save() {
-        if (wItemEntity != null) {
-            if (!wItemEntity.hasStartedDate()) {
-                if (isWorking()) {
-                    wItemEntity.setStarting_date(GSCTUtils.getDateNow());
-                }
-            }
-            if (isFinish()) {
-                wItemEntity.setComplete_date(GSCTUtils.getDateNow());
-            }
-            Work_ItemsControler.getInstance(getContext()).updateItem(wItemEntity);
-        }
         for (WorkItemValueOdf odf : listValue) {
             odf.save();
         }
@@ -91,31 +53,8 @@ public class WorkItemOdf extends BaseCustomWorkItem {
     // Save Odf outdoor theo node.
     @Override
     public void save(long nodeId) {
-        if (wItemEntity != null) {
-            if (!wItemEntity.hasStartedDate()) {
-                if (isWorking()) {
-                    wItemEntity.setStarting_date(GSCTUtils.getDateNow());
-                }
-            }
-            if (isFinish()) {
-                wItemEntity.setComplete_date(GSCTUtils.getDateNow());
-            }
-            Work_ItemsControler.getInstance(getContext()).updateItem(wItemEntity);
-        }
         for (WorkItemValueOdf odf : listValue) {
             odf.save(nodeId);
-        }
-    }
-
-    @Override
-    public void updateTrangThai() {
-        if (wItemEntity != null) {
-            if (wItemEntity.hasStartedDate()) {
-                btnTienDo.setText(dangLam);
-            }
-        }
-        for (WorkItemValueOdf odf : listValue) {
-            odf.updateLuyKeLapDat();
         }
     }
 
@@ -123,63 +62,10 @@ public class WorkItemOdf extends BaseCustomWorkItem {
         setOrientation(VERTICAL);
         rootView = inflate(context, R.layout.custom_workitem_odf,this);
         ButterKnife.bind(this);
-
-        chuaLam = getResources().getString(R.string.str_tiendo_chualam);
-        dangLam = getResources().getString(R.string.str_tiendo_danglam);
-        hoanThanh = getResources().getString(R.string.str_tiendo_hoanthanh);
-
-        btnTienDo.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String tienDo = btnTienDo.getText().toString().trim();
-                for (WorkItemValueOdf odf : listValue) {
-                    odf.setFinish(false);
-                }
-                // Ham lay tong tat ca value va luy ke hien tai cua toan bo sub work item value.
-                if (chuaLam.equalsIgnoreCase(tienDo)) {
-                    btnTienDo.setText(dangLam);
-                } else if (dangLam.equalsIgnoreCase(tienDo)) {
-                    double value = 0;
-                    double oldLuyke = 0;
-                    double sum = 0;
-                    for (WorkItemValueOdf odf : listValue) {
-                        value = odf.getDoubleKhoiLuong();
-                        oldLuyke = odf.getDoubleOldLuyKe();
-                        sum += (value + oldLuyke);
-                    }
-                    if (sum == 0) {
-                        Toast.makeText(getContext(),getResources().getString(R.string.str_validate_hoanthanh),Toast.LENGTH_SHORT).show();
-                    } else {
-                        btnTienDo.setText(hoanThanh);
-                        for (WorkItemValueOdf odf : listValue) {
-                            odf.setFinish(true);
-                        }
-                    }
-                } else if (hoanThanh.equalsIgnoreCase(tienDo)) {
-                    if (wItemEntity != null) {
-                        if (wItemEntity.hasStartedDate()) {
-                            btnTienDo.setText(dangLam);
-                        } else {
-                            btnTienDo.setText(chuaLam);
-                        }
-                    }
-
-                }
-            }
-        });
     }
 
     public void addWorkItem(Work_ItemsEntity wItem) {
         this.wItemEntity = wItem;
-        if (wItemEntity.hasStartedDate()) {
-            btnTienDo.setText(dangLam);
-        }
-        if (wItemEntity.hasCompletedDate()) {
-            btnTienDo.setText(hoanThanh);
-            if (!GSCTUtils.getDateNow().equalsIgnoreCase(wItemEntity.getComplete_date())) {
-                btnTienDo.setEnabled(false);
-            }
-        }
     }
 
     public Work_ItemsEntity getwItemEntity() {
