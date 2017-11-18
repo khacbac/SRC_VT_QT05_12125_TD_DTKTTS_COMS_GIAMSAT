@@ -31,7 +31,7 @@ import com.viettel.gsct.fragment.tiendo.gpon.model.GponTienDoModel;
 import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
 import com.viettel.gsct.fragment.tiendo.gpon.view.IeGponTienDoFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.model.IeGponTienDoModel;
-import com.viettel.gsct.preview.common.GponPreviewNodeFragment;
+import com.viettel.gsct.preview.gpon.GponPreviewNodeFragment;
 import com.viettel.gsct.utils.GSCTUtils;
 import java.util.ArrayList;
 import java.util.HashMap;

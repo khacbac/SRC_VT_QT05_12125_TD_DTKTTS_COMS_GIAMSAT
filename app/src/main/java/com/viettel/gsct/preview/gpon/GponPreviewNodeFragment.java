@@ -1,4 +1,4 @@
-package com.viettel.gsct.preview.common;
+package com.viettel.gsct.preview.gpon;
 
         import android.os.Bundle;
         import android.support.annotation.Nullable;
