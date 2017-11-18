@@ -62,8 +62,6 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
     @BindView(R.id.layout_root_right)
     LinearLayout layoutRootRight;
     private Unbinder unbinder;
-    private boolean dialogDismissFlag = true;
-    private boolean isFinish = false;
     public static ArrayList<Double> luykes;
     private static GPONTiendoFragment fragment;
 
@@ -121,8 +119,8 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
         hashPlanCodes.put("DOKIEM_BRCD", "GPON_Ngay_hoan_thanh_do_kiem_nghiem_thu");
         hashPlanCodes.put("LAPDAT_BRCD", "GPON_Ngay_hoan_thanh_lap_dat");
 
-//        WorkItemRightGPONView rightView = new WorkItemRightGPONView(getContext());
-
+        boolean isLapDatFinish = false;
+        boolean isHanNoiFinish = false;
         if (workItems != null && !workItems.isEmpty()) {
             for (Work_ItemsEntity workItem : workItems) {
                 Log.d(TAG, "Work item entity name = " + workItem.getWork_item_name());
@@ -135,8 +133,16 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                     workItem.addSubWorkItem(subWorkItem);
                     hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
                 }
-                if (flagIsRealFinish)
+                if (flagIsRealFinish) {
                     flagIsRealFinish = workItem.isCompleted();
+                }
+                if (workItem.hasCompletedDate() && !workItem.getComplete_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
+                    if (workItem.getWork_item_name().equalsIgnoreCase("Lắp đặt")) {
+                        isLapDatFinish = true;
+                    } else if (workItem.getWork_item_name().equalsIgnoreCase("Hàn nối")) {
+                        isHanNoiFinish = true;
+                    }
+                }
             }
         }
 
@@ -161,6 +167,19 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                 ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = cat_sub_work_itemControler.getsubCates(entity.getItem_type_id());
                 for (Cat_Sub_Work_ItemEntity catSubWorkItem : arrSubWorkItems) {
                     SubWorkItemGponOldView subView = new SubWorkItemGponOldView(getContext());
+                    if (catSubWorkItem.getCode().contains("HANNOI_BRCD")) {
+                        subView.setEdtValueMaxLength(9);
+                        subView.setEdtDataType(0);
+                        if (isHanNoiFinish) {
+                            subView.setEdtEnable(false);
+                        }
+                    } else if (catSubWorkItem.getCode().contains("CAPQUANG")) {
+                        subView.setEdtValueMaxLength(12);
+                        subView.setEdtDataType(1);
+                        if (isLapDatFinish) {
+                            subView.setEdtEnable(false);
+                        }
+                    }
                     Sub_Work_ItemEntity subWorkItem = hashSubWorkItems.get(catSubWorkItem.getId());
                     if (subWorkItem == null) {
                         subWorkItem = new Sub_Work_ItemEntity();
@@ -278,13 +297,6 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
         Enumeration<Long> keys = hashWorkItems.keys();
         while (keys.hasMoreElements()) {
             Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
-            Log.d(TAG, "save() called" + "Work item entity code =" + workItem.getWork_item_code());
-            if (workItem.isCompleted()) {
-                Log.d(TAG, "save() called" + " Sub work item size complete = " + workItem.getSubWorkItems().size());
-            }
-            if (workItem.getWork_item_code() == null){
-                Log.d(TAG, "save() called" + " Sub work item size null = " + workItem.getSubWorkItems().size());
-            }
             if (workItem.isCompleted() || workItem.getWork_item_code() == null)
                 continue;
             workItem.setSyncStatus(workItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
@@ -294,8 +306,6 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
             if (workItem.getStarting_date().length() == 0) {
                 workItem.setStarting_date(GSCTUtils.getDateNow());
             }
-            Log.d(TAG, "save() called" + "Work item has updated date - name = " + workItem.getWork_item_name());
-
             if (workItem.getStatus_id() == 403 && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
                 boolean flagValue = false;
                 Enumeration<SubWorkItemGponOldView> enums = hashSubWorkItemViews.elements();
@@ -336,7 +346,6 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                 }
 
                 SubWorkItemGponOldView view = hashSubWorkItemViews.get(subWorkItem.getCat_sub_work_item_id());
-                Log.d(TAG, "SUb work item name = " + view.getTvTitle());
                 double value = view != null ? view.getValue() : 0L;
                 Sub_Work_Item_ValueEntity subWorkItemValue = sub_work_item_value_controller.getItem(subWorkItem.getWork_item_id(), subWorkItem.getCat_sub_work_item_id());
                 if (subWorkItemValue == null) {
@@ -394,15 +403,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
             Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
             if (workItem.isCompleted() || workItem.getWork_item_code() == null)
                 continue;
-
-            workItem.setSyncStatus(workItem.getProcessId() > 0
-                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            workItem.setSyncStatus(workItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
             workItem.setEmployeeId(userId);
-//            workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
-//            workItem.updateDate();
-
-            if (workItem.getStatus_id() == 403
-                    && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
+            if (workItem.getStatus_id() == 403 && workItem.getWork_item_code().equals("KEOCAP_BRCD")) {
                 boolean flagValue = false;
                 Enumeration<SubWorkItemGponOldView> enums = hashSubWorkItemViews.elements();
                 while (enums.hasMoreElements()) {
@@ -466,6 +469,9 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
     @Override
     public void showPreviewTienDo(BaseGponPreview mGponPrevFrag) {
         super.showPreviewTienDo(mGponPrevFrag);
+        if (hmSubWorkItem.isEmpty()) {
+            return;
+        }
         mGponPrevFrag.initDataOldTienDoPreview(hmSubWorkItem);
     }
 }

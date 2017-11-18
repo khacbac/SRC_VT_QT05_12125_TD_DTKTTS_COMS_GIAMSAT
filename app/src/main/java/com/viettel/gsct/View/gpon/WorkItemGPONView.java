@@ -38,19 +38,9 @@ public class WorkItemGPONView extends LinearLayout implements SubWorkItemGPONVie
     @BindView(R.id.rootLayout)
     RelativeLayout rootLayout;
 
-    private Cat_Work_Item_TypesEntity workItemTypeId;
-    private String itemType;
-
     private ArrayList<AppCompatRadioButton> radioButtons = new ArrayList<>();
-
     private ArrayList<View> arrSubViews= new ArrayList<>();
     private IeShowWorkItemByItemType ieShowWorkItemByItemType;
-    private ArrayList<View> allRightSubViews = new ArrayList<>();
-    // Danh sach view value custom.
-    private ArrayList<View> listViewValue = new ArrayList<>();
-
-    private AppCompatButton[] btnTienDo;
-
 
     public WorkItemGPONView(Context context) {
         super(context);
@@ -110,7 +100,7 @@ public class WorkItemGPONView extends LinearLayout implements SubWorkItemGPONVie
             }
         });
 
-        tvTitle.setOnClickListener(new OnClickListener() {
+        rootView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnCollapse.performClick();
@@ -131,18 +121,6 @@ public class WorkItemGPONView extends LinearLayout implements SubWorkItemGPONVie
         arrSubViews.add(subWork);
         subWork.setVisibility(GONE);
         subWork.setOnRadioCheckChangeListener(this);
-    }
-
-    public ArrayList<AppCompatRadioButton> getRadioButtons() {
-        return radioButtons;
-    }
-
-    public void hideAllRadioButton() {
-        if (radioButtons.size() > 0) {
-            for (AppCompatRadioButton radioButton : radioButtons) {
-                radioButton.setChecked(false);
-            }
-        }
     }
 
     public void addRadioButton(AppCompatRadioButton radioButton) {
@@ -173,53 +151,5 @@ public class WorkItemGPONView extends LinearLayout implements SubWorkItemGPONVie
 
     public RelativeLayout getRootLayout() {
         return rootLayout;
-    }
-
-    public ArrayList<View> getArrSubViews() {
-        return arrSubViews;
-    }
-
-    public void addRightItemSubView(View view) {
-        allRightSubViews.add(view);
-    }
-
-    public ArrayList<View> getAllRightSubViews() {
-        return allRightSubViews;
-    }
-
-    public void initRightListSubView() {
-        allRightSubViews = new ArrayList<>();
-    }
-
-    public Cat_Work_Item_TypesEntity getWorkItemTypeId() {
-        return workItemTypeId;
-    }
-
-    public void setWorkItemTypeId(Cat_Work_Item_TypesEntity workItemTypeId) {
-        this.workItemTypeId = workItemTypeId;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-
-    public void addViewValue(View view) {
-        listViewValue.add(view);
-    }
-
-    public ArrayList<View> getListViewValue() {
-        return listViewValue;
-    }
-
-    public AppCompatButton[] getListBtnTienDo() {
-        return btnTienDo;
-    }
-
-    public void setBtnTienDo(AppCompatButton... btnTienDo) {
-        this.btnTienDo = btnTienDo;
     }
 }

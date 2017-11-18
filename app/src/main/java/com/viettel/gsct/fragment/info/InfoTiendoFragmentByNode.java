@@ -132,7 +132,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity entity : listCSWI) {
                     double luyKe = Sub_Work_ItemController.getInstance(getActivity()).getLuyke(wItemOdf.getId(),entity.getId());
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(entity.getName(),""+luyKe,"","");
+                    subView.setValue(entity.getName(),""+(int)luyKe,"","");
                     bottomLayout.addView(subView);
                 }
             }
@@ -214,7 +214,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemKeoCap.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+luyke,"","");
+                    subView.setValue(cswiEntity.getName(),""+((double)Math.round(luyke * 100) / 100),"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -234,7 +234,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemSo8.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+luyke,"","");
+                    subView.setValue(cswiEntity.getName(),""+((double)Math.round(luyke * 100) / 100),"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -254,7 +254,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemAdss.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+luyke,"","");
+                    subView.setValue(cswiEntity.getName(),""+((double)Math.round(luyke * 100) / 100),"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -268,13 +268,16 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
             WorkItemInfoView view = new WorkItemInfoView(getContext());
             view.setValue(wItemHanNoi.getWork_item_name(),wItemHanNoi.getStarting_date(),wItemHanNoi.getComplete_date());
             bottomLayoutByNode.addView(view);
-
+            SubWorkItemInfoView subViewHeader = new SubWorkItemInfoView(getContext());
+            subViewHeader.setValue("","Lắp đặt","Hàn nối","","");
+            bottomLayoutByNode.addView(subViewHeader);
             if (cwitHanNoi != null) {
                 ArrayList<Cat_Sub_Work_ItemEntity> listCSWIEntity = Cat_Sub_Work_ItemControler.getInstance(getContext()).getsubCates(cwitHanNoi.getItem_type_id());
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
-                    double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemAdss.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
+                    double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemHanNoi.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
+                    double luykeHanNoi = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeHanNoiByNode(wItemHanNoi.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+luyke,"","");
+                    subView.setValue(cswiEntity.getName(),""+(int)luyke,""+(int)luykeHanNoi,"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -291,9 +294,9 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
             if (cwitOutDoor != null) {
                 ArrayList<Cat_Sub_Work_ItemEntity> listCSWIEntity = Cat_Sub_Work_ItemControler.getInstance(getContext()).getsubCatesByCode(cwitOutDoor.getItem_type_id(),"OUTDOOR");
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
-                    double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemAdss.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
+                    double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemOdf.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+luyke,"","");
+                    subView.setValue(cswiEntity.getName(),""+(int)luyke,"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }

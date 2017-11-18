@@ -51,19 +51,6 @@ public class WorkItemHanNoiBoChia extends BaseCustomWorkItem {
         listValue.add(view);
     }
 
-    // Ham tra ve toan bo gia tri luy ke cua lap dat va han noi sau khi luu.
-    public double getAllValue() {
-        double value = 0;
-        double oldLuyke = 0;
-        double sum = 0;
-        for (WorkItemValueHanNoiBoChia boChia : listValue) {
-            value = boChia.getDoubleKhoiLuong();
-            oldLuyke = boChia.getDoubleOldLuyKe();
-            sum += (value + oldLuyke);
-        }
-        return sum;
-    }
-
     public void setFinish(boolean finish) {
         for (WorkItemValueHanNoiBoChia boChia : listValue) {
             boChia.setFinish(finish);

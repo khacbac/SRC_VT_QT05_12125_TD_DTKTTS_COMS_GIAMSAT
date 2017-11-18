@@ -99,14 +99,9 @@ public class LoginActivity extends HomeBaseActivity {
 //            Login_Log_ConstrEntity loginLogConstr = new Login_Log_ConstrEntity();
 //            loginLogConstr.setUserName(sUserName);
 //            loginLogConstr.setMac(this.getMacAddress());
-//            SimpleDateFormat dateView = new SimpleDateFormat(
-//                    "yyyy-dd-MM HH:mm:ss");
-//
-//            loginLogConstr.setLogDate(dateView.format(Calendar
-//                    .getInstance().getTime()));
-//
-//            new Login_Log_ConstrController(this)
-//                    .insertLoginLogConstr(loginLogConstr);
+//            SimpleDateFormat dateView = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
+//            loginLogConstr.setLogDate(dateView.format(Calendar.getInstance().getTime()));
+//            new Login_Log_ConstrController(this).insertLoginLogConstr(loginLogConstr);
 //            this.gotoHomeActivity(new Bundle());
 //            this.finish();
 

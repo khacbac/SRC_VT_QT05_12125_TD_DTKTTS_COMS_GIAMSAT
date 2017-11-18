@@ -5,16 +5,20 @@ import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.viettel.constants.Constants;
 import com.viettel.database.Ktts_KeyController;
 import com.viettel.database.Sub_Work_ItemController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
@@ -49,14 +53,7 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     private Work_ItemsEntity wIEntity;
     private Cat_Sub_Work_ItemEntity cSWIEntity;
     private Sub_Work_Item_ValueController sWIValueController;
-
-    private ArrayList<View> views = new ArrayList<>();
-
-    private Work_ItemsEntity workItem;
-
-    private WorkItemRightGPONView.FinishListener listener;
-    private WorkItemRightGPONView.OnStatusBtnTienDo statusTienDo;
-    private AppCompatButton btnTienDo;
+    private ConstrNodeEntity node;
     private Sub_Work_ItemEntity swiEntity;
     private String odfTAG = "";
 
@@ -81,6 +78,26 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
         rootView = inflate(context, R.layout.layout_sub_work_item_right_lapdat_odf_gpon, this);
         ButterKnife.bind(this);
         sWIValueController = new Sub_Work_Item_ValueController(context);
+
+        edtKhoiLuong.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (".".equalsIgnoreCase(editable.toString())) {
+                    edtKhoiLuong.setError("Không phải là số!");
+                    edtKhoiLuong.requestFocus();
+                }
+            }
+        });
     }
 
     public void setTvTenOdf(String tvTenOdf) {
@@ -88,31 +105,27 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     }
 
     public void setTvLuyKe(double luyKe) {
-        this.tvLuyKe.setText(String.valueOf(luyKe));
+        this.tvLuyKe.setText(String.valueOf((int)luyKe));
     }
 
     public void setEdtKhoiLuong(double khoiLuong) {
-        edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf(khoiLuong));
+        edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((int)khoiLuong));
     }
 
     public String getTvTenOdf() {
         return tvTenOdf.getText().toString().trim();
     }
 
-    public double getDoubleKhoiLuong() {
-        return edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim());
+    public int getDoubleKhoiLuong() {
+        return (int)(edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim()));
     }
 
-    public double getDoubleOldLuyKe() {
+    public int getDoubleOldLuyKe() {
         if (Constant.TAG_LAPDAT_ODF_INDOOR.equalsIgnoreCase(odfTAG)) {
-            return Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId());
+            return (int)(Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId()));
         } else {
-            return sWIValueController.getOldLuyke(wIEntity.getId(), cSWIEntity.getId());
+            return (int)(sWIValueController.getOldLuykeByNode(wIEntity.getId(), cSWIEntity.getId(),node.getNodeID()));
         }
-    }
-
-    public AppCompatEditText getEdtKhoiLuong() {
-        return edtKhoiLuong;
     }
 
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {
@@ -131,11 +144,18 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
         this.cSWIEntity = entity;
     }
 
+    public void addCTNodeEntity(ConstrNodeEntity node) {
+        this.node = node;
+    }
+
     // Save odf indoor theo cong trinh.
     @Override
     public void save() {
         super.save();
         double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
+        if (edtKhoiLuong.getText().toString().isEmpty()) {
+            return;
+        }
         new SaveAsynByCt().execute(value);
     }
 
@@ -143,6 +163,9 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     @Override
     public void save(long nodeId) {
         double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
+        if (edtKhoiLuong.getText().toString().isEmpty()) {
+            return;
+        }
         new SaveAsyncByNode().execute(nodeId, value);
     }
 
@@ -152,7 +175,7 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
         if (Constant.TAG_LAPDAT_ODF_INDOOR.equalsIgnoreCase(odfTAG)) {
             luyke = Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId()) + value;
         } else {
-            luyke = sWIValueController.getOldLuyke(wIEntity.getId(), cSWIEntity.getId()) + value;
+            luyke = sWIValueController.getOldLuykeByNode(wIEntity.getId(), cSWIEntity.getId(),node.getNodeID()) + value;
         }
         setTvLuyKe(luyke);
     }

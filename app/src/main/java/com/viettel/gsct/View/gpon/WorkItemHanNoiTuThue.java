@@ -52,38 +52,6 @@ public class WorkItemHanNoiTuThue extends BaseCustomWorkItem {
         listValue.add(view);
     }
 
-    // Ham tra ve toan bo gia tri luy ke sau khi luu.
-    public double getSumValueLapDat() {
-        double value = 0;
-        double oldLuyke = 0;
-        double sum = 0;
-        for (WorkItemValueHanNoiTuThue tuThue : listValue) {
-            value = tuThue.getDoubleKhoiLuongLapDat();
-            oldLuyke = tuThue.getDoubleOldLuyKeLapDat();
-            sum += (value + oldLuyke);
-        }
-        Log.d(TAG, "getSumValueLapDat: sum = " + sum);
-        return sum;
-    }
-
-    // Ham tra ve toan bo gia tri luy ke sau khi luu.
-    public double getSumValueHanNoi() {
-        double value = 0;
-        double oldLuyke = 0;
-        double sum = 0;
-        for (WorkItemValueHanNoiTuThue tuThue : listValue) {
-            value = tuThue.getDoubleKhoiLuongHanNoi();
-            oldLuyke = tuThue.getDoubleOldLuyKeHanNoi();
-            sum += (value + oldLuyke);
-        }
-        Log.d(TAG, "getSumValueHanNoi: sum = " + sum);
-        return sum;
-    }
-
-    // Ham tra ve toan bo gia tri luy ke cua lap dat va han noi sau khi luu.
-    public double getAllValue() {
-        return getSumValueHanNoi() + getSumValueLapDat();
-    }
 
     public void setFinish(boolean finish) {
         for (WorkItemValueHanNoiTuThue tuThue : listValue) {

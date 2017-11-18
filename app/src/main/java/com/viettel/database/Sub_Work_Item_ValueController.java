@@ -225,15 +225,34 @@ public class Sub_Work_Item_ValueController {
         return ret;
     }
 
-    public double getOldLuykeHanNoi(long work_item_id, long cat_sub_work_item_id) {
+    public double getOldLuykeByNode(long work_item_id, long cat_sub_work_item_id,long nodeId) {
+        double ret = 0L;
+        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
+        Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
+                        + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
+                        + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                        + Sub_Work_Item_ValueField.CONSTR_NODE_ID +  "=? AND "
+                        + Sub_Work_Item_ValueField.ADDED_DATE + " != " + "'" + GSCTUtils.getDateNow() + "';",
+                new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id), String.valueOf(nodeId)});
+        if(cursor.moveToFirst())
+            ret = cursor.getDouble(0);
+        else
+            ret = 0;
+        cursor.close();
+        KttsDatabaseHelper.INSTANCE.close();
+        return ret;
+    }
+
+    public double getOldLuykeHanNoi(long work_item_id, long cat_sub_work_item_id,long nodeID) {
 //        Log.e(TAG, "getLuyke: " + work_item_id + " " + cat_sub_work_item_id );
         double ret = 0L;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
         Cursor cursor  = db.rawQuery("select sum(" + Sub_Work_Item_ValueField.VALUE_ITEM + ") from " + Sub_Work_Item_ValueField.TABLE_NAME + " where "
                         + Sub_Work_Item_ValueField.WORK_ITEM_ID + "=? AND "
                         + Sub_Work_Item_ValueField.CAT_SUB_WORK_ITEM_ID +  "=? AND "
+                        + Sub_Work_Item_ValueField.CONSTR_NODE_ID +  "=? AND "
                         + Sub_Work_Item_ValueField.ADDED_DATE + " != " + "'" + GSCTUtils.getDateNow() + "';",
-                new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id)});
+                new String[] { String.valueOf(work_item_id), String.valueOf(cat_sub_work_item_id), String.valueOf(nodeID)});
         if(cursor.moveToFirst())
             ret = cursor.getDouble(0);
         else

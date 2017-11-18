@@ -25,16 +25,10 @@ public class WorkItemRightGPONView extends LinearLayout {
     View rootView;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-
     @BindView(R.id.btn_tien_do)
     AppCompatButton btnTienDo;
 
-    private String workItemType;
-
-    private ArrayList<View> views = new ArrayList<>();
-
     private Work_ItemsEntity workItem;
-
     private FinishListener listener;
     private OnStatusBtnTienDo statusTienDo;
 
@@ -104,7 +98,7 @@ public class WorkItemRightGPONView extends LinearLayout {
     }
 
     public interface FinishListener {
-        public boolean onFinishListener();
+        boolean onFinishListener();
     }
 
     public interface OnStatusBtnTienDo {
@@ -115,28 +109,8 @@ public class WorkItemRightGPONView extends LinearLayout {
         this.statusTienDo = status;
     }
 
-    public String getStatusTienDo() {
-        return btnTienDo.getText().toString();
-    }
-
     public String getTitle() {
         return tvTitle.getText().toString();
-    }
-
-    public AppCompatButton getBtnTienDo() {
-        return btnTienDo;
-    }
-
-    public Work_ItemsEntity getWorkItem() {
-        return workItem;
-    }
-
-    public void addViews(View view) {
-        views.add(view);
-    }
-
-    public ArrayList<View> getListSubViews() {
-        return views;
     }
 
 }

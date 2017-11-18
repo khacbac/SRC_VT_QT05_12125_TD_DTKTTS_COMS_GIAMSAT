@@ -1,20 +1,14 @@
 package com.viettel.gsct.View.gpon;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.viettel.database.Work_ItemsControler;
 import com.viettel.database.entity.Work_ItemsEntity;
-import com.viettel.gsct.utils.GSCTUtils;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
@@ -38,7 +32,6 @@ public class WorkItemValueKeoCapHeader extends BaseCustomWorkItem {
     LinearLayout layoutForItem;
 
     private ArrayList<WorkItemValueKeoCap> listValue = new ArrayList<>();
-
     private Work_ItemsEntity wParentItem;
     private Work_ItemsEntity wItemEntity;
 
@@ -69,10 +62,6 @@ public class WorkItemValueKeoCapHeader extends BaseCustomWorkItem {
         });
     }
 
-    public TextView getTvLoaiCap() {
-        return tvLoaiCap;
-    }
-
     public void setTvLoaiCap(String tvLoaiCap) {
         this.tvLoaiCap.setText(tvLoaiCap);
     }
@@ -81,16 +70,7 @@ public class WorkItemValueKeoCapHeader extends BaseCustomWorkItem {
         return tvLoaiCap.getText().toString();
     }
 
-    public Button getBtnCollapse() {
-        return btnCollapse;
-    }
-
-    public void setBtnCollapse(Button btnCollapse) {
-        this.btnCollapse = btnCollapse;
-    }
-
     public void addItemValue(WorkItemValueKeoCap view) {
-//        this.wIValue = view;
         layoutForItem.addView(view);
         listValue.add(view);
     }
@@ -109,10 +89,15 @@ public class WorkItemValueKeoCapHeader extends BaseCustomWorkItem {
         }
     }
 
-    public Work_ItemsEntity getwParentItem() {
-        return wParentItem;
+    @Override
+    public boolean validate() {
+        for (WorkItemValueKeoCap kcValue : listValue) {
+            if (!kcValue.validate()) {
+                return false;
+            }
+        }
+        return true;
     }
-
 
     @Override
     public void save(long nodeId) {
@@ -121,17 +106,6 @@ public class WorkItemValueKeoCapHeader extends BaseCustomWorkItem {
                 kcValue.save(nodeId);
             }
         }
-    }
-
-    // Ham tra ve so luong luy ke sau khi luu.Dung de hien thi phan preview.
-    public double getAllValueAlterSave() {
-        double sum = 0;
-        if (!listValue.isEmpty()) {
-            for (WorkItemValueKeoCap kcValue : listValue) {
-                sum += (kcValue.getAllValueAlterSave());
-            }
-        }
-        return sum;
     }
 
     public Work_ItemsEntity getwItemEntity() {

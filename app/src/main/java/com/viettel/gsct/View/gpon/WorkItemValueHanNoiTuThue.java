@@ -4,16 +4,20 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.viettel.constants.Constants;
 import com.viettel.database.Ktts_KeyController;
 import com.viettel.database.Sub_Work_ItemController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
@@ -50,6 +54,8 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
     private Work_ItemsEntity wIEntity;
     private Cat_Sub_Work_ItemEntity cSWIEntity;
     private Sub_Work_Item_ValueController sWIValueController;
+    private long nodeId = 0;
+    private ConstrNodeEntity node;
 
     public WorkItemValueHanNoiTuThue(Context context) {
         super(context);
@@ -71,6 +77,46 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
         rootView = inflate(context, R.layout.layout_sub_work_item_right_hannoi_tuthue_gpon, this);
         ButterKnife.bind(this);
         sWIValueController = new Sub_Work_Item_ValueController(context);
+
+        edtSlLapDat.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (".".equalsIgnoreCase(editable.toString())) {
+                    edtSlLapDat.setError("Không phải là số!");
+                    edtSlLapDat.requestFocus();
+                }
+            }
+        });
+
+        edtSlHanNoi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (".".equalsIgnoreCase(editable.toString())) {
+                    edtSlHanNoi.setError("Not Number");
+                    edtSlHanNoi.requestFocus();
+                }
+            }
+        });
     }
 
     public void setTvTenTu(String tvTenTu) {
@@ -82,43 +128,35 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
     }
 
     public void setTvLuyKeLapDat(double luyKeLapDat) {
-        this.tvLuyKeLapDat.setText(String.valueOf(luyKeLapDat));
+        this.tvLuyKeLapDat.setText(String.valueOf((int) luyKeLapDat));
     }
 
     public void setTvLuyKeHanNoi(double luyKeHanNoi) {
-        this.tvLuyKeHanNoi.setText(String.valueOf(luyKeHanNoi));
+        this.tvLuyKeHanNoi.setText(String.valueOf((int) luyKeHanNoi));
     }
 
     public void setEdtKhoiLuongLapDat(double value) {
-        edtSlLapDat.setText(value == 0 ? "" : String.valueOf(value));
+        edtSlLapDat.setText(value == 0 ? "" : String.valueOf((int) value));
     }
 
     public void setEdtKhoiLuongHanNoi(double valueItem) {
-        edtSlHanNoi.setText(valueItem == 0 ? "" : String.valueOf(valueItem));
+        edtSlHanNoi.setText(valueItem == 0 ? "" : String.valueOf((int) valueItem));
     }
 
-    public double getDoubleKhoiLuongLapDat() {
-        return edtSlLapDat.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlLapDat.getText().toString().trim());
+    public int getIntegerKhoiLuongLapDat() {
+        return (int)(edtSlLapDat.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlLapDat.getText().toString().trim()));
     }
 
-    public double getDoubleKhoiLuongHanNoi() {
-        return edtSlHanNoi.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlHanNoi.getText().toString().trim());
+    public int getIntegerKhoiLuongHanNoi() {
+        return (int)(edtSlHanNoi.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlHanNoi.getText().toString().trim()));
     }
 
-    public double getDoubleOldLuyKeLapDat() {
-        return sWIValueController.getOldLuyke(wIEntity.getId(),cSWIEntity.getId());
+    public int getIntegerOldLuyKeLapDat() {
+        return (int)(sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()));
     }
 
-    public double getDoubleOldLuyKeHanNoi() {
-        return sWIValueController.getOldLuykeHanNoi(wIEntity.getId(),cSWIEntity.getId());
-    }
-
-    public AppCompatEditText getEdtSlHanNoi() {
-        return edtSlHanNoi;
-    }
-
-    public AppCompatEditText getEdtSlLapDat() {
-        return edtSlLapDat;
+    public int getIntegerOldLuyKeHanNoi() {
+        return (int)(sWIValueController.getOldLuykeHanNoi(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()));
     }
 
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {
@@ -133,20 +171,29 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
         this.cSWIEntity = entity;
     }
 
+    public void addCTNodeEntity(ConstrNodeEntity node) {
+        this.node = node;
+    }
+
     public void save(long nodeId) {
+        this.nodeId = nodeId;
         double value = edtSlLapDat.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtSlLapDat.getText().toString());
-        new SaveAsync().execute(nodeId,value);
+        double valueHN = edtSlHanNoi.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtSlHanNoi.getText().toString());
+        if (edtSlLapDat.getText().toString().isEmpty() && edtSlHanNoi.getText().toString().isEmpty()) {
+            return;
+        }
+        new SaveAsync().execute(nodeId, value, valueHN);
     }
 
     public void updateLuyKeLapDat() {
         double value = edtSlLapDat.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtSlLapDat.getText().toString());
-        double luyke = sWIValueController.getOldLuyke(wIEntity.getId(),cSWIEntity.getId()) + value;
+        double luyke = sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()) + value;
         setTvLuyKeLapDat(luyke);
     }
 
     public void updateLuyKeHanNoi() {
         double value = edtSlHanNoi.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtSlHanNoi.getText().toString());
-        double luykeHanNoi = sWIValueController.getOldLuykeHanNoi(wIEntity.getId(),cSWIEntity.getId()) + value;
+        double luykeHanNoi = sWIValueController.getOldLuykeHanNoi(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()) + value;
         setTvLuyKeHanNoi(luykeHanNoi);
     }
 
@@ -160,6 +207,7 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
         protected Boolean doInBackground(Object... objects) {
             long nodeId = Long.parseLong(objects[0].toString());
             double value = Double.parseDouble(objects[1].toString());
+            double valueHN = Double.parseDouble(objects[2].toString());
             boolean isSWIValueUpdate;
 
             // Cap nhat sub work item value vao Database.
@@ -176,6 +224,7 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
                 isSWIValueUpdate = true;
             }
             swiValue.setValue(value);
+            swiValue.setValue_item(valueHN);
             swiValue.setEmployeeId(BaseFragment.userId);
             swiValue.setIsActive(Constants.ISACTIVE.ACTIVE);
             swiValue.setSyncStatus(swiValue.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);

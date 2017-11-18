@@ -145,8 +145,6 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                 hashWorkItems.put(workItem.getItem_type_id(), workItem);
                 if (workItem.isReady())
                     workItem.setStatus_id(403);
-//                Log.e(TAG, "initData: " + workItem.getId() + " " + workItem.getItem_type_id()
-//                  + " " + workItem.getWork_item_name() + " " + workItem.getIsActive());
             }
         }
 
@@ -170,22 +168,14 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                 view.setTitle(index, type);
                 if (hashWorkItems.containsKey(type.getItem_type_id())) {
                     Work_ItemsEntity workItem = hashWorkItems.get(type.getItem_type_id());
-                    ArrayList<Sub_Work_ItemEntity> subWorkItems
-                            = sub_work_itemController.getItems(workItem.getId());
+                    ArrayList<Sub_Work_ItemEntity> subWorkItems = sub_work_itemController.getItems(workItem.getId());
                     for (Sub_Work_ItemEntity subWorkItem : subWorkItems) {
-//                        workItem.finishAddSubWorkItem(subWorkItem);
                         hashSubWorkItems.put(subWorkItem.getCat_sub_work_item_id(), subWorkItem);
                     }
                     view.setChecked(true);
-//                    Log.e(TAG, "initData: " + workItem.getId() + " " + workItem.getWork_item_name()
-//                    + " " + workItem.isCompleted() + " " + workItem.getUpdate_date()
-//                    +" "+  flagWorkItemComplete);
-                    if (!flagWorkItemComplete && (!workItem.isReady()
-                            && workItem.getStatus_id() == 403 && workItem.hasCompletedDate()
-                            && !GSCTUtils.getDateNow().equals(workItem.getComplete_date())))
-//                            (workItem.getUpdate_date().length() > 0
-//                              && !GSCTUtils.getDateNow().equals(workItem.getUpdate_date())))
+                    if (!flagWorkItemComplete && (!workItem.isReady() && workItem.getStatus_id() == 403 && workItem.hasCompletedDate() && !GSCTUtils.getDateNow().equals(workItem.getComplete_date()))) {
                         flagWorkItemComplete = true;
+                    }
                 }
                 hashWorkItemViews.put(type.getItem_type_id(), view);
                 layoutLeft.addView(view, i++);
@@ -195,8 +185,9 @@ public class BtsTiendoFragment extends BaseTienDoFragment
             }
 
             // Nếu workitem hoàn thành thì disable radiobutton
-            for (WorkItemTienDoBTSView view : temp)
+            for (WorkItemTienDoBTSView view : temp) {
                 view.setEnabledRadioBtn(!flagWorkItemComplete);
+            }
 
         }
     }
@@ -399,8 +390,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                 boolean flagComplete = true;
                 boolean flagWorking = false;
                 for (Cat_Sub_Work_ItemEntity catSubWorkItemEntity : arrCatSubWorkItems) {
-                    Sub_Work_ItemEntity subWorkItemEntity
-                            = hashSubWorkItems.get(catSubWorkItemEntity.getId());
+                    Sub_Work_ItemEntity subWorkItemEntity = hashSubWorkItems.get(catSubWorkItemEntity.getId());
                     if (subWorkItemEntity != null) {
                         subWorkItemEntity.setIsActive(Constants.ISACTIVE.ACTIVE);
                         subWorkItemEntity.setWork_item_id(workItemId);
@@ -408,45 +398,32 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                             flagComplete = subWorkItemEntity.isCompleted();
                         if (!flagWorking)
                             flagWorking = subWorkItemEntity.isCompleted();
-                        if (workItem.getStarting_date().length() == 0
-                                && subWorkItemEntity.isCompleted()) {
+                        if (workItem.getStarting_date().length() == 0 && subWorkItemEntity.isCompleted()) {
                             workItem.setStarting_date(GSCTUtils.getDateNow());
                         }
 
                         if (hashPlanCodes.containsKey(subWorkItemEntity.getCode())) {
-                            planController.updateRealFinishDate(
-                                    constr_ConstructionItem.getConstructId(),
-                                    hashPlanCodes.get(subWorkItemEntity.getCode()),
-                                    subWorkItemEntity.getFinishDate()
-                            );
+                            planController.updateRealFinishDate(constr_ConstructionItem.getConstructId(), hashPlanCodes.get(subWorkItemEntity.getCode()), subWorkItemEntity.getFinishDate());
                         }
                     }
                 }
-                if (flagConstructions)
+                if (flagConstructions) {
                     flagConstructions = flagComplete;
-                workItem.setStatus_id(flagWorking
-                        ? Work_ItemsEntity.STATUS_WORKING : Work_ItemsEntity.STATUS_NOT_START);
-                workItem.setStatus_id(flagComplete
-                        ? Work_ItemsEntity.STATUS_COMPLETE : workItem.getStatus_id());
+                }
+                workItem.setStatus_id(flagWorking ? Work_ItemsEntity.STATUS_WORKING : Work_ItemsEntity.STATUS_NOT_START);
+                workItem.setStatus_id(flagComplete ? Work_ItemsEntity.STATUS_COMPLETE : workItem.getStatus_id());
 
-                if (workItem.getIsActive() == Constants.ISACTIVE.ACTIVE
-                        && !workItem.isReady()
-                        && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE
-                        && (workItem.getAccept_note_code() == null
-                        || workItem.getAccept_note_code().length() == 0)) {
+                if (workItem.getIsActive() == Constants.ISACTIVE.ACTIVE && !workItem.isReady() && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE && (workItem.getAccept_note_code() == null || workItem.getAccept_note_code().length() == 0)) {
                     showError("Bạn chưa nhập BBNT cho " + workItem.getWork_item_name());
                     isValidate = false;
                     return;
                 }
             } else {
-                if (flagConstructions)
+                if (flagConstructions) {
                     flagConstructions = (workItem.hasCompletedDate());
+                }
 
-                if (workItem.getIsActive() == Constants.ISACTIVE.ACTIVE
-                        && !workItem.isReady()
-                        && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE
-                        && (workItem.getAccept_note_code() == null
-                        || workItem.getAccept_note_code().length() == 0)) {
+                if (workItem.getIsActive() == Constants.ISACTIVE.ACTIVE && !workItem.isReady() && workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE && (workItem.getAccept_note_code() == null || workItem.getAccept_note_code().length() == 0)) {
                     showError("Bạn chưa nhập BBNT cho " + workItem.getWork_item_name());
                     isValidate = false;
                     return;
@@ -454,8 +431,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
             }
 
             if (workItem.isReady()) {
-                Supervision_ConstrEntity item = new Supervision_ConstrController(
-                        getContext()).getItemByConstructId(constr_ConstructionItem.getConstructId());
+                Supervision_ConstrEntity item = new Supervision_ConstrController(getContext()).getItemByConstructId(constr_ConstructionItem.getConstructId());
                 if (item != null) {
                     Date date = GSCTUtils.convertString(item.getSysCreateDate(), "yyyy-MM-dd");
                     String strDate = "";
@@ -479,8 +455,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
         }
 
         if (flagConstructions) {
-            Log.e(TAG, "save hoan thanh: " + constr_ConstructionItem.getConstructId()
-                    + " " + constr_ConstructionItem.getConstrType());
+            Log.e(TAG, "save hoan thanh: " + constr_ConstructionItem.getConstructId() + " " + constr_ConstructionItem.getConstrType());
             constr_ConstructionItem.setStatus(396);
         } else {
             constr_ConstructionItem.setStatus(0);
@@ -492,27 +467,22 @@ public class BtsTiendoFragment extends BaseTienDoFragment
         Enumeration<Sub_Work_ItemEntity> enumCatSubWorkItems = hashSubWorkItems.elements();
         while (enumCatSubWorkItems.hasMoreElements()) {
             Sub_Work_ItemEntity subWorkItem = enumCatSubWorkItems.nextElement();
-
-            if (subWorkItem.getFinishDate() != null && subWorkItem.getFinishDate().length() > 0
-                    && !subWorkItem.getFinishDate().equals(GSCTUtils.getDateNow()))
+            if (subWorkItem.getFinishDate() != null && subWorkItem.getFinishDate().length() > 0 && !subWorkItem.getFinishDate().equals(GSCTUtils.getDateNow()))
                 continue;
 
-            subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0
-                    ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
+            subWorkItem.setSyncStatus(subWorkItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
             subWorkItem.setEmployeeId(userId);
             subWorkItem.setIsActive(Constants.IS_ACTIVE);
             if (subWorkItem.getId() > 0) {
                 sub_work_itemController.updateItem(subWorkItem);
             } else {
-                long id = Ktts_KeyController.getInstance()
-                        .getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
+                long id = Ktts_KeyController.getInstance().getKttsNextKey(Sub_Work_ItemField.TABLE_NAME);
                 subWorkItem.setId(id);
                 sub_work_itemController.addItem(subWorkItem);
             }
         }
 
-        Toast.makeText(getContext(), "Cập nhật tiến độ thành công!",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Cập nhật tiến độ thành công!", Toast.LENGTH_SHORT).show();
     }
 
     public boolean checkTiendoFragmentValidate() {

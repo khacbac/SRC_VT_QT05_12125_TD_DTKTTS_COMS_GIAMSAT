@@ -107,11 +107,7 @@ public class GponPreviewFragment extends BaseGponPreview {
         Log.d(TAG, "save: called from gpon preview");
     }
 
-    /**
-     * Khoi tao du lieu cho phan xem truoc noi dung nhat ky.
-     *
-     * @param listHashMap String.
-     */
+    // Khoi tao du lieu cho phan xem truoc noi dung nhat ky.
     @Override
     public void initDataForNhatKy(LinkedHashMap<String, String> listHashMap, String[] keyDois, String[] keyTenHangMucs) {
         txtDpTramTuyen.setText(listHashMap.get(KeyEventCommon.KEY_TEN_TRAM_TUYEN));
@@ -125,20 +121,17 @@ public class GponPreviewFragment extends BaseGponPreview {
         for (int i = 0; i < keyDois.length; i++) {
             mContentJournalPreviewList.add(new ContentJournalPreview("" + ++stt, keyTenHangMucs[i], listHashMap.get(keyDois[i])));
         }
-        BtsXemNhatKyAdapter mBtsXemNhatKyAdapter =
-                new BtsXemNhatKyAdapter(mContentJournalPreviewList, getActivity());
+        BtsXemNhatKyAdapter mBtsXemNhatKyAdapter = new BtsXemNhatKyAdapter(mContentJournalPreviewList, getActivity());
         mListViewDpQuanSoDoiThiCong.setAdapter(mBtsXemNhatKyAdapter);
     }
 
+    // Khoi tao phan man hinh xem thong tin vua nhap truoc khi luu cho cong trinh Gpon chi co cap nhat theo cong trinh.
     @Override
     public void initDataOldTienDoPreview(HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         super.initDataOldTienDoPreview(hmSubWorkItem);
-        Log.d(TAG, "id = " + constr_ConstructionItem.getConstructId());
         adapter = new TienDoPreviewAdapter(getActivity());
         adapter.setNeedDisplayKhoiLuong(true);
         mListViewDpTienDoThiCong.setAdapter(adapter);
-
-        ArrayList<Work_ItemsEntity> wItemS = Work_ItemsControler.getInstance(getActivity()).getItems(constr_ConstructionItem.getConstructId());
         ArrayList<Cat_Work_Item_TypesEntity> arrCat = cat_work_item_typesControler.getCates(constr_ConstructionItem.getConstrType());
         int stt = 0;
         if (!arrCat.isEmpty()) {
@@ -169,7 +162,7 @@ public class GponPreviewFragment extends BaseGponPreview {
         }
     }
 
-
+    // Hien thi thong tin vua nhap cho phan keo cap.
     private int initPreviewForKeoCap(int stt, Cat_Work_Item_TypesEntity cwiEntity, HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         Work_ItemsEntity wItem = Work_ItemsControler.getInstance(getActivity()).getItem(constr_ConstructionItem.getConstructId(),cwiEntity.getItem_type_id());
         if (wItem == null) {
@@ -186,14 +179,13 @@ public class GponPreviewFragment extends BaseGponPreview {
         return stt;
     }
 
+    // Hien thi thong tin vua nhap cho phan cap quang hinh so 8.
     private int initPreviewForCapSo8(int stt, Cat_Work_Item_TypesEntity cwiEntity, HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         Work_ItemsEntity wItem = Work_ItemsControler.getInstance(getActivity()).getItem(constr_ConstructionItem.getConstructId(),cwiEntity.getItem_type_id());
         ArrayList<Cat_Sub_Work_ItemEntity> listCSWI = Cat_Sub_Work_ItemControler.getInstance(getActivity()).getsubCates(cwiEntity.getItem_type_id());
         if (wItem == null) {
             return stt;
         }
-        Log.d(TAG, "initPreviewForCapSo8: code = " + cwiEntity.getCode());
-        Log.d(TAG, "initPreviewForCapSo8: id = " + constr_ConstructionItem.getConstructId());
         List<ContentProgressPreview> lHeader = new ArrayList<>();
         List<ContentDetailItemProgressPreview> lSubWork;
         HashMap<ContentProgressPreview, List<ContentDetailItemProgressPreview>> hmItem = new HashMap<>();
@@ -202,7 +194,8 @@ public class GponPreviewFragment extends BaseGponPreview {
         lHeader.add(content);
         for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWI) {
             double luyke = Sub_Work_Item_ValueController.getInstance(getActivity()).getOldLuyke(wItem.getId(),cswiEntity.getId());
-            double value = hmSubWorkItem.get(cswiEntity.getName()).getValue();
+            SubWorkItemGponOldView swGpon = hmSubWorkItem.get(cswiEntity.getName());
+            double value = swGpon == null ? 0 : swGpon.getValue();
             ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", "" + (value + luyke));
             if (value > 0) {
                 item.setNewEdit(true);
@@ -215,6 +208,7 @@ public class GponPreviewFragment extends BaseGponPreview {
         return stt;
     }
 
+    // Hien thi thong tin vua nhap cho phan cap quang Adss.
     private int initPreviewForCapAdss(int stt, Cat_Work_Item_TypesEntity cwiEntity, HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         Work_ItemsEntity wItem = Work_ItemsControler.getInstance(getActivity()).getItem(constr_ConstructionItem.getConstructId(),cwiEntity.getItem_type_id());
         ArrayList<Cat_Sub_Work_ItemEntity> listCSWI = Cat_Sub_Work_ItemControler.getInstance(getActivity()).getsubCates(cwiEntity.getItem_type_id());
@@ -230,7 +224,8 @@ public class GponPreviewFragment extends BaseGponPreview {
         lHeader.add(content);
         for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWI) {
             double luyke = Sub_Work_Item_ValueController.getInstance(getActivity()).getOldLuyke(wItem.getId(),cswiEntity.getId());
-            double value = hmSubWorkItem.get(cswiEntity.getName()).getValue();
+            SubWorkItemGponOldView swGpon = hmSubWorkItem.get(cswiEntity.getName());
+            double value = swGpon == null ? 0 : swGpon.getValue();
             ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", ""+ (value + luyke));
             if (value > 0) {
                 item.setNewEdit(true);
@@ -243,6 +238,7 @@ public class GponPreviewFragment extends BaseGponPreview {
         return stt;
     }
 
+    // Hien thi thong tin vua nhap cho phan han noi.
     private int initPreviewForHanNoi(int stt, Cat_Work_Item_TypesEntity cwiEntity, HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         Work_ItemsEntity wItem = Work_ItemsControler.getInstance(getActivity()).getItem(constr_ConstructionItem.getConstructId(),cwiEntity.getItem_type_id());
         ArrayList<Cat_Sub_Work_ItemEntity> listCSWI = Cat_Sub_Work_ItemControler.getInstance(getActivity()).getsubCates(cwiEntity.getItem_type_id());
@@ -258,7 +254,8 @@ public class GponPreviewFragment extends BaseGponPreview {
         lHeader.add(content);
         for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWI) {
             double luyke = Sub_Work_Item_ValueController.getInstance(getActivity()).getOldLuyke(wItem.getId(),cswiEntity.getId());
-            double value = hmSubWorkItem.get(cswiEntity.getName()).getValue();
+            SubWorkItemGponOldView swGpon = hmSubWorkItem.get(cswiEntity.getName());
+            double value = swGpon == null ? 0 : swGpon.getValue();
             ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", ""+ (value + luyke));
             if (value > 0) {
                 item.setNewEdit(true);
@@ -271,6 +268,7 @@ public class GponPreviewFragment extends BaseGponPreview {
         return stt;
     }
 
+    // Hien thi thong tin vua nhap cho phan lap dat.
     private int initPreviewForLapDat(int stt, Cat_Work_Item_TypesEntity cwiEntity, HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         Work_ItemsEntity wItem = Work_ItemsControler.getInstance(getActivity()).getItem(constr_ConstructionItem.getConstructId(),cwiEntity.getItem_type_id());
         if (wItem == null) {
@@ -288,6 +286,7 @@ public class GponPreviewFragment extends BaseGponPreview {
         return stt;
     }
 
+    // Hien thi thong tin vua nhap cho phan do kiem nghiem thu..
     private int initPreviewForDoKiem(int stt, Cat_Work_Item_TypesEntity cwiEntity, HashMap<String, SubWorkItemGponOldView> hmSubWorkItem) {
         Work_ItemsEntity wItem = Work_ItemsControler.getInstance(getActivity()).getItem(constr_ConstructionItem.getConstructId(),cwiEntity.getItem_type_id());
         if (wItem == null) {

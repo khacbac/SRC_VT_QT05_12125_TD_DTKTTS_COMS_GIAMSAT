@@ -112,6 +112,10 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         rbCheck.setEnabled(enable);
     }
 
+    public boolean isEnable() {
+        return rbCheck.isEnabled();
+    }
+
     public boolean getEnabledRadioBtn() {
         return rbCheck.isEnabled();
     }
@@ -130,4 +134,5 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         public void onRadioChecked(int parentIndex, Cat_Work_Item_TypesEntity entity) ;
         public void onTextviewClicked(int parentIndex,Cat_Work_Item_TypesEntity entity) ;
     }
+
 }

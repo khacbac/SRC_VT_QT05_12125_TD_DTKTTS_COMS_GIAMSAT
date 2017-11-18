@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +61,8 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
     LinearLayout lOltValue;
     @BindView(R.id.lDoKiemValue)
     LinearLayout lDoKiemValue;
+    @BindView(R.id.rootAllLayout)
+    LinearLayout rootAllLayout;
 
     private Unbinder unbinder;
     // Presenter cho cap nhat tien do Gpon.
@@ -83,30 +87,36 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         return layout;
     }
 
-    /**
-     * Khoi tao all View.
-     */
+    // Khoi tao all view.
     private void initViews() {
         tvDate.setText(GSCTUtils.getDateNow("dd/MM/yyyy"));
-        Log.d(TAG, "initViews() called");
         // Khoi tao presenter.
         itemGponPresenter = new GponTienDoTienDoPresenter(this, getContext());
         hideAllLayout();
     }
 
-    /**
-     * Khoi tao all Data.
-     */
+    // Khoi tao work item.
     public void initData() {
         super.initData();
         // Them all Work Item Entity.
         itemGponPresenter.addWorkItem();
 
-        // Hien thi item dau tien
-        swiKeoCap.getRadioBtnCheck().setChecked(true);
+        if (swiKeoCap != null) {
+            AppCompatRadioButton radioBtnCheck = swiKeoCap.getRadioBtnCheck();
+            if (radioBtnCheck != null) {
+                // Hien thi item dau tien
+                radioBtnCheck.setChecked(true);
+            }
+        }
     }
 
+    // Truong hop ko tra ve duoc list woik item cua cong trinh.
+    @Override
+    public void errorLoadWorkitem() {
+        rootAllLayout.setVisibility(View.GONE);
+    }
 
+    // Them work item keo cap cho cong trinh.
     @Override
     public void finishAddWKeoCap(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
@@ -114,6 +124,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWKeoCap();
     }
 
+    // Them work item han noi cho cong trinh.
     @Override
     public void finishAddWHanNoi(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
@@ -121,6 +132,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWHanNoi();
     }
 
+    // Them work item indoor cho cong trinh.
     @Override
     public void finishAddWOdfInDoor(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
@@ -128,6 +140,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWValueInDoor();
     }
 
+    // Them work item outdoor cho cong trinh.
     @Override
     public void finishAddWOdfOutDoor(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
@@ -136,6 +149,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWOutdoor();
     }
 
+    // Them work item olt cho cong trinh.
     @Override
     public void finishAddWOlt(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
@@ -144,6 +158,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         Log.d(TAG, "finishAddWOlt: called");
     }
 
+    // Them work item do kiem cho cong trinh.
     @Override
     public void finishAddWDoKiem(WorkItemGPONView view) {
         layoutRootLeft.addView(view);
@@ -152,6 +167,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWDoKiem();
     }
 
+    // Hien thi layout cho cac node doi voi work item keo cap.
     @Override
     public void finishAddSWKeoCap(SubWorkItemGPONView sView, ConstrNodeEntity node) {
         layoutRootLeft.addView(sView);
@@ -163,6 +179,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWValueKeoCap(node, sView);
     }
 
+    // Hien thi layout cho cac node doi voi work item han noi.
     @Override
     public void finishAddSWHanNoi(SubWorkItemGPONView sView, ConstrNodeEntity node) {
         layoutRootLeft.addView(sView);
@@ -170,6 +187,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWValueHanNoi(node, sView);
     }
 
+    // Hien thi layout cho cac node doi voi work item lap dat phan outdoor.
     @Override
     public void finishAddSWOutdoor(SubWorkItemGPONView sView, ConstrNodeEntity node) {
         layoutRootLeft.addView(sView);
@@ -184,42 +202,43 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         itemGponPresenter.addSWValueDoKiem(node, sView);
     }
 
+    // Hien thi layout phan value cho work item keo cap.
     @Override
     public void finishAddKeoCapValue(View view) {
         lKeoCapValue.addView(view);
     }
 
+    // Hien thi layout phan value cho work item han noi.
     @Override
     public void finishAddHanNoiValue(View view) {
         lHanNoiValue.addView(view);
     }
 
+    // Hien thi layout phan value cho work item indoor.
     @Override
     public void finishAddOdfInDoorValue(View indoor) {
-        Log.d(TAG, "finishAddOdfInDoorValue: called");
         lIndoorValue.addView(indoor);
     }
 
+    // Hien thi layout phan value cho work item outdoor.
     @Override
     public void finishAddOdfOutDoorValue(View sView) {
         lOutdoorValue.addView(sView);
     }
 
+    // Hien thi layout phan value cho work item do kiem.
     @Override
     public void finishAddOdfDoKiemValue(View view) {
         lDoKiemValue.addView(view);
     }
 
+    // Hien thi layour phan value cho work item olt.
     @Override
     public void finishAddLapDatOltValue(View view) {
         lOltValue.addView(view);
     }
 
-    /**
-     * Hiển thị layout theo WorkItem tương ứng.
-     *
-     * @param strType String.
-     */
+    // Hiển thị layout theo WorkItem tương ứng.
     @Override
     public void showWorkItemByItemType(String strType) {
         hideAllLayout();
@@ -247,53 +266,13 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         }
     }
 
-    /**
-     * Kiem tra validate cho cap nhat tien do.
-     *
-     * @return boolean.
-     */
-    public boolean checkValidateGponTienDo() {
+    // Kiem tra validate cho cap nhat tien do.
+    @Override
+    public boolean checkValidateTienDo() {
         return itemGponPresenter.checkValidate();
     }
 
-
-    @Override
-    public boolean checkValidateTienDo() {
-        return checkValidateGponTienDo();
-    }
-
-    /**
-     * Set trang thai input cho edt khoi luong,trong truong hop la da hoan thanh hay chua.
-     *
-     * @param editText    Edittext.
-     * @param isHoanThanh boolean.
-     */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void setStatusEdtValueFollowStatus(
-            AppCompatEditText editText, final boolean isHoanThanh) {
-        editText.setClickable(!isHoanThanh);
-        editText.setAlpha(isHoanThanh ? 0.5f : 1);
-        editText.setShowSoftInputOnFocus(!isHoanThanh);
-        editText.setFocusableInTouchMode(!isHoanThanh);
-        editText.setFocusable(!isHoanThanh);
-        editText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (isHoanThanh) {
-                        Toast.makeText(getActivity(), "Bạn chỉ có thể nhâp khối lượng trong trạng thái chưa làm!", Toast.LENGTH_SHORT).show();
-                    }
-                    return false;
-                }
-                return false;
-            }
-        });
-        Log.d(TAG, "setStatusEdtValueFollowStatus() called with: editText = [" + editText + "], isHoanThanh = [" + isHoanThanh + "]");
-    }
-
-    /**
-     * Ẩn toàn bộ phần layout bên phải, hiện thị các layout tùy theo WorkItem.
-     */
+    // Ẩn toàn bộ phần layout bên phải, hiện thị các layout tùy theo WorkItem.
     private void hideAllLayout() {
         lKeoCapValue.setVisibility(View.GONE);
         lHanNoiValue.setVisibility(View.GONE);
@@ -309,9 +288,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         }
     }
 
-    /**
-     * Luu data xuong database.
-     */
+    // Luu data xuong database.
     @Override
     public void save() {
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
@@ -323,6 +300,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
         Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
     }
 
+    // Hien thi man hinh xem thong tin vua nhap truoc khi luu.
     @Override
     public void showPreviewTienDo(BaseGponPreview mGponPrevFrag) {
         super.showPreviewTienDo(mGponPrevFrag);
@@ -333,7 +311,6 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        Log.d(TAG, "onDestroyView() called");
     }
 
 }

@@ -304,9 +304,7 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                     }
 
                 } else {
-                    Toast.makeText(this, "" + getResources()
-                            .getString(R.string.str_thong_bao_truoc_khi_luu), Toast.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(this, "" + getResources().getString(R.string.str_thong_bao_truoc_khi_luu), Toast.LENGTH_SHORT).show();
                     showPreviewNhatKyTienDoClick();
                     fragmentCapNhatNhatKy.registerListenerEventBus();
                     fragmentCapNhatTienDo.showPreviewTienDo(mGponPrevFrag);

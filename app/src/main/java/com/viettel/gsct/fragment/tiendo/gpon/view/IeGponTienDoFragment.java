@@ -16,6 +16,10 @@ import java.util.ArrayList;
  */
 
 public interface IeGponTienDoFragment {
+
+    // Truong hop ko lay duoc work item.
+    void errorLoadWorkitem();
+
     // Thong bao hoan thanh them work item cho main view.
     void finishAddWKeoCap(WorkItemGPONView view);
     void finishAddWHanNoi(WorkItemGPONView view);

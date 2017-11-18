@@ -4,16 +4,20 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.viettel.constants.Constants;
 import com.viettel.database.Ktts_KeyController;
 import com.viettel.database.Sub_Work_ItemController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
@@ -45,6 +49,7 @@ public class WorkItemValueHanNoiBoChia extends BaseCustomWorkItem {
     private Work_ItemsEntity wIEntity;
     private Cat_Sub_Work_ItemEntity cSWIEntity;
     private Sub_Work_Item_ValueController sWIValueController;
+    private ConstrNodeEntity node;
 
     public WorkItemValueHanNoiBoChia(Context context) {
         super(context);
@@ -66,6 +71,26 @@ public class WorkItemValueHanNoiBoChia extends BaseCustomWorkItem {
         rootView = inflate(context, R.layout.layout_sub_work_item_right_hannoi_bochia_gpon, this);
         ButterKnife.bind(this);
         sWIValueController = new Sub_Work_Item_ValueController(context);
+
+        edtKhoiLuong.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (".".equalsIgnoreCase(editable.toString())) {
+                    edtKhoiLuong.setError("Không phải là số!");
+                    edtKhoiLuong.requestFocus();
+                }
+            }
+        });
     }
 
     public void setTvBochia(String tvBochia) {
@@ -73,27 +98,25 @@ public class WorkItemValueHanNoiBoChia extends BaseCustomWorkItem {
     }
 
     public void setTvLuyKe(double luyKe) {
-        this.tvLuyKe.setText(String.valueOf(luyKe));
+        this.tvLuyKe.setText(String.valueOf((int) luyKe));
     }
 
     public void setEdtKhoiLuong(double khoiLuong) {
-        this.edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf(khoiLuong));
+        this.edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((int) khoiLuong));
     }
 
     public String getTextBochia() {
         return tvBochia.getText().toString();
     }
 
-    public double getDoubleKhoiLuong() {
-        return edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim());
+    public int getIntegerKhoiLuong() {
+        Double value = edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim());
+        return value.intValue();
     }
 
-    public double getDoubleOldLuyKe() {
-        return sWIValueController.getOldLuyke(wIEntity.getId(),cSWIEntity.getId());
-    }
-
-    public AppCompatEditText getEdtKhoiLuong() {
-        return edtKhoiLuong;
+    public int getIntegerOldLuyKe() {
+        Double oldLuyKe = sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID());
+        return oldLuyKe.intValue();
     }
 
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {
@@ -108,15 +131,21 @@ public class WorkItemValueHanNoiBoChia extends BaseCustomWorkItem {
         this.cSWIEntity = entity;
     }
 
+    public void addCTNodeEntity(ConstrNodeEntity node) {
+        this.node = node;
+    }
+
     public void save(long nodeId) {
         double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
-        new SaveAsync().execute(nodeId,value);
-
+        if (edtKhoiLuong.getText().toString().isEmpty()) {
+            return;
+        }
+        new SaveAsync().execute(nodeId, value);
     }
 
     public void updateLuyKe() {
         double value = edtKhoiLuong.getText().toString().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString());
-        double luyke = sWIValueController.getOldLuyke(wIEntity.getId(),cSWIEntity.getId()) + value;
+        double luyke = sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()) + value;
         setTvLuyKe(luyke);
     }
 

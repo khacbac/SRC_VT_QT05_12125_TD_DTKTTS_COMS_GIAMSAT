@@ -1,6 +1,7 @@
 package com.viettel.gsct.fragment.tiendo.gpon.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.viettel.database.Sub_Work_ItemController;
 import com.viettel.database.Sub_Work_Item_ValueController;
@@ -25,6 +26,7 @@ import com.viettel.gsct.View.gpon.WorkItemValueKeoCap;
 import com.viettel.gsct.View.gpon.WorkItemValueOdf;
 import com.viettel.gsct.View.gpon.WorkItemValueOltDoKiem;
 import com.viettel.gsct.fragment.base.BaseFragment;
+import com.viettel.gsct.fragment.base.BaseTienDoFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.model.GponTienDoModel;
 import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
 import com.viettel.gsct.fragment.tiendo.gpon.view.IeGponTienDoFragment;
@@ -33,6 +35,7 @@ import com.viettel.gsct.preview.common.Gpon2PreviewFragment;
 import com.viettel.gsct.utils.GSCTUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by doanLV4 on 9/20/2017.
@@ -56,7 +59,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
     private Sub_Work_Item_ValueController svController;
 
     // Hash map work item cap nhat theo tung node.
-    private HashMap<Long, WorkItemKeoCap> hmWKeoCap = new HashMap<>();
+    private LinkedHashMap<Long, WorkItemKeoCap> hmWKeoCap = new LinkedHashMap<>();
     private HashMap<Long, WorkItemHanNoi> hmWHanNoi = new HashMap<>();
     private HashMap<Long, WorkItemOdf> hmWOdfOutdoor = new HashMap<>();
     private HashMap<Long, WorkItemOltAndDoKiem> hmWDoKiem = new HashMap<>();
@@ -76,6 +79,10 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
     // Them toan bo work item, do van de design nen phai hard code.
     @Override
     public void addWorkItem() {
+        if (BaseTienDoFragment.workItems.isEmpty()) {
+            ieGponTienDoFragment.errorLoadWorkitem();
+            return;
+        }
         initWorkItemGpon();
         ieGponTienDoFragment.finishAddWKeoCap(wItemKeoCap);
         ieGponTienDoFragment.finishAddWHanNoi(wItemHanNoi);
@@ -147,10 +154,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         ieGponTienDoModel.addSWValueDoKiem(node, sView, this);
     }
 
-    // Luu thong tin vua nhap xuong DB qua 2 buoc.
-    // B1: Cap nhat lai phan view hien thi ngay khi user an save.
-    // B2: Luu data xuong Database.
-    // Do su dung Thread nen phai chia ra lam 2 buoc.
+    // Luu thong tin vua nhap xuong DB.
     @Override
     public void save() {
         // Luu data vao Database.
@@ -159,6 +163,12 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
 
     @Override
     public boolean checkValidate() {
+        for (long kcKey : hmWKeoCap.keySet()) {
+            if (!hmWKeoCap.get(kcKey).validate()) {
+                Toast.makeText(context,"Số bạn vừa nhập không hợp lệ,vui lòng nhập lại!",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
         return true;
     }
 
@@ -286,7 +296,14 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 item.setTvItemLoaiCap(cswItem.getName());
                 item.setTvLuyKe(luyke);
                 item.setEdtKhoiLuong(value);
+                item.addCTNodeEntity(node);
                 hdCapQuang.addItemValue(item);
+
+                if (svItem != null) {
+                    if (svItem.hadAddedDate() && svItem.getAdded_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
+                        sView.getRadioBtnCheck().setChecked(true);
+                    }
+                }
             }
             hdCapQuang.addWorkItem(wItemCapSo8);
             keoCap.addCapQuangSo8(hdCapQuang);
@@ -310,7 +327,14 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 item.setTvItemLoaiCap(cswItem.getName());
                 item.setTvLuyKe(luyke);
                 item.setEdtKhoiLuong(value);
+                item.addCTNodeEntity(node);
                 hdAdss.addItemValue(item);
+
+                if (svItem != null) {
+                    if (svItem.hadAddedDate() && svItem.getAdded_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
+                        sView.getRadioBtnCheck().setChecked(true);
+                    }
+                }
             }
             hdAdss.addWorkItem(wItemAdss);
             keoCap.addCapQuangAdss(hdAdss);
@@ -349,6 +373,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     tuthue.addWIEntity(wItem);
                     tuthue.addSWIValue(svItem);
                     tuthue.addCSWIEntity(cswItem);
+                    tuthue.addCTNodeEntity(node);
                     wItemHanNoi.addValueTuThue(tuthue);
                 } else if (cswItem.getCode().contains("BO_CHIA")) {
                     WorkItemValueHanNoiBoChia bochia = new WorkItemValueHanNoiBoChia(context);
@@ -358,7 +383,14 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     bochia.addWIEntity(wItem);
                     bochia.addSWIValue(svItem);
                     bochia.addCSWIEntity(cswItem);
+                    bochia.addCTNodeEntity(node);
                     wItemHanNoi.addValueBoChia(bochia);
+                }
+
+                if (svItem != null) {
+                    if (svItem.hadAddedDate() && GSCTUtils.getDateNow().equalsIgnoreCase(svItem.getAdded_date())) {
+                        sView.getRadioBtnCheck().setChecked(true);
+                    }
                 }
             }
         }
@@ -392,7 +424,14 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 dokiemItem.addWIEntity(wItem);
                 dokiemItem.addCSWIEntity(cswEntity);
                 dokiemItem.addSWIValue(svItem);
+                dokiemItem.addCTNodeEntity(node);
                 wiDoKiem.addValueItem(dokiemItem);
+
+                if (svItem != null) {
+                    if (svItem.hadAddedDate() && GSCTUtils.getDateNow().equalsIgnoreCase(svItem.getAdded_date())) {
+                        sView.getRadioBtnCheck().setChecked(true);
+                    }
+                }
             }
         }
         sView.addSWValue(wiDoKiem);
@@ -421,7 +460,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     odfIndoor.setEdtKhoiLuong(value);
                     odfIndoor.addSWIEntity(swiEntity);
                     odfIndoor.addCSWIEntity(entity);
-                    wItemOdfIndoor.addViewValue(odfIndoor);
                     workItemOdfIndoor.addValueOdf(odfIndoor);
                 }
             }
@@ -454,8 +492,14 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     odfOutdoor.setEdtKhoiLuong(value);
                     odfOutdoor.addCSWIEntity(entity);
                     odfOutdoor.addSWIValue(svItem);
-                    wItemOutdoor.addViewValue(odfOutdoor);
+                    odfOutdoor.addCTNodeEntity(node);
                     wiOdf.addValueOdf(odfOutdoor);
+
+                    if (svItem != null) {
+                        if (svItem.hadAddedDate() && GSCTUtils.getDateNow().equalsIgnoreCase(svItem.getAdded_date())) {
+                            sView.getRadioBtnCheck().setChecked(true);
+                        }
+                    }
                 }
             }
         }

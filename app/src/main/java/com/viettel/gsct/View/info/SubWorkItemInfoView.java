@@ -29,6 +29,8 @@ public class SubWorkItemInfoView extends LinearLayout {
     TextView tvKhoiLuong;
     @BindView(R.id.layoutKhoiLuong)
     LinearLayout layoutKhoiLuong;
+    @BindView(R.id.tv_khoi_luong_han_noi)
+    TextView tvKLHanNoi;
 
     public SubWorkItemInfoView(Context context) {
         super(context);
@@ -59,6 +61,15 @@ public class SubWorkItemInfoView extends LinearLayout {
         tvEndDate.setText(GSCTUtils.standardlizeTime(endDate));
     }
 
+    public void setValue(String title, String khoiluong,String khoiluongHanNoi,String startDate, String endDate) {
+        tvKLHanNoi.setVisibility(VISIBLE);
+        tvTitle.setText(title);
+        tvKhoiLuong.setText(khoiluong);
+        tvKLHanNoi.setText(khoiluongHanNoi);
+        tvStartDate.setText(GSCTUtils.standardlizeTime(startDate));
+        tvEndDate.setText(GSCTUtils.standardlizeTime(endDate));
+    }
+
     public void setStartedDate(String startDate) {
         tvStartDate.setText(GSCTUtils.standardlizeTime(startDate));
     }
@@ -78,4 +89,5 @@ public class SubWorkItemInfoView extends LinearLayout {
     public TextView getTvKhoiLuong() {
         return tvKhoiLuong;
     }
+
 }

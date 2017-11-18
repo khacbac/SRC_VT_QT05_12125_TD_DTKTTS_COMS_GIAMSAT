@@ -16,6 +16,7 @@ import com.viettel.database.Sub_Work_ItemController;
 import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.Work_ItemsControler;
 import com.viettel.database.entity.Cat_Sub_Work_ItemEntity;
+import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.database.entity.Sub_Work_ItemEntity;
 import com.viettel.database.entity.Sub_Work_Item_ValueEntity;
 import com.viettel.database.entity.Work_ItemsEntity;
@@ -45,6 +46,7 @@ public class WorkItemValueOltDoKiem extends BaseCustomWorkItem {
     private Work_ItemsEntity wiEntity;
     private Sub_Work_ItemEntity swiEntity;
     private Sub_Work_Item_ValueEntity swiValue;
+    private ConstrNodeEntity node;
 
     public WorkItemValueOltDoKiem(Context context) {
         super(context);
@@ -123,6 +125,10 @@ public class WorkItemValueOltDoKiem extends BaseCustomWorkItem {
         this.cswiEntity = entity;
     }
 
+    public void addCTNodeEntity(ConstrNodeEntity node) {
+        this.node = node;
+    }
+
     // Save Do kiem,cap nhat theo node.
     @Override
     public void save(long nodeId) {
@@ -143,10 +149,6 @@ public class WorkItemValueOltDoKiem extends BaseCustomWorkItem {
     // Check cong trinh hoan thanh chua,chi check trong ngay.
     public boolean isFinish() {
         return getResources().getString(R.string.str_tiendo_hoanthanh).equalsIgnoreCase(btnTienDo.getText().toString());
-    }
-
-    public Cat_Sub_Work_ItemEntity getCswiEntity() {
-        return cswiEntity;
     }
 
     public Sub_Work_ItemEntity getSwiEntity() {

@@ -41,6 +41,11 @@ public class WorkItemKeoCap extends BaseCustomWorkItem {
     }
 
     @Override
+    public boolean validate() {
+        return wIVKCHeaderCapSo8.validate() && wIVKCHeaderCapAdss.validate();
+    }
+
+    @Override
     public void save(long nodeId) {
         if (wIVKCHeaderCapSo8 != null) {
             wIVKCHeaderCapSo8.save(nodeId);
