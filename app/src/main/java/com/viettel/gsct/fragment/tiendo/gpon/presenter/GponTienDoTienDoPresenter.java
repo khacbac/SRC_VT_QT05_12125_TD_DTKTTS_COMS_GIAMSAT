@@ -31,7 +31,7 @@ import com.viettel.gsct.fragment.tiendo.gpon.model.GponTienDoModel;
 import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
 import com.viettel.gsct.fragment.tiendo.gpon.view.IeGponTienDoFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.model.IeGponTienDoModel;
-import com.viettel.gsct.preview.common.Gpon2PreviewFragment;
+import com.viettel.gsct.preview.common.GponPreviewNodeFragment;
 import com.viettel.gsct.utils.GSCTUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -537,9 +537,9 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
 
     @Override
     public void showPreviewTienDo(BaseGponPreview gponPreview) {
-        Gpon2PreviewFragment gponFragment = null;
-        if (gponPreview instanceof Gpon2PreviewFragment) {
-            gponFragment = (Gpon2PreviewFragment) gponPreview;
+        GponPreviewNodeFragment gponFragment = null;
+        if (gponPreview instanceof GponPreviewNodeFragment) {
+            gponFragment = (GponPreviewNodeFragment) gponPreview;
         }
         if (gponFragment != null) {
             gponFragment.initDataNewTienDoPreviewCT(workItemOdfIndoor,workItemOlt);

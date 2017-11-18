@@ -1,22 +1,16 @@
 package com.viettel.gsct.fragment.tiendo.gpon.view;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.viettel.database.Sub_Work_Item_ValueController;
 import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.fragment.base.BaseFragment;
@@ -28,9 +22,6 @@ import com.viettel.gsct.fragment.tiendo.gpon.presenter.IeGponTienDoPresenter;
 import com.viettel.gsct.fragment.tiendo.gpon.presenter.GponTienDoTienDoPresenter;
 import com.viettel.ktts.R;
 
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,7 +30,7 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTienDoFragment, WorkItemGPONView.IeShowWorkItemByItemType/*, View.OnClickListener*/ {
+public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGponTienDoFragment, WorkItemGPONView.IeShowWorkItemByItemType/*, View.OnClickListener*/ {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -74,7 +65,7 @@ public class GPONTiendo2Fragment extends BaseTienDoFragment implements IeGponTie
     private SubWorkItemGPONView swiKeoCap;
 
     public static BaseFragment newInstance() {
-        return new GPONTiendo2Fragment();
+        return new GPONTiendoNodeFragment();
     }
 
     @Nullable

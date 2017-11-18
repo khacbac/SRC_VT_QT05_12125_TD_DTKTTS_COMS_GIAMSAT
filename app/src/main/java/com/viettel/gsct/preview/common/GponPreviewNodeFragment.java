@@ -51,9 +51,9 @@ package com.viettel.gsct.preview.common;
  * Created by doanLV4 on 9/26/2017.
  */
 
-public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoPreviewFragment.ViewCallBack {
+public class GponPreviewNodeFragment extends BaseGponPreview implements GponTienDoPreviewFragment.ViewCallBack {
 
-    private static final String TAG = Gpon2PreviewFragment.class.getSimpleName();
+    private static final String TAG = GponPreviewNodeFragment.class.getSimpleName();
 
     @BindView(R.id.txtDpThoiTiet)
     TextView txtDpThoiTiet;
@@ -74,15 +74,15 @@ public class Gpon2PreviewFragment extends BaseGponPreview implements GponTienDoP
     @BindView(R.id.frameTiendoByNode)
     FrameLayout frame_tiendo;
 
-    private static Gpon2PreviewFragment fragment;
+    private static GponPreviewNodeFragment fragment;
     // Phan xem preview theo node.
     private TienDoGpon2PreviewAdapter adapterForNode;
     // Phan xem preview theo cong trinh.
     private TienDoGpon2PreviewAdapter adapterForCT;
 
-    public static Gpon2PreviewFragment newInstance() {
+    public static GponPreviewNodeFragment newInstance() {
         if (fragment == null) {
-            fragment = new Gpon2PreviewFragment();
+            fragment = new GponPreviewNodeFragment();
         }
         return fragment;
     }

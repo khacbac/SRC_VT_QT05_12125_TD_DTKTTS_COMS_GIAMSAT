@@ -1,7 +1,6 @@
 package com.viettel.gsct.activity.gpon;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
@@ -30,10 +29,10 @@ import com.viettel.database.field.ConstrNodeController;
 import com.viettel.gsct.fragment.base.BaseTienDoFragment;
 import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
 import com.viettel.gsct.fragment.tiendo.gpon.view.GPONTiendoFragment;
-import com.viettel.gsct.preview.common.Gpon2PreviewFragment;
+import com.viettel.gsct.fragment.tiendo.gpon.view.GPONTiendoNodeFragment;
+import com.viettel.gsct.preview.common.GponPreviewNodeFragment;
 import com.viettel.gsct.preview.common.GponPreviewFragment;
 import com.viettel.gsct.fragment.nhatky.BtsNhatkyFragment;
-import com.viettel.gsct.fragment.tiendo.gpon.view.GPONTiendo2Fragment;
 import com.viettel.ktts.R;
 import com.viettel.sync.SyncTask;
 import com.viettel.utils.DeactivatedViewPager;
@@ -188,9 +187,9 @@ public class GponActivity extends HomeBaseActivity implements ViewPager.OnPageCh
                 mGponPrevFrag = GponPreviewFragment.newInstance();
                 Log.d(TAG, "initViews: Cap nhat chi theo cong trinh");
             } else {
-                fragmentCapNhatTienDo = (GPONTiendo2Fragment) GPONTiendo2Fragment.newInstance();
+                fragmentCapNhatTienDo = (GPONTiendoNodeFragment) GPONTiendoNodeFragment.newInstance();
                 // Dung cho truong hop bat dau chuyen sang cap nhat gpon theo node.
-                mGponPrevFrag = Gpon2PreviewFragment.newInstance();
+                mGponPrevFrag = GponPreviewNodeFragment.newInstance();
                 Log.d(TAG, "initViews: Cap nhat theo ca node va cong trinh");
             }
         }
