@@ -50,8 +50,7 @@
             android:id="@+id/et_value"
             style="@style/vOfficeeditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <LinearLayout

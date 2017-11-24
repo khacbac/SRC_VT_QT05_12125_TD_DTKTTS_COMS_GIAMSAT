@@ -170,15 +170,15 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                 ArrayList<Cat_Sub_Work_ItemEntity> arrSubWorkItems = cat_sub_work_itemControler.getsubCates(entity.getItem_type_id());
                 for (Cat_Sub_Work_ItemEntity catSubWorkItem : arrSubWorkItems) {
                     SubWorkItemGponOldView subView = new SubWorkItemGponOldView(getContext());
-                    if (catSubWorkItem.getCode().contains("HANNOI_BRCD")) {
-                        subView.setEdtValueMaxLength(9);
+                    if (catSubWorkItem.getCode().contains("HANNOI")) {
                         subView.setEdtDataType(0);
+                        subView.setEdtValueMaxLength(9);
                         if (isHanNoiFinish) {
                             subView.setEdtEnable(false);
                         }
                     } else if (catSubWorkItem.getCode().contains("CAPQUANG")) {
-                        subView.setEdtValueMaxLength(12);
                         subView.setEdtDataType(1);
+                        subView.setEdtValueMaxLength(12);
                         if (isKeoCapFinish) {
                             subView.setEdtEnable(false);
                         }

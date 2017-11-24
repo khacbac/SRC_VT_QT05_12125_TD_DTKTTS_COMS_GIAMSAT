@@ -69,10 +69,11 @@ public class SubWorkItemGponOldView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() > 9) {
+                    etValue.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                }
                 if (editable.toString().length() == 11 && !editable.toString().contains(".")) {
                     etValue.setInputType(InputType.TYPE_CLASS_NUMBER);
-                } else {
-                    etValue.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 }
                 if (editable.toString().contains(".")) {
                     String subAfterDot = editable.toString().substring(editable.toString().indexOf(".") + 1);
