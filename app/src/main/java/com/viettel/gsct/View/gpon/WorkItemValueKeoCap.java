@@ -1,5 +1,6 @@
 package com.viettel.gsct.View.gpon;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
@@ -29,6 +30,8 @@ import com.viettel.database.field.Sub_Work_Item_ValueField;
 import com.viettel.gsct.fragment.base.BaseFragment;
 import com.viettel.gsct.utils.GSCTUtils;
 import com.viettel.ktts.R;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,17 +119,17 @@ public class WorkItemValueKeoCap extends BaseCustomWorkItem {
 
     public void setTvLuyKe(double luyKe) {
         if (luyKe % 1 == 0) {
-            this.tvLuyKe.setText(String.valueOf((int)luyKe));
+            this.tvLuyKe.setText(String.valueOf((long)luyKe));
         } else {
-            this.tvLuyKe.setText(String.valueOf((double) Math.round(luyKe * 100) / 100));
+            this.tvLuyKe.setText(String.format(Locale.UK,"%.2f",luyKe));
         }
     }
 
     public void setEdtKhoiLuong(double khoiLuong) {
         if (khoiLuong % 1 == 0) {
-            edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((int)khoiLuong));
+            edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((long)khoiLuong));
         } else {
-            edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((double) Math.round(khoiLuong * 100) / 100));
+            edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.format(Locale.UK,"%.2f",khoiLuong));
         }
     }
 

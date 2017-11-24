@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -196,7 +197,11 @@ public class GponPreviewFragment extends BaseGponPreview {
             double luyke = Sub_Work_Item_ValueController.getInstance(getActivity()).getOldLuyke(wItem.getId(),cswiEntity.getId());
             SubWorkItemGponOldView swGpon = hmSubWorkItem.get(cswiEntity.getName());
             double value = swGpon == null ? 0 : swGpon.getValue();
-            ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", "" + (value + luyke));
+            double khoiLuong = value + luyke;
+            ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", String.format(Locale.UK,"%.2f",khoiLuong));
+            if (khoiLuong % 1 == 0) {
+                item.setDetailKhoiLuong(String.valueOf((long)khoiLuong));
+            }
             if (value > 0) {
                 item.setNewEdit(true);
                 content.setNewEdit(true);
@@ -226,7 +231,11 @@ public class GponPreviewFragment extends BaseGponPreview {
             double luyke = Sub_Work_Item_ValueController.getInstance(getActivity()).getOldLuyke(wItem.getId(),cswiEntity.getId());
             SubWorkItemGponOldView swGpon = hmSubWorkItem.get(cswiEntity.getName());
             double value = swGpon == null ? 0 : swGpon.getValue();
-            ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", ""+ (value + luyke));
+            double khoiLuong = value + luyke;
+            ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", String.format(Locale.UK,"%.2f",khoiLuong));
+            if (khoiLuong % 1 == 0) {
+                item.setDetailKhoiLuong(String.valueOf((long)khoiLuong));
+            }
             if (value > 0) {
                 item.setNewEdit(true);
                 content.setNewEdit(true);
@@ -256,7 +265,11 @@ public class GponPreviewFragment extends BaseGponPreview {
             double luyke = Sub_Work_Item_ValueController.getInstance(getActivity()).getOldLuyke(wItem.getId(),cswiEntity.getId());
             SubWorkItemGponOldView swGpon = hmSubWorkItem.get(cswiEntity.getName());
             double value = swGpon == null ? 0 : swGpon.getValue();
-            ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", ""+ (value + luyke));
+            double khoiLuong = value + luyke;
+            ContentDetailItemProgressPreview item = new ContentDetailItemProgressPreview(cswiEntity.getName(), "", "", String.format(Locale.UK,"%.2f",khoiLuong));
+            if (khoiLuong % 1 == 0) {
+                item.setDetailKhoiLuong(String.valueOf((long)khoiLuong));
+            }
             if (value > 0) {
                 item.setNewEdit(true);
                 content.setNewEdit(true);

@@ -130,7 +130,9 @@ public class TienDoGpon2PreviewAdapter extends BaseExpandableListAdapter {
             viewHolderForItem.iCon.setVisibility(View.VISIBLE);
         }
         if (item.isHasSLHanNoi()) {
-            viewHolderForItem.setHasSlHanNoi();
+            viewHolderForItem.setHasSlHanNoi(true);
+        } else {
+            viewHolderForItem.setHasSlHanNoi(false);
         }
         if (((ContentDetailItemProgressGpon2Preview) getChild(groupPosition,childPosition)).isNewEdit()) {
             viewHolderForItem.txtDetailTenHangMuc.setTextColor(mContext.getResources().getColor(R.color.teal));
@@ -191,9 +193,14 @@ public class TienDoGpon2PreviewAdapter extends BaseExpandableListAdapter {
             iCon = (ImageView) view.findViewById(R.id.imgForTenHangMuc);
         }
 
-        void setHasSlHanNoi() {
-            txtSLHanNoi.setVisibility(View.VISIBLE);
-            txtLuyKeHanHoi.setVisibility(View.VISIBLE);
+        void setHasSlHanNoi(boolean isVisible) {
+            if (isVisible) {
+                txtSLHanNoi.setVisibility(View.VISIBLE);
+                txtLuyKeHanHoi.setVisibility(View.VISIBLE);
+            } else {
+                txtSLHanNoi.setVisibility(View.GONE);
+                txtLuyKeHanHoi.setVisibility(View.GONE);
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.viettel.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,6 +19,7 @@ public class NestedExpandableListView extends ExpandableListView {
         super(context, attrs);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -33,19 +35,14 @@ public class NestedExpandableListView extends ExpandableListView {
                     View listItem = listAdapter.getView(listPosition, null, this);
                     //now it will not throw a NPE if listItem is a ViewGroup instance
                     if (listItem instanceof ViewGroup) {
-                        listItem.setLayoutParams(new LayoutParams(
-                                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                        listItem.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
                     }
                     listItem.measure(widthMeasureSpec, heightMeasureSpec);
                     newHeight += listItem.getMeasuredHeight();
                 }
                 newHeight += getDividerHeight() * listPosition;
             }
-            if ((heightMode == MeasureSpec.AT_MOST) && (newHeight > heightSize)) {
-                if (newHeight > heightSize) {
-                    newHeight = heightSize;
-                }
-            }
+            newHeight = (heightMode == MeasureSpec.AT_MOST) && (newHeight > heightSize) ? heightSize : newHeight;
         } else {
             newHeight = getMeasuredHeight();
         }

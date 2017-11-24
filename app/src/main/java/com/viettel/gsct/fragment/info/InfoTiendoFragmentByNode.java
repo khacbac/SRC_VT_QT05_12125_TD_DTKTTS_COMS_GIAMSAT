@@ -1,5 +1,6 @@
 package com.viettel.gsct.fragment.info;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -27,9 +28,11 @@ import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.View.info.SubWorkItemInfoView;
 import com.viettel.gsct.View.info.WorkItemInfoView;
 import com.viettel.gsct.fragment.base.BaseTienDoFragment;
+import com.viettel.gsct.utils.GSCTUtils;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,7 +135,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity entity : listCSWI) {
                     double luyKe = Sub_Work_ItemController.getInstance(getActivity()).getLuyke(wItemOdf.getId(),entity.getId());
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(entity.getName(),""+(int)luyKe,"","");
+                    subView.setValue(entity.getName(),""+(long)luyKe,"","");
                     bottomLayout.addView(subView);
                 }
             }
@@ -234,7 +237,10 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemSo8.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+((double)Math.round(luyke * 100) / 100),"","");
+                    subView.setValue(cswiEntity.getName(),""+String.format(Locale.UK,"%.2f",luyke),"","");
+                    if (luyke % 1 == 0) {
+                        subView.setLuyKe("" + (long)luyke);
+                    }
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -254,7 +260,10 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemAdss.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+((double)Math.round(luyke * 100) / 100),"","");
+                    subView.setValue(cswiEntity.getName(),""+String.format(Locale.UK,"%.2f",luyke),"","");
+                    if (luyke % 1 == 0) {
+                        subView.setLuyKe("" + (long)luyke);
+                    }
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -277,7 +286,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemHanNoi.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     double luykeHanNoi = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeHanNoiByNode(wItemHanNoi.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+(int)luyke,""+(int)luykeHanNoi,"","");
+                    subView.setValue(cswiEntity.getName(),""+(long)luyke,""+(long)luykeHanNoi,"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }
@@ -296,7 +305,7 @@ public class InfoTiendoFragmentByNode extends BaseTienDoFragment {
                 for (Cat_Sub_Work_ItemEntity cswiEntity : listCSWIEntity) {
                     double luyke = Sub_Work_Item_ValueController.getInstance(getContext()).getLuykeByNode(wItemOdf.getId(),cswiEntity.getId(),Long.parseLong(String.valueOf(tag)));
                     SubWorkItemInfoView subView = new SubWorkItemInfoView(getContext());
-                    subView.setValue(cswiEntity.getName(),""+(int)luyke,"","");
+                    subView.setValue(cswiEntity.getName(),""+(long)luyke,"","");
                     bottomLayoutByNode.addView(subView);
                 }
             }

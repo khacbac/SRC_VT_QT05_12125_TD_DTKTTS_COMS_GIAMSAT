@@ -41,4 +41,6 @@ public interface IeGponTienDoFragment {
     void finishAddOdfInDoorValue(View view);
     void finishAddOdfOutDoorValue(View view);
     void finishAddOdfDoKiemValue(View view);
+
+    void saveSuccess();
 }

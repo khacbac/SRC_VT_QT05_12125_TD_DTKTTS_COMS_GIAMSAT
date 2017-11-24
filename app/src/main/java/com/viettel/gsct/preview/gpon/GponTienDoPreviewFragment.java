@@ -1,4 +1,4 @@
-package com.viettel.gsct.fragment.tiendo.gpon.view;
+package com.viettel.gsct.preview.gpon;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

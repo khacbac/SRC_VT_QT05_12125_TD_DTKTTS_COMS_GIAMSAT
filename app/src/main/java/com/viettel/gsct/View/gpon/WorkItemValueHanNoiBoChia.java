@@ -98,25 +98,29 @@ public class WorkItemValueHanNoiBoChia extends BaseCustomWorkItem {
     }
 
     public void setTvLuyKe(double luyKe) {
-        this.tvLuyKe.setText(String.valueOf((int) luyKe));
+        this.tvLuyKe.setText(String.valueOf((long) luyKe));
     }
 
     public void setEdtKhoiLuong(double khoiLuong) {
-        this.edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((int) khoiLuong));
+        this.edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((long) khoiLuong));
     }
 
     public String getTextBochia() {
         return tvBochia.getText().toString();
     }
 
-    public int getIntegerKhoiLuong() {
+    public long getLongKhoiLuong() {
         Double value = edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim());
-        return value.intValue();
+        return value.longValue();
     }
 
-    public int getIntegerOldLuyKe() {
+    public String getKhoiLuong() {
+        return "" + edtKhoiLuong.getText().toString();
+    }
+
+    public long getLongOldLuyKe() {
         Double oldLuyKe = sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID());
-        return oldLuyKe.intValue();
+        return oldLuyKe.longValue();
     }
 
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {

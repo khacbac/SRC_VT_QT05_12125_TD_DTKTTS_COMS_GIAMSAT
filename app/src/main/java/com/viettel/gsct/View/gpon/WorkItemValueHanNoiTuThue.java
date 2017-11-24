@@ -128,35 +128,43 @@ public class WorkItemValueHanNoiTuThue extends BaseCustomWorkItem {
     }
 
     public void setTvLuyKeLapDat(double luyKeLapDat) {
-        this.tvLuyKeLapDat.setText(String.valueOf((int) luyKeLapDat));
+        this.tvLuyKeLapDat.setText(String.valueOf((long) luyKeLapDat));
     }
 
     public void setTvLuyKeHanNoi(double luyKeHanNoi) {
-        this.tvLuyKeHanNoi.setText(String.valueOf((int) luyKeHanNoi));
+        this.tvLuyKeHanNoi.setText(String.valueOf((long) luyKeHanNoi));
     }
 
     public void setEdtKhoiLuongLapDat(double value) {
-        edtSlLapDat.setText(value == 0 ? "" : String.valueOf((int) value));
+        edtSlLapDat.setText(value == 0 ? "" : String.valueOf((long) value));
     }
 
     public void setEdtKhoiLuongHanNoi(double valueItem) {
-        edtSlHanNoi.setText(valueItem == 0 ? "" : String.valueOf((int) valueItem));
+        edtSlHanNoi.setText(valueItem == 0 ? "" : String.valueOf((long) valueItem));
     }
 
-    public int getIntegerKhoiLuongLapDat() {
-        return (int)(edtSlLapDat.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlLapDat.getText().toString().trim()));
+    public String getKhoiLuongLD() {
+        return "" + edtSlLapDat.getText().toString();
     }
 
-    public int getIntegerKhoiLuongHanNoi() {
-        return (int)(edtSlHanNoi.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlHanNoi.getText().toString().trim()));
+    public String getKhoiLuongHN() {
+        return "" + edtSlHanNoi.getText().toString();
     }
 
-    public int getIntegerOldLuyKeLapDat() {
-        return (int)(sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()));
+    public long getLongKhoiLuongLapDat() {
+        return (long)(edtSlLapDat.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlLapDat.getText().toString().trim()));
     }
 
-    public int getIntegerOldLuyKeHanNoi() {
-        return (int)(sWIValueController.getOldLuykeHanNoi(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()));
+    public long getLongKhoiLuongHanNoi() {
+        return (long)(edtSlHanNoi.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtSlHanNoi.getText().toString().trim()));
+    }
+
+    public long getLongOldLuyKeLapDat() {
+        return (long)(sWIValueController.getOldLuykeByNode(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()));
+    }
+
+    public long getLongOldLuyKeHanNoi() {
+        return (long)(sWIValueController.getOldLuykeHanNoi(wIEntity.getId(),cSWIEntity.getId(),node.getNodeID()));
     }
 
     public void addSWIValue(Sub_Work_Item_ValueEntity entity) {

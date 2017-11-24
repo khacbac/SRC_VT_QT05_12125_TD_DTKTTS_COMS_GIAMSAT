@@ -2,7 +2,6 @@ package com.viettel.gsct.fragment.tiendo.gpon.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.viettel.database.entity.ConstrNodeEntity;
 import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.fragment.base.BaseFragment;
@@ -21,7 +19,7 @@ import com.viettel.gsct.View.gpon.WorkItemGPONView;
 import com.viettel.gsct.fragment.tiendo.gpon.presenter.IeGponTienDoPresenter;
 import com.viettel.gsct.fragment.tiendo.gpon.presenter.GponTienDoTienDoPresenter;
 import com.viettel.ktts.R;
-
+import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,7 +28,7 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGponTienDoFragment, WorkItemGPONView.IeShowWorkItemByItemType/*, View.OnClickListener*/ {
+public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGponTienDoFragment, WorkItemGPONView.IeShowWorkItemByItemType {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -58,12 +56,8 @@ public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGpon
     private Unbinder unbinder;
     // Presenter cho cap nhat tien do Gpon.
     private IeGponTienDoPresenter itemGponPresenter;
-    private boolean flagIsRealFinish = true;
-
-    private boolean isFirstShow = true;
     // Ung voi node dau tien.
-    private SubWorkItemGPONView swiKeoCap;
-
+    private ArrayList<SubWorkItemGPONView> listSWIKeoCap = new ArrayList<>();
     public static BaseFragment newInstance() {
         return new GPONTiendoNodeFragment();
     }
@@ -92,11 +86,11 @@ public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGpon
         // Them all Work Item Entity.
         itemGponPresenter.addWorkItem();
 
-        if (swiKeoCap != null) {
-            AppCompatRadioButton radioBtnCheck = swiKeoCap.getRadioBtnCheck();
-            if (radioBtnCheck != null) {
-                // Hien thi item dau tien
-                radioBtnCheck.setChecked(true);
+        // Hien thi xerm item dau tien luc vua khoi tao man hinh.
+        for (SubWorkItemGPONView sView : listSWIKeoCap) {
+            if (sView.getRadioBtnCheck().isChecked()) {
+                sView.getRootView().performClick();
+                return;
             }
         }
     }
@@ -162,10 +156,7 @@ public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGpon
     @Override
     public void finishAddSWKeoCap(SubWorkItemGPONView sView, ConstrNodeEntity node) {
         layoutRootLeft.addView(sView);
-        if (isFirstShow) {
-            this.swiKeoCap = sView;
-            isFirstShow = false;
-        }
+        listSWIKeoCap.add(sView);
         // Them item cho right Sub Work Item.
         itemGponPresenter.addSWValueKeoCap(node, sView);
     }
@@ -282,12 +273,16 @@ public class GPONTiendoNodeFragment extends BaseTienDoFragment implements IeGpon
     // Luu data xuong database.
     @Override
     public void save() {
-        if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
+        if (constr_ConstructionItem.getStatus() >= 395) {
             Toast.makeText(getContext(), "Công trình đang chờ hoàn thành," + " bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
             return;
         }
         super.save();
         itemGponPresenter.save();
+    }
+
+    @Override
+    public void saveSuccess() {
         Toast.makeText(getContext(), "Cập nhật tiến độ thành công", Toast.LENGTH_SHORT).show();
     }
 

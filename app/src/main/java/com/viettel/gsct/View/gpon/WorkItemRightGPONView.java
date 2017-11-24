@@ -82,7 +82,7 @@ public class WorkItemRightGPONView extends LinearLayout {
     public void setWorkItem(Work_ItemsEntity workItem) {
         this.workItem = workItem;
         tvTitle.setText(workItem.getWork_item_name());
-        if (workItem.getStatus_id() == Work_ItemsEntity.STATUS_COMPLETE) {
+        if (workItem.hasCompletedDate()) {
             btnTienDo.setText("Hoàn thành");
         } else {
             btnTienDo.setText("Chưa làm");

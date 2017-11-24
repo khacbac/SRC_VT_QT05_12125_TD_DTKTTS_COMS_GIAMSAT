@@ -1,6 +1,7 @@
 package com.viettel.gsct.fragment.tiendo.gpon.view;
 
 import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,7 @@ import com.viettel.database.entity.Work_ItemsEntity;
 import com.viettel.database.field.Sub_Work_ItemField;
 import com.viettel.database.field.Sub_Work_Item_ValueField;
 import com.viettel.database.field.Work_ItemsField;
+import com.viettel.gsct.View.constant.Constant;
 import com.viettel.gsct.View.gpon.SubWorkItemGponOldView;
 import com.viettel.gsct.View.gpon.WorkItemGponOldView;
 import com.viettel.gsct.fragment.base.BaseFragment;
@@ -82,8 +84,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_gpon_tien_do, container, false);
         unbinder = ButterKnife.bind(this, layout);
         initViews();
@@ -119,7 +120,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
         hashPlanCodes.put("DOKIEM_BRCD", "GPON_Ngay_hoan_thanh_do_kiem_nghiem_thu");
         hashPlanCodes.put("LAPDAT_BRCD", "GPON_Ngay_hoan_thanh_lap_dat");
 
-        boolean isLapDatFinish = false;
+        boolean isKeoCapFinish = false;
         boolean isHanNoiFinish = false;
         if (workItems != null && !workItems.isEmpty()) {
             for (Work_ItemsEntity workItem : workItems) {
@@ -137,10 +138,12 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                     flagIsRealFinish = workItem.isCompleted();
                 }
                 if (workItem.hasCompletedDate() && !workItem.getComplete_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
-                    if (workItem.getWork_item_name().equalsIgnoreCase("Lắp đặt")) {
-                        isLapDatFinish = true;
-                    } else if (workItem.getWork_item_name().equalsIgnoreCase("Hàn nối")) {
-                        isHanNoiFinish = true;
+                    if (workItem.getWork_item_name() != null) {
+                        if (workItem.getWork_item_name().equalsIgnoreCase(Constant.TAG_KEOCAP)) {
+                            isKeoCapFinish = true;
+                        } else if (workItem.getWork_item_name().equalsIgnoreCase(Constant.TAG_HANNOI)) {
+                            isHanNoiFinish = true;
+                        }
                     }
                 }
             }
@@ -176,7 +179,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
                     } else if (catSubWorkItem.getCode().contains("CAPQUANG")) {
                         subView.setEdtValueMaxLength(12);
                         subView.setEdtDataType(1);
-                        if (isLapDatFinish) {
+                        if (isKeoCapFinish) {
                             subView.setEdtEnable(false);
                         }
                     }
@@ -295,10 +298,20 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
         super.save();
         Plan_Constr_DetailController planController = new Plan_Constr_DetailController(getContext());
         Enumeration<Long> keys = hashWorkItems.keys();
+        boolean isKeoCapFinish = false;
         while (keys.hasMoreElements()) {
             Work_ItemsEntity workItem = hashWorkItems.get(keys.nextElement());
-            if (workItem.isCompleted() || workItem.getWork_item_code() == null)
+            if (workItem.isCompleted() || workItem.getWork_item_code() == null) {
+                if (workItem.getWork_item_code().equalsIgnoreCase("KEOCAP_BRCD")) {
+                    isKeoCapFinish = true;
+                }
                 continue;
+            }
+            // Vi work item keo cap la cha cua cap hinh so 8 va cap adss.
+            // Nen neu keo cap hoan thanh thi 2 thang kia cung hoan thanh,khong nhap duoc nua.
+            if (isKeoCapFinish && workItem.getWork_item_code().contains("CAPQUANG")) {
+                continue;
+            }
             workItem.setSyncStatus(workItem.getProcessId() > 0 ? Constants.SYNC_STATUS.EDIT : Constants.SYNC_STATUS.ADD);
             workItem.setEmployeeId(userId);
             workItem.setIsActive(Constants.ISACTIVE.ACTIVE);
@@ -394,8 +407,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
     public boolean checkValidateGponTienDo() {
         Log.d(TAG, "checkValidateGponTienDo() called");
         if (constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
-            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành," +
-                    " bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Công trình đang chờ hoàn thành," + " bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
             return false;
         }
         Enumeration<Long> keys = hashWorkItems.keys();
@@ -441,8 +453,7 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
      * @param isHoanThanh boolean.
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void setStatusEdtValueFollowStatus(
-            AppCompatEditText editText, final boolean isHoanThanh) {
+    public void setStatusEdtValueFollowStatus(AppCompatEditText editText, final boolean isHoanThanh) {
         editText.setClickable(!isHoanThanh);
         editText.setAlpha(isHoanThanh ? 0.5f : 1);
         editText.setShowSoftInputOnFocus(!isHoanThanh);
@@ -453,17 +464,14 @@ public class GPONTiendoFragment extends BaseTienDoFragment {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (isHoanThanh) {
-                        Toast.makeText(getActivity(),
-                                "Bạn chỉ có thể nhâp khối lượng trong trạng thái chưa làm!",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Bạn chỉ có thể nhâp khối lượng trong trạng thái chưa làm!", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }
                 return false;
             }
         });
-        Log.d(TAG, "setStatusEdtValueFollowStatus() called with: editText = ["
-                + editText + "], isHoanThanh = [" + isHoanThanh + "]");
+        Log.d(TAG, "setStatusEdtValueFollowStatus() called with: editText = [" + editText + "], isHoanThanh = [" + isHoanThanh + "]");
     }
 
     @Override

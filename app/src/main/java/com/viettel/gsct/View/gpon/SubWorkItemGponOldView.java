@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.viettel.ktts.R;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -67,6 +69,11 @@ public class SubWorkItemGponOldView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() == 11 && !editable.toString().contains(".")) {
+                    etValue.setInputType(InputType.TYPE_CLASS_NUMBER);
+                } else {
+                    etValue.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                }
                 if (editable.toString().contains(".")) {
                     String subAfterDot = editable.toString().substring(editable.toString().indexOf(".") + 1);
                     if (editable.toString().endsWith(".") || subAfterDot.isEmpty()) {
@@ -83,16 +90,16 @@ public class SubWorkItemGponOldView extends LinearLayout {
         tvTitle.setText(title);
         if (luyke > 0) {
             if (luyke % 1 == 0) {
-                tvLuyke.setText(String.valueOf((int)luyke));
+                tvLuyke.setText(String.valueOf((long)luyke));
             } else {
-                tvLuyke.setText(String.valueOf((double) Math.round(luyke * 100) / 100));
+                tvLuyke.setText(String.format(Locale.UK,"%.2f",luyke));
             }
         }
         if (value > 0) {
             if (value % 1 == 0) {
-                etValue.setText(String.valueOf((int)value));
+                etValue.setText(String.valueOf((long)value));
             } else {
-                etValue.setText(String.valueOf((double) Math.round(value * 100) / 100));
+                etValue.setText(String.format(Locale.UK,"%.2f",value));
             }
         }
         tvDonvi.setText(donvi);
@@ -101,9 +108,9 @@ public class SubWorkItemGponOldView extends LinearLayout {
     public void setLuyke(double luyke) {
         if (luyke > 0) {
             if (luyke % 1 == 0) {
-                tvLuyke.setText(String.valueOf((int) luyke));
+                tvLuyke.setText(String.valueOf((long) luyke));
             } else {
-                tvLuyke.setText(String.valueOf((double) Math.round(luyke * 100) / 100));
+                tvLuyke.setText(String.format(Locale.UK,"%.2f",luyke));
             }
         } else {
             tvLuyke.setText("");

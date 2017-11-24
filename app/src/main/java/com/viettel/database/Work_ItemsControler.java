@@ -41,46 +41,26 @@ public class Work_ItemsControler {
             Work_ItemsField.WORK_ITEM_CODE,
             Work_ItemsField.WORK_ITEM_NAME,
             Work_ItemsField.WORK_ITEM_ADDRESS,
-
             Work_ItemsField.CONSTRUCTOR_ID,
             Work_ItemsField.SUPERVISOR_ID,
             Work_ItemsField.UPDATE_DATE,
             Work_ItemsField.STARTING_DATE,
             Work_ItemsField.COMPLETE_DATE,
-//            Work_ItemsField.ENGINEERING_COST,
-//            Work_ItemsField.DEVICE_COST,
-//            Work_ItemsField.OTHER_COST,
-//            Work_ItemsField.CONTINGENCY_COST,
-//            Work_ItemsField.INVEST_PROJECT_ID,
             Work_ItemsField.CONSTR_ID,
             Work_ItemsField.CONTRACT_ID,
-//            Work_ItemsField.CONSTR_FORM,
-//            Work_ItemsField.SUPER_FORM,
             Work_ItemsField.STATUS,
             Work_ItemsField.REAL_COMPLETE_DATE,
-
-//            Work_ItemsField.TOTAL_REAL_COST,
-//            Work_ItemsField.LIQUIDATE_COST,
-//            Work_ItemsField.LIQUIDATE_DATE,
             Work_ItemsField.START_BY,
             Work_ItemsField.UPDATE_STATUS_BY,
             Work_ItemsField.ACCEPT_BY,
-//            Work_ItemsField.NORMS_ID,
             Work_ItemsField.STATUS_ID,
             Work_ItemsField.WORK_ITEM_TYPE_NAME,
             Work_ItemsField.CONSTR_TYPE,
-//            Work_ItemsField.CABLE_TYPE,
-//            Work_ItemsField.TOTAL_WORK,
-//            Work_ItemsField.CURRENT_WORK,
-//            Work_ItemsField.MATERIAL_TYPE,
-//            Work_ItemsField.CONSTR_DESIGN_ID,
-//            Work_ItemsField.PROVINCE_ID,
             BaseField.COLUMN_IS_ACTIVE,
             BaseField.COLUMN_PROCESS_ID,
             BaseField.COLUMN_SYNC_STATUS,
             BaseField.COLUMN_EMPLOYEE_ID,
-            Work_ItemsField.ACCEPT_NOTE_CODE/*,
-            Work_ItemsField.CONSTR_NODE_ID*/
+            Work_ItemsField.ACCEPT_NOTE_CODE
     };
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "
@@ -108,62 +88,28 @@ public class Work_ItemsControler {
             + " INTEGER,"
             + Work_ItemsField.CONSTR_TYPE
             + " INTEGER,"
-//            + Work_ItemsField.ENGINEERING_COST
-//            + " INTEGER,"
-//            + Work_ItemsField.DEVICE_COST
-//            + " INTEGER,"
-//            + Work_ItemsField.OTHER_COST
-//            + " INTEGER,"
-//            + Work_ItemsField.CONTINGENCY_COST
-//            + " INTEGER,"
-//            + Work_ItemsField.INVEST_PROJECT_ID
-//            + " INTEGER,"
             + Work_ItemsField.CONTRACT_ID
             + " TEXT,"
             + Work_ItemsField.STATUS
             + " INTEGER,"
             + Work_ItemsField.REAL_COMPLETE_DATE
             + " TEXT,"
-//            + Work_ItemsField.TOTAL_REAL_COST
-//            + " INTEGER,"
-//            + Work_ItemsField.LIQUIDATE_COST
-//            + " INTEGER,"
-//            + Work_ItemsField.LIQUIDATE_DATE
-//            + " TEXT,"
             + Work_ItemsField.START_BY
             + " INTEGER,"
             + Work_ItemsField.UPDATE_STATUS_BY
             + " INTEGER,"
             + Work_ItemsField.ACCEPT_BY
             + " INTEGER,"
-//            + Work_ItemsField.NORMS_ID
-//            + " INTEGER,"
             + Work_ItemsField.WORK_ITEM_CODE
             + " TEXT,"
-//            + Work_ItemsField.CONSTR_FORM
-//            + " INTEGER,"
-//            + Work_ItemsField.SUPER_FORM
-//            + " INTEGER,"
             + Work_ItemsField.CONSTRUCTOR_ID
             + " INTEGER,"
             + Work_ItemsField.SUPERVISOR_ID
             + " INTEGER,"
-//            + Work_ItemsField.CABLE_TYPE
-//            + " TEXT,"
-//            + Work_ItemsField.TOTAL_WORK
-//            + " INTEGER,"
-//            + Work_ItemsField.CURRENT_WORK
-//            + " INTEGER,"
-//            + Work_ItemsField.MATERIAL_TYPE
-//            + " INTEGER,"
-//            + Work_ItemsField.CONSTR_DESIGN_ID
-//            + " INTEGER,"
-//            + Work_ItemsField.PROVINCE_ID
-//            + " INTEGER,"
+            + Work_ItemsField.COLUMN_RECENT_CHECK
+            + " TEXT,"
             + Work_ItemsField.COLUMN_IS_ACTIVE
             + " INTEGER,"
-            /*+ Work_ItemsField.CONSTR_NODE_ID
-            + " INTEGER,"*/
             + Work_ItemsField.COLUMN_CONSTRUCT_ID
             + " INTEGER,"
             + BaseField.COLUMN_PROCESS_ID
@@ -182,11 +128,7 @@ public class Work_ItemsControler {
         ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
         Cursor cursor = db
-                .query(Work_ItemsField.TABLE_NAME, allColumn,
-                        Work_ItemsField.CONSTR_ID + "=? AND "
-                                + Work_ItemsField.COLUMN_IS_ACTIVE + "= 1",
-                        new String[]{String.valueOf(constructId)}, null, null,
-                        null, null);
+                .query(Work_ItemsField.TABLE_NAME, allColumn, Work_ItemsField.CONSTR_ID + "=? AND " + Work_ItemsField.COLUMN_IS_ACTIVE + "= 1", new String[]{String.valueOf(constructId)}, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 Work_ItemsEntity curItem = this.converCursorToItem(cursor);
@@ -216,68 +158,10 @@ public class Work_ItemsControler {
         return ret;
     }
 
-    public ArrayList<Work_ItemsEntity> getWItemsByNode(int constrIdFromNode) {
-        ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
-        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
-        String strQuery = "select * from WORK_ITEMS where CONSTR_ID = " + constrIdFromNode;
-        @SuppressLint("Recycle")
-        Cursor cursor = db.rawQuery(strQuery,null);
-        if (cursor.moveToFirst()) {
-            do {
-                Work_ItemsEntity curItem = this.converCursorToItem(cursor);
-                Log.d(TAG, "getItems: From Controler - Name = " + curItem.getWork_item_name());
-                ret.add(curItem);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        KttsDatabaseHelper.INSTANCE.close();
-        return ret;
-    }
-
-    public ArrayList<String> getAllWorkItemName() {
-        ArrayList<String> allItemName = new ArrayList<>();
-        String query = "select WORK_ITEMS.WORK_ITEM_NAME from WORK_ITEMS INNER JOIN CONSTR_CONSTRUCTIONS on WORK_ITEMS.CONSTR_ID = CONSTR_CONSTRUCTIONS.CONSTRUCT_ID ;";
-        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
-        @SuppressLint("Recycle")
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                String worlName = cursor.getString(0);
-                allItemName.add(worlName);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        KttsDatabaseHelper.INSTANCE.close();
-        return allItemName;
-
-    }
-
-    public ArrayList<Work_ItemsEntity> getItemsByCatWorkItemType(long itemTypeId) {
-        ArrayList<Work_ItemsEntity> ret = new ArrayList<>();
-        SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
-        Cursor cursor = db
-                .query(Work_ItemsField.TABLE_NAME, allColumn,
-                        Work_ItemsField.ITEM_TYPE_ID + "=? AND "
-                                + Work_ItemsField.COLUMN_IS_ACTIVE + "= 1",
-                        new String[]{String.valueOf(itemTypeId)}, null, null,
-                        null, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Work_ItemsEntity curItem = this.converCursorToItem(cursor);
-                Log.d(TAG, "getItems: From Controler - Name = " + curItem.getWork_item_name());
-                ret.add(curItem);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        KttsDatabaseHelper.INSTANCE.close();
-        return ret;
-    }
-
     public ArrayList<String> getListColumn() {
         ArrayList<String> allColums = new ArrayList<>();
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
-        Cursor cursor = db
-                .query(Work_ItemsField.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = db.query(Work_ItemsField.TABLE_NAME, null, null, null, null, null, null);
         String[] columns = cursor.getColumnNames();
         Collections.addAll(allColums, columns);
         cursor.close();
@@ -299,16 +183,9 @@ public class Work_ItemsControler {
     }
 
     public Work_ItemsEntity getItem(long constructId, long cat_work_item_id) {
-//        Log.e(TAG, "getItem: " + constructId + " " + cat_work_item_id );
         Work_ItemsEntity curItem;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
-        Cursor cursor = db
-                .query(Work_ItemsField.TABLE_NAME, allColumn,
-                        Work_ItemsField.CONSTR_ID + "=? AND "
-                                + Work_ItemsField.ITEM_TYPE_ID + "=?",
-                        new String[]{String.valueOf(constructId),
-                                String.valueOf(cat_work_item_id)}, null, null,
-                        null, null);
+        Cursor cursor = db.query(Work_ItemsField.TABLE_NAME, allColumn, Work_ItemsField.CONSTR_ID + "=? AND " + Work_ItemsField.ITEM_TYPE_ID + "=?", new String[]{String.valueOf(constructId), String.valueOf(cat_work_item_id)}, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             curItem = this.converCursorToItem(cursor);
@@ -352,11 +229,8 @@ public class Work_ItemsControler {
         boolean bResult = false;
         SQLiteDatabase db = KttsDatabaseHelper.INSTANCE.open(mContext);
         ContentValues values = convertItemToValues(addItem);
-
-        String sqlclause = Work_ItemsField.WORK_ITEM_ID
-                + "= ?";
+        String sqlclause = Work_ItemsField.WORK_ITEM_ID + "= ?";
         String[] sqlPara = new String[]{String.valueOf(addItem.getId())};
-
         db.update(Work_ItemsField.TABLE_NAME, values, sqlclause, sqlPara);
         KttsDatabaseHelper.INSTANCE.close();
         bResult = true;
@@ -380,7 +254,7 @@ public class Work_ItemsControler {
         values.put(Work_ItemsField.COLUMN_EMPLOYEE_ID, addItem.getEmployeeId());
         values.put(Work_ItemsField.COLUMN_SYNC_STATUS, addItem.getSyncStatus());
         values.put(Work_ItemsField.COLUMN_IS_ACTIVE, addItem.getIsActive());
-//        values.put(Work_ItemsField.CONSTR_NODE_ID, addItem.getNodeID());
+        values.put(Work_ItemsField.COLUMN_RECENT_CHECK, addItem.getRecentCheck());
         return values;
     }
 
@@ -416,8 +290,8 @@ public class Work_ItemsControler {
                     .getColumnIndex(Work_ItemsField.COLUMN_SYNC_STATUS)));
             curItem.setIsActive(cursor.getInt(cursor
                     .getColumnIndex(Work_ItemsField.COLUMN_IS_ACTIVE)));
-//            curItem.setNodeID(cursor.getLong(cursor
-//                    .getColumnIndex(Work_ItemsField.CONSTR_NODE_ID)));
+            curItem.setRecentCheck(cursor.getString(cursor
+                    .getColumnIndex(Work_ItemsField.COLUMN_RECENT_CHECK)));
         } catch (Exception e) {
             e.printStackTrace();
         }

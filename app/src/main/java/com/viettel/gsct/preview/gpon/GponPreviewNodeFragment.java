@@ -31,7 +31,6 @@ package com.viettel.gsct.preview.gpon;
         import com.viettel.gsct.View.gpon.WorkItemValueOdf;
         import com.viettel.gsct.View.gpon.WorkItemValueOltDoKiem;
         import com.viettel.gsct.fragment.tiendo.gpon.view.BaseGponPreview;
-        import com.viettel.gsct.fragment.tiendo.gpon.view.GponTienDoPreviewFragment;
         import com.viettel.gsct.utils.GSCTUtils;
         import com.viettel.ktts.R;
         import com.viettel.utils.NestedExpandableListView;
@@ -43,6 +42,7 @@ package com.viettel.gsct.preview.gpon;
         import java.util.HashMap;
         import java.util.LinkedHashMap;
         import java.util.List;
+        import java.util.Locale;
 
         import butterknife.BindView;
         import butterknife.ButterKnife;
@@ -239,7 +239,17 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
             lHeader.add(contentCapSo8);
             for (int i = 0; i < kc.getwIVKCHeaderCapSo8().getListValue().size(); i++) {
                 WorkItemValueKeoCap valueKC = kc.getwIVKCHeaderCapSo8().getListValue().get(i);
-                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueKC.getTenItem(), ""+ valueKC.getDoubleKhoiLuong(), "" , "" + ((double)Math.round((valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe()) * 100) / 100));
+                double value = valueKC.getDoubleKhoiLuong();
+                double luyke = valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe();
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueKC.getTenItem(), valueKC.getKhoiLuong().isEmpty() ? "" : String.format(Locale.UK,"%.2f",value), "" , String.format(Locale.UK,"%.2f",luyke));
+                item.setHasSLHanNoi(false);
+                if (!valueKC.getKhoiLuong().isEmpty() && (value % 1 == 0)) {
+                    item.setDetailSLLapDat(String.valueOf((long)value));
+                }
+
+                if (luyke % 1 == 0) {
+                    item.setDetailLuyKe(String.valueOf((long)luyke));
+                }
                 if (valueKC.getDoubleKhoiLuong() > 0) {
                     item.setNewEdit(true);
                     contentCapSo8.setNewEdit(true);
@@ -257,7 +267,17 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
             lHeader.add(contentAdss);
             for (int i = 0; i < kc.getwIVKCHeaderCapAdss().getListValue().size(); i++) {
                 WorkItemValueKeoCap valueKC = kc.getwIVKCHeaderCapAdss().getListValue().get(i);
-                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueKC.getTenItem(), ""+valueKC.getDoubleKhoiLuong(), "", "" + ((double)Math.round((valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe()) * 100) / 100));
+                double value = valueKC.getDoubleKhoiLuong();
+//                double luyke = (double)Math.round((valueKC.getLongKhoiLuong() + valueKC.getLongOldLuyKe()) * 100) / 100;
+                double luyke = valueKC.getDoubleKhoiLuong() + valueKC.getDoubleOldLuyKe();
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueKC.getTenItem(), valueKC.getKhoiLuong().isEmpty() ? "" : String.format(Locale.UK,"%.2f",value), "", String.format(Locale.UK,"%.2f",luyke));
+                item.setHasSLHanNoi(false);
+                if (!valueKC.getKhoiLuong().isEmpty() && (value % 1 == 0)) {
+                    item.setDetailSLLapDat(String.valueOf((long)value));
+                }
+                if (luyke % 1 == 0) {
+                    item.setDetailLuyKe(String.valueOf((long)luyke));
+                }
                 if (valueKC.getDoubleKhoiLuong() > 0) {
                     item.setNewEdit(true);
                     contentAdss.setNewEdit(true);
@@ -291,9 +311,9 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
 
             for (int i = 0; i < hn.getlBoChia().getListValue().size(); i++) {
                 WorkItemValueHanNoiBoChia valueBC = hn.getlBoChia().getListValue().get(i);
-                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueBC.getTextBochia(), ""+valueBC.getIntegerKhoiLuong(), "", "" + (valueBC.getIntegerKhoiLuong() + valueBC.getIntegerOldLuyKe()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueBC.getTextBochia(), valueBC.getKhoiLuong().isEmpty() ? "" : ""+valueBC.getLongKhoiLuong(), "", "" + (valueBC.getLongKhoiLuong() + valueBC.getLongOldLuyKe()));
                 item.setHasSLHanNoi(true);
-                if (valueBC.getIntegerKhoiLuong() > 0) {
+                if (valueBC.getLongKhoiLuong() > 0) {
                     item.setNewEdit(true);
                     content.setNewEdit(true);
                 }
@@ -301,9 +321,9 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
             }
             for (int i = 0; i < hn.getlTuThue().getListValue().size(); i++) {
                 WorkItemValueHanNoiTuThue valueTT = hn.getlTuThue().getListValue().get(i);
-                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueTT.getTenTu(), ""+valueTT.getIntegerKhoiLuongLapDat(), ""+valueTT.getIntegerKhoiLuongHanNoi(), "", "" + (valueTT.getIntegerKhoiLuongLapDat() + valueTT.getIntegerOldLuyKeLapDat()),"" + (valueTT.getIntegerKhoiLuongHanNoi() + valueTT.getIntegerOldLuyKeHanNoi()));
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueTT.getTenTu(), valueTT.getKhoiLuongLD().isEmpty() ? "" : ""+valueTT.getLongKhoiLuongLapDat(), valueTT.getKhoiLuongHN().isEmpty() ? "" : ""+valueTT.getLongKhoiLuongHanNoi(), "", "" + (valueTT.getLongKhoiLuongLapDat() + valueTT.getLongOldLuyKeLapDat()),"" + (valueTT.getLongKhoiLuongHanNoi() + valueTT.getLongOldLuyKeHanNoi()));
                 item.setHasSLHanNoi(true);
-                if (valueTT.getIntegerKhoiLuongHanNoi() > 0) {
+                if (valueTT.getLongKhoiLuongLapDat() > 0 || valueTT.getLongKhoiLuongHanNoi() > 0) {
                     item.setNewEdit(true);
                     content.setNewEdit(true);
                 }
@@ -332,8 +352,9 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
             for (int i = 0; i < odf.getListValue().size(); i++) {
                 WorkItemValueOdf valueOdf = odf.getListValue().get(i);
                 ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueOdf.getTvTenOdf(),
-                        ""+valueOdf.getDoubleKhoiLuong(), "", "" + (valueOdf.getDoubleKhoiLuong() + valueOdf.getDoubleOldLuyKe()));
-                if (valueOdf.getDoubleKhoiLuong() > 0) {
+                        valueOdf.getKhoiLuong().isEmpty() ? "" : ""+valueOdf.getLongKhoiLuong(), "", "" + (valueOdf.getLongKhoiLuong() + valueOdf.getLongOldLuyKe()));
+                item.setHasSLHanNoi(false);
+                if (valueOdf.getLongKhoiLuong() > 0) {
                     item.setNewEdit(true);
                     content.setNewEdit(true);
                 }
@@ -367,11 +388,11 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
                 if (swivEntity != null) {
                     if (valueDoKiem.isFinish()) {
                         if (!swivEntity.hadAddedDate() || GSCTUtils.getDateNow().equalsIgnoreCase(swivEntity.getAdded_date())) {
-                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
+                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.standardlizeTime(GSCTUtils.getDateNow()));
                             itemDetail.setNewEdit(true);
                             content.setNewEdit(true);
                         } else {
-                            itemDetail.setDetailNgayHoanThanh(swivEntity.getAdded_date());
+                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.standardlizeTime(swivEntity.getAdded_date()));
                         }
                     }
                 }
@@ -398,8 +419,9 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
             lHeader.add(content);
             for (int i = 0; i < itemOdf.getListValue().size(); i++) {
                 WorkItemValueOdf valueOdf = itemOdf.getListValue().get(i);
-                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueOdf.getTvTenOdf(), ""+valueOdf.getDoubleKhoiLuong(), "", "" + (valueOdf.getDoubleKhoiLuong() + valueOdf.getDoubleOldLuyKe()));
-                if (valueOdf.getDoubleKhoiLuong() > 0) {
+                ContentDetailItemProgressGpon2Preview item = new ContentDetailItemProgressGpon2Preview(valueOdf.getTvTenOdf(), valueOdf.getKhoiLuong().isEmpty() ? "" : ""+valueOdf.getLongKhoiLuong(), "", "" + (valueOdf.getLongKhoiLuong() + valueOdf.getLongOldLuyKe()));
+                item.setHasSLHanNoi(false);
+                if (valueOdf.getLongKhoiLuong() > 0) {
                     item.setNewEdit(true);
                     content.setNewEdit(true);
                 }
@@ -431,11 +453,11 @@ public class GponPreviewNodeFragment extends BaseGponPreview implements GponTien
                 if (swiEntity != null) {
                     if (valueDoKiem.isFinish()) {
                         if (!swiEntity.hasFinishDate() || GSCTUtils.getDateNow().equalsIgnoreCase(swiEntity.getFinishDate())) {
-                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.getDateNow());
+                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.standardlizeTime(GSCTUtils.getDateNow()));
                             itemDetail.setNewEdit(true);
                             content.setNewEdit(true);
                         } else {
-                            itemDetail.setDetailNgayHoanThanh(swiEntity.getFinishDate());
+                            itemDetail.setDetailNgayHoanThanh(GSCTUtils.standardlizeTime(swiEntity.getFinishDate()));
                         }
                     }
                 }

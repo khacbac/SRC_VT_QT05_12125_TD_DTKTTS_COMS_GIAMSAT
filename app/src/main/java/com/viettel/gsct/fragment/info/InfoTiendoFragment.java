@@ -20,6 +20,7 @@ import com.viettel.gsct.fragment.base.BaseTienDoFragment;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -130,10 +131,13 @@ public class InfoTiendoFragment extends BaseTienDoFragment {
                                     subWorkItem.getCat_sub_work_item_id());
                     subView.setValue(
                             catSubWorkItem.getName(),
-                            "" + luyke,
+                            String.format(Locale.UK,"%.2f",luyke),
                             "",
                             subWorkItem.getFinishDate()
                     );
+                    if (luyke % 1 == 0) {
+                        subView.setLuyKe(String.valueOf((long)luyke));
+                    }
                     if (constr_ConstructionEmployeeItem.getSupvConstrType() == Constants.CONSTR_TYPE.BTS ||
                             constr_ConstructionEmployeeItem.getSupvConstrType() == Constants.CONSTR_TYPE.SH) {
                         subView.setHienThiCotKhoiLuong(false);

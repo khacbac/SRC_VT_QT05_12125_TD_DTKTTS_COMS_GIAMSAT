@@ -1308,8 +1308,7 @@ public abstract class BaseActivity extends AppCompatActivity
     public void showPopupPlan(View view) {
         int popupWidth = getResources().getDisplayMetrics().widthPixels / 2;
         int popupHeight = getResources().getDisplayMetrics().heightPixels;
-        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = layoutInflater.inflate(R.layout.popup_make_new_plan, null);
         popupWindow = new PopupWindow(popupView, popupWidth, popupHeight);
         popupWindow.setFocusable(true);
@@ -1399,13 +1398,11 @@ public abstract class BaseActivity extends AppCompatActivity
         interactor.saveTienDo();
     }
     // Check validate tu nhat ky.
-    public boolean listenerValidateFromNhatKy(
-            IeValidate.IecheckValidateNhatKy validateNhatKy, boolean isThiCong) {
+    public boolean listenerValidateFromNhatKy(IeValidate.IecheckValidateNhatKy validateNhatKy, boolean isThiCong) {
         return validateNhatKy.checkValidateNhatKy(isThiCong);
     }
     // Check validate tu nhat ky.
-    public boolean listenerValidateFromTienDo(
-            IeValidate.IecheckValidateTienDo validateTienDo) {
+    public boolean listenerValidateFromTienDo(IeValidate.IecheckValidateTienDo validateTienDo) {
         return validateTienDo.checkValidateTienDo();
     }
 
@@ -1421,9 +1418,7 @@ public abstract class BaseActivity extends AppCompatActivity
                 w.getLocationOnScreen(scrcoords);
                 float x = ev.getRawX() + w.getLeft() - scrcoords[0];
                 float y = ev.getRawY() + w.getTop() - scrcoords[1];
-                if (ev.getAction() == MotionEvent.ACTION_UP
-                        && (x < w.getLeft() || x >= w.getRight()
-                        || y < w.getTop() || y > w.getBottom())) {
+                if (ev.getAction() == MotionEvent.ACTION_UP && (x < w.getLeft() || x >= w.getRight() || y < w.getTop() || y > w.getBottom())) {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
                 }

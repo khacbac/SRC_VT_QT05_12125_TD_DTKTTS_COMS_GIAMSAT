@@ -46,7 +46,7 @@ public class KttsMultiThreadSQLiteOpenHelper extends
     public static final String TAG = KttsMultiThreadSQLiteOpenHelper.class.getSimpleName();
 
     // Database Version
-    private static final int DATABASE_VERSION = 52;//32
+    private static final int DATABASE_VERSION = 53;//32
     // Database Name
     private static final String DATABASE_NAME = "KTTS_DB_MANAGER";
 
@@ -472,6 +472,11 @@ public class KttsMultiThreadSQLiteOpenHelper extends
                 case 51:
                     String strAdd51 = "ALTER TABLE " + Sub_Work_ItemField.TABLE_NAME + " ADD COLUMN " + Sub_Work_ItemField.VALUE + " REAL";
                     db.execSQL(strAdd51);
+                    Log.d(TAG, "onUpgrade: Version " + oldVersion + "add column success!");
+                    break;
+                case 52:
+                    String strAdd52 = "ALTER TABLE " + Work_ItemsField.TABLE_NAME + " ADD COLUMN " + Work_ItemsField.COLUMN_RECENT_CHECK + " TEXT";
+                    db.execSQL(strAdd52);
                     Log.d(TAG, "onUpgrade: Version " + oldVersion + "add column success!");
                     break;
                 default:

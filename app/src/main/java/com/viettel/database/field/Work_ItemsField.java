@@ -47,5 +47,6 @@ public class Work_ItemsField implements BaseField {
 
 //    public static final String CONSTR_NODE_ID = ConstrNodeItemsField.CONSTR_NODE_ID;
     public static final String COLUMN_CONSTRUCT_ID = "CONSTRUCT_ID";
+    public static final String COLUMN_RECENT_CHECK = "COLUMN_RECENT_CHECK";
 
 }

@@ -1,16 +1,21 @@
 package com.viettel.gsct.View.gpon;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.viettel.database.Work_ItemsControler;
+import com.viettel.database.entity.Work_ItemsEntity;
+import com.viettel.gsct.View.constant.Constant;
 import com.viettel.ktts.R;
 
 import java.util.ArrayList;
@@ -41,6 +46,7 @@ public class SubWorkItemGPONView extends LinearLayout {
 
     private WorkItemGPONView workItemGPONView;
     private IeOnRadioCheckChangedListener ieOnRadioCheckChangedListener;
+    private Work_ItemsEntity wItemEntity;
 
     // Phan view chua toan bo value hien thi.
     // Duoc su dung cho viec hide/show tuy theo radio button click.
@@ -70,6 +76,16 @@ public class SubWorkItemGPONView extends LinearLayout {
         radioBtnCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d(TAG, "onCheckedChanged: node check = " + getTvTitle());
+                if (wItemEntity != null) {
+                    wItemEntity.setRecentCheck(getTvTitle());
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Work_ItemsControler.getInstance(context).updateItem(wItemEntity);
+                        }
+                    });
+                }
                 if (workItemGPONView != null) {
                     ieOnRadioCheckChangedListener.onRadioCheckChange(isChecked, radioBtnCheck, SubWorkItemGPONView.this);
                 }
@@ -84,6 +100,7 @@ public class SubWorkItemGPONView extends LinearLayout {
                 }
             }
         });
+
         radioBtnCheck.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,12 +108,12 @@ public class SubWorkItemGPONView extends LinearLayout {
                     radioBtnCheck.performClick();
                 } else {
                     if (workItemGPONView != null) {
-                        ieOnRadioCheckChangedListener.onRadioCheckChange(true,
-                                radioBtnCheck, SubWorkItemGPONView.this);
+                        ieOnRadioCheckChangedListener.onRadioCheckChange(true, radioBtnCheck, SubWorkItemGPONView.this);
                     }
                 }
             }
         });
+
         rootView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,8 +121,7 @@ public class SubWorkItemGPONView extends LinearLayout {
                     radioBtnCheck.performClick();
                 } else {
                     if (workItemGPONView != null) {
-                        ieOnRadioCheckChangedListener.onRadioCheckChange(true,
-                                radioBtnCheck, SubWorkItemGPONView.this);
+                        ieOnRadioCheckChangedListener.onRadioCheckChange(true, radioBtnCheck, SubWorkItemGPONView.this);
                     }
                 }
             }
@@ -129,17 +145,6 @@ public class SubWorkItemGPONView extends LinearLayout {
             tvLuyke.setText("");
     }
 
-    public double getLuyKe() {
-        String ret = tvLuyke.getText().toString();
-        if (ret.equals("")) return 0L;
-        try {
-            return Double.parseDouble(ret);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return 0L;
-        }
-    }
-
     public double getValue() {
         String value = etValue.getEditableText().toString();
         double ret = 0;
@@ -154,20 +159,12 @@ public class SubWorkItemGPONView extends LinearLayout {
         return ret;
     }
 
-    public WorkItemGPONView getWorkItemGPONView() {
-        return workItemGPONView;
-    }
-
     public void setWorkItemGPONView(WorkItemGPONView workItemGPONView) {
         this.workItemGPONView = workItemGPONView;
     }
 
     public String getTvTitle() {
         return tvTitle.getText().toString();
-    }
-
-    public AppCompatEditText getEtValue() {
-        return etValue;
     }
 
     public AppCompatRadioButton getRadioBtnCheck() {
@@ -199,5 +196,15 @@ public class SubWorkItemGPONView extends LinearLayout {
         radioBtnCheck.setEnabled(!isFinish);
     }
 
+    public void addWItemEntity(Work_ItemsEntity wItem) {
+        this.wItemEntity = wItem;
+        if (getTvTitle().equalsIgnoreCase(wItem.getRecentCheck())) {
+            radioBtnCheck.setChecked(true);
+        }
+    }
 
+    @Override
+    public View getRootView() {
+        return rootView;
+    }
 }

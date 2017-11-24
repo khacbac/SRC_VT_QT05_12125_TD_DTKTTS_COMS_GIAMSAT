@@ -105,26 +105,30 @@ public class WorkItemValueOdf extends BaseCustomWorkItem {
     }
 
     public void setTvLuyKe(double luyKe) {
-        this.tvLuyKe.setText(String.valueOf((int)luyKe));
+        this.tvLuyKe.setText(String.valueOf((long)luyKe));
     }
 
     public void setEdtKhoiLuong(double khoiLuong) {
-        edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((int)khoiLuong));
+        edtKhoiLuong.setText(khoiLuong == 0 ? "" : String.valueOf((long)khoiLuong));
     }
 
     public String getTvTenOdf() {
         return tvTenOdf.getText().toString().trim();
     }
 
-    public int getDoubleKhoiLuong() {
-        return (int)(edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim()));
+    public long getLongKhoiLuong() {
+        return (long)(edtKhoiLuong.getText().toString().trim().isEmpty() ? 0 : Double.parseDouble(edtKhoiLuong.getText().toString().trim()));
     }
 
-    public int getDoubleOldLuyKe() {
+    public String getKhoiLuong() {
+        return ""+edtKhoiLuong.getText().toString();
+    }
+
+    public long getLongOldLuyKe() {
         if (Constant.TAG_LAPDAT_ODF_INDOOR.equalsIgnoreCase(odfTAG)) {
-            return (int)(Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId()));
+            return (long)(Sub_Work_ItemController.getInstance(getContext()).getOldLuyke(wIEntity.getId(), cSWIEntity.getId()));
         } else {
-            return (int)(sWIValueController.getOldLuykeByNode(wIEntity.getId(), cSWIEntity.getId(),node.getNodeID()));
+            return (long)(sWIValueController.getOldLuykeByNode(wIEntity.getId(), cSWIEntity.getId(),node.getNodeID()));
         }
     }
 

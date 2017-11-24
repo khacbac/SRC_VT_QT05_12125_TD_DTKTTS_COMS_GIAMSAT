@@ -26,8 +26,6 @@ public class WorkItemTienDoBTSView extends LinearLayout {
     @BindView(R.id.rb_check)
     AppCompatRadioButton rbCheck;
     private RadioCheckListener listener;
-    private boolean isTxtActive;
-
     private int parentIndex = 0;
     private Cat_Work_Item_TypesEntity entity;
 
@@ -46,7 +44,6 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         init(context);
     }
 
-
     private void init(Context context) {
         setOrientation(HORIZONTAL);
         rootView = inflate(context, R.layout.layout_work_item_item_bts, this);
@@ -55,9 +52,11 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         rbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (rbCheck.isChecked())
-                    if (listener != null)
+                if (rbCheck.isChecked()) {
+                    if (listener != null) {
                         listener.onRadioChecked(parentIndex, entity);
+                    }
+                }
             }
         });
 
@@ -67,8 +66,9 @@ public class WorkItemTienDoBTSView extends LinearLayout {
                 if (!rbCheck.isChecked()) {
                     rbCheck.setChecked(rbCheck.isEnabled());
                 } else {
-                    if (listener != null)
+                    if (listener != null) {
                         listener.onTextviewClicked(parentIndex,entity);
+                    }
                 }
             }
         });
@@ -96,28 +96,12 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         return rbCheck.isChecked();
     }
 
-    public boolean isTxtActive() {
-        return isTxtActive;
-    }
-
-    public void setTxtActive(boolean txtActive) {
-        isTxtActive = txtActive;
-    }
-
     public void setRadioCheckListener(RadioCheckListener listener) {
         this.listener = listener;
     }
 
     public void setEnabledRadioBtn(boolean enable) {
         rbCheck.setEnabled(enable);
-    }
-
-    public boolean isEnable() {
-        return rbCheck.isEnabled();
-    }
-
-    public boolean getEnabledRadioBtn() {
-        return rbCheck.isEnabled();
     }
 
     private TiendoBTSItemView parentView;
@@ -129,10 +113,9 @@ public class WorkItemTienDoBTSView extends LinearLayout {
         return parentView;
     }
 
-
     public interface RadioCheckListener {
-        public void onRadioChecked(int parentIndex, Cat_Work_Item_TypesEntity entity) ;
-        public void onTextviewClicked(int parentIndex,Cat_Work_Item_TypesEntity entity) ;
+        void onRadioChecked(int parentIndex, Cat_Work_Item_TypesEntity entity) ;
+        void onTextviewClicked(int parentIndex,Cat_Work_Item_TypesEntity entity) ;
     }
 
 }

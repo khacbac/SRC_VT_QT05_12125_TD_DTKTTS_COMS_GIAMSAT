@@ -1,6 +1,8 @@
 package com.viettel.gsct.fragment.tiendo.gpon.presenter;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.viettel.database.Sub_Work_ItemController;
@@ -67,6 +69,8 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
     // Work item cap nhat theo cong trinh.
     private WorkItemOdf workItemOdfIndoor;
     private WorkItemOltAndDoKiem workItemOlt;
+
+    private boolean flagIsRealFinish = true;
 
     public GponTienDoTienDoPresenter(IeGponTienDoFragment ieGponTienDoFragment, Context context) {
         this.context = context;
@@ -159,6 +163,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
     public void save() {
         // Luu data vao Database.
         saveDataToDataBase();
+        ieGponTienDoFragment.saveSuccess();
     }
 
     @Override
@@ -249,6 +254,9 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
 
         Work_ItemsEntity wItemEntity = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), BaseFragment.constr_ConstructionItem.getConstructId());
         if (wItemEntity != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wItemEntity.isCompleted();
+            }
             workItemOlt.addWorkitem(wItemEntity);
             for (Cat_Sub_Work_ItemEntity catEntity : arrSWItem) {
                 Sub_Work_ItemEntity swiEntity = Sub_Work_ItemController.getInstance(context).getItem(wItemEntity.getId(),catEntity.getId());
@@ -273,9 +281,11 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         Cat_Work_Item_TypesEntity cwiKeoCap = hmCatWorkItem.get(Constant.CODE_KEOCAP);
         Work_ItemsEntity wIKeoCap = wController.getWorkByCatTest(cwiKeoCap.getItem_type_id(), node.getContructorId());
         if (wIKeoCap != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wIKeoCap.isCompleted();
+            }
             keoCap.addWorkItem(wIKeoCap);
-            // Disable cac node da hoan thanh keo cap.
-            sView.setFinish(wIKeoCap.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wIKeoCap.getComplete_date())));
+            sView.addWItemEntity(wIKeoCap);
         }
 
         // Khoi tao work item cap quang hinh so 8.
@@ -285,10 +295,14 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         ArrayList<Cat_Sub_Work_ItemEntity> arrSWItem = BaseFragment.cat_sub_work_itemControler.getsubCates(cwiCapQuang.getItem_type_id());
         Work_ItemsEntity wItemCapSo8 = wController.getWorkByCatTest(cwiCapQuang.getItem_type_id(), node.getContructorId());
         if (wItemCapSo8 != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wItemCapSo8.isCompleted();
+            }
             for (Cat_Sub_Work_ItemEntity cswItem : arrSWItem) {
                 Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItemCapSo8.getId(), cswItem.getId(),node.getNodeID());
                 double luyke = svController.getLuykeByNode(wItemCapSo8.getId(), cswItem.getId(),node.getNodeID());
                 double value = svItem != null ? svItem.getValue() : 0;
+                Log.d(TAG, "finishAddSWValueKeoCap: Luy ke = " + luyke);
 
                 WorkItemValueKeoCap item = new WorkItemValueKeoCap(context);
                 item.addSWIValue(svItem);
@@ -298,12 +312,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 item.setEdtKhoiLuong(value);
                 item.addCTNodeEntity(node);
                 hdCapQuang.addItemValue(item);
-
-                if (svItem != null) {
-                    if (svItem.hadAddedDate() && svItem.getAdded_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
-                        sView.getRadioBtnCheck().setChecked(true);
-                    }
-                }
             }
             hdCapQuang.addWorkItem(wItemCapSo8);
             keoCap.addCapQuangSo8(hdCapQuang);
@@ -316,6 +324,9 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         ArrayList<Cat_Sub_Work_ItemEntity> arrSWItemAdss = BaseFragment.cat_sub_work_itemControler.getsubCates(cwiAdss.getItem_type_id());
         Work_ItemsEntity wItemAdss = wController.getWorkByCatTest(cwiAdss.getItem_type_id(), node.getContructorId());
         if (wItemAdss != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wItemAdss.isCompleted();
+            }
             for (Cat_Sub_Work_ItemEntity cswItem : arrSWItemAdss) {
                 Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItemAdss.getId(), cswItem.getId(),node.getNodeID());
                 double luyke = svController.getLuykeByNode(wItemAdss.getId(), cswItem.getId(),node.getNodeID());
@@ -329,12 +340,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 item.setEdtKhoiLuong(value);
                 item.addCTNodeEntity(node);
                 hdAdss.addItemValue(item);
-
-                if (svItem != null) {
-                    if (svItem.hadAddedDate() && svItem.getAdded_date().equalsIgnoreCase(GSCTUtils.getDateNow())) {
-                        sView.getRadioBtnCheck().setChecked(true);
-                    }
-                }
             }
             hdAdss.addWorkItem(wItemAdss);
             keoCap.addCapQuangAdss(hdAdss);
@@ -353,9 +358,11 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         // Hard code 69280340 for test.
         Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), node.getContructorId());
         if (wItem != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wItem.isCompleted();
+            }
             wItemHanNoi.addWorkItem(wItem);
-            // Disable cac node da hoan thanh keo cap.
-            sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
+            sView.addWItemEntity(wItem);
 
             for (Cat_Sub_Work_ItemEntity cswItem : arrSWItem) {
                 Sub_Work_Item_ValueEntity svItem = svController.getItemByNode(wItem.getId(), cswItem.getId(),node.getNodeID());
@@ -386,12 +393,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     bochia.addCTNodeEntity(node);
                     wItemHanNoi.addValueBoChia(bochia);
                 }
-
-                if (svItem != null) {
-                    if (svItem.hadAddedDate() && GSCTUtils.getDateNow().equalsIgnoreCase(svItem.getAdded_date())) {
-                        sView.getRadioBtnCheck().setChecked(true);
-                    }
-                }
             }
         }
         sView.addSWValue(wItemHanNoi);
@@ -413,9 +414,11 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         // Hard code 69280340 for test.
         Work_ItemsEntity wItem = wController.getWorkByCatTest(catWorkItem.getItem_type_id(), node.getContructorId());
         if (wItem != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wItem.isCompleted();
+            }
             wiDoKiem.addWorkitem(wItem);
-            // Disable cac node da hoan thanh keo cap.
-            sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
+            sView.addWItemEntity(wItem);
 
             for (Cat_Sub_Work_ItemEntity cswEntity : arrSWItem) {
                 Sub_Work_Item_ValueEntity svItem = svController.getItemByNodeDoKiem(wItem.getId(), cswEntity.getId(),node.getNodeID());
@@ -426,12 +429,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 dokiemItem.addSWIValue(svItem);
                 dokiemItem.addCTNodeEntity(node);
                 wiDoKiem.addValueItem(dokiemItem);
-
-                if (svItem != null) {
-                    if (svItem.hadAddedDate() && GSCTUtils.getDateNow().equalsIgnoreCase(svItem.getAdded_date())) {
-                        sView.getRadioBtnCheck().setChecked(true);
-                    }
-                }
             }
         }
         sView.addSWValue(wiDoKiem);
@@ -446,6 +443,9 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         workItemOdfIndoor = new WorkItemOdf(context);
         Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), BaseFragment.constr_ConstructionItem.getConstructId());
         if (wItem != null) {
+            if (flagIsRealFinish) {
+                flagIsRealFinish = wItem.isCompleted();
+            }
             workItemOdfIndoor.addWorkItem(wItem);
             for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
                 if (entity.getCode().contains("INDOOR")) {
@@ -464,7 +464,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                 }
             }
         }
-//        this.workItemOdfIndoor = wiOdf;
         ieGponTienDoFragment.finishAddOdfInDoorValue(workItemOdfIndoor);
     }
 
@@ -476,8 +475,7 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
         Work_ItemsEntity wItem = wController.getWorkByCatTest(catWork.getItem_type_id(), node.getContructorId());
         if (wItem != null) {
             wiOdf.addWorkItem(wItem);
-            // Disable cac node da hoan thanh keo cap.
-            sView.setFinish(wItem.hasCompletedDate() && (!GSCTUtils.getDateNow().equalsIgnoreCase(wItem.getComplete_date())));
+            sView.addWItemEntity(wItem);
 
             for (Cat_Sub_Work_ItemEntity entity : arrSubWorkItems) {
                 if (entity.getCode().contains("OUTDOOR")) {
@@ -494,12 +492,6 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
                     odfOutdoor.addSWIValue(svItem);
                     odfOutdoor.addCTNodeEntity(node);
                     wiOdf.addValueOdf(odfOutdoor);
-
-                    if (svItem != null) {
-                        if (svItem.hadAddedDate() && GSCTUtils.getDateNow().equalsIgnoreCase(svItem.getAdded_date())) {
-                            sView.getRadioBtnCheck().setChecked(true);
-                        }
-                    }
                 }
             }
         }
@@ -537,6 +529,10 @@ public class GponTienDoTienDoPresenter implements IeGponTienDoPresenter, IeGponT
 
     @Override
     public void showPreviewTienDo(BaseGponPreview gponPreview) {
+        if (BaseFragment.constr_ConstructionItem.getStatus() >= 395 && flagIsRealFinish) {
+            Toast.makeText(context, "Công trình đang chờ hoàn thành," + " bạn không thể cập nhật thêm tiến độ!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         GponPreviewNodeFragment gponFragment = null;
         if (gponPreview instanceof GponPreviewNodeFragment) {
             gponFragment = (GponPreviewNodeFragment) gponPreview;

@@ -50,9 +50,7 @@ import butterknife.Unbinder;
  * Created by admin2 on 05/04/2017.
  */
 
-public class BtsTiendoFragment extends BaseTienDoFragment
-        implements WorkItemTienDoBTSView.RadioCheckListener, IeSave.IeCapNhatTienDoInteractor,
-        IeValidate.IecheckValidateTienDo {
+public class BtsTiendoFragment extends BaseTienDoFragment implements WorkItemTienDoBTSView.RadioCheckListener, IeSave.IeCapNhatTienDoInteractor, IeValidate.IecheckValidateTienDo {
     private final String TAG = this.getClass().getSimpleName();
     @BindView(R.id.tv_date)
     TextView tvDate;
@@ -86,26 +84,20 @@ public class BtsTiendoFragment extends BaseTienDoFragment
     };
     private final String[] codeItemsThietbi = new String[]{"BTS_HMTB"};
 
-    private ConcurrentHashMap<Integer,
-            TiendoBTSItemView> hashTienDoViews = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Long,
-            WorkItemTienDoBTSView> hashWorkItemViews = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, TiendoBTSItemView> hashTienDoViews = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Long, WorkItemTienDoBTSView> hashWorkItemViews = new ConcurrentHashMap<>();
     private InterfacePassDataFromTienDoToActivity mInterfacePassDataFromTienDoToActivity;
-    private ConcurrentHashMap<Integer,
-            ArrayList<SubWorkItemTienDoBTSView>> subWorkItemTienDoBTSViewHashMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, ArrayList<SubWorkItemTienDoBTSView>> subWorkItemTienDoBTSViewHashMap = new ConcurrentHashMap<>();
 
     private long last_cat_work_item_type_id = 0;
-
     public boolean isValidate;
-
     public static BaseFragment newInstance() {
         return new BtsTiendoFragment();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bts_tien_do, container, false);
         unbinder = ButterKnife.bind(this, layout);
 
@@ -222,15 +214,16 @@ public class BtsTiendoFragment extends BaseTienDoFragment
         last_cat_work_item_type_id = cat_work_item_type.getItem_type_id();
         Work_ItemsEntity work_itemsEntity = hashWorkItems.get(cat_work_item_type.getItem_type_id());
         if (work_itemsEntity == null) {
-            work_itemsEntity = work_itemsControler.getItem(constr_ConstructionItem.getConstructId(),
-                    cat_work_item_type.getItem_type_id());
-            if (work_itemsEntity != null) work_itemsEntity.setChange(true);
+            work_itemsEntity = work_itemsControler.getItem(constr_ConstructionItem.getConstructId(), cat_work_item_type.getItem_type_id());
+            if (work_itemsEntity != null) {
+                work_itemsEntity.setChange(true);
+            }
         }
         if (work_itemsEntity != null) {
-            if (!hashWorkItems.containsKey(work_itemsEntity.getItem_type_id()))
+            if (!hashWorkItems.containsKey(work_itemsEntity.getItem_type_id())) {
                 hashWorkItems.put(work_itemsEntity.getItem_type_id(), work_itemsEntity);
-            ArrayList<Sub_Work_ItemEntity> subWorkItems
-                    = sub_work_itemController.getItems(work_itemsEntity.getId());
+            }
+            ArrayList<Sub_Work_ItemEntity> subWorkItems = sub_work_itemController.getItems(work_itemsEntity.getId());
             for (Sub_Work_ItemEntity subWorkItem : subWorkItems) {
                 work_itemsEntity.addSubWorkItem(subWorkItem);
                 if (!hashSubWorkItems.containsKey(subWorkItem.getCat_sub_work_item_id())) {
@@ -242,15 +235,15 @@ public class BtsTiendoFragment extends BaseTienDoFragment
             work_itemsEntity.setItem_type_id(cat_work_item_type.getItem_type_id());
             work_itemsEntity.setWork_item_name(cat_work_item_type.getItem_type_name());
             work_itemsEntity.setChange(true);
-            if (work_itemsEntity.isReady())
+            if (work_itemsEntity.isReady()) {
                 work_itemsEntity.setStatus_id(403);
+            }
             hashWorkItems.put(work_itemsEntity.getItem_type_id(), work_itemsEntity);
         }
 
         etBbnt.setEnabled(!work_itemsEntity.isCompleted());
         etBbnt.setText(work_itemsEntity.getAccept_note_code());
-        ArrayList<Cat_Sub_Work_ItemEntity> arrCatSubWorkItems
-                = cat_sub_work_itemControler.getsubCates(cat_work_item_type.getItem_type_id());
+        ArrayList<Cat_Sub_Work_ItemEntity> arrCatSubWorkItems = cat_sub_work_itemControler.getsubCates(cat_work_item_type.getItem_type_id());
         if (arrCatSubWorkItems.size() > 0) {
             for (Cat_Sub_Work_ItemEntity catSubWorkItem : arrCatSubWorkItems) {
                 SubWorkItemTienDoBTSView subView = new SubWorkItemTienDoBTSView(getContext());
@@ -259,7 +252,6 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                 subView.setFinishListener(new SubWorkItemTienDoBTSView.FinishListener() {
                     @Override
                     public void onFinishListener(boolean isFinish, long catSubWorkItemId) {
-
                         Sub_Work_ItemEntity subWorkItemEntity = hashSubWorkItems.get(catSubWorkItemId);
                         if (subWorkItemEntity != null) {
                             subWorkItemEntity.setFinishDate(isFinish ? GSCTUtils.getDateNow() : "");
@@ -293,8 +285,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                 }
             });
             subView.setFinish(work_itemsEntity.isReady() || work_itemsEntity.hasCompletedDate());
-            subView.setEnableTiendo(!work_itemsEntity.hasCompletedDate()
-                    || GSCTUtils.getDateNow().equals(work_itemsEntity.getComplete_date()));
+            subView.setEnableTiendo(!work_itemsEntity.hasCompletedDate() || GSCTUtils.getDateNow().equals(work_itemsEntity.getComplete_date()));
             subView.setFinishDate(work_itemsEntity.getComplete_date());
             subView.setStrTrangThaiTienDoBanDau(subView.getButtonTienDoStatus());
             doBTSViews.add(subView);
@@ -352,8 +343,9 @@ public class BtsTiendoFragment extends BaseTienDoFragment
                 workItem.setItem_type_id(catWorkItem.getItem_type_id());
                 workItem.setConstr_id(constr_ConstructionItem.getConstructId());
                 workItem.setWork_item_name(catWorkItem.getItem_type_name());
-                if (workItem.isReady())
+                if (workItem.isReady()) {
                     workItem.setStatus_id(403);
+                }
                 hashWorkItems.put(workItem.getItem_type_id(), workItem);
                 workItem.setChange(true);
             }
@@ -376,14 +368,10 @@ public class BtsTiendoFragment extends BaseTienDoFragment
             workItem.setEmployeeId(userId);
 
             workItem.updateDate();
-            long workItemId = workItem.getId() == 0 ?
-                    Ktts_KeyController.getInstance()
-                            .getKttsNextKey(Work_ItemsField.TABLE_NAME) : workItem.getId();
+            long workItemId = workItem.getId() == 0 ? Ktts_KeyController.getInstance().getKttsNextKey(Work_ItemsField.TABLE_NAME) : workItem.getId();
 
-            ArrayList<Cat_Sub_Work_ItemEntity> arrCatSubWorkItems
-                    = cat_sub_work_itemControler.getsubCates(workItem.getItem_type_id());
-            Log.e(TAG, "save: " + workItem.getWork_item_name() + " "
-                    + arrCatSubWorkItems.size() + " " + workItem.getStatus_id());
+            ArrayList<Cat_Sub_Work_ItemEntity> arrCatSubWorkItems = cat_sub_work_itemControler.getsubCates(workItem.getItem_type_id());
+            Log.e(TAG, "save: " + workItem.getWork_item_name() + " " + arrCatSubWorkItems.size() + " " + workItem.getStatus_id());
 
             if (arrCatSubWorkItems.size() > 0) {
                 // Nếu có subWorkItem
@@ -504,8 +492,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
         boolean isCompleted = true;
         for (int i = 0; i < layoutRight.getChildCount(); i++) {
             if (layoutRight.getChildAt(i) instanceof SubWorkItemTienDoBTSView) {
-                SubWorkItemTienDoBTSView subWork
-                        = (SubWorkItemTienDoBTSView) layoutRight.getChildAt(i);
+                SubWorkItemTienDoBTSView subWork = (SubWorkItemTienDoBTSView) layoutRight.getChildAt(i);
                 if (subWork.getBtnTienDo().getText().toString().trim().equals("Chưa làm")) {
                     isCompleted = false;
                     break;
@@ -568,9 +555,7 @@ public class BtsTiendoFragment extends BaseTienDoFragment
             TiendoBTSItemView parentView = hashTienDoViews.get(keyParentItem.nextElement());
             listParent.add(parentView);
         }
-        mInterfacePassDataFromTienDoToActivity
-                .passDataFromTienDoToActivity(listParent,
-                        subWorkItemTienDoBTSViewHashMap, hashWorkItems);
+        mInterfacePassDataFromTienDoToActivity.passDataFromTienDoToActivity(listParent, subWorkItemTienDoBTSViewHashMap, hashWorkItems);
     }
 
     @Override

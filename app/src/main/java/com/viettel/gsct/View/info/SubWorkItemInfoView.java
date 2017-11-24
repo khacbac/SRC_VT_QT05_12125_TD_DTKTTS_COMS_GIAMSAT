@@ -78,6 +78,10 @@ public class SubWorkItemInfoView extends LinearLayout {
         tvEndDate.setText(GSCTUtils.standardlizeTime(finishDate));
     }
 
+    public void setLuyKe(String luyke) {
+        tvKhoiLuong.setText(luyke);
+    }
+
     public void setHienThiCotKhoiLuong(boolean isDisplay) {
         if (isDisplay) {
             layoutKhoiLuong.setVisibility(VISIBLE);
