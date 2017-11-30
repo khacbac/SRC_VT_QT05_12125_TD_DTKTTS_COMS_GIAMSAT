@@ -37,7 +37,8 @@
                     android:id="@+id/tv_khoiluong"
                     style="@style/vOfficeeditTextNumber"
                     android:inputType="number"
-                    android:maxLength="9"/>
+                    android:maxLength="9"
+                    android:imeOptions="actionNext"/>
             </LinearLayout>
 
             <TextView

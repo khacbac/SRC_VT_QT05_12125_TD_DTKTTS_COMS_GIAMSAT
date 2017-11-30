@@ -27,7 +27,8 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/tv_khoiluong"
             style="@style/vOfficeeditTextNumber"
-            android:maxLength="12"/>
+            android:maxLength="12"
+            android:imeOptions="actionNext"/>
     </LinearLayout>
 
     <TextView

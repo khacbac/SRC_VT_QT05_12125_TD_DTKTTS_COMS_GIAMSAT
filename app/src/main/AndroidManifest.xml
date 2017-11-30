@@ -3,7 +3,7 @@
     package="com.viettel.ktts"
     android:versionCode="1"
     android:versionName="1.0"
-    android:installLocation="preferExternal" >
+    android:installLocation="auto" >
 
     <uses-feature
         android:glEsVersion="0x00020000"
