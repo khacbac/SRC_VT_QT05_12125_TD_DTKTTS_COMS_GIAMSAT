@@ -18,7 +18,7 @@ android {
             applicationIdSuffix ".debug"
         }
         release {
-            minifyEnabled false // Xóa các class không dùng.
+            minifyEnabled true // Xóa các class không dùng.
             shrinkResources true // Xóa các ảnh không dùng.
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
